@@ -1,0 +1,27 @@
+{
+  "name": "@openapi-code/cli",
+  "version": "0.0.1",
+  "description": "OpenAPI Codegen cli",
+  "main": "dist/index.js",
+  "repository": {
+    "url": "https://github.com/fabien0102/openapi-codegen",
+    "directory": "cli"
+  },
+  "author": "Fabien Bernard",
+  "keywords": [
+    "openapi",
+    "codegen",
+    "plugin",
+    "typescript"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "clipanion": "^3.2.0-rc.3",
+    "js-yaml": "^4.1.0",
+    "openapi3-ts": "^2.0.1",
+    "swagger2openapi": "^7.0.8"
+  },
+  "devDependencies": {
+    "@types/js-yaml": "^4.0.3"
+  }
+}

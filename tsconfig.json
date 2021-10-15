@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "outDir": "lib",
+    "target": "es2017",
+    "lib": ["ESNext"],
+    "allowSyntheticDefaultImports": true,
+    "importHelpers": true,
+    "strict": true,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "noUnusedLocals": true,
+    "esModuleInterop": true,
+    "downlevelIteration": true,
+    "noFallthroughCasesInSwitch": true,
+    "sourceMap": true,
+    "declaration": true
+  },
+  "include": ["cli/src/**/*", "plugins/*/src/**/*"]
+}
