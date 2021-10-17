@@ -97,8 +97,8 @@ const getType = (
     );
   }
 
-  // TODO: deal with `allOf` -> & (with polymorphism)
   if (schema.allOf) {
+    return getAllOf(schema.allOf, context);
   }
 
   if (schema.enum) {
@@ -273,6 +273,16 @@ const withDiscriminator = (
   }
 
   return node;
+};
+
+/**
+ * Get `allOf` type.
+ */
+const getAllOf = (
+  members: Required<SchemaObject["allOf"]>,
+  context: Context
+): ts.TypeNode => {
+  return f.createKeywordTypeNode(ts.SyntaxKind.AnyKeyword);
 };
 
 const keysToExpressAsJsDocProperty: Array<keyof RemoveIndex<SchemaObject>> = [
