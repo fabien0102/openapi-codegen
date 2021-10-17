@@ -470,63 +470,76 @@ export type test = {
     });
   });
 
-  it("should generate a allOf (1)", () => {
-    const schema: SchemaObject = {
-      allOf: [
-        { type: "object", properties: { foo: { type: "string" } } },
-        { type: "object", properties: { foo: { type: "number" } } },
-      ],
-    };
-
-    expect(printSchema(schema)).toMatchInlineSnapshot(
-      `"export type test = {foo: never};"`
-    );
-  });
-
-  it("should generate a allOf (2)", () => {
-    const schema: SchemaObject = {
-      allOf: [
-        { type: "object", properties: { foo: { type: "string" } } },
-        { type: "object", properties: { bar: { type: "number" } } },
-      ],
-    };
-
-    expect(printSchema(schema)).toMatchInlineSnapshot(
-      `"export type test = {foo?: string; bar?: number};"`
-    );
-  });
-
-  it("should generate a allOf (2)", () => {
-    const schema: SchemaObject = {
-      allOf: [
-        { $ref: "#/components/schema/Foo" },
-        { type: "object", properties: { bar: { type: "number" } } },
-      ],
-    };
-
-    expect(printSchema(schema)).toMatchInlineSnapshot(
-      `"export type test = Foo & { bar?: number }"`
-    );
-
-    it("should generate a allOf (2)", () => {
+  describe("allOf", () => {
+    it("should combine inline types", () => {
       const schema: SchemaObject = {
-        allOf: [{ $ref: "#/components/schema/Foo" }, { required: ["bar"] }],
+        allOf: [
+          { type: "object", properties: { foo: { type: "string" } } },
+          { type: "object", properties: { bar: { type: "number" } } },
+        ],
       };
 
-      expect(
-        printSchema(schema, undefined, {
+      expect(printSchema(schema)).toMatchInlineSnapshot(
+        `"export type test = {foo?: string; bar?: number};"`
+      );
+    });
+
+    it("should combine ref and inline type", () => {
+      const schema: SchemaObject = {
+        allOf: [
+          { $ref: "#/components/schema/Foo" },
+          { type: "object", properties: { bar: { type: "number" } } },
+        ],
+      };
+
+      const components: OpenAPIObject["components"] = {
+        schemas: {
+          Foo: {
+            type: "object",
+            properties: {
+              foo: { type: "string" },
+            },
+          },
+        },
+      };
+
+      expect(printSchema(schema, undefined, components)).toMatchInlineSnapshot(
+        `"export type test = Foo & { bar?: number }"`
+      );
+
+      it("should generate a new type when schemas intersect", () => {
+        const schema: SchemaObject = {
+          allOf: [{ $ref: "#/components/schema/Foo" }, { required: ["bar"] }],
+        };
+
+        const components: OpenAPIObject["components"] = {
           schemas: {
             Foo: {
               type: "object",
               properties: {
-                bar: {
-                  type: "string",
-                },
+                bar: { type: "string" },
               },
             },
           },
-        })
-      ).toMatchInlineSnapshot(`"export type test = {bar: string}"`);
+        };
+
+        expect(
+          printSchema(schema, undefined, components)
+        ).toMatchInlineSnapshot(`"export type test = { bar: string }"`);
+      });
+
+      it("should generate a `never` if the combined type is broken", () => {
+        const schema: SchemaObject = {
+          allOf: [
+            { type: "object", properties: { foo: { type: "string" } } },
+            { type: "object", properties: { foo: { type: "number" } } },
+          ],
+        };
+
+        expect(printSchema(schema)).toMatchInlineSnapshot(
+          `"export type test = {foo: never};"`
+        );
+      });
     });
   });
 });
