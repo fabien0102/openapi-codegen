@@ -14,11 +14,13 @@
     "plugins/typescript"
   ],
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "all-contrib": "all-contributors"
   },
   "devDependencies": {
     "@types/jest": "^27.0.2",
     "@types/node": "^16.10.9",
+    "all-contributors-cli": "^6.20.0",
     "eslint": "^8.0.1",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
