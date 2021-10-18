@@ -1,4 +1,4 @@
-import { findKey, get } from "lodash";
+import { findKey, get, merge, intersection } from "lodash";
 import {
   ComponentsObject,
   DiscriminatorObject,
@@ -26,7 +26,7 @@ type GeneratedComponents = Extract<
 export type RefPrefixes = Record<GeneratedComponents, string>;
 
 export type Context = {
-  specs: Pick<OpenAPIObject, "components">;
+  openAPIDocument: Pick<OpenAPIObject, "components">;
   refPrefixes: RefPrefixes;
 };
 
@@ -42,7 +42,7 @@ export const schemaToTypeAliasDeclaration = (
   schema: SchemaObject,
   context: Context
 ): ts.Node[] => {
-  const jsDocNode = getJSDocComment(schema);
+  const jsDocNode = getJSDocComment(schema, context);
   const declarationNode = f.createTypeAliasDeclaration(
     undefined,
     [f.createModifier(ts.SyntaxKind.ExportKeyword)],
@@ -79,6 +79,10 @@ const getType = (
       );
     }
     return f.createKeywordTypeNode(ts.SyntaxKind.AnyKeyword);
+  }
+
+  if (schema["x-openapi-codegen"]?.type === "never") {
+    return f.createKeywordTypeNode(ts.SyntaxKind.NeverKeyword);
   }
 
   if (schema.oneOf) {
@@ -160,7 +164,7 @@ const getType = (
               : f.createToken(ts.SyntaxKind.QuestionToken),
             getType(property, context)
           );
-          const jsDocNode = getJSDocComment(property);
+          const jsDocNode = getJSDocComment(property, context);
           if (jsDocNode) addJSDocToNode(propertyNode, jsDocNode);
 
           return propertyNode;
@@ -237,7 +241,7 @@ const withDiscriminator = (
     ]);
 
     const spec = get<SchemaObject | ReferenceObject>(
-      context.specs,
+      context.openAPIDocument,
       schema.$ref.slice(2).replace(/\//g, ".")
     );
     if (spec && isSchemaObject(spec) && spec.properties) {
@@ -279,10 +283,193 @@ const withDiscriminator = (
  * Get `allOf` type.
  */
 const getAllOf = (
-  members: Required<SchemaObject["allOf"]>,
+  members: Required<SchemaObject>["allOf"],
   context: Context
 ): ts.TypeNode => {
-  return f.createKeywordTypeNode(ts.SyntaxKind.AnyKeyword);
+  const initialValue = {
+    isSchemaObjectOnly: true,
+    isWritableWithIntersection: true,
+    mergedSchema: {} as SchemaObject,
+    intersectionMembers: [] as ts.TypeNode[],
+  };
+
+  const {
+    mergedSchema,
+    isSchemaObjectOnly,
+    isWritableWithIntersection,
+    intersectionMembers,
+  } = members.reduce((acc, member, i) => {
+    if (i === 0 && isSchemaObject(member)) {
+      return {
+        ...acc,
+        mergedSchema: member,
+        intersectionMembers: [getType(member, context)],
+      };
+    }
+
+    if (isSchemaObject(member)) {
+      const { mergedSchema, isColliding } = mergeSchemas(
+        acc.mergedSchema,
+        member
+      );
+
+      return {
+        ...acc,
+        mergedSchema,
+        isWritableWithIntersection:
+          acc.isWritableWithIntersection && !isColliding,
+        intersectionMembers: [
+          ...acc.intersectionMembers,
+          getType(member, context),
+        ],
+      };
+    }
+
+    if (isReferenceObject(member)) {
+      const referenceSchema = getReferenceSchema(member.$ref, context);
+      const { mergedSchema, isColliding } = mergeSchemas(
+        acc.mergedSchema,
+        referenceSchema
+      );
+
+      return {
+        ...acc,
+        isWritableWithIntersection:
+          acc.isWritableWithIntersection && !isColliding,
+        isSchemaObjectOnly: false,
+        mergedSchema,
+        intersectionMembers: [
+          ...acc.intersectionMembers,
+          getType(member, context),
+        ],
+      };
+    }
+
+    return acc;
+  }, initialValue);
+
+  if (isSchemaObjectOnly) {
+    return getType(mergedSchema, context);
+  }
+
+  if (isWritableWithIntersection) {
+    return f.createIntersectionTypeNode(intersectionMembers);
+  }
+
+  return getType(mergedSchema, context);
+};
+
+/**
+ * Get the SchemaObject from a $ref.
+ *
+ * @param $ref Path of the reference
+ * @param context Context
+ * @returns The resolved SchemaObject
+ */
+const getReferenceSchema = ($ref: string, context: Context): SchemaObject => {
+  const [hash, ...refPath] = $ref.split("/");
+  if (hash !== "#") {
+    throw new Error("This library only resolve local $ref");
+  }
+  const referenceSchema = get(context.openAPIDocument, refPath.join("."));
+
+  if (!referenceSchema) {
+    throw new Error(`${$ref} not found!`);
+  }
+
+  if (isReferenceObject(referenceSchema)) {
+    return getReferenceSchema(referenceSchema.$ref, context);
+  }
+
+  if (!isSchemaObject(referenceSchema)) {
+    throw new Error(`${$ref} can’t be resolved`);
+  }
+
+  return referenceSchema;
+};
+
+/**
+ * Merge two schema objects
+ *
+ * @param a
+ * @param b
+ * @returns the merged schema and a flag to know if the schema was colliding
+ */
+const mergeSchemas = (
+  a: SchemaObject,
+  b: SchemaObject
+): { mergedSchema: SchemaObject; isColliding: boolean } => {
+  if (Boolean(a.type) && Boolean(b.type) && a.type !== b.type) {
+    return {
+      mergedSchema: {
+        ...merge(a, b),
+        ["x-openapi-codegen"]: {
+          type: "never",
+        },
+      },
+      isColliding: true,
+    };
+  }
+
+  if (a.properties && b.properties) {
+    let isColliding = false;
+    const properties = Object.entries(a.properties).reduce(
+      (mergedProperties, [key, propertyA]) => {
+        const propertyB = b.properties?.[key];
+        if (propertyB) {
+          isColliding = true;
+        }
+        if (
+          propertyB &&
+          isSchemaObject(propertyB) &&
+          isSchemaObject(propertyA) &&
+          Boolean(propertyB.type) &&
+          Boolean(propertyA.type) &&
+          propertyA.type !== propertyB.type
+        ) {
+          return {
+            ...mergedProperties,
+            [key]: {
+              ...propertyA,
+              ...propertyB,
+              ["x-openapi-codegen"]: {
+                type: "never",
+              },
+            },
+          };
+        }
+
+        return { ...mergedProperties, [key]: propertyA };
+      },
+      {} as typeof a.properties
+    );
+
+    return {
+      mergedSchema: {
+        ...merge({}, a, b),
+        properties: merge({}, properties, b.properties),
+      },
+      isColliding,
+    };
+  }
+
+  let isColliding = false;
+  if (
+    a.required &&
+    b.properties &&
+    intersection(a.required, Object.keys(b.properties)).length > 0
+  ) {
+    isColliding = true;
+  }
+  if (
+    a.properties &&
+    b.required &&
+    intersection(b.required, Object.keys(a.properties)).length > 0
+  ) {
+    isColliding = true;
+  }
+
+  return { mergedSchema: merge({}, a, b), isColliding };
 };
 
 const keysToExpressAsJsDocProperty: Array<keyof RemoveIndex<SchemaObject>> = [
@@ -311,11 +498,27 @@ const keysToExpressAsJsDocProperty: Array<keyof RemoveIndex<SchemaObject>> = [
  * Get JSDocComment from an OpenAPI Schema.
  *
  * @param schema
+ * @param context
  * @returns JSDoc node
  */
-const getJSDocComment = (schema: SchemaObject): ts.JSDoc | undefined => {
+const getJSDocComment = (
+  schema: SchemaObject,
+  context: Context
+): ts.JSDoc | undefined => {
+  // `allOf` can add some documentation to the schema, let’s merge all items as first step
+  const schemaWithAllOfResolved = schema.allOf
+    ? schema.allOf.reduce<SchemaObject>((mem, allOfItem) => {
+        if (isReferenceObject(allOfItem)) {
+          const referenceSchema = getReferenceSchema(allOfItem.$ref, context);
+          return mergeSchemas(mem, referenceSchema).mergedSchema;
+        } else {
+          return mergeSchemas(mem, allOfItem).mergedSchema;
+        }
+      }, schema)
+    : schema;
+
   const propertyTags: ts.JSDocPropertyTag[] = [];
-  Object.entries(schema)
+  Object.entries(schemaWithAllOfResolved)
     .filter(
       ([key, value]) =>
         keysToExpressAsJsDocProperty.includes(key as any) ||
@@ -343,10 +546,11 @@ const getJSDocComment = (schema: SchemaObject): ts.JSDoc | undefined => {
       }
     });
 
-  if (schema.description || propertyTags.length > 0) {
+  if (schemaWithAllOfResolved.description || propertyTags.length > 0) {
     return f.createJSDocComment(
-      schema.description
-        ? schema.description.trim() + (propertyTags.length ? "\n" : "")
+      schemaWithAllOfResolved.description
+        ? schemaWithAllOfResolved.description.trim() +
+            (propertyTags.length ? "\n" : "")
         : undefined,
       propertyTags
     );

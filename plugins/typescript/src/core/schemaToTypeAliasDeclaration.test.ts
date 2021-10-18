@@ -101,21 +101,21 @@ describe("schemaToTypeAliasDeclaration", () => {
     };
 
     expect(printSchema(schema)).toMatchInlineSnapshot(`
-"/**
- * I’m null
- * 
- * @maximum 43
- * @minimum 42
- * @default 42
- * @format int32
- * @deprecated true
- * @exclusiveMaximum true
- * @exclusiveMinimum false
- * @example I’m an example
- * @x-test plop
- */
-export type test = null;"
-`);
+      "/**
+       * I’m null
+       * 
+       * @maximum 43
+       * @minimum 42
+       * @default 42
+       * @format int32
+       * @deprecated true
+       * @exclusiveMaximum true
+       * @exclusiveMinimum false
+       * @example I’m an example
+       * @x-test plop
+       */
+      export type test = null;"
+    `);
   });
 
   it("should generate multiple examples", () => {
@@ -125,12 +125,12 @@ export type test = null;"
     };
 
     expect(printSchema(schema)).toMatchInlineSnapshot(`
-"/**
- * @example first example
- * @example second example
- */
-export type test = null;"
-`);
+      "/**
+       * @example first example
+       * @example second example
+       */
+      export type test = null;"
+    `);
   });
 
   it("should generate an object", () => {
@@ -156,24 +156,24 @@ export type test = null;"
     };
 
     expect(printSchema(schema)).toMatchInlineSnapshot(`
-"/**
- * An object
- */
-export type test = {
-    /*
-     * I’m a foo
-     *
-     * @default boom
-     */
-    foo: string;
-    /*
-     * @minimum 0
-     * @maximum 42
-     */
-    bar?: number;
-    baz?: boolean;
-};"
-`);
+      "/**
+       * An object
+       */
+      export type test = {
+          /*
+           * I’m a foo
+           *
+           * @default boom
+           */
+          foo: string;
+          /*
+           * @minimum 0
+           * @maximum 42
+           */
+          bar?: number;
+          baz?: boolean;
+      };"
+    `);
   });
 
   it("should generate a nested object", () => {
@@ -210,30 +210,30 @@ export type test = {
     };
 
     expect(printSchema(schema)).toMatchInlineSnapshot(`
-"/**
- * An object
- */
-export type test = {
-    /*
-     * I’m a foo
-     *
-     * @default boom
-     */
-    foo: {
-        /*
-         * @minimum 0
-         * @maximum 42
-         */
-        bar?: number;
-        baz?: {
-            /*
-             * @default yeah
-             */
-            oh?: string;
-        }[];
-    };
-};"
-`);
+      "/**
+       * An object
+       */
+      export type test = {
+          /*
+           * I’m a foo
+           *
+           * @default boom
+           */
+          foo: {
+              /*
+               * @minimum 0
+               * @maximum 42
+               */
+              bar?: number;
+              baz?: {
+                  /*
+                   * @default yeah
+                   */
+                  oh?: string;
+              }[];
+          };
+      };"
+    `);
   });
 
   it("should resolve ref", () => {
@@ -288,12 +288,12 @@ export type test = {
     };
 
     expect(printSchema(schema)).toMatchInlineSnapshot(`
-"export type test = {
-    foo?: string;
-    bar: number;
-    [key: string]: Foo[];
-};"
-`);
+      "export type test = {
+          foo?: string;
+          bar: number;
+          [key: string]: Foo[];
+      };"
+    `);
   });
 
   it("should generate an object with additional properties as true", () => {
@@ -308,12 +308,12 @@ export type test = {
     };
 
     expect(printSchema(schema)).toMatchInlineSnapshot(`
-"export type test = {
-    foo?: string;
-    bar: number;
-    [key: string]: any;
-};"
-`);
+      "export type test = {
+          foo?: string;
+          bar: number;
+          [key: string]: any;
+      };"
+    `);
   });
 
   it("should generate an object with additional properties as empty object", () => {
@@ -328,12 +328,12 @@ export type test = {
     };
 
     expect(printSchema(schema)).toMatchInlineSnapshot(`
-"export type test = {
-    foo?: string;
-    bar: number;
-    [key: string]: any;
-};"
-`);
+      "export type test = {
+          foo?: string;
+          bar: number;
+          [key: string]: any;
+      };"
+    `);
   });
 
   it("should generate a oneOf", () => {
@@ -401,14 +401,14 @@ export type test = {
           },
         })
       ).toMatchInlineSnapshot(`
-  "export type test = (Omit<Foo, \\"discriminatorPropertyName\\"> & {
-      discriminatorPropertyName: \\"foo\\";
-  }) | (Omit<Bar, \\"discriminatorPropertyName\\"> & {
-      discriminatorPropertyName: \\"bar\\";
-  }) | (Omit<Baz, \\"discriminatorPropertyName\\"> & {
-      discriminatorPropertyName: \\"baz\\";
-  });"
-  `);
+          "export type test = (Omit<Foo, \\"discriminatorPropertyName\\"> & {
+              discriminatorPropertyName: \\"foo\\";
+          }) | (Omit<Bar, \\"discriminatorPropertyName\\"> & {
+              discriminatorPropertyName: \\"bar\\";
+          }) | (Omit<Baz, \\"discriminatorPropertyName\\"> & {
+              discriminatorPropertyName: \\"baz\\";
+          });"
+        `);
     });
 
     it("should not add the `Omit` if not necessary", () => {
@@ -421,14 +421,14 @@ export type test = {
           },
         })
       ).toMatchInlineSnapshot(`
-"export type test = (Foo & {
-    discriminatorPropertyName: \\"foo\\";
-}) | (Bar & {
-    discriminatorPropertyName: \\"bar\\";
-}) | (Baz & {
-    discriminatorPropertyName: \\"baz\\";
-});"
-`);
+        "export type test = (Foo & {
+            discriminatorPropertyName: \\"foo\\";
+        }) | (Bar & {
+            discriminatorPropertyName: \\"bar\\";
+        }) | (Baz & {
+            discriminatorPropertyName: \\"baz\\";
+        });"
+      `);
     });
 
     it("should use the original type if compliant", () => {
@@ -479,15 +479,18 @@ export type test = {
         ],
       };
 
-      expect(printSchema(schema)).toMatchInlineSnapshot(
-        `"export type test = {foo?: string; bar?: number};"`
-      );
+      expect(printSchema(schema)).toMatchInlineSnapshot(`
+        "export type test = {
+            foo?: string;
+            bar?: number;
+        };"
+      `);
     });
 
     it("should combine ref and inline type", () => {
       const schema: SchemaObject = {
         allOf: [
-          { $ref: "#/components/schema/Foo" },
+          { $ref: "#/components/schemas/Foo" },
           { type: "object", properties: { bar: { type: "number" } } },
         ],
       };
@@ -503,45 +506,108 @@ export type test = {
         },
       };
 
-      expect(printSchema(schema, undefined, components)).toMatchInlineSnapshot(
-        `"export type test = Foo & { bar?: number }"`
-      );
+      expect(printSchema(schema, undefined, components)).toMatchInlineSnapshot(`
+        "export type test = Foo & {
+            bar?: number;
+        };"
+      `);
+    });
 
-      it("should generate a new type when schemas intersect", () => {
-        const schema: SchemaObject = {
-          allOf: [{ $ref: "#/components/schema/Foo" }, { required: ["bar"] }],
-        };
+    it("should generate a new type when schemas intersect", () => {
+      const schema: SchemaObject = {
+        allOf: [{ $ref: "#/components/schemas/Foo" }, { required: ["bar"] }],
+      };
 
-        const components: OpenAPIObject["components"] = {
-          schemas: {
-            Foo: {
-              type: "object",
-              properties: {
-                bar: { type: "string" },
-              },
+      const components: OpenAPIObject["components"] = {
+        schemas: {
+          Foo: {
+            type: "object",
+            properties: {
+              bar: { type: "string" },
             },
           },
-        };
+        },
+      };
 
-        expect(
-          printSchema(schema, undefined, components)
-        ).toMatchInlineSnapshot(`"export type test = { bar: string }"`);
-      });
-
-      it("should generate a `never` if the combined type is broken", () => {
-        const schema: SchemaObject = {
-          allOf: [
-            { type: "object", properties: { foo: { type: "string" } } },
-            { type: "object", properties: { foo: { type: "number" } } },
-          ],
-        };
-
-        expect(printSchema(schema)).toMatchInlineSnapshot(
-          `"export type test = {foo: never};"`
-        );
-      });
+      expect(printSchema(schema, undefined, components)).toMatchInlineSnapshot(`
+        "export type test = {
+            bar: string;
+        };"
+      `);
     });
-  });
+
+    it("should generate a `never` if the combined type is broken", () => {
+      const schema: SchemaObject = {
+        allOf: [{ type: "string" }, { type: "number" }],
+      };
+
+      expect(printSchema(schema)).toMatchInlineSnapshot(
+        `"export type test = never;"`
+      );
+    });
+
+    it("should generate a `never` if the combined property type is broken", () => {
+      const schema: SchemaObject = {
+        allOf: [
+          { type: "object", properties: { foo: { type: "string" } } },
+          { type: "object", properties: { foo: { type: "number" } } },
+        ],
+      };
+
+      expect(printSchema(schema)).toMatchInlineSnapshot(`
+        "export type test = {
+            foo?: never;
+        };"
+      `);
+    });
+
+    it("should generate documentation (object properties)", () => {
+      const schema: SchemaObject = {
+        allOf: [
+          { type: "object", properties: { foo: { type: "string" } } },
+          {
+            type: "object",
+            properties: { foo: { description: "A nice description for foo" } },
+          },
+          { description: "A nice top-level description" },
+        ],
+      };
+
+      expect(printSchema(schema)).toMatchInlineSnapshot(`
+        "/**
+         * A nice top-level description
+         */
+        export type test = {
+            /*
+             * A nice description for foo
+             */
+            foo?: string;
+        };"
+      `);
+    });
+
+    it("should generate documentation (top level)", () => {
+      const schema: SchemaObject = {
+        allOf: [
+          { type: "string" },
+          {
+            type: "string",
+            maxLength: 255,
+          },
+          { description: "A nice top-level description" },
+        ],
+      };
+
+      expect(printSchema(schema)).toMatchInlineSnapshot(`
+        "/**
+         * A nice top-level description
+         * 
+         * @maxLength 255
+         */
+        export type test = string;"
+      `);
+    });
+  }); // end of allOf
 });
 
 const printSchema = (
@@ -551,7 +617,7 @@ const printSchema = (
 ) => {
   const nodes = schemaToTypeAliasDeclaration("test", schema, {
     refPrefixes,
-    specs: { components },
+    openAPIDocument: { components },
   });
 
   const sourceFile = ts.createSourceFile(
