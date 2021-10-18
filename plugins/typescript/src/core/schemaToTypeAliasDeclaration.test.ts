@@ -176,6 +176,23 @@ describe("schemaToTypeAliasDeclaration", () => {
     `);
   });
 
+  it("should generate an object with escaped keys", () => {
+    const schema: SchemaObject = {
+      type: "object",
+      properties: {
+        ["foo.bar"]: {
+          type: "string",
+        },
+      },
+    };
+
+    expect(printSchema(schema)).toMatchInlineSnapshot(`
+      "export type test = {
+          [\\"foo.bar\\"]?: string;
+      };"
+    `);
+  });
+
   it("should generate a nested object", () => {
     const schema: SchemaObject = {
       type: "object",

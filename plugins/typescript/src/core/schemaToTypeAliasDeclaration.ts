@@ -9,6 +9,7 @@ import {
   SchemaObject,
 } from "openapi3-ts";
 import ts, { factory as f } from "typescript";
+import { isValidIdentifier } from "tsutils";
 
 type RemoveIndex<T> = {
   [P in keyof T as string extends P
@@ -158,7 +159,9 @@ const getType = (
         ([key, property]) => {
           const propertyNode = f.createPropertySignature(
             undefined,
-            f.createIdentifier(key),
+            isValidIdentifier(key)
+              ? f.createIdentifier(key)
+              : f.createComputedPropertyName(f.createStringLiteral(key)),
             schema.required?.includes(key)
               ? undefined
               : f.createToken(ts.SyntaxKind.QuestionToken),
