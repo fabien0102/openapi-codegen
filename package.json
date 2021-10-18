@@ -6,9 +6,12 @@
   "author": "Fabien Bernard",
   "license": "MIT",
   "private": true,
+  "engines": {
+    "node": ">=16"
+  },
   "workspaces": [
     "cli",
-    "plugins/*"
+    "plugins/typescript"
   ],
   "scripts": {
     "test": "jest"
