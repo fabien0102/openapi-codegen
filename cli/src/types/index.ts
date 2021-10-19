@@ -69,7 +69,7 @@ export type GithubOptions = {
 export type FromOptions = FileOptions | UrlOptions | GithubOptions;
 
 export type Context = {
-  schema: OpenAPIObject;
+  openAPIDocument: OpenAPIObject;
   outputDir: string;
 };
 
