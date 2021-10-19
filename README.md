@@ -134,12 +134,12 @@ export default defineConfig({
     outputDir: "src",
 
     to: async (context: {
-      schema: OpenAPIObject;
+      openAPIDocument: OpenAPIObject;
       operationsTree: OperationTree;
       outputDir: string;
       customFlags: Record<string, unknown>; // extra flags from the cli
     }) => {
-      // You can transform the `schema` here, can be useful to remove internal routes or fixing some known issues in the specs ;)
+      // You can transform the `openAPIDocument` here, can be useful to remove internal routes or fixing some known issues in the specs ;)
 
       // Generate all the schemas types (components & responses)
       await generateSchemaTypes(context, {
