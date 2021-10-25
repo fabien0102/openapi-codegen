@@ -1,5 +1,6 @@
-import { Box, Text, useInput } from "ink";
 import React, { useState } from "react";
+import { Box, Text, useInput } from "ink";
+
 import { Answer } from "./Answer";
 import { Hint } from "./Hint";
 import { Message } from "./Message";
@@ -56,7 +57,7 @@ export function Select<TChoice>({
           {choices.map((choice, i) => (
             <Box key={`choice-${i}`}>
               <Box minWidth={2}>
-                {i === selectedChoice && <Text color="cyan">{">"}</Text>}
+                {i === selectedChoice && <Text color="cyan">❯</Text>}
               </Box>
               <Box minWidth={choiceMaxLength + 1}>
                 <Text>{choice.label}</Text>
