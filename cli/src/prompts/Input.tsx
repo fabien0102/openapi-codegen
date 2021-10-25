@@ -2,6 +2,7 @@ import { Box, Text } from "ink";
 import TextInput from "ink-text-input";
 import React, { useState } from "react";
 import { Answer } from "./Answer";
+import { Hint } from "./Hint";
 import { Message } from "./Message";
 
 type InputProps = {
@@ -53,11 +54,7 @@ export const Input = ({
             showCursor={!answer}
           />
         )}
-        {!value && hint ? (
-          <Box marginLeft={1}>
-            <Text color="blackBright">{hint}</Text>
-          </Box>
-        ) : null}
+        {!value && hint ? <Hint>{hint}</Hint> : null}
       </Box>
       {!isValid ? <Text color="red">The answer can’t be empty!</Text> : null}
     </>
