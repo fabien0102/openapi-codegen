@@ -1,5 +1,7 @@
 # OpenAPI Codegen
 
+⚠️ This project is in early stage, please check the issues to see what’s is missing! ⚠️
+
 -> Insert logo and badges here
 
 Tooling to give you full type-safety around OpenAPI specs.
