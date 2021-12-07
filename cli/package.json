@@ -16,10 +16,14 @@
   ],
   "license": "MIT",
   "scripts": {
-    "start": "ts-node -T src/index.ts"
+    "start": "ts-node -T src/index.ts",
+    "gen": "graphql-codegen --config codegen.yml"
   },
   "dependencies": {
+    "@apollo/client": "^3.4.16",
     "clipanion": "^3.2.0-rc.3",
+    "cross-fetch": "^3.1.4",
+    "graphql": "^15.7.2",
     "ink": "^3.2.0",
     "ink-text-input": "^4.0.1",
     "js-yaml": "^4.1.0",
@@ -29,6 +33,10 @@
     "swagger2openapi": "^7.0.8"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "2.2.2",
+    "@graphql-codegen/typescript": "2.3.0",
+    "@graphql-codegen/typescript-operations": "2.2.0",
+    "@graphql-codegen/typescript-react-apollo": "3.2.0",
     "@types/js-yaml": "^4.0.3",
     "@types/react": "16.8",
     "ts-node": "^10.3.0"
