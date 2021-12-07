@@ -1,5 +1,5 @@
 import { Command } from "clipanion";
-import { askQuestion } from "../components/Input";
+import { Prompt } from "../prompts/Prompt";
 import { FileOptions, FromOptions, GithubOptions, UrlOptions } from "../types";
 
 export class InitCommand extends Command {
@@ -93,11 +93,10 @@ export class InitCommand extends Command {
       writeConfiguration(options, outdir);
     }
 
-    const value = await askQuestion("Wesh! La forme?", {
-      defaultValue: "grave",
-      hint: "toto",
-    });
-    await askQuestion("this should not be here");
-    this.context.stdout.write(`Init the config file ${value}\n`);
+    const prompt = new Prompt();
+    const github = await prompt.github();
+    prompt.close();
+
+    this.context.stdout.write(JSON.stringify(github, null, 2));
   }
 }

@@ -1,8 +1,11 @@
 import React from "react";
 import { Box, render } from "ink";
+
 import { Input } from "./Input";
 import { Confirm } from "./Confirm";
 import { Choice, Select } from "./Select";
+import { GithubOptions } from "src/types";
+import { Github } from "./Github";
 
 export type InputOptions = {
   message: string;
@@ -82,6 +85,15 @@ export class Prompt {
 
     return new Promise<boolean>((resolve) => {
       this.app.rerender(<Confirm {...props} onSubmit={resolve} />);
+    });
+  }
+
+  /**
+   * Smart prompt for selecting a github file.
+   */
+  public github(): Promise<GithubOptions> {
+    return new Promise<GithubOptions>((resolve) => {
+      this.app.rerender(<Github onSubmit={resolve} />);
     });
   }
 }

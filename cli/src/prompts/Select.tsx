@@ -12,7 +12,7 @@ export type Choice<T> = {
 };
 
 export type SelectProps<TChoice> = {
-  message: string;
+  message?: string;
   choices: Choice<TChoice>[];
   onSubmit: (value: TChoice) => void;
 };
@@ -49,7 +49,7 @@ export function Select<TChoice>({
 
   return (
     <Box flexDirection={answer ? "row" : "column"}>
-      <Message>{message}</Message>
+      {message && <Message>{message}</Message>}
       {answer ? (
         <Answer>{answer}</Answer>
       ) : (
