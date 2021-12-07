@@ -17,7 +17,7 @@
   "license": "MIT",
   "scripts": {
     "start": "ts-node -T src/index.ts",
-    "gen": "graphql-codegen --config codegen.yml"
+    "gen": "graphql-codegen --config codegen.yml -r dotenv/config"
   },
   "dependencies": {
     "@apollo/client": "^3.4.16",
