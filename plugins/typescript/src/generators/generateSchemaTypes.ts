@@ -132,6 +132,37 @@ export const generateSchemaTypes = async (
       );
     }
   }
+
+  // Generate `components/parameters` types
+  if (components.parameters) {
+    const componentsParameters = Object.entries(components.parameters).reduce<
+      ts.Node[]
+    >((mem, [name, parameterObject]) => {
+      if (isReferenceObject(parameterObject) || !parameterObject.schema) {
+        return mem;
+      }
+      return [
+        ...mem,
+        ...schemaToTypeAliasDeclaration(name, parameterObject.schema, {
+          openAPIDocument: context.openAPIDocument,
+          refPrefixes: {
+            schemas: "Schemas",
+            requestBodies: "RequestBodies",
+            parameters: "",
+            responses: "Responses",
+          },
+        }),
+      ];
+    }, []);
+
+    await context.writeFile(
+      files.parameters + ".ts",
+      printNodes([
+        ...getUsedImports(componentsParameters, files),
+        ...componentsParameters,
+      ])
+    );
+  }
 };
 
 /**

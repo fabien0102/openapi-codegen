@@ -233,6 +233,17 @@ export const petstore: OpenAPIObject = {
     },
   },
   components: {
+    parameters: {
+      idParam: {
+        name: "id",
+        in: "path",
+        required: true,
+        schema: {
+          description: "Unique identifier",
+          type: "string",
+        },
+      },
+    },
     requestBodies: {
       updatePetRequest: {
         content: {

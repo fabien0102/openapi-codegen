@@ -10,6 +10,7 @@ import {
 } from "openapi3-ts";
 import ts, { factory as f } from "typescript";
 import { isValidIdentifier } from "tsutils";
+import { pascal } from "case";
 
 type RemoveIndex<T> = {
   [P in keyof T as string extends P
@@ -47,7 +48,7 @@ export const schemaToTypeAliasDeclaration = (
   const declarationNode = f.createTypeAliasDeclaration(
     undefined,
     [f.createModifier(ts.SyntaxKind.ExportKeyword)],
-    name,
+    pascal(name),
     undefined,
     getType(schema, context)
   );
@@ -78,11 +79,11 @@ const getType = (
         return f.createTypeReferenceNode(
           f.createQualifiedName(
             f.createIdentifier(left),
-            f.createIdentifier(name)
+            f.createIdentifier(pascal(name))
           )
         );
       }
-      return f.createTypeReferenceNode(f.createIdentifier(name));
+      return f.createTypeReferenceNode(f.createIdentifier(pascal(name)));
     }
     return f.createKeywordTypeNode(ts.SyntaxKind.AnyKeyword);
   }

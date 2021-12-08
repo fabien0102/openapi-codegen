@@ -151,7 +151,25 @@ describe("generateSchemaTypes", () => {
       expect(writeFile.mock.calls[1][1]).toMatchInlineSnapshot(`
         "import type * as Schemas from \\"./swaggerPetstoreSchemas\\";
 
-        export type updatePetRequest = Schemas.NewPet;
+        export type UpdatePetRequest = Schemas.NewPet;
+        "
+      `);
+    });
+
+    it("should generate the parameters file", async () => {
+      const writeFile = jest.fn();
+      await generateSchemaTypes(
+        { openAPIDocument: petstore, writeFile },
+        {
+          filenameCase: "camel",
+        }
+      );
+      expect(writeFile.mock.calls[2][0]).toBe("swaggerPetstoreParameters.ts");
+      expect(writeFile.mock.calls[2][1]).toMatchInlineSnapshot(`
+        "/**
+         * Unique identifier
+         */
+        export type IdParam = string;
         "
       `);
     });
