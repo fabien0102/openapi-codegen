@@ -29,7 +29,7 @@
     "prettier": "^2.4.1",
     "pretty-quick": "^3.1.1",
     "ts-jest": "^27.0.5",
-    "typescript": "^4.4.4"
+    "typescript": "^4.5.2"
   },
   "jest": {
     "projects": [

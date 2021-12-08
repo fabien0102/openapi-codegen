@@ -10,6 +10,7 @@ import {
 } from "openapi3-ts";
 import ts, { factory as f } from "typescript";
 import { isValidIdentifier } from "tsutils";
+import { pascal } from "case";
 
 type RemoveIndex<T> = {
   [P in keyof T as string extends P
@@ -19,16 +20,19 @@ type RemoveIndex<T> = {
     : P]: T[P];
 };
 
-type GeneratedComponents = Extract<
+export type OpenAPIComponentType = Extract<
   keyof RemoveIndex<ComponentsObject>,
   "parameters" | "responses" | "schemas" | "requestBodies"
 >;
 
-export type RefPrefixes = Record<GeneratedComponents, string>;
-
 export type Context = {
   openAPIDocument: Pick<OpenAPIObject, "components">;
-  refPrefixes: RefPrefixes;
+  /**
+   * Current OpenAPI component
+   *
+   * This is required to correctly resolve types dependencies
+   */
+  currentComponent: OpenAPIComponentType;
 };
 
 /**
@@ -47,7 +51,7 @@ export const schemaToTypeAliasDeclaration = (
   const declarationNode = f.createTypeAliasDeclaration(
     undefined,
     [f.createModifier(ts.SyntaxKind.ExportKeyword)],
-    name,
+    pascal(name),
     undefined,
     getType(schema, context)
   );
@@ -72,14 +76,16 @@ const getType = (
         "This library only resolve $ref that are include into `#/components/*` for now"
       );
     }
-    if (namespace in context.refPrefixes) {
-      return f.createTypeReferenceNode(
-        f.createIdentifier(
-          context.refPrefixes[namespace as keyof RefPrefixes] + name
-        )
-      );
+    if (namespace === context.currentComponent) {
+      return f.createTypeReferenceNode(f.createIdentifier(pascal(name)));
     }
-    return f.createKeywordTypeNode(ts.SyntaxKind.AnyKeyword);
+
+    return f.createTypeReferenceNode(
+      f.createQualifiedName(
+        f.createIdentifier(pascal(namespace)),
+        f.createIdentifier(pascal(name))
+      )
+    );
   }
 
   if (schema["x-openapi-codegen"]?.type === "never") {

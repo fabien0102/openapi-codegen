@@ -1,16 +1,9 @@
 import { OpenAPIObject, ReferenceObject, SchemaObject } from "openapi3-ts";
 import ts from "typescript";
 import {
-  RefPrefixes,
+  OpenAPIComponentType,
   schemaToTypeAliasDeclaration,
 } from "./schemaToTypeAliasDeclaration";
-
-const defaultRefPrefixes = {
-  parameters: "",
-  requestBodies: "",
-  responses: "",
-  schemas: "",
-};
 
 describe("schemaToTypeAliasDeclaration", () => {
   it("should generate null", () => {
@@ -18,7 +11,7 @@ describe("schemaToTypeAliasDeclaration", () => {
       type: "null",
     };
 
-    expect(printSchema(schema)).toBe("export type test = null;");
+    expect(printSchema(schema)).toBe("export type Test = null;");
   });
 
   it("should generate integer", () => {
@@ -26,7 +19,7 @@ describe("schemaToTypeAliasDeclaration", () => {
       type: "integer",
     };
 
-    expect(printSchema(schema)).toBe("export type test = number;");
+    expect(printSchema(schema)).toBe("export type Test = number;");
   });
 
   it("should generate string", () => {
@@ -34,7 +27,7 @@ describe("schemaToTypeAliasDeclaration", () => {
       type: "string",
     };
 
-    expect(printSchema(schema)).toBe("export type test = string;");
+    expect(printSchema(schema)).toBe("export type Test = string;");
   });
 
   it("should generate boolean", () => {
@@ -42,7 +35,7 @@ describe("schemaToTypeAliasDeclaration", () => {
       type: "boolean",
     };
 
-    expect(printSchema(schema)).toBe("export type test = boolean;");
+    expect(printSchema(schema)).toBe("export type Test = boolean;");
   });
 
   it("should generate a nullable value", () => {
@@ -51,7 +44,7 @@ describe("schemaToTypeAliasDeclaration", () => {
       nullable: true,
     };
 
-    expect(printSchema(schema)).toBe("export type test = number | null;");
+    expect(printSchema(schema)).toBe("export type Test = number | null;");
   });
 
   it("should generate an array of numbers", () => {
@@ -62,7 +55,7 @@ describe("schemaToTypeAliasDeclaration", () => {
       },
     };
 
-    expect(printSchema(schema)).toBe("export type test = number[];");
+    expect(printSchema(schema)).toBe("export type Test = number[];");
   });
 
   it("should generate enums (strings)", () => {
@@ -72,7 +65,7 @@ describe("schemaToTypeAliasDeclaration", () => {
     };
 
     expect(printSchema(schema)).toBe(
-      `export type test = "foo" | "bar" | "baz";`
+      `export type Test = "foo" | "bar" | "baz";`
     );
   });
 
@@ -82,7 +75,7 @@ describe("schemaToTypeAliasDeclaration", () => {
       enum: [1, 2, 3],
     };
 
-    expect(printSchema(schema)).toBe(`export type test = 1 | 2 | 3;`);
+    expect(printSchema(schema)).toBe(`export type Test = 1 | 2 | 3;`);
   });
 
   it("should generate top-level documentation", () => {
@@ -114,7 +107,7 @@ describe("schemaToTypeAliasDeclaration", () => {
        * @example I’m an example
        * @x-test plop
        */
-      export type test = null;"
+      export type Test = null;"
     `);
   });
 
@@ -129,7 +122,7 @@ describe("schemaToTypeAliasDeclaration", () => {
        * @example first example
        * @example second example
        */
-      export type test = null;"
+      export type Test = null;"
     `);
   });
 
@@ -159,7 +152,7 @@ describe("schemaToTypeAliasDeclaration", () => {
       "/**
        * An object
        */
-      export type test = {
+      export type Test = {
           /*
            * I’m a foo
            *
@@ -187,7 +180,7 @@ describe("schemaToTypeAliasDeclaration", () => {
     };
 
     expect(printSchema(schema)).toMatchInlineSnapshot(`
-      "export type test = {
+      "export type Test = {
           [\\"foo.bar\\"]?: string;
       };"
     `);
@@ -230,7 +223,7 @@ describe("schemaToTypeAliasDeclaration", () => {
       "/**
        * An object
        */
-      export type test = {
+      export type Test = {
           /*
            * I’m a foo
            *
@@ -259,7 +252,7 @@ describe("schemaToTypeAliasDeclaration", () => {
     };
 
     expect(printSchema(schema)).toMatchInlineSnapshot(
-      `"export type test = User;"`
+      `"export type Test = User;"`
     );
   });
 
@@ -268,14 +261,9 @@ describe("schemaToTypeAliasDeclaration", () => {
       $ref: "#/components/schemas/User",
     };
 
-    expect(
-      printSchema(schema, {
-        schemas: "Schemas.",
-        parameters: "",
-        requestBodies: "",
-        responses: "",
-      })
-    ).toMatchInlineSnapshot(`"export type test = Schemas.User;"`);
+    expect(printSchema(schema, "parameters")).toMatchInlineSnapshot(
+      `"export type Test = Schemas.User;"`
+    );
   });
 
   it("should generate a free form object", () => {
@@ -284,7 +272,7 @@ describe("schemaToTypeAliasDeclaration", () => {
     };
 
     expect(printSchema(schema)).toMatchInlineSnapshot(
-      `"export type test = Record<string, any>;"`
+      `"export type Test = Record<string, any>;"`
     );
   });
 
@@ -305,7 +293,7 @@ describe("schemaToTypeAliasDeclaration", () => {
     };
 
     expect(printSchema(schema)).toMatchInlineSnapshot(`
-      "export type test = {
+      "export type Test = {
           foo?: string;
           bar: number;
           [key: string]: Foo[];
@@ -325,7 +313,7 @@ describe("schemaToTypeAliasDeclaration", () => {
     };
 
     expect(printSchema(schema)).toMatchInlineSnapshot(`
-      "export type test = {
+      "export type Test = {
           foo?: string;
           bar: number;
           [key: string]: any;
@@ -345,7 +333,7 @@ describe("schemaToTypeAliasDeclaration", () => {
     };
 
     expect(printSchema(schema)).toMatchInlineSnapshot(`
-      "export type test = {
+      "export type Test = {
           foo?: string;
           bar: number;
           [key: string]: any;
@@ -359,7 +347,7 @@ describe("schemaToTypeAliasDeclaration", () => {
     };
 
     expect(printSchema(schema)).toMatchInlineSnapshot(
-      `"export type test = string | number;"`
+      `"export type Test = string | number;"`
     );
   });
 
@@ -369,7 +357,7 @@ describe("schemaToTypeAliasDeclaration", () => {
     };
 
     expect(printSchema(schema)).toMatchInlineSnapshot(
-      `"export type test = string | number;"`
+      `"export type Test = string | number;"`
     );
   });
 
@@ -392,7 +380,7 @@ describe("schemaToTypeAliasDeclaration", () => {
 
     it("should omit the base value if present", () => {
       expect(
-        printSchema(schema, defaultRefPrefixes, {
+        printSchema(schema, "schemas", {
           schemas: {
             Foo: {
               type: "object",
@@ -401,6 +389,7 @@ describe("schemaToTypeAliasDeclaration", () => {
                 discriminatorPropertyName: { type: "string" },
               },
             },
+
             Bar: {
               type: "object",
               properties: {
@@ -408,6 +397,7 @@ describe("schemaToTypeAliasDeclaration", () => {
                 discriminatorPropertyName: { type: "string" },
               },
             },
+
             Baz: {
               type: "object",
               properties: {
@@ -418,19 +408,19 @@ describe("schemaToTypeAliasDeclaration", () => {
           },
         })
       ).toMatchInlineSnapshot(`
-          "export type test = (Omit<Foo, \\"discriminatorPropertyName\\"> & {
-              discriminatorPropertyName: \\"foo\\";
-          }) | (Omit<Bar, \\"discriminatorPropertyName\\"> & {
-              discriminatorPropertyName: \\"bar\\";
-          }) | (Omit<Baz, \\"discriminatorPropertyName\\"> & {
-              discriminatorPropertyName: \\"baz\\";
-          });"
-        `);
+        "export type Test = (Omit<Foo, \\"discriminatorPropertyName\\"> & {
+            discriminatorPropertyName: \\"foo\\";
+        }) | (Omit<Bar, \\"discriminatorPropertyName\\"> & {
+            discriminatorPropertyName: \\"bar\\";
+        }) | (Omit<Baz, \\"discriminatorPropertyName\\"> & {
+            discriminatorPropertyName: \\"baz\\";
+        });"
+      `);
     });
 
     it("should not add the `Omit` if not necessary", () => {
       expect(
-        printSchema(schema, defaultRefPrefixes, {
+        printSchema(schema, "schemas", {
           schemas: {
             Foo: { type: "object", properties: { foo: { type: "string" } } },
             Bar: { type: "object", properties: { bar: { type: "string" } } },
@@ -438,7 +428,7 @@ describe("schemaToTypeAliasDeclaration", () => {
           },
         })
       ).toMatchInlineSnapshot(`
-        "export type test = (Foo & {
+        "export type Test = (Foo & {
             discriminatorPropertyName: \\"foo\\";
         }) | (Bar & {
             discriminatorPropertyName: \\"bar\\";
@@ -450,7 +440,7 @@ describe("schemaToTypeAliasDeclaration", () => {
 
     it("should use the original type if compliant", () => {
       expect(
-        printSchema(schema, defaultRefPrefixes, {
+        printSchema(schema, "schemas", {
           schemas: {
             Foo: {
               type: "object",
@@ -483,7 +473,7 @@ describe("schemaToTypeAliasDeclaration", () => {
             },
           },
         })
-      ).toMatchInlineSnapshot(`"export type test = Foo | Bar | Baz;"`);
+      ).toMatchInlineSnapshot(`"export type Test = Foo | Bar | Baz;"`);
     });
   });
 
@@ -497,7 +487,7 @@ describe("schemaToTypeAliasDeclaration", () => {
       };
 
       expect(printSchema(schema)).toMatchInlineSnapshot(`
-        "export type test = {
+        "export type Test = {
             foo?: string;
             bar?: number;
         };"
@@ -524,7 +514,7 @@ describe("schemaToTypeAliasDeclaration", () => {
       };
 
       expect(printSchema(schema, undefined, components)).toMatchInlineSnapshot(`
-        "export type test = Foo & {
+        "export type Test = Foo & {
             bar?: number;
         };"
       `);
@@ -547,7 +537,7 @@ describe("schemaToTypeAliasDeclaration", () => {
       };
 
       expect(printSchema(schema, undefined, components)).toMatchInlineSnapshot(`
-        "export type test = {
+        "export type Test = {
             bar: string;
         };"
       `);
@@ -559,7 +549,7 @@ describe("schemaToTypeAliasDeclaration", () => {
       };
 
       expect(printSchema(schema)).toMatchInlineSnapshot(
-        `"export type test = never;"`
+        `"export type Test = never;"`
       );
     });
 
@@ -572,7 +562,7 @@ describe("schemaToTypeAliasDeclaration", () => {
       };
 
       expect(printSchema(schema)).toMatchInlineSnapshot(`
-        "export type test = {
+        "export type Test = {
             foo?: never;
         };"
       `);
@@ -594,7 +584,7 @@ describe("schemaToTypeAliasDeclaration", () => {
         "/**
          * A nice top-level description
          */
-        export type test = {
+        export type Test = {
             /*
              * A nice description for foo
              */
@@ -621,7 +611,7 @@ describe("schemaToTypeAliasDeclaration", () => {
          * 
          * @maxLength 255
          */
-        export type test = string;"
+        export type Test = string;"
       `);
     });
   }); // end of allOf
@@ -629,11 +619,11 @@ describe("schemaToTypeAliasDeclaration", () => {
 
 const printSchema = (
   schema: SchemaObject,
-  refPrefixes: RefPrefixes = defaultRefPrefixes,
+  currentComponent: OpenAPIComponentType = "schemas",
   components?: OpenAPIObject["components"]
 ) => {
-  const nodes = schemaToTypeAliasDeclaration("test", schema, {
-    refPrefixes,
+  const nodes = schemaToTypeAliasDeclaration("Test", schema, {
+    currentComponent,
     openAPIDocument: { components },
   });
 
