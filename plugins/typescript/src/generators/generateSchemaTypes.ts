@@ -79,12 +79,7 @@ export const generateSchemaTypes = async (
         ...mem,
         ...schemaToTypeAliasDeclaration(name, schema, {
           openAPIDocument: context.openAPIDocument,
-          refPrefixes: {
-            schemas: "",
-            requestBodies: "RequestBodies",
-            parameters: "Parameters",
-            responses: "Responses",
-          },
+          currentComponent: "schemas",
         }),
       ],
       []
@@ -112,12 +107,7 @@ export const generateSchemaTypes = async (
         ...mem,
         ...schemaToTypeAliasDeclaration(name, mediaType.schema, {
           openAPIDocument: context.openAPIDocument,
-          refPrefixes: {
-            schemas: "Schemas",
-            requestBodies: "",
-            parameters: "Parameters",
-            responses: "Responses",
-          },
+          currentComponent: "requestBodies",
         }),
       ];
     }, []);
@@ -145,12 +135,7 @@ export const generateSchemaTypes = async (
         ...mem,
         ...schemaToTypeAliasDeclaration(name, parameterObject.schema, {
           openAPIDocument: context.openAPIDocument,
-          refPrefixes: {
-            schemas: "Schemas",
-            requestBodies: "RequestBodies",
-            parameters: "",
-            responses: "Responses",
-          },
+          currentComponent: "parameters",
         }),
       ];
     }, []);

@@ -20,16 +20,19 @@ type RemoveIndex<T> = {
     : P]: T[P];
 };
 
-type GeneratedComponents = Extract<
+export type OpenAPIComponentType = Extract<
   keyof RemoveIndex<ComponentsObject>,
   "parameters" | "responses" | "schemas" | "requestBodies"
 >;
 
-export type RefPrefixes = Record<GeneratedComponents, string>;
-
 export type Context = {
   openAPIDocument: Pick<OpenAPIObject, "components">;
-  refPrefixes: RefPrefixes;
+  /**
+   * Current OpenAPI component
+   *
+   * This is required to correctly resolve types dependencies
+   */
+  currentComponent: OpenAPIComponentType;
 };
 
 /**
@@ -73,19 +76,16 @@ const getType = (
         "This library only resolve $ref that are include into `#/components/*` for now"
       );
     }
-    if (namespace in context.refPrefixes) {
-      const left = context.refPrefixes[namespace as keyof RefPrefixes];
-      if (left) {
-        return f.createTypeReferenceNode(
-          f.createQualifiedName(
-            f.createIdentifier(left),
-            f.createIdentifier(pascal(name))
-          )
-        );
-      }
+    if (namespace === context.currentComponent) {
       return f.createTypeReferenceNode(f.createIdentifier(pascal(name)));
     }
-    return f.createKeywordTypeNode(ts.SyntaxKind.AnyKeyword);
+
+    return f.createTypeReferenceNode(
+      f.createQualifiedName(
+        f.createIdentifier(pascal(namespace)),
+        f.createIdentifier(pascal(name))
+      )
+    );
   }
 
   if (schema["x-openapi-codegen"]?.type === "never") {

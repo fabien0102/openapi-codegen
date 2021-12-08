@@ -1,16 +1,9 @@
 import { OpenAPIObject, ReferenceObject, SchemaObject } from "openapi3-ts";
 import ts from "typescript";
 import {
-  RefPrefixes,
+  OpenAPIComponentType,
   schemaToTypeAliasDeclaration,
 } from "./schemaToTypeAliasDeclaration";
-
-const defaultRefPrefixes = {
-  parameters: "",
-  requestBodies: "",
-  responses: "",
-  schemas: "",
-};
 
 describe("schemaToTypeAliasDeclaration", () => {
   it("should generate null", () => {
@@ -268,14 +261,9 @@ describe("schemaToTypeAliasDeclaration", () => {
       $ref: "#/components/schemas/User",
     };
 
-    expect(
-      printSchema(schema, {
-        schemas: "Schemas",
-        parameters: "",
-        requestBodies: "",
-        responses: "",
-      })
-    ).toMatchInlineSnapshot(`"export type Test = Schemas.User;"`);
+    expect(printSchema(schema, "parameters")).toMatchInlineSnapshot(
+      `"export type Test = Schemas.User;"`
+    );
   });
 
   it("should generate a free form object", () => {
@@ -392,7 +380,7 @@ describe("schemaToTypeAliasDeclaration", () => {
 
     it("should omit the base value if present", () => {
       expect(
-        printSchema(schema, defaultRefPrefixes, {
+        printSchema(schema, "schemas", {
           schemas: {
             Foo: {
               type: "object",
@@ -432,7 +420,7 @@ describe("schemaToTypeAliasDeclaration", () => {
 
     it("should not add the `Omit` if not necessary", () => {
       expect(
-        printSchema(schema, defaultRefPrefixes, {
+        printSchema(schema, "schemas", {
           schemas: {
             Foo: { type: "object", properties: { foo: { type: "string" } } },
             Bar: { type: "object", properties: { bar: { type: "string" } } },
@@ -452,7 +440,7 @@ describe("schemaToTypeAliasDeclaration", () => {
 
     it("should use the original type if compliant", () => {
       expect(
-        printSchema(schema, defaultRefPrefixes, {
+        printSchema(schema, "schemas", {
           schemas: {
             Foo: {
               type: "object",
@@ -631,11 +619,11 @@ describe("schemaToTypeAliasDeclaration", () => {
 
 const printSchema = (
   schema: SchemaObject,
-  refPrefixes: RefPrefixes = defaultRefPrefixes,
+  currentComponent: OpenAPIComponentType = "schemas",
   components?: OpenAPIObject["components"]
 ) => {
   const nodes = schemaToTypeAliasDeclaration("Test", schema, {
-    refPrefixes,
+    currentComponent,
     openAPIDocument: { components },
   });
 
