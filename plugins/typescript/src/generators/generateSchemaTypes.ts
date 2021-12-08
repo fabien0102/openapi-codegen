@@ -3,6 +3,7 @@ import {
   MediaTypeObject,
   OpenAPIObject,
   RequestBodyObject,
+  ResponseObject,
 } from "openapi3-ts";
 import * as c from "case";
 import { schemaToTypeAliasDeclaration } from "../core/schemaToTypeAliasDeclaration";
@@ -94,6 +95,35 @@ export const generateSchemaTypes = async (
     );
   }
 
+  // Generate `components/responses` types
+  if (components.responses) {
+    const componentsResponses = Object.entries(components.responses).reduce<
+      ts.Node[]
+    >((mem, [name, responseObject]) => {
+      if (isReferenceObject(responseObject)) return mem;
+      const mediaType = findCompatibleMediaType(responseObject);
+      if (!mediaType || !mediaType.schema) return mem;
+
+      return [
+        ...mem,
+        ...schemaToTypeAliasDeclaration(name, mediaType.schema, {
+          openAPIDocument: context.openAPIDocument,
+          currentComponent: "responses",
+        }),
+      ];
+    }, []);
+
+    if (componentsResponses.length) {
+      await context.writeFile(
+        files.responses + ".ts",
+        printNodes([
+          ...getUsedImports(componentsResponses, files),
+          ...componentsResponses,
+        ])
+      );
+    }
+  }
+
   // Generate `components/requestBodies` types
   if (components.requestBodies) {
     const componentsRequestBodies = Object.entries(
@@ -153,19 +183,20 @@ export const generateSchemaTypes = async (
 /**
  * Returns the first compatible media type.
  *
- * @param requestBodyObject
+ * @param requestBodyOrResponseObject
  * @returns
  */
 const findCompatibleMediaType = (
-  requestBodyObject: RequestBodyObject
+  requestBodyOrResponseObject: RequestBodyObject | ResponseObject
 ): MediaTypeObject | undefined => {
-  for (let contentType of Object.keys(requestBodyObject.content)) {
+  if (!requestBodyOrResponseObject.content) return;
+  for (let contentType of Object.keys(requestBodyOrResponseObject.content)) {
     if (
       contentType.startsWith("*/*") ||
       contentType.startsWith("application/json") ||
       contentType.startsWith("application/octet-stream")
     ) {
-      return requestBodyObject.content[contentType];
+      return requestBodyOrResponseObject.content[contentType];
     }
   }
 };

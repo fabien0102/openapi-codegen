@@ -137,6 +137,23 @@ describe("generateSchemaTypes", () => {
       `);
     });
 
+    it("should generate the responses file", async () => {
+      const writeFile = jest.fn();
+      await generateSchemaTypes(
+        { openAPIDocument: petstore, writeFile },
+        {
+          filenameCase: "camel",
+        }
+      );
+      expect(writeFile.mock.calls[1][0]).toBe("swaggerPetstoreResponses.ts");
+      expect(writeFile.mock.calls[1][1]).toMatchInlineSnapshot(`
+        "import type * as Schemas from \\"./swaggerPetstoreSchemas\\";
+
+        export type PetResponse = Schemas.Pet;
+        "
+      `);
+    });
+
     it("should generate the request bodies file", async () => {
       const writeFile = jest.fn();
       await generateSchemaTypes(
@@ -145,10 +162,10 @@ describe("generateSchemaTypes", () => {
           filenameCase: "camel",
         }
       );
-      expect(writeFile.mock.calls[1][0]).toBe(
+      expect(writeFile.mock.calls[2][0]).toBe(
         "swaggerPetstoreRequestBodies.ts"
       );
-      expect(writeFile.mock.calls[1][1]).toMatchInlineSnapshot(`
+      expect(writeFile.mock.calls[2][1]).toMatchInlineSnapshot(`
         "import type * as Schemas from \\"./swaggerPetstoreSchemas\\";
 
         export type UpdatePetRequest = Schemas.NewPet;
@@ -164,8 +181,8 @@ describe("generateSchemaTypes", () => {
           filenameCase: "camel",
         }
       );
-      expect(writeFile.mock.calls[2][0]).toBe("swaggerPetstoreParameters.ts");
-      expect(writeFile.mock.calls[2][1]).toMatchInlineSnapshot(`
+      expect(writeFile.mock.calls[3][0]).toBe("swaggerPetstoreParameters.ts");
+      expect(writeFile.mock.calls[3][1]).toMatchInlineSnapshot(`
         "/**
          * Unique identifier
          */

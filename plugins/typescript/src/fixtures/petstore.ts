@@ -256,6 +256,18 @@ export const petstore: OpenAPIObject = {
         required: true,
       },
     },
+    responses: {
+      PetResponse: {
+        description: "A pet",
+        content: {
+          "application/json": {
+            schema: {
+              $ref: "#/components/schemas/Pet",
+            },
+          },
+        },
+      },
+    },
     schemas: {
       Pet: {
         description: "A pet.",
