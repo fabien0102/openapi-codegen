@@ -270,7 +270,7 @@ describe("schemaToTypeAliasDeclaration", () => {
 
     expect(
       printSchema(schema, {
-        schemas: "Schemas.",
+        schemas: "Schemas",
         parameters: "",
         requestBodies: "",
         responses: "",

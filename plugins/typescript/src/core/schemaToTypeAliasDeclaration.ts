@@ -73,11 +73,16 @@ const getType = (
       );
     }
     if (namespace in context.refPrefixes) {
-      return f.createTypeReferenceNode(
-        f.createIdentifier(
-          context.refPrefixes[namespace as keyof RefPrefixes] + name
-        )
-      );
+      const left = context.refPrefixes[namespace as keyof RefPrefixes];
+      if (left) {
+        return f.createTypeReferenceNode(
+          f.createQualifiedName(
+            f.createIdentifier(left),
+            f.createIdentifier(name)
+          )
+        );
+      }
+      return f.createTypeReferenceNode(f.createIdentifier(name));
     }
     return f.createKeywordTypeNode(ts.SyntaxKind.AnyKeyword);
   }
