@@ -63,9 +63,9 @@ describe("generateSchemaTypes", () => {
   });
 
   describe("schemas file generation", () => {
-    it("should generate the schemas file", () => {
+    it("should generate the schemas file", async () => {
       const writeFile = jest.fn();
-      generateSchemaTypes(
+      await generateSchemaTypes(
         { openAPIDocument: petstore, writeFile },
         {
           filenameCase: "camel",
@@ -133,6 +133,25 @@ describe("generateSchemaTypes", () => {
         export type Request = {
             action?: (\\"create\\" | \\"read\\" | \\"update\\" | \\"delete\\")[];
         };
+        "
+      `);
+    });
+
+    it("should generate the request bodies file", async () => {
+      const writeFile = jest.fn();
+      await generateSchemaTypes(
+        { openAPIDocument: petstore, writeFile },
+        {
+          filenameCase: "camel",
+        }
+      );
+      expect(writeFile.mock.calls[1][0]).toBe(
+        "swaggerPetstoreRequestBodies.ts"
+      );
+      expect(writeFile.mock.calls[1][1]).toMatchInlineSnapshot(`
+        "import type * as Schemas from \\"./swaggerPetstoreSchemas\\";
+
+        export type updatePetRequest = Schemas.NewPet;
         "
       `);
     });
