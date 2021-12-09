@@ -71,6 +71,7 @@ export type FromOptions = FileOptions | UrlOptions | GithubOptions;
 export type Context = {
   openAPIDocument: OpenAPIObject;
   outputDir: string;
+  writeFile: (file: string, data: string) => Promise<void>;
 };
 
 /**
@@ -88,10 +89,3 @@ export type Config = {
   outputDir: string;
   to: (context: Context) => Promise<void>;
 };
-
-/**
- * Type helper to make it easier to use openapi-codegen.ts.
- */
-export type defineConfig = (
-  configs: Record<Namespace, Config>
-) => Record<Namespace, Config>;

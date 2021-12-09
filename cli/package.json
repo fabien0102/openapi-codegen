@@ -15,7 +15,11 @@
     "typescript"
   ],
   "license": "MIT",
+  "scripts": {
+    "start": "node -r @swc-node/register src/index.ts"
+  },
   "dependencies": {
+    "@swc/core": "^1.2.118",
     "clipanion": "^3.2.0-rc.3",
     "js-yaml": "^4.1.0",
     "ky": "^0.28.6",
@@ -23,6 +27,8 @@
     "swagger2openapi": "^7.0.8"
   },
   "devDependencies": {
+    "@swc-node/register": "^1.4.0",
+    "@swc/cli": "^0.1.52",
     "@types/js-yaml": "^4.0.3"
   }
 }
