@@ -16,7 +16,7 @@ export class GenerateCommand extends Command {
     description: "Configuration file path",
   });
 
-  configKey = Option.String();
+  namespace = Option.String();
 
   static paths = [["gen"], ["generate"], Command.Default];
   static usage = Command.Usage({
@@ -39,14 +39,14 @@ export class GenerateCommand extends Command {
 
   async execute() {
     const configs = await this.loadConfigs();
-    if (!(this.configKey in configs)) {
+    if (!(this.namespace in configs)) {
       this.context.stdout.write(
-        `"${this.configKey}" is not defined in your configuration`
+        `"${this.namespace}" is not defined in your configuration`
       );
       process.exit(1);
     }
 
-    const config = configs[this.configKey];
+    const config = configs[this.namespace];
     const sourceFile = await getOpenAPISourceFile(config.from);
     const openAPIDocument = await parseOpenAPISourceFile(sourceFile);
 

@@ -1,8 +1,12 @@
 {
-  "name": "@openapi-code/cli",
+  "name": "@openapi-codegen/cli",
   "version": "0.0.1",
   "description": "OpenAPI Codegen cli",
-  "main": "dist/index.js",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "bin": {
+    "openapi-codegen": "lib/index.js"
+  },
   "repository": {
     "url": "https://github.com/fabien0102/openapi-codegen",
     "directory": "cli"
@@ -16,19 +20,23 @@
   ],
   "license": "MIT",
   "scripts": {
-    "start": "node -r @swc-node/register src/index.ts"
+    "start": "node -r @swc-node/register src/index.ts",
+    "build": "tsc -p tsconfig.package.json"
   },
+  "files": [
+    "lib",
+    "README.md"
+  ],
   "dependencies": {
     "@swc/core": "^1.2.118",
     "clipanion": "^3.2.0-rc.3",
     "js-yaml": "^4.1.0",
-    "ky": "^0.28.6",
     "openapi3-ts": "^2.0.1",
-    "swagger2openapi": "^7.0.8"
+    "swagger2openapi": "^7.0.8",
+    "tslib": "^2.3.1"
   },
   "devDependencies": {
     "@swc-node/register": "^1.4.0",
-    "@swc/cli": "^0.1.52",
     "@types/js-yaml": "^4.0.3"
   }
 }

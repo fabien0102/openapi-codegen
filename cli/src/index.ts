@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import { Cli } from "clipanion";
 
 import { GenerateCommand } from "./commands/GenerateCommand";
@@ -8,7 +10,7 @@ import { join } from "path";
 
 const [_node, _app, ...args] = process.argv;
 const packageJSON = JSON.parse(
-  readFileSync(join(__dirname, "../../package.json"), "utf-8")
+  readFileSync(join(__dirname, "../package.json"), "utf-8")
 );
 
 const cli = new Cli({
