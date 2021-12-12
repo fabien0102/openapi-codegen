@@ -1,6 +1,6 @@
 import { Command, Option } from "clipanion";
 import fs from "fs/promises";
-import { join } from "path";
+import path from "path";
 import * as swc from "@swc/core";
 
 import { Config, Namespace } from "../types";
@@ -28,13 +28,33 @@ export class GenerateCommand extends Command {
   });
 
   async loadConfigs(): Promise<Record<Namespace, Config>> {
-    const userConfigPath = join(
+    const userConfigPath = path.join(
       process.cwd(),
       this.config || "openapi-codegen.config.ts"
     );
+    const { dir, name } = path.parse(userConfigPath);
+    const transpiledPath = `${dir}/${name}.js`;
 
-    await swc.transformFile(userConfigPath);
-    return require(userConfigPath).default;
+    const { code } = await swc.transformFile(userConfigPath, {
+      jsc: {
+        target: "es2022",
+      },
+      module: {
+        type: "commonjs",
+      },
+    });
+
+    // Write the transpiled file
+    await fs.writeFile(transpiledPath, code);
+
+    // Compute the result
+    const config = require(transpiledPath).default;
+
+    // Delete the transpiled file
+    await fs.unlink(transpiledPath);
+
+    // Return the result
+    return config;
   }
 
   async execute() {
@@ -51,7 +71,10 @@ export class GenerateCommand extends Command {
     const openAPIDocument = await parseOpenAPISourceFile(sourceFile);
 
     const writeFile = async (file: string, data: string) => {
-      await fs.writeFile(join(process.cwd(), config.outputDir, file), data);
+      await fs.writeFile(
+        path.join(process.cwd(), config.outputDir, file),
+        data
+      );
     };
 
     await config.to({
