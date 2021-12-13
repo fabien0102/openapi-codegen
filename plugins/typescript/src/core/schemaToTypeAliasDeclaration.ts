@@ -182,7 +182,15 @@ const getType = (
 
       const additionalPropertiesNode = getAdditionalProperties(schema, context);
 
-      if (additionalPropertiesNode) members.push(additionalPropertiesNode);
+      if (additionalPropertiesNode) {
+        return withNullable(
+          f.createIntersectionTypeNode([
+            f.createTypeLiteralNode(members),
+            f.createTypeLiteralNode([additionalPropertiesNode]),
+          ]),
+          schema.nullable
+        );
+      }
 
       return withNullable(f.createTypeLiteralNode(members), schema.nullable);
     case "array":

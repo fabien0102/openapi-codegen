@@ -296,6 +296,7 @@ describe("schemaToTypeAliasDeclaration", () => {
       "export type Test = {
           foo?: string;
           bar: number;
+      } & {
           [key: string]: Foo[];
       };"
     `);
@@ -316,6 +317,7 @@ describe("schemaToTypeAliasDeclaration", () => {
       "export type Test = {
           foo?: string;
           bar: number;
+      } & {
           [key: string]: any;
       };"
     `);
@@ -336,6 +338,7 @@ describe("schemaToTypeAliasDeclaration", () => {
       "export type Test = {
           foo?: string;
           bar: number;
+      } & {
           [key: string]: any;
       };"
     `);
