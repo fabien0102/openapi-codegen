@@ -33,7 +33,7 @@ export class GenerateCommand extends Command {
       this.config || "openapi-codegen.config.ts"
     );
     const { dir, name, ext } = path.parse(userConfigPath);
-    const isTs = ext.toLowerCase() === "ts";
+    const isTs = ext.toLowerCase() === ".ts";
 
     if (isTs) {
       const transpiledPath = `${dir}/${name}.js`;
