@@ -1,5 +1,5 @@
 import { Command, Option } from "clipanion";
-import fs from "fs/promises";
+import { unlink, outputFile } from "fs-extra";
 import path from "path";
 import * as swc from "@swc/core";
 
@@ -32,29 +32,35 @@ export class GenerateCommand extends Command {
       process.cwd(),
       this.config || "openapi-codegen.config.ts"
     );
-    const { dir, name } = path.parse(userConfigPath);
-    const transpiledPath = `${dir}/${name}.js`;
+    const { dir, name, ext } = path.parse(userConfigPath);
+    const isTs = ext.toLowerCase() === "ts";
 
-    const { code } = await swc.transformFile(userConfigPath, {
-      jsc: {
-        target: "es2022",
-      },
-      module: {
-        type: "commonjs",
-      },
-    });
+    if (isTs) {
+      const transpiledPath = `${dir}/${name}.js`;
 
-    // Write the transpiled file
-    await fs.writeFile(transpiledPath, code);
+      const { code } = await swc.transformFile(userConfigPath, {
+        jsc: {
+          target: "es2022",
+        },
+        module: {
+          type: "commonjs",
+        },
+      });
 
-    // Compute the result
-    const config = require(transpiledPath).default;
+      // Write the transpiled file (.js)
+      await outputFile(transpiledPath, code);
 
-    // Delete the transpiled file
-    await fs.unlink(transpiledPath);
+      // Compute the result
+      const config = require(transpiledPath).default;
 
-    // Return the result
-    return config;
+      // Delete the transpiled file
+      await unlink(transpiledPath);
+
+      // Return the result
+      return config;
+    } else {
+      return require(userConfigPath);
+    }
   }
 
   async execute() {
@@ -71,10 +77,7 @@ export class GenerateCommand extends Command {
     const openAPIDocument = await parseOpenAPISourceFile(sourceFile);
 
     const writeFile = async (file: string, data: string) => {
-      await fs.writeFile(
-        path.join(process.cwd(), config.outputDir, file),
-        data
-      );
+      await outputFile(path.join(process.cwd(), config.outputDir, file), data);
     };
 
     await config.to({
