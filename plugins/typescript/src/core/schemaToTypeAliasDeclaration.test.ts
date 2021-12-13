@@ -344,6 +344,23 @@ describe("schemaToTypeAliasDeclaration", () => {
     `);
   });
 
+  it("should handle implicit object", () => {
+    const schema: SchemaObject = {
+      properties: {
+        foo: { type: "string" },
+        bar: { type: "number" },
+      },
+      required: ["bar"],
+    };
+
+    expect(printSchema(schema)).toMatchInlineSnapshot(`
+      "export type Test = {
+          foo?: string;
+          bar: number;
+      };"
+    `);
+  });
+
   it("should generate a oneOf", () => {
     const schema: SchemaObject = {
       oneOf: [{ type: "string" }, { type: "number" }],

@@ -131,6 +131,11 @@ const getType = (
     );
   }
 
+  // Handle implicit object
+  if (schema.properties && !schema.type) {
+    schema.type = "object";
+  }
+
   switch (schema.type) {
     case "null":
       return f.createLiteralTypeNode(f.createNull());
