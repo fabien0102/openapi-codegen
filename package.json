@@ -37,7 +37,10 @@
         "displayName": "cli",
         "transform": {
           "^.+\\.(t|j)sx?$": [
-            "@swc/jest"
+            "@swc/jest",
+            {
+              "sourceMaps": true
+            }
           ]
         },
         "testMatch": [
@@ -48,7 +51,10 @@
         "displayName": "plugins/typescript",
         "transform": {
           "^.+\\.(t|j)sx?$": [
-            "@swc/jest"
+            "@swc/jest",
+            {
+              "sourceMaps": true
+            }
           ]
         },
         "testMatch": [
