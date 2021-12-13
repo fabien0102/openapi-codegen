@@ -1,6 +1,6 @@
 import { Command, Option } from "clipanion";
-import fs from "fs/promises";
-import { join } from "path";
+import { unlink, outputFile } from "fs-extra";
+import path from "path";
 import * as swc from "@swc/core";
 
 import { Config, Namespace } from "../types";
@@ -16,7 +16,7 @@ export class GenerateCommand extends Command {
     description: "Configuration file path",
   });
 
-  configKey = Option.String();
+  namespace = Option.String();
 
   static paths = [["gen"], ["generate"], Command.Default];
   static usage = Command.Usage({
@@ -28,30 +28,56 @@ export class GenerateCommand extends Command {
   });
 
   async loadConfigs(): Promise<Record<Namespace, Config>> {
-    const userConfigPath = join(
+    const userConfigPath = path.join(
       process.cwd(),
       this.config || "openapi-codegen.config.ts"
     );
+    const { dir, name, ext } = path.parse(userConfigPath);
+    const isTs = ext.toLowerCase() === ".ts";
 
-    await swc.transformFile(userConfigPath);
-    return require(userConfigPath).default;
+    if (isTs) {
+      const transpiledPath = `${dir}/${name}.js`;
+
+      const { code } = await swc.transformFile(userConfigPath, {
+        jsc: {
+          target: "es2022",
+        },
+        module: {
+          type: "commonjs",
+        },
+      });
+
+      // Write the transpiled file (.js)
+      await outputFile(transpiledPath, code);
+
+      // Compute the result
+      const config = require(transpiledPath).default;
+
+      // Delete the transpiled file
+      await unlink(transpiledPath);
+
+      // Return the result
+      return config;
+    } else {
+      return require(userConfigPath);
+    }
   }
 
   async execute() {
     const configs = await this.loadConfigs();
-    if (!(this.configKey in configs)) {
+    if (!(this.namespace in configs)) {
       this.context.stdout.write(
-        `"${this.configKey}" is not defined in your configuration`
+        `"${this.namespace}" is not defined in your configuration`
       );
       process.exit(1);
     }
 
-    const config = configs[this.configKey];
+    const config = configs[this.namespace];
     const sourceFile = await getOpenAPISourceFile(config.from);
     const openAPIDocument = await parseOpenAPISourceFile(sourceFile);
 
     const writeFile = async (file: string, data: string) => {
-      await fs.writeFile(join(process.cwd(), config.outputDir, file), data);
+      await outputFile(path.join(process.cwd(), config.outputDir, file), data);
     };
 
     await config.to({
