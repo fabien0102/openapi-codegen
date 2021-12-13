@@ -3,11 +3,18 @@
   "version": "0.0.1",
   "description": "OpenAPI Codegen typescript generators",
   "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "repository": {
     "url": "https://github.com/fabien0102/openapi-codegen",
     "directory": "plugins/typescript"
   },
-  "scripts": {},
+  "scripts": {
+    "build": "tsc -p tsconfig.package.json"
+  },
+  "files": [
+    "lib",
+    "README.md"
+  ],
   "keywords": [
     "openapi",
     "codegen",
