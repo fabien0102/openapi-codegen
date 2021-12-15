@@ -1,32 +1,13 @@
-import {
-  isReferenceObject,
-  MediaTypeObject,
-  OpenAPIObject,
-  RequestBodyObject,
-  ResponseObject,
-} from "openapi3-ts";
+import { isReferenceObject } from "openapi3-ts";
 import * as c from "case";
-import { schemaToTypeAliasDeclaration } from "../core/schemaToTypeAliasDeclaration";
 import ts, { factory as f } from "typescript";
-import { get } from "lodash";
 
-export type Context = {
-  openAPIDocument: OpenAPIObject;
-  writeFile: (file: string, data: string) => Promise<void>;
-};
+import { ConfigBase, Context } from "./types";
+import { schemaToTypeAliasDeclaration } from "../core/schemaToTypeAliasDeclaration";
+import { findCompatibleMediaType } from "../core/findCompatibleMediaType";
+import { getUsedImports } from "../core/getUsedImports";
 
-type Config = {
-  /**
-   * @default openapi.info.title
-   */
-  filenamePrefix?: string;
-  /**
-   * Case convention for filenames.
-   *
-   * @default camel
-   */
-  filenameCase?: keyof Pick<typeof c, "snake" | "camel" | "kebab" | "pascal">;
-};
+type Config = ConfigBase;
 
 /**
  * Generate schemas types (components & responses)
@@ -177,97 +158,9 @@ export const generateSchemaTypes = async (
         ...componentsParameters,
       ])
     );
+
+    return {
+      schemasFiles: files,
+    };
   }
-};
-
-/**
- * Returns the first compatible media type.
- *
- * @param requestBodyOrResponseObject
- * @returns
- */
-const findCompatibleMediaType = (
-  requestBodyOrResponseObject: RequestBodyObject | ResponseObject
-): MediaTypeObject | undefined => {
-  if (!requestBodyOrResponseObject.content) return;
-  for (let contentType of Object.keys(requestBodyOrResponseObject.content)) {
-    if (
-      contentType.startsWith("*/*") ||
-      contentType.startsWith("application/json") ||
-      contentType.startsWith("application/octet-stream")
-    ) {
-      return requestBodyOrResponseObject.content[contentType];
-    }
-  }
-};
-
-/**
- * Create an `ImportDeclaration` typescript node
- *
- * @param namespace
- * @param from
- * @returns
- */
-const createImportDeclaration = (namespace: string, from: string) =>
-  f.createImportDeclaration(
-    undefined,
-    undefined,
-    f.createImportClause(
-      true,
-      undefined,
-      f.createNamespaceImport(f.createIdentifier(namespace))
-    ),
-    f.createStringLiteral(from),
-    undefined
-  );
-
-/**
- * Generate the needed imports regarding the generated nodes usage.
- *
- * @param nodes generated nodes
- * @param files files path for dependencies
- */
-const getUsedImports = (
-  nodes: ts.Node[],
-  files: {
-    requestBodies: string;
-    schemas: string;
-    parameters: string;
-    responses: string;
-  }
-): ts.Node[] => {
-  const imports: Record<
-    keyof typeof files,
-    { used: boolean; namespace: string; from: string }
-  > = {
-    parameters: {
-      used: false,
-      namespace: "Parameters",
-      from: files.parameters,
-    },
-    schemas: { used: false, namespace: "Schemas", from: files.schemas },
-    requestBodies: {
-      used: false,
-      namespace: "RequestBodies",
-      from: files.requestBodies,
-    },
-    responses: { used: false, namespace: "Responses", from: files.responses },
-  };
-
-  const visitor: ts.Visitor = (node) => {
-    if (ts.isQualifiedName(node)) {
-      // We can’t use `node.left.getText()` because the node is not compiled (no internal `text` property)
-      const text = (get(node.left, "escapedText", "") as string).toLowerCase();
-      if (text in imports) {
-        imports[text as keyof typeof imports].used = true;
-      }
-    }
-    return node.forEachChild(visitor);
-  };
-
-  ts.visitNodes(f.createNodeArray(nodes), visitor);
-
-  return Object.values(imports)
-    .filter((i) => i.used)
-    .map((i) => createImportDeclaration(i.namespace, `./${i.from}`));
 };

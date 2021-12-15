@@ -32,7 +32,7 @@ export type Context = {
    *
    * This is required to correctly resolve types dependencies
    */
-  currentComponent: OpenAPIComponentType;
+  currentComponent: OpenAPIComponentType | null;
 };
 
 /**
@@ -65,7 +65,7 @@ export const schemaToTypeAliasDeclaration = (
  * @param schema OpenAPI Schema
  * @returns ts.TypeNode
  */
-const getType = (
+export const getType = (
   schema: SchemaObject | ReferenceObject,
   context: Context
 ): ts.TypeNode => {
