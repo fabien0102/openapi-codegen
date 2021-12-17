@@ -20,6 +20,7 @@ import {
 } from "../core/schemaToTypeAliasDeclaration";
 import { findCompatibleMediaType } from "../core/findCompatibleMediaType";
 import { getUsedImports } from "../core/getUsedImports";
+import { getCustomFetcher } from "../templates/customFetcher";
 
 export type Config = ConfigBase & {
   /**
@@ -31,6 +32,12 @@ export type Config = ConfigBase & {
     parameters: string;
     responses: string;
   };
+  /**
+   * List of headers injected in the custom fetcher
+   *
+   * This will mark the header as optional in the component API
+   */
+  injectedHeaders?: string[];
 };
 
 export const generateReactQueryComponents = async (
@@ -54,7 +61,9 @@ export const generateReactQueryComponents = async (
         return (
           printer.printNode(ts.EmitHint.Unspecified, node, sourceFile) +
           (ts.isJSDoc(node) ||
-          (ts.isImportDeclaration(node) && ts.isImportDeclaration(nodes[i + 1]))
+          (ts.isImportDeclaration(node) &&
+            nodes[i + 1] &&
+            ts.isImportDeclaration(nodes[i + 1]))
             ? ""
             : "\n")
         );
@@ -70,10 +79,13 @@ export const generateReactQueryComponents = async (
   const fetcherFn = c.camel(`${filenamePrefix}-fetch`);
   const nodes: ts.Node[] = [];
 
-  // Generate ${fetcherFn} if the file doesn't exist
-
-  // TODO: import custom fetch
-  // TODO: import deps schemas/responses/etc
+  const fetcherFilename = formatFilename(filenamePrefix + "-fetcher");
+  if (!context.existsFile(fetcherFilename)) {
+    context.writeFile(
+      `${fetcherFilename}.ts`,
+      printNodes(getCustomFetcher(filenamePrefix))
+    );
+  }
 
   // Generate `useQuery` & `useMutation`
   const operationIds: string[] = [];
@@ -89,7 +101,6 @@ export const generateReactQueryComponents = async (
           );
         }
         operationIds.push(operationId);
-        const paramsInPath = extractPathParams(route);
 
         // Retrieve dataType
         const dataType = getResponseType({
@@ -140,7 +151,7 @@ export const generateReactQueryComponents = async (
         if (headerParams.length > 0) {
           nodes.push(
             ...schemaToTypeAliasDeclaration(
-              `${operationId}HeaderParams`,
+              `${operationId}Headers`,
               paramsToSchema(headerParams),
               {
                 currentComponent: null,
@@ -154,9 +165,25 @@ export const generateReactQueryComponents = async (
         nodes.push(
           ...createOperationFetcherFnNodes({
             dataType,
+            pathParamsType:
+              pathParams.length > 0
+                ? f.createTypeReferenceNode(
+                    `${c.pascal(operationId)}PathParams`
+                  )
+                : undefined,
+            queryParamsType:
+              queryParams.length > 0
+                ? f.createTypeReferenceNode(
+                    `${c.pascal(operationId)}QueryParams`
+                  )
+                : undefined,
+            headersType:
+              headerParams.length > 0
+                ? f.createTypeReferenceNode(`${c.pascal(operationId)}Headers`)
+                : undefined,
             operation,
             fetcherFn,
-            url: f.createStringLiteral(route),
+            url: route,
             verb,
             name: operationFetcherFnName,
           }),
@@ -199,26 +226,6 @@ const isVerb = (
   ["get", "post", "patch", "put", "delete"].includes(verb);
 
 /**
- * Extract variable from the pattern `/pet/{id}`
- *
- * @param route
- * @example
- * ```
- * extractVariable("/pet/{id}"); // => ["id"]
- * ```
- */
-const extractPathParams = (route: string) => {
-  const routePattern = /\{(\w+)\}/g;
-  const variables = [];
-  let n;
-  while ((n = routePattern.exec(route)) !== null) {
-    variables.push(n[1]);
-  }
-
-  return variables;
-};
-
-/**
  * Resolve $ref and group parameters by `type`.
  *
  * @param parameters Operation parameters
@@ -235,10 +242,14 @@ const getParamsGroupByType = (
   } = groupBy(
     [...parameters].map<ParameterObject>((p) => {
       if (isReferenceObject(p)) {
-        return get(
+        const schema = get(
           components,
           p.$ref.replace("#/components/", "").replace("/", ".")
         );
+        if (!schema) {
+          throw new Error(`${p.$ref} not found!`);
+        }
+        return schema;
       } else {
         return p;
       }
@@ -340,6 +351,10 @@ const getResponseType = ({
  */
 const createOperationFetcherFnNodes = ({
   dataType,
+  bodyType,
+  queryParamsType,
+  pathParamsType,
+  headersType,
   fetcherFn,
   operation,
   url,
@@ -347,9 +362,13 @@ const createOperationFetcherFnNodes = ({
   name,
 }: {
   dataType: ts.TypeNode;
+  bodyType?: ts.TypeNode;
+  headersType?: ts.TypeNode;
+  pathParamsType?: ts.TypeNode;
+  queryParamsType?: ts.TypeNode;
   operation: OperationObject;
   fetcherFn: string;
-  url: ts.StringLiteral;
+  url: string;
   verb: string;
   name: string;
 }) => {
@@ -357,6 +376,49 @@ const createOperationFetcherFnNodes = ({
   if (operation.description) {
     nodes.push(f.createJSDocComment(operation.description.trim(), []));
   }
+  const optionsProperties: ts.TypeElement[] = [];
+
+  if (bodyType) {
+    optionsProperties.push(
+      f.createPropertySignature(
+        undefined,
+        f.createIdentifier("body"),
+        undefined,
+        bodyType
+      )
+    );
+  }
+  if (headersType) {
+    optionsProperties.push(
+      f.createPropertySignature(
+        undefined,
+        f.createIdentifier("headers"),
+        undefined,
+        headersType
+      )
+    );
+  }
+  if (pathParamsType) {
+    optionsProperties.push(
+      f.createPropertySignature(
+        undefined,
+        f.createIdentifier("pathParams"),
+        undefined,
+        pathParamsType
+      )
+    );
+  }
+  if (queryParamsType) {
+    optionsProperties.push(
+      f.createPropertySignature(
+        undefined,
+        f.createIdentifier("queryParams"),
+        undefined,
+        queryParamsType
+      )
+    );
+  }
+
   nodes.push(
     f.createVariableStatement(
       [f.createModifier(ts.SyntaxKind.ExportKeyword)],
@@ -369,7 +431,19 @@ const createOperationFetcherFnNodes = ({
             f.createArrowFunction(
               undefined,
               undefined,
-              [],
+              optionsProperties.length > 0
+                ? [
+                    f.createParameterDeclaration(
+                      undefined,
+                      undefined,
+                      undefined,
+                      f.createIdentifier("options"),
+                      undefined,
+                      f.createTypeLiteralNode(optionsProperties),
+                      undefined
+                    ),
+                  ]
+                : [],
               undefined,
               f.createToken(ts.SyntaxKind.EqualsGreaterThanToken),
               f.createCallExpression(
@@ -380,12 +454,19 @@ const createOperationFetcherFnNodes = ({
                     [
                       f.createPropertyAssignment(
                         f.createIdentifier("url"),
-                        url
+                        f.createStringLiteral(url)
                       ),
                       f.createPropertyAssignment(
                         f.createIdentifier("method"),
                         f.createStringLiteral(verb)
                       ),
+                      ...(optionsProperties.length > 0
+                        ? [
+                            f.createSpreadAssignment(
+                              f.createIdentifier("options")
+                            ),
+                          ]
+                        : []),
                     ],
                     false
                   ),

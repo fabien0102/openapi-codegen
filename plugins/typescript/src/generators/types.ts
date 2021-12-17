@@ -7,6 +7,7 @@ import * as c from "case";
 export type Context = {
   openAPIDocument: OpenAPIObject;
   writeFile: (file: string, data: string) => Promise<void>;
+  existsFile: (file: string) => boolean;
 };
 
 /**
