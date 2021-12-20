@@ -13,7 +13,7 @@ import {
   ResponsesObject,
   SchemaObject,
 } from "openapi3-ts";
-import { get, groupBy } from "lodash";
+import { get, groupBy, uniqBy } from "lodash";
 import {
   getType,
   schemaToTypeAliasDeclaration,
@@ -107,6 +107,7 @@ export const generateReactQueryComponents = async (
           responses: operation.responses,
           components: context.openAPIDocument.components,
           filter: (statusCode) => statusCode.startsWith("2"),
+          printNodes,
         });
 
         // Retrieve errorType
@@ -114,6 +115,7 @@ export const generateReactQueryComponents = async (
           responses: operation.responses,
           components: context.openAPIDocument.components,
           filter: (statusCode) => !statusCode.startsWith("2"),
+          printNodes,
         });
 
         // Generate params types
@@ -287,60 +289,63 @@ const paramsToSchema = (
 
 /**
  * Extract types from responses
- *
- * TODO: Add duplication check
  */
 const getResponseType = ({
   responses,
   components,
   filter,
+  printNodes,
 }: {
   responses: ResponsesObject;
   components?: ComponentsObject;
   filter: (statusCode: string) => boolean;
+  printNodes: (nodes: ts.Node[]) => string;
 }) => {
-  const responseTypes = Object.entries(responses).reduce(
-    (
-      mem,
-      [statusCode, response]: [string, ResponseObject | ReferenceObject]
-    ) => {
-      if (!filter(statusCode)) return mem;
-      if (isReferenceObject(response)) {
-        const [hash, topLevel, namespace, name] = response.$ref.split("/");
-        if (hash !== "#" || topLevel !== "components") {
-          throw new Error(
-            "This library only resolve $ref that are include into `#/components/*` for now"
-          );
+  const responseTypes = uniqBy(
+    Object.entries(responses).reduce(
+      (
+        mem,
+        [statusCode, response]: [string, ResponseObject | ReferenceObject]
+      ) => {
+        if (!filter(statusCode)) return mem;
+        if (isReferenceObject(response)) {
+          const [hash, topLevel, namespace, name] = response.$ref.split("/");
+          if (hash !== "#" || topLevel !== "components") {
+            throw new Error(
+              "This library only resolve $ref that are include into `#/components/*` for now"
+            );
+          }
+          if (namespace !== "responses") {
+            throw new Error(
+              "$ref for responses must be on `#/components/responses`"
+            );
+          }
+          return [
+            ...mem,
+            f.createTypeReferenceNode(
+              f.createQualifiedName(
+                f.createIdentifier("Responses"),
+                f.createIdentifier(name)
+              ),
+              undefined
+            ),
+          ];
         }
-        if (namespace !== "responses") {
-          throw new Error(
-            "$ref for responses must be on `#/components/responses`"
-          );
-        }
+
+        const mediaType = findCompatibleMediaType(response);
+        if (!mediaType || !mediaType.schema) return mem;
+
         return [
           ...mem,
-          f.createTypeReferenceNode(
-            f.createQualifiedName(
-              f.createIdentifier("Responses"),
-              f.createIdentifier(name)
-            ),
-            undefined
-          ),
+          getType(mediaType.schema, {
+            currentComponent: null,
+            openAPIDocument: { components },
+          }),
         ];
-      }
-
-      const mediaType = findCompatibleMediaType(response);
-      if (!mediaType || !mediaType.schema) return mem;
-
-      return [
-        ...mem,
-        getType(mediaType.schema, {
-          currentComponent: null,
-          openAPIDocument: { components },
-        }),
-      ];
-    },
-    [] as ts.TypeNode[]
+      },
+      [] as ts.TypeNode[]
+    ),
+    (node) => printNodes([node])
   );
 
   return responseTypes.length === 0
