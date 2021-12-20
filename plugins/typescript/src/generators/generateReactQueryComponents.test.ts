@@ -282,7 +282,7 @@ describe("generateReactQueryComponents", () => {
           /*
            * Filter on the dog breed
            */
-          breed: string;
+          breed?: string;
       };
 
       /**

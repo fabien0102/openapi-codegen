@@ -152,7 +152,7 @@ export const generateReactQueryComponents = async (
           nodes.push(
             ...schemaToTypeAliasDeclaration(
               `${operationId}Headers`,
-              paramsToSchema(headerParams),
+              paramsToSchema(headerParams, config.injectedHeaders),
               {
                 currentComponent: null,
                 openAPIDocument: context.openAPIDocument,
@@ -264,9 +264,13 @@ const getParamsGroupByType = (
  * Convert a list of params in an object schema.
  *
  * @param params Parameters list
+ * @param optionalKeys Override the key to be optional
  * @returns An openAPI object schemas with the parameters as properties
  */
-const paramsToSchema = (params: ParameterObject[]): SchemaObject => {
+const paramsToSchema = (
+  params: ParameterObject[],
+  optionalKeys: string[] = []
+): SchemaObject => {
   return {
     type: "object",
     properties: params.reduce((mem, param) => {
@@ -275,7 +279,9 @@ const paramsToSchema = (params: ParameterObject[]): SchemaObject => {
         [param.name]: { ...param.schema, description: param.description },
       };
     }, {}),
-    required: params.filter((p) => p.required).map((p) => p.name),
+    required: params
+      .filter((p) => p.required && !optionalKeys.includes(p.name))
+      .map((p) => p.name),
   };
 };
 
