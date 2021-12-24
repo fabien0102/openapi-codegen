@@ -1,3 +1,4 @@
+import { camel } from "case";
 import { get } from "lodash";
 import ts, { factory as f } from "typescript";
 
@@ -37,7 +38,7 @@ export const getUsedImports = (
   const visitor: ts.Visitor = (node) => {
     if (ts.isQualifiedName(node)) {
       // We can’t use `node.left.getText()` because the node is not compiled (no internal `text` property)
-      const text = (get(node.left, "escapedText", "") as string).toLowerCase();
+      const text = camel(get(node.left, "escapedText", "") as string);
       if (text in imports) {
         imports[text as keyof typeof imports].used = true;
       }

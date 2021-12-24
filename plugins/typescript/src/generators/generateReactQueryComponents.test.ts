@@ -482,4 +482,113 @@ describe("generateReactQueryComponents", () => {
       "
     `);
   });
+
+  it("should resolve requestBody ref", async () => {
+    const writeFile = jest.fn();
+    const openAPIDocument: OpenAPIObject = {
+      openapi: "3.0.0",
+      info: {
+        title: "petshop",
+        version: "1.0.0",
+      },
+      components: {
+        requestBodies: {
+          dog: {
+            content: {
+              "application/json": {
+                schema: {
+                  type: "object",
+                  properties: {
+                    name: {
+                      type: "string",
+                    },
+                    color: {
+                      type: "string",
+                    },
+                    breed: {
+                      type: "string",
+                    },
+                    age: {
+                      type: "integer",
+                    },
+                  },
+                  required: ["name", "breed", "age"],
+                },
+              },
+            },
+          },
+        },
+      },
+      paths: {
+        "/pet": {
+          post: {
+            operationId: "AddPet",
+            requestBody: {
+              $ref: "#/components/requestBodies/dog",
+            },
+            responses: {
+              200: {
+                content: {
+                  "application/json": {
+                    description: "Successful response",
+                    schema: {
+                      type: "string",
+                    },
+                  },
+                },
+              },
+              500: {
+                content: {
+                  "application/json": {
+                    description: "An Error",
+                    schema: {
+                      type: "object",
+                      properties: {
+                        code: {
+                          type: "integer",
+                          enum: [500],
+                        },
+                        message: {
+                          type: "string",
+                        },
+                      },
+                      required: ["code", "message"],
+                    },
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
+    };
+
+    await generateReactQueryComponents(
+      {
+        openAPIDocument,
+        writeFile,
+        existsFile: () => true,
+      },
+      config
+    );
+
+    expect(writeFile.mock.calls[0][0]).toBe("petstoreComponents.ts");
+    expect(writeFile.mock.calls[0][1]).toMatchInlineSnapshot(`
+      "import { useQuery, QueryKey, UseQueryOptions } from \\"react-query\\";
+      import petstoreFetch from \\"./petstoreFetch\\";
+      import type * as RequestBodies from \\"./petstoreRequestBodies\\";
+
+      export type AddPetError = {
+          code: 500;
+          message: string;
+      };
+
+      export const fetchAddPet = () => petstoreFetch<string>({ url: \\"/pet\\", method: \\"post\\" });
+
+      const useAddPet = (options: Omit<UseMutationOptions<string, AddPetError, RequestBodies.Dog>, \\"mutationFn\\">) => {
+          return useMutation<string, AddPetError, RequestBodies.Dog>(fetchAddPet, options);
+      };
+      "
+    `);
+  });
 });

@@ -434,7 +434,7 @@ const getRequestBodyType = ({
   }
 
   if (isReferenceObject(requestBody)) {
-    const [hash, topLevel, namespace] = requestBody.$ref.split("/");
+    const [hash, topLevel, namespace, name] = requestBody.$ref.split("/");
     if (hash !== "#" || topLevel !== "components") {
       throw new Error(
         "This library only resolve $ref that are include into `#/components/*` for now"
@@ -445,15 +445,13 @@ const getRequestBodyType = ({
         "$ref for requestBody must be on `#/components/requestBodies`"
       );
     }
-    const resolvedRequestBody: RequestBodyObject = get(
-      components,
-      requestBody.$ref.replace("#/components/", "").replace("/", ".")
+    return f.createTypeReferenceNode(
+      f.createQualifiedName(
+        f.createIdentifier("RequestBodies"),
+        f.createIdentifier(c.pascal(name))
+      ),
+      undefined
     );
-    if (!resolvedRequestBody) {
-      throw new Error(`${requestBody.$ref} not found!`);
-    }
-
-    requestBody = resolvedRequestBody;
   }
 
   const mediaType = findCompatibleMediaType(requestBody);
@@ -475,7 +473,7 @@ const getRequestBodyType = ({
     return f.createTypeReferenceNode(
       f.createQualifiedName(
         f.createIdentifier("Schemas"),
-        f.createIdentifier(name)
+        f.createIdentifier(c.pascal(name))
       ),
       undefined
     );
