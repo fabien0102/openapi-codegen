@@ -9,6 +9,7 @@ import {
   ParameterObject,
   PathItemObject,
   ReferenceObject,
+  RequestBodyObject,
   ResponseObject,
   ResponsesObject,
   SchemaObject,
@@ -103,7 +104,7 @@ export const generateReactQueryComponents = async (
         operationIds.push(operationId);
 
         // Retrieve dataType
-        const dataType = getResponseType({
+        let dataType = getResponseType({
           responses: operation.responses,
           components: context.openAPIDocument.components,
           filter: (statusCode) => statusCode.startsWith("2"),
@@ -111,11 +112,17 @@ export const generateReactQueryComponents = async (
         });
 
         // Retrieve errorType
-        const errorType = getResponseType({
+        let errorType = getResponseType({
           responses: operation.responses,
           components: context.openAPIDocument.components,
           filter: (statusCode) => !statusCode.startsWith("2"),
           printNodes,
+        });
+
+        // Retrieve requestBodyType
+        let requestBodyType = getRequestBodyType({
+          requestBody: operation.requestBody,
+          components: context.openAPIDocument.components,
         });
 
         // Generate params types
@@ -163,6 +170,54 @@ export const generateReactQueryComponents = async (
           );
         }
 
+        // Export error type if needed
+        if (ts.isTypeLiteralNode(errorType)) {
+          const errorTypeIdentifier = c.pascal(`${operationId}Error`);
+          nodes.push(
+            f.createTypeAliasDeclaration(
+              undefined,
+              [f.createModifier(ts.SyntaxKind.ExportKeyword)],
+              f.createIdentifier(errorTypeIdentifier),
+              undefined,
+              errorType
+            )
+          );
+
+          errorType = f.createTypeReferenceNode(errorTypeIdentifier);
+        }
+
+        // Export data type if needed
+        if (ts.isTypeLiteralNode(dataType)) {
+          const dataTypeIdentifier = c.pascal(`${operationId}Response`);
+          nodes.push(
+            f.createTypeAliasDeclaration(
+              undefined,
+              [f.createModifier(ts.SyntaxKind.ExportKeyword)],
+              f.createIdentifier(dataTypeIdentifier),
+              undefined,
+              dataType
+            )
+          );
+
+          dataType = f.createTypeReferenceNode(dataTypeIdentifier);
+        }
+
+        // Export requestBody type if needed
+        if (ts.isTypeLiteralNode(requestBodyType)) {
+          const requestBodyIdentifier = c.pascal(`${operationId}RequestBody`);
+          nodes.push(
+            f.createTypeAliasDeclaration(
+              undefined,
+              [f.createModifier(ts.SyntaxKind.ExportKeyword)],
+              f.createIdentifier(requestBodyIdentifier),
+              undefined,
+              requestBodyType
+            )
+          );
+
+          requestBodyType = f.createTypeReferenceNode(requestBodyIdentifier);
+        }
+
         const operationFetcherFnName = `fetch${c.pascal(operationId)}`;
         nodes.push(
           ...createOperationFetcherFnNodes({
@@ -189,13 +244,22 @@ export const generateReactQueryComponents = async (
             verb,
             name: operationFetcherFnName,
           }),
-          ...createOperationHook({
-            operationFetcherFnName,
-            operation,
-            dataType,
-            errorType,
-            name: `use${c.pascal(operationId)}`,
-          })
+          ...(verb === "get"
+            ? createQueryHook({
+                operationFetcherFnName,
+                operation,
+                dataType,
+                errorType,
+                name: `use${c.pascal(operationId)}`,
+              })
+            : createMutationHook({
+                operationFetcherFnName,
+                operation,
+                dataType,
+                errorType,
+                requestBodyType,
+                name: `use${c.pascal(operationId)}`,
+              }))
         );
       });
     }
@@ -356,6 +420,78 @@ const getResponseType = ({
 };
 
 /**
+ * Extract types from request body
+ */
+const getRequestBodyType = ({
+  requestBody,
+  components,
+}: {
+  requestBody?: RequestBodyObject | ReferenceObject;
+  components?: ComponentsObject;
+}) => {
+  if (!requestBody) {
+    return f.createKeywordTypeNode(ts.SyntaxKind.VoidKeyword);
+  }
+
+  if (isReferenceObject(requestBody)) {
+    const [hash, topLevel, namespace] = requestBody.$ref.split("/");
+    if (hash !== "#" || topLevel !== "components") {
+      throw new Error(
+        "This library only resolve $ref that are include into `#/components/*` for now"
+      );
+    }
+    if (namespace !== "requestBodies") {
+      throw new Error(
+        "$ref for requestBody must be on `#/components/requestBodies`"
+      );
+    }
+    const resolvedRequestBody: RequestBodyObject = get(
+      components,
+      requestBody.$ref.replace("#/components/", "").replace("/", ".")
+    );
+    if (!resolvedRequestBody) {
+      throw new Error(`${requestBody.$ref} not found!`);
+    }
+
+    requestBody = resolvedRequestBody;
+  }
+
+  const mediaType = findCompatibleMediaType(requestBody);
+  if (!mediaType) {
+    return f.createKeywordTypeNode(ts.SyntaxKind.VoidKeyword);
+  }
+
+  if (isReferenceObject(mediaType)) {
+    const [hash, topLevel, namespace, name] = mediaType.$ref.split("/");
+    if (hash !== "#" || topLevel !== "components") {
+      throw new Error(
+        "This library only resolve $ref that are include into `#/components/*` for now"
+      );
+    }
+    if (namespace !== "schemas") {
+      throw new Error("$ref for schemas must be on `#/components/schemas`");
+    }
+
+    return f.createTypeReferenceNode(
+      f.createQualifiedName(
+        f.createIdentifier("Schemas"),
+        f.createIdentifier(name)
+      ),
+      undefined
+    );
+  }
+
+  if (!mediaType.schema) {
+    return f.createKeywordTypeNode(ts.SyntaxKind.VoidKeyword);
+  }
+
+  return getType(mediaType.schema, {
+    currentComponent: null,
+    openAPIDocument: { components },
+  });
+};
+
+/**
  * Create the declaration of the fetcher function.
  *
  * @returns Array of nodes
@@ -493,7 +629,86 @@ const createOperationFetcherFnNodes = ({
   return nodes;
 };
 
-const createOperationHook = ({
+const createMutationHook = ({
+  operationFetcherFnName,
+  dataType,
+  errorType,
+  requestBodyType,
+  name,
+  operation,
+}: {
+  operationFetcherFnName: string;
+  name: string;
+  dataType: ts.TypeNode;
+  errorType: ts.TypeNode;
+  requestBodyType: ts.TypeNode;
+  operation: OperationObject;
+}) => {
+  const nodes: ts.Node[] = [];
+  if (operation.description) {
+    nodes.push(f.createJSDocComment(operation.description.trim(), []));
+  }
+
+  nodes.push(
+    f.createVariableStatement(
+      undefined,
+      f.createVariableDeclarationList(
+        [
+          f.createVariableDeclaration(
+            f.createIdentifier(name),
+            undefined,
+            undefined,
+            f.createArrowFunction(
+              undefined,
+              undefined,
+              [
+                f.createParameterDeclaration(
+                  undefined,
+                  undefined,
+                  undefined,
+                  f.createIdentifier("options"),
+                  undefined,
+                  f.createTypeReferenceNode(f.createIdentifier("Omit"), [
+                    f.createTypeReferenceNode(
+                      f.createIdentifier("UseMutationOptions"),
+                      [dataType, errorType, requestBodyType]
+                    ),
+                    f.createLiteralTypeNode(
+                      f.createStringLiteral("mutationFn")
+                    ),
+                  ]),
+                  undefined
+                ),
+              ],
+              undefined,
+              f.createToken(ts.SyntaxKind.EqualsGreaterThanToken),
+              f.createBlock(
+                [
+                  f.createReturnStatement(
+                    f.createCallExpression(
+                      f.createIdentifier("useMutation"),
+                      [dataType, errorType, requestBodyType],
+                      [
+                        f.createIdentifier(operationFetcherFnName),
+                        f.createIdentifier("options"),
+                      ]
+                    )
+                  ),
+                ],
+                true
+              )
+            )
+          ),
+        ],
+        ts.NodeFlags.Const
+      )
+    )
+  );
+
+  return nodes;
+};
+
+const createQueryHook = ({
   operationFetcherFnName,
   dataType,
   errorType,
