@@ -1,5 +1,5 @@
 import { Command, Option } from "clipanion";
-import { unlink, outputFile } from "fs-extra";
+import { unlink, outputFile, existsSync } from "fs-extra";
 import path from "path";
 import * as swc from "@swc/core";
 
@@ -80,10 +80,15 @@ export class GenerateCommand extends Command {
       await outputFile(path.join(process.cwd(), config.outputDir, file), data);
     };
 
+    const existsFile = (file: string) => {
+      return existsSync(path.join(process.cwd(), file));
+    };
+
     await config.to({
       openAPIDocument,
       outputDir: config.outputDir,
       writeFile,
+      existsFile,
     });
   }
 }

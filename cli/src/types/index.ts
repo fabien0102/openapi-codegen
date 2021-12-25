@@ -72,6 +72,7 @@ export type Context = {
   openAPIDocument: OpenAPIObject;
   outputDir: string;
   writeFile: (file: string, data: string) => Promise<void>;
+  existsFile: (file: string) => boolean;
 };
 
 /**
