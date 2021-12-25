@@ -268,8 +268,8 @@ export const generateReactQueryComponents = async (
   await context.writeFile(
     filename + ".ts",
     printNodes([
-      createReactQueryImports(["useQuery", "QueryKey", "UseQueryOptions"]),
-      createFetcherFnImport(fetcherFn, `./${fetcherFn}`),
+      createReactQueryImport(),
+      createFetcherFnImport(fetcherFn, `./${fetcherFilename}`),
       ...getUsedImports(nodes, config.schemasFiles),
       ...nodes,
     ])
@@ -668,7 +668,10 @@ const createMutationHook = ({
                   undefined,
                   f.createTypeReferenceNode(f.createIdentifier("Omit"), [
                     f.createTypeReferenceNode(
-                      f.createIdentifier("UseMutationOptions"),
+                      f.createQualifiedName(
+                        f.createIdentifier("reactQuery"),
+                        f.createIdentifier("UseMutationOptions")
+                      ),
                       [dataType, errorType, requestBodyType]
                     ),
                     f.createLiteralTypeNode(
@@ -684,7 +687,10 @@ const createMutationHook = ({
                 [
                   f.createReturnStatement(
                     f.createCallExpression(
-                      f.createIdentifier("useMutation"),
+                      f.createPropertyAccessExpression(
+                        f.createIdentifier("reactQuery"),
+                        f.createIdentifier("useMutation")
+                      ),
                       [dataType, errorType, requestBodyType],
                       [
                         f.createIdentifier(operationFetcherFnName),
@@ -738,7 +744,10 @@ const createQueryHook = ({
                 f.createTypeParameterDeclaration(
                   f.createIdentifier("TQueryKey"),
                   f.createTypeReferenceNode(
-                    f.createIdentifier("QueryKey"),
+                    f.createQualifiedName(
+                      f.createIdentifier("reactQuery"),
+                      f.createIdentifier("QueryKey")
+                    ),
                     undefined
                   ),
                   undefined
@@ -769,7 +778,10 @@ const createQueryHook = ({
               undefined,
               f.createToken(ts.SyntaxKind.EqualsGreaterThanToken),
               f.createCallExpression(
-                f.createIdentifier("useQuery"),
+                f.createPropertyAccessExpression(
+                  f.createIdentifier("reactQuery"),
+                  f.createIdentifier("useQuery")
+                ),
                 [
                   dataType,
                   errorType,
@@ -813,18 +825,14 @@ const createUseQueryOptionsType = (
     ]),
   ]);
 
-const createReactQueryImports = (keys: string[]) =>
+const createReactQueryImport = () =>
   f.createImportDeclaration(
     undefined,
     undefined,
     f.createImportClause(
       false,
       undefined,
-      f.createNamedImports(
-        keys.map((key) =>
-          f.createImportSpecifier(false, undefined, f.createIdentifier(key))
-        )
-      )
+      f.createNamespaceImport(f.createIdentifier("reactQuery"))
     ),
     f.createStringLiteral("react-query"),
     undefined
