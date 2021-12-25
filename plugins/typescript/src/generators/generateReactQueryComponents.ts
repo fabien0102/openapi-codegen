@@ -222,22 +222,23 @@ export const generateReactQueryComponents = async (
         nodes.push(
           ...createOperationFetcherFnNodes({
             dataType,
+            requestBodyType,
             pathParamsType:
               pathParams.length > 0
                 ? f.createTypeReferenceNode(
                     `${c.pascal(operationId)}PathParams`
                   )
-                : undefined,
+                : f.createKeywordTypeNode(ts.SyntaxKind.VoidKeyword),
             queryParamsType:
               queryParams.length > 0
                 ? f.createTypeReferenceNode(
                     `${c.pascal(operationId)}QueryParams`
                   )
-                : undefined,
+                : f.createKeywordTypeNode(ts.SyntaxKind.VoidKeyword),
             headersType:
               headerParams.length > 0
                 ? f.createTypeReferenceNode(`${c.pascal(operationId)}Headers`)
-                : undefined,
+                : f.createKeywordTypeNode(ts.SyntaxKind.VoidKeyword),
             operation,
             fetcherFn,
             url: route,
@@ -496,7 +497,7 @@ const getRequestBodyType = ({
  */
 const createOperationFetcherFnNodes = ({
   dataType,
-  bodyType,
+  requestBodyType: bodyType,
   queryParamsType,
   pathParamsType,
   headersType,
@@ -507,10 +508,10 @@ const createOperationFetcherFnNodes = ({
   name,
 }: {
   dataType: ts.TypeNode;
-  bodyType?: ts.TypeNode;
-  headersType?: ts.TypeNode;
-  pathParamsType?: ts.TypeNode;
-  queryParamsType?: ts.TypeNode;
+  requestBodyType: ts.TypeNode;
+  headersType: ts.TypeNode;
+  pathParamsType: ts.TypeNode;
+  queryParamsType: ts.TypeNode;
   operation: OperationObject;
   fetcherFn: string;
   url: string;
@@ -523,7 +524,7 @@ const createOperationFetcherFnNodes = ({
   }
   const optionsProperties: ts.TypeElement[] = [];
 
-  if (bodyType) {
+  if (bodyType.kind !== ts.SyntaxKind.VoidKeyword) {
     optionsProperties.push(
       f.createPropertySignature(
         undefined,
@@ -533,7 +534,7 @@ const createOperationFetcherFnNodes = ({
       )
     );
   }
-  if (headersType) {
+  if (headersType.kind !== ts.SyntaxKind.VoidKeyword) {
     optionsProperties.push(
       f.createPropertySignature(
         undefined,
@@ -543,7 +544,7 @@ const createOperationFetcherFnNodes = ({
       )
     );
   }
-  if (pathParamsType) {
+  if (pathParamsType.kind !== ts.SyntaxKind.VoidKeyword) {
     optionsProperties.push(
       f.createPropertySignature(
         undefined,
@@ -553,7 +554,7 @@ const createOperationFetcherFnNodes = ({
       )
     );
   }
-  if (queryParamsType) {
+  if (queryParamsType.kind !== ts.SyntaxKind.VoidKeyword) {
     optionsProperties.push(
       f.createPropertySignature(
         undefined,
@@ -593,7 +594,13 @@ const createOperationFetcherFnNodes = ({
               f.createToken(ts.SyntaxKind.EqualsGreaterThanToken),
               f.createCallExpression(
                 f.createIdentifier(fetcherFn),
-                [dataType],
+                [
+                  dataType,
+                  bodyType,
+                  headersType,
+                  queryParamsType,
+                  pathParamsType,
+                ],
                 [
                   f.createObjectLiteralExpression(
                     [
@@ -627,6 +634,7 @@ const createOperationFetcherFnNodes = ({
   return nodes;
 };
 
+// TODO inject fetcher options
 const createMutationHook = ({
   operationFetcherFnName,
   dataType,
@@ -712,6 +720,7 @@ const createMutationHook = ({
   return nodes;
 };
 
+// TODO inject fetcher options
 const createQueryHook = ({
   operationFetcherFnName,
   dataType,
