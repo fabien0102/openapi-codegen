@@ -1,6 +1,6 @@
 import { isReferenceObject } from "openapi3-ts";
 import * as c from "case";
-import ts, { factory as f } from "typescript";
+import ts from "typescript";
 
 import { ConfigBase, Context } from "./types";
 import { schemaToTypeAliasDeclaration } from "../core/schemaToTypeAliasDeclaration";
@@ -19,7 +19,9 @@ export const generateSchemaTypes = async (
   config: Config = {}
 ) => {
   const { components } = context.openAPIDocument;
-  if (!components) return;
+  if (!components) {
+    throw new Error("No components founds!");
+  }
 
   const sourceFile = ts.createSourceFile(
     "index.ts",
@@ -158,9 +160,9 @@ export const generateSchemaTypes = async (
         ...componentsParameters,
       ])
     );
-
-    return {
-      schemasFiles: files,
-    };
   }
+
+  return {
+    schemasFiles: files,
+  };
 };
