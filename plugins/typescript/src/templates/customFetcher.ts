@@ -3,8 +3,6 @@ import { camel, pascal } from "case";
 
 /**
  * Get custom fetcher template
- *
- * Playground: https://ts-ast-viewer.com/#code/JYWwDg9gTgLgBARwM5wGZQiOAiZ2DcAUIQKYAekscMAnmCXAMICuSMmAYiTAMYAWJKAHkwMYBAB2SADwAVAEIQAJjQA0cWQAkSAQyWCk62QEVmgmgAUdUHSEMarMPlZt2AfHAC8cAN6E4cMxQADYAXHBsUMASAOZEASDcfMrhkdFx-nAARso0APzhCrnxcAJ6BgUa2uVQSCUIZlCW1rZIlSaNza51mWA6Ti6t7Y7OLXZEAL5EpBTQ8PqoOszB8DpINBI8aMybYpJwPKzsIFy8fNKZsgAi-Tqql4oqcOQwJBJKKD4TcAA+cABuEGASnuAS0un0tWeZFe70+E1BGlM5kGdmhsI+vgRlxGqJQLzemK+hDcAAo-AEgsFEYknMpETkVIiypDDL1+qNuoiGiixmyJuEWGxONx+IIRHspBcwY81JdqqzER1eVycRy8SSAJThCwYEDAJAkOQ3GA6DwUg6SNhwKAkJCQKQMbw6ADuOmA8Bd0SUEBdADpUKK+KTMgFbUgIMF-iQAKohUlU9Q8pp49R9AZ8zWIgIWgIJJL00N5xk0cIluB5OAAKQAykIAHJ+tKxYCoGikkuauDhHYLaIkEFFgIsgzhXN5gLYRiSWEwAC0sjoJGw4WwOjAYGCwB4-XEEgA9AArCMSbDZidwP1Xke1c8BbETiaZTXTAKtuCkgCE4Ydhr9EAAay7cd933DQhCuIQ4AAQSUQ8jmoPgDTgYIIBibc4DdM44BoCAgmeKAMCgaglyLJwMBdOAJBISiAFFCOgUlsHrbgXWgACbTtX8GDdFAJAgeBAOwF9MifTJbRgIIJDgV13XgH8rRIP1j0kUkRLE-cACpNP8TS4AASQkQ8SB4eBky6Vo4AAMjgdNOUs9hEIYKk-V03S4AAAT6VxAhCdyvLGRBOg1OA9ICny7JCsKJKkpBdP3QgeCteS7UjaM42CLwP0yKlUhgKJYm5YK+XCAAlEzoCUaRmxidQdgA-iXQkDxvC+RFIpKuByqSqAqpq9QaparFCC7TxzUyYJuCC8wsuQJt8vSVt23MvERLfVAP3MrtzKygADPIABIfHMiZdtfTjJKgaSXNtTcdB4EhSX3AAdHxnpdTTnomfdao-ACSBoUaPA67oAG1-poJstwe0kAEZ1DnWHNQAXS7ABqaamkmIggA
  */
 export const getCustomFetcher = (prefix: string) => [
   factory.createImportDeclaration(
@@ -114,23 +112,32 @@ export const getCustomFetcher = (prefix: string) => [
         factory.createIdentifier("TBody"),
         factory.createUnionTypeNode([
           factory.createTypeLiteralNode([]),
-          factory.createKeywordTypeNode(ts.SyntaxKind.VoidKeyword),
+          factory.createKeywordTypeNode(ts.SyntaxKind.UndefinedKeyword),
         ]),
         undefined
       ),
       factory.createTypeParameterDeclaration(
         factory.createIdentifier("THeaders"),
-        factory.createTypeLiteralNode([]),
+        factory.createUnionTypeNode([
+          factory.createTypeLiteralNode([]),
+          factory.createKeywordTypeNode(ts.SyntaxKind.UndefinedKeyword),
+        ]),
         undefined
       ),
       factory.createTypeParameterDeclaration(
         factory.createIdentifier("TQueryParams"),
-        factory.createTypeLiteralNode([]),
+        factory.createUnionTypeNode([
+          factory.createTypeLiteralNode([]),
+          factory.createKeywordTypeNode(ts.SyntaxKind.UndefinedKeyword),
+        ]),
         undefined
       ),
       factory.createTypeParameterDeclaration(
         factory.createIdentifier("TPathParams"),
-        factory.createTypeLiteralNode([]),
+        factory.createUnionTypeNode([
+          factory.createTypeLiteralNode([]),
+          factory.createKeywordTypeNode(ts.SyntaxKind.UndefinedKeyword),
+        ]),
         undefined
       ),
     ],

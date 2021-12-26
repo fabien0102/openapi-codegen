@@ -228,17 +228,17 @@ export const generateReactQueryComponents = async (
                 ? f.createTypeReferenceNode(
                     `${c.pascal(operationId)}PathParams`
                   )
-                : f.createKeywordTypeNode(ts.SyntaxKind.VoidKeyword),
+                : f.createKeywordTypeNode(ts.SyntaxKind.UndefinedKeyword),
             queryParamsType:
               queryParams.length > 0
                 ? f.createTypeReferenceNode(
                     `${c.pascal(operationId)}QueryParams`
                   )
-                : f.createKeywordTypeNode(ts.SyntaxKind.VoidKeyword),
+                : f.createKeywordTypeNode(ts.SyntaxKind.UndefinedKeyword),
             headersType:
               headerParams.length > 0
                 ? f.createTypeReferenceNode(`${c.pascal(operationId)}Headers`)
-                : f.createKeywordTypeNode(ts.SyntaxKind.VoidKeyword),
+                : f.createKeywordTypeNode(ts.SyntaxKind.UndefinedKeyword),
             operation,
             fetcherFn,
             url: route,
@@ -414,7 +414,7 @@ const getResponseType = ({
   );
 
   return responseTypes.length === 0
-    ? f.createKeywordTypeNode(ts.SyntaxKind.VoidKeyword)
+    ? f.createKeywordTypeNode(ts.SyntaxKind.UndefinedKeyword)
     : responseTypes.length === 1
     ? responseTypes[0]
     : f.createUnionTypeNode(responseTypes);
@@ -431,7 +431,7 @@ const getRequestBodyType = ({
   components?: ComponentsObject;
 }) => {
   if (!requestBody) {
-    return f.createKeywordTypeNode(ts.SyntaxKind.VoidKeyword);
+    return f.createKeywordTypeNode(ts.SyntaxKind.UndefinedKeyword);
   }
 
   if (isReferenceObject(requestBody)) {
@@ -457,7 +457,7 @@ const getRequestBodyType = ({
 
   const mediaType = findCompatibleMediaType(requestBody);
   if (!mediaType) {
-    return f.createKeywordTypeNode(ts.SyntaxKind.VoidKeyword);
+    return f.createKeywordTypeNode(ts.SyntaxKind.UndefinedKeyword);
   }
 
   if (isReferenceObject(mediaType)) {
@@ -481,7 +481,7 @@ const getRequestBodyType = ({
   }
 
   if (!mediaType.schema) {
-    return f.createKeywordTypeNode(ts.SyntaxKind.VoidKeyword);
+    return f.createKeywordTypeNode(ts.SyntaxKind.UndefinedKeyword);
   }
 
   return getType(mediaType.schema, {
@@ -524,7 +524,7 @@ const createOperationFetcherFnNodes = ({
   }
   const optionsProperties: ts.TypeElement[] = [];
 
-  if (bodyType.kind !== ts.SyntaxKind.VoidKeyword) {
+  if (bodyType.kind !== ts.SyntaxKind.UndefinedKeyword) {
     optionsProperties.push(
       f.createPropertySignature(
         undefined,
@@ -534,7 +534,7 @@ const createOperationFetcherFnNodes = ({
       )
     );
   }
-  if (headersType.kind !== ts.SyntaxKind.VoidKeyword) {
+  if (headersType.kind !== ts.SyntaxKind.UndefinedKeyword) {
     optionsProperties.push(
       f.createPropertySignature(
         undefined,
@@ -544,7 +544,7 @@ const createOperationFetcherFnNodes = ({
       )
     );
   }
-  if (pathParamsType.kind !== ts.SyntaxKind.VoidKeyword) {
+  if (pathParamsType.kind !== ts.SyntaxKind.UndefinedKeyword) {
     optionsProperties.push(
       f.createPropertySignature(
         undefined,
@@ -554,7 +554,7 @@ const createOperationFetcherFnNodes = ({
       )
     );
   }
-  if (queryParamsType.kind !== ts.SyntaxKind.VoidKeyword) {
+  if (queryParamsType.kind !== ts.SyntaxKind.UndefinedKeyword) {
     optionsProperties.push(
       f.createPropertySignature(
         undefined,
