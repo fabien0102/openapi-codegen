@@ -278,6 +278,7 @@ export const generateReactQueryComponents = async (
                 operation,
                 dataType,
                 errorType,
+                variablesType,
                 name: `use${c.pascal(operationId)}`,
               })
             : createMutationHook({
@@ -285,7 +286,7 @@ export const generateReactQueryComponents = async (
                 operation,
                 dataType,
                 errorType,
-                requestBodyType,
+                variablesType,
                 name: `use${c.pascal(operationId)}`,
               }))
         );
@@ -687,7 +688,7 @@ const createMutationHook = ({
   operationFetcherFnName,
   dataType,
   errorType,
-  requestBodyType,
+  variablesType,
   name,
   operation,
 }: {
@@ -695,7 +696,7 @@ const createMutationHook = ({
   name: string;
   dataType: ts.TypeNode;
   errorType: ts.TypeNode;
-  requestBodyType: ts.TypeNode;
+  variablesType: ts.TypeNode;
   operation: OperationObject;
 }) => {
   const nodes: ts.Node[] = [];
@@ -705,7 +706,7 @@ const createMutationHook = ({
 
   nodes.push(
     f.createVariableStatement(
-      undefined,
+      [f.createModifier(ts.SyntaxKind.ExportKeyword)],
       f.createVariableDeclarationList(
         [
           f.createVariableDeclaration(
@@ -728,7 +729,7 @@ const createMutationHook = ({
                         f.createIdentifier("reactQuery"),
                         f.createIdentifier("UseMutationOptions")
                       ),
-                      [dataType, errorType, requestBodyType]
+                      [dataType, errorType, variablesType]
                     ),
                     f.createLiteralTypeNode(
                       f.createStringLiteral("mutationFn")
@@ -747,7 +748,7 @@ const createMutationHook = ({
                         f.createIdentifier("reactQuery"),
                         f.createIdentifier("useMutation")
                       ),
-                      [dataType, errorType, requestBodyType],
+                      [dataType, errorType, variablesType],
                       [
                         f.createIdentifier(operationFetcherFnName),
                         f.createIdentifier("options"),
@@ -768,10 +769,12 @@ const createMutationHook = ({
   return nodes;
 };
 
+// TODO inject options
 const createQueryHook = ({
   operationFetcherFnName,
   dataType,
   errorType,
+  variablesType,
   name,
   operation,
 }: {
@@ -779,6 +782,7 @@ const createQueryHook = ({
   name: string;
   dataType: ts.TypeNode;
   errorType: ts.TypeNode;
+  variablesType: ts.TypeNode;
   operation: OperationObject;
 }) => {
   const nodes: ts.Node[] = [];
@@ -869,12 +873,18 @@ const createUseQueryOptionsType = (
   errorType: ts.TypeNode
 ) =>
   f.createTypeReferenceNode(f.createIdentifier("Omit"), [
-    f.createTypeReferenceNode(f.createIdentifier("UseQueryOptions"), [
-      dataType,
-      errorType,
-      dataType,
-      f.createTypeReferenceNode(f.createIdentifier("TQueryKey"), undefined),
-    ]),
+    f.createTypeReferenceNode(
+      f.createQualifiedName(
+        f.createIdentifier("reactQuery"),
+        f.createIdentifier("UseQueryOptions")
+      ),
+      [
+        dataType,
+        errorType,
+        dataType,
+        f.createTypeReferenceNode(f.createIdentifier("TQueryKey"), undefined),
+      ]
+    ),
     f.createUnionTypeNode([
       f.createLiteralTypeNode(f.createStringLiteral("queryKey")),
       f.createLiteralTypeNode(f.createStringLiteral("queryFn")),
