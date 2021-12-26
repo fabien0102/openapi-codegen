@@ -218,27 +218,54 @@ export const generateReactQueryComponents = async (
           requestBodyType = f.createTypeReferenceNode(requestBodyIdentifier);
         }
 
+        const pathParamsType =
+          pathParams.length > 0
+            ? f.createTypeReferenceNode(`${c.pascal(operationId)}PathParams`)
+            : f.createKeywordTypeNode(ts.SyntaxKind.UndefinedKeyword);
+
+        const queryParamsType =
+          queryParams.length > 0
+            ? f.createTypeReferenceNode(`${c.pascal(operationId)}QueryParams`)
+            : f.createKeywordTypeNode(ts.SyntaxKind.UndefinedKeyword);
+
+        const headersType =
+          headerParams.length > 0
+            ? f.createTypeReferenceNode(`${c.pascal(operationId)}Headers`)
+            : f.createKeywordTypeNode(ts.SyntaxKind.UndefinedKeyword);
+
+        // Generate fetcher variables type
+        let variablesType: ts.TypeNode = getVariablesType({
+          requestBodyType,
+          headersType,
+          pathParamsType,
+          queryParamsType,
+        });
+
+        // Export fetcher variables type if needed
+        if (ts.isTypeLiteralNode(variablesType)) {
+          const variablesIdentifier = c.pascal(`${operationId}Variables`);
+          nodes.push(
+            f.createTypeAliasDeclaration(
+              undefined,
+              [f.createModifier(ts.SyntaxKind.ExportKeyword)],
+              f.createIdentifier(variablesIdentifier),
+              undefined,
+              variablesType
+            )
+          );
+
+          variablesType = f.createTypeReferenceNode(variablesIdentifier);
+        }
+
         const operationFetcherFnName = `fetch${c.pascal(operationId)}`;
         nodes.push(
           ...createOperationFetcherFnNodes({
             dataType,
             requestBodyType,
-            pathParamsType:
-              pathParams.length > 0
-                ? f.createTypeReferenceNode(
-                    `${c.pascal(operationId)}PathParams`
-                  )
-                : f.createKeywordTypeNode(ts.SyntaxKind.UndefinedKeyword),
-            queryParamsType:
-              queryParams.length > 0
-                ? f.createTypeReferenceNode(
-                    `${c.pascal(operationId)}QueryParams`
-                  )
-                : f.createKeywordTypeNode(ts.SyntaxKind.UndefinedKeyword),
-            headersType:
-              headerParams.length > 0
-                ? f.createTypeReferenceNode(`${c.pascal(operationId)}Headers`)
-                : f.createKeywordTypeNode(ts.SyntaxKind.UndefinedKeyword),
+            pathParamsType,
+            variablesType,
+            queryParamsType,
+            headersType,
             operation,
             fetcherFn,
             url: route,
@@ -491,16 +518,79 @@ const getRequestBodyType = ({
 };
 
 /**
+ * Get fetcher variables types from the operation types
+ */
+const getVariablesType = ({
+  requestBodyType,
+  headersType,
+  pathParamsType,
+  queryParamsType,
+}: {
+  requestBodyType: ts.TypeNode;
+  headersType: ts.TypeNode;
+  pathParamsType: ts.TypeNode;
+  queryParamsType: ts.TypeNode;
+}) => {
+  const variablesItems: ts.TypeElement[] = [];
+
+  if (requestBodyType.kind !== ts.SyntaxKind.UndefinedKeyword) {
+    variablesItems.push(
+      f.createPropertySignature(
+        undefined,
+        f.createIdentifier("body"),
+        undefined,
+        requestBodyType
+      )
+    );
+  }
+  if (headersType.kind !== ts.SyntaxKind.UndefinedKeyword) {
+    variablesItems.push(
+      f.createPropertySignature(
+        undefined,
+        f.createIdentifier("headers"),
+        undefined,
+        headersType
+      )
+    );
+  }
+  if (pathParamsType.kind !== ts.SyntaxKind.UndefinedKeyword) {
+    variablesItems.push(
+      f.createPropertySignature(
+        undefined,
+        f.createIdentifier("pathParams"),
+        undefined,
+        pathParamsType
+      )
+    );
+  }
+  if (queryParamsType.kind !== ts.SyntaxKind.UndefinedKeyword) {
+    variablesItems.push(
+      f.createPropertySignature(
+        undefined,
+        f.createIdentifier("queryParams"),
+        undefined,
+        queryParamsType
+      )
+    );
+  }
+
+  return variablesItems.length === 0
+    ? f.createKeywordTypeNode(ts.SyntaxKind.VoidKeyword)
+    : f.createTypeLiteralNode(variablesItems);
+};
+
+/**
  * Create the declaration of the fetcher function.
  *
  * @returns Array of nodes
  */
 const createOperationFetcherFnNodes = ({
   dataType,
-  requestBodyType: bodyType,
+  requestBodyType,
   queryParamsType,
   pathParamsType,
   headersType,
+  variablesType,
   fetcherFn,
   operation,
   url,
@@ -512,6 +602,7 @@ const createOperationFetcherFnNodes = ({
   headersType: ts.TypeNode;
   pathParamsType: ts.TypeNode;
   queryParamsType: ts.TypeNode;
+  variablesType: ts.TypeNode;
   operation: OperationObject;
   fetcherFn: string;
   url: string;
@@ -521,48 +612,6 @@ const createOperationFetcherFnNodes = ({
   const nodes: ts.Node[] = [];
   if (operation.description) {
     nodes.push(f.createJSDocComment(operation.description.trim(), []));
-  }
-  const optionsProperties: ts.TypeElement[] = [];
-
-  if (bodyType.kind !== ts.SyntaxKind.UndefinedKeyword) {
-    optionsProperties.push(
-      f.createPropertySignature(
-        undefined,
-        f.createIdentifier("body"),
-        undefined,
-        bodyType
-      )
-    );
-  }
-  if (headersType.kind !== ts.SyntaxKind.UndefinedKeyword) {
-    optionsProperties.push(
-      f.createPropertySignature(
-        undefined,
-        f.createIdentifier("headers"),
-        undefined,
-        headersType
-      )
-    );
-  }
-  if (pathParamsType.kind !== ts.SyntaxKind.UndefinedKeyword) {
-    optionsProperties.push(
-      f.createPropertySignature(
-        undefined,
-        f.createIdentifier("pathParams"),
-        undefined,
-        pathParamsType
-      )
-    );
-  }
-  if (queryParamsType.kind !== ts.SyntaxKind.UndefinedKeyword) {
-    optionsProperties.push(
-      f.createPropertySignature(
-        undefined,
-        f.createIdentifier("queryParams"),
-        undefined,
-        queryParamsType
-      )
-    );
   }
 
   nodes.push(
@@ -577,15 +626,15 @@ const createOperationFetcherFnNodes = ({
             f.createArrowFunction(
               undefined,
               undefined,
-              optionsProperties.length > 0
+              variablesType.kind !== ts.SyntaxKind.VoidKeyword
                 ? [
                     f.createParameterDeclaration(
                       undefined,
                       undefined,
                       undefined,
-                      f.createIdentifier("options"),
+                      f.createIdentifier("variables"),
                       undefined,
-                      f.createTypeLiteralNode(optionsProperties),
+                      variablesType,
                       undefined
                     ),
                   ]
@@ -596,7 +645,7 @@ const createOperationFetcherFnNodes = ({
                 f.createIdentifier(fetcherFn),
                 [
                   dataType,
-                  bodyType,
+                  requestBodyType,
                   headersType,
                   queryParamsType,
                   pathParamsType,
@@ -612,10 +661,10 @@ const createOperationFetcherFnNodes = ({
                         f.createIdentifier("method"),
                         f.createStringLiteral(verb)
                       ),
-                      ...(optionsProperties.length > 0
+                      ...(variablesType.kind !== ts.SyntaxKind.VoidKeyword
                         ? [
                             f.createSpreadAssignment(
-                              f.createIdentifier("options")
+                              f.createIdentifier("variables")
                             ),
                           ]
                         : []),
@@ -634,7 +683,6 @@ const createOperationFetcherFnNodes = ({
   return nodes;
 };
 
-// TODO inject fetcher options
 const createMutationHook = ({
   operationFetcherFnName,
   dataType,
@@ -720,7 +768,6 @@ const createMutationHook = ({
   return nodes;
 };
 
-// TODO inject fetcher options
 const createQueryHook = ({
   operationFetcherFnName,
   dataType,
