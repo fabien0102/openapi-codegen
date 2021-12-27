@@ -769,7 +769,6 @@ const createMutationHook = ({
   return nodes;
 };
 
-// TODO inject options
 const createQueryHook = ({
   operationFetcherFnName,
   dataType,
@@ -826,6 +825,18 @@ const createQueryHook = ({
                   ),
                   undefined
                 ),
+                ...(variablesType.kind !== ts.SyntaxKind.VoidKeyword
+                  ? [
+                      f.createParameterDeclaration(
+                        undefined,
+                        undefined,
+                        undefined,
+                        f.createIdentifier("variables"),
+                        undefined,
+                        variablesType
+                      ),
+                    ]
+                  : []),
                 f.createParameterDeclaration(
                   undefined,
                   undefined,
@@ -853,7 +864,20 @@ const createQueryHook = ({
                 ],
                 [
                   f.createIdentifier("queryKey"),
-                  f.createIdentifier(operationFetcherFnName),
+                  variablesType.kind === ts.SyntaxKind.VoidKeyword
+                    ? f.createIdentifier(operationFetcherFnName)
+                    : f.createArrowFunction(
+                        undefined,
+                        undefined,
+                        [],
+                        undefined,
+                        f.createToken(ts.SyntaxKind.EqualsGreaterThanToken),
+                        f.createCallExpression(
+                          f.createIdentifier(operationFetcherFnName),
+                          undefined,
+                          [f.createIdentifier("variables")]
+                        )
+                      ),
                   f.createIdentifier("options"),
                 ]
               )

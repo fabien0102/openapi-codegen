@@ -195,7 +195,7 @@ describe("generateReactQueryComponents", () => {
       /**
        * Get all the pets
        */
-      export const useListPets = <TQueryKey extends reactQuery.QueryKey>(queryKey: TQueryKey, options?: Omit<reactQuery.UseQueryOptions<Schemas.Pet[], undefined, Schemas.Pet[], TQueryKey>, \\"queryKey\\" | \\"queryFn\\">) => reactQuery.useQuery<Schemas.Pet[], undefined, Schemas.Pet[], TQueryKey>(queryKey, fetchListPets, options);
+      export const useListPets = <TQueryKey extends reactQuery.QueryKey>(queryKey: TQueryKey, variables: ListPetsVariables, options?: Omit<reactQuery.UseQueryOptions<Schemas.Pet[], undefined, Schemas.Pet[], TQueryKey>, \\"queryKey\\" | \\"queryFn\\">) => reactQuery.useQuery<Schemas.Pet[], undefined, Schemas.Pet[], TQueryKey>(queryKey, () => fetchListPets(variables), options);
       "
     `);
   });
@@ -300,7 +300,7 @@ describe("generateReactQueryComponents", () => {
       /**
        * Get all the pets
        */
-      export const useListPets = <TQueryKey extends reactQuery.QueryKey>(queryKey: TQueryKey, options?: Omit<reactQuery.UseQueryOptions<Schemas.Pet[], undefined, Schemas.Pet[], TQueryKey>, \\"queryKey\\" | \\"queryFn\\">) => reactQuery.useQuery<Schemas.Pet[], undefined, Schemas.Pet[], TQueryKey>(queryKey, fetchListPets, options);
+      export const useListPets = <TQueryKey extends reactQuery.QueryKey>(queryKey: TQueryKey, variables: ListPetsVariables, options?: Omit<reactQuery.UseQueryOptions<Schemas.Pet[], undefined, Schemas.Pet[], TQueryKey>, \\"queryKey\\" | \\"queryFn\\">) => reactQuery.useQuery<Schemas.Pet[], undefined, Schemas.Pet[], TQueryKey>(queryKey, () => fetchListPets(variables), options);
       "
     `);
   });
