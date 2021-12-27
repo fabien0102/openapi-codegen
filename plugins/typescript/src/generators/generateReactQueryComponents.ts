@@ -722,7 +722,7 @@ const createMutationHook = ({
                   undefined,
                   undefined,
                   f.createIdentifier("options"),
-                  undefined,
+                  f.createToken(ts.SyntaxKind.QuestionToken),
                   f.createTypeReferenceNode(f.createIdentifier("Omit"), [
                     f.createTypeReferenceNode(
                       f.createQualifiedName(
