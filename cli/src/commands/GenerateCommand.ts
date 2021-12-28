@@ -2,6 +2,7 @@ import { Command, Option } from "clipanion";
 import { unlink, outputFile, existsSync } from "fs-extra";
 import path from "path";
 import * as swc from "@swc/core";
+import prettier from "prettier";
 
 import { Config, Namespace } from "../types";
 import { getOpenAPISourceFile } from "../core/getOpenAPISourceFile";
@@ -75,9 +76,13 @@ export class GenerateCommand extends Command {
     const config = configs[this.namespace];
     const sourceFile = await getOpenAPISourceFile(config.from);
     const openAPIDocument = await parseOpenAPISourceFile(sourceFile);
+    const prettierConfig = await prettier.resolveConfig(process.cwd());
 
     const writeFile = async (file: string, data: string) => {
-      await outputFile(path.join(process.cwd(), config.outputDir, file), data);
+      await outputFile(
+        path.join(process.cwd(), config.outputDir, file),
+        prettier.format(data, { parser: "babel-ts", ...prettierConfig })
+      );
     };
 
     const existsFile = (file: string) => {

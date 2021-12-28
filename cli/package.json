@@ -1,6 +1,6 @@
 {
   "name": "@openapi-codegen/cli",
-  "version": "0.0.1",
+  "version": "0.0.1-alpha.7",
   "description": "OpenAPI Codegen cli",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -21,7 +21,8 @@
   "license": "MIT",
   "scripts": {
     "start": "node -r @swc-node/register src/cli.ts",
-    "build": "tsc -p tsconfig.package.json"
+    "build": "tsc -p tsconfig.package.json",
+    "prepublishOnly": "npm run build"
   },
   "files": [
     "lib",
@@ -33,6 +34,7 @@
     "fs-extra": "^10.0.0",
     "js-yaml": "^4.1.0",
     "openapi3-ts": "^2.0.1",
+    "prettier": "^2.5.1",
     "swagger2openapi": "^7.0.8",
     "tslib": "^2.3.1"
   },
