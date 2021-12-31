@@ -9,7 +9,8 @@
     "directory": "plugins/typescript"
   },
   "scripts": {
-    "build": "tsc -p tsconfig.package.json"
+    "build": "tsc -p tsconfig.package.json",
+    "prepublishOnly": "npm run build"
   },
   "files": [
     "lib",
