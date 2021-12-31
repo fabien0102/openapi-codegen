@@ -603,4 +603,78 @@ describe("generateReactQueryComponents", () => {
       "
     `);
   });
+
+  it("should deal with pathParams", async () => {
+    const writeFile = jest.fn();
+    const openAPIDocument: OpenAPIObject = {
+      openapi: "3.0.0",
+      info: {
+        title: "petshop",
+        version: "1.0.0",
+      },
+      paths: {
+        "/pet/{pet_id}": {
+          parameters: [
+            {
+              in: "path",
+              name: "pet_id",
+              schema: {
+                type: "string",
+              },
+              required: true,
+            },
+          ],
+          put: {
+            operationId: "updatePet",
+            requestBody: {
+              $ref: "#/components/requestBodies/UpdatePetRequestBody",
+            },
+            responses: {
+              200: {
+                content: {
+                  "application/json": {
+                    description: "Successful response",
+                    schema: {
+                      type: "string",
+                    },
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
+    };
+    await generateReactQueryComponents(
+      {
+        openAPIDocument,
+        writeFile,
+        existsFile: () => true,
+      },
+      config
+    );
+
+    expect(writeFile.mock.calls[0][0]).toBe("petstoreComponents.ts");
+    expect(writeFile.mock.calls[0][1]).toMatchInlineSnapshot(`
+      "import * as reactQuery from \\"react-query\\";
+      import petstoreFetch from \\"./petstoreFetcher\\";
+      import type * as RequestBodies from \\"./petstoreRequestBodies\\";
+
+      export type UpdatePetPathParams = {
+          petId: string;
+      };
+
+      export type UpdatePetVariables = {
+          body: RequestBodies.UpdatePetRequestBody;
+          pathParams: UpdatePetPathParams;
+      };
+
+      export const fetchUpdatePet = (variables: UpdatePetVariables) => petstoreFetch<string, RequestBodies.UpdatePetRequestBody, undefined, undefined, UpdatePetPathParams>({ url: \\"/pet/{petId}\\", method: \\"put\\", ...variables });
+
+      export const useUpdatePet = (options?: Omit<reactQuery.UseMutationOptions<string, undefined, UpdatePetVariables>, \\"mutationFn\\">) => {
+          return reactQuery.useMutation<string, undefined, UpdatePetVariables>(fetchUpdatePet, options);
+      };
+      "
+    `);
+  });
 });

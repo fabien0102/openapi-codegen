@@ -371,12 +371,15 @@ const paramsToSchema = (
     properties: params.reduce((mem, param) => {
       return {
         ...mem,
-        [param.name]: { ...param.schema, description: param.description },
+        [c.camel(param.name)]: {
+          ...param.schema,
+          description: param.description,
+        },
       };
     }, {}),
     required: params
-      .filter((p) => p.required && !optionalKeys.includes(p.name))
-      .map((p) => p.name),
+      .filter((p) => p.required && !optionalKeys.includes(c.camel(p.name)))
+      .map((p) => c.camel(p.name)),
   };
 };
 
@@ -656,7 +659,7 @@ const createOperationFetcherFnNodes = ({
                     [
                       f.createPropertyAssignment(
                         f.createIdentifier("url"),
-                        f.createStringLiteral(url)
+                        f.createStringLiteral(camelizedPathParams(url))
                       ),
                       f.createPropertyAssignment(
                         f.createIdentifier("method"),
@@ -936,3 +939,12 @@ const createFetcherFnImport = (fnName: string, filename: string) =>
     f.createStringLiteral(filename),
     undefined
   );
+
+/**
+ * Transform url params case to camel.
+ *
+ * @example
+ * `pet/{pet_id}` -> `pet/{petId}`
+ */
+const camelizedPathParams = (url: string) =>
+  url.replace(/\{\w*\}/g, (match) => `{${c.camel(match)}}`);
