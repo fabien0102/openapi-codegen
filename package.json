@@ -43,6 +43,7 @@
             }
           ]
         },
+        "transformIgnorePatterns": [],
         "testMatch": [
           "<rootDir>/cli/**/*.test.ts"
         ]
