@@ -1,5 +1,4 @@
 import { readFileSync } from "fs";
-import got from "got";
 import { join, parse } from "path";
 import { URL } from "url";
 import { FromOptions, OpenAPISourceFile } from "../types";
@@ -24,8 +23,9 @@ export const getOpenAPISourceFile = async (
       return { text, format };
 
     case "url": {
+      const { default: got } = await import("got");
       const { pathname } = new URL(options.url);
-      const file = await got[options.method](options.url, {
+      const file = await got[options.method || "get"](options.url, {
         headers: options.headers || {},
       });
       let format: OpenAPISourceFile["format"] = "yaml";
