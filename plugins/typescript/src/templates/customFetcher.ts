@@ -439,7 +439,7 @@ export const getCustomFetcher = (prefix: string) => [
                       ),
                       undefined,
                       [
-                        factory.createRegularExpressionLiteral("/{w*}/g"),
+                        factory.createRegularExpressionLiteral("/\\{\\w*\\}/g"),
                         factory.createArrowFunction(
                           undefined,
                           undefined,
