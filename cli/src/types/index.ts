@@ -39,7 +39,7 @@ export type UrlOptions = {
   /**
    * HTTP Method
    */
-  method: "GET";
+  method: "get" | "post";
 };
 
 export type GithubOptions = {
