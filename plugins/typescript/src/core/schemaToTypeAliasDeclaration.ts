@@ -209,7 +209,7 @@ export const getType = (
       );
     default:
       return withNullable(
-        f.createKeywordTypeNode(ts.SyntaxKind.AnyKeyword),
+        f.createKeywordTypeNode(ts.SyntaxKind.VoidKeyword),
         schema.nullable
       );
   }

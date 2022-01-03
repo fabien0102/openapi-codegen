@@ -149,6 +149,8 @@ describe("generateSchemaTypes", () => {
       expect(writeFile.mock.calls[1][1]).toMatchInlineSnapshot(`
         "import type * as Schemas from \\"./swaggerPetstoreSchemas\\";
 
+        export type NotModified = void;
+
         export type PetResponse = Schemas.Pet;
         "
       `);

@@ -85,11 +85,11 @@ export const generateSchemaTypes = async (
     >((mem, [name, responseObject]) => {
       if (isReferenceObject(responseObject)) return mem;
       const mediaType = findCompatibleMediaType(responseObject);
-      if (!mediaType || !mediaType.schema) return mem;
+      // if (!mediaType || !mediaType.schema) return mem;
 
       return [
         ...mem,
-        ...schemaToTypeAliasDeclaration(name, mediaType.schema, {
+        ...schemaToTypeAliasDeclaration(name, mediaType?.schema || {}, {
           openAPIDocument: context.openAPIDocument,
           currentComponent: "responses",
         }),

@@ -361,6 +361,14 @@ describe("schemaToTypeAliasDeclaration", () => {
     `);
   });
 
+  it("should generate void", () => {
+    const schema: SchemaObject = {};
+
+    expect(printSchema(schema)).toMatchInlineSnapshot(
+      `"export type Test = void;"`
+    );
+  });
+
   it("should generate a oneOf", () => {
     const schema: SchemaObject = {
       oneOf: [{ type: "string" }, { type: "number" }],

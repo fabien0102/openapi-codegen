@@ -257,6 +257,9 @@ export const petstore: OpenAPIObject = {
       },
     },
     responses: {
+      NotModified: {
+        description: "Not modified",
+      },
       PetResponse: {
         description: "A pet",
         content: {
