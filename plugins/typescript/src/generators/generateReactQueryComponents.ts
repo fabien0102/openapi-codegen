@@ -421,7 +421,7 @@ const getResponseType = ({
             f.createTypeReferenceNode(
               f.createQualifiedName(
                 f.createIdentifier("Responses"),
-                f.createIdentifier(name)
+                f.createIdentifier(c.pascal(name))
               ),
               undefined
             ),
