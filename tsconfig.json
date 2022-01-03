@@ -1,7 +1,8 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
-    "target": "ES2021",
+    "module": "ESNext",
+    "target": "ESNext",
+    "moduleResolution": "Node",
     "lib": ["ESNext"],
     "allowSyntheticDefaultImports": true,
     "importHelpers": true,

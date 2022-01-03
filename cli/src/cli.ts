@@ -2,10 +2,14 @@
 
 import { Cli } from "clipanion";
 
-import { GenerateCommand } from "./commands/GenerateCommand";
-import { InitCommand } from "./commands/InitCommand";
+import { GenerateCommand } from "./commands/GenerateCommand.js";
+import { InitCommand } from "./commands/InitCommand.js";
 import { readFileSync } from "fs";
-import { join } from "path";
+import { join, dirname } from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const [_node, _app, ...args] = process.argv;
 const packageJSON = JSON.parse(
