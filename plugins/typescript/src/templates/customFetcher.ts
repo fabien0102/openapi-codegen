@@ -121,6 +121,7 @@ export const getCustomFetcher = (prefix: string) => [
         factory.createUnionTypeNode([
           factory.createTypeLiteralNode([]),
           factory.createKeywordTypeNode(ts.SyntaxKind.UndefinedKeyword),
+          factory.createLiteralTypeNode(factory.createNull()),
         ]),
         undefined
       ),

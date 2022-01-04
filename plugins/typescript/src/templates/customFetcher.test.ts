@@ -30,7 +30,7 @@ describe("customFetcher", () => {
           queryParams?: TQueryParams;
           pathParams?: TPathParams;
       };
-      export default async function testFetch<TData, TBody extends {} | undefined, THeaders extends {} | undefined, TQueryParams extends {} | undefined, TPathParams extends {} | undefined>({ url, method, body, headers, pathParams, queryParams }: TestFetcherOptions<TBody, THeaders, TQueryParams, TPathParams>): Promise<TData> {
+      export default async function testFetch<TData, TBody extends {} | undefined, THeaders extends {} | undefined | null, TQueryParams extends {} | undefined, TPathParams extends {} | undefined>({ url, method, body, headers, pathParams, queryParams }: TestFetcherOptions<TBody, THeaders, TQueryParams, TPathParams>): Promise<TData> {
           const response = await window.fetch(resolveUrl(url, queryParams, pathParams), {
               method,
               body: body ? JSON.stringify(body) : undefined,
