@@ -95,7 +95,7 @@ export class GenerateCommand extends Command {
     };
 
     const existsFile = (file: string) => {
-      return existsSync(path.join(process.cwd(), file));
+      return existsSync(path.join(process.cwd(), config.outputDir, file));
     };
 
     await config.to({

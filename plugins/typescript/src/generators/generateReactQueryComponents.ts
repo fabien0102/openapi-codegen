@@ -81,7 +81,7 @@ export const generateReactQueryComponents = async (
   const nodes: ts.Node[] = [];
 
   const fetcherFilename = formatFilename(filenamePrefix + "-fetcher");
-  if (!context.existsFile(fetcherFilename)) {
+  if (!context.existsFile(`${fetcherFilename}.ts`)) {
     context.writeFile(
       `${fetcherFilename}.ts`,
       printNodes(getCustomFetcher(filenamePrefix))
