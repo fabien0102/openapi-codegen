@@ -85,7 +85,6 @@ export const generateSchemaTypes = async (
     >((mem, [name, responseObject]) => {
       if (isReferenceObject(responseObject)) return mem;
       const mediaType = findCompatibleMediaType(responseObject);
-      // if (!mediaType || !mediaType.schema) return mem;
 
       return [
         ...mem,
