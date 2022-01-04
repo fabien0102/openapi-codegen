@@ -1,4 +1,4 @@
-import { findKey, get, merge, intersection } from "lodash";
+import { findKey, get, merge, intersection, omit } from "lodash";
 import {
   ComponentsObject,
   DiscriminatorObject,
@@ -93,19 +93,31 @@ export const getType = (
   }
 
   if (schema.oneOf) {
-    return f.createUnionTypeNode(
-      schema.oneOf.map((i) =>
-        withDiscriminator(getType(i, context), i, schema.discriminator, context)
-      )
-    );
+    return f.createUnionTypeNode([
+      ...schema.oneOf.map((i) =>
+        withDiscriminator(
+          getType({ ...omit(schema, ["oneOf", "nullable"]), ...i }, context),
+          i,
+          schema.discriminator,
+          context
+        )
+      ),
+      ...(schema.nullable ? [f.createLiteralTypeNode(f.createNull())] : []),
+    ]);
   }
 
   if (schema.anyOf) {
-    return f.createUnionTypeNode(
-      schema.anyOf.map((i) =>
-        withDiscriminator(getType(i, context), i, schema.discriminator, context)
-      )
-    );
+    return f.createUnionTypeNode([
+      ...schema.anyOf.map((i) =>
+        withDiscriminator(
+          getType({ ...omit(schema, ["anyOf", "nullable"]), ...i }, context),
+          i,
+          schema.discriminator,
+          context
+        )
+      ),
+      ...(schema.nullable ? [f.createLiteralTypeNode(f.createNull())] : []),
+    ]);
   }
 
   if (schema.allOf) {
@@ -156,7 +168,14 @@ export const getType = (
         schema.nullable
       );
     case "object":
-      if (!schema.properties /* free form object */) {
+      if (schema.maxProperties === 0) {
+        return withNullable(f.createTypeLiteralNode([]), schema.nullable);
+      }
+
+      if (
+        !schema.properties /* free form object */ &&
+        !schema.additionalProperties
+      ) {
         return withNullable(
           f.createTypeReferenceNode(f.createIdentifier("Record"), [
             f.createKeywordTypeNode(ts.SyntaxKind.StringKeyword),
@@ -166,33 +185,35 @@ export const getType = (
         );
       }
 
-      const members: ts.TypeElement[] = Object.entries(schema.properties).map(
-        ([key, property]) => {
-          const propertyNode = f.createPropertySignature(
-            undefined,
-            isValidIdentifier(key)
-              ? f.createIdentifier(key)
-              : f.createComputedPropertyName(f.createStringLiteral(key)),
-            schema.required?.includes(key)
-              ? undefined
-              : f.createToken(ts.SyntaxKind.QuestionToken),
-            getType(property, context)
-          );
-          const jsDocNode = getJSDocComment(property, context);
-          if (jsDocNode) addJSDocToNode(propertyNode, jsDocNode);
+      const members: ts.TypeElement[] = Object.entries(
+        schema.properties || {}
+      ).map(([key, property]) => {
+        const propertyNode = f.createPropertySignature(
+          undefined,
+          isValidIdentifier(key)
+            ? f.createIdentifier(key)
+            : f.createComputedPropertyName(f.createStringLiteral(key)),
+          schema.required?.includes(key)
+            ? undefined
+            : f.createToken(ts.SyntaxKind.QuestionToken),
+          getType(property, context)
+        );
+        const jsDocNode = getJSDocComment(property, context);
+        if (jsDocNode) addJSDocToNode(propertyNode, jsDocNode);
 
-          return propertyNode;
-        }
-      );
+        return propertyNode;
+      });
 
       const additionalPropertiesNode = getAdditionalProperties(schema, context);
 
       if (additionalPropertiesNode) {
         return withNullable(
-          f.createIntersectionTypeNode([
-            f.createTypeLiteralNode(members),
-            f.createTypeLiteralNode([additionalPropertiesNode]),
-          ]),
+          members.length > 0
+            ? f.createIntersectionTypeNode([
+                f.createTypeLiteralNode(members),
+                f.createTypeLiteralNode([additionalPropertiesNode]),
+              ])
+            : f.createTypeLiteralNode([additionalPropertiesNode]),
           schema.nullable
         );
       }
@@ -561,7 +582,11 @@ const getJSDocComment = (
         propertyTags.push(
           f.createJSDocPropertyTag(
             f.createIdentifier(key),
-            f.createIdentifier(value.toString()),
+            f.createIdentifier(
+              typeof value === "object"
+                ? JSON.stringify(value)
+                : value.toString()
+            ),
             false
           )
         );
