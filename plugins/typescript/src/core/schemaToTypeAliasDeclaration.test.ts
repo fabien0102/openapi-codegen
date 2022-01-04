@@ -126,6 +126,21 @@ describe("schemaToTypeAliasDeclaration", () => {
     `);
   });
 
+  it("should generate multiple examples (with singular)", () => {
+    const schema: SchemaObject = {
+      type: "null",
+      example: ["first example", "second example"],
+    };
+
+    expect(printSchema(schema)).toMatchInlineSnapshot(`
+      "/**
+       * @example first example
+       * @example second example
+       */
+      export type Test = null;"
+    `);
+  });
+
   it("should generate an object", () => {
     const schema: SchemaObject = {
       type: "object",

@@ -1,4 +1,5 @@
 import { findKey, get, merge, intersection, omit } from "lodash";
+import { singular } from "pluralize";
 import {
   ComponentsObject,
   DiscriminatorObject,
@@ -575,7 +576,7 @@ const getJSDocComment = (
         value.forEach((v) =>
           propertyTags.push(
             f.createJSDocPropertyTag(
-              f.createIdentifier(key.slice(0, -1)), // Remove the plural
+              f.createIdentifier(singular(key)),
               f.createIdentifier(v.toString()),
               false
             )
