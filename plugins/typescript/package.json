@@ -9,7 +9,8 @@
     "directory": "plugins/typescript"
   },
   "scripts": {
-    "build": "tsc -p tsconfig.package.json"
+    "build": "tsc -p tsconfig.package.json",
+    "prepublishOnly": "npm run build"
   },
   "files": [
     "lib",
@@ -27,11 +28,14 @@
     "case": "^1.6.3",
     "lodash": "^4.17.21",
     "openapi3-ts": "^2.0.1",
+    "pluralize": "^8.0.0",
     "tslib": "^2.3.1",
     "tsutils": "^3.21.0",
     "typescript": "^4.5.2"
   },
   "devDependencies": {
-    "@types/lodash": "^4.14.175"
+    "@types/lodash": "^4.14.175",
+    "@types/pluralize": "^0.0.29",
+    "@types/qs": "^6.9.7"
   }
 }

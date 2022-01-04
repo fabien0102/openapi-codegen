@@ -1,4 +1,4 @@
-import { defineConfig } from "../src/index";
+import { defineConfig } from "../lib/index.js";
 
 export default defineConfig({
   withFile: {
@@ -7,6 +7,16 @@ export default defineConfig({
       relativePath: "examples/petstore.json",
     },
     outputDir: "petstore",
+    to: async (context) => {
+      console.log(context);
+    },
+  },
+  withUrl: {
+    from: {
+      source: "url",
+      url: "https://api.apis.guru/v2/specs/github.com/1.1.4/openapi.yaml",
+    },
+    outputDir: "github",
     to: async (context) => {
       console.log(context);
     },

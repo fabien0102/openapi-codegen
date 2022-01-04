@@ -126,6 +126,21 @@ describe("schemaToTypeAliasDeclaration", () => {
     `);
   });
 
+  it("should generate multiple examples (with singular)", () => {
+    const schema: SchemaObject = {
+      type: "null",
+      example: ["first example", "second example"],
+    };
+
+    expect(printSchema(schema)).toMatchInlineSnapshot(`
+      "/**
+       * @example first example
+       * @example second example
+       */
+      export type Test = null;"
+    `);
+  });
+
   it("should generate an object", () => {
     const schema: SchemaObject = {
       type: "object",
@@ -361,19 +376,29 @@ describe("schemaToTypeAliasDeclaration", () => {
     `);
   });
 
-  it("should generate a oneOf", () => {
+  it("should handle implicit array", () => {
     const schema: SchemaObject = {
-      oneOf: [{ type: "string" }, { type: "number" }],
+      items: {
+        $ref: "#/components/schemas/Foo",
+      },
     };
 
     expect(printSchema(schema)).toMatchInlineSnapshot(
-      `"export type Test = string | number;"`
+      `"export type Test = Foo[];"`
     );
   });
 
-  it("should generate a anyOf", () => {
+  it("should generate void", () => {
+    const schema: SchemaObject = {};
+
+    expect(printSchema(schema)).toMatchInlineSnapshot(
+      `"export type Test = void;"`
+    );
+  });
+
+  it("should generate a oneOf", () => {
     const schema: SchemaObject = {
-      anyOf: [{ type: "string" }, { type: "number" }],
+      oneOf: [{ type: "string" }, { type: "number" }],
     };
 
     expect(printSchema(schema)).toMatchInlineSnapshot(
@@ -635,6 +660,144 @@ describe("schemaToTypeAliasDeclaration", () => {
       `);
     });
   }); // end of allOf
+
+  describe("anyOf", () => {
+    it("should generate a simple union", () => {
+      const schema: SchemaObject = {
+        anyOf: [{ type: "string" }, { type: "number" }],
+      };
+
+      expect(printSchema(schema)).toMatchInlineSnapshot(
+        `"export type Test = string | number;"`
+      );
+    });
+
+    it("should combine required & properties", () => {
+      // from github api - operationId: gists/update
+      const schema: SchemaObject = {
+        anyOf: [
+          {
+            required: ["description"],
+          },
+          {
+            required: ["files"],
+          },
+        ],
+        nullable: true,
+        properties: {
+          description: {
+            description: "Description of the gist",
+            example: "Example Ruby script",
+            type: "string",
+          },
+          files: {
+            additionalProperties: {
+              anyOf: [
+                {
+                  required: ["content"],
+                },
+                {
+                  required: ["filename"],
+                },
+                {
+                  maxProperties: 0,
+                  type: "object",
+                },
+              ],
+              nullable: true,
+              properties: {
+                content: {
+                  description: "The new content of the file",
+                  type: "string",
+                },
+                filename: {
+                  description: "The new filename for the file",
+                  nullable: true,
+                  type: "string",
+                },
+              },
+              type: "object",
+            },
+            description: "Names of files to be updated",
+            example: {
+              "hello.rb": {
+                content: "blah",
+                filename: "goodbye.rb",
+              },
+            },
+            type: "object",
+          },
+        },
+        type: "object",
+      };
+
+      expect(printSchema(schema)).toMatchInlineSnapshot(`
+        "export type Test = {
+            /*
+             * Description of the gist
+             *
+             * @example Example Ruby script
+             */
+            description: string;
+            /*
+             * Names of files to be updated
+             *
+             * @example {\\"hello.rb\\":{\\"content\\":\\"blah\\",\\"filename\\":\\"goodbye.rb\\"}}
+             */
+            files?: Record<string, {
+                /*
+                 * The new content of the file
+                 */
+                content: string;
+                /*
+                 * The new filename for the file
+                 */
+                filename?: string | null;
+            } | {
+                /*
+                 * The new content of the file
+                 */
+                content?: string;
+                /*
+                 * The new filename for the file
+                 */
+                filename: string | null;
+            } | {} | null>;
+        } | {
+            /*
+             * Description of the gist
+             *
+             * @example Example Ruby script
+             */
+            description?: string;
+            /*
+             * Names of files to be updated
+             *
+             * @example {\\"hello.rb\\":{\\"content\\":\\"blah\\",\\"filename\\":\\"goodbye.rb\\"}}
+             */
+            files: Record<string, {
+                /*
+                 * The new content of the file
+                 */
+                content: string;
+                /*
+                 * The new filename for the file
+                 */
+                filename?: string | null;
+            } | {
+                /*
+                 * The new content of the file
+                 */
+                content?: string;
+                /*
+                 * The new filename for the file
+                 */
+                filename: string | null;
+            } | {} | null>;
+        } | null;"
+      `);
+    });
+  });
 });
 
 const printSchema = (

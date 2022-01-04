@@ -1,11 +1,17 @@
 import { Command, Option } from "clipanion";
-import { unlink, outputFile } from "fs-extra";
-import path from "path";
+import fsExtra from "fs-extra";
+import path from "path/posix";
 import * as swc from "@swc/core";
+import prettier from "prettier";
+import { fileURLToPath } from "url";
+import slash from "slash";
 
 import { Config, Namespace } from "../types";
-import { getOpenAPISourceFile } from "../core/getOpenAPISourceFile";
-import { parseOpenAPISourceFile } from "../core/parseOpenAPISourceFile";
+import { getOpenAPISourceFile } from "../core/getOpenAPISourceFile.js";
+import { parseOpenAPISourceFile } from "../core/parseOpenAPISourceFile.js";
+
+const { unlink, outputFile, existsSync } = fsExtra;
+const __filename = fileURLToPath(import.meta.url);
 
 // if no config -> tell the user to do `openapi-codegen init`
 // if config -> adjust examples/documentation regarding the keys
@@ -36,14 +42,14 @@ export class GenerateCommand extends Command {
     const isTs = ext.toLowerCase() === ".ts";
 
     if (isTs) {
-      const transpiledPath = `${dir}/${name}.js`;
+      const transpiledPath = `${dir}/${name}.mjs`;
 
       const { code } = await swc.transformFile(userConfigPath, {
         jsc: {
           target: "es2022",
         },
         module: {
-          type: "commonjs",
+          type: "es6",
         },
       });
 
@@ -51,7 +57,9 @@ export class GenerateCommand extends Command {
       await outputFile(transpiledPath, code);
 
       // Compute the result
-      const config = require(transpiledPath).default;
+      const { default: config } = await import(
+        path.relative(slash(__filename), slash(transpiledPath).slice(3))
+      );
 
       // Delete the transpiled file
       await unlink(transpiledPath);
@@ -59,7 +67,9 @@ export class GenerateCommand extends Command {
       // Return the result
       return config;
     } else {
-      return require(userConfigPath);
+      return await import(
+        path.relative(slash(__filename), slash(userConfigPath)).slice(3)
+      );
     }
   }
 
@@ -75,15 +85,24 @@ export class GenerateCommand extends Command {
     const config = configs[this.namespace];
     const sourceFile = await getOpenAPISourceFile(config.from);
     const openAPIDocument = await parseOpenAPISourceFile(sourceFile);
+    const prettierConfig = await prettier.resolveConfig(process.cwd());
 
     const writeFile = async (file: string, data: string) => {
-      await outputFile(path.join(process.cwd(), config.outputDir, file), data);
+      await outputFile(
+        path.join(process.cwd(), config.outputDir, file),
+        prettier.format(data, { parser: "babel-ts", ...prettierConfig })
+      );
+    };
+
+    const existsFile = (file: string) => {
+      return existsSync(path.join(process.cwd(), config.outputDir, file));
     };
 
     await config.to({
       openAPIDocument,
       outputDir: config.outputDir,
       writeFile,
+      existsFile,
     });
   }
 }

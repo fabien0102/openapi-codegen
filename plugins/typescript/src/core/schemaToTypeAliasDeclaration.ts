@@ -1,4 +1,5 @@
-import { findKey, get, merge, intersection } from "lodash";
+import { findKey, get, merge, intersection, omit } from "lodash";
+import { singular } from "pluralize";
 import {
   ComponentsObject,
   DiscriminatorObject,
@@ -32,7 +33,7 @@ export type Context = {
    *
    * This is required to correctly resolve types dependencies
    */
-  currentComponent: OpenAPIComponentType;
+  currentComponent: OpenAPIComponentType | null;
 };
 
 /**
@@ -65,7 +66,7 @@ export const schemaToTypeAliasDeclaration = (
  * @param schema OpenAPI Schema
  * @returns ts.TypeNode
  */
-const getType = (
+export const getType = (
   schema: SchemaObject | ReferenceObject,
   context: Context
 ): ts.TypeNode => {
@@ -93,19 +94,31 @@ const getType = (
   }
 
   if (schema.oneOf) {
-    return f.createUnionTypeNode(
-      schema.oneOf.map((i) =>
-        withDiscriminator(getType(i, context), i, schema.discriminator, context)
-      )
-    );
+    return f.createUnionTypeNode([
+      ...schema.oneOf.map((i) =>
+        withDiscriminator(
+          getType({ ...omit(schema, ["oneOf", "nullable"]), ...i }, context),
+          i,
+          schema.discriminator,
+          context
+        )
+      ),
+      ...(schema.nullable ? [f.createLiteralTypeNode(f.createNull())] : []),
+    ]);
   }
 
   if (schema.anyOf) {
-    return f.createUnionTypeNode(
-      schema.anyOf.map((i) =>
-        withDiscriminator(getType(i, context), i, schema.discriminator, context)
-      )
-    );
+    return f.createUnionTypeNode([
+      ...schema.anyOf.map((i) =>
+        withDiscriminator(
+          getType({ ...omit(schema, ["anyOf", "nullable"]), ...i }, context),
+          i,
+          schema.discriminator,
+          context
+        )
+      ),
+      ...(schema.nullable ? [f.createLiteralTypeNode(f.createNull())] : []),
+    ]);
   }
 
   if (schema.allOf) {
@@ -136,6 +149,11 @@ const getType = (
     schema.type = "object";
   }
 
+  // Handle implicit array
+  if (schema.items && !schema.type) {
+    schema.type = "array";
+  }
+
   switch (schema.type) {
     case "null":
       return f.createLiteralTypeNode(f.createNull());
@@ -156,7 +174,14 @@ const getType = (
         schema.nullable
       );
     case "object":
-      if (!schema.properties /* free form object */) {
+      if (schema.maxProperties === 0) {
+        return withNullable(f.createTypeLiteralNode([]), schema.nullable);
+      }
+
+      if (
+        !schema.properties /* free form object */ &&
+        !schema.additionalProperties
+      ) {
         return withNullable(
           f.createTypeReferenceNode(f.createIdentifier("Record"), [
             f.createKeywordTypeNode(ts.SyntaxKind.StringKeyword),
@@ -166,33 +191,38 @@ const getType = (
         );
       }
 
-      const members: ts.TypeElement[] = Object.entries(schema.properties).map(
-        ([key, property]) => {
-          const propertyNode = f.createPropertySignature(
-            undefined,
-            isValidIdentifier(key)
-              ? f.createIdentifier(key)
-              : f.createComputedPropertyName(f.createStringLiteral(key)),
-            schema.required?.includes(key)
-              ? undefined
-              : f.createToken(ts.SyntaxKind.QuestionToken),
-            getType(property, context)
-          );
-          const jsDocNode = getJSDocComment(property, context);
-          if (jsDocNode) addJSDocToNode(propertyNode, jsDocNode);
+      const members: ts.TypeElement[] = Object.entries(
+        schema.properties || {}
+      ).map(([key, property]) => {
+        const propertyNode = f.createPropertySignature(
+          undefined,
+          isValidIdentifier(key)
+            ? f.createIdentifier(key)
+            : f.createComputedPropertyName(f.createStringLiteral(key)),
+          schema.required?.includes(key)
+            ? undefined
+            : f.createToken(ts.SyntaxKind.QuestionToken),
+          getType(property, context)
+        );
+        const jsDocNode = getJSDocComment(property, context);
+        if (jsDocNode) addJSDocToNode(propertyNode, jsDocNode);
 
-          return propertyNode;
-        }
-      );
+        return propertyNode;
+      });
 
       const additionalPropertiesNode = getAdditionalProperties(schema, context);
 
       if (additionalPropertiesNode) {
         return withNullable(
-          f.createIntersectionTypeNode([
-            f.createTypeLiteralNode(members),
-            f.createTypeLiteralNode([additionalPropertiesNode]),
-          ]),
+          members.length > 0
+            ? f.createIntersectionTypeNode([
+                f.createTypeLiteralNode(members),
+                f.createTypeLiteralNode([additionalPropertiesNode]),
+              ])
+            : f.createTypeReferenceNode(f.createIdentifier("Record"), [
+                f.createKeywordTypeNode(ts.SyntaxKind.StringKeyword),
+                additionalPropertiesNode.type,
+              ]),
           schema.nullable
         );
       }
@@ -201,7 +231,7 @@ const getType = (
     case "array":
       return withNullable(
         f.createArrayTypeNode(
-          !schema.items
+          !schema.items || Object.keys(schema.items).length === 0
             ? f.createKeywordTypeNode(ts.SyntaxKind.AnyKeyword)
             : getType(schema.items, context)
         ),
@@ -209,7 +239,7 @@ const getType = (
       );
     default:
       return withNullable(
-        f.createKeywordTypeNode(ts.SyntaxKind.AnyKeyword),
+        f.createKeywordTypeNode(ts.SyntaxKind.VoidKeyword),
         schema.nullable
       );
   }
@@ -551,7 +581,7 @@ const getJSDocComment = (
         value.forEach((v) =>
           propertyTags.push(
             f.createJSDocPropertyTag(
-              f.createIdentifier(key.slice(0, -1)), // Remove the plural
+              f.createIdentifier(singular(key)),
               f.createIdentifier(v.toString()),
               false
             )
@@ -561,7 +591,11 @@ const getJSDocComment = (
         propertyTags.push(
           f.createJSDocPropertyTag(
             f.createIdentifier(key),
-            f.createIdentifier(value.toString()),
+            f.createIdentifier(
+              typeof value === "object"
+                ? JSON.stringify(value)
+                : value.toString()
+            ),
             false
           )
         );
