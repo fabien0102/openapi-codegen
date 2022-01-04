@@ -376,6 +376,18 @@ describe("schemaToTypeAliasDeclaration", () => {
     `);
   });
 
+  it("should handle implicit array", () => {
+    const schema: SchemaObject = {
+      items: {
+        $ref: "#/components/schemas/Foo",
+      },
+    };
+
+    expect(printSchema(schema)).toMatchInlineSnapshot(
+      `"export type Test = Foo[];"`
+    );
+  });
+
   it("should generate void", () => {
     const schema: SchemaObject = {};
 

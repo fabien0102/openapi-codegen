@@ -149,6 +149,11 @@ export const getType = (
     schema.type = "object";
   }
 
+  // Handle implicit array
+  if (schema.items && !schema.type) {
+    schema.type = "array";
+  }
+
   switch (schema.type) {
     case "null":
       return f.createLiteralTypeNode(f.createNull());
@@ -226,7 +231,7 @@ export const getType = (
     case "array":
       return withNullable(
         f.createArrayTypeNode(
-          !schema.items
+          !schema.items || Object.keys(schema.items).length === 0
             ? f.createKeywordTypeNode(ts.SyntaxKind.AnyKeyword)
             : getType(schema.items, context)
         ),
