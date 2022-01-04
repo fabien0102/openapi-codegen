@@ -90,7 +90,7 @@ Having to reverse engineer a backend response is the least productive/fun task e
 Taking React as example, calling an API will be as simple as this:
 
 ```tsx
-import { useListPets } from "petStore"; // <- output from openapi-codegen
+import { useListPets } from "./petStore/petStoreComponents"; // <- output from openapi-codegen
 
 const App = () => {
   const { data, loading, error } = useListPets();
@@ -131,24 +131,20 @@ export default defineConfig({
     },
 
     // can be overridden from cli
-    outputDir: "src",
+    outputDir: "src/queries",
 
-    to: async (context: {
-      openAPIDocument: OpenAPIObject;
-      operationsTree: OperationTree;
-      outputDir: string;
-      customFlags: Record<string, unknown>; // extra flags from the cli
-    }) => {
-      // You can transform the `openAPIDocument` here, can be useful to remove internal routes or fixing some known issues in the specs ;)
+    to: async (context) => {
+      // You can transform the `context.openAPIDocument` here, can be useful to remove internal routes or fixing some known issues in the specs ;)
 
       // Generate all the schemas types (components & responses)
-      await generateSchemaTypes(context, {
+      const { schemasFiles } = await generateSchemaTypes(context, {
         /* config */
       });
 
       // Generate all react-query components
       await generateReactQueryComponents(context, {
         /* config*/
+        schemasFiles,
       });
     },
   },
