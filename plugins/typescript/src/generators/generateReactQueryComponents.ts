@@ -171,7 +171,7 @@ export const generateReactQueryComponents = async (
         }
 
         // Export error type if needed
-        if (ts.isTypeLiteralNode(errorType)) {
+        if (shouldExtractNode(errorType)) {
           const errorTypeIdentifier = c.pascal(`${operationId}Error`);
           nodes.push(
             f.createTypeAliasDeclaration(
@@ -187,7 +187,7 @@ export const generateReactQueryComponents = async (
         }
 
         // Export data type if needed
-        if (ts.isTypeLiteralNode(dataType)) {
+        if (shouldExtractNode(dataType)) {
           const dataTypeIdentifier = c.pascal(`${operationId}Response`);
           nodes.push(
             f.createTypeAliasDeclaration(
@@ -203,7 +203,7 @@ export const generateReactQueryComponents = async (
         }
 
         // Export requestBody type if needed
-        if (ts.isTypeLiteralNode(requestBodyType)) {
+        if (shouldExtractNode(requestBodyType)) {
           const requestBodyIdentifier = c.pascal(`${operationId}RequestBody`);
           nodes.push(
             f.createTypeAliasDeclaration(
@@ -242,7 +242,7 @@ export const generateReactQueryComponents = async (
         });
 
         // Export fetcher variables type if needed
-        if (ts.isTypeLiteralNode(variablesType)) {
+        if (shouldExtractNode(variablesType)) {
           const variablesIdentifier = c.pascal(`${operationId}Variables`);
           nodes.push(
             f.createTypeAliasDeclaration(
@@ -939,6 +939,14 @@ const createFetcherFnImport = (fnName: string, filename: string) =>
     f.createStringLiteral(filename),
     undefined
   );
+
+/**
+ * Define if the type should be extracted or inline.
+ */
+const shouldExtractNode = (node: ts.Node) =>
+  ts.isIntersectionTypeNode(node) ||
+  ts.isTypeLiteralNode(node) ||
+  ts.isArrayTypeNode(node);
 
 /**
  * Transform url params case to camel.
