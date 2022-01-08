@@ -140,6 +140,19 @@ export const generateReactQueryComponents = async (
           context.openAPIDocument.components
         );
 
+        // Check if types can be marked as optional (all properties are optional)
+        const requestBodyOptional = false;
+        const headersOptional = headerParams.reduce((mem, p) => {
+          if ((config.injectedHeaders || []).includes(p.name)) return mem;
+          return mem && !p.required;
+        }, true);
+        const pathParamsOptional = pathParams.reduce((mem, p) => {
+          return mem && !p.required;
+        }, true);
+        const queryParamsOptional = queryParams.reduce((mem, p) => {
+          return mem && !p.required;
+        }, true);
+
         if (pathParams.length > 0) {
           nodes.push(
             ...schemaToTypeAliasDeclaration(
@@ -257,6 +270,10 @@ export const generateReactQueryComponents = async (
               pathParamsType,
               queryParamsType,
               contextTypeName,
+              headersOptional,
+              pathParamsOptional,
+              queryParamsOptional,
+              requestBodyOptional,
             })
           )
         );
@@ -341,9 +358,9 @@ const getParamsGroupByType = (
   components: ComponentsObject = {}
 ) => {
   const {
-    query: queryParams = [],
-    path: pathParams = [],
-    header: headerParams = [],
+    query: queryParams = [] as ParameterObject[],
+    path: pathParams = [] as ParameterObject[],
+    header: headerParams = [] as ParameterObject[],
   } = groupBy(
     [...parameters].map<ParameterObject>((p) => {
       if (isReferenceObject(p)) {
@@ -536,15 +553,23 @@ const getRequestBodyType = ({
  */
 const getVariablesType = ({
   requestBodyType,
+  requestBodyOptional,
   headersType,
+  headersOptional,
   pathParamsType,
+  pathParamsOptional,
   queryParamsType,
+  queryParamsOptional,
   contextTypeName,
 }: {
   requestBodyType: ts.TypeNode;
+  requestBodyOptional: boolean;
   headersType: ts.TypeNode;
+  headersOptional: boolean;
   pathParamsType: ts.TypeNode;
+  pathParamsOptional: boolean;
   queryParamsType: ts.TypeNode;
+  queryParamsOptional: boolean;
   contextTypeName: string;
 }) => {
   const variablesItems: ts.TypeElement[] = [];
@@ -561,7 +586,9 @@ const getVariablesType = ({
       f.createPropertySignature(
         undefined,
         f.createIdentifier("body"),
-        undefined,
+        requestBodyOptional
+          ? f.createToken(ts.SyntaxKind.QuestionToken)
+          : undefined,
         requestBodyType
       )
     );
@@ -571,7 +598,9 @@ const getVariablesType = ({
       f.createPropertySignature(
         undefined,
         f.createIdentifier("headers"),
-        undefined,
+        headersOptional
+          ? f.createToken(ts.SyntaxKind.QuestionToken)
+          : undefined,
         headersType
       )
     );
@@ -581,7 +610,9 @@ const getVariablesType = ({
       f.createPropertySignature(
         undefined,
         f.createIdentifier("pathParams"),
-        undefined,
+        pathParamsOptional
+          ? f.createToken(ts.SyntaxKind.QuestionToken)
+          : undefined,
         pathParamsType
       )
     );
@@ -591,7 +622,9 @@ const getVariablesType = ({
       f.createPropertySignature(
         undefined,
         f.createIdentifier("queryParams"),
-        undefined,
+        queryParamsOptional
+          ? f.createToken(ts.SyntaxKind.QuestionToken)
+          : undefined,
         queryParamsType
       )
     );
@@ -1122,3 +1155,16 @@ const shouldExtractNode = (node: ts.Node) =>
  */
 const camelizedPathParams = (url: string) =>
   url.replace(/\{\w*\}/g, (match) => `{${c.camel(match)}}`);
+
+/**
+ * Returns `true` if all properties are marked as optional.
+ *
+ * @param node
+ * @returns
+ */
+const hasAllPropertiesOptional = (node: ts.Node) => {
+  if (!ts.isTypeLiteralNode(node)) return true;
+  return node.members.reduce((mem, member) => {
+    return mem && Boolean(member.questionToken);
+  }, true);
+};

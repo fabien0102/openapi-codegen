@@ -305,8 +305,8 @@ describe("generateReactQueryComponents", () => {
       export type ListPetsResponse = Schemas.Pet[];
 
       export type ListPetsVariables = {
-          headers: ListPetsHeaders;
-          queryParams: ListPetsQueryParams;
+          headers?: ListPetsHeaders;
+          queryParams?: ListPetsQueryParams;
       } & PetstoreContext[\\"fetcherOptions\\"];
 
       /**
