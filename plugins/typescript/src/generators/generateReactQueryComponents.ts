@@ -12,7 +12,6 @@ import {
   RequestBodyObject,
   ResponseObject,
   ResponsesObject,
-  SchemaObject,
 } from "openapi3-ts";
 import { get, groupBy, uniqBy } from "lodash";
 
@@ -23,6 +22,7 @@ import {
 import { findCompatibleMediaType } from "../core/findCompatibleMediaType";
 import { getUsedImports } from "../core/getUsedImports";
 import { getVariablesType } from "../core/getVariablesType";
+import { paramsToSchema } from "../core/paramsToSchema";
 
 import { getCustomFetcher } from "../templates/customFetcher";
 import { getContext } from "../templates/context";
@@ -383,34 +383,6 @@ const getParamsGroupByType = (
   );
 
   return { queryParams, pathParams, headerParams };
-};
-
-/**
- * Convert a list of params in an object schema.
- *
- * @param params Parameters list
- * @param optionalKeys Override the key to be optional
- * @returns An openAPI object schemas with the parameters as properties
- */
-const paramsToSchema = (
-  params: ParameterObject[],
-  optionalKeys: string[] = []
-): SchemaObject => {
-  return {
-    type: "object",
-    properties: params.reduce((mem, param) => {
-      return {
-        ...mem,
-        [c.camel(param.name)]: {
-          ...param.schema,
-          description: param.description,
-        },
-      };
-    }, {}),
-    required: params
-      .filter((p) => p.required && !optionalKeys.includes(c.camel(p.name)))
-      .map((p) => c.camel(p.name)),
-  };
 };
 
 /**
