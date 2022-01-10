@@ -10,10 +10,8 @@ import {
   PathItemObject,
   ReferenceObject,
   RequestBodyObject,
-  ResponseObject,
-  ResponsesObject,
 } from "openapi3-ts";
-import { get, groupBy, uniqBy } from "lodash";
+import { get, groupBy } from "lodash";
 
 import {
   getType,
@@ -23,6 +21,7 @@ import { findCompatibleMediaType } from "../core/findCompatibleMediaType";
 import { getUsedImports } from "../core/getUsedImports";
 import { getVariablesType } from "../core/getVariablesType";
 import { paramsToSchema } from "../core/paramsToSchema";
+import { getResponseType } from "../core/getResponseType";
 
 import { getCustomFetcher } from "../templates/customFetcher";
 import { getContext } from "../templates/context";
@@ -383,74 +382,6 @@ const getParamsGroupByType = (
   );
 
   return { queryParams, pathParams, headerParams };
-};
-
-/**
- * Extract types from responses
- */
-const getResponseType = ({
-  responses,
-  components,
-  filter,
-  printNodes,
-}: {
-  responses: ResponsesObject;
-  components?: ComponentsObject;
-  filter: (statusCode: string) => boolean;
-  printNodes: (nodes: ts.Node[]) => string;
-}) => {
-  const responseTypes = uniqBy(
-    Object.entries(responses).reduce(
-      (
-        mem,
-        [statusCode, response]: [string, ResponseObject | ReferenceObject]
-      ) => {
-        if (!filter(statusCode)) return mem;
-        if (isReferenceObject(response)) {
-          const [hash, topLevel, namespace, name] = response.$ref.split("/");
-          if (hash !== "#" || topLevel !== "components") {
-            throw new Error(
-              "This library only resolve $ref that are include into `#/components/*` for now"
-            );
-          }
-          if (namespace !== "responses") {
-            throw new Error(
-              "$ref for responses must be on `#/components/responses`"
-            );
-          }
-          return [
-            ...mem,
-            f.createTypeReferenceNode(
-              f.createQualifiedName(
-                f.createIdentifier("Responses"),
-                f.createIdentifier(c.pascal(name))
-              ),
-              undefined
-            ),
-          ];
-        }
-
-        const mediaType = findCompatibleMediaType(response);
-        if (!mediaType || !mediaType.schema) return mem;
-
-        return [
-          ...mem,
-          getType(mediaType.schema, {
-            currentComponent: null,
-            openAPIDocument: { components },
-          }),
-        ];
-      },
-      [] as ts.TypeNode[]
-    ),
-    (node) => printNodes([node])
-  );
-
-  return responseTypes.length === 0
-    ? f.createKeywordTypeNode(ts.SyntaxKind.UndefinedKeyword)
-    : responseTypes.length === 1
-    ? responseTypes[0]
-    : f.createUnionTypeNode(responseTypes);
 };
 
 /**
