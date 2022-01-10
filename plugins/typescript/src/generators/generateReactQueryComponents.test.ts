@@ -650,6 +650,24 @@ describe("generateReactQueryComponents", () => {
         title: "petshop",
         version: "1.0.0",
       },
+      components: {
+        requestBodies: {
+          UpdatePetRequestBody: {
+            content: {
+              "application/json": {
+                schema: {
+                  type: "object",
+                  properties: {
+                    name: {
+                      type: "string",
+                    },
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
       paths: {
         "/pet/{pet_id}": {
           parameters: [
@@ -704,7 +722,7 @@ describe("generateReactQueryComponents", () => {
       };
 
       export type UpdatePetVariables = {
-          body: RequestBodies.UpdatePetRequestBody;
+          body?: RequestBodies.UpdatePetRequestBody;
           pathParams: UpdatePetPathParams;
       } & PetstoreContext[\\"fetcherOptions\\"];
 

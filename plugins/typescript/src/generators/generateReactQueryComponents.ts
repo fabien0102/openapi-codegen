@@ -11,6 +11,7 @@ import { paramsToSchema } from "../core/paramsToSchema";
 import { getResponseType } from "../core/getResponseType";
 import { getRequestBodyType } from "../core/getRequestBodyType";
 import { getParamsGroupByType } from "../core/getParamsGroupByType";
+import { isRequestBodyOptional } from "../core/isRequestBodyOptional";
 
 import { getCustomFetcher } from "../templates/customFetcher";
 import { getContext } from "../templates/context";
@@ -132,7 +133,10 @@ export const generateReactQueryComponents = async (
         );
 
         // Check if types can be marked as optional (all properties are optional)
-        const requestBodyOptional = false;
+        const requestBodyOptional = isRequestBodyOptional({
+          requestBody: operation.requestBody,
+          components: context.openAPIDocument.components,
+        });
         const headersOptional = headerParams.reduce((mem, p) => {
           if ((config.injectedHeaders || []).includes(p.name)) return mem;
           return mem && !p.required;
