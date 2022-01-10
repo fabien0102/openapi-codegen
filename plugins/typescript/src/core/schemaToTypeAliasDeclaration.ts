@@ -219,10 +219,7 @@ export const getType = (
                 f.createTypeLiteralNode(members),
                 f.createTypeLiteralNode([additionalPropertiesNode]),
               ])
-            : f.createTypeReferenceNode(f.createIdentifier("Record"), [
-                f.createKeywordTypeNode(ts.SyntaxKind.StringKeyword),
-                additionalPropertiesNode.type,
-              ]),
+            : f.createTypeLiteralNode([additionalPropertiesNode]),
           schema.nullable
         );
       }
