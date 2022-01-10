@@ -2,14 +2,7 @@ import ts, { factory as f } from "typescript";
 import * as c from "case";
 
 import { ConfigBase, Context } from "./types";
-import {
-  ComponentsObject,
-  isReferenceObject,
-  OperationObject,
-  ParameterObject,
-  PathItemObject,
-} from "openapi3-ts";
-import { get, groupBy } from "lodash";
+import { OperationObject, PathItemObject } from "openapi3-ts";
 
 import { schemaToTypeAliasDeclaration } from "../core/schemaToTypeAliasDeclaration";
 import { getUsedImports } from "../core/getUsedImports";
@@ -17,6 +10,7 @@ import { getVariablesType } from "../core/getVariablesType";
 import { paramsToSchema } from "../core/paramsToSchema";
 import { getResponseType } from "../core/getResponseType";
 import { getRequestBodyType } from "../core/getRequestBodyType";
+import { getParamsGroupByType } from "../core/getParamsGroupByType";
 
 import { getCustomFetcher } from "../templates/customFetcher";
 import { getContext } from "../templates/context";
@@ -343,41 +337,6 @@ const isVerb = (
   verb: string
 ): verb is "get" | "post" | "patch" | "put" | "delete" =>
   ["get", "post", "patch", "put", "delete"].includes(verb);
-
-/**
- * Resolve $ref and group parameters by `type`.
- *
- * @param parameters Operation parameters
- * @param components #/components
- */
-const getParamsGroupByType = (
-  parameters: OperationObject["parameters"] = [],
-  components: ComponentsObject = {}
-) => {
-  const {
-    query: queryParams = [] as ParameterObject[],
-    path: pathParams = [] as ParameterObject[],
-    header: headerParams = [] as ParameterObject[],
-  } = groupBy(
-    [...parameters].map<ParameterObject>((p) => {
-      if (isReferenceObject(p)) {
-        const schema = get(
-          components,
-          p.$ref.replace("#/components/", "").replace("/", ".")
-        );
-        if (!schema) {
-          throw new Error(`${p.$ref} not found!`);
-        }
-        return schema;
-      } else {
-        return p;
-      }
-    }),
-    "in"
-  );
-
-  return { queryParams, pathParams, headerParams };
-};
 
 /**
  * Create the declaration of the fetcher function.
