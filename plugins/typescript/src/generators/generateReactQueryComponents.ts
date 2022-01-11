@@ -2,26 +2,19 @@ import ts, { factory as f } from "typescript";
 import * as c from "case";
 
 import { ConfigBase, Context } from "./types";
-import {
-  ComponentsObject,
-  isReferenceObject,
-  OperationObject,
-  ParameterObject,
-  PathItemObject,
-  ReferenceObject,
-  RequestBodyObject,
-  ResponseObject,
-  ResponsesObject,
-  SchemaObject,
-} from "openapi3-ts";
-import { get, groupBy, uniqBy } from "lodash";
-import {
-  getType,
-  schemaToTypeAliasDeclaration,
-} from "../core/schemaToTypeAliasDeclaration";
-import { findCompatibleMediaType } from "../core/findCompatibleMediaType";
+import { OperationObject, PathItemObject } from "openapi3-ts";
+
+import { schemaToTypeAliasDeclaration } from "../core/schemaToTypeAliasDeclaration";
 import { getUsedImports } from "../core/getUsedImports";
+import { getVariablesType } from "../core/getVariablesType";
+import { paramsToSchema } from "../core/paramsToSchema";
+import { getResponseType } from "../core/getResponseType";
+import { getRequestBodyType } from "../core/getRequestBodyType";
+import { getParamsGroupByType } from "../core/getParamsGroupByType";
+import { isRequestBodyOptional } from "../core/isRequestBodyOptional";
+
 import { getCustomFetcher } from "../templates/customFetcher";
+import { getContext } from "../templates/context";
 
 export type Config = ConfigBase & {
   /**
@@ -78,14 +71,22 @@ export const generateReactQueryComponents = async (
   const filename = formatFilename(filenamePrefix + "-components");
 
   const fetcherFn = c.camel(`${filenamePrefix}-fetch`);
+  const contextTypeName = `${c.pascal(filenamePrefix)}Context`;
+  const contextHookName = `use${c.pascal(filenamePrefix)}Context`;
   const nodes: ts.Node[] = [];
 
   const fetcherFilename = formatFilename(filenamePrefix + "-fetcher");
+  const contextFilename = formatFilename(filenamePrefix + "-context");
+
   if (!context.existsFile(`${fetcherFilename}.ts`)) {
     context.writeFile(
       `${fetcherFilename}.ts`,
-      printNodes(getCustomFetcher(filenamePrefix))
+      getCustomFetcher(filenamePrefix, contextFilename)
     );
+  }
+
+  if (!context.existsFile(`${contextFilename}.ts`)) {
+    context.writeFile(`${contextFilename}.ts`, getContext(filenamePrefix));
   }
 
   // Generate `useQuery` & `useMutation`
@@ -131,6 +132,22 @@ export const generateReactQueryComponents = async (
           context.openAPIDocument.components
         );
 
+        // Check if types can be marked as optional (all properties are optional)
+        const requestBodyOptional = isRequestBodyOptional({
+          requestBody: operation.requestBody,
+          components: context.openAPIDocument.components,
+        });
+        const headersOptional = headerParams.reduce((mem, p) => {
+          if ((config.injectedHeaders || []).includes(p.name)) return mem;
+          return mem && !p.required;
+        }, true);
+        const pathParamsOptional = pathParams.reduce((mem, p) => {
+          return mem && !p.required;
+        }, true);
+        const queryParamsOptional = queryParams.reduce((mem, p) => {
+          return mem && !p.required;
+        }, true);
+
         if (pathParams.length > 0) {
           nodes.push(
             ...schemaToTypeAliasDeclaration(
@@ -171,7 +188,7 @@ export const generateReactQueryComponents = async (
         }
 
         // Export error type if needed
-        if (ts.isTypeLiteralNode(errorType)) {
+        if (shouldExtractNode(errorType)) {
           const errorTypeIdentifier = c.pascal(`${operationId}Error`);
           nodes.push(
             f.createTypeAliasDeclaration(
@@ -187,7 +204,7 @@ export const generateReactQueryComponents = async (
         }
 
         // Export data type if needed
-        if (ts.isTypeLiteralNode(dataType)) {
+        if (shouldExtractNode(dataType)) {
           const dataTypeIdentifier = c.pascal(`${operationId}Response`);
           nodes.push(
             f.createTypeAliasDeclaration(
@@ -203,7 +220,7 @@ export const generateReactQueryComponents = async (
         }
 
         // Export requestBody type if needed
-        if (ts.isTypeLiteralNode(requestBodyType)) {
+        if (shouldExtractNode(requestBodyType)) {
           const requestBodyIdentifier = c.pascal(`${operationId}RequestBody`);
           nodes.push(
             f.createTypeAliasDeclaration(
@@ -221,41 +238,40 @@ export const generateReactQueryComponents = async (
         const pathParamsType =
           pathParams.length > 0
             ? f.createTypeReferenceNode(`${c.pascal(operationId)}PathParams`)
-            : f.createKeywordTypeNode(ts.SyntaxKind.UndefinedKeyword);
+            : f.createTypeLiteralNode([]);
 
         const queryParamsType =
           queryParams.length > 0
             ? f.createTypeReferenceNode(`${c.pascal(operationId)}QueryParams`)
-            : f.createKeywordTypeNode(ts.SyntaxKind.UndefinedKeyword);
+            : f.createTypeLiteralNode([]);
 
         const headersType =
           headerParams.length > 0
             ? f.createTypeReferenceNode(`${c.pascal(operationId)}Headers`)
-            : f.createKeywordTypeNode(ts.SyntaxKind.UndefinedKeyword);
+            : f.createTypeLiteralNode([]);
 
         // Generate fetcher variables type
-        let variablesType: ts.TypeNode = getVariablesType({
-          requestBodyType,
-          headersType,
-          pathParamsType,
-          queryParamsType,
-        });
-
-        // Export fetcher variables type if needed
-        if (ts.isTypeLiteralNode(variablesType)) {
-          const variablesIdentifier = c.pascal(`${operationId}Variables`);
-          nodes.push(
-            f.createTypeAliasDeclaration(
-              undefined,
-              [f.createModifier(ts.SyntaxKind.ExportKeyword)],
-              f.createIdentifier(variablesIdentifier),
-              undefined,
-              variablesType
-            )
-          );
-
-          variablesType = f.createTypeReferenceNode(variablesIdentifier);
-        }
+        const variablesIdentifier = c.pascal(`${operationId}Variables`);
+        const variablesType = f.createTypeReferenceNode(variablesIdentifier);
+        nodes.push(
+          f.createTypeAliasDeclaration(
+            undefined,
+            [f.createModifier(ts.SyntaxKind.ExportKeyword)],
+            f.createIdentifier(variablesIdentifier),
+            undefined,
+            getVariablesType({
+              requestBodyType,
+              headersType,
+              pathParamsType,
+              queryParamsType,
+              contextTypeName,
+              headersOptional,
+              pathParamsOptional,
+              queryParamsOptional,
+              requestBodyOptional,
+            })
+          )
+        );
 
         const operationFetcherFnName = `fetch${c.pascal(operationId)}`;
         nodes.push(
@@ -279,6 +295,7 @@ export const generateReactQueryComponents = async (
                 dataType,
                 errorType,
                 variablesType,
+                contextHookName,
                 name: `use${c.pascal(operationId)}`,
               })
             : createMutationHook({
@@ -287,6 +304,7 @@ export const generateReactQueryComponents = async (
                 dataType,
                 errorType,
                 variablesType,
+                contextHookName,
                 name: `use${c.pascal(operationId)}`,
               }))
         );
@@ -298,7 +316,11 @@ export const generateReactQueryComponents = async (
     filename + ".ts",
     printNodes([
       createReactQueryImport(),
-      createFetcherFnImport(fetcherFn, `./${fetcherFilename}`),
+      createNamedImport(
+        [contextHookName, contextTypeName],
+        `./${contextFilename}`
+      ),
+      createNamedImport(fetcherFn, `./${fetcherFilename}`),
       ...getUsedImports(nodes, config.schemasFiles),
       ...nodes,
     ])
@@ -319,269 +341,6 @@ const isVerb = (
   verb: string
 ): verb is "get" | "post" | "patch" | "put" | "delete" =>
   ["get", "post", "patch", "put", "delete"].includes(verb);
-
-/**
- * Resolve $ref and group parameters by `type`.
- *
- * @param parameters Operation parameters
- * @param components #/components
- */
-const getParamsGroupByType = (
-  parameters: OperationObject["parameters"] = [],
-  components: ComponentsObject = {}
-) => {
-  const {
-    query: queryParams = [],
-    path: pathParams = [],
-    header: headerParams = [],
-  } = groupBy(
-    [...parameters].map<ParameterObject>((p) => {
-      if (isReferenceObject(p)) {
-        const schema = get(
-          components,
-          p.$ref.replace("#/components/", "").replace("/", ".")
-        );
-        if (!schema) {
-          throw new Error(`${p.$ref} not found!`);
-        }
-        return schema;
-      } else {
-        return p;
-      }
-    }),
-    "in"
-  );
-
-  return { queryParams, pathParams, headerParams };
-};
-
-/**
- * Convert a list of params in an object schema.
- *
- * @param params Parameters list
- * @param optionalKeys Override the key to be optional
- * @returns An openAPI object schemas with the parameters as properties
- */
-const paramsToSchema = (
-  params: ParameterObject[],
-  optionalKeys: string[] = []
-): SchemaObject => {
-  return {
-    type: "object",
-    properties: params.reduce((mem, param) => {
-      return {
-        ...mem,
-        [c.camel(param.name)]: {
-          ...param.schema,
-          description: param.description,
-        },
-      };
-    }, {}),
-    required: params
-      .filter((p) => p.required && !optionalKeys.includes(c.camel(p.name)))
-      .map((p) => c.camel(p.name)),
-  };
-};
-
-/**
- * Extract types from responses
- */
-const getResponseType = ({
-  responses,
-  components,
-  filter,
-  printNodes,
-}: {
-  responses: ResponsesObject;
-  components?: ComponentsObject;
-  filter: (statusCode: string) => boolean;
-  printNodes: (nodes: ts.Node[]) => string;
-}) => {
-  const responseTypes = uniqBy(
-    Object.entries(responses).reduce(
-      (
-        mem,
-        [statusCode, response]: [string, ResponseObject | ReferenceObject]
-      ) => {
-        if (!filter(statusCode)) return mem;
-        if (isReferenceObject(response)) {
-          const [hash, topLevel, namespace, name] = response.$ref.split("/");
-          if (hash !== "#" || topLevel !== "components") {
-            throw new Error(
-              "This library only resolve $ref that are include into `#/components/*` for now"
-            );
-          }
-          if (namespace !== "responses") {
-            throw new Error(
-              "$ref for responses must be on `#/components/responses`"
-            );
-          }
-          return [
-            ...mem,
-            f.createTypeReferenceNode(
-              f.createQualifiedName(
-                f.createIdentifier("Responses"),
-                f.createIdentifier(c.pascal(name))
-              ),
-              undefined
-            ),
-          ];
-        }
-
-        const mediaType = findCompatibleMediaType(response);
-        if (!mediaType || !mediaType.schema) return mem;
-
-        return [
-          ...mem,
-          getType(mediaType.schema, {
-            currentComponent: null,
-            openAPIDocument: { components },
-          }),
-        ];
-      },
-      [] as ts.TypeNode[]
-    ),
-    (node) => printNodes([node])
-  );
-
-  return responseTypes.length === 0
-    ? f.createKeywordTypeNode(ts.SyntaxKind.UndefinedKeyword)
-    : responseTypes.length === 1
-    ? responseTypes[0]
-    : f.createUnionTypeNode(responseTypes);
-};
-
-/**
- * Extract types from request body
- */
-const getRequestBodyType = ({
-  requestBody,
-  components,
-}: {
-  requestBody?: RequestBodyObject | ReferenceObject;
-  components?: ComponentsObject;
-}) => {
-  if (!requestBody) {
-    return f.createKeywordTypeNode(ts.SyntaxKind.UndefinedKeyword);
-  }
-
-  if (isReferenceObject(requestBody)) {
-    const [hash, topLevel, namespace, name] = requestBody.$ref.split("/");
-    if (hash !== "#" || topLevel !== "components") {
-      throw new Error(
-        "This library only resolve $ref that are include into `#/components/*` for now"
-      );
-    }
-    if (namespace !== "requestBodies") {
-      throw new Error(
-        "$ref for requestBody must be on `#/components/requestBodies`"
-      );
-    }
-    return f.createTypeReferenceNode(
-      f.createQualifiedName(
-        f.createIdentifier("RequestBodies"),
-        f.createIdentifier(c.pascal(name))
-      ),
-      undefined
-    );
-  }
-
-  const mediaType = findCompatibleMediaType(requestBody);
-  if (!mediaType) {
-    return f.createKeywordTypeNode(ts.SyntaxKind.UndefinedKeyword);
-  }
-
-  if (isReferenceObject(mediaType)) {
-    const [hash, topLevel, namespace, name] = mediaType.$ref.split("/");
-    if (hash !== "#" || topLevel !== "components") {
-      throw new Error(
-        "This library only resolve $ref that are include into `#/components/*` for now"
-      );
-    }
-    if (namespace !== "schemas") {
-      throw new Error("$ref for schemas must be on `#/components/schemas`");
-    }
-
-    return f.createTypeReferenceNode(
-      f.createQualifiedName(
-        f.createIdentifier("Schemas"),
-        f.createIdentifier(c.pascal(name))
-      ),
-      undefined
-    );
-  }
-
-  if (!mediaType.schema) {
-    return f.createKeywordTypeNode(ts.SyntaxKind.UndefinedKeyword);
-  }
-
-  return getType(mediaType.schema, {
-    currentComponent: null,
-    openAPIDocument: { components },
-  });
-};
-
-/**
- * Get fetcher variables types from the operation types
- */
-const getVariablesType = ({
-  requestBodyType,
-  headersType,
-  pathParamsType,
-  queryParamsType,
-}: {
-  requestBodyType: ts.TypeNode;
-  headersType: ts.TypeNode;
-  pathParamsType: ts.TypeNode;
-  queryParamsType: ts.TypeNode;
-}) => {
-  const variablesItems: ts.TypeElement[] = [];
-
-  if (requestBodyType.kind !== ts.SyntaxKind.UndefinedKeyword) {
-    variablesItems.push(
-      f.createPropertySignature(
-        undefined,
-        f.createIdentifier("body"),
-        undefined,
-        requestBodyType
-      )
-    );
-  }
-  if (headersType.kind !== ts.SyntaxKind.UndefinedKeyword) {
-    variablesItems.push(
-      f.createPropertySignature(
-        undefined,
-        f.createIdentifier("headers"),
-        undefined,
-        headersType
-      )
-    );
-  }
-  if (pathParamsType.kind !== ts.SyntaxKind.UndefinedKeyword) {
-    variablesItems.push(
-      f.createPropertySignature(
-        undefined,
-        f.createIdentifier("pathParams"),
-        undefined,
-        pathParamsType
-      )
-    );
-  }
-  if (queryParamsType.kind !== ts.SyntaxKind.UndefinedKeyword) {
-    variablesItems.push(
-      f.createPropertySignature(
-        undefined,
-        f.createIdentifier("queryParams"),
-        undefined,
-        queryParamsType
-      )
-    );
-  }
-
-  return variablesItems.length === 0
-    ? f.createKeywordTypeNode(ts.SyntaxKind.VoidKeyword)
-    : f.createTypeLiteralNode(variablesItems);
-};
 
 /**
  * Create the declaration of the fetcher function.
@@ -689,6 +448,7 @@ const createOperationFetcherFnNodes = ({
 
 const createMutationHook = ({
   operationFetcherFnName,
+  contextHookName,
   dataType,
   errorType,
   variablesType,
@@ -696,6 +456,7 @@ const createMutationHook = ({
   operation,
 }: {
   operationFetcherFnName: string;
+  contextHookName: string;
   name: string;
   dataType: ts.TypeNode;
   errorType: ts.TypeNode;
@@ -745,6 +506,37 @@ const createMutationHook = ({
               f.createToken(ts.SyntaxKind.EqualsGreaterThanToken),
               f.createBlock(
                 [
+                  f.createVariableStatement(
+                    undefined,
+                    f.createVariableDeclarationList(
+                      [
+                        f.createVariableDeclaration(
+                          f.createObjectBindingPattern([
+                            f.createBindingElement(
+                              undefined,
+                              undefined,
+                              f.createIdentifier("fetcherOptions"),
+                              undefined
+                            ),
+                            f.createBindingElement(
+                              undefined,
+                              undefined,
+                              f.createIdentifier("queryOptions"),
+                              undefined
+                            ),
+                          ]),
+                          undefined,
+                          undefined,
+                          f.createCallExpression(
+                            f.createIdentifier(contextHookName),
+                            undefined,
+                            []
+                          )
+                        ),
+                      ],
+                      ts.NodeFlags.Const
+                    )
+                  ),
                   f.createReturnStatement(
                     f.createCallExpression(
                       f.createPropertyAccessExpression(
@@ -753,8 +545,51 @@ const createMutationHook = ({
                       ),
                       [dataType, errorType, variablesType],
                       [
-                        f.createIdentifier(operationFetcherFnName),
-                        f.createIdentifier("options"),
+                        f.createArrowFunction(
+                          undefined,
+                          undefined,
+                          [
+                            f.createParameterDeclaration(
+                              undefined,
+                              undefined,
+                              undefined,
+                              f.createIdentifier("variables"),
+                              undefined,
+                              variablesType,
+                              undefined
+                            ),
+                          ],
+                          undefined,
+                          f.createToken(ts.SyntaxKind.EqualsGreaterThanToken),
+                          f.createCallExpression(
+                            f.createIdentifier(operationFetcherFnName),
+                            undefined,
+                            [
+                              f.createObjectLiteralExpression(
+                                [
+                                  f.createSpreadAssignment(
+                                    f.createIdentifier("fetcherOptions")
+                                  ),
+                                  f.createSpreadAssignment(
+                                    f.createIdentifier("variables")
+                                  ),
+                                ],
+                                false
+                              ),
+                            ]
+                          )
+                        ),
+                        f.createObjectLiteralExpression(
+                          [
+                            f.createSpreadAssignment(
+                              f.createIdentifier("queryOptions")
+                            ),
+                            f.createSpreadAssignment(
+                              f.createIdentifier("options")
+                            ),
+                          ],
+                          true
+                        ),
                       ]
                     )
                   ),
@@ -774,6 +609,7 @@ const createMutationHook = ({
 
 const createQueryHook = ({
   operationFetcherFnName,
+  contextHookName,
   dataType,
   errorType,
   variablesType,
@@ -781,6 +617,7 @@ const createQueryHook = ({
   operation,
 }: {
   operationFetcherFnName: string;
+  contextHookName: string;
   name: string;
   dataType: ts.TypeNode;
   errorType: ts.TypeNode;
@@ -828,18 +665,14 @@ const createQueryHook = ({
                   ),
                   undefined
                 ),
-                ...(variablesType.kind !== ts.SyntaxKind.VoidKeyword
-                  ? [
-                      f.createParameterDeclaration(
-                        undefined,
-                        undefined,
-                        undefined,
-                        f.createIdentifier("variables"),
-                        undefined,
-                        variablesType
-                      ),
-                    ]
-                  : []),
+                f.createParameterDeclaration(
+                  undefined,
+                  undefined,
+                  undefined,
+                  f.createIdentifier("variables"),
+                  undefined,
+                  variablesType
+                ),
                 f.createParameterDeclaration(
                   undefined,
                   undefined,
@@ -851,25 +684,56 @@ const createQueryHook = ({
               ],
               undefined,
               f.createToken(ts.SyntaxKind.EqualsGreaterThanToken),
-              f.createCallExpression(
-                f.createPropertyAccessExpression(
-                  f.createIdentifier("reactQuery"),
-                  f.createIdentifier("useQuery")
+              f.createBlock([
+                f.createVariableStatement(
+                  undefined,
+                  f.createVariableDeclarationList(
+                    [
+                      f.createVariableDeclaration(
+                        f.createObjectBindingPattern([
+                          f.createBindingElement(
+                            undefined,
+                            undefined,
+                            f.createIdentifier("fetcherOptions"),
+                            undefined
+                          ),
+                          f.createBindingElement(
+                            undefined,
+                            undefined,
+                            f.createIdentifier("queryOptions"),
+                            undefined
+                          ),
+                        ]),
+                        undefined,
+                        undefined,
+                        f.createCallExpression(
+                          f.createIdentifier(contextHookName),
+                          undefined,
+                          []
+                        )
+                      ),
+                    ],
+                    ts.NodeFlags.Const
+                  )
                 ),
-                [
-                  dataType,
-                  errorType,
-                  dataType,
-                  f.createTypeReferenceNode(
-                    f.createIdentifier("TQueryKey"),
-                    undefined
-                  ),
-                ],
-                [
-                  f.createIdentifier("queryKey"),
-                  variablesType.kind === ts.SyntaxKind.VoidKeyword
-                    ? f.createIdentifier(operationFetcherFnName)
-                    : f.createArrowFunction(
+                f.createReturnStatement(
+                  f.createCallExpression(
+                    f.createPropertyAccessExpression(
+                      f.createIdentifier("reactQuery"),
+                      f.createIdentifier("useQuery")
+                    ),
+                    [
+                      dataType,
+                      errorType,
+                      dataType,
+                      f.createTypeReferenceNode(
+                        f.createIdentifier("TQueryKey"),
+                        undefined
+                      ),
+                    ],
+                    [
+                      f.createIdentifier("queryKey"),
+                      f.createArrowFunction(
                         undefined,
                         undefined,
                         [],
@@ -878,12 +742,36 @@ const createQueryHook = ({
                         f.createCallExpression(
                           f.createIdentifier(operationFetcherFnName),
                           undefined,
-                          [f.createIdentifier("variables")]
+                          [
+                            f.createObjectLiteralExpression(
+                              [
+                                f.createSpreadAssignment(
+                                  f.createIdentifier("fetcherOptions")
+                                ),
+                                f.createSpreadAssignment(
+                                  f.createIdentifier("variables")
+                                ),
+                              ],
+                              false
+                            ),
+                          ]
                         )
                       ),
-                  f.createIdentifier("options"),
-                ]
-              )
+                      f.createObjectLiteralExpression(
+                        [
+                          f.createSpreadAssignment(
+                            f.createIdentifier("queryOptions")
+                          ),
+                          f.createSpreadAssignment(
+                            f.createIdentifier("options")
+                          ),
+                        ],
+                        true
+                      ),
+                    ]
+                  )
+                ),
+              ])
             )
           ),
         ],
@@ -931,14 +819,32 @@ const createReactQueryImport = () =>
     undefined
   );
 
-const createFetcherFnImport = (fnName: string, filename: string) =>
-  f.createImportDeclaration(
+const createNamedImport = (fnName: string | string[], filename: string) => {
+  const fnNames = Array.isArray(fnName) ? fnName : [fnName];
+  return f.createImportDeclaration(
     undefined,
     undefined,
-    f.createImportClause(false, f.createIdentifier(fnName), undefined),
+    f.createImportClause(
+      false,
+      undefined,
+      f.createNamedImports(
+        fnNames.map((name) =>
+          f.createImportSpecifier(false, undefined, f.createIdentifier(name))
+        )
+      )
+    ),
     f.createStringLiteral(filename),
     undefined
   );
+};
+
+/**
+ * Define if the type should be extracted.
+ */
+const shouldExtractNode = (node: ts.Node) =>
+  ts.isIntersectionTypeNode(node) ||
+  (ts.isTypeLiteralNode(node) && node.members.length > 0) ||
+  ts.isArrayTypeNode(node);
 
 /**
  * Transform url params case to camel.

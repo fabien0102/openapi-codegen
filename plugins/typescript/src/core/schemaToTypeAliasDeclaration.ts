@@ -12,6 +12,7 @@ import {
 import ts, { factory as f } from "typescript";
 import { isValidIdentifier } from "tsutils";
 import { pascal } from "case";
+import { getReferenceSchema } from "./getReferenceSchema";
 
 type RemoveIndex<T> = {
   [P in keyof T as string extends P
@@ -219,10 +220,7 @@ export const getType = (
                 f.createTypeLiteralNode(members),
                 f.createTypeLiteralNode([additionalPropertiesNode]),
               ])
-            : f.createTypeReferenceNode(f.createIdentifier("Record"), [
-                f.createKeywordTypeNode(ts.SyntaxKind.StringKeyword),
-                additionalPropertiesNode.type,
-              ]),
+            : f.createTypeLiteralNode([additionalPropertiesNode]),
           schema.nullable
         );
       }
@@ -378,7 +376,10 @@ const getAllOf = (
     }
 
     if (isReferenceObject(member)) {
-      const referenceSchema = getReferenceSchema(member.$ref, context);
+      const referenceSchema = getReferenceSchema(
+        member.$ref,
+        context.openAPIDocument
+      );
       const { mergedSchema, isColliding } = mergeSchemas(
         acc.mergedSchema,
         referenceSchema
@@ -409,35 +410,6 @@ const getAllOf = (
   }
 
   return getType(mergedSchema, context);
-};
-
-/**
- * Get the SchemaObject from a $ref.
- *
- * @param $ref Path of the reference
- * @param context Context
- * @returns The resolved SchemaObject
- */
-const getReferenceSchema = ($ref: string, context: Context): SchemaObject => {
-  const [hash, ...refPath] = $ref.split("/");
-  if (hash !== "#") {
-    throw new Error("This library only resolve local $ref");
-  }
-  const referenceSchema = get(context.openAPIDocument, refPath.join("."));
-
-  if (!referenceSchema) {
-    throw new Error(`${$ref} not found!`);
-  }
-
-  if (isReferenceObject(referenceSchema)) {
-    return getReferenceSchema(referenceSchema.$ref, context);
-  }
-
-  if (!isSchemaObject(referenceSchema)) {
-    throw new Error(`${$ref} can’t be resolved`);
-  }
-
-  return referenceSchema;
 };
 
 /**
@@ -561,7 +533,10 @@ const getJSDocComment = (
   const schemaWithAllOfResolved = schema.allOf
     ? schema.allOf.reduce<SchemaObject>((mem, allOfItem) => {
         if (isReferenceObject(allOfItem)) {
-          const referenceSchema = getReferenceSchema(allOfItem.$ref, context);
+          const referenceSchema = getReferenceSchema(
+            allOfItem.$ref,
+            context.openAPIDocument
+          );
           return mergeSchemas(mem, referenceSchema).mergedSchema;
         } else {
           return mergeSchemas(mem, allOfItem).mergedSchema;

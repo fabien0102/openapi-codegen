@@ -744,25 +744,27 @@ describe("schemaToTypeAliasDeclaration", () => {
              *
              * @example {\\"hello.rb\\":{\\"content\\":\\"blah\\",\\"filename\\":\\"goodbye.rb\\"}}
              */
-            files?: Record<string, {
-                /*
-                 * The new content of the file
-                 */
-                content: string;
-                /*
-                 * The new filename for the file
-                 */
-                filename?: string | null;
-            } | {
-                /*
-                 * The new content of the file
-                 */
-                content?: string;
-                /*
-                 * The new filename for the file
-                 */
-                filename: string | null;
-            } | {} | null>;
+            files?: {
+                [key: string]: {
+                    /*
+                     * The new content of the file
+                     */
+                    content: string;
+                    /*
+                     * The new filename for the file
+                     */
+                    filename?: string | null;
+                } | {
+                    /*
+                     * The new content of the file
+                     */
+                    content?: string;
+                    /*
+                     * The new filename for the file
+                     */
+                    filename: string | null;
+                } | {} | null;
+            };
         } | {
             /*
              * Description of the gist
@@ -775,25 +777,27 @@ describe("schemaToTypeAliasDeclaration", () => {
              *
              * @example {\\"hello.rb\\":{\\"content\\":\\"blah\\",\\"filename\\":\\"goodbye.rb\\"}}
              */
-            files: Record<string, {
-                /*
-                 * The new content of the file
-                 */
-                content: string;
-                /*
-                 * The new filename for the file
-                 */
-                filename?: string | null;
-            } | {
-                /*
-                 * The new content of the file
-                 */
-                content?: string;
-                /*
-                 * The new filename for the file
-                 */
-                filename: string | null;
-            } | {} | null>;
+            files: {
+                [key: string]: {
+                    /*
+                     * The new content of the file
+                     */
+                    content: string;
+                    /*
+                     * The new filename for the file
+                     */
+                    filename?: string | null;
+                } | {
+                    /*
+                     * The new content of the file
+                     */
+                    content?: string;
+                    /*
+                     * The new filename for the file
+                     */
+                    filename: string | null;
+                } | {} | null;
+            };
         } | null;"
       `);
     });

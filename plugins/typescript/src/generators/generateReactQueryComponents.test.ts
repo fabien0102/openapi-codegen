@@ -83,18 +83,26 @@ describe("generateReactQueryComponents", () => {
     expect(writeFile.mock.calls[0][0]).toBe("petstoreComponents.ts");
     expect(writeFile.mock.calls[0][1]).toMatchInlineSnapshot(`
       "import * as reactQuery from \\"react-query\\";
-      import petstoreFetch from \\"./petstoreFetcher\\";
+      import { usePetstoreContext, PetstoreContext } from \\"./petstoreContext\\";
+      import { petstoreFetch } from \\"./petstoreFetcher\\";
       import type * as Schemas from \\"./petstoreSchemas\\";
 
-      /**
-       * Get all the pets
-       */
-      export const fetchListPets = () => petstoreFetch<Schemas.Pet[], undefined, undefined, undefined, undefined>({ url: \\"/pets\\", method: \\"get\\" });
+      export type ListPetsResponse = Schemas.Pet[];
+
+      export type ListPetsVariables = PetstoreContext[\\"fetcherOptions\\"];
 
       /**
        * Get all the pets
        */
-      export const useListPets = <TQueryKey extends reactQuery.QueryKey>(queryKey: TQueryKey, options?: Omit<reactQuery.UseQueryOptions<Schemas.Pet[], undefined, Schemas.Pet[], TQueryKey>, \\"queryKey\\" | \\"queryFn\\">) => reactQuery.useQuery<Schemas.Pet[], undefined, Schemas.Pet[], TQueryKey>(queryKey, fetchListPets, options);
+      export const fetchListPets = (variables: ListPetsVariables) => petstoreFetch<ListPetsResponse, undefined, {}, {}, {}>({ url: \\"/pets\\", method: \\"get\\", ...variables });
+
+      /**
+       * Get all the pets
+       */
+      export const useListPets = <TQueryKey extends reactQuery.QueryKey>(queryKey: TQueryKey, variables: ListPetsVariables, options?: Omit<reactQuery.UseQueryOptions<ListPetsResponse, undefined, ListPetsResponse, TQueryKey>, \\"queryKey\\" | \\"queryFn\\">) => { const { fetcherOptions, queryOptions } = usePetstoreContext(); return reactQuery.useQuery<ListPetsResponse, undefined, ListPetsResponse, TQueryKey>(queryKey, () => fetchListPets({ ...fetcherOptions, ...variables }), {
+          ...queryOptions,
+          ...options
+      }); };
       "
     `);
   });
@@ -169,7 +177,8 @@ describe("generateReactQueryComponents", () => {
     expect(writeFile.mock.calls[0][0]).toBe("petstoreComponents.ts");
     expect(writeFile.mock.calls[0][1]).toMatchInlineSnapshot(`
       "import * as reactQuery from \\"react-query\\";
-      import petstoreFetch from \\"./petstoreFetcher\\";
+      import { usePetstoreContext, PetstoreContext } from \\"./petstoreContext\\";
+      import { petstoreFetch } from \\"./petstoreFetcher\\";
       import type * as Schemas from \\"./petstoreSchemas\\";
 
       export type ListPetsQueryParams = {
@@ -183,19 +192,24 @@ describe("generateReactQueryComponents", () => {
           color?: \\"white\\" | \\"black\\" | \\"grey\\";
       };
 
+      export type ListPetsResponse = Schemas.Pet[];
+
       export type ListPetsVariables = {
           queryParams: ListPetsQueryParams;
-      };
+      } & PetstoreContext[\\"fetcherOptions\\"];
 
       /**
        * Get all the pets
        */
-      export const fetchListPets = (variables: ListPetsVariables) => petstoreFetch<Schemas.Pet[], undefined, undefined, ListPetsQueryParams, undefined>({ url: \\"/pets\\", method: \\"get\\", ...variables });
+      export const fetchListPets = (variables: ListPetsVariables) => petstoreFetch<ListPetsResponse, undefined, {}, ListPetsQueryParams, {}>({ url: \\"/pets\\", method: \\"get\\", ...variables });
 
       /**
        * Get all the pets
        */
-      export const useListPets = <TQueryKey extends reactQuery.QueryKey>(queryKey: TQueryKey, variables: ListPetsVariables, options?: Omit<reactQuery.UseQueryOptions<Schemas.Pet[], undefined, Schemas.Pet[], TQueryKey>, \\"queryKey\\" | \\"queryFn\\">) => reactQuery.useQuery<Schemas.Pet[], undefined, Schemas.Pet[], TQueryKey>(queryKey, () => fetchListPets(variables), options);
+      export const useListPets = <TQueryKey extends reactQuery.QueryKey>(queryKey: TQueryKey, variables: ListPetsVariables, options?: Omit<reactQuery.UseQueryOptions<ListPetsResponse, undefined, ListPetsResponse, TQueryKey>, \\"queryKey\\" | \\"queryFn\\">) => { const { fetcherOptions, queryOptions } = usePetstoreContext(); return reactQuery.useQuery<ListPetsResponse, undefined, ListPetsResponse, TQueryKey>(queryKey, () => fetchListPets({ ...fetcherOptions, ...variables }), {
+          ...queryOptions,
+          ...options
+      }); };
       "
     `);
   });
@@ -270,7 +284,8 @@ describe("generateReactQueryComponents", () => {
     expect(writeFile.mock.calls[0][0]).toBe("petstoreComponents.ts");
     expect(writeFile.mock.calls[0][1]).toMatchInlineSnapshot(`
       "import * as reactQuery from \\"react-query\\";
-      import petstoreFetch from \\"./petstoreFetcher\\";
+      import { usePetstoreContext, PetstoreContext } from \\"./petstoreContext\\";
+      import { petstoreFetch } from \\"./petstoreFetcher\\";
       import type * as Schemas from \\"./petstoreSchemas\\";
 
       export type ListPetsQueryParams = {
@@ -287,20 +302,25 @@ describe("generateReactQueryComponents", () => {
           breed?: string;
       };
 
+      export type ListPetsResponse = Schemas.Pet[];
+
       export type ListPetsVariables = {
-          headers: ListPetsHeaders;
-          queryParams: ListPetsQueryParams;
-      };
+          headers?: ListPetsHeaders;
+          queryParams?: ListPetsQueryParams;
+      } & PetstoreContext[\\"fetcherOptions\\"];
 
       /**
        * Get all the pets
        */
-      export const fetchListPets = (variables: ListPetsVariables) => petstoreFetch<Schemas.Pet[], undefined, ListPetsHeaders, ListPetsQueryParams, undefined>({ url: \\"/pets\\", method: \\"get\\", ...variables });
+      export const fetchListPets = (variables: ListPetsVariables) => petstoreFetch<ListPetsResponse, undefined, ListPetsHeaders, ListPetsQueryParams, {}>({ url: \\"/pets\\", method: \\"get\\", ...variables });
 
       /**
        * Get all the pets
        */
-      export const useListPets = <TQueryKey extends reactQuery.QueryKey>(queryKey: TQueryKey, variables: ListPetsVariables, options?: Omit<reactQuery.UseQueryOptions<Schemas.Pet[], undefined, Schemas.Pet[], TQueryKey>, \\"queryKey\\" | \\"queryFn\\">) => reactQuery.useQuery<Schemas.Pet[], undefined, Schemas.Pet[], TQueryKey>(queryKey, () => fetchListPets(variables), options);
+      export const useListPets = <TQueryKey extends reactQuery.QueryKey>(queryKey: TQueryKey, variables: ListPetsVariables, options?: Omit<reactQuery.UseQueryOptions<ListPetsResponse, undefined, ListPetsResponse, TQueryKey>, \\"queryKey\\" | \\"queryFn\\">) => { const { fetcherOptions, queryOptions } = usePetstoreContext(); return reactQuery.useQuery<ListPetsResponse, undefined, ListPetsResponse, TQueryKey>(queryKey, () => fetchListPets({ ...fetcherOptions, ...variables }), {
+          ...queryOptions,
+          ...options
+      }); };
       "
     `);
   });
@@ -363,18 +383,26 @@ describe("generateReactQueryComponents", () => {
     expect(writeFile.mock.calls[0][0]).toBe("petstoreComponents.ts");
     expect(writeFile.mock.calls[0][1]).toMatchInlineSnapshot(`
       "import * as reactQuery from \\"react-query\\";
-      import petstoreFetch from \\"./petstoreFetcher\\";
+      import { usePetstoreContext, PetstoreContext } from \\"./petstoreContext\\";
+      import { petstoreFetch } from \\"./petstoreFetcher\\";
       import type * as Schemas from \\"./petstoreSchemas\\";
 
-      /**
-       * Get all the pets
-       */
-      export const fetchListPets = () => petstoreFetch<Schemas.Pet[], undefined, undefined, undefined, undefined>({ url: \\"/pets\\", method: \\"get\\" });
+      export type ListPetsResponse = Schemas.Pet[];
+
+      export type ListPetsVariables = PetstoreContext[\\"fetcherOptions\\"];
 
       /**
        * Get all the pets
        */
-      export const useListPets = <TQueryKey extends reactQuery.QueryKey>(queryKey: TQueryKey, options?: Omit<reactQuery.UseQueryOptions<Schemas.Pet[], undefined, Schemas.Pet[], TQueryKey>, \\"queryKey\\" | \\"queryFn\\">) => reactQuery.useQuery<Schemas.Pet[], undefined, Schemas.Pet[], TQueryKey>(queryKey, fetchListPets, options);
+      export const fetchListPets = (variables: ListPetsVariables) => petstoreFetch<ListPetsResponse, undefined, {}, {}, {}>({ url: \\"/pets\\", method: \\"get\\", ...variables });
+
+      /**
+       * Get all the pets
+       */
+      export const useListPets = <TQueryKey extends reactQuery.QueryKey>(queryKey: TQueryKey, variables: ListPetsVariables, options?: Omit<reactQuery.UseQueryOptions<ListPetsResponse, undefined, ListPetsResponse, TQueryKey>, \\"queryKey\\" | \\"queryFn\\">) => { const { fetcherOptions, queryOptions } = usePetstoreContext(); return reactQuery.useQuery<ListPetsResponse, undefined, ListPetsResponse, TQueryKey>(queryKey, () => fetchListPets({ ...fetcherOptions, ...variables }), {
+          ...queryOptions,
+          ...options
+      }); };
       "
     `);
   });
@@ -464,7 +492,8 @@ describe("generateReactQueryComponents", () => {
     expect(writeFile.mock.calls[0][0]).toBe("petstoreComponents.ts");
     expect(writeFile.mock.calls[0][1]).toMatchInlineSnapshot(`
       "import * as reactQuery from \\"react-query\\";
-      import petstoreFetch from \\"./petstoreFetcher\\";
+      import { usePetstoreContext, PetstoreContext } from \\"./petstoreContext\\";
+      import { petstoreFetch } from \\"./petstoreFetcher\\";
 
       export type AddPetError = {
           code: 500;
@@ -480,12 +509,16 @@ describe("generateReactQueryComponents", () => {
 
       export type AddPetVariables = {
           body: AddPetRequestBody;
-      };
+      } & PetstoreContext[\\"fetcherOptions\\"];
 
-      export const fetchAddPet = (variables: AddPetVariables) => petstoreFetch<string, AddPetRequestBody, undefined, undefined, undefined>({ url: \\"/pet\\", method: \\"post\\", ...variables });
+      export const fetchAddPet = (variables: AddPetVariables) => petstoreFetch<string, AddPetRequestBody, {}, {}, {}>({ url: \\"/pet\\", method: \\"post\\", ...variables });
 
       export const useAddPet = (options?: Omit<reactQuery.UseMutationOptions<string, AddPetError, AddPetVariables>, \\"mutationFn\\">) => {
-          return reactQuery.useMutation<string, AddPetError, AddPetVariables>(fetchAddPet, options);
+          const { fetcherOptions, queryOptions } = usePetstoreContext();
+          return reactQuery.useMutation<string, AddPetError, AddPetVariables>((variables: AddPetVariables) => fetchAddPet({ ...fetcherOptions, ...variables }), {
+              ...queryOptions,
+              ...options
+          });
       };
       "
     `);
@@ -583,7 +616,8 @@ describe("generateReactQueryComponents", () => {
     expect(writeFile.mock.calls[0][0]).toBe("petstoreComponents.ts");
     expect(writeFile.mock.calls[0][1]).toMatchInlineSnapshot(`
       "import * as reactQuery from \\"react-query\\";
-      import petstoreFetch from \\"./petstoreFetcher\\";
+      import { usePetstoreContext, PetstoreContext } from \\"./petstoreContext\\";
+      import { petstoreFetch } from \\"./petstoreFetcher\\";
       import type * as RequestBodies from \\"./petstoreRequestBodies\\";
 
       export type AddPetError = {
@@ -593,12 +627,16 @@ describe("generateReactQueryComponents", () => {
 
       export type AddPetVariables = {
           body: RequestBodies.Dog;
-      };
+      } & PetstoreContext[\\"fetcherOptions\\"];
 
-      export const fetchAddPet = (variables: AddPetVariables) => petstoreFetch<string, RequestBodies.Dog, undefined, undefined, undefined>({ url: \\"/pet\\", method: \\"post\\", ...variables });
+      export const fetchAddPet = (variables: AddPetVariables) => petstoreFetch<string, RequestBodies.Dog, {}, {}, {}>({ url: \\"/pet\\", method: \\"post\\", ...variables });
 
       export const useAddPet = (options?: Omit<reactQuery.UseMutationOptions<string, AddPetError, AddPetVariables>, \\"mutationFn\\">) => {
-          return reactQuery.useMutation<string, AddPetError, AddPetVariables>(fetchAddPet, options);
+          const { fetcherOptions, queryOptions } = usePetstoreContext();
+          return reactQuery.useMutation<string, AddPetError, AddPetVariables>((variables: AddPetVariables) => fetchAddPet({ ...fetcherOptions, ...variables }), {
+              ...queryOptions,
+              ...options
+          });
       };
       "
     `);
@@ -611,6 +649,24 @@ describe("generateReactQueryComponents", () => {
       info: {
         title: "petshop",
         version: "1.0.0",
+      },
+      components: {
+        requestBodies: {
+          UpdatePetRequestBody: {
+            content: {
+              "application/json": {
+                schema: {
+                  type: "object",
+                  properties: {
+                    name: {
+                      type: "string",
+                    },
+                  },
+                },
+              },
+            },
+          },
+        },
       },
       paths: {
         "/pet/{pet_id}": {
@@ -657,7 +713,8 @@ describe("generateReactQueryComponents", () => {
     expect(writeFile.mock.calls[0][0]).toBe("petstoreComponents.ts");
     expect(writeFile.mock.calls[0][1]).toMatchInlineSnapshot(`
       "import * as reactQuery from \\"react-query\\";
-      import petstoreFetch from \\"./petstoreFetcher\\";
+      import { usePetstoreContext, PetstoreContext } from \\"./petstoreContext\\";
+      import { petstoreFetch } from \\"./petstoreFetcher\\";
       import type * as RequestBodies from \\"./petstoreRequestBodies\\";
 
       export type UpdatePetPathParams = {
@@ -665,14 +722,18 @@ describe("generateReactQueryComponents", () => {
       };
 
       export type UpdatePetVariables = {
-          body: RequestBodies.UpdatePetRequestBody;
+          body?: RequestBodies.UpdatePetRequestBody;
           pathParams: UpdatePetPathParams;
-      };
+      } & PetstoreContext[\\"fetcherOptions\\"];
 
-      export const fetchUpdatePet = (variables: UpdatePetVariables) => petstoreFetch<string, RequestBodies.UpdatePetRequestBody, undefined, undefined, UpdatePetPathParams>({ url: \\"/pet/{petId}\\", method: \\"put\\", ...variables });
+      export const fetchUpdatePet = (variables: UpdatePetVariables) => petstoreFetch<string, RequestBodies.UpdatePetRequestBody, {}, {}, UpdatePetPathParams>({ url: \\"/pet/{petId}\\", method: \\"put\\", ...variables });
 
       export const useUpdatePet = (options?: Omit<reactQuery.UseMutationOptions<string, undefined, UpdatePetVariables>, \\"mutationFn\\">) => {
-          return reactQuery.useMutation<string, undefined, UpdatePetVariables>(fetchUpdatePet, options);
+          const { fetcherOptions, queryOptions } = usePetstoreContext();
+          return reactQuery.useMutation<string, undefined, UpdatePetVariables>((variables: UpdatePetVariables) => fetchUpdatePet({ ...fetcherOptions, ...variables }), {
+              ...queryOptions,
+              ...options
+          });
       };
       "
     `);
