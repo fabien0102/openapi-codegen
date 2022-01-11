@@ -6,6 +6,7 @@ import { ConfigBase, Context } from "./types";
 import { schemaToTypeAliasDeclaration } from "../core/schemaToTypeAliasDeclaration";
 import { findCompatibleMediaType } from "../core/findCompatibleMediaType";
 import { getUsedImports } from "../core/getUsedImports";
+import { createWatermark } from "../core/createWatermark";
 
 type Config = ConfigBase;
 
@@ -72,6 +73,7 @@ export const generateSchemaTypes = async (
     await context.writeFile(
       files.schemas + ".ts",
       printNodes([
+        createWatermark(context.openAPIDocument.info),
         ...getUsedImports(componentsSchemas, files),
         ...componentsSchemas,
       ])
@@ -99,6 +101,7 @@ export const generateSchemaTypes = async (
       await context.writeFile(
         files.responses + ".ts",
         printNodes([
+          createWatermark(context.openAPIDocument.info),
           ...getUsedImports(componentsResponses, files),
           ...componentsResponses,
         ])
@@ -128,6 +131,7 @@ export const generateSchemaTypes = async (
       await context.writeFile(
         files.requestBodies + ".ts",
         printNodes([
+          createWatermark(context.openAPIDocument.info),
           ...getUsedImports(componentsRequestBodies, files),
           ...componentsRequestBodies,
         ])
@@ -155,6 +159,7 @@ export const generateSchemaTypes = async (
     await context.writeFile(
       files.parameters + ".ts",
       printNodes([
+        createWatermark(context.openAPIDocument.info),
         ...getUsedImports(componentsParameters, files),
         ...componentsParameters,
       ])
