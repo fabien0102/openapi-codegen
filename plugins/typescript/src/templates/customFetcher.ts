@@ -61,6 +61,6 @@ const resolveUrl = (
 ) => {
   let query = qs.stringify(queryParams);
   if (query) query = \`?\${query}\`;
-  return url.replace(/\{\w*\}/g, (key) => pathParams[key.slice(1, -1)]) + query;
+  return url.replace(/\\{\\w*\\}/g, (key) => pathParams[key.slice(1, -1)]) + query;
 };
 `;
