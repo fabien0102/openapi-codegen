@@ -13,6 +13,8 @@ import { getRequestBodyType } from "../core/getRequestBodyType";
 import { getParamsGroupByType } from "../core/getParamsGroupByType";
 import { isRequestBodyOptional } from "../core/isRequestBodyOptional";
 import { createWatermark } from "../core/createWatermark";
+import { isVerb } from "../core/isVerb";
+import { isOperationObject } from "../core/isOperationObject";
 
 import { getCustomFetcher } from "../templates/customFetcher";
 import { getContext } from "../templates/context";
@@ -337,21 +339,6 @@ export const generateReactQueryComponents = async (
     ])
   );
 };
-
-/**
- * Type guard for `OperationObject`
- *
- * @param obj
- */
-const isOperationObject = (
-  obj: any
-): obj is OperationObject & { operationId: string } =>
-  typeof obj === "object" && typeof (obj as any).operationId === "string";
-
-const isVerb = (
-  verb: string
-): verb is "get" | "post" | "patch" | "put" | "delete" =>
-  ["get", "post", "patch", "put", "delete"].includes(verb);
 
 /**
  * Create the declaration of the fetcher function.

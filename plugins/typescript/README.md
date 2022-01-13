@@ -100,12 +100,6 @@ export const useBadassContext = (): BadassContext => {
 
 You can also tweak `{filenamePrefix}Fetcher.ts`, especially the error management part, so everything fit the expected `ErrorType`.
 
-### Custom OpenAPI extensions
-
-| Property                    | Description                                         | Type                      |
-| --------------------------- | --------------------------------------------------- | ------------------------- |
-| x-openapi-codegen-component | Force the generation of a specific react-query hook | "useMutate" \| "useQuery" |
-
 ## Utils
 
 ### renameComponent
@@ -150,3 +144,52 @@ export default defineConfig({
   },
 });
 ```
+
+### forceReactQueryComponent
+
+Force the generation of a specific react-query hook.
+
+Example:
+
+```ts
+// openapi-codegen.config.ts
+
+import { defineConfig } from "@openapi-codegen/cli";
+import {
+  generateReactQueryComponents,
+  generateSchemaTypes,
+  renameComponent,
+} from "@openapi-codegen/typescript";
+
+export default defineConfig({
+  myAPI: {
+    from: {
+      /* file, url or github */
+    },
+    outputDir: "./myAPI",
+    to: async (context) => {
+      // Force the usage of `useQuery` for listPets
+      context.openAPIDocument = forceReactQueryComponent({
+        openAPIDocument: contextOpenAPIDocument
+        component: "useQuery",
+        operationId: "listPets"
+      })
+
+      const filenamePrefix = "myAPI";
+      const { schemasFiles } = await generateSchemaTypes(context, {
+        filenamePrefix,
+      });
+      await generateReactQueryComponents(context, {
+        filenamePrefix,
+        schemasFiles,
+      });
+    },
+  },
+});
+```
+
+## Custom OpenAPI extensions
+
+| Property                    | Description                                         | Type                      |
+| --------------------------- | --------------------------------------------------- | ------------------------- |
+| x-openapi-codegen-component | Force the generation of a specific react-query hook | "useMutate" \| "useQuery" |

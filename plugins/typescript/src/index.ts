@@ -5,3 +5,4 @@ export { generateReactQueryComponents } from "./generators/generateReactQueryCom
 
 // Utils
 export { renameComponent } from "./utils/renameComponent";
+export { forceReactQueryComponent } from "./utils/forceReactQueryComponent";
