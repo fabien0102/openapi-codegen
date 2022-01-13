@@ -275,6 +275,15 @@ export const generateReactQueryComponents = async (
         );
 
         const operationFetcherFnName = `fetch${c.pascal(operationId)}`;
+        const component: "useQuery" | "useMutate" =
+          operation["x-openapi-codegen-component"] ||
+          (verb === "get" ? "useQuery" : "useMutate");
+
+        if (!["useQuery", "useMutate"].includes(component)) {
+          throw new Error(`[x-openapi-codegen-component] Invalid value for ${operation.operationId} operation
+          Valid options: "useMutate", "useQuery"`);
+        }
+
         nodes.push(
           ...createOperationFetcherFnNodes({
             dataType,
@@ -289,7 +298,7 @@ export const generateReactQueryComponents = async (
             verb,
             name: operationFetcherFnName,
           }),
-          ...(verb === "get"
+          ...(component === "useQuery"
             ? createQueryHook({
                 operationFetcherFnName,
                 operation,

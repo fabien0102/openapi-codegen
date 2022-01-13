@@ -100,6 +100,12 @@ export const useBadassContext = (): BadassContext => {
 
 You can also tweak `{filenamePrefix}Fetcher.ts`, especially the error management part, so everything fit the expected `ErrorType`.
 
+### Custom OpenAPI extensions
+
+| Property                    | Description                                         | Type                      |
+| --------------------------- | --------------------------------------------------- | ------------------------- |
+| x-openapi-codegen-component | Force the generation of a specific react-query hook | "useMutate" \| "useQuery" |
+
 ## Utils
 
 ### renameComponent
