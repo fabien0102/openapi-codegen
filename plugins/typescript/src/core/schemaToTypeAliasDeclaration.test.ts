@@ -281,7 +281,7 @@ describe("schemaToTypeAliasDeclaration", () => {
     );
   });
 
-  it("should generate a free form object", () => {
+  it("should generate a free form object (1)", () => {
     const schema: SchemaObject = {
       type: "object",
     };
@@ -289,6 +289,32 @@ describe("schemaToTypeAliasDeclaration", () => {
     expect(printSchema(schema)).toMatchInlineSnapshot(
       `"export type Test = Record<string, any>;"`
     );
+  });
+
+  it("should generate a free form object (2)", () => {
+    const schema: SchemaObject = {
+      type: "object",
+      additionalProperties: true,
+    };
+
+    expect(printSchema(schema)).toMatchInlineSnapshot(`
+      "export type Test = {
+          [key: string]: any;
+      };"
+    `);
+  });
+
+  it("should generate a free form object (3)", () => {
+    const schema: SchemaObject = {
+      type: "object",
+      additionalProperties: {},
+    };
+
+    expect(printSchema(schema)).toMatchInlineSnapshot(`
+      "export type Test = {
+          [key: string]: any;
+      };"
+    `);
   });
 
   it("should generate an object with additional properties", () => {
