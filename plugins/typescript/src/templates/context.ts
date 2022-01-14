@@ -1,7 +1,7 @@
 import { pascal } from "case";
 
 export const getContext = (prefix: string) =>
-  `import type reactQuery from "react-query";
+  `import type { QueryKey } from "react-query";
   
   export type ${pascal(prefix)}Context = {
     fetcherOptions: {
@@ -24,7 +24,7 @@ export const getContext = (prefix: string) =>
     /**
      * Query key middleware.
      */
-    queryKeyFn: <TQueryKey extends reactQuery.QueryKey>(queryKey: TQueryKey) => TQueryKey;
+    queryKeyFn: (queryKey: QueryKey) => QueryKey;
   };
   
   /**

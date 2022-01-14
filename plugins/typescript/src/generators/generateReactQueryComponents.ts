@@ -621,19 +621,7 @@ const createQueryHook = ({
             undefined,
             f.createArrowFunction(
               undefined,
-              [
-                f.createTypeParameterDeclaration(
-                  f.createIdentifier("TQueryKey"),
-                  f.createTypeReferenceNode(
-                    f.createQualifiedName(
-                      f.createIdentifier("reactQuery"),
-                      f.createIdentifier("QueryKey")
-                    ),
-                    undefined
-                  ),
-                  undefined
-                ),
-              ],
+              undefined,
               [
                 f.createParameterDeclaration(
                   undefined,
@@ -642,7 +630,10 @@ const createQueryHook = ({
                   f.createIdentifier("queryKey"),
                   undefined,
                   f.createTypeReferenceNode(
-                    f.createIdentifier("TQueryKey"),
+                    f.createQualifiedName(
+                      f.createIdentifier("reactQuery"),
+                      f.createIdentifier("QueryKey")
+                    ),
                     undefined
                   ),
                   undefined
@@ -710,15 +701,7 @@ const createQueryHook = ({
                       f.createIdentifier("reactQuery"),
                       f.createIdentifier("useQuery")
                     ),
-                    [
-                      dataType,
-                      errorType,
-                      dataType,
-                      f.createTypeReferenceNode(
-                        f.createIdentifier("TQueryKey"),
-                        undefined
-                      ),
-                    ],
+                    [dataType, errorType, dataType],
                     [
                       f.createCallExpression(
                         f.createIdentifier("queryKeyFn"),
@@ -785,12 +768,7 @@ const createUseQueryOptionsType = (
         f.createIdentifier("reactQuery"),
         f.createIdentifier("UseQueryOptions")
       ),
-      [
-        dataType,
-        errorType,
-        dataType,
-        f.createTypeReferenceNode(f.createIdentifier("TQueryKey"), undefined),
-      ]
+      [dataType, errorType, dataType]
     ),
     f.createUnionTypeNode([
       f.createLiteralTypeNode(f.createStringLiteral("queryKey")),
