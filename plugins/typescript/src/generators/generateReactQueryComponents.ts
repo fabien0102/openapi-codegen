@@ -701,6 +701,12 @@ const createQueryHook = ({
                             f.createIdentifier("queryOptions"),
                             undefined
                           ),
+                          f.createBindingElement(
+                            undefined,
+                            undefined,
+                            f.createIdentifier("queryKeyFn"),
+                            undefined
+                          ),
                         ]),
                         undefined,
                         undefined,
@@ -730,7 +736,11 @@ const createQueryHook = ({
                       ),
                     ],
                     [
-                      f.createIdentifier("queryKey"),
+                      f.createCallExpression(
+                        f.createIdentifier("queryKeyFn"),
+                        undefined,
+                        [f.createIdentifier("queryKey")]
+                      ),
                       f.createArrowFunction(
                         undefined,
                         undefined,
