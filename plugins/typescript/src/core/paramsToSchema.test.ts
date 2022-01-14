@@ -83,7 +83,7 @@ describe("paramsToSchema", () => {
     `);
   });
 
-  it("should camelized every properties", () => {
+  it("should camelized every properties (pathParam)", () => {
     const schema = paramsToSchema([
       {
         in: "path",
@@ -98,6 +98,31 @@ describe("paramsToSchema", () => {
       Object {
         "properties": Object {
           "iAmAMonster": Object {
+            "description": undefined,
+            "type": "string",
+          },
+        },
+        "required": Array [],
+        "type": "object",
+      }
+    `);
+  });
+
+  it("should not camelized every properties (queryParams)", () => {
+    const schema = paramsToSchema([
+      {
+        in: "query",
+        name: "I am a monster",
+        schema: {
+          type: "string",
+        },
+      },
+    ]);
+
+    expect(schema).toMatchInlineSnapshot(`
+      Object {
+        "properties": Object {
+          "I am a monster": Object {
             "description": undefined,
             "type": "string",
           },
