@@ -1,9 +1,9 @@
 import { camel, pascal } from "case";
 
 /**
- * Get custom fetcher template
+ * Get fetcher template
  */
-export const getCustomFetcher = (prefix: string, contextPath: string) =>
+export const getFetcher = (prefix: string, contextPath: string) =>
   `import qs from "qs";
 import { ${pascal(prefix)}Context } from "./${contextPath}";
 

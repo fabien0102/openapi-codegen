@@ -16,7 +16,7 @@ import { createWatermark } from "../core/createWatermark";
 import { isVerb } from "../core/isVerb";
 import { isOperationObject } from "../core/isOperationObject";
 
-import { getCustomFetcher } from "../templates/customFetcher";
+import { getFetcher } from "../templates/fetcher";
 import { getContext } from "../templates/context";
 
 export type Config = ConfigBase & {
@@ -84,7 +84,7 @@ export const generateReactQueryComponents = async (
   if (!context.existsFile(`${fetcherFilename}.ts`)) {
     context.writeFile(
       `${fetcherFilename}.ts`,
-      getCustomFetcher(filenamePrefix, contextFilename)
+      getFetcher(filenamePrefix, contextFilename)
     );
   }
 
@@ -516,12 +516,6 @@ const createMutationHook = ({
                               f.createIdentifier("fetcherOptions"),
                               undefined
                             ),
-                            f.createBindingElement(
-                              undefined,
-                              undefined,
-                              f.createIdentifier("queryOptions"),
-                              undefined
-                            ),
                           ]),
                           undefined,
                           undefined,
@@ -577,17 +571,7 @@ const createMutationHook = ({
                             ]
                           )
                         ),
-                        f.createObjectLiteralExpression(
-                          [
-                            f.createSpreadAssignment(
-                              f.createIdentifier("queryOptions")
-                            ),
-                            f.createSpreadAssignment(
-                              f.createIdentifier("options")
-                            ),
-                          ],
-                          true
-                        ),
+                        f.createIdentifier("options"),
                       ]
                     )
                   ),
@@ -637,19 +621,7 @@ const createQueryHook = ({
             undefined,
             f.createArrowFunction(
               undefined,
-              [
-                f.createTypeParameterDeclaration(
-                  f.createIdentifier("TQueryKey"),
-                  f.createTypeReferenceNode(
-                    f.createQualifiedName(
-                      f.createIdentifier("reactQuery"),
-                      f.createIdentifier("QueryKey")
-                    ),
-                    undefined
-                  ),
-                  undefined
-                ),
-              ],
+              undefined,
               [
                 f.createParameterDeclaration(
                   undefined,
@@ -658,7 +630,10 @@ const createQueryHook = ({
                   f.createIdentifier("queryKey"),
                   undefined,
                   f.createTypeReferenceNode(
-                    f.createIdentifier("TQueryKey"),
+                    f.createQualifiedName(
+                      f.createIdentifier("reactQuery"),
+                      f.createIdentifier("QueryKey")
+                    ),
                     undefined
                   ),
                   undefined
@@ -701,6 +676,12 @@ const createQueryHook = ({
                             f.createIdentifier("queryOptions"),
                             undefined
                           ),
+                          f.createBindingElement(
+                            undefined,
+                            undefined,
+                            f.createIdentifier("queryKeyFn"),
+                            undefined
+                          ),
                         ]),
                         undefined,
                         undefined,
@@ -720,17 +701,13 @@ const createQueryHook = ({
                       f.createIdentifier("reactQuery"),
                       f.createIdentifier("useQuery")
                     ),
+                    [dataType, errorType, dataType],
                     [
-                      dataType,
-                      errorType,
-                      dataType,
-                      f.createTypeReferenceNode(
-                        f.createIdentifier("TQueryKey"),
-                        undefined
+                      f.createCallExpression(
+                        f.createIdentifier("queryKeyFn"),
+                        undefined,
+                        [f.createIdentifier("queryKey")]
                       ),
-                    ],
-                    [
-                      f.createIdentifier("queryKey"),
                       f.createArrowFunction(
                         undefined,
                         undefined,
@@ -791,12 +768,7 @@ const createUseQueryOptionsType = (
         f.createIdentifier("reactQuery"),
         f.createIdentifier("UseQueryOptions")
       ),
-      [
-        dataType,
-        errorType,
-        dataType,
-        f.createTypeReferenceNode(f.createIdentifier("TQueryKey"), undefined),
-      ]
+      [dataType, errorType, dataType]
     ),
     f.createUnionTypeNode([
       f.createLiteralTypeNode(f.createStringLiteral("queryKey")),

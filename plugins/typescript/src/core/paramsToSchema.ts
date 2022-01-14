@@ -12,19 +12,20 @@ export const paramsToSchema = (
   params: ParameterObject[],
   optionalKeys: string[] = []
 ): SchemaObject => {
+  const formatKey = params[0].in === "path" ? camel : (key: string) => key;
   return {
     type: "object",
     properties: params.reduce((mem, param) => {
       return {
         ...mem,
-        [camel(param.name)]: {
+        [formatKey(param.name)]: {
           ...param.schema,
           description: param.description,
         },
       };
     }, {}),
     required: params
-      .filter((p) => p.required && !optionalKeys.includes(camel(p.name)))
-      .map((p) => camel(p.name)),
+      .filter((p) => p.required && !optionalKeys.includes(formatKey(p.name)))
+      .map((p) => formatKey(p.name)),
   };
 };
