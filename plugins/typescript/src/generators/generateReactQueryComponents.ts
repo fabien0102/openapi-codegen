@@ -516,12 +516,6 @@ const createMutationHook = ({
                               f.createIdentifier("fetcherOptions"),
                               undefined
                             ),
-                            f.createBindingElement(
-                              undefined,
-                              undefined,
-                              f.createIdentifier("queryOptions"),
-                              undefined
-                            ),
                           ]),
                           undefined,
                           undefined,
@@ -577,17 +571,7 @@ const createMutationHook = ({
                             ]
                           )
                         ),
-                        f.createObjectLiteralExpression(
-                          [
-                            f.createSpreadAssignment(
-                              f.createIdentifier("queryOptions")
-                            ),
-                            f.createSpreadAssignment(
-                              f.createIdentifier("options")
-                            ),
-                          ],
-                          true
-                        ),
+                        f.createIdentifier("options"),
                       ]
                     )
                   ),
