@@ -16,7 +16,7 @@ import { createWatermark } from "../core/createWatermark";
 import { isVerb } from "../core/isVerb";
 import { isOperationObject } from "../core/isOperationObject";
 
-import { getCustomFetcher } from "../templates/customFetcher";
+import { getFetcher } from "../templates/fetcher";
 import { getContext } from "../templates/context";
 
 export type Config = ConfigBase & {
@@ -84,7 +84,7 @@ export const generateReactQueryComponents = async (
   if (!context.existsFile(`${fetcherFilename}.ts`)) {
     context.writeFile(
       `${fetcherFilename}.ts`,
-      getCustomFetcher(filenamePrefix, contextFilename)
+      getFetcher(filenamePrefix, contextFilename)
     );
   }
 
