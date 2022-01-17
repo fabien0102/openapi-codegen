@@ -6,6 +6,7 @@ import { OperationObject, PathItemObject } from "openapi3-ts";
 
 import { getUsedImports } from "../core/getUsedImports";
 import { createWatermark } from "../core/createWatermark";
+import { createOperationFetcherFnNodes } from "../core/createOperationFetcherFnNodes";
 import { isVerb } from "../core/isVerb";
 import { isOperationObject } from "../core/isOperationObject";
 import { getOperationTypes } from "../core/getOperationTypes";
@@ -184,110 +185,6 @@ export const generateReactQueryComponents = async (
       ...nodes,
     ])
   );
-};
-
-/**
- * Create the declaration of the fetcher function.
- *
- * @returns Array of nodes
- */
-const createOperationFetcherFnNodes = ({
-  dataType,
-  requestBodyType,
-  queryParamsType,
-  pathParamsType,
-  headersType,
-  variablesType,
-  fetcherFn,
-  operation,
-  url,
-  verb,
-  name,
-}: {
-  dataType: ts.TypeNode;
-  requestBodyType: ts.TypeNode;
-  headersType: ts.TypeNode;
-  pathParamsType: ts.TypeNode;
-  queryParamsType: ts.TypeNode;
-  variablesType: ts.TypeNode;
-  operation: OperationObject;
-  fetcherFn: string;
-  url: string;
-  verb: string;
-  name: string;
-}) => {
-  const nodes: ts.Node[] = [];
-  if (operation.description) {
-    nodes.push(f.createJSDocComment(operation.description.trim(), []));
-  }
-
-  nodes.push(
-    f.createVariableStatement(
-      [f.createModifier(ts.SyntaxKind.ExportKeyword)],
-      f.createVariableDeclarationList(
-        [
-          f.createVariableDeclaration(
-            f.createIdentifier(name),
-            undefined,
-            undefined,
-            f.createArrowFunction(
-              undefined,
-              undefined,
-              variablesType.kind !== ts.SyntaxKind.VoidKeyword
-                ? [
-                    f.createParameterDeclaration(
-                      undefined,
-                      undefined,
-                      undefined,
-                      f.createIdentifier("variables"),
-                      undefined,
-                      variablesType,
-                      undefined
-                    ),
-                  ]
-                : [],
-              undefined,
-              f.createToken(ts.SyntaxKind.EqualsGreaterThanToken),
-              f.createCallExpression(
-                f.createIdentifier(fetcherFn),
-                [
-                  dataType,
-                  requestBodyType,
-                  headersType,
-                  queryParamsType,
-                  pathParamsType,
-                ],
-                [
-                  f.createObjectLiteralExpression(
-                    [
-                      f.createPropertyAssignment(
-                        f.createIdentifier("url"),
-                        f.createStringLiteral(camelizedPathParams(url))
-                      ),
-                      f.createPropertyAssignment(
-                        f.createIdentifier("method"),
-                        f.createStringLiteral(verb)
-                      ),
-                      ...(variablesType.kind !== ts.SyntaxKind.VoidKeyword
-                        ? [
-                            f.createSpreadAssignment(
-                              f.createIdentifier("variables")
-                            ),
-                          ]
-                        : []),
-                    ],
-                    false
-                  ),
-                ]
-              )
-            )
-          ),
-        ],
-        ts.NodeFlags.Const
-      )
-    )
-  );
-  return nodes;
 };
 
 const createMutationHook = ({
@@ -653,12 +550,3 @@ const createNamedImport = (fnName: string | string[], filename: string) => {
     undefined
   );
 };
-
-/**
- * Transform url params case to camel.
- *
- * @example
- * `pet/{pet_id}` -> `pet/{petId}`
- */
-const camelizedPathParams = (url: string) =>
-  url.replace(/\{\w*\}/g, (match) => `{${c.camel(match)}}`);
