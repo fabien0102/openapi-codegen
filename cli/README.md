@@ -2,14 +2,61 @@
 
 ## Getting started
 
-```bash
-$ npx @openapi-codegen/cli init
+1. Add a `openapi-codegen.config.ts` at the root of your project
+
+```ts
+// openapi-codegen.config.ts
+import { defineConfig } from "@openapi-codegen/cli";
+import {
+  generateSchemaTypes,
+  generateReactQueryComponents,
+} from "@openapi-codegen/typescript";
+
+export default defineConfig({
+  example: {
+    from: {
+      source: "github",
+      owner: "fabien0102",
+      repository: "openapi-codegen",
+      branch: "main",
+      specPath: "examples/spec.yaml",
+    },
+
+    // can be overridden from cli
+    outputDir: "src/queries",
+
+    to: async (context) => {
+      const filenamePrefix = "example";
+
+      // Generate all the schemas types (components & responses)
+      const { schemasFiles } = await generateSchemaTypes(context, {
+        filenamePrefix,
+      });
+
+      // Generate all react-query components
+      await generateReactQueryComponents(context, {
+        filenamePrefix,
+        schemasFiles,
+      });
+    },
+  },
+});
 ```
 
-Follow the steps, this will generate you a configuration file (openapi-codegen.config.ts) and update your `package.json`
+2. Expose openapi-codegen in your `package.json`
 
-```bash
-$ yarn gen # or the defined alias
+```diff
+--- a/package.json
++++ b/package.json
+   "scripts": {
++    "gen": "openapi-codegen",
+   }
 ```
 
-You should have a bunch of types / components ready to be used.
+3. Run the generator (`example` is the config key defined in the step 1)
+
+```bash
+$ yarn gen example
+```
+
+4. Start playing! 🥳
