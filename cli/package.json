@@ -12,6 +12,9 @@
     "url": "https://github.com/fabien0102/openapi-codegen",
     "directory": "cli"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "author": "Fabien Bernard",
   "keywords": [
     "openapi",
