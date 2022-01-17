@@ -4,17 +4,11 @@ import * as c from "case";
 import { ConfigBase, Context } from "./types";
 import { OperationObject, PathItemObject } from "openapi3-ts";
 
-import { schemaToTypeAliasDeclaration } from "../core/schemaToTypeAliasDeclaration";
 import { getUsedImports } from "../core/getUsedImports";
-import { getVariablesType } from "../core/getVariablesType";
-import { paramsToSchema } from "../core/paramsToSchema";
-import { getResponseType } from "../core/getResponseType";
-import { getRequestBodyType } from "../core/getRequestBodyType";
-import { getParamsGroupByType } from "../core/getParamsGroupByType";
-import { isRequestBodyOptional } from "../core/isRequestBodyOptional";
 import { createWatermark } from "../core/createWatermark";
 import { isVerb } from "../core/isVerb";
 import { isOperationObject } from "../core/isOperationObject";
+import { getOperationTypes } from "../core/getOperationTypes";
 
 import { getFetcher } from "../templates/fetcher";
 import { getContext } from "../templates/context";
@@ -107,174 +101,26 @@ export const generateReactQueryComponents = async (
         }
         operationIds.push(operationId);
 
-        // Retrieve dataType
-        let dataType = getResponseType({
-          responses: operation.responses,
-          components: context.openAPIDocument.components,
-          filter: (statusCode) => statusCode.startsWith("2"),
+        const {
+          dataType,
+          errorType,
+          requestBodyType,
+          pathParamsType,
+          variablesType,
+          queryParamsType,
+          headersType,
+          declarationNodes,
+        } = getOperationTypes({
+          contextTypeName,
+          openAPIDocument: context.openAPIDocument,
+          operation,
+          operationId,
           printNodes,
+          injectedHeaders: config.injectedHeaders,
+          pathParameters: verbs.parameters,
         });
 
-        // Retrieve errorType
-        let errorType = getResponseType({
-          responses: operation.responses,
-          components: context.openAPIDocument.components,
-          filter: (statusCode) => !statusCode.startsWith("2"),
-          printNodes,
-        });
-
-        // Retrieve requestBodyType
-        let requestBodyType = getRequestBodyType({
-          requestBody: operation.requestBody,
-          components: context.openAPIDocument.components,
-        });
-
-        // Generate params types
-        const { pathParams, queryParams, headerParams } = getParamsGroupByType(
-          [...(verbs.parameters || []), ...(operation.parameters || [])],
-          context.openAPIDocument.components
-        );
-
-        // Check if types can be marked as optional (all properties are optional)
-        const requestBodyOptional = isRequestBodyOptional({
-          requestBody: operation.requestBody,
-          components: context.openAPIDocument.components,
-        });
-        const headersOptional = headerParams.reduce((mem, p) => {
-          if ((config.injectedHeaders || []).includes(p.name)) return mem;
-          return mem && !p.required;
-        }, true);
-        const pathParamsOptional = pathParams.reduce((mem, p) => {
-          return mem && !p.required;
-        }, true);
-        const queryParamsOptional = queryParams.reduce((mem, p) => {
-          return mem && !p.required;
-        }, true);
-
-        if (pathParams.length > 0) {
-          nodes.push(
-            ...schemaToTypeAliasDeclaration(
-              `${operationId}PathParams`,
-              paramsToSchema(pathParams),
-              {
-                currentComponent: null,
-                openAPIDocument: context.openAPIDocument,
-              }
-            )
-          );
-        }
-
-        if (queryParams.length > 0) {
-          nodes.push(
-            ...schemaToTypeAliasDeclaration(
-              `${operationId}QueryParams`,
-              paramsToSchema(queryParams),
-              {
-                currentComponent: null,
-                openAPIDocument: context.openAPIDocument,
-              }
-            )
-          );
-        }
-
-        if (headerParams.length > 0) {
-          nodes.push(
-            ...schemaToTypeAliasDeclaration(
-              `${operationId}Headers`,
-              paramsToSchema(headerParams, config.injectedHeaders),
-              {
-                currentComponent: null,
-                openAPIDocument: context.openAPIDocument,
-              }
-            )
-          );
-        }
-
-        // Export error type if needed
-        if (shouldExtractNode(errorType)) {
-          const errorTypeIdentifier = c.pascal(`${operationId}Error`);
-          nodes.push(
-            f.createTypeAliasDeclaration(
-              undefined,
-              [f.createModifier(ts.SyntaxKind.ExportKeyword)],
-              f.createIdentifier(errorTypeIdentifier),
-              undefined,
-              errorType
-            )
-          );
-
-          errorType = f.createTypeReferenceNode(errorTypeIdentifier);
-        }
-
-        // Export data type if needed
-        if (shouldExtractNode(dataType)) {
-          const dataTypeIdentifier = c.pascal(`${operationId}Response`);
-          nodes.push(
-            f.createTypeAliasDeclaration(
-              undefined,
-              [f.createModifier(ts.SyntaxKind.ExportKeyword)],
-              f.createIdentifier(dataTypeIdentifier),
-              undefined,
-              dataType
-            )
-          );
-
-          dataType = f.createTypeReferenceNode(dataTypeIdentifier);
-        }
-
-        // Export requestBody type if needed
-        if (shouldExtractNode(requestBodyType)) {
-          const requestBodyIdentifier = c.pascal(`${operationId}RequestBody`);
-          nodes.push(
-            f.createTypeAliasDeclaration(
-              undefined,
-              [f.createModifier(ts.SyntaxKind.ExportKeyword)],
-              f.createIdentifier(requestBodyIdentifier),
-              undefined,
-              requestBodyType
-            )
-          );
-
-          requestBodyType = f.createTypeReferenceNode(requestBodyIdentifier);
-        }
-
-        const pathParamsType =
-          pathParams.length > 0
-            ? f.createTypeReferenceNode(`${c.pascal(operationId)}PathParams`)
-            : f.createTypeLiteralNode([]);
-
-        const queryParamsType =
-          queryParams.length > 0
-            ? f.createTypeReferenceNode(`${c.pascal(operationId)}QueryParams`)
-            : f.createTypeLiteralNode([]);
-
-        const headersType =
-          headerParams.length > 0
-            ? f.createTypeReferenceNode(`${c.pascal(operationId)}Headers`)
-            : f.createTypeLiteralNode([]);
-
-        // Generate fetcher variables type
-        const variablesIdentifier = c.pascal(`${operationId}Variables`);
-        const variablesType = f.createTypeReferenceNode(variablesIdentifier);
-        nodes.push(
-          f.createTypeAliasDeclaration(
-            undefined,
-            [f.createModifier(ts.SyntaxKind.ExportKeyword)],
-            f.createIdentifier(variablesIdentifier),
-            undefined,
-            getVariablesType({
-              requestBodyType,
-              headersType,
-              pathParamsType,
-              queryParamsType,
-              contextTypeName,
-              headersOptional,
-              pathParamsOptional,
-              queryParamsOptional,
-              requestBodyOptional,
-            })
-          )
-        );
+        nodes.push(...declarationNodes);
 
         const operationFetcherFnName = `fetch${c.pascal(operationId)}`;
         const component: "useQuery" | "useMutate" =
@@ -807,14 +653,6 @@ const createNamedImport = (fnName: string | string[], filename: string) => {
     undefined
   );
 };
-
-/**
- * Define if the type should be extracted.
- */
-const shouldExtractNode = (node: ts.Node) =>
-  ts.isIntersectionTypeNode(node) ||
-  (ts.isTypeLiteralNode(node) && node.members.length > 0) ||
-  ts.isArrayTypeNode(node);
 
 /**
  * Transform url params case to camel.
