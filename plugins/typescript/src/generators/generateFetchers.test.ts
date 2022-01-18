@@ -61,6 +61,7 @@ describe("generateFetchers", () => {
        * 
        * @version 1.0.0
        */
+      import { petstoreFetch } from \\"./petstoreFetcher\\";
       import type * as Schemas from \\"./petstoreSchemas\\";
 
       export type ListPetsResponse = Schemas.Pet[];

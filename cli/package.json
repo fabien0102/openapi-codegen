@@ -24,7 +24,6 @@
   ],
   "license": "MIT",
   "scripts": {
-    "start": "node -r @swc-node/register src/cli.ts",
     "build": "tsc -p tsconfig.package.json",
     "prepublishOnly": "npm run build"
   },
