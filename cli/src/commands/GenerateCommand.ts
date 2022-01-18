@@ -58,7 +58,7 @@ export class GenerateCommand extends Command {
 
       // Compute the result
       const { default: config } = await import(
-        path.relative(slash(__filename), slash(transpiledPath).slice(3))
+        path.relative(path.parse(slash(__filename)).dir, slash(transpiledPath))
       );
 
       // Delete the transpiled file
@@ -68,7 +68,7 @@ export class GenerateCommand extends Command {
       return config;
     } else {
       return await import(
-        path.relative(slash(__filename), slash(userConfigPath)).slice(3)
+        path.relative(path.parse(slash(__filename)).dir, slash(userConfigPath))
       );
     }
   }
