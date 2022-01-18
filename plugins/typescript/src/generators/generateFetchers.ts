@@ -10,6 +10,7 @@ import { createOperationFetcherFnNodes } from "../core/createOperationFetcherFnN
 import { isVerb } from "../core/isVerb";
 import { isOperationObject } from "../core/isOperationObject";
 import { getOperationTypes } from "../core/getOperationTypes";
+import { createNamedImport } from "../core/createNamedImport";
 
 import { getFetcher } from "../templates/fetcher";
 
@@ -134,6 +135,7 @@ export const generateFetchers = async (context: Context, config: Config) => {
     filename + ".ts",
     printNodes([
       createWatermark(context.openAPIDocument.info),
+      createNamedImport(fetcherFn, `./${fetcherFilename}`),
       ...getUsedImports(nodes, config.schemasFiles),
       ...nodes,
     ])

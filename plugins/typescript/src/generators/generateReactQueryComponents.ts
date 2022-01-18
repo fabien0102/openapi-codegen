@@ -10,6 +10,7 @@ import { createOperationFetcherFnNodes } from "../core/createOperationFetcherFnN
 import { isVerb } from "../core/isVerb";
 import { isOperationObject } from "../core/isOperationObject";
 import { getOperationTypes } from "../core/getOperationTypes";
+import { createNamedImport } from "../core/createNamedImport";
 
 import { getFetcher } from "../templates/fetcher";
 import { getContext } from "../templates/context";
@@ -532,22 +533,3 @@ const createReactQueryImport = () =>
     f.createStringLiteral("react-query"),
     undefined
   );
-
-const createNamedImport = (fnName: string | string[], filename: string) => {
-  const fnNames = Array.isArray(fnName) ? fnName : [fnName];
-  return f.createImportDeclaration(
-    undefined,
-    undefined,
-    f.createImportClause(
-      false,
-      undefined,
-      f.createNamedImports(
-        fnNames.map((name) =>
-          f.createImportSpecifier(false, undefined, f.createIdentifier(name))
-        )
-      )
-    ),
-    f.createStringLiteral(filename),
-    undefined
-  );
-};
