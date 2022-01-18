@@ -119,6 +119,7 @@ export const generateReactQueryComponents = async (
           printNodes,
           injectedHeaders: config.injectedHeaders,
           pathParameters: verbs.parameters,
+          withContextType: true,
         });
 
         nodes.push(...declarationNodes);

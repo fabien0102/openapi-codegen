@@ -18,6 +18,7 @@ export type GetOperationTypesOptions = {
   pathParameters?: PathItemObject["parameters"];
   printNodes: (nodes: ts.Node[]) => string;
   contextTypeName: string;
+  withContextType: boolean;
 };
 
 export type GetOperationTypesOutput = {
@@ -39,6 +40,7 @@ export const getOperationTypes = ({
   operation,
   openAPIDocument,
   printNodes,
+  withContextType,
   pathParameters = [],
   injectedHeaders = [],
   contextTypeName,
@@ -193,26 +195,32 @@ export const getOperationTypes = ({
 
   // Generate fetcher variables type
   const variablesIdentifier = pascal(`${operationId}Variables`);
-  const variablesType = f.createTypeReferenceNode(variablesIdentifier);
-  declarationNodes.push(
-    f.createTypeAliasDeclaration(
-      undefined,
-      [f.createModifier(ts.SyntaxKind.ExportKeyword)],
-      f.createIdentifier(variablesIdentifier),
-      undefined,
-      getVariablesType({
-        requestBodyType,
-        headersType,
-        pathParamsType,
-        queryParamsType,
-        contextTypeName,
-        headersOptional,
-        pathParamsOptional,
-        queryParamsOptional,
-        requestBodyOptional,
-      })
-    )
-  );
+
+  let variablesType: ts.TypeNode = getVariablesType({
+    requestBodyType,
+    headersType,
+    pathParamsType,
+    queryParamsType,
+    contextTypeName,
+    headersOptional,
+    pathParamsOptional,
+    queryParamsOptional,
+    requestBodyOptional,
+    withContextType,
+  });
+
+  if (shouldExtractNode(variablesType) || withContextType) {
+    declarationNodes.push(
+      f.createTypeAliasDeclaration(
+        undefined,
+        [f.createModifier(ts.SyntaxKind.ExportKeyword)],
+        f.createIdentifier(variablesIdentifier),
+        undefined,
+        variablesType
+      )
+    );
+    variablesType = f.createTypeReferenceNode(variablesIdentifier);
+  }
 
   return {
     dataType,
