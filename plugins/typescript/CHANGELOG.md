@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/fabien0102/openapi-codegen/compare/typescript-v1.1.0...typescript-v1.2.0) (2022-01-19)
+
+
+### Features
+
+* **typescript:** Improve generated fetcher names ([2aa1b4b](https://github.com/fabien0102/openapi-codegen/commit/2aa1b4b52628450172d39a68838f825c1bcd2a6d))
+
 ## [1.1.0](https://github.com/fabien0102/openapi-codegen/compare/typescript-v1.0.0...typescript-v1.1.0) (2022-01-19)
 
 
