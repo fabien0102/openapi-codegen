@@ -4,6 +4,7 @@ import { getVariablesType } from "./getVariablesType";
 describe("getVariableType", () => {
   it("should return the fetcherOption type if no types are provided", () => {
     const variablesType = getVariablesType({
+      withContextType: true,
       requestBodyType: undefinedType,
       headersType: undefinedType,
       pathParamsType: undefinedType,
@@ -22,6 +23,7 @@ describe("getVariableType", () => {
 
   it("should have requestBody type declared", () => {
     const variablesType = getVariablesType({
+      withContextType: true,
       requestBodyType: f.createKeywordTypeNode(ts.SyntaxKind.StringKeyword),
       headersType: undefinedType,
       pathParamsType: undefinedType,
@@ -42,6 +44,7 @@ describe("getVariableType", () => {
 
   it("should have headers type declared", () => {
     const variablesType = getVariablesType({
+      withContextType: true,
       requestBodyType: undefinedType,
       headersType: createType("Headers", "Foo"),
       pathParamsType: undefinedType,
@@ -62,6 +65,7 @@ describe("getVariableType", () => {
 
   it("should have pathParams type declared", () => {
     const variablesType = getVariablesType({
+      withContextType: true,
       requestBodyType: undefinedType,
       headersType: undefinedType,
       pathParamsType: f.createKeywordTypeNode(ts.SyntaxKind.NumberKeyword),
@@ -82,6 +86,7 @@ describe("getVariableType", () => {
 
   it("should have queryParams type declared", () => {
     const variablesType = getVariablesType({
+      withContextType: true,
       requestBodyType: undefinedType,
       headersType: undefinedType,
       pathParamsType: undefinedType,
@@ -102,6 +107,7 @@ describe("getVariableType", () => {
 
   it("should ignore empty type", () => {
     const variablesType = getVariablesType({
+      withContextType: true,
       requestBodyType: undefinedType,
       headersType: undefinedType,
       pathParamsType: undefinedType,
@@ -120,6 +126,7 @@ describe("getVariableType", () => {
 
   it("should combine types", () => {
     const variablesType = getVariablesType({
+      withContextType: true,
       requestBodyType: createType("RequestBody", "Pet"),
       headersType: createType("Headers", "Pet"),
       pathParamsType: createType("PathParams", "Pet"),
@@ -143,6 +150,7 @@ describe("getVariableType", () => {
 
   it("should mark types as optional", () => {
     const variablesType = getVariablesType({
+      withContextType: true,
       requestBodyType: createType("RequestBody", "Pet"),
       headersType: createType("Headers", "Pet"),
       pathParamsType: createType("PathParams", "Pet"),

@@ -13,6 +13,7 @@ export const getVariablesType = ({
   queryParamsType,
   queryParamsOptional,
   contextTypeName,
+  withContextType,
 }: {
   requestBodyType: ts.TypeNode;
   requestBodyOptional: boolean;
@@ -23,6 +24,7 @@ export const getVariablesType = ({
   queryParamsType: ts.TypeNode;
   queryParamsOptional: boolean;
   contextTypeName: string;
+  withContextType: boolean;
 }) => {
   const variablesItems: ts.TypeElement[] = [];
 
@@ -82,15 +84,20 @@ export const getVariablesType = ({
     );
   }
 
-  const fetcherOptionsType = f.createIndexedAccessTypeNode(
-    f.createTypeReferenceNode(f.createIdentifier(contextTypeName), undefined),
-    f.createLiteralTypeNode(f.createStringLiteral("fetcherOptions"))
-  );
-
-  return variablesItems.length === 0
-    ? fetcherOptionsType
-    : f.createIntersectionTypeNode([
-        f.createTypeLiteralNode(variablesItems),
-        fetcherOptionsType,
-      ]);
+  if (withContextType) {
+    const fetcherOptionsType = f.createIndexedAccessTypeNode(
+      f.createTypeReferenceNode(f.createIdentifier(contextTypeName), undefined),
+      f.createLiteralTypeNode(f.createStringLiteral("fetcherOptions"))
+    );
+    return variablesItems.length === 0
+      ? fetcherOptionsType
+      : f.createIntersectionTypeNode([
+          f.createTypeLiteralNode(variablesItems),
+          fetcherOptionsType,
+        ]);
+  } else {
+    return variablesItems.length === 0
+      ? f.createKeywordTypeNode(ts.SyntaxKind.VoidKeyword)
+      : f.createTypeLiteralNode(variablesItems);
+  }
 };

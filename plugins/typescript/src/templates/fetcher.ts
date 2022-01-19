@@ -3,9 +3,13 @@ import { camel, pascal } from "case";
 /**
  * Get fetcher template
  */
-export const getFetcher = (prefix: string, contextPath: string) =>
+export const getFetcher = (prefix: string, contextPath?: string) =>
   `import qs from "qs";
-import { ${pascal(prefix)}Context } from "./${contextPath}";
+${
+  contextPath
+    ? `import { ${pascal(prefix)}Context } from "./${contextPath}";`
+    : ""
+}
 
 export type ${pascal(
     prefix
@@ -16,7 +20,7 @@ export type ${pascal(
   headers?: THeaders;
   queryParams?: TQueryParams;
   pathParams?: TPathParams;
-} & ${pascal(prefix)}Context["fetcherOptions"];
+}${contextPath ? ` & ${pascal(prefix)}Context["fetcherOptions"];` : ""}
 
 export async function ${camel(prefix)}Fetch<
   TData,

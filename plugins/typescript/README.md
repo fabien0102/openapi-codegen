@@ -100,6 +100,12 @@ export const useBadassContext = (): BadassContext => {
 
 You can also tweak `{filenamePrefix}Fetcher.ts`, especially the error management part, so everything fit the expected `ErrorType`.
 
+### generateFetchers
+
+Generate some generic fetchers, `{filenamePrefix}Fetcher.ts` can be customized to fit your needs.
+
+`{filenamePrefix}Components.ts` will use this fetcher with the OpenAPI types passed as generic.
+
 ## Utils
 
 ### renameComponent
