@@ -69,7 +69,7 @@ describe("generateFetchers", () => {
       /**
        * Get all the pets
        */
-      export const fetchListPets = () => petstoreFetch<ListPetsResponse, undefined, {}, {}, {}>({ url: \\"/pets\\", method: \\"get\\" });
+      export const listPets = () => petstoreFetch<ListPetsResponse, undefined, {}, {}, {}>({ url: \\"/pets\\", method: \\"get\\" });
       "
     `);
   });

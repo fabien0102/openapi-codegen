@@ -108,11 +108,8 @@ export const generateFetchers = async (context: Context, config: Config) => {
           withContextType: false,
         });
 
-        nodes.push(...declarationNodes);
-
-        const operationFetcherFnName = `fetch${c.pascal(operationId)}`;
-
         nodes.push(
+          ...declarationNodes,
           ...createOperationFetcherFnNodes({
             dataType,
             requestBodyType,
@@ -124,7 +121,7 @@ export const generateFetchers = async (context: Context, config: Config) => {
             fetcherFn,
             url: route,
             verb,
-            name: operationFetcherFnName,
+            name: operationId,
           })
         );
       });
