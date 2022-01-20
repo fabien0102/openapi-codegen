@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/fabien0102/openapi-codegen/compare/cli-v1.1.0...cli-v1.2.0) (2022-01-20)
+
+
+### Features
+
+* [generateFetchers] Add extra props support ([#25](https://github.com/fabien0102/openapi-codegen/issues/25)) ([35fc219](https://github.com/fabien0102/openapi-codegen/commit/35fc219d9c644becdf38b0b3e38e1512d095d2d0))
+
 ## [1.1.0](https://github.com/fabien0102/openapi-codegen/compare/cli-v1.0.0...cli-v1.1.0) (2022-01-19)
 
 
