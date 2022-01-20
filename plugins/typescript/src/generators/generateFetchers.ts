@@ -1,4 +1,4 @@
-import ts from "typescript";
+import ts, { factory as f } from "typescript";
 import * as c from "case";
 
 import { ConfigBase, Context } from "./types";
@@ -66,13 +66,45 @@ export const generateFetchers = async (context: Context, config: Config) => {
   const filename = formatFilename(filenamePrefix + "-components");
 
   const fetcherFn = c.camel(`${filenamePrefix}-fetch`);
-  const contextTypeName = `${c.pascal(filenamePrefix)}Context`;
   const nodes: ts.Node[] = [];
+  const fetcherImports = [fetcherFn];
 
   const fetcherFilename = formatFilename(filenamePrefix + "-fetcher");
 
+  const fetcherExtraPropsTypeName = `${c.pascal(
+    filenamePrefix
+  )}FetcherExtraProps`;
+
+  let variablesExtraPropsType: ts.TypeNode = f.createKeywordTypeNode(
+    ts.SyntaxKind.VoidKeyword
+  );
+
   if (!context.existsFile(`${fetcherFilename}.ts`)) {
     context.writeFile(`${fetcherFilename}.ts`, getFetcher(filenamePrefix));
+  } else {
+    const fetcherSourceText = await context.readFile(`${fetcherFilename}.ts`);
+
+    const fetcherSourceFile = ts.createSourceFile(
+      `${fetcherFilename}.ts`,
+      fetcherSourceText,
+      ts.ScriptTarget.Latest
+    );
+
+    // Lookup for {prefix}FetcherExtraProps declaration
+    ts.forEachChild(fetcherSourceFile, (node) => {
+      if (
+        ts.isTypeAliasDeclaration(node) &&
+        node.name.escapedText === fetcherExtraPropsTypeName &&
+        ts.isTypeLiteralNode(node.type) &&
+        node.type.members.length > 0
+      ) {
+        // Use the type of defined
+        variablesExtraPropsType = f.createTypeReferenceNode(
+          fetcherExtraPropsTypeName
+        );
+        fetcherImports.push(fetcherExtraPropsTypeName);
+      }
+    });
   }
 
   const operationIds: string[] = [];
@@ -98,14 +130,13 @@ export const generateFetchers = async (context: Context, config: Config) => {
           headersType,
           declarationNodes,
         } = getOperationTypes({
-          contextTypeName,
           openAPIDocument: context.openAPIDocument,
           operation,
           operationId,
           printNodes,
           injectedHeaders: config.injectedHeaders,
           pathParameters: verbs.parameters,
-          withContextType: false,
+          variablesExtraPropsType,
         });
 
         nodes.push(
@@ -132,7 +163,7 @@ export const generateFetchers = async (context: Context, config: Config) => {
     filename + ".ts",
     printNodes([
       createWatermark(context.openAPIDocument.info),
-      createNamedImport(fetcherFn, `./${fetcherFilename}`),
+      createNamedImport(fetcherImports, `./${fetcherFilename}`),
       ...getUsedImports(nodes, config.schemasFiles),
       ...nodes,
     ])
