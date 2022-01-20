@@ -10,7 +10,6 @@ import { Config, Namespace } from "../types";
 import { getOpenAPISourceFile } from "../core/getOpenAPISourceFile.js";
 import { parseOpenAPISourceFile } from "../core/parseOpenAPISourceFile.js";
 
-const { unlink, outputFile, existsSync } = fsExtra;
 const __filename = fileURLToPath(import.meta.url);
 
 // if no config -> tell the user to do `openapi-codegen init`
@@ -54,7 +53,7 @@ export class GenerateCommand extends Command {
       });
 
       // Write the transpiled file (.js)
-      await outputFile(transpiledPath, code);
+      await fsExtra.outputFile(transpiledPath, code);
 
       // Compute the result
       const { default: config } = await import(
@@ -62,7 +61,7 @@ export class GenerateCommand extends Command {
       );
 
       // Delete the transpiled file
-      await unlink(transpiledPath);
+      await fsExtra.unlink(transpiledPath);
 
       // Return the result
       return config;
@@ -88,14 +87,23 @@ export class GenerateCommand extends Command {
     const prettierConfig = await prettier.resolveConfig(process.cwd());
 
     const writeFile = async (file: string, data: string) => {
-      await outputFile(
+      await fsExtra.outputFile(
         path.join(process.cwd(), config.outputDir, file),
         prettier.format(data, { parser: "babel-ts", ...prettierConfig })
       );
     };
 
+    const readFile = (file: string) => {
+      return fsExtra.readFile(
+        path.join(process.cwd(), config.outputDir, file),
+        "utf-8"
+      );
+    };
+
     const existsFile = (file: string) => {
-      return existsSync(path.join(process.cwd(), config.outputDir, file));
+      return fsExtra.existsSync(
+        path.join(process.cwd(), config.outputDir, file)
+      );
     };
 
     await config.to({
@@ -103,6 +111,7 @@ export class GenerateCommand extends Command {
       outputDir: config.outputDir,
       writeFile,
       existsFile,
+      readFile,
     });
   }
 }
