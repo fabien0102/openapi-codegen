@@ -225,9 +225,9 @@ export const getOperationTypes = ({
         variablesType
       )
     );
-  }
 
-  variablesType = f.createTypeReferenceNode(variablesIdentifier);
+    variablesType = f.createTypeReferenceNode(variablesIdentifier);
+  }
 
   return {
     dataType,

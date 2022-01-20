@@ -67,11 +67,44 @@ export const generateFetchers = async (context: Context, config: Config) => {
 
   const fetcherFn = c.camel(`${filenamePrefix}-fetch`);
   const nodes: ts.Node[] = [];
+  const fetcherImports = [fetcherFn];
 
   const fetcherFilename = formatFilename(filenamePrefix + "-fetcher");
 
+  const fetcherExtraPropsTypeName = `${c.pascal(
+    filenamePrefix
+  )}FetcherExtraProps`;
+
+  let variablesExtraPropsType: ts.TypeNode = f.createKeywordTypeNode(
+    ts.SyntaxKind.VoidKeyword
+  );
+
   if (!context.existsFile(`${fetcherFilename}.ts`)) {
     context.writeFile(`${fetcherFilename}.ts`, getFetcher(filenamePrefix));
+  } else {
+    const fetcherSourceText = await context.readFile(`${fetcherFilename}.ts`);
+
+    const fetcherSourceFile = ts.createSourceFile(
+      `${fetcherFilename}.ts`,
+      fetcherSourceText,
+      ts.ScriptTarget.Latest
+    );
+
+    // Lookup for {prefix}FetcherExtraProps declaration
+    ts.forEachChild(fetcherSourceFile, (node) => {
+      if (
+        ts.isTypeAliasDeclaration(node) &&
+        node.name.escapedText === fetcherExtraPropsTypeName &&
+        ts.isTypeLiteralNode(node.type) &&
+        node.type.members.length > 0
+      ) {
+        // Use the type of defined
+        variablesExtraPropsType = f.createTypeReferenceNode(
+          fetcherExtraPropsTypeName
+        );
+        fetcherImports.push(fetcherExtraPropsTypeName);
+      }
+    });
   }
 
   const operationIds: string[] = [];
@@ -103,10 +136,7 @@ export const generateFetchers = async (context: Context, config: Config) => {
           printNodes,
           injectedHeaders: config.injectedHeaders,
           pathParameters: verbs.parameters,
-          // TODO read the type from the fetcher file and don’t inject it if empty
-          variablesExtraPropsType: f.createTypeReferenceNode(
-            `${c.pascal(filenamePrefix)}FetcherExtraProps`
-          ),
+          variablesExtraPropsType,
         });
 
         nodes.push(
@@ -133,7 +163,7 @@ export const generateFetchers = async (context: Context, config: Config) => {
     filename + ".ts",
     printNodes([
       createWatermark(context.openAPIDocument.info),
-      createNamedImport(fetcherFn, `./${fetcherFilename}`),
+      createNamedImport(fetcherImports, `./${fetcherFilename}`),
       ...getUsedImports(nodes, config.schemasFiles),
       ...nodes,
     ])
