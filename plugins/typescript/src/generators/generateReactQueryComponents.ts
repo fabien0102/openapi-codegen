@@ -113,14 +113,19 @@ export const generateReactQueryComponents = async (
           headersType,
           declarationNodes,
         } = getOperationTypes({
-          contextTypeName,
           openAPIDocument: context.openAPIDocument,
           operation,
           operationId,
           printNodes,
           injectedHeaders: config.injectedHeaders,
           pathParameters: verbs.parameters,
-          withContextType: true,
+          variablesExtraPropsType: f.createIndexedAccessTypeNode(
+            f.createTypeReferenceNode(
+              f.createIdentifier(contextTypeName),
+              undefined
+            ),
+            f.createLiteralTypeNode(f.createStringLiteral("fetcherOptions"))
+          ),
         });
 
         nodes.push(...declarationNodes);

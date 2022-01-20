@@ -1,4 +1,4 @@
-import ts from "typescript";
+import ts, { factory as f } from "typescript";
 import * as c from "case";
 
 import { ConfigBase, Context } from "./types";
@@ -66,7 +66,6 @@ export const generateFetchers = async (context: Context, config: Config) => {
   const filename = formatFilename(filenamePrefix + "-components");
 
   const fetcherFn = c.camel(`${filenamePrefix}-fetch`);
-  const contextTypeName = `${c.pascal(filenamePrefix)}Context`;
   const nodes: ts.Node[] = [];
 
   const fetcherFilename = formatFilename(filenamePrefix + "-fetcher");
@@ -98,14 +97,16 @@ export const generateFetchers = async (context: Context, config: Config) => {
           headersType,
           declarationNodes,
         } = getOperationTypes({
-          contextTypeName,
           openAPIDocument: context.openAPIDocument,
           operation,
           operationId,
           printNodes,
           injectedHeaders: config.injectedHeaders,
           pathParameters: verbs.parameters,
-          withContextType: false,
+          // TODO read the type from the fetcher file and don’t inject it if empty
+          variablesExtraPropsType: f.createTypeReferenceNode(
+            `${c.pascal(filenamePrefix)}FetcherExtraProps`
+          ),
         });
 
         nodes.push(

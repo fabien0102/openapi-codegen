@@ -66,10 +66,12 @@ describe("generateFetchers", () => {
 
       export type ListPetsResponse = Schemas.Pet[];
 
+      export type ListPetsVariables = PetstoreFetcherExtraProps;
+
       /**
        * Get all the pets
        */
-      export const listPets = () => petstoreFetch<ListPetsResponse, undefined, {}, {}, {}>({ url: \\"/pets\\", method: \\"get\\" });
+      export const listPets = (variables: ListPetsVariables) => petstoreFetch<ListPetsResponse, undefined, {}, {}, {}>({ url: \\"/pets\\", method: \\"get\\", ...variables });
       "
     `);
   });

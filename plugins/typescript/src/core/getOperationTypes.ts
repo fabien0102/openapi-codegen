@@ -17,8 +17,7 @@ export type GetOperationTypesOptions = {
   injectedHeaders?: string[];
   pathParameters?: PathItemObject["parameters"];
   printNodes: (nodes: ts.Node[]) => string;
-  contextTypeName: string;
-  withContextType: boolean;
+  variablesExtraPropsType: ts.TypeNode;
 };
 
 export type GetOperationTypesOutput = {
@@ -40,10 +39,9 @@ export const getOperationTypes = ({
   operation,
   openAPIDocument,
   printNodes,
-  withContextType,
   pathParameters = [],
   injectedHeaders = [],
-  contextTypeName,
+  variablesExtraPropsType,
 }: GetOperationTypesOptions): GetOperationTypesOutput => {
   const declarationNodes: ts.Node[] = [];
 
@@ -201,15 +199,23 @@ export const getOperationTypes = ({
     headersType,
     pathParamsType,
     queryParamsType,
-    contextTypeName,
     headersOptional,
     pathParamsOptional,
     queryParamsOptional,
     requestBodyOptional,
-    withContextType,
   });
 
-  if (shouldExtractNode(variablesType) || withContextType) {
+  if (variablesExtraPropsType.kind !== ts.SyntaxKind.VoidKeyword) {
+    variablesType =
+      variablesType.kind === ts.SyntaxKind.VoidKeyword
+        ? variablesExtraPropsType
+        : f.createIntersectionTypeNode([
+            variablesType,
+            variablesExtraPropsType,
+          ]);
+  }
+
+  if (variablesType.kind !== ts.SyntaxKind.VoidKeyword) {
     declarationNodes.push(
       f.createTypeAliasDeclaration(
         undefined,
@@ -219,8 +225,9 @@ export const getOperationTypes = ({
         variablesType
       )
     );
-    variablesType = f.createTypeReferenceNode(variablesIdentifier);
   }
+
+  variablesType = f.createTypeReferenceNode(variablesIdentifier);
 
   return {
     dataType,

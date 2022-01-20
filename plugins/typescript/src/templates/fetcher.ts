@@ -2,13 +2,26 @@ import { camel, pascal } from "case";
 
 /**
  * Get fetcher template
+ *
+ * @param contextPath import the context from another file
  */
 export const getFetcher = (prefix: string, contextPath?: string) =>
   `import qs from "qs";
 ${
   contextPath
     ? `import { ${pascal(prefix)}Context } from "./${contextPath}";`
-    : ""
+    : `
+    
+    export type ${pascal(prefix)}FetcherExtraProps = {
+      /**
+       * You can add some extra props to your generated fetchers.
+       * 
+       * Note: You need to re-gen after adding the first property to
+       * have the \`${pascal(prefix)}FetcherExtraProps\` injected in \`${pascal(
+        prefix
+      )}Components.ts\`
+       **/
+    }`
 }
 
 export type ${pascal(
@@ -20,7 +33,11 @@ export type ${pascal(
   headers?: THeaders;
   queryParams?: TQueryParams;
   pathParams?: TPathParams;
-}${contextPath ? ` & ${pascal(prefix)}Context["fetcherOptions"];` : ""}
+} & ${
+    contextPath
+      ? `${pascal(prefix)}Context["fetcherOptions"];`
+      : `${pascal(prefix)}FetcherExtraProps`
+  }
 
 export async function ${camel(prefix)}Fetch<
   TData,
