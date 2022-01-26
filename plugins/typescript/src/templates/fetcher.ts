@@ -61,7 +61,7 @@ export async function ${camel(prefix)}Fetch<
   const response = await window.fetch(
     resolveUrl(url, queryParams, pathParams),
     {
-      method,
+      method: method.toUpperCase(),
       body: body ? JSON.stringify(body) : undefined,
       headers: {
         "Content-Type": "application/json",
