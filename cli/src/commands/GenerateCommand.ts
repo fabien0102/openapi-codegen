@@ -1,4 +1,5 @@
-import { Command, Option } from "clipanion";
+import { Command, Option, UsageError } from "clipanion";
+import * as t from "typanion";
 import fsExtra from "fs-extra";
 import path from "path/posix";
 import * as swc from "@swc/core";
@@ -6,7 +7,7 @@ import prettier from "prettier";
 import { fileURLToPath } from "url";
 import slash from "slash";
 
-import { Config, Namespace } from "../types";
+import { Config, FromOptions, Namespace } from "../types";
 import { getOpenAPISourceFile } from "../core/getOpenAPISourceFile.js";
 import { parseOpenAPISourceFile } from "../core/parseOpenAPISourceFile.js";
 
@@ -22,6 +23,43 @@ export class GenerateCommand extends Command {
   });
 
   namespace = Option.String();
+
+  source = Option.String(`--source`, {
+    description: "Source of the spec (file, url or github)",
+    validator: t.isEnum(["file", "url", "github"]),
+  });
+
+  // source=file options
+  relativePath = Option.String(`--relativePath`, {
+    description: "[source=file] Relative path of the spec file",
+  });
+
+  // source=url options
+  url = Option.String("--url", {
+    description: "[source=url] URL of the spec file",
+  });
+  method = Option.String("--method", {
+    description: "[source=url] HTTP Method",
+    validator: t.isEnum(["get", "post"]),
+  });
+
+  // source=github options
+  owner = Option.String("--owner", {
+    description: "[source=github] Owner of the repository",
+  });
+  repository = Option.String("--repository --repo", {
+    description: "[source=github] Repository name",
+  });
+  branch = Option.String("-b --branch", {
+    description: "[source=github] Branch name",
+  });
+  specPath = Option.String("--specPath", {
+    description: "[source=github] OpenAPI specs file path",
+  });
+  pullRequest = Option.String("--pr --pull-request", {
+    description:
+      "[source=github] Select a specific pull-request instead of a branch",
+  });
 
   static paths = [["gen"], ["generate"], Command.Default];
   static usage = Command.Usage({
@@ -72,17 +110,95 @@ export class GenerateCommand extends Command {
     }
   }
 
+  /**
+   * Get `from` options consolidated with cli flags.
+   *
+   * @param config config from openapi-codegen.config.ts
+   * @returns consolidated configuration
+   */
+  getFromOptions(config: Config): FromOptions {
+    const source = this.source || config.from.source;
+
+    switch (source) {
+      case "file": {
+        if (config.from.source === "file") {
+          return {
+            ...config.from,
+            relativePath: this.relativePath ?? config.from.relativePath,
+          };
+        } else {
+          if (!this.relativePath) {
+            throw new UsageError("--relativePath argument is missing");
+          }
+          return {
+            source: "file",
+            relativePath: this.relativePath,
+          };
+        }
+      }
+
+      case "url":
+        if (config.from.source === "url") {
+          return {
+            ...config.from,
+            url: this.url ?? config.from.url,
+            method: this.method ?? config.from.method,
+          };
+        } else {
+          if (!this.url) {
+            throw new UsageError("--url argument is missing");
+          }
+          return {
+            source: "url",
+            url: this.url,
+            method: this.method,
+          };
+        }
+
+      case "github":
+        if (config.from.source === "github") {
+          return {
+            ...config.from,
+            owner: this.owner ?? config.from.owner,
+            branch: this.branch ?? config.from.branch,
+            repository: this.repository ?? config.from.repository,
+            specPath: this.specPath ?? config.from.specPath,
+          };
+        } else {
+          if (!this.owner) {
+            throw new UsageError("--owner argument is missing");
+          }
+          if (!this.branch) {
+            throw new UsageError("--branch argument is missing");
+          }
+          if (!this.repository) {
+            throw new UsageError("--repository argument is missing");
+          }
+          if (!this.specPath) {
+            throw new UsageError("--specPath argument is missing");
+          }
+
+          return {
+            source: "github",
+            branch: this.branch,
+            owner: this.owner,
+            repository: this.repository,
+            specPath: this.specPath,
+          };
+        }
+    }
+  }
+
   async execute() {
     const configs = await this.loadConfigs();
     if (!(this.namespace in configs)) {
-      this.context.stdout.write(
+      throw new UsageError(
         `"${this.namespace}" is not defined in your configuration`
       );
-      process.exit(1);
     }
 
     const config = configs[this.namespace];
-    const sourceFile = await getOpenAPISourceFile(config.from);
+    const sourceFile = await getOpenAPISourceFile(this.getFromOptions(config));
     const openAPIDocument = await parseOpenAPISourceFile(sourceFile);
     const prettierConfig = await prettier.resolveConfig(process.cwd());
 
