@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.0](https://github.com/fabien0102/openapi-codegen/compare/typescript-v1.3.0...typescript-v1.4.0) (2022-01-27)
+
+
+### Features
+
+* Add support for flags in `gen` command ([#27](https://github.com/fabien0102/openapi-codegen/issues/27)) ([ec263c2](https://github.com/fabien0102/openapi-codegen/commit/ec263c2f55e4cc4fcb1bc427bf2c9fd1152f640d))
+
 ## [1.3.0](https://github.com/fabien0102/openapi-codegen/compare/typescript-v1.2.0...typescript-v1.3.0) (2022-01-20)
 
 
