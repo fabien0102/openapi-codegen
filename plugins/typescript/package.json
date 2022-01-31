@@ -1,6 +1,6 @@
 {
   "name": "@openapi-codegen/typescript",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "OpenAPI Codegen typescript generators",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
