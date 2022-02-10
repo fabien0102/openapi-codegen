@@ -1,6 +1,6 @@
 # OpenAPI Codegen
 
-⚠️ This project is in early stage, please check the issues to see what’s is missing! ⚠️
+⚠️ This project is in an early stage, please check the issues to see what’s missing! ⚠️
 
 -> Insert logo and badges here
 
@@ -12,7 +12,7 @@ This will give you full auto-completion and type-safety of your APIs
 
 **For backend:**
 
-This will generate you everything to be able to deliver a perfect API, spec driven.
+This will generate everything you need to deliver a perfect API, spec driven.
 
 ## Getting started
 
@@ -20,7 +20,7 @@ This will generate you everything to be able to deliver a perfect API, spec driv
 $ npx @openapi-codegen/cli init
 ```
 
-Follow the steps, this will generate you a configuration file (openapi-codegen.config.ts) and update your `package.json`
+Follow the steps, this will generate a configuration file for you (openapi-codegen.config.ts) and update your `package.json`
 
 ```bash
 $ yarn gen # or the defined alias
@@ -30,28 +30,28 @@ You should have a bunch of types / components ready to be used.
 
 ## Philosophy
 
-In software development, the harder part is usually communication and more specifically documentation.
+In software development, communication between components and documentation around it is often no fun.
 
-GraphQL did resolve this by having documentation part of the tooling (introspection), sadly this is often harder with REST API. OpenAPI can be an amazing tool, if, and if only the documentation and the actual implementation are aligned!
+GraphQL did resolve this by making documentation a part of the tooling (introspection), sadly this is often harder with REST APIs. OpenAPI can be an amazing tool, if, and only if the documentation (spec) and the actual implementation are aligned!
 
 ### Backend side
 
-For this, we have two viable options from the backend perspective:
+There are two different approaches:
 
-1. The OpenAPI is generated from the code (code first)
-2. The code is generated from OpenAPI (spec first)
+1. The OpenAPI spec is generated from the code (**code first**)
+2. The code is generated from the OpenAPI spec (**spec first**)
 
-And this need to be linked to the type system of the language, so everything is connected, and we remove or update something that impact the final response, this is **automatically** reflected!
+In either case, there needs to be an integration with the type system of the language, so everything is connected, and as we remove or update something that impacts the final response, this is **automatically** reflected!
 
-This library is to support the second option, spec first. By doing so, your documentation is not your last boring task on the list, but the first exiting one! Indeed, you can’t start coding without generating your types (models & controllers) from the specs.
+This library has chosen the second approach, **spec first**. By doing so, your documentation is not your final (boring) task on the list, but the first and exciting one when adding new functionality! Indeed, you can’t start coding without generating your types (models & controllers) from the specs.
 
-This have few benefits:
+This has multiple benefits:
 
 - You can take your time to think about your API before writing any code!
-- You can discuss the API with your team (and discover API design problem earlier)
+- You can discuss the API with your team (and discover API design problems earlier)
 - You can generate all your validation rules
 
-As example, if you write this object in your schema:
+For example, if you add this object to your schema:
 
 ```yaml
 SignUpInput:
@@ -79,15 +79,15 @@ SignUpInput:
     - lastName
 ```
 
-OpenAPI Codegen will be able to generate all the relevant validation (or at least give you the choice to do it)
+OpenAPI Codegen will be able to generate all the relevant validation (or at least give you the choice to do it).
 
-Note: You can also attach any custom logic with `x-*` tag, the possibilities are endless!
+Note: You can also attach any custom logic by using the `x-*` tag, the possibilities are endless!
 
 ### Frontend side
 
-Having to reverse engineer a backend response is the least productive/fun task ever! This is why, with some nice OpenAPI specs, we can actually generate some nice types components.
+Having to reverse engineer a backend response is the least productive/fun task ever! However, given a nice OpenAPI specs, we can actually generate nicely typed code for you that lets you interact with your API in a safe manner.
 
-Taking React as example, calling an API will be as simple as this:
+Taking React as example, calling an API can be as simple as this:
 
 ```tsx
 import { useListPets } from "./petStore/petStoreComponents"; // <- output from openapi-codegen
@@ -101,12 +101,12 @@ const App = () => {
 
 And since this generated from the specs, everything is safe at build time!
 
-Note: If you can’t trust your backend, some runtime validation can be useful to avoid surprise in production 😅
+Note: If you can’t trust your backend, some runtime validation can be useful to avoid surprises in production 😅
 
 ## Configuration
 
 The only thing you need to manage is the configuration.
-Everything is typed and self documented, but just in case, you can find here an example configuration.
+Everything is typed and self-documented, but just in case, you can find here example configuration below:
 
 ```ts
 // openapi-codegen.config.ts
@@ -151,7 +151,7 @@ export default defineConfig({
 });
 ```
 
-You can import any generator into the `to` section, those can be provided by us or you, you have the full control of what you are generating!
+You can import any generator into the `to` section, those can be the ones provided by this project or your own custom ones. You have full control of what you are generating!
 
 Have fun!
 
