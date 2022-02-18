@@ -485,10 +485,10 @@ const createQueryHook = ({
                       f.createObjectLiteralExpression(
                         [
                           f.createSpreadAssignment(
-                            f.createIdentifier("queryOptions")
+                            f.createIdentifier("options")
                           ),
                           f.createSpreadAssignment(
-                            f.createIdentifier("options")
+                            f.createIdentifier("queryOptions")
                           ),
                         ],
                         true
