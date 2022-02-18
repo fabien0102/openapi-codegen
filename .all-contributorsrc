@@ -20,6 +20,15 @@
         "ideas",
         "review"
       ]
+    },
+    {
+      "login": "micha-f",
+      "name": "Michael Franzkowiak",
+      "avatar_url": "https://avatars.githubusercontent.com/u/200647?v=4",
+      "profile": "https://github.com/micha-f",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7
