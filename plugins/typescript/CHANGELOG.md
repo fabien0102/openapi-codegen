@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.0.0](https://github.com/fabien0102/openapi-codegen/compare/typescript-v1.4.0...typescript-v2.0.0) (2022-02-18)
+
+
+### ⚠ BREAKING CHANGES
+
+* Inject query options in context (#31)
+
+### Features
+
+* Inject query options in context ([#31](https://github.com/fabien0102/openapi-codegen/issues/31)) ([0a7fd6d](https://github.com/fabien0102/openapi-codegen/commit/0a7fd6d6b46132ae12df787edd4169bbec76dd81))
+
 ## [1.4.0](https://github.com/fabien0102/openapi-codegen/compare/typescript-v1.3.0...typescript-v1.4.0) (2022-01-27)
 
 
