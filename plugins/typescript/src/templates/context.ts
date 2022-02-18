@@ -1,7 +1,7 @@
 import { pascal } from "case";
 
 export const getContext = (prefix: string) =>
-  `import type { QueryKey } from "react-query";
+  `import type { QueryKey, UseQueryOptions } from "react-query";
   
   export type ${pascal(prefix)}Context = {
     fetcherOptions: {
@@ -36,9 +36,9 @@ export const getContext = (prefix: string) =>
    TQueryFnData = unknown,
    TError = unknown,
    TData = TQueryFnData,
-   TQueryKey extends reactQuery.QueryKey = reactQuery.QueryKey
+   TQueryKey extends QueryKey = QueryKey
  >(
-   queryOptions?: Omit<reactQuery.UseQueryOptions<TQueryFnData, TError, TData, TQueryKey>, 'queryKey' | 'queryFn'>
+   queryOptions?: Omit<UseQueryOptions<TQueryFnData, TError, TData, TQueryKey>, 'queryKey' | 'queryFn'>
  ): ${pascal(prefix)}Context {
     return {
       fetcherOptions: {},
