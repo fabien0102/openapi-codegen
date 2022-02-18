@@ -57,15 +57,14 @@ The `{filenamePrefix}Context.ts` can be tweak to inject any props in the generat
 
 ```ts
 // `BadassContext.ts`
+import type { QueryKey, UseQueryOptions } from "react-query";
 
 export type BadassContext = {
   fetcherOptions: {
     /**
      * Headers to inject in the fetcher
      */
-    headers?: {
-      authorization?: string;
-    };
+    headers?: {};
     /**
      * Query params to inject in the fetcher
      */
@@ -78,13 +77,30 @@ export type BadassContext = {
      */
     enabled?: boolean;
   };
+  /**
+   * Query key middleware.
+   */
+  queryKeyFn: (queryKey: QueryKey) => QueryKey;
 };
 
 /**
  * Context injected into every react-query hook wrappers
+ *
+ * @param queryOptions options from the useQuery wrapper
  */
-export const useBadassContext = (): BadassContext => {
+export function useBadassContext<
+  TQueryFnData = unknown,
+  TError = unknown,
+  TData = TQueryFnData,
+  TQueryKey extends QueryKey = QueryKey
+>(
+  queryOptions?: Omit<
+    UseQueryOptions<TQueryFnData, TError, TData, TQueryKey>,
+    "queryKey" | "queryFn"
+  >
+): BadassContext {
   const token = window.localStorage.getItem("token");
+
   return {
     fetcherOptions: {
       headers: {
@@ -92,10 +108,11 @@ export const useBadassContext = (): BadassContext => {
       },
     },
     queryOptions: {
-      enabled: Boolean(token),
+      enabled: Boolean(token) && (queryOptions?.enabled ?? true),
     },
+    queryKeyFn: (queryKey) => queryKey,
   };
-};
+}
 ```
 
 You can also tweak `{filenamePrefix}Fetcher.ts`, especially the error management part, so everything fit the expected `ErrorType`.
