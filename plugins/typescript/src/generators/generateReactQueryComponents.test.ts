@@ -104,7 +104,7 @@ describe("generateReactQueryComponents", () => {
       /**
        * Get all the pets
        */
-      export const useListPets = (queryKey: reactQuery.QueryKey, variables: ListPetsVariables, options?: Omit<reactQuery.UseQueryOptions<ListPetsResponse, undefined, ListPetsResponse>, \\"queryKey\\" | \\"queryFn\\">) => { const { fetcherOptions, queryOptions, queryKeyFn } = usePetstoreContext(); return reactQuery.useQuery<ListPetsResponse, undefined, ListPetsResponse>(queryKeyFn(queryKey), () => fetchListPets({ ...fetcherOptions, ...variables }), {
+      export const useListPets = (queryKey: reactQuery.QueryKey, variables: ListPetsVariables, options?: Omit<reactQuery.UseQueryOptions<ListPetsResponse, undefined, ListPetsResponse>, \\"queryKey\\" | \\"queryFn\\">) => { const { fetcherOptions, queryOptions, queryKeyFn } = usePetstoreContext(options); return reactQuery.useQuery<ListPetsResponse, undefined, ListPetsResponse>(queryKeyFn(queryKey), () => fetchListPets({ ...fetcherOptions, ...variables }), {
           ...options,
           ...queryOptions
       }); };
@@ -216,7 +216,7 @@ describe("generateReactQueryComponents", () => {
       /**
        * Get all the pets
        */
-      export const useListPets = (queryKey: reactQuery.QueryKey, variables: ListPetsVariables, options?: Omit<reactQuery.UseQueryOptions<ListPetsResponse, undefined, ListPetsResponse>, \\"queryKey\\" | \\"queryFn\\">) => { const { fetcherOptions, queryOptions, queryKeyFn } = usePetstoreContext(); return reactQuery.useQuery<ListPetsResponse, undefined, ListPetsResponse>(queryKeyFn(queryKey), () => fetchListPets({ ...fetcherOptions, ...variables }), {
+      export const useListPets = (queryKey: reactQuery.QueryKey, variables: ListPetsVariables, options?: Omit<reactQuery.UseQueryOptions<ListPetsResponse, undefined, ListPetsResponse>, \\"queryKey\\" | \\"queryFn\\">) => { const { fetcherOptions, queryOptions, queryKeyFn } = usePetstoreContext(options); return reactQuery.useQuery<ListPetsResponse, undefined, ListPetsResponse>(queryKeyFn(queryKey), () => fetchListPets({ ...fetcherOptions, ...variables }), {
           ...options,
           ...queryOptions
       }); };
@@ -332,7 +332,7 @@ describe("generateReactQueryComponents", () => {
       /**
        * Get all the pets
        */
-      export const useListPets = (queryKey: reactQuery.QueryKey, variables: ListPetsVariables, options?: Omit<reactQuery.UseQueryOptions<ListPetsResponse, undefined, ListPetsResponse>, \\"queryKey\\" | \\"queryFn\\">) => { const { fetcherOptions, queryOptions, queryKeyFn } = usePetstoreContext(); return reactQuery.useQuery<ListPetsResponse, undefined, ListPetsResponse>(queryKeyFn(queryKey), () => fetchListPets({ ...fetcherOptions, ...variables }), {
+      export const useListPets = (queryKey: reactQuery.QueryKey, variables: ListPetsVariables, options?: Omit<reactQuery.UseQueryOptions<ListPetsResponse, undefined, ListPetsResponse>, \\"queryKey\\" | \\"queryFn\\">) => { const { fetcherOptions, queryOptions, queryKeyFn } = usePetstoreContext(options); return reactQuery.useQuery<ListPetsResponse, undefined, ListPetsResponse>(queryKeyFn(queryKey), () => fetchListPets({ ...fetcherOptions, ...variables }), {
           ...options,
           ...queryOptions
       }); };
@@ -419,7 +419,7 @@ describe("generateReactQueryComponents", () => {
       /**
        * Get all the pets
        */
-      export const useListPets = (queryKey: reactQuery.QueryKey, variables: ListPetsVariables, options?: Omit<reactQuery.UseQueryOptions<ListPetsResponse, undefined, ListPetsResponse>, \\"queryKey\\" | \\"queryFn\\">) => { const { fetcherOptions, queryOptions, queryKeyFn } = usePetstoreContext(); return reactQuery.useQuery<ListPetsResponse, undefined, ListPetsResponse>(queryKeyFn(queryKey), () => fetchListPets({ ...fetcherOptions, ...variables }), {
+      export const useListPets = (queryKey: reactQuery.QueryKey, variables: ListPetsVariables, options?: Omit<reactQuery.UseQueryOptions<ListPetsResponse, undefined, ListPetsResponse>, \\"queryKey\\" | \\"queryFn\\">) => { const { fetcherOptions, queryOptions, queryKeyFn } = usePetstoreContext(options); return reactQuery.useQuery<ListPetsResponse, undefined, ListPetsResponse>(queryKeyFn(queryKey), () => fetchListPets({ ...fetcherOptions, ...variables }), {
           ...options,
           ...queryOptions
       }); };

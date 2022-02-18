@@ -438,7 +438,7 @@ const createQueryHook = ({
                         f.createCallExpression(
                           f.createIdentifier(contextHookName),
                           undefined,
-                          []
+                          [f.createIdentifier("options")]
                         )
                       ),
                     ],

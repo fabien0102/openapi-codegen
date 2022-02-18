@@ -29,8 +29,17 @@ export const getContext = (prefix: string) =>
   
   /**
    * Context injected into every react-query hook wrappers
+   * 
+   * @param queryOptions options from the useQuery wrapper
    */
-  export const use${pascal(prefix)}Context = (): ${pascal(prefix)}Context => {
+   export function use${pascal(prefix)}Context<
+   TQueryFnData = unknown,
+   TError = unknown,
+   TData = TQueryFnData,
+   TQueryKey extends reactQuery.QueryKey = reactQuery.QueryKey
+ >(
+   queryOptions?: Omit<reactQuery.UseQueryOptions<TQueryFnData, TError, TData, TQueryKey>, 'queryKey' | 'queryFn'>
+ ): ${pascal(prefix)}Context {
     return {
       fetcherOptions: {},
       queryOptions: {},
