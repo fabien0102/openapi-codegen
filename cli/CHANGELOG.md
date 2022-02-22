@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.3.1](https://github.com/fabien0102/openapi-codegen/compare/cli-v1.3.0...cli-v1.3.1) (2022-02-22)
+
+
+### Bug Fixes
+
+* Fix `path` usage for node 14 ([#34](https://github.com/fabien0102/openapi-codegen/issues/34)) ([4422e61](https://github.com/fabien0102/openapi-codegen/commit/4422e61b317ffd4d3aa0b30340592063c4a222cc))
+
 ## [1.3.0](https://github.com/fabien0102/openapi-codegen/compare/cli-v1.2.0...cli-v1.3.0) (2022-01-27)
 
 
