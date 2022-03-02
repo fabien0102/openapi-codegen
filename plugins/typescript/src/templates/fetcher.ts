@@ -7,6 +7,8 @@ import { camel, pascal } from "case";
  */
 export const getFetcher = (prefix: string, contextPath?: string) =>
   `import qs from "qs";
+
+const baseUrl = ""; // TODO add your baseUrl
 ${
   contextPath
     ? `import { ${pascal(prefix)}Context } from "./${contextPath}";`
@@ -58,8 +60,8 @@ export async function ${camel(prefix)}Fetch<
   TQueryParams,
   TPathParams
 >): Promise<TData> {
-  const response = await window.fetch(
-    resolveUrl(url, queryParams, pathParams),
+  const response = await window.fetch(\`\${baseUrl}
+    \${resolveUrl(url, queryParams, pathParams)}\`,
     {
       method: method.toUpperCase(),
       body: body ? JSON.stringify(body) : undefined,
@@ -70,6 +72,7 @@ export async function ${camel(prefix)}Fetch<
     }
   );
   if (!response.ok) {
+    // TODO validate & parse the error to fit the generated error types 
     throw new Error("Network response was not ok");
   }
   return await response.json();
