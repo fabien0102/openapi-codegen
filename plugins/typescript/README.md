@@ -26,13 +26,13 @@ import {
 } from "@openapi-codegen/typescript";
 
 export default defineConfig({
-  myAPI: {
+  petstore: {
     from: {
       /* file, url or github */
     },
-    outputDir: "./myAPI",
+    outputDir: "./petStore",
     to: async (context) => {
-      const filenamePrefix = "myAPI";
+      const filenamePrefix = "petStore";
       const { schemasFiles } = await generateSchemaTypes(context, {
         filenamePrefix,
       });
@@ -56,10 +56,10 @@ Only `{filenamePrefix}Components.ts` can’t be manually touch and will be regen
 The `{filenamePrefix}Context.ts` can be tweak to inject any props in the generated hooks, this is an example with some auth flow.
 
 ```ts
-// `BadassContext.ts`
+// `PetStoreContext.ts`
 import type { QueryKey, UseQueryOptions } from "react-query";
 
-export type BadassContext = {
+export type PetStoreContext = {
   fetcherOptions: {
     /**
      * Headers to inject in the fetcher
@@ -88,7 +88,7 @@ export type BadassContext = {
  *
  * @param queryOptions options from the useQuery wrapper
  */
-export function useBadassContext<
+export function usePetStoreContext<
   TQueryFnData = unknown,
   TError = unknown,
   TData = TQueryFnData,
@@ -115,7 +115,45 @@ export function useBadassContext<
 }
 ```
 
-You can also tweak `{filenamePrefix}Fetcher.ts`, especially the error management part, so everything fit the expected `ErrorType`.
+You also need to tweak `{filenamePrefix}Fetcher.ts`, to inject your `baseUrl` and adjust the error management part to fullfil the `ErrorType` (you can search for the `TODO` keyword).
+
+#### Usage
+
+First of all, we need to have a working react-query context (more information [here](https://react-query.tanstack.com/quick-start)).
+
+Now that we have all this generated code and properly configured `{filenamePrefix}Fetcher.ts` to talk to the correct server. This is time to try!
+
+Assuming that you have a route with the verb `GET` and the `operationId` as `listPets`. You can simply use `useListPets` in a react component.
+
+```tsx
+import { useListPets } from "./petstoreComponents";
+
+export const MyPage = () => {
+  const { data, isLoading, error } = useListPets(["listPets"]); // <- You need to add the react-query cache key
+
+  return <div>{JSON.stringify({ data, isLoading, error })}</div>;
+};
+```
+
+And for any mutation.
+
+```tsx
+import { useUpdatePet } from "./pestoreComponents";
+
+export const MyPage = () => {
+  const { mutate: updatePet } = useUpdatePet();
+
+  return (
+    <button
+      onClick={() =>
+        updatePet({ pathParams: { id: "2" }, body: { name: "Biscuit" } })
+      }
+    >
+      Give a cute name
+    </button>
+  );
+};
+```
 
 ### generateFetchers
 
