@@ -1,12 +1,12 @@
 import { Box, Text } from "ink";
 import React from "react";
 
-import TextInput from "./TextInput.js";
+import { TextInput } from "./TextInput.js";
 import { Answer } from "./Answer.js";
 import { Hint } from "./Hint.js";
 import { Message } from "./Message.js";
 
-type InputProps = {
+export type InputProps = {
   message: string;
   hint?: string;
   defaultValue?: string;

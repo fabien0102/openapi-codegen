@@ -1,7 +1,6 @@
 import Apollo from "@apollo/client";
 
 import { Box, Text } from "ink";
-import TextInput from "ink-text-input";
 import React from "react";
 import fetch from "cross-fetch";
 import { join } from "path";
@@ -17,6 +16,7 @@ import {
 } from "./queries/github.js";
 import { Select } from "./Select.js";
 import { Input } from "./Input.js";
+import { TextInput } from "./TextInput.js";
 
 const { ApolloClient, HttpLink, InMemoryCache } = Apollo;
 

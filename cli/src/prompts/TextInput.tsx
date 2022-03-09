@@ -6,7 +6,7 @@ import type { FC } from "react";
 import { Text, useInput } from "ink";
 import chalk from "chalk";
 
-interface Props {
+interface TextInputProps {
   /**
    * Text to display when `value` is empty.
    */
@@ -49,7 +49,7 @@ interface Props {
   onSubmit?: (value: string) => void;
 }
 
-const TextInput: FC<Props> = ({
+export const TextInput: FC<TextInputProps> = ({
   value: originalValue,
   placeholder = "",
   focus = true,
@@ -197,22 +197,4 @@ const TextInput: FC<Props> = ({
         : renderedValue}
     </Text>
   );
-};
-
-export default TextInput;
-
-interface UncontrolledProps extends Omit<Props, "value" | "onChange"> {
-  /**
-   * Initial value.
-   */
-  initialValue?: string;
-}
-
-export const UncontrolledTextInput: FC<UncontrolledProps> = ({
-  initialValue = "",
-  ...props
-}) => {
-  const [value, setValue] = useState(initialValue);
-
-  return <TextInput {...props} value={value} onChange={setValue} />;
 };

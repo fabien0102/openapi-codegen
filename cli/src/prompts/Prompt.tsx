@@ -1,12 +1,11 @@
 import React from "react";
-import { Box, render } from "ink";
+import { render } from "ink";
+import { ReplaySubject } from "rxjs";
 
 import type { GithubOptions } from "src/types";
 
-import { Input } from "./Input.js";
-import { Confirm } from "./Confirm.js";
-import { Choice, Select } from "./Select.js";
-import { Github } from "./Github.js";
+import { Choice } from "./Select.js";
+import { App, PromptUnit } from "./App.js";
 
 export type InputOptions = {
   message: string;
@@ -26,10 +25,12 @@ export type SelectOptions<TChoice> = {
 };
 
 export class Prompt {
+  private state = new ReplaySubject<PromptUnit>();
+
   /**
    * Ink render instance.
    */
-  private app = render(<Box />);
+  private app = render(<App state={this.state} />);
 
   /**
    * Close the prompt session.
@@ -51,7 +52,11 @@ export class Prompt {
     const props = typeof options === "string" ? { message: options } : options;
 
     return new Promise<string>((resolve) => {
-      this.app.rerender(<Input {...props} onSubmit={resolve} />);
+      this.state.next({
+        type: "input",
+        onSubmit: resolve,
+        ...props,
+      });
     });
   }
 
@@ -69,7 +74,11 @@ export class Prompt {
    */
   public select<TChoice>(props: SelectOptions<TChoice>): Promise<TChoice> {
     return new Promise<TChoice>((resolve) => {
-      this.app.rerender(<Select {...props} onSubmit={resolve} />);
+      this.state.next({
+        type: "select",
+        onSubmit: resolve,
+        ...props,
+      });
     });
   }
 
@@ -85,7 +94,11 @@ export class Prompt {
     const props = typeof options === "string" ? { message: options } : options;
 
     return new Promise<boolean>((resolve) => {
-      this.app.rerender(<Confirm {...props} onSubmit={resolve} />);
+      this.state.next({
+        type: "confirm",
+        onSubmit: resolve,
+        ...props,
+      });
     });
   }
 
@@ -94,7 +107,10 @@ export class Prompt {
    */
   public github(): Promise<GithubOptions> {
     return new Promise<GithubOptions>((resolve) => {
-      this.app.rerender(<Github onSubmit={resolve} />);
+      this.state.next({
+        type: "github",
+        onSubmit: resolve,
+      });
     });
   }
 }

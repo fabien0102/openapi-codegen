@@ -2,7 +2,7 @@ import { Box, Text } from "ink";
 import React, { useState } from "react";
 
 import { Message } from "./Message.js";
-import TextInput from "./TextInput.js";
+import { TextInput } from "./TextInput.js";
 
 export type ConfirmProps = {
   message: string;
