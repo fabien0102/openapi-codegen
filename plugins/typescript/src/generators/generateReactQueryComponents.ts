@@ -74,6 +74,7 @@ export const generateReactQueryComponents = async (
   const contextTypeName = `${c.pascal(filenamePrefix)}Context`;
   const contextHookName = `use${c.pascal(filenamePrefix)}Context`;
   const nodes: ts.Node[] = [];
+  const keyManagerItems: [string, ts.Expression][] = [];
 
   const fetcherFilename = formatFilename(filenamePrefix + "-fetcher");
   const contextFilename = formatFilename(filenamePrefix + "-context");
@@ -145,6 +146,49 @@ export const generateReactQueryComponents = async (
           Valid options: "useMutate", "useQuery"`);
         }
 
+        if (component === "useQuery") {
+          keyManagerItems.push([
+            operationId,
+
+            f.createArrowFunction(
+              undefined,
+              undefined,
+              [
+                f.createParameterDeclaration(
+                  undefined,
+                  undefined,
+                  undefined,
+                  f.createIdentifier("variables"),
+                  undefined,
+                  f.createIntersectionTypeNode(
+                    compactNodes([
+                      pathParamsType,
+                      queryParamsType,
+                      requestBodyType,
+                    ])
+                  ),
+                  undefined
+                ),
+              ],
+              undefined,
+              f.createToken(ts.SyntaxKind.EqualsGreaterThanToken),
+              f.createArrayLiteralExpression([
+                f.createStringLiteral(operationId),
+                f.createSpreadElement(
+                  f.createCallExpression(
+                    f.createPropertyAccessExpression(
+                      f.createIdentifier("Object"),
+                      f.createIdentifier("values")
+                    ),
+                    undefined,
+                    [f.createIdentifier("variables")]
+                  )
+                ),
+              ])
+            ),
+          ]);
+        }
+
         nodes.push(
           ...createOperationFetcherFnNodes({
             dataType,
@@ -183,6 +227,25 @@ export const generateReactQueryComponents = async (
     }
   );
 
+  const queryKeyManager = f.createVariableStatement(
+    [f.createModifier(ts.SyntaxKind.ExportKeyword)],
+    f.createVariableDeclarationList(
+      [
+        f.createVariableDeclaration(
+          f.createIdentifier("queryKeyManager"),
+          undefined,
+          undefined,
+          f.createObjectLiteralExpression(
+            keyManagerItems.map(([key, node]) =>
+              f.createPropertyAssignment(key, node)
+            )
+          )
+        ),
+      ],
+      ts.NodeFlags.Const
+    )
+  );
+
   await context.writeFile(
     filename + ".ts",
     printNodes([
@@ -195,6 +258,7 @@ export const generateReactQueryComponents = async (
       createNamedImport(fetcherFn, `./${fetcherFilename}`),
       ...getUsedImports(nodes, config.schemasFiles),
       ...nodes,
+      queryKeyManager,
     ])
   );
 };
@@ -543,3 +607,13 @@ const createReactQueryImport = () =>
     f.createStringLiteral("react-query"),
     undefined
   );
+
+function compactNodes(nodes: ts.TypeNode[]): readonly ts.TypeNode[] {
+  // TODO: Remove empty {}
+  return nodes.filter(
+    (node) =>
+      node !== undefined &&
+      node.kind !== ts.SyntaxKind.UndefinedKeyword &&
+      node.kind !== ts.SyntaxKind.NullKeyword
+  );
+}
