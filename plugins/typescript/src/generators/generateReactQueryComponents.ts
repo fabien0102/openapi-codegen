@@ -147,9 +147,14 @@ export const generateReactQueryComponents = async (
         }
 
         if (component === "useQuery") {
+          const queryBuilderType = compactNodes([
+            pathParamsType,
+            queryParamsType,
+            requestBodyType,
+          ]);
+
           keyManagerItems.push([
             operationId,
-
             f.createArrowFunction(
               undefined,
               undefined,
@@ -160,14 +165,15 @@ export const generateReactQueryComponents = async (
                   undefined,
                   f.createIdentifier("variables"),
                   undefined,
-                  f.createIntersectionTypeNode(
-                    compactNodes([
-                      pathParamsType,
-                      queryParamsType,
-                      requestBodyType,
-                    ])
-                  ),
-                  undefined
+                  queryBuilderType.length > 0
+                    ? f.createIntersectionTypeNode(queryBuilderType)
+                    : f.createTypeReferenceNode("Record", [
+                        f.createTypeReferenceNode("string"),
+                        f.createTypeReferenceNode("never"),
+                      ]),
+                  queryBuilderType.length === 0
+                    ? f.createObjectLiteralExpression([])
+                    : undefined
                 ),
               ],
               undefined,
@@ -634,12 +640,12 @@ const createReactQueryImport = () =>
 
 // TODO: Properly type this
 function compactNodes(nodes: any[]): any[] {
-  // TODO: Remove empty {}
   return nodes.filter(
     (node) =>
       node !== undefined &&
       node.kind !== ts.SyntaxKind.UndefinedKeyword &&
-      node.kind !== ts.SyntaxKind.NullKeyword
+      node.kind !== ts.SyntaxKind.NullKeyword &&
+      hasProperties(node)
   );
 }
 
