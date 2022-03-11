@@ -210,8 +210,11 @@ export const generateReactQueryComponents = async (
                 dataType,
                 errorType,
                 variablesType,
+                pathParamsType,
+                requestBodyType,
                 contextHookName,
                 name: `use${c.pascal(operationId)}`,
+                operationId,
               })
             : createMutationHook({
                 operationFetcherFnName,
@@ -414,15 +417,21 @@ const createQueryHook = ({
   dataType,
   errorType,
   variablesType,
+  pathParamsType,
+  requestBodyType,
   name,
+  operationId,
   operation,
 }: {
   operationFetcherFnName: string;
   contextHookName: string;
   name: string;
+  operationId: string;
   dataType: ts.TypeNode;
   errorType: ts.TypeNode;
   variablesType: ts.TypeNode;
+  pathParamsType: ts.TypeNode;
+  requestBodyType: ts.TypeNode;
   operation: OperationObject;
 }) => {
   const nodes: ts.Node[] = [];
@@ -442,21 +451,6 @@ const createQueryHook = ({
               undefined,
               undefined,
               [
-                f.createParameterDeclaration(
-                  undefined,
-                  undefined,
-                  undefined,
-                  f.createIdentifier("queryKey"),
-                  undefined,
-                  f.createTypeReferenceNode(
-                    f.createQualifiedName(
-                      f.createIdentifier("reactQuery"),
-                      f.createIdentifier("QueryKey")
-                    ),
-                    undefined
-                  ),
-                  undefined
-                ),
                 f.createParameterDeclaration(
                   undefined,
                   undefined,
@@ -525,7 +519,37 @@ const createQueryHook = ({
                       f.createCallExpression(
                         f.createIdentifier("queryKeyFn"),
                         undefined,
-                        [f.createIdentifier("queryKey")]
+                        [
+                          f.createCallExpression(
+                            f.createPropertyAccessExpression(
+                              f.createIdentifier("queryKeyManager"),
+                              f.createIdentifier(operationId)
+                            ),
+                            undefined,
+                            [
+                              f.createObjectLiteralExpression(
+                                compactNodes([
+                                  hasProperties(requestBodyType)
+                                    ? f.createSpreadAssignment(
+                                        f.createPropertyAccessExpression(
+                                          f.createIdentifier("variables"),
+                                          f.createIdentifier("body")
+                                        )
+                                      )
+                                    : undefined,
+                                  hasProperties(pathParamsType)
+                                    ? f.createSpreadAssignment(
+                                        f.createPropertyAccessExpression(
+                                          f.createIdentifier("variables"),
+                                          f.createIdentifier("pathParams")
+                                        )
+                                      )
+                                    : undefined,
+                                ])
+                              ),
+                            ]
+                          ),
+                        ]
                       ),
                       f.createArrowFunction(
                         undefined,
@@ -608,7 +632,8 @@ const createReactQueryImport = () =>
     undefined
   );
 
-function compactNodes(nodes: ts.TypeNode[]): readonly ts.TypeNode[] {
+// TODO: Properly type this
+function compactNodes(nodes: any[]): any[] {
   // TODO: Remove empty {}
   return nodes.filter(
     (node) =>
@@ -617,3 +642,10 @@ function compactNodes(nodes: ts.TypeNode[]): readonly ts.TypeNode[] {
       node.kind !== ts.SyntaxKind.NullKeyword
   );
 }
+
+const hasProperties = (node: ts.Node) => {
+  return (
+    (!ts.isTypeLiteralNode(node) || node.members.length > 0) &&
+    node.kind !== ts.SyntaxKind.UndefinedKeyword
+  );
+};
