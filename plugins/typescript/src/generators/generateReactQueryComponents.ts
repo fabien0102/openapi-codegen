@@ -1,4 +1,4 @@
-import ts, { factory as f } from "typescript";
+import ts, { factory as f, SyntaxKind } from "typescript";
 import * as c from "case";
 
 import { ConfigBase, Context } from "./types";
@@ -91,7 +91,10 @@ export const generateReactQueryComponents = async (
   }
 
   if (!context.existsFile(`${contextFilename}.ts`)) {
-    context.writeFile(`${contextFilename}.ts`, getContext(filenamePrefix));
+    context.writeFile(
+      `${contextFilename}.ts`,
+      getContext(filenamePrefix, filename)
+    );
   }
 
   // Generate `useQuery` & `useMutation`
@@ -147,12 +150,6 @@ export const generateReactQueryComponents = async (
         }
 
         if (component === "useQuery") {
-          const queryBuilderType = compactNodes([
-            pathParamsType,
-            queryParamsType,
-            requestBodyType,
-          ]);
-
           keyManagerItems.push([
             operationId,
             f.createArrowFunction(
@@ -165,31 +162,67 @@ export const generateReactQueryComponents = async (
                   undefined,
                   f.createIdentifier("variables"),
                   undefined,
-                  queryBuilderType.length > 0
-                    ? f.createIntersectionTypeNode(queryBuilderType)
-                    : f.createTypeReferenceNode("Record", [
-                        f.createTypeReferenceNode("string"),
-                        f.createTypeReferenceNode("never"),
-                      ]),
-                  queryBuilderType.length === 0
-                    ? f.createObjectLiteralExpression([])
-                    : undefined
+                  f.createTypeReferenceNode(f.createIdentifier("Omit"), [
+                    variablesType,
+                    f.createTypeOperatorNode(
+                      SyntaxKind.KeyOfKeyword,
+                      f.createIndexedAccessTypeNode(
+                        f.createTypeReferenceNode(
+                          f.createIdentifier(contextTypeName)
+                        ),
+                        f.createLiteralTypeNode(
+                          f.createStringLiteral("fetcherOptions")
+                        )
+                      )
+                    ),
+                  ]),
+                  undefined
                 ),
               ],
               undefined,
               f.createToken(ts.SyntaxKind.EqualsGreaterThanToken),
               f.createArrayLiteralExpression([
+                f.createSpreadElement(
+                  compactNodes([pathParamsType]).length > 0
+                    ? f.createCallExpression(
+                        f.createPropertyAccessExpression(
+                          f.createIdentifier("Object"),
+                          f.createIdentifier("values")
+                        ),
+                        undefined,
+                        [
+                          f.createPropertyAccessExpression(
+                            f.createIdentifier("variables"),
+                            f.createIdentifier("pathParams")
+                          ),
+                        ]
+                      )
+                    : f.createArrayLiteralExpression([])
+                ),
                 f.createStringLiteral(operationId),
                 f.createSpreadElement(
-                  f.createCallExpression(
-                    f.createPropertyAccessExpression(
-                      f.createIdentifier("Object"),
-                      f.createIdentifier("values")
-                    ),
-                    undefined,
-                    [f.createIdentifier("variables")]
-                  )
+                  compactNodes([queryParamsType]).length > 0
+                    ? f.createCallExpression(
+                        f.createPropertyAccessExpression(
+                          f.createIdentifier("Object"),
+                          f.createIdentifier("values")
+                        ),
+                        undefined,
+                        [
+                          f.createPropertyAccessExpression(
+                            f.createIdentifier("variables"),
+                            f.createIdentifier("queryParams")
+                          ),
+                        ]
+                      )
+                    : f.createArrayLiteralExpression([])
                 ),
+                compactNodes([requestBodyType]).length > 0
+                  ? f.createPropertyAccessExpression(
+                      f.createIdentifier("variables"),
+                      f.createIdentifier("body")
+                    )
+                  : f.createArrayLiteralExpression([]),
               ])
             ),
           ]);
@@ -532,29 +565,10 @@ const createQueryHook = ({
                               f.createIdentifier(operationId)
                             ),
                             undefined,
-                            [
-                              f.createObjectLiteralExpression(
-                                compactNodes([
-                                  hasProperties(requestBodyType)
-                                    ? f.createSpreadAssignment(
-                                        f.createPropertyAccessExpression(
-                                          f.createIdentifier("variables"),
-                                          f.createIdentifier("body")
-                                        )
-                                      )
-                                    : undefined,
-                                  hasProperties(pathParamsType)
-                                    ? f.createSpreadAssignment(
-                                        f.createPropertyAccessExpression(
-                                          f.createIdentifier("variables"),
-                                          f.createIdentifier("pathParams")
-                                        )
-                                      )
-                                    : undefined,
-                                ])
-                              ),
-                            ]
+                            [f.createIdentifier("variables")]
                           ),
+                          f.createStringLiteral(operationId),
+                          f.createIdentifier("variables"),
                         ]
                       ),
                       f.createArrowFunction(
