@@ -1,8 +1,9 @@
-# OpenAPI Codegen
+<div align="center" style="margin-bottom: 16px">
+  <img src="openapi-codegen-logo.svg" width="400px" />
+</div>
 
-⚠️ This project is in an early stage, please check the issues to see what’s missing! ⚠️
-
--> Insert logo and badges here
+[![npm](https://img.shields.io/npm/v/@openapi-codegen/cli.svg?style=for-the-badge)](https://www.npmjs.com/package/@openapi-codegen/cli)
+[![License](https://img.shields.io/npm/l/@openapi-codegen/cli.svg?style=for-the-badge)](https://github.com/fabien0102/openapi-codegen/blob/main/LICENSE)
 
 Tooling to give you full type-safety around OpenAPI specs.
 
@@ -10,7 +11,7 @@ Tooling to give you full type-safety around OpenAPI specs.
 
 This will give you full auto-completion and type-safety of your APIs
 
-**For backend:**
+**For backend: (in coming)**
 
 This will generate everything you need to deliver a perfect API, spec driven.
 
