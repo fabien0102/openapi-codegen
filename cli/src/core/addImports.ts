@@ -1,3 +1,4 @@
+import { getText } from "../utils/getText.js";
 import ts, { factory as f } from "typescript";
 
 type Import = {
@@ -143,13 +144,4 @@ function createImportStatements(imports: Map<string, string[]>) {
       printer.printNode(ts.EmitHint.Unspecified, statement, sourceFile)
     )
     .join("\n");
-}
-
-function getText(expression: ts.Expression) {
-  try {
-    // @ts-expect-error
-    return (expression.text as string) ?? "";
-  } catch {
-    return "";
-  }
 }

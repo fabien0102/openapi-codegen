@@ -1,6 +1,8 @@
-import ts, { factory } from "typescript";
+import ts from "typescript";
 
 import type { Config } from "../types";
+
+const { factory } = ts;
 
 export type Plugin =
   | "typescript/types-only"
@@ -9,7 +11,7 @@ export type Plugin =
 
 export type GenerateConfigOptions = {
   /**
-   * New configation key
+   * New configuration key
    */
   namespace: string;
 
