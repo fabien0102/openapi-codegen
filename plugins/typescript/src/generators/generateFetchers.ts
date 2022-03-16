@@ -13,6 +13,7 @@ import { getOperationTypes } from "../core/getOperationTypes";
 import { createNamedImport } from "../core/createNamedImport";
 
 import { getFetcher } from "../templates/fetcher";
+import { get } from "lodash";
 
 export type Config = ConfigBase & {
   /**
@@ -80,7 +81,13 @@ export const generateFetchers = async (context: Context, config: Config) => {
   );
 
   if (!context.existsFile(`${fetcherFilename}.ts`)) {
-    context.writeFile(`${fetcherFilename}.ts`, getFetcher(filenamePrefix));
+    context.writeFile(
+      `${fetcherFilename}.ts`,
+      getFetcher({
+        prefix: filenamePrefix,
+        baseUrl: get(context.openAPIDocument, "servers.0.url"),
+      })
+    );
   } else {
     const fetcherSourceText = await context.readFile(`${fetcherFilename}.ts`);
 

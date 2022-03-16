@@ -91,3 +91,13 @@ export type Config = {
   outputDir: string;
   to: (context: Context) => Promise<void>;
 };
+
+export type Import = {
+  namedImports: string[];
+  module: string;
+};
+
+export type Plugin =
+  | "typescript/types-only"
+  | "typescript/react-query"
+  | "typescript/fetch";

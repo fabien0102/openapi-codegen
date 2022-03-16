@@ -25,29 +25,44 @@
   "license": "MIT",
   "scripts": {
     "build": "tsc -p tsconfig.package.json",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build",
+    "gen": "graphql-codegen --config codegen.yml -r dotenv/config"
   },
   "files": [
     "lib",
     "README.md"
   ],
   "dependencies": {
+    "@apollo/client": "^3.5.10",
     "@swc/core": "^1.2.118",
+    "case": "^1.6.3",
+    "chalk": "^5.0.0",
+    "cli-highlight": "^2.1.11",
     "clipanion": "^3.2.0-rc.3",
     "fs-extra": "^10.0.0",
     "got": "^12.0.0",
+    "got-fetch": "^5.0.2",
+    "graphql": "^15.8.0",
+    "ink": "^3.2.0",
     "js-yaml": "^4.1.0",
     "openapi3-ts": "^2.0.1",
     "prettier": "^2.5.1",
+    "react": "^17.0.2",
+    "rxjs": "^7.5.4",
     "slash": "^4.0.0",
     "swagger2openapi": "^7.0.8",
     "tslib": "^2.3.1"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "^2.6.2",
+    "@graphql-codegen/typescript": "^2.4.5",
+    "@graphql-codegen/typescript-operations": "^2.3.2",
+    "@graphql-codegen/typescript-react-apollo": "^3.2.8",
     "@swc-node/register": "^1.4.0",
     "@types/fs-extra": "^9.0.13",
     "@types/js-yaml": "^4.0.3",
     "@types/nock": "^11.1.0",
+    "@types/react": "^17.0.39",
     "@types/slash": "^3.0.0",
     "nock": "^13.2.1"
   }

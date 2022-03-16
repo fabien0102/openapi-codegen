@@ -1,8 +1,9 @@
 import { OpenAPIObject } from "openapi3-ts";
 
+import type { OpenAPISourceFile } from "../types";
+
 import swagger2openapi from "swagger2openapi";
 import YAML from "js-yaml";
-import { OpenAPISourceFile } from "../types";
 
 /**
  * Parse an openAPI source file to an openAPI object.

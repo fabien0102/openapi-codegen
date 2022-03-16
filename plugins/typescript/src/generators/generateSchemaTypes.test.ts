@@ -5,8 +5,15 @@ describe("generateSchemaTypes", () => {
   describe("filenameCase option", () => {
     it("should generate files in camel case", () => {
       const writeFile = jest.fn();
+      const readFile = jest.fn(() => Promise.resolve(""));
+
       generateSchemaTypes(
-        { openAPIDocument: petstore, writeFile, existsFile: () => true },
+        {
+          openAPIDocument: petstore,
+          writeFile,
+          readFile,
+          existsFile: () => true,
+        },
         {
           filenameCase: "camel",
         }
@@ -16,8 +23,15 @@ describe("generateSchemaTypes", () => {
 
     it("should generate files in snake case", () => {
       const writeFile = jest.fn();
+      const readFile = jest.fn(() => Promise.resolve(""));
+
       generateSchemaTypes(
-        { openAPIDocument: petstore, writeFile, existsFile: () => true },
+        {
+          openAPIDocument: petstore,
+          writeFile,
+          readFile,
+          existsFile: () => true,
+        },
         {
           filenameCase: "snake",
         }
@@ -27,8 +41,15 @@ describe("generateSchemaTypes", () => {
 
     it("should generate files in kebab case", () => {
       const writeFile = jest.fn();
+      const readFile = jest.fn(() => Promise.resolve(""));
+
       generateSchemaTypes(
-        { openAPIDocument: petstore, writeFile, existsFile: () => true },
+        {
+          openAPIDocument: petstore,
+          writeFile,
+          readFile,
+          existsFile: () => true,
+        },
         {
           filenameCase: "kebab",
         }
@@ -38,8 +59,15 @@ describe("generateSchemaTypes", () => {
 
     it("should generate files in pascal case", () => {
       const writeFile = jest.fn();
+      const readFile = jest.fn(() => Promise.resolve(""));
+
       generateSchemaTypes(
-        { openAPIDocument: petstore, writeFile, existsFile: () => true },
+        {
+          openAPIDocument: petstore,
+          writeFile,
+          readFile,
+          existsFile: () => true,
+        },
         {
           filenameCase: "pascal",
         }
@@ -51,8 +79,14 @@ describe("generateSchemaTypes", () => {
   describe("filenamePrefix option", () => {
     it("should take have the correct prefix", () => {
       const writeFile = jest.fn();
+      const readFile = jest.fn(() => Promise.resolve(""));
       generateSchemaTypes(
-        { openAPIDocument: petstore, writeFile, existsFile: () => true },
+        {
+          openAPIDocument: petstore,
+          writeFile,
+          readFile,
+          existsFile: () => true,
+        },
         {
           filenameCase: "camel",
           filenamePrefix: "petstore",
@@ -65,8 +99,14 @@ describe("generateSchemaTypes", () => {
   describe("schemas file generation", () => {
     it("should generate the schemas file", async () => {
       const writeFile = jest.fn();
+      const readFile = jest.fn(() => Promise.resolve(""));
       await generateSchemaTypes(
-        { openAPIDocument: petstore, writeFile, existsFile: () => true },
+        {
+          openAPIDocument: petstore,
+          writeFile,
+          readFile,
+          existsFile: () => true,
+        },
         {
           filenameCase: "camel",
         }
@@ -144,8 +184,14 @@ describe("generateSchemaTypes", () => {
 
     it("should generate the responses file", async () => {
       const writeFile = jest.fn();
+      const readFile = jest.fn(() => Promise.resolve(""));
       await generateSchemaTypes(
-        { openAPIDocument: petstore, writeFile, existsFile: () => true },
+        {
+          openAPIDocument: petstore,
+          writeFile,
+          readFile,
+          existsFile: () => true,
+        },
         {
           filenameCase: "camel",
         }
@@ -168,8 +214,14 @@ describe("generateSchemaTypes", () => {
 
     it("should generate the request bodies file", async () => {
       const writeFile = jest.fn();
+      const readFile = jest.fn(() => Promise.resolve(""));
       await generateSchemaTypes(
-        { openAPIDocument: petstore, writeFile, existsFile: () => true },
+        {
+          openAPIDocument: petstore,
+          writeFile,
+          readFile,
+          existsFile: () => true,
+        },
         {
           filenameCase: "camel",
         }
@@ -192,8 +244,15 @@ describe("generateSchemaTypes", () => {
 
     it("should generate the parameters file", async () => {
       const writeFile = jest.fn();
+      const readFile = jest.fn(() => Promise.resolve(""));
+
       await generateSchemaTypes(
-        { openAPIDocument: petstore, writeFile, existsFile: () => true },
+        {
+          openAPIDocument: petstore,
+          writeFile,
+          readFile,
+          existsFile: () => true,
+        },
         {
           filenameCase: "camel",
         }
