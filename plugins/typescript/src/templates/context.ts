@@ -55,10 +55,4 @@ export const getContext = (prefix: string, componentsFile: string) =>
       },
     };
   };
-
-  type KeyManager<T extends keyof typeof queryKeyManager> = NonNullable<Parameters<typeof queryKeyManager[T]>[0]> & {
-    pathParams?: Record<string, string>;
-    queryParams?: Record<string, string>;
-    body?: unknown;
-  };
   `;
