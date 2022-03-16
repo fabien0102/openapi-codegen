@@ -1,7 +1,7 @@
 import { Command, Option, UsageError } from "clipanion";
 import * as t from "typanion";
 import fsExtra from "fs-extra";
-import path from "path/posix";
+import _path from "path";
 import * as swc from "@swc/core";
 import prettier from "prettier";
 import { fileURLToPath } from "url";
@@ -11,6 +11,7 @@ import { Config, FromOptions, Namespace } from "../types";
 import { getOpenAPISourceFile } from "../core/getOpenAPISourceFile.js";
 import { parseOpenAPISourceFile } from "../core/parseOpenAPISourceFile.js";
 
+const path = _path.posix;
 const __filename = fileURLToPath(import.meta.url);
 
 // if no config -> tell the user to do `openapi-codegen init`
