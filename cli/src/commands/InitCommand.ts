@@ -2,16 +2,19 @@ import { Command, Option } from "clipanion";
 import { posix as path } from "path";
 import fsExtra from "fs-extra";
 import ts from "typescript";
+import { highlight } from "cli-highlight";
+import prettier from "prettier";
 
-import type { FileOptions, FromOptions, UrlOptions } from "../types/index";
+import type { FileOptions, FromOptions, UrlOptions, Plugin } from "../types";
 
 import {
   generateConfigProperty,
-  Plugin,
+  getImports,
 } from "../core/generateConfigProperty.js";
 import { Prompt } from "../prompts/Prompt.js";
 import { getText } from "../utils/getText.js";
 import emptyConfig from "../templates/emptyConfig.js";
+import { updateConfig } from "../core/updateConfig.js";
 
 export class InitCommand extends Command {
   static paths = [["init"]];
@@ -106,7 +109,7 @@ export class InitCommand extends Command {
       choices: [
         { label: "File", value: "file" as const },
         { label: "Url", value: "url" as const },
-        { label: "Github", value: "github" as const },
+        // { label: "Github", value: "github" as const },
       ],
       message: "Select the source of your OpenAPI",
     });
@@ -145,18 +148,30 @@ export class InitCommand extends Command {
       },
     });
 
+    const updatedConfigSourceFile = updateConfig({
+      sourceFile: config.sourceFile,
+      existingImports: config.importModules,
+      importsToInsert: getImports(plugin),
+      configProperty,
+    });
+
     const printer = ts.createPrinter({
       newLine: ts.NewLineKind.LineFeed,
       removeComments: false,
     });
 
+    const prettierConfig = await prettier.resolveConfig(process.cwd());
+
+    const updatedConfig = prettier.format(
+      printer.printFile(updatedConfigSourceFile),
+      { parser: "babel-ts", ...prettierConfig }
+    );
+
     if (this.dryRun) {
       this.context.stdout.write(
-        printer.printNode(
-          ts.EmitHint.Unspecified,
-          configProperty,
-          config.sourceFile
-        )
+        highlight(updatedConfig, {
+          language: "typescript",
+        })
       );
     } else {
       // write new config

@@ -1,10 +1,8 @@
 import { getText } from "../utils/getText.js";
-import ts, { factory as f } from "typescript";
+import ts from "typescript";
+import type { Import } from "../types";
 
-type Import = {
-  namedImports: string[];
-  module: string;
-};
+const { factory: f } = ts;
 
 interface AddImportsOptions {
   /**
@@ -21,12 +19,18 @@ interface AddImportsOptions {
    * List of the existing imports (module name)
    */
   existingImports: string[];
+
+  /**
+   * Config property to add
+   */
+  configProperty: ts.PropertyAssignment;
 }
 
-export function addImports({
+export function updateConfig({
   sourceFile,
   existingImports,
   importsToInsert,
+  configProperty,
 }: AddImportsOptions) {
   // Split imports in two categories
   const { toInsert, toUpdate } = importsToInsert.reduce(
@@ -44,7 +48,7 @@ export function addImports({
     }
   );
 
-  const updateExistingImports: ts.TransformerFactory<ts.SourceFile> = (
+  const addImportsAndConfigProperty: ts.TransformerFactory<ts.SourceFile> = (
     context
   ) => {
     const visit: ts.Visitor = (node) => {
@@ -81,6 +85,37 @@ export function addImports({
           node.moduleSpecifier
         );
       }
+
+      if (
+        ts.isExportAssignment(node) &&
+        ts.isCallExpression(node.expression) &&
+        ts.isIdentifier(node.expression.expression) &&
+        node.expression.expression.escapedText === "defineConfig"
+      ) {
+        const prevProperties = ts.isObjectLiteralExpression(
+          node.expression.arguments[0]
+        )
+          ? node.expression.arguments[0].properties
+          : [];
+
+        return f.updateExportAssignment(
+          node,
+          node.decorators,
+          node.modifiers,
+          f.updateCallExpression(
+            node.expression,
+            node.expression.expression,
+            node.expression.typeArguments,
+            [
+              f.createObjectLiteralExpression(
+                [...prevProperties, configProperty],
+                true
+              ),
+            ]
+          )
+        );
+      }
+
       return node;
     };
 
@@ -89,7 +124,7 @@ export function addImports({
 
   const {
     transformed: [sourceFileWithImports],
-  } = ts.transform(sourceFile, [updateExistingImports]);
+  } = ts.transform(sourceFile, [addImportsAndConfigProperty]);
 
   const printer = ts.createPrinter({
     newLine: ts.NewLineKind.LineFeed,

@@ -24,7 +24,7 @@ describe("generateConfigProperty", () => {
           outputDir: \\"specs\\",
           to: async (context) => {
               await generateSchemaTypes(context, {
-                  filenamePrefix = \\"foo\\"
+                  filenamePrefix: \\"foo\\"
               });
           }
       }"

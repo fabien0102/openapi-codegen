@@ -1,13 +1,8 @@
 import ts from "typescript";
 
-import type { Config } from "../types";
+import type { Config, Import, Plugin } from "../types";
 
 const { factory } = ts;
-
-export type Plugin =
-  | "typescript/types-only"
-  | "typescript/react-query"
-  | "typescript/fetch";
 
 export type GenerateConfigOptions = {
   /**
@@ -78,7 +73,7 @@ export function generateConfigProperty({
             undefined,
             factory.createToken(ts.SyntaxKind.EqualsGreaterThanToken),
             factory.createBlock(
-              getToFunctionStatememts(options.plugin, namespace),
+              getToFunctionStatements(options.plugin, namespace),
               true
             )
           )
@@ -89,7 +84,7 @@ export function generateConfigProperty({
   );
 }
 
-function getToFunctionStatememts(
+function getToFunctionStatements(
   plugin: Plugin,
   namespace: string
 ): ts.Statement[] {
@@ -105,7 +100,7 @@ function getToFunctionStatememts(
                 factory.createIdentifier("context"),
                 factory.createObjectLiteralExpression(
                   [
-                    factory.createShorthandPropertyAssignment(
+                    factory.createPropertyAssignment(
                       factory.createIdentifier("filenamePrefix"),
                       factory.createStringLiteral(namespace)
                     ),
@@ -286,6 +281,38 @@ function getToFunctionStatememts(
             )
           )
         ),
+      ];
+  }
+}
+
+/**
+ * Get list of required imports regarding the plugin
+ *
+ * @param plugin
+ * @returns
+ */
+export function getImports(plugin: Plugin): Import[] {
+  switch (plugin) {
+    case "typescript/fetch":
+      return [
+        {
+          module: "@openapi-codegen/typescript",
+          namedImports: ["generateSchemaTypes", "generateFetchers"],
+        },
+      ];
+    case "typescript/types-only":
+      return [
+        {
+          module: "@openapi-codegen/typescript",
+          namedImports: ["generateSchemaTypes"],
+        },
+      ];
+    case "typescript/react-query":
+      return [
+        {
+          module: "@openapi-codegen/typescript",
+          namedImports: ["generateSchemaTypes", "generateReactQueryComponents"],
+        },
       ];
   }
 }
