@@ -1,4 +1,4 @@
-import ts, { factory as f, SyntaxKind } from "typescript";
+import ts, { factory as f } from "typescript";
 import * as c from "case";
 
 import { ConfigBase, Context } from "./types";
@@ -73,7 +73,7 @@ export const generateReactQueryComponents = async (
   const contextTypeName = `${c.pascal(filenamePrefix)}Context`;
   const contextHookName = `use${c.pascal(filenamePrefix)}Context`;
   const nodes: ts.Node[] = [];
-  const keyManagerItems: [string, ts.Expression][] = [];
+  const keyManagerItems: ts.TypeLiteralNode[] = [];
 
   const fetcherFilename = formatFilename(filenamePrefix + "-fetcher");
   const contextFilename = formatFilename(filenamePrefix + "-context");
@@ -145,82 +145,22 @@ export const generateReactQueryComponents = async (
         }
 
         if (component === "useQuery") {
-          keyManagerItems.push([
-            operationId,
-            f.createArrowFunction(
-              undefined,
-              undefined,
-              [
-                f.createParameterDeclaration(
-                  undefined,
-                  undefined,
-                  undefined,
-                  f.createIdentifier("variables"),
-                  undefined,
-                  f.createTypeReferenceNode(f.createIdentifier("Omit"), [
-                    variablesType,
-                    f.createTypeOperatorNode(
-                      SyntaxKind.KeyOfKeyword,
-                      f.createIndexedAccessTypeNode(
-                        f.createTypeReferenceNode(
-                          f.createIdentifier(contextTypeName)
-                        ),
-                        f.createLiteralTypeNode(
-                          f.createStringLiteral("fetcherOptions")
-                        )
-                      )
-                    ),
-                  ]),
-                  undefined
-                ),
-              ],
-              undefined,
-              f.createToken(ts.SyntaxKind.EqualsGreaterThanToken),
-              f.createArrayLiteralExpression([
-                f.createSpreadElement(
-                  compactNodes([pathParamsType]).length > 0
-                    ? f.createCallExpression(
-                        f.createPropertyAccessExpression(
-                          f.createIdentifier("Object"),
-                          f.createIdentifier("values")
-                        ),
-                        undefined,
-                        [
-                          f.createPropertyAccessExpression(
-                            f.createIdentifier("variables"),
-                            f.createIdentifier("pathParams")
-                          ),
-                        ]
-                      )
-                    : f.createArrayLiteralExpression([])
-                ),
-                f.createStringLiteral(operationId),
-                f.createSpreadElement(
-                  compactNodes([queryParamsType]).length > 0
-                    ? f.createCallExpression(
-                        f.createPropertyAccessExpression(
-                          f.createIdentifier("Object"),
-                          f.createIdentifier("values")
-                        ),
-                        undefined,
-                        [
-                          f.createPropertyAccessExpression(
-                            f.createIdentifier("variables"),
-                            f.createIdentifier("queryParams")
-                          ),
-                        ]
-                      )
-                    : f.createArrayLiteralExpression([])
-                ),
-                compactNodes([requestBodyType]).length > 0
-                  ? f.createPropertyAccessExpression(
-                      f.createIdentifier("variables"),
-                      f.createIdentifier("body")
-                    )
-                  : f.createArrayLiteralExpression([]),
-              ])
-            ),
-          ]);
+          keyManagerItems.push(
+            f.createTypeLiteralNode([
+              f.createPropertySignature(
+                undefined,
+                f.createIdentifier("operationId"),
+                undefined,
+                f.createLiteralTypeNode(f.createStringLiteral(operationId))
+              ),
+              f.createPropertySignature(
+                undefined,
+                f.createIdentifier("variables"),
+                undefined,
+                variablesType
+              ),
+            ])
+          );
         }
 
         nodes.push(
@@ -244,8 +184,6 @@ export const generateReactQueryComponents = async (
                 dataType,
                 errorType,
                 variablesType,
-                pathParamsType,
-                requestBodyType,
                 contextHookName,
                 name: `use${c.pascal(operationId)}`,
                 operationId,
@@ -264,23 +202,12 @@ export const generateReactQueryComponents = async (
     }
   );
 
-  const queryKeyManager = f.createVariableStatement(
+  const queryKeyManager = f.createTypeAliasDeclaration(
+    undefined,
     [f.createModifier(ts.SyntaxKind.ExportKeyword)],
-    f.createVariableDeclarationList(
-      [
-        f.createVariableDeclaration(
-          f.createIdentifier("queryKeyManager"),
-          undefined,
-          undefined,
-          f.createObjectLiteralExpression(
-            keyManagerItems.map(([key, node]) =>
-              f.createPropertyAssignment(key, node)
-            )
-          )
-        ),
-      ],
-      ts.NodeFlags.Const
-    )
+    "Operation",
+    undefined,
+    f.createUnionTypeNode(keyManagerItems)
   );
 
   await context.writeFile(
@@ -451,8 +378,6 @@ const createQueryHook = ({
   dataType,
   errorType,
   variablesType,
-  pathParamsType,
-  requestBodyType,
   name,
   operationId,
   operation,
@@ -464,8 +389,6 @@ const createQueryHook = ({
   dataType: ts.TypeNode;
   errorType: ts.TypeNode;
   variablesType: ts.TypeNode;
-  pathParamsType: ts.TypeNode;
-  requestBodyType: ts.TypeNode;
   operation: OperationObject;
 }) => {
   const nodes: ts.Node[] = [];
@@ -554,16 +477,16 @@ const createQueryHook = ({
                         f.createIdentifier("queryKeyFn"),
                         undefined,
                         [
-                          f.createCallExpression(
-                            f.createPropertyAccessExpression(
-                              f.createIdentifier("queryKeyManager"),
-                              f.createIdentifier(operationId)
+                          f.createObjectLiteralExpression([
+                            f.createPropertyAssignment(
+                              "operationId",
+                              f.createStringLiteral(operationId)
                             ),
-                            undefined,
-                            [f.createIdentifier("variables")]
-                          ),
-                          f.createStringLiteral(operationId),
-                          f.createIdentifier("variables"),
+                            f.createPropertyAssignment(
+                              "variables",
+                              f.createIdentifier("variables")
+                            ),
+                          ]),
                         ]
                       ),
                       f.createArrowFunction(
@@ -646,21 +569,3 @@ const createReactQueryImport = () =>
     f.createStringLiteral("react-query"),
     undefined
   );
-
-// TODO: Properly type this
-function compactNodes(nodes: any[]): any[] {
-  return nodes.filter(
-    (node) =>
-      node !== undefined &&
-      node.kind !== ts.SyntaxKind.UndefinedKeyword &&
-      node.kind !== ts.SyntaxKind.NullKeyword &&
-      hasProperties(node)
-  );
-}
-
-const hasProperties = (node: ts.Node) => {
-  return (
-    (!ts.isTypeLiteralNode(node) || node.members.length > 0) &&
-    node.kind !== ts.SyntaxKind.UndefinedKeyword
-  );
-};
