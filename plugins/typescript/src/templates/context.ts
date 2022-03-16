@@ -2,7 +2,7 @@ import { pascal } from "case";
 
 export const getContext = (prefix: string, componentsFile: string) =>
   `import type { QueryKey, UseQueryOptions } from "react-query";
-  import { queryKeyManager } from './${componentsFile}';
+  import { Operation } from './${componentsFile}';
   
   export type ${pascal(prefix)}Context = {
     fetcherOptions: {
@@ -25,11 +25,7 @@ export const getContext = (prefix: string, componentsFile: string) =>
     /**
      * Query key middleware.
      */
-    queryKeyFn: <T extends keyof typeof queryKeyManager>(
-      queryKey: reactQuery.QueryKey,
-      operation: T,
-      variables: KeyManager<T>
-    ) => reactQuery.QueryKey;
+    queryKeyFn: (operation: Operation) => reactQuery.QueryKey;
   };
   
   /**
@@ -48,7 +44,15 @@ export const getContext = (prefix: string, componentsFile: string) =>
     return {
       fetcherOptions: {},
       queryOptions: {},
-      queryKeyFn: queryKey => queryKey,
+      queryKeyFn: queryKey => {
+        switch (operation.operationId) {
+          default: {
+            const { pathParams, queryParams, body } = operation.variables;
+
+            return [operation, pathParams, queryParams, body];
+          }
+        }
+      },
     };
   };
 
