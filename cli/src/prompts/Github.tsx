@@ -1,8 +1,8 @@
 import Apollo from "@apollo/client";
 
 import { Box, Text } from "ink";
+import fetch from "got-fetch";
 import React from "react";
-import fetch from "cross-fetch";
 import { join } from "path";
 import { homedir } from "os";
 import { existsSync, readFileSync, writeFileSync } from "fs";
