@@ -18,16 +18,15 @@ This will generate everything you need to deliver a perfect API, spec driven.
 ## Getting started
 
 ```bash
-$ npx @openapi-codegen/cli init
+$ npm i -D @openapi-codegen/{cli,typescript}
+$ npx openapi-codegen init
 ```
 
-Follow the steps, this will generate a configuration file for you (openapi-codegen.config.ts) and update your `package.json`
-
-```bash
-$ yarn gen # or the defined alias
-```
+Follow the steps, this will generate a configuration file for you (openapi-codegen.config.ts).
 
 You should have a bunch of types / components ready to be used.
+
+Note: The generated `{namespace}Fetcher.ts` assume a global `fetch` and the `qs` package, this is just a suggestion, you can do what ever you want on this file as soon as the types are compliant.
 
 ## Philosophy
 
