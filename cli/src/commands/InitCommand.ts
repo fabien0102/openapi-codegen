@@ -4,6 +4,7 @@ import fsExtra from "fs-extra";
 import ts from "typescript";
 import { highlight } from "cli-highlight";
 import prettier from "prettier";
+import format from "case";
 
 import type { FileOptions, FromOptions, UrlOptions, Plugin } from "../types";
 
@@ -29,12 +30,23 @@ export class InitCommand extends Command {
 
   private prompt = new Prompt();
 
-  private async getConfigSourceFile() {
-    const userConfigPath = path.join(
-      process.cwd(),
-      this.config || "openapi-codegen.config.ts"
-    );
+  private hasDependencyInstalled(name: string, packageJSON: any) {
+    if (typeof packageJSON !== "object") return false;
+    if (
+      typeof packageJSON.dependencies === "object" &&
+      packageJSON.dependencies[name]
+    )
+      return true;
+    if (
+      typeof packageJSON.devDependencies === "object" &&
+      packageJSON.devDependencies[name]
+    )
+      return true;
 
+    return false;
+  }
+
+  private async getConfigSourceFile(userConfigPath: string) {
     if (fsExtra.existsSync(userConfigPath)) {
       const sourceText = await fsExtra.readFile(userConfigPath, "utf-8");
       const sourceFile = ts.createSourceFile(
@@ -66,6 +78,7 @@ export class InitCommand extends Command {
 
       if (isValidConfig) {
         return {
+          isExistingConfig: true,
           sourceFile,
           importModules: Array.from(importModules.values()),
         };
@@ -79,7 +92,11 @@ export class InitCommand extends Command {
       ts.ScriptTarget.Latest
     );
 
-    return { sourceFile, importModules: ["@openapi-codegen/cli"] };
+    return {
+      isExistingConfig: false,
+      sourceFile,
+      importModules: ["@openapi-codegen/cli"],
+    };
   }
 
   private async askForFile(): Promise<FileOptions> {
@@ -103,7 +120,12 @@ export class InitCommand extends Command {
   }
 
   async execute() {
-    const config = await this.getConfigSourceFile();
+    const userConfigPath = path.join(
+      process.cwd(),
+      this.config || "openapi-codegen.config.ts"
+    );
+
+    const config = await this.getConfigSourceFile(userConfigPath);
 
     const source = await this.prompt.select({
       choices: [
@@ -121,9 +143,11 @@ export class InitCommand extends Command {
         ? await this.askForUrl()
         : await this.prompt.github();
 
-    const namespace = await this.prompt.input({
-      message: "What namespace do you want for your API?",
-    });
+    const namespace = format.camel(
+      await this.prompt.input({
+        message: "What namespace do you want for your API?",
+      })
+    );
 
     const plugin = await this.prompt.select<Plugin>({
       message: "What do you want to generate?",
@@ -148,10 +172,12 @@ export class InitCommand extends Command {
       },
     });
 
+    const importsToInsert = getImports(plugin);
+
     const updatedConfigSourceFile = updateConfig({
       sourceFile: config.sourceFile,
       existingImports: config.importModules,
-      importsToInsert: getImports(plugin),
+      importsToInsert,
       configProperty,
     });
 
@@ -174,10 +200,43 @@ export class InitCommand extends Command {
         })
       );
     } else {
-      // write new config
-      // update package.json if no command
-      this.context.stdout.write(JSON.stringify(from));
-      // little message about the next step here
+      const nextSteps: string[] = [];
+      try {
+        const packageJson = await fsExtra.readJSON(
+          path.join(process.cwd(), "package.json")
+        );
+        const hasCli = this.hasDependencyInstalled(
+          "@openapi-codegen/cli",
+          packageJson
+        );
+        const hasTsPlugin = this.hasDependencyInstalled(
+          "@openapi-codegen/typescript",
+          packageJson
+        );
+        if (!hasCli && !hasTsPlugin) {
+          nextSteps.push("npm install -D @openapi-codegen/{cli,typescript}");
+        } else if (!hasCli) {
+          nextSteps.push("npm install -D @openapi-codegen/cli");
+        } else if (!hasTsPlugin) {
+          nextSteps.push("npm install -D @openapi-codegen/typescript");
+        }
+      } catch {
+        nextSteps.push("npm install -D @openapi-codegen/{cli,typescript}");
+      }
+      nextSteps.push(`npx openapi-codegen gen ${namespace}`);
+
+      await fsExtra.writeFile(userConfigPath, updatedConfig);
+      if (config.isExistingConfig) {
+        this.context.stdout.write(
+          `The config "${namespace}" has been added to your current config successfully 🥳\n`
+        );
+      } else {
+        this.context.stdout.write(`A new config file has been created!\n`);
+      }
+
+      this.context.stdout.write(
+        `\n  Next steps:\n   - ${nextSteps.join("\n   - ")}\n`
+      );
     }
   }
 }
