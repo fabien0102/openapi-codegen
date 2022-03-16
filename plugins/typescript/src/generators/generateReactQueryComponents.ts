@@ -482,8 +482,7 @@ const createQueryHook = ({
                               "operationId",
                               f.createStringLiteral(operationId)
                             ),
-                            f.createPropertyAssignment(
-                              "variables",
+                            f.createShorthandPropertyAssignment(
                               f.createIdentifier("variables")
                             ),
                           ]),
