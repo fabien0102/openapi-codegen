@@ -26,7 +26,7 @@ Follow the steps, this will generate a configuration file for you (openapi-codeg
 
 You should have a bunch of types / components ready to be used.
 
-Note: The generated `{namespace}Fetcher.ts` assume a global `fetch` and the `qs` package, this is just a suggestion, you can do what ever you want on this file as soon as the types are compliant.
+Note: The generated `{namespace}Fetcher.ts` assume a global `fetch`, if you want to use this in a nodejs environment, please update this file (this is just a template)
 
 ## Philosophy
 
