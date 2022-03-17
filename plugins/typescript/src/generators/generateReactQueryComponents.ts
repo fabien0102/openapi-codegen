@@ -14,6 +14,7 @@ import { createNamedImport } from "../core/createNamedImport";
 
 import { getFetcher } from "../templates/fetcher";
 import { getContext } from "../templates/context";
+import { get } from "lodash";
 
 export type Config = ConfigBase & {
   /**
@@ -80,7 +81,11 @@ export const generateReactQueryComponents = async (
   if (!context.existsFile(`${fetcherFilename}.ts`)) {
     context.writeFile(
       `${fetcherFilename}.ts`,
-      getFetcher(filenamePrefix, contextFilename)
+      getFetcher({
+        prefix: filenamePrefix,
+        contextPath: contextFilename,
+        baseUrl: get(context.openAPIDocument, "servers.0.url"),
+      })
     );
   }
 

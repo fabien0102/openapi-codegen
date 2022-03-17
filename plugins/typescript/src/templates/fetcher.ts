@@ -5,14 +5,22 @@ import { camel, pascal } from "case";
  *
  * @param contextPath import the context from another file
  */
-export const getFetcher = (prefix: string, contextPath?: string) =>
+export const getFetcher = ({
+  prefix,
+  contextPath,
+  baseUrl,
+}: {
+  prefix: string;
+  contextPath?: string;
+  baseUrl?: string;
+}) =>
   `import qs from "qs";
+  ${
+    contextPath
+      ? `import { ${pascal(prefix)}Context } from "./${contextPath}";`
+      : `
 
-const baseUrl = ""; // TODO add your baseUrl
-${
-  contextPath
-    ? `import { ${pascal(prefix)}Context } from "./${contextPath}";`
-    : `
+    const baseUrl = ${baseUrl ? `"${baseUrl}"` : `""; // TODO add your baseUrl`}
     
     export type ${pascal(prefix)}FetcherExtraProps = {
       /**
@@ -20,11 +28,11 @@ ${
        * 
        * Note: You need to re-gen after adding the first property to
        * have the \`${pascal(prefix)}FetcherExtraProps\` injected in \`${pascal(
-        prefix
-      )}Components.ts\`
+          prefix
+        )}Components.ts\`
        **/
     }`
-}
+  }
 
 export type ${pascal(
     prefix
