@@ -14,8 +14,7 @@ export const getFetcher = ({
   contextPath?: string;
   baseUrl?: string;
 }) =>
-  `import qs from "qs";
-  ${
+  `${
     contextPath
       ? `import { ${pascal(prefix)}Context } from "./${contextPath}";`
       : `
@@ -88,10 +87,10 @@ export async function ${camel(prefix)}Fetch<
 
 const resolveUrl = (
   url: string,
-  queryParams: Record<string, unknown> = {},
+  queryParams: Record<string, string> = {},
   pathParams: Record<string, string> = {}
 ) => {
-  let query = qs.stringify(queryParams);
+  let query = new URLSearchParams(queryParams).toString();
   if (query) query = \`?\${query}\`;
   return url.replace(/\\{\\w*\\}/g, (key) => pathParams[key.slice(1, -1)]) + query;
 };
