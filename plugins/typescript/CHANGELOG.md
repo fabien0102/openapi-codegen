@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.0](https://github.com/fabien0102/openapi-codegen/compare/typescript-v2.0.0...typescript-v2.1.0) (2022-03-17)
+
+
+### Features
+
+* Add `init` command ([#44](https://github.com/fabien0102/openapi-codegen/issues/44)) ([2ccd5ec](https://github.com/fabien0102/openapi-codegen/commit/2ccd5ec45c4bc27908c45a16002afef04f92ed96))
+
 ## [2.0.0](https://github.com/fabien0102/openapi-codegen/compare/typescript-v1.4.0...typescript-v2.0.0) (2022-02-18)
 
 
