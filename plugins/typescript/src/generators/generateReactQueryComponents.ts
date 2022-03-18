@@ -1,4 +1,4 @@
-import ts, { factory as f, SyntaxKind } from "typescript";
+import ts, { factory as f } from "typescript";
 import * as c from "case";
 
 import { ConfigBase, Context } from "./types";
@@ -221,7 +221,7 @@ export const generateReactQueryComponents = async (
     undefined,
     keyManagerItems.length > 0
       ? f.createUnionTypeNode(keyManagerItems)
-      : f.createKeywordTypeNode(SyntaxKind.NeverKeyword)
+      : f.createKeywordTypeNode(ts.SyntaxKind.NeverKeyword)
   );
 
   await context.writeFile(
