@@ -5,14 +5,21 @@ import { camel, pascal } from "case";
  *
  * @param contextPath import the context from another file
  */
-export const getFetcher = (prefix: string, contextPath?: string) =>
-  `import qs from "qs";
+export const getFetcher = ({
+  prefix,
+  contextPath,
+  baseUrl,
+}: {
+  prefix: string;
+  contextPath?: string;
+  baseUrl?: string;
+}) =>
+  `${
+    contextPath
+      ? `import { ${pascal(prefix)}Context } from "./${contextPath}";`
+      : `
 
-const baseUrl = ""; // TODO add your baseUrl
-${
-  contextPath
-    ? `import { ${pascal(prefix)}Context } from "./${contextPath}";`
-    : `
+    const baseUrl = ${baseUrl ? `"${baseUrl}"` : `""; // TODO add your baseUrl`}
     
     export type ${pascal(prefix)}FetcherExtraProps = {
       /**
@@ -20,11 +27,11 @@ ${
        * 
        * Note: You need to re-gen after adding the first property to
        * have the \`${pascal(prefix)}FetcherExtraProps\` injected in \`${pascal(
-        prefix
-      )}Components.ts\`
+          prefix
+        )}Components.ts\`
        **/
     }`
-}
+  }
 
 export type ${pascal(
     prefix
@@ -80,10 +87,10 @@ export async function ${camel(prefix)}Fetch<
 
 const resolveUrl = (
   url: string,
-  queryParams: Record<string, unknown> = {},
+  queryParams: Record<string, string> = {},
   pathParams: Record<string, string> = {}
 ) => {
-  let query = qs.stringify(queryParams);
+  let query = new URLSearchParams(queryParams).toString();
   if (query) query = \`?\${query}\`;
   return url.replace(/\\{\\w*\\}/g, (key) => pathParams[key.slice(1, -1)]) + query;
 };

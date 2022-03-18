@@ -1,8 +1,9 @@
-# OpenAPI Codegen
+<div align="center" style="margin-bottom: 16px">
+  <img src="openapi-codegen-logo.svg" width="400px" />
+</div>
 
-⚠️ This project is in an early stage, please check the issues to see what’s missing! ⚠️
-
--> Insert logo and badges here
+[![npm](https://img.shields.io/npm/v/@openapi-codegen/cli.svg?style=for-the-badge)](https://www.npmjs.com/package/@openapi-codegen/cli)
+[![License](https://img.shields.io/npm/l/@openapi-codegen/cli.svg?style=for-the-badge)](https://github.com/fabien0102/openapi-codegen/blob/main/LICENSE)
 
 Tooling to give you full type-safety around OpenAPI specs.
 
@@ -10,23 +11,22 @@ Tooling to give you full type-safety around OpenAPI specs.
 
 This will give you full auto-completion and type-safety of your APIs
 
-**For backend:**
+**For backend: (in coming)**
 
 This will generate everything you need to deliver a perfect API, spec driven.
 
 ## Getting started
 
 ```bash
-$ npx @openapi-codegen/cli init
+$ npm i -D @openapi-codegen/{cli,typescript}
+$ npx openapi-codegen init
 ```
 
-Follow the steps, this will generate a configuration file for you (openapi-codegen.config.ts) and update your `package.json`
-
-```bash
-$ yarn gen # or the defined alias
-```
+Follow the steps, this will generate a configuration file for you (openapi-codegen.config.ts).
 
 You should have a bunch of types / components ready to be used.
+
+Note: The generated `{namespace}Fetcher.ts` assume a global `fetch`, if you want to use this in a nodejs environment, please update this file (this is just a template)
 
 ## Philosophy
 

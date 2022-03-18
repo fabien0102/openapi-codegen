@@ -1,7 +1,7 @@
 import { Command, Option, UsageError } from "clipanion";
 import * as t from "typanion";
 import fsExtra from "fs-extra";
-import _path from "path";
+import { posix as path } from "path";
 import * as swc from "@swc/core";
 import prettier from "prettier";
 import { fileURLToPath } from "url";
@@ -11,12 +11,10 @@ import { Config, FromOptions, Namespace } from "../types";
 import { getOpenAPISourceFile } from "../core/getOpenAPISourceFile.js";
 import { parseOpenAPISourceFile } from "../core/parseOpenAPISourceFile.js";
 
-const path = _path.posix;
 const __filename = fileURLToPath(import.meta.url);
 
 // if no config -> tell the user to do `openapi-codegen init`
 // if config -> adjust examples/documentation regarding the keys
-// Flags should reflects `getOpenAPISourceFile.Options`
 
 export class GenerateCommand extends Command {
   config = Option.String(`-c,--config`, {
@@ -71,7 +69,7 @@ export class GenerateCommand extends Command {
     ],
   });
 
-  async loadConfigs(): Promise<Record<Namespace, Config>> {
+  private async loadConfigs(): Promise<Record<Namespace, Config>> {
     const userConfigPath = path.join(
       process.cwd(),
       this.config || "openapi-codegen.config.ts"
@@ -117,7 +115,7 @@ export class GenerateCommand extends Command {
    * @param config config from openapi-codegen.config.ts
    * @returns consolidated configuration
    */
-  getFromOptions(config: Config): FromOptions {
+  private getFromOptions(config: Config): FromOptions {
     const source = this.source || config.from.source;
 
     switch (source) {

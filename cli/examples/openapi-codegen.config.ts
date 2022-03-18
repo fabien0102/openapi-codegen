@@ -1,4 +1,5 @@
 import { defineConfig } from "../lib/index.js";
+import { generateFetchers } from "@openapi-codegen/typescript";
 
 export default defineConfig({
   withFile: {
