@@ -13,7 +13,7 @@ import { getOperationTypes } from "../core/getOperationTypes";
 import { createNamedImport } from "../core/createNamedImport";
 
 import { getFetcher } from "../templates/fetcher";
-import { get } from "lodash";
+import { compact, get } from "lodash";
 
 export type Config = ConfigBase & {
   /**
@@ -172,40 +172,45 @@ export const generateFetchers = async (context: Context, config: Config) => {
     }
   );
 
-  const operationDictionary = f.createVariableStatement(
-    [f.createModifier(ts.SyntaxKind.ExportKeyword)],
-    f.createVariableDeclarationList(
-      [
-        f.createVariableDeclaration(
-          f.createIdentifier("operationsByTag"),
-          undefined,
-          undefined,
-          f.createObjectLiteralExpression(
-            Object.entries(operationByTags).map(([tag, operationIds]) => {
-              return f.createPropertyAssignment(
-                f.createStringLiteral(c.camel(tag)),
+  const operationDictionary =
+    Object.keys(operationByTags).length > 0
+      ? f.createVariableStatement(
+          [f.createModifier(ts.SyntaxKind.ExportKeyword)],
+          f.createVariableDeclarationList(
+            [
+              f.createVariableDeclaration(
+                f.createIdentifier("operationsByTag"),
+                undefined,
+                undefined,
                 f.createObjectLiteralExpression(
-                  operationIds.map((operationId) =>
-                    f.createShorthandPropertyAssignment(operationId)
-                  )
+                  Object.entries(operationByTags).map(([tag, operationIds]) => {
+                    return f.createPropertyAssignment(
+                      f.createStringLiteral(c.camel(tag)),
+                      f.createObjectLiteralExpression(
+                        operationIds.map((operationId) =>
+                          f.createShorthandPropertyAssignment(operationId)
+                        )
+                      )
+                    );
+                  })
                 )
-              );
-            })
+              ),
+            ],
+            ts.NodeFlags.Const
           )
-        ),
-      ],
-      ts.NodeFlags.Const
-    )
-  );
+        )
+      : undefined;
 
   await context.writeFile(
     filename + ".ts",
-    printNodes([
-      createWatermark(context.openAPIDocument.info),
-      createNamedImport(fetcherImports, `./${fetcherFilename}`),
-      ...getUsedImports(nodes, config.schemasFiles),
-      ...nodes,
-      operationDictionary,
-    ])
+    printNodes(
+      compact([
+        createWatermark(context.openAPIDocument.info),
+        createNamedImport(fetcherImports, `./${fetcherFilename}`),
+        ...getUsedImports(nodes, config.schemasFiles),
+        ...nodes,
+        operationDictionary,
+      ])
+    )
   );
 };
