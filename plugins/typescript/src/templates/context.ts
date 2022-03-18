@@ -23,9 +23,9 @@ export const getContext = (prefix: string, componentsFile: string) =>
       enabled?: boolean;
     };
     /**
-     * Query key middleware.
+     * Query key manager.
      */
-    queryKeyFn: (operation: QueryOperation) => reactQuery.QueryKey;
+    queryKeyFn: (operation: QueryOperation) => QueryKey;
   };
   
   /**
@@ -44,15 +44,59 @@ export const getContext = (prefix: string, componentsFile: string) =>
     return {
       fetcherOptions: {},
       queryOptions: {},
-      queryKeyFn: queryKey => {
-        switch (operation.operationId) {
-          default: {
-            const { pathParams, queryParams, body } = operation.variables;
+      queryKeyFn: (operation) => {
+        const queryKey: unknown[] = hasPathParams(operation)
+          ? operation.path
+              .split("/")
+              .filter(Boolean)
+              .map((i) => resolvePathParam(i, operation.variables.pathParams))
+          : operation.path.split("/").filter(Boolean);
 
-            return [operation, pathParams, queryParams, body];
-          }
+        if (hasQueryParams(operation)) {
+          queryKey.push(operation.variables.queryParams);
         }
-      },
-    };
+
+        if (hasBody(operation)) {
+          queryKey.push(operation.variables.body);
+        }
+
+        return queryKey;
+      }
+    }
+  };
+
+  // Helpers
+  const resolvePathParam = (
+    key: string,
+    pathParams: Record<string, string>
+  ) => {
+    if (key.startsWith("{") && key.endsWith("}")) {
+      return pathParams[key.slice(1, -1)];
+    }
+    return key;
+  };
+
+  const hasPathParams = (
+    operation: QueryOperation
+  ): operation is QueryOperation & {
+    variables: { pathParams: Record<string, string> };
+  } => {
+    return Boolean((operation.variables as any).pathParams);
+  };
+
+  const hasBody = (
+    operation: QueryOperation
+  ): operation is QueryOperation & {
+    variables: { body: Record<string, unknown> };
+  } => {
+    return Boolean((operation.variables as any).body);
+  };
+
+  const hasQueryParams = (
+    operation: QueryOperation
+  ): operation is QueryOperation & {
+    variables: { queryParams: Record<string, unknown> };
+  } => {
+    return Boolean((operation.variables as any).queryParams);
   };
   `;
