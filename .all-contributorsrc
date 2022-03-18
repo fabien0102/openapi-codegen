@@ -29,6 +29,16 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "SferaDev",
+      "name": "Alexis Rico",
+      "avatar_url": "https://avatars.githubusercontent.com/u/2181866?v=4",
+      "profile": "https://github.com/SferaDev",
+      "contributions": [
+        "code",
+        "ideas"
+      ]
     }
   ],
   "contributorsPerLine": 7
