@@ -23,6 +23,7 @@ describe("generateFetchers", () => {
         get: {
           operationId: "listPets",
           description: "Get all the pets",
+          tags: ["pets"],
           responses: {
             "200": {
               description: "pet response",
@@ -72,6 +73,8 @@ describe("generateFetchers", () => {
        * Get all the pets
        */
       export const listPets = () => petstoreFetch<ListPetsResponse, undefined, {}, {}, {}>({ url: \\"/pets\\", method: \\"get\\" });
+
+      export const operationsByTag = { \\"pets\\": { listPets } };
       "
     `);
   });
@@ -114,6 +117,8 @@ describe("generateFetchers", () => {
        * Get all the pets
        */
       export const listPets = (variables: ListPetsVariables) => petstoreFetch<ListPetsResponse, undefined, {}, {}, {}>({ url: \\"/pets\\", method: \\"get\\", ...variables });
+
+      export const operationsByTag = { \\"pets\\": { listPets } };
       "
     `);
   });
