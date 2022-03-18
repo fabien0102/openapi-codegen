@@ -17,11 +17,7 @@ export const getFetcher = ({
   `${
     contextPath
       ? `import { ${pascal(prefix)}Context } from "./${contextPath}";`
-      : `
-
-    const baseUrl = ${baseUrl ? `"${baseUrl}"` : `""; // TODO add your baseUrl`}
-    
-    export type ${pascal(prefix)}FetcherExtraProps = {
+      : `export type ${pascal(prefix)}FetcherExtraProps = {
       /**
        * You can add some extra props to your generated fetchers.
        * 
@@ -32,6 +28,8 @@ export const getFetcher = ({
        **/
     }`
   }
+
+const baseUrl = ${baseUrl ? `"${baseUrl}"` : `""; // TODO add your baseUrl`}
 
 export type ${pascal(
     prefix
