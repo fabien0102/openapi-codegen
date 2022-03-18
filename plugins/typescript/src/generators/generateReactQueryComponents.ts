@@ -221,7 +221,26 @@ export const generateReactQueryComponents = async (
     undefined,
     keyManagerItems.length > 0
       ? f.createUnionTypeNode(keyManagerItems)
-      : f.createKeywordTypeNode(ts.SyntaxKind.NeverKeyword)
+      : f.createTypeLiteralNode([
+          f.createPropertySignature(
+            undefined,
+            f.createIdentifier("path"),
+            undefined,
+            f.createKeywordTypeNode(ts.SyntaxKind.StringKeyword)
+          ),
+          f.createPropertySignature(
+            undefined,
+            f.createIdentifier("operationId"),
+            undefined,
+            f.createKeywordTypeNode(ts.SyntaxKind.NeverKeyword)
+          ),
+          f.createPropertySignature(
+            undefined,
+            f.createIdentifier("variables"),
+            undefined,
+            f.createKeywordTypeNode(ts.SyntaxKind.UnknownKeyword)
+          ),
+        ])
   );
 
   await context.writeFile(

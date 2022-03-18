@@ -567,7 +567,11 @@ describe("generateReactQueryComponents", () => {
           return reactQuery.useMutation<string, AddPetError, AddPetVariables>((variables: AddPetVariables) => fetchAddPet({ ...fetcherOptions, ...variables }), options);
       };
 
-      export type QueryOperation = never;
+      export type QueryOperation = {
+          path: string;
+          operationId: never;
+          variables: unknown;
+      };
       "
     `);
   });
@@ -689,7 +693,11 @@ describe("generateReactQueryComponents", () => {
           return reactQuery.useMutation<string, AddPetError, AddPetVariables>((variables: AddPetVariables) => fetchAddPet({ ...fetcherOptions, ...variables }), options);
       };
 
-      export type QueryOperation = never;
+      export type QueryOperation = {
+          path: string;
+          operationId: never;
+          variables: unknown;
+      };
       "
     `);
   });
@@ -811,7 +819,11 @@ describe("generateReactQueryComponents", () => {
           return reactQuery.useMutation<string, AddPetError, AddPetVariables>((variables: AddPetVariables) => fetchAddPet({ ...fetcherOptions, ...variables }), options);
       };
 
-      export type QueryOperation = never;
+      export type QueryOperation = {
+          path: string;
+          operationId: never;
+          variables: unknown;
+      };
       "
     `);
   });
@@ -912,7 +924,11 @@ describe("generateReactQueryComponents", () => {
           return reactQuery.useMutation<string, undefined, UpdatePetVariables>((variables: UpdatePetVariables) => fetchUpdatePet({ ...fetcherOptions, ...variables }), options);
       };
 
-      export type QueryOperation = never;
+      export type QueryOperation = {
+          path: string;
+          operationId: never;
+          variables: unknown;
+      };
       "
     `);
   });
