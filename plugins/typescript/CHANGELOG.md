@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.2.0](https://github.com/fabien0102/openapi-codegen/compare/typescript-v2.1.0...typescript-v2.2.0) (2022-03-18)
+
+
+### Features
+
+* Add fetchers dictionary by tag ([#45](https://github.com/fabien0102/openapi-codegen/issues/45)) ([b2751d0](https://github.com/fabien0102/openapi-codegen/commit/b2751d03c23ccb841822eafb03d9e579d159dc41))
+
+
+### Bug Fixes
+
+* fix baseUrl in fetcherTemplate ([78b2a40](https://github.com/fabien0102/openapi-codegen/commit/78b2a4003bd9b960cdaf58db36ad205a503888a9))
+
 ## [2.1.0](https://github.com/fabien0102/openapi-codegen/compare/typescript-v2.0.0...typescript-v2.1.0) (2022-03-17)
 
 
