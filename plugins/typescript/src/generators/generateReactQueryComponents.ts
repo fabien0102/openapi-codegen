@@ -1,4 +1,4 @@
-import ts, { factory as f } from "typescript";
+import ts, { factory as f, SyntaxKind } from "typescript";
 import * as c from "case";
 
 import { ConfigBase, Context } from "./types";
@@ -149,6 +149,12 @@ export const generateReactQueryComponents = async (
             f.createTypeLiteralNode([
               f.createPropertySignature(
                 undefined,
+                f.createIdentifier("path"),
+                undefined,
+                f.createLiteralTypeNode(f.createStringLiteral(route))
+              ),
+              f.createPropertySignature(
+                undefined,
                 f.createIdentifier("operationId"),
                 undefined,
                 f.createLiteralTypeNode(f.createStringLiteral(operationId))
@@ -187,6 +193,7 @@ export const generateReactQueryComponents = async (
                 contextHookName,
                 name: `use${c.pascal(operationId)}`,
                 operationId,
+                url: route,
               })
             : createMutationHook({
                 operationFetcherFnName,
@@ -205,9 +212,11 @@ export const generateReactQueryComponents = async (
   const queryKeyManager = f.createTypeAliasDeclaration(
     undefined,
     [f.createModifier(ts.SyntaxKind.ExportKeyword)],
-    "Operation",
+    "QueryOperation",
     undefined,
-    f.createUnionTypeNode(keyManagerItems)
+    keyManagerItems.length > 0
+      ? f.createUnionTypeNode(keyManagerItems)
+      : f.createKeywordTypeNode(SyntaxKind.NeverKeyword)
   );
 
   await context.writeFile(
@@ -381,11 +390,13 @@ const createQueryHook = ({
   name,
   operationId,
   operation,
+  url,
 }: {
   operationFetcherFnName: string;
   contextHookName: string;
   name: string;
   operationId: string;
+  url: string;
   dataType: ts.TypeNode;
   errorType: ts.TypeNode;
   variablesType: ts.TypeNode;
@@ -478,6 +489,10 @@ const createQueryHook = ({
                         undefined,
                         [
                           f.createObjectLiteralExpression([
+                            f.createPropertyAssignment(
+                              "path",
+                              f.createStringLiteral(url)
+                            ),
                             f.createPropertyAssignment(
                               "operationId",
                               f.createStringLiteral(operationId)
