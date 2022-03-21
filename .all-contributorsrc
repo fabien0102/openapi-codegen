@@ -11,6 +11,20 @@
   "commitConvention": "none",
   "contributors": [
     {
+      "login": "fabien0102",
+      "name": "Fabien BERNARD",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1761469?v=4",
+      "profile": "https://fabien0102.com/",
+      "contributions": [
+        "code",
+        "design",
+        "doc",
+        "ideas",
+        "projectManagement",
+        "review"
+      ]
+    },
+    {
       "login": "mpotomin",
       "name": "mpotomin",
       "avatar_url": "https://avatars.githubusercontent.com/u/639406?v=4",
