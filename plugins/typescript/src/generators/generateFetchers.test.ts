@@ -87,7 +87,7 @@ describe("generateFetchers", () => {
         readFile: async () => "",
         existsFile: () => true,
       },
-      { ...config, filenamePrefix: null }
+      { ...config, filenamePrefix: "" }
     );
 
     expect(writeFile.mock.calls[0][0]).toBe("components.ts");

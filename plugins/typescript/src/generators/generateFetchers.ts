@@ -1,6 +1,6 @@
 import ts, { factory as f } from "typescript";
 import * as c from "case";
-import { get, isNull } from "lodash";
+import { get } from "lodash";
 
 import { ConfigBase, Context } from "./types";
 import { PathItemObject } from "openapi3-ts";
@@ -61,11 +61,7 @@ export const generateFetchers = async (context: Context, config: Config) => {
       .join("\n");
 
   const filenamePrefix =
-    c.snake(
-      isNull(config.filenamePrefix)
-        ? ""
-        : config.filenamePrefix || context.openAPIDocument.info.title
-    ) + "-";
+    c.snake(config.filenamePrefix ?? context.openAPIDocument.info.title) + "-";
 
   const formatFilename = config.filenameCase ? c[config.filenameCase] : c.camel;
 

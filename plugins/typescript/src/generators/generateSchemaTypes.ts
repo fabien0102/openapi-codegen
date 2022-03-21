@@ -1,7 +1,6 @@
 import { isReferenceObject } from "openapi3-ts";
 import * as c from "case";
 import ts from "typescript";
-import { isNull } from "lodash";
 
 import { ConfigBase, Context } from "./types";
 import { schemaToTypeAliasDeclaration } from "../core/schemaToTypeAliasDeclaration";
@@ -47,11 +46,7 @@ export const generateSchemaTypes = async (
       .join("\n");
 
   const filenamePrefix =
-    c.snake(
-      isNull(config.filenamePrefix)
-        ? ""
-        : config.filenamePrefix || context.openAPIDocument.info.title
-    ) + "-";
+    c.snake(config.filenamePrefix ?? context.openAPIDocument.info.title) + "-";
 
   const formatFilename = config.filenameCase ? c[config.filenameCase] : c.camel;
   const files = {

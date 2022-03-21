@@ -109,7 +109,7 @@ describe("generateSchemaTypes", () => {
         },
         {
           filenameCase: "camel",
-          filenamePrefix: null,
+          filenamePrefix: "",
         }
       );
       expect(writeFile.mock.calls[0][0]).toBe("schemas.ts");
