@@ -18,7 +18,7 @@ export type ConfigBase = {
   /**
    * @default openapi.info.title
    */
-  filenamePrefix?: string;
+  filenamePrefix?: string | null;
   /**
    * Case convention for filenames.
    *

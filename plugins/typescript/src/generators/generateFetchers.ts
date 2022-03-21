@@ -1,5 +1,6 @@
 import ts, { factory as f } from "typescript";
 import * as c from "case";
+import { get, isNull } from "lodash";
 
 import { ConfigBase, Context } from "./types";
 import { PathItemObject } from "openapi3-ts";
@@ -13,7 +14,6 @@ import { getOperationTypes } from "../core/getOperationTypes";
 import { createNamedImport } from "../core/createNamedImport";
 
 import { getFetcher } from "../templates/fetcher";
-import { get } from "lodash";
 
 export type Config = ConfigBase & {
   /**
@@ -61,7 +61,12 @@ export const generateFetchers = async (context: Context, config: Config) => {
       .join("\n");
 
   const filenamePrefix =
-    c.snake(config.filenamePrefix || context.openAPIDocument.info.title) + "-";
+    c.snake(
+      isNull(config.filenamePrefix)
+        ? ""
+        : config.filenamePrefix || context.openAPIDocument.info.title
+    ) + "-";
+
   const formatFilename = config.filenameCase ? c[config.filenameCase] : c.camel;
 
   const filename = formatFilename(filenamePrefix + "-components");
