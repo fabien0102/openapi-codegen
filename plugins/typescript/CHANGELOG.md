@@ -1,5 +1,17 @@
 # Changelog
 
+## [3.0.0](https://github.com/fabien0102/openapi-codegen/compare/typescript-v2.2.0...typescript-v3.0.0) (2022-03-21)
+
+
+### ⚠ BREAKING CHANGES
+
+* React query key cache manager (#49)
+
+### Features
+
+* Allow generating code without a prefix ([#50](https://github.com/fabien0102/openapi-codegen/issues/50)) ([cb4d68f](https://github.com/fabien0102/openapi-codegen/commit/cb4d68fcd52ce0a14ae1f378071fbc2a4e7d1877))
+* React query key cache manager ([#49](https://github.com/fabien0102/openapi-codegen/issues/49)) ([4e30ddb](https://github.com/fabien0102/openapi-codegen/commit/4e30ddbbb0db14e5b9c1c54b441218481d8537f6))
+
 ## [2.2.0](https://github.com/fabien0102/openapi-codegen/compare/typescript-v2.1.0...typescript-v2.2.0) (2022-03-18)
 
 
