@@ -65,8 +65,7 @@ export async function ${camel(prefix)}Fetch<
   TQueryParams,
   TPathParams
 >): Promise<TData> {
-  const response = await window.fetch(\`\${baseUrl}
-    \${resolveUrl(url, queryParams, pathParams)}\`,
+  const response = await window.fetch(\`\${baseUrl}\${resolveUrl(url, queryParams, pathParams)}\`,
     {
       method: method.toUpperCase(),
       body: body ? JSON.stringify(body) : undefined,

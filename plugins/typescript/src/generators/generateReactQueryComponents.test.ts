@@ -1038,6 +1038,12 @@ describe("generateReactQueryComponents", () => {
           const { fetcherOptions } = useContext();
           return reactQuery.useMutation<string, undefined, UpdatePetVariables>((variables: UpdatePetVariables) => fetchUpdatePet({ ...fetcherOptions, ...variables }), options);
       };
+
+      export type QueryOperation = {
+          path: string;
+          operationId: never;
+          variables: unknown;
+      };
       "
     `);
   });
