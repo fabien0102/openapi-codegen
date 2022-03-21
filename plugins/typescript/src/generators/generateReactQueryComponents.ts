@@ -1,5 +1,6 @@
 import ts, { factory as f } from "typescript";
 import * as c from "case";
+import { get } from "lodash";
 
 import { ConfigBase, Context } from "./types";
 import { OperationObject, PathItemObject } from "openapi3-ts";
@@ -14,7 +15,6 @@ import { createNamedImport } from "../core/createNamedImport";
 
 import { getFetcher } from "../templates/fetcher";
 import { getContext } from "../templates/context";
-import { get } from "lodash";
 
 export type Config = ConfigBase & {
   /**
@@ -65,7 +65,8 @@ export const generateReactQueryComponents = async (
       .join("\n");
 
   const filenamePrefix =
-    c.snake(config.filenamePrefix || context.openAPIDocument.info.title) + "-";
+    c.snake(config.filenamePrefix ?? context.openAPIDocument.info.title) + "-";
+
   const formatFilename = config.filenameCase ? c[config.filenameCase] : c.camel;
 
   const filename = formatFilename(filenamePrefix + "-components");

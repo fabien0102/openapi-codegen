@@ -96,6 +96,26 @@ describe("generateSchemaTypes", () => {
     });
   });
 
+  describe("without filenamePrefix option", () => {
+    it("should not have a prefix", () => {
+      const writeFile = jest.fn();
+      const readFile = jest.fn(() => Promise.resolve(""));
+      generateSchemaTypes(
+        {
+          openAPIDocument: petstore,
+          writeFile,
+          readFile,
+          existsFile: () => true,
+        },
+        {
+          filenameCase: "camel",
+          filenamePrefix: "",
+        }
+      );
+      expect(writeFile.mock.calls[0][0]).toBe("schemas.ts");
+    });
+  });
+
   describe("schemas file generation", () => {
     it("should generate the schemas file", async () => {
       const writeFile = jest.fn();
