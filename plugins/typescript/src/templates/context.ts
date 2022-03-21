@@ -39,7 +39,7 @@ export const getContext = (prefix: string, componentsFile: string) =>
    TData = TQueryFnData,
    TQueryKey extends QueryKey = QueryKey
  >(
-   queryOptions?: Omit<UseQueryOptions<TQueryFnData, TError, TData, TQueryKey>, 'queryKey' | 'queryFn'>
+   _queryOptions?: Omit<UseQueryOptions<TQueryFnData, TError, TData, TQueryKey>, 'queryKey' | 'queryFn'>
  ): ${pascal(prefix)}Context {
     return {
       fetcherOptions: {},
