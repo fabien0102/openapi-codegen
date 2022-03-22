@@ -48,7 +48,7 @@ export type ${pascal(
 
 export async function ${camel(prefix)}Fetch<
   TData,
-  TBody extends {} | undefined,
+  TBody extends {} | undefined | null,
   THeaders extends {},
   TQueryParams extends {},
   TPathParams extends {}
