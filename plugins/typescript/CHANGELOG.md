@@ -1,5 +1,13 @@
 # Changelog
 
+### [3.0.1](https://github.com/fabien0102/openapi-codegen/compare/typescript-v3.0.0...typescript-v3.0.1) (2022-03-22)
+
+
+### Bug Fixes
+
+* permit `null` as body ([bdfa4b9](https://github.com/fabien0102/openapi-codegen/commit/bdfa4b9a6062b0b9ddd23f589d0d7acd88589961))
+* remove spaces in fetcher template ([58f7741](https://github.com/fabien0102/openapi-codegen/commit/58f774161856afa9bc16eaba299114ce7de03833))
+
 ## [3.0.0](https://github.com/fabien0102/openapi-codegen/compare/typescript-v2.2.0...typescript-v3.0.0) (2022-03-21)
 
 
