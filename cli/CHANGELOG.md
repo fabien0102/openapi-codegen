@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.4.1](https://github.com/fabien0102/openapi-codegen/compare/cli-v1.4.0...cli-v1.4.1) (2022-03-23)
+
+
+### Bug Fixes
+
+* add typescript as dependency ([22bfb09](https://github.com/fabien0102/openapi-codegen/commit/22bfb091e1617318a38e206d5f88fe3594e0f571))
+
 ## [1.4.0](https://github.com/fabien0102/openapi-codegen/compare/cli-v1.3.1...cli-v1.4.0) (2022-03-17)
 
 
