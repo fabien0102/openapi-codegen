@@ -105,10 +105,23 @@ export class Prompt {
   /**
    * Smart prompt for selecting a github file.
    */
-  public github(): Promise<GithubOptions> {
+  public github(token: string): Promise<GithubOptions> {
     return new Promise<GithubOptions>((resolve) => {
       this.state.next({
         type: "github",
+        token,
+        onSubmit: resolve,
+      });
+    });
+  }
+
+  /**
+   * Retrieve github token. This will ask if the token is not already stored.
+   */
+  public githubToken(): Promise<string> {
+    return new Promise<string>((resolve) => {
+      this.state.next({
+        type: "githubToken",
         onSubmit: resolve,
       });
     });

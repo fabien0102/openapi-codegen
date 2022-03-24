@@ -22,4 +22,17 @@ export default defineConfig({
       console.log(context);
     },
   },
+  withGithub: {
+    from: {
+      source: "github",
+      owner: "fabien0102",
+      branch: "main",
+      repository: "openapi-codegen",
+      specPath: "cli/examples/petstore.json",
+    },
+    outputDir: "petstore",
+    to: async (context) => {
+      console.log(context);
+    },
+  },
 });

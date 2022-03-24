@@ -1,4 +1,7 @@
-import { readFileSync } from "fs";
+import { UsageError } from "clipanion";
+import { readFileSync, unlinkSync } from "fs";
+import { HTTPError } from "got";
+import { homedir } from "os";
 import { join, parse } from "path";
 import { URL } from "url";
 import { FromOptions, OpenAPISourceFile } from "../types";
@@ -39,9 +42,79 @@ export const getOpenAPISourceFile = async (
       return { text: file.body, format };
     }
 
-    case "github":
-      // TODO
-      return { text: "", format: "json" };
+    case "github": {
+      // Retrieve Github token
+      const { Prompt } = await import("../prompts/Prompt.js");
+      const prompt = new Prompt();
+
+      const token = await prompt.githubToken();
+
+      // Retrieve specs
+      const { default: got } = await import("got");
+
+      try {
+        const raw = await got
+          .post("https://api.github.com/graphql", {
+            headers: {
+              "content-type": "application/json",
+              "user-agent": "openapi-codegen",
+              authorization: `bearer ${token}`,
+            },
+            body: JSON.stringify({
+              query: `query {
+            repository(name: "${options.repository}", owner: "${options.owner}") {
+              object(expression: "${options.branch}:${options.specPath}") {
+                ... on Blob {
+                  text
+                }
+              }
+            }
+          }`,
+            }),
+          })
+          .json<{
+            data: { repository: { object: { text: string } | null } };
+            errors?: [
+              {
+                message: string;
+              }
+            ];
+          }>();
+
+        prompt.close();
+        if (raw.errors) {
+          throw new UsageError(raw.errors[0].message);
+        }
+        if (raw.data.repository.object === null) {
+          throw new UsageError(`No file found at "${options.specPath}"`);
+        }
+
+        let format: OpenAPISourceFile["format"] = "yaml";
+        if (options.specPath.toLowerCase().endsWith("json")) {
+          format = "json";
+        }
+
+        return { text: raw.data.repository.object.text, format };
+      } catch (e) {
+        if (
+          e instanceof HTTPError &&
+          e.response.statusCode === 401 &&
+          !process.env.GITHUB_TOKEN
+        ) {
+          const removeToken = await prompt.confirm(
+            "Your token doesn't have the correct permissions, should we remove it?"
+          );
+          prompt.close();
+
+          if (removeToken) {
+            const githubTokenPath = join(homedir(), ".openapi-codegen");
+            unlinkSync(githubTokenPath);
+            return await getOpenAPISourceFile(options);
+          }
+        }
+        throw e;
+      }
+    }
   }
 };
 
