@@ -46,16 +46,16 @@ export class GenerateCommand extends Command {
   owner = Option.String("--owner", {
     description: "[source=github] Owner of the repository",
   });
-  repository = Option.String("--repository --repo", {
+  repository = Option.String("--repository,--repo", {
     description: "[source=github] Repository name",
   });
-  branch = Option.String("-b --branch", {
+  branch = Option.String("-b,--branch", {
     description: "[source=github] Branch name",
   });
   specPath = Option.String("--specPath", {
     description: "[source=github] OpenAPI specs file path",
   });
-  pullRequest = Option.String("--pr --pull-request", {
+  pullRequest = Option.String("--pr,--pull-request", {
     description:
       "[source=github] Select a specific pull-request instead of a branch",
   });
