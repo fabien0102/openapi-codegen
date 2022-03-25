@@ -143,7 +143,7 @@ export const GithubPullRequest = ({
               value: {
                 owner: node?.headRepository?.owner.login || owner,
                 repository: node?.headRepository?.name || repository,
-                ref: node?.headRefName || "main",
+                ref: node?.headRefName || "HEAD",
               },
             }))}
           onSubmit={onSubmit}

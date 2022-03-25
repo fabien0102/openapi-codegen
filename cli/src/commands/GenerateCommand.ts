@@ -171,16 +171,13 @@ export class GenerateCommand extends Command {
           return {
             ...config.from,
             owner: this.owner ?? config.from.owner,
-            ref: this.ref ?? config.from.ref,
+            ref: this.ref ?? config.from.ref ?? "HEAD",
             repository: this.repository ?? config.from.repository,
             specPath: this.specPath ?? config.from.specPath,
           };
         } else {
           if (!this.owner) {
             throw new UsageError("--owner argument is missing");
-          }
-          if (!this.ref && !this.pullRequest) {
-            throw new UsageError("--ref argument is missing");
           }
           if (!this.repository) {
             throw new UsageError("--repository argument is missing");
@@ -191,7 +188,7 @@ export class GenerateCommand extends Command {
 
           return {
             source: "github",
-            ref: this.ref || "main", // Fallback for --pr mode
+            ref: this.ref || "HEAD",
             owner: this.owner,
             repository: this.repository,
             specPath: this.specPath,

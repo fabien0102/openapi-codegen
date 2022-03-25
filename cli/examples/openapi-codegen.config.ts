@@ -25,7 +25,6 @@ export default defineConfig({
     from: {
       source: "github",
       owner: "fabien0102",
-      ref: "main",
       repository: "openapi-codegen",
       specPath: "cli/examples/petstore.json",
     },
