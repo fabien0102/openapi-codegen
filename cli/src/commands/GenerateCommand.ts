@@ -19,26 +19,31 @@ const __filename = fileURLToPath(import.meta.url);
 export class GenerateCommand extends Command {
   config = Option.String(`-c,--config`, {
     description: "Configuration file path",
+    env: "OPENAPI_CODEGEN_CONFIG",
   });
 
   namespace = Option.String();
 
   source = Option.String(`--source`, {
     description: "Source of the spec (file, url or github)",
+    env: "OPENAPI_CODEGEN_SOURCE",
     validator: t.isEnum(["file", "url", "github"]),
   });
 
   // source=file options
   relativePath = Option.String(`--relativePath`, {
     description: "[source=file] Relative path of the spec file",
+    env: "OPENAPI_CODEGEN_FILE_PATH",
   });
 
   // source=url options
   url = Option.String("--url", {
     description: "[source=url] URL of the spec file",
+    env: "OPENAPI_CODEGEN_URL",
   });
   method = Option.String("--method", {
     description: "[source=url] HTTP Method",
+    env: "OPENAPI_CODEGEN_URL_METHOD",
     validator: t.isEnum(["get", "post"]),
   });
 
@@ -57,9 +62,11 @@ export class GenerateCommand extends Command {
   });
   specPath = Option.String("--specPath", {
     description: "[source=github] OpenAPI specs file path",
+    env: "OPENAPI_CODEGEN_GITHUB_SPEC_PATH",
   });
   pullRequest = Option.String("--pr,--pull-request", {
     description: "[source=github] Select a specific pull-request as ref",
+    env: "OPENAPI_CODEGEN_GITHUB_PULL_REQUEST",
     validator: t.isNumber(),
     tolerateBoolean: true,
   });
