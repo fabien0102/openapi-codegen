@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.5.0](https://github.com/fabien0102/openapi-codegen/compare/cli-v1.4.1...cli-v1.5.0) (2022-03-25)
+
+
+### Features
+
+* github as openapi source ([#54](https://github.com/fabien0102/openapi-codegen/issues/54)) ([0d054f4](https://github.com/fabien0102/openapi-codegen/commit/0d054f488dfa660f647007002fd80b6ae242b784))
+
 ### [1.4.1](https://github.com/fabien0102/openapi-codegen/compare/cli-v1.4.0...cli-v1.4.1) (2022-03-23)
 
 
