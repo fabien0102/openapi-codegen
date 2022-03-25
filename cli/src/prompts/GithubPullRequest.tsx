@@ -9,6 +9,7 @@ import { Message } from "./Message.js";
 import { Select } from "./Select.js";
 import { TextInput } from "./TextInput.js";
 import { Confirm } from "./Confirm.js";
+import { Spinner } from "./Spinner.js";
 
 const { ApolloClient, HttpLink, InMemoryCache } = Apollo;
 
@@ -82,7 +83,13 @@ export const GithubPullRequest = ({
     const pr = data?.repository?.pullRequests.nodes?.find(
       (node) => node?.number === pullRequestNumber
     );
-    if (loading) return <Text>Resolving pull request…</Text>;
+    if (loading)
+      return (
+        <Text>
+          <Spinner />
+          Resolving pull request
+        </Text>
+      );
     if (!pr)
       return <Text>The pull request #{pullRequestNumber} is not open</Text>;
     return null;
@@ -115,7 +122,12 @@ export const GithubPullRequest = ({
         <Message>Pull request title</Message>
         <TextInput onChange={setSearch} value={search} />
       </Box>
-      {loading && <Text>Loading…</Text>}
+      {loading && (
+        <Text>
+          <Spinner />
+          Loading
+        </Text>
+      )}
       {error && <Box>{error.message}</Box>}
       {data && data.repository?.pullRequests.nodes && (
         <Select
