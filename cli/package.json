@@ -38,7 +38,7 @@
     "case": "^1.6.3",
     "chalk": "^5.0.0",
     "cli-highlight": "^2.1.11",
-    "clipanion": "^3.2.0-rc.3",
+    "clipanion": "^3.2.0-rc.10",
     "fs-extra": "^10.0.0",
     "got": "^12.0.0",
     "got-fetch": "^5.0.2",
@@ -52,6 +52,7 @@
     "slash": "^4.0.0",
     "swagger2openapi": "^7.0.8",
     "tslib": "^2.3.1",
+    "typanion": "^3.7.1",
     "typescript": "^4.6.2"
   },
   "devDependencies": {
