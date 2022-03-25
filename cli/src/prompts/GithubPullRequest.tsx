@@ -1,6 +1,6 @@
 import Apollo from "@apollo/client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Text } from "ink";
 import fetch from "got-fetch";
 
@@ -32,6 +32,7 @@ export type GithubPullRequestProps = {
 export const GithubPullRequest = ({
   token,
   repository,
+  pullRequestNumber,
   owner,
   onSubmit,
 }: GithubPullRequestProps) => {
@@ -61,6 +62,31 @@ export const GithubPullRequest = ({
     },
     client: apolloClient,
   });
+
+  useEffect(() => {
+    if (pullRequestNumber && data?.repository?.pullRequests.nodes) {
+      const pr = data.repository.pullRequests.nodes.find(
+        (node) => node?.number === pullRequestNumber
+      );
+      if (pr) {
+        onSubmit({
+          branch: pr.headRefName,
+          owner: pr.headRepository?.owner.login ?? owner,
+          repository: pr.headRepository?.name ?? repository,
+        });
+      }
+    }
+  }, [data, pullRequestNumber]);
+
+  if (pullRequestNumber) {
+    const pr = data?.repository?.pullRequests.nodes?.find(
+      (node) => node?.number === pullRequestNumber
+    );
+    if (loading) return <Text>Resolving pull request…</Text>;
+    if (!pr)
+      return <Text>The pull request #{pullRequestNumber} is not open</Text>;
+    return null;
+  }
 
   if (data?.repository?.pullRequests.nodes?.length === 0) {
     return (
