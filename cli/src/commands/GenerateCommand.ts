@@ -19,45 +19,56 @@ const __filename = fileURLToPath(import.meta.url);
 export class GenerateCommand extends Command {
   config = Option.String(`-c,--config`, {
     description: "Configuration file path",
+    env: "OPENAPI_CODEGEN_CONFIG",
   });
 
   namespace = Option.String();
 
   source = Option.String(`--source`, {
     description: "Source of the spec (file, url or github)",
+    env: "OPENAPI_CODEGEN_SOURCE",
     validator: t.isEnum(["file", "url", "github"]),
   });
 
   // source=file options
   relativePath = Option.String(`--relativePath`, {
     description: "[source=file] Relative path of the spec file",
+    env: "OPENAPI_CODEGEN_FILE_PATH",
   });
 
   // source=url options
   url = Option.String("--url", {
     description: "[source=url] URL of the spec file",
+    env: "OPENAPI_CODEGEN_URL",
   });
   method = Option.String("--method", {
     description: "[source=url] HTTP Method",
+    env: "OPENAPI_CODEGEN_URL_METHOD",
     validator: t.isEnum(["get", "post"]),
   });
 
   // source=github options
   owner = Option.String("--owner", {
     description: "[source=github] Owner of the repository",
+    env: "OPENAPI_CODEGEN_GITHUB_OWNER",
   });
-  repository = Option.String("--repository --repo", {
+  repository = Option.String("--repository,--repo", {
     description: "[source=github] Repository name",
+    env: "OPENAPI_CODEGEN_GITHUB_REPOSITORY",
   });
-  branch = Option.String("-b --branch", {
-    description: "[source=github] Branch name",
+  ref = Option.String("--ref", {
+    description: "[source=github] Git reference (commit sha, branch or tag)",
+    env: "OPENAPI_CODEGEN_GITHUB_REF",
   });
   specPath = Option.String("--specPath", {
     description: "[source=github] OpenAPI specs file path",
+    env: "OPENAPI_CODEGEN_GITHUB_SPEC_PATH",
   });
-  pullRequest = Option.String("--pr --pull-request", {
-    description:
-      "[source=github] Select a specific pull-request instead of a branch",
+  pullRequest = Option.String("--pr,--pull-request", {
+    description: "[source=github] Select a specific pull-request as ref",
+    env: "OPENAPI_CODEGEN_GITHUB_PULL_REQUEST",
+    validator: t.isNumber(),
+    tolerateBoolean: true,
   });
 
   static paths = [["gen"], ["generate"], Command.Default];
@@ -65,7 +76,7 @@ export class GenerateCommand extends Command {
     description: "Generate types & components from an OpenAPI file",
     examples: [
       [`From a config key`, `$0 gen myapi`],
-      [`With some override`, `$0 gen myapi --branch awesome-feature`],
+      [`With some override`, `$0 gen myapi --ref awesome-feature`],
     ],
   });
 
@@ -159,7 +170,7 @@ export class GenerateCommand extends Command {
           return {
             ...config.from,
             owner: this.owner ?? config.from.owner,
-            branch: this.branch ?? config.from.branch,
+            ref: this.ref ?? config.from.ref,
             repository: this.repository ?? config.from.repository,
             specPath: this.specPath ?? config.from.specPath,
           };
@@ -167,8 +178,8 @@ export class GenerateCommand extends Command {
           if (!this.owner) {
             throw new UsageError("--owner argument is missing");
           }
-          if (!this.branch) {
-            throw new UsageError("--branch argument is missing");
+          if (!this.ref && !this.pullRequest) {
+            throw new UsageError("--ref argument is missing");
           }
           if (!this.repository) {
             throw new UsageError("--repository argument is missing");
@@ -179,7 +190,7 @@ export class GenerateCommand extends Command {
 
           return {
             source: "github",
-            branch: this.branch,
+            ref: this.ref || "main", // Fallback for --pr mode
             owner: this.owner,
             repository: this.repository,
             specPath: this.specPath,
@@ -197,7 +208,24 @@ export class GenerateCommand extends Command {
     }
 
     const config = configs[this.namespace];
-    const sourceFile = await getOpenAPISourceFile(this.getFromOptions(config));
+    const options = this.getFromOptions(config);
+    if (options.source === "github" && this.pullRequest) {
+      const { Prompt } = await import("../prompts/Prompt.js");
+      const prompt = new Prompt();
+      const token = await prompt.githubToken();
+      const pullRequest = await prompt.githubPullRequest({
+        ...options,
+        token,
+        pullRequestNumber:
+          typeof this.pullRequest === "number" ? this.pullRequest : undefined,
+      });
+
+      options.ref = pullRequest.ref;
+      options.owner = pullRequest.owner;
+      options.repository = pullRequest.repository;
+    }
+
+    const sourceFile = await getOpenAPISourceFile(options);
     const openAPIDocument = await parseOpenAPISourceFile(sourceFile);
     const prettierConfig = await prettier.resolveConfig(process.cwd());
 

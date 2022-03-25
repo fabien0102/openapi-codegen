@@ -6,6 +6,7 @@ import type { GithubOptions } from "src/types";
 
 import { Choice } from "./Select.js";
 import { App, PromptUnit } from "./App.js";
+import { GithubPullRequestProps, PullRequest } from "./GithubPullRequest.js";
 
 export type InputOptions = {
   message: string;
@@ -105,10 +106,43 @@ export class Prompt {
   /**
    * Smart prompt for selecting a github file.
    */
-  public github(): Promise<GithubOptions> {
+  public github(token: string): Promise<GithubOptions> {
     return new Promise<GithubOptions>((resolve) => {
       this.state.next({
         type: "github",
+        token,
+        onSubmit: resolve,
+      });
+    });
+  }
+
+  /**
+   * Retrieve github token. This will ask if the token is not already stored.
+   */
+  public githubToken(): Promise<string> {
+    return new Promise<string>((resolve) => {
+      this.state.next({
+        type: "githubToken",
+        onSubmit: resolve,
+      });
+    });
+  }
+
+  /**
+   * Select a pull-request.
+   *
+   * @returns The ref of the pull-request
+   */
+  public githubPullRequest(
+    options: Omit<GithubPullRequestProps, "onSubmit">
+  ): Promise<PullRequest> {
+    return new Promise<PullRequest>((resolve) => {
+      this.state.next({
+        type: "githubPullRequest",
+        owner: options.owner,
+        repository: options.repository,
+        token: options.token,
+        pullRequestNumber: options.pullRequestNumber,
         onSubmit: resolve,
       });
     });

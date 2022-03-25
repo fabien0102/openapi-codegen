@@ -3,9 +3,6 @@ import Apollo from "@apollo/client";
 import { Box, Text } from "ink";
 import fetch from "got-fetch";
 import React from "react";
-import { join } from "path";
-import { homedir } from "os";
-import { existsSync, readFileSync, writeFileSync } from "fs";
 
 import type { GithubOptions } from "../types";
 
@@ -15,12 +12,9 @@ import {
   useSearchUserQuery,
 } from "./queries/github.js";
 import { Select } from "./Select.js";
-import { Input } from "./Input.js";
 import { TextInput } from "./TextInput.js";
 
 const { ApolloClient, HttpLink, InMemoryCache } = Apollo;
-
-const githubTokenPath = join(homedir(), ".openapi-codegen");
 
 type Step1 = Pick<Partial<GithubOptions>, "owner">;
 type Step2 = Required<Step1> & Pick<Partial<GithubOptions>, "repository">;
@@ -34,14 +28,12 @@ type State =
   | (Step4 & { step: 4 });
 
 export type GithubProps = {
+  token: string;
   onSubmit: (value: GithubOptions) => void;
 };
 
-export const Github = ({ onSubmit }: GithubProps) => {
+export const Github = ({ onSubmit, token }: GithubProps) => {
   const [state, setState] = React.useState<State>({ step: 1 });
-  const [token, setToken] = React.useState<string | undefined>(
-    getEnvGithubToken()
-  );
 
   const apolloClient = React.useMemo(
     () =>
@@ -83,26 +75,6 @@ export const Github = ({ onSubmit }: GithubProps) => {
     skip: state.step !== 2,
     client: apolloClient,
   });
-
-  if (!token) {
-    return (
-      <Box flexDirection="column">
-        <Input
-          message="Github token"
-          onSubmit={(val) => {
-            setToken(val);
-            writeFileSync(githubTokenPath, val);
-          }}
-        />
-        <Box marginTop={1} paddingLeft={2} flexDirection="column">
-          <Text>Please provide a GitHub token with `repo` rules checked</Text>
-          <Text color="cyan">
-            https://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line
-          </Text>
-        </Box>
-      </Box>
-    );
-  }
 
   switch (state.step) {
     case 1:
@@ -162,16 +134,4 @@ export const Github = ({ onSubmit }: GithubProps) => {
   }
 
   return null;
-};
-
-/**
- * Retrieve stored github token
- */
-const getEnvGithubToken = () => {
-  let accessToken = process.env.GITHUB_TOKEN;
-  if (!accessToken && existsSync(githubTokenPath)) {
-    accessToken = readFileSync(githubTokenPath, "utf-8");
-  }
-
-  return accessToken;
 };

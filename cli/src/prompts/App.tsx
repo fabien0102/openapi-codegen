@@ -5,12 +5,19 @@ import { Input, InputProps } from "./Input.js";
 import { Select, SelectProps } from "./Select.js";
 import { Confirm, ConfirmProps } from "./Confirm.js";
 import { Github, GithubProps } from "./Github.js";
+import { GithubToken, GithubTokenProps } from "./GithubToken.js";
+import {
+  GithubPullRequest,
+  GithubPullRequestProps,
+} from "./GithubPullRequest.js";
 
 export type PromptUnit =
   | ({ type: "input" } & InputProps)
   | ({ type: "select" } & SelectProps<any>)
   | ({ type: "confirm" } & ConfirmProps)
-  | ({ type: "github" } & GithubProps);
+  | ({ type: "github" } & GithubProps)
+  | ({ type: "githubToken" } & GithubTokenProps)
+  | ({ type: "githubPullRequest" } & GithubPullRequestProps);
 
 type AppProps = {
   state: Observable<PromptUnit>;
@@ -40,6 +47,10 @@ export function App({ state }: AppProps) {
               return <Confirm {...promptProps} key={index} />;
             case "github":
               return <Github {...promptProps} key={index} />;
+            case "githubToken":
+              return <GithubToken {...promptProps} key={index} />;
+            case "githubPullRequest":
+              return <GithubPullRequest {...promptProps} key={index} />;
           }
         })}
       </Box>
