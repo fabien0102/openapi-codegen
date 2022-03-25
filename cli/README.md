@@ -18,7 +18,7 @@ export default defineConfig({
       source: "github",
       owner: "fabien0102",
       repository: "openapi-codegen",
-      branch: "main",
+      ref: "main",
       specPath: "examples/spec.yaml",
     },
 

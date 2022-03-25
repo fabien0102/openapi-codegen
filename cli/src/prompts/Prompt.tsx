@@ -131,7 +131,7 @@ export class Prompt {
   /**
    * Select a pull-request.
    *
-   * @returns The branch of the pull-request
+   * @returns The ref of the pull-request
    */
   public githubPullRequest(
     options: Omit<GithubPullRequestProps, "onSubmit">
@@ -139,8 +139,11 @@ export class Prompt {
     return new Promise<PullRequest>((resolve) => {
       this.state.next({
         type: "githubPullRequest",
+        owner: options.owner,
+        repository: options.repository,
+        token: options.token,
+        pullRequestNumber: options.pullRequestNumber,
         onSubmit: resolve,
-        ...options,
       });
     });
   }

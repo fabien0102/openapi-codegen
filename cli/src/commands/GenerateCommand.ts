@@ -45,19 +45,21 @@ export class GenerateCommand extends Command {
   // source=github options
   owner = Option.String("--owner", {
     description: "[source=github] Owner of the repository",
+    env: "OPENAPI_CODEGEN_GITHUB_OWNER",
   });
   repository = Option.String("--repository,--repo", {
     description: "[source=github] Repository name",
+    env: "OPENAPI_CODEGEN_GITHUB_REPOSITORY",
   });
-  branch = Option.String("-b,--branch", {
-    description: "[source=github] Branch name",
+  ref = Option.String("--ref", {
+    description: "[source=github] Git reference (commit sha, branch or tag)",
+    env: "OPENAPI_CODEGEN_GITHUB_REF",
   });
   specPath = Option.String("--specPath", {
     description: "[source=github] OpenAPI specs file path",
   });
   pullRequest = Option.String("--pr,--pull-request", {
-    description:
-      "[source=github] Select a specific pull-request instead of a branch",
+    description: "[source=github] Select a specific pull-request as ref",
     validator: t.isNumber(),
     tolerateBoolean: true,
   });
@@ -67,7 +69,7 @@ export class GenerateCommand extends Command {
     description: "Generate types & components from an OpenAPI file",
     examples: [
       [`From a config key`, `$0 gen myapi`],
-      [`With some override`, `$0 gen myapi --branch awesome-feature`],
+      [`With some override`, `$0 gen myapi --ref awesome-feature`],
     ],
   });
 
@@ -161,7 +163,7 @@ export class GenerateCommand extends Command {
           return {
             ...config.from,
             owner: this.owner ?? config.from.owner,
-            branch: this.branch ?? config.from.branch,
+            ref: this.ref ?? config.from.ref,
             repository: this.repository ?? config.from.repository,
             specPath: this.specPath ?? config.from.specPath,
           };
@@ -169,8 +171,8 @@ export class GenerateCommand extends Command {
           if (!this.owner) {
             throw new UsageError("--owner argument is missing");
           }
-          if (!this.branch) {
-            throw new UsageError("--branch argument is missing");
+          if (!this.ref && !this.pullRequest) {
+            throw new UsageError("--ref argument is missing");
           }
           if (!this.repository) {
             throw new UsageError("--repository argument is missing");
@@ -181,7 +183,7 @@ export class GenerateCommand extends Command {
 
           return {
             source: "github",
-            branch: this.branch,
+            ref: this.ref || "main", // Fallback for --pr mode
             owner: this.owner,
             repository: this.repository,
             specPath: this.specPath,
@@ -211,7 +213,7 @@ export class GenerateCommand extends Command {
           typeof this.pullRequest === "number" ? this.pullRequest : undefined,
       });
 
-      options.branch = pullRequest.branch;
+      options.ref = pullRequest.ref;
       options.owner = pullRequest.owner;
       options.repository = pullRequest.repository;
     }

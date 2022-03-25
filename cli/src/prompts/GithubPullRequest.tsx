@@ -14,7 +14,7 @@ import { Spinner } from "./Spinner.js";
 const { ApolloClient, HttpLink, InMemoryCache } = Apollo;
 
 export type PullRequest = {
-  branch: string;
+  ref: string;
   owner: string;
   repository: string;
 };
@@ -71,7 +71,7 @@ export const GithubPullRequest = ({
       );
       if (pr) {
         onSubmit({
-          branch: pr.headRefName,
+          ref: pr.headRefName,
           owner: pr.headRepository?.owner.login ?? owner,
           repository: pr.headRepository?.name ?? repository,
         });
@@ -105,7 +105,7 @@ export const GithubPullRequest = ({
               onSubmit({
                 owner,
                 repository,
-                branch: data.repository.defaultBranchRef?.name,
+                ref: data.repository.defaultBranchRef?.name,
               });
             } else {
               process.exit(0);
@@ -145,7 +145,7 @@ export const GithubPullRequest = ({
               value: {
                 owner: node?.headRepository?.owner.login || owner,
                 repository: node?.headRepository?.name || repository,
-                branch: node?.headRefName || "main",
+                ref: node?.headRefName || "main",
               },
             }))}
           onSubmit={onSubmit}

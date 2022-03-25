@@ -71,7 +71,7 @@ describe("generateConfigProperty", () => {
       options: {
         from: {
           source: "github",
-          branch: "main",
+          ref: "main",
           owner: "fabien0102",
           repository: "openapi-codegen",
           specPath: "examples/petstore.json",

@@ -63,7 +63,7 @@ export const getOpenAPISourceFile = async (
             body: JSON.stringify({
               query: `query {
             repository(name: "${options.repository}", owner: "${options.owner}") {
-              object(expression: "${options.branch}:${options.specPath}") {
+              object(expression: "${options.ref}:${options.specPath}") {
                 ... on Blob {
                   text
                 }
