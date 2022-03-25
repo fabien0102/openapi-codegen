@@ -6,6 +6,7 @@ import type { GithubOptions } from "src/types";
 
 import { Choice } from "./Select.js";
 import { App, PromptUnit } from "./App.js";
+import { GithubPullRequestProps, PullRequest } from "./GithubPullRequest.js";
 
 export type InputOptions = {
   message: string;
@@ -123,6 +124,23 @@ export class Prompt {
       this.state.next({
         type: "githubToken",
         onSubmit: resolve,
+      });
+    });
+  }
+
+  /**
+   * Select a pull-request.
+   *
+   * @returns The branch of the pull-request
+   */
+  public githubPullRequest(
+    options: Omit<GithubPullRequestProps, "onSubmit">
+  ): Promise<PullRequest> {
+    return new Promise<PullRequest>((resolve) => {
+      this.state.next({
+        type: "githubPullRequest",
+        onSubmit: resolve,
+        ...options,
       });
     });
   }

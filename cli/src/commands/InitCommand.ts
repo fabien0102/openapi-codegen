@@ -141,7 +141,7 @@ export class InitCommand extends Command {
         ? await this.askForFile()
         : source === "url"
         ? await this.askForUrl()
-        : await this.prompt.github();
+        : await this.prompt.github("todo: inject the token");
 
     const namespace = format.camel(
       await this.prompt.input({

@@ -1,0 +1,20 @@
+query searchPullRequest($repositoryName: String!, $owner: String!) {
+  repository(name: $repositoryName, owner: $owner) {
+    defaultBranchRef {
+      name
+    }
+    pullRequests(last: 100, states: OPEN) {
+      nodes {
+        number
+        title
+        headRefName
+        headRepository {
+          owner {
+            login
+          }
+          name
+        }
+      }
+    }
+  }
+}

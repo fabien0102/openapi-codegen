@@ -58,6 +58,8 @@ export class GenerateCommand extends Command {
   pullRequest = Option.String("--pr,--pull-request", {
     description:
       "[source=github] Select a specific pull-request instead of a branch",
+    validator: t.isNumber(),
+    tolerateBoolean: true,
   });
 
   static paths = [["gen"], ["generate"], Command.Default];
@@ -197,7 +199,24 @@ export class GenerateCommand extends Command {
     }
 
     const config = configs[this.namespace];
-    const sourceFile = await getOpenAPISourceFile(this.getFromOptions(config));
+    const options = this.getFromOptions(config);
+    if (options.source === "github" && this.pullRequest) {
+      const { Prompt } = await import("../prompts/Prompt.js");
+      const prompt = new Prompt();
+      const token = await prompt.githubToken();
+      const pullRequest = await prompt.githubPullRequest({
+        ...options,
+        token,
+        pullRequestNumber:
+          typeof this.pullRequest === "number" ? this.pullRequest : undefined,
+      });
+
+      options.branch = pullRequest.branch;
+      options.owner = pullRequest.owner;
+      options.repository = pullRequest.repository;
+    }
+
+    const sourceFile = await getOpenAPISourceFile(options);
     const openAPIDocument = await parseOpenAPISourceFile(sourceFile);
     const prettierConfig = await prettier.resolveConfig(process.cwd());
 
