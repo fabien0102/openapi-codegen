@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Text } from "ink";
 
 import { join } from "path";
@@ -15,15 +15,13 @@ export type GithubTokenProps = {
  * Retrieve github token, ask if not already set.
  */
 export const GithubToken = ({ onSubmit }: GithubTokenProps) => {
-  const token = getEnvGithubToken();
-  const [hasSubmit, setHasSubmit] = useState(false);
+  const [token, setToken] = useState(getEnvGithubToken());
 
-  if (hasSubmit) return null;
+  useEffect(() => {
+    if (token) onSubmit(token);
+  }, [token]);
 
-  if (token) {
-    onSubmit(token);
-    setHasSubmit(true);
-  }
+  if (token) return null;
 
   return (
     <Box flexDirection="column">
@@ -31,8 +29,7 @@ export const GithubToken = ({ onSubmit }: GithubTokenProps) => {
         message="Github token"
         onSubmit={(val) => {
           writeFileSync(githubTokenPath, val);
-          onSubmit(val);
-          setHasSubmit(true);
+          setToken(val);
         }}
       />
       <Box marginTop={1} paddingLeft={2} flexDirection="column">

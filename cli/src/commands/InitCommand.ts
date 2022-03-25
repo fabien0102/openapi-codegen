@@ -131,7 +131,7 @@ export class InitCommand extends Command {
       choices: [
         { label: "File", value: "file" as const },
         { label: "Url", value: "url" as const },
-        // { label: "Github", value: "github" as const },
+        { label: "Github", value: "github" as const },
       ],
       message: "Select the source of your OpenAPI",
     });
@@ -141,7 +141,7 @@ export class InitCommand extends Command {
         ? await this.askForFile()
         : source === "url"
         ? await this.askForUrl()
-        : await this.prompt.github("todo: inject the token");
+        : await this.prompt.github();
 
     const namespace = format.camel(
       await this.prompt.input({

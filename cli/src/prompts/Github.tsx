@@ -13,6 +13,7 @@ import {
 } from "./queries/github.js";
 import { Select } from "./Select.js";
 import { TextInput } from "./TextInput.js";
+import { GithubToken } from "./GithubToken.js";
 
 type Step1 = Pick<Partial<GithubOptions>, "owner">;
 type Step2 = Required<Step1> & Pick<Partial<GithubOptions>, "repository">;
@@ -26,12 +27,12 @@ type State =
   | (Step4 & { step: 4 });
 
 export type GithubProps = {
-  token: string;
   onSubmit: (value: GithubOptions) => void;
 };
 
-export const Github = ({ onSubmit, token }: GithubProps) => {
+export const Github = ({ onSubmit }: GithubProps) => {
   const [state, setState] = React.useState<State>({ step: 1 });
+  const [token, setToken] = React.useState<string>();
 
   const apolloClient = React.useMemo(
     () =>
@@ -73,6 +74,10 @@ export const Github = ({ onSubmit, token }: GithubProps) => {
     skip: state.step !== 2,
     client: apolloClient,
   });
+
+  if (!token) {
+    return <GithubToken onSubmit={setToken} />;
+  }
 
   switch (state.step) {
     case 1:
