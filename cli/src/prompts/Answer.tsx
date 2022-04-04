@@ -2,7 +2,7 @@ import { Text } from "ink";
 import React from "react";
 
 export type AnswerProps = {
-  children: string;
+  children: React.ReactNode;
 };
 
 /**

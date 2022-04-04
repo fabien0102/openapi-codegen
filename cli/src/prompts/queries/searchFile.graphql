@@ -4,6 +4,7 @@ query searchFile(
   $owner: String!
 ) {
   repository(name: $repositoryName, owner: $owner) {
+    id
     object(expression: $expression) {
       ... on Tree {
         entries {

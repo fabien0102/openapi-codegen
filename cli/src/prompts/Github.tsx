@@ -8,17 +8,20 @@ import type { GithubOptions } from "../types";
 
 import { Message } from "./Message.js";
 import {
+  useSearchFileQuery,
   useSearchRepositoryQuery,
   useSearchUserQuery,
 } from "./queries/github.js";
 import { Select } from "./Select.js";
 import { TextInput } from "./TextInput.js";
 import { GithubToken } from "./GithubToken.js";
+import { Spinner } from "./Spinner.js";
+import { Answer } from "./Answer.js";
 
 type Step1 = Pick<Partial<GithubOptions>, "owner">;
 type Step2 = Required<Step1> & Pick<Partial<GithubOptions>, "repository">;
-type Step3 = Required<Step2> & Pick<Partial<GithubOptions>, "source">;
-type Step4 = Required<Step3> & Pick<Partial<GithubOptions>, "specPath">;
+type Step3 = Required<Step2> & Pick<Partial<GithubOptions>, "specPath">;
+type Step4 = Required<Step3>;
 
 type State =
   | (Step1 & { step: 1 })
@@ -31,8 +34,11 @@ export type GithubProps = {
 };
 
 export const Github = ({ onSubmit }: GithubProps) => {
-  const [state, setState] = React.useState<State>({ step: 1 });
+  const [state, setState] = React.useState<State>({
+    step: 1,
+  });
   const [token, setToken] = React.useState<string>();
+  const [search, setSearch] = React.useState("");
 
   const apolloClient = React.useMemo(
     () =>
@@ -75,6 +81,21 @@ export const Github = ({ onSubmit }: GithubProps) => {
     client: apolloClient,
   });
 
+  const {
+    data: files,
+    error: filesError,
+    loading: filesLoading,
+  } = useSearchFileQuery({
+    variables: {
+      expression:
+        state.step === 3 && state.specPath ? `HEAD:${state.specPath}` : "HEAD:",
+      owner: state.owner || "",
+      repositoryName: (state.step === 3 && state.repository) || "",
+    },
+    skip: state.step !== 3,
+    client: apolloClient,
+  });
+
   if (!token) {
     return <GithubToken onSubmit={setToken} />;
   }
@@ -90,7 +111,12 @@ export const Github = ({ onSubmit }: GithubProps) => {
               value={state.owner || ""}
             />
           </Box>
-          {usersLoading && <Text>Loading…</Text>}
+          {usersLoading && (
+            <Text>
+              <Spinner />
+              Loading…
+            </Text>
+          )}
           {usersError && <Box>{usersError.message}</Box>}
           {users && users.search.nodes && (
             <Select
@@ -108,14 +134,22 @@ export const Github = ({ onSubmit }: GithubProps) => {
       return (
         <Box flexDirection="column">
           <Box>
-            <Message>Pick a repository</Message>
-            <Text color="blackBright">{state.owner}/ </Text>
+            <Message>Owner?</Message>
+            <Answer>{state.owner}</Answer>
+          </Box>
+          <Box>
+            <Message>Repository?</Message>
             <TextInput
               onChange={(repository) => setState({ ...state, repository })}
               value={state.repository || ""}
             />
           </Box>
-          {repositoriesLoading && <Text>Loading…</Text>}
+          {repositoriesLoading && (
+            <Text>
+              <Spinner />
+              Loading…
+            </Text>
+          )}
           {repositoriesError && <Box>{repositoriesError.message}</Box>}
           {repositories && repositories.search.nodes && (
             <Select
@@ -134,7 +168,88 @@ export const Github = ({ onSubmit }: GithubProps) => {
           )}
         </Box>
       );
-  }
 
-  return null;
+    case 3:
+      return (
+        <Box flexDirection="column">
+          <Box>
+            <Message>Owner?</Message>
+            <Answer>{state.owner}</Answer>
+          </Box>
+          <Box>
+            <Message>Repository?</Message>
+            <Answer>{state.repository}</Answer>
+          </Box>
+          <Box>
+            <Message>OpenAPI file?</Message>
+            <Answer>{state.specPath}/</Answer>
+            <TextInput onChange={setSearch} value={search} />
+          </Box>
+          {filesError && <Box>{filesError}</Box>}
+          {filesLoading && (
+            <Text>
+              <Spinner />
+              Loading…
+            </Text>
+          )}
+          {files &&
+            files.repository?.object?.__typename === "Tree" &&
+            files.repository.object.entries && (
+              <Select
+                choices={files.repository.object.entries
+                  .filter((file) => {
+                    if (search) {
+                      return new RegExp(search, "i").exec(file.name);
+                    }
+
+                    return true;
+                  })
+                  .map((file) => ({
+                    label: file.name,
+                    value: file,
+                  }))}
+                onSubmit={(value) => {
+                  setSearch("");
+                  if (value.type === "blob") {
+                    const specPath = `${
+                      state.specPath ? state.specPath + "/" : ""
+                    }${value.name}`;
+                    setState({ ...state, step: 4, specPath });
+                    onSubmit({
+                      owner: state.owner,
+                      repository: state.repository,
+                      source: "github",
+                      specPath,
+                    });
+                  } else if (value.type === "tree") {
+                    setState({
+                      ...state,
+                      specPath: `${state.specPath ? state.specPath + "/" : ""}${
+                        value.name
+                      }`,
+                    });
+                  }
+                }}
+              />
+            )}
+        </Box>
+      );
+    case 4:
+      return (
+        <Box flexDirection="column">
+          <Box>
+            <Message>Owner?</Message>
+            <Answer>{state.owner}</Answer>
+          </Box>
+          <Box>
+            <Message>Repository?</Message>
+            <Answer>{state.repository}</Answer>
+          </Box>
+          <Box>
+            <Message>OpenAPI file?</Message>
+            <Answer>{state.specPath}</Answer>
+          </Box>
+        </Box>
+      );
+  }
 };
