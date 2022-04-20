@@ -78,6 +78,40 @@ describe("schemaToTypeAliasDeclaration", () => {
     expect(printSchema(schema)).toBe(`export type Test = 1 | 2 | 3;`);
   });
 
+  it("should skip example which contains `*/` to avoid confusion", () => {
+    const schema: SchemaObject = {
+      title: "CronTimingCreate",
+      required: ["type", "cron_expression"],
+      type: "object",
+      properties: {
+        cron_expression: {
+          title: "Cron Expression",
+          type: "string",
+          description: "The string representing the timing's cron expression.",
+          format: "cron-string",
+          example: "*/5 * * * *", // `*/` is conflicting the multiline comment syntax
+        },
+      },
+      additionalProperties: false,
+      description: "Cron timing schema for create requests.",
+    };
+
+    expect(printSchema(schema)).toMatchInlineSnapshot(`
+      "/**
+       * Cron timing schema for create requests.
+       */
+      export type Test = {
+          /*
+           * The string representing the timing's cron expression.
+           *
+           * @format cron-string
+           * @example [see original specs]
+           */
+          cron_expression: string;
+      };"
+    `);
+  });
+
   it("should generate top-level documentation", () => {
     const schema: SchemaObject = {
       type: "null",
