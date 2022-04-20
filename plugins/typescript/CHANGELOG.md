@@ -1,5 +1,12 @@
 # Changelog
 
+### [3.0.2](https://github.com/fabien0102/openapi-codegen/compare/typescript-v3.0.1...typescript-v3.0.2) (2022-04-20)
+
+
+### Bug Fixes
+
+* Fix comment generation ([#58](https://github.com/fabien0102/openapi-codegen/issues/58)) ([f291a32](https://github.com/fabien0102/openapi-codegen/commit/f291a32bb6225d224e6f14089aef8313f50481a6))
+
 ### [3.0.1](https://github.com/fabien0102/openapi-codegen/compare/typescript-v3.0.0...typescript-v3.0.1) (2022-03-22)
 
 
