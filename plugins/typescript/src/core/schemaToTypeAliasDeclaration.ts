@@ -562,6 +562,8 @@ const getJSDocComment = (
       return f.createIdentifier(value.toString());
     }
 
+    // Value is not stringifiable
+    // See https://github.com/fabien0102/openapi-codegen/issues/36, https://github.com/fabien0102/openapi-codegen/issues/57
     return f.createIdentifier("[see original specs]");
   };
 
