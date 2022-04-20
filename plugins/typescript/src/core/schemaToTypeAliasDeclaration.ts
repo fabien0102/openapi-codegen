@@ -544,6 +544,29 @@ const getJSDocComment = (
       }, schema)
     : schema;
 
+  const getJsDocIdentifier = (value: unknown) => {
+    const multilineEndChar = "*/";
+
+    if (typeof value === "string" && !value.includes(multilineEndChar)) {
+      return f.createIdentifier(value);
+    }
+
+    if (
+      typeof value === "object" &&
+      !JSON.stringify(value).includes(multilineEndChar)
+    ) {
+      return f.createIdentifier(JSON.stringify(value));
+    }
+
+    if (typeof value === "boolean" || typeof value === "number") {
+      return f.createIdentifier(value.toString());
+    }
+
+    // Value is not stringifiable
+    // See https://github.com/fabien0102/openapi-codegen/issues/36, https://github.com/fabien0102/openapi-codegen/issues/57
+    return f.createIdentifier("[see original specs]");
+  };
+
   const propertyTags: ts.JSDocPropertyTag[] = [];
   Object.entries(schemaWithAllOfResolved)
     .filter(
@@ -557,7 +580,7 @@ const getJSDocComment = (
           propertyTags.push(
             f.createJSDocPropertyTag(
               f.createIdentifier(singular(key)),
-              f.createIdentifier(v.toString()),
+              getJsDocIdentifier(v),
               false
             )
           )
@@ -566,11 +589,7 @@ const getJSDocComment = (
         propertyTags.push(
           f.createJSDocPropertyTag(
             f.createIdentifier(key),
-            f.createIdentifier(
-              typeof value === "object"
-                ? JSON.stringify(value)
-                : value.toString()
-            ),
+            getJsDocIdentifier(value),
             false
           )
         );
