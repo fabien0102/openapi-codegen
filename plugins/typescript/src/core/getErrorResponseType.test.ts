@@ -1,5 +1,5 @@
 import { ResponseObject } from "openapi3-ts";
-import ts from "typescript";
+import { print } from "../testUtils";
 import { getErrorResponseType } from "./getErrorResponseType";
 
 describe("getErrorResponseType", () => {
@@ -209,16 +209,6 @@ describe("getErrorResponseType", () => {
 });
 
 // Helpers
-const sourceFile = ts.createSourceFile("index.ts", "", ts.ScriptTarget.Latest);
-
-const printer = ts.createPrinter({
-  newLine: ts.NewLineKind.LineFeed,
-  removeComments: false,
-});
-
-const print = (node: ts.Node) =>
-  printer.printNode(ts.EmitHint.Unspecified, node, sourceFile);
-
 const createResponse = (refName: string): ResponseObject => ({
   description: "a response",
   content: {

@@ -4,6 +4,7 @@ import { OperationObject } from "openapi3-ts";
 
 import { petstore } from "../fixtures/petstore";
 import { getOperationTypes } from "./getOperationTypes";
+import { print } from "../testUtils";
 
 describe("getOperationTypes", () => {
   it("should generate a variable type (with extra props)", () => {
@@ -74,14 +75,3 @@ describe("getOperationTypes", () => {
     expect(output.declarationNodes.length).toBe(2);
   });
 });
-
-// Helpers
-const sourceFile = ts.createSourceFile("index.ts", "", ts.ScriptTarget.Latest);
-
-const printer = ts.createPrinter({
-  newLine: ts.NewLineKind.LineFeed,
-  removeComments: false,
-});
-
-const print = (node: ts.Node) =>
-  printer.printNode(ts.EmitHint.Unspecified, node, sourceFile);

@@ -1,3 +1,4 @@
+import { print } from "../testUtils";
 import ts, { factory as f } from "typescript";
 import { getVariablesType } from "./getVariablesType";
 
@@ -154,16 +155,6 @@ describe("getVariableType", () => {
 });
 
 // Helpers
-const sourceFile = ts.createSourceFile("index.ts", "", ts.ScriptTarget.Latest);
-
-const printer = ts.createPrinter({
-  newLine: ts.NewLineKind.LineFeed,
-  removeComments: false,
-});
-
-const print = (node: ts.Node) =>
-  printer.printNode(ts.EmitHint.Unspecified, node, sourceFile);
-
 const createType = (namespace: string, name: string) =>
   f.createTypeReferenceNode(
     f.createQualifiedName(
