@@ -1,6 +1,7 @@
 import { camel } from "case";
 import { get } from "lodash";
 import ts, { factory as f } from "typescript";
+import { createNamespaceImport } from "./createNamespaceImport";
 
 /**
  * Generate the needed imports regarding the generated nodes usage.
@@ -50,25 +51,5 @@ export const getUsedImports = (
 
   return Object.values(imports)
     .filter((i) => i.used)
-    .map((i) => createImportDeclaration(i.namespace, `./${i.from}`));
+    .map((i) => createNamespaceImport(i.namespace, `./${i.from}`));
 };
-
-/**
- * Create an `ImportDeclaration` typescript node
- *
- * @param namespace
- * @param from
- * @returns
- */
-const createImportDeclaration = (namespace: string, from: string) =>
-  f.createImportDeclaration(
-    undefined,
-    undefined,
-    f.createImportClause(
-      true,
-      undefined,
-      f.createNamespaceImport(f.createIdentifier(namespace))
-    ),
-    f.createStringLiteral(from),
-    undefined
-  );
