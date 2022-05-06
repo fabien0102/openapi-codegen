@@ -15,7 +15,7 @@ describe("getOperationTypes", () => {
       variablesExtraPropsType: factory.createTypeReferenceNode("ExtraProps"),
     });
 
-    expect(print(output.declarationNodes[2])).toMatchInlineSnapshot(`
+    expect(print(output.declarationNodes[3])).toMatchInlineSnapshot(`
       "export type ListPetVariables = {
           queryParams?: ListPetQueryParams;
       } & ExtraProps;"
@@ -33,7 +33,7 @@ describe("getOperationTypes", () => {
       ),
     });
 
-    expect(print(output.declarationNodes[2])).toMatchInlineSnapshot(`
+    expect(print(output.declarationNodes[3])).toMatchInlineSnapshot(`
       "export type ListPetVariables = {
           queryParams?: ListPetQueryParams;
       };"
@@ -52,7 +52,7 @@ describe("getOperationTypes", () => {
       variablesExtraPropsType: factory.createTypeReferenceNode("ExtraProps"),
     });
 
-    expect(print(output.declarationNodes[1])).toMatchInlineSnapshot(
+    expect(print(output.declarationNodes[2])).toMatchInlineSnapshot(
       `"export type ListPetVariables = ExtraProps;"`
     );
   });
@@ -71,7 +71,7 @@ describe("getOperationTypes", () => {
       ),
     });
 
-    expect(output.declarationNodes.length).toBe(1);
+    expect(output.declarationNodes.length).toBe(2);
   });
 });
 

@@ -44,7 +44,7 @@ describe("generateFetchers", () => {
     },
   };
 
-  it("should genarate fetchers", async () => {
+  it("should generate fetchers", async () => {
     const writeFile = jest.fn();
 
     await generateFetchers(
@@ -77,7 +77,7 @@ describe("generateFetchers", () => {
     `);
   });
 
-  it("should genarate fetchers without prefix", async () => {
+  it("should generate fetchers without prefix", async () => {
     const writeFile = jest.fn();
 
     await generateFetchers(
