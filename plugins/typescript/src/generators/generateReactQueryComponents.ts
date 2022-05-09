@@ -183,6 +183,7 @@ export const generateReactQueryComponents = async (
         nodes.push(
           ...createOperationFetcherFnNodes({
             dataType,
+            errorType,
             requestBodyType,
             pathParamsType,
             variablesType,

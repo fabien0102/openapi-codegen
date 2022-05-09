@@ -142,6 +142,7 @@ export const generateFetchers = async (context: Context, config: Config) => {
 
         const {
           dataType,
+          errorType,
           requestBodyType,
           pathParamsType,
           variablesType,
@@ -162,6 +163,7 @@ export const generateFetchers = async (context: Context, config: Config) => {
           ...declarationNodes,
           ...createOperationFetcherFnNodes({
             dataType,
+            errorType,
             requestBodyType,
             pathParamsType,
             variablesType,
