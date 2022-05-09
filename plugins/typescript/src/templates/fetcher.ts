@@ -31,6 +31,8 @@ export const getFetcher = ({
 
 const baseUrl = ${baseUrl ? `"${baseUrl}"` : `""; // TODO add your baseUrl`}
 
+export type ErrorWrapper<TError> = TError
+
 export type ${pascal(
     prefix
   )}FetcherOptions<TBody, THeaders, TQueryParams, TPathParams> = {
@@ -78,8 +80,16 @@ export async function ${camel(prefix)}Fetch<
   );
   if (!response.ok) {
     // TODO validate & parse the error to fit the generated error types 
-    throw new Error("Network response was not ok");
+    let error: TError;
+    try {
+      error = await response.json();
+    } catch {
+      error = "Network response was not ok";
+    }
+
+    throw error;
   }
+
   return await response.json();
 }
 

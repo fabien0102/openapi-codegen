@@ -9,6 +9,7 @@ import { print } from "../testUtils";
 describe("getOperationTypes", () => {
   it("should generate a variable type (with extra props)", () => {
     const output = getOperationTypes({
+      allErrors: new Map(),
       operationId: "listPet",
       operation: petstore.paths["/pets"].get as OperationObject,
       openAPIDocument: petstore,
@@ -25,6 +26,7 @@ describe("getOperationTypes", () => {
 
   it("should generate a variable type (without extra props)", () => {
     const output = getOperationTypes({
+      allErrors: new Map(),
       operationId: "listPet",
       operation: petstore.paths["/pets"].get as OperationObject,
       openAPIDocument: petstore,
@@ -43,6 +45,7 @@ describe("getOperationTypes", () => {
 
   it("should generate a variable type (with extra props only)", () => {
     const output = getOperationTypes({
+      allErrors: new Map(),
       operationId: "listPet",
       operation: omit(
         petstore.paths["/pets"].get,
@@ -60,6 +63,7 @@ describe("getOperationTypes", () => {
 
   it("should generate a variable type (void)", () => {
     const output = getOperationTypes({
+      allErrors: new Map(),
       operationId: "listPet",
       operation: omit(
         petstore.paths["/pets"].get,

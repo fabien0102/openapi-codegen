@@ -38,6 +38,19 @@ describe("generateFetchers", () => {
                 },
               },
             },
+            "404": {
+              description: "not found",
+              $ref: "#/components/responses/NotFoundError",
+            },
+            "5xx": {
+              content: {
+                "application/json": {
+                  schema: {
+                    $ref: "#/components/schemas/Error",
+                  },
+                },
+              },
+            },
           },
         },
       },
@@ -67,8 +80,16 @@ describe("generateFetchers", () => {
       import type * as Fetcher from \\"./petstoreFetcher\\";
       import { petstoreFetch } from \\"./petstoreFetcher\\";
       import type * as Schemas from \\"./petstoreSchemas\\";
+      import type * as Responses from \\"./petstoreResponses\\";
+      import { ServerErrorStatus } from \\"././petstoreUtils\\";
 
-      export type ListPetsError = Fetcher.ErrorWrapper<undefined>;
+      export type ListPetsError = Fetcher.ErrorWrapper<{
+          status: 404;
+          payload: Responses.NotFoundError;
+      } | {
+          status: ServerErrorStatus;
+          payload: Schemas.Error;
+      }>;
 
       export type ListPetsResponse = Schemas.Pet[];
 
@@ -76,6 +97,8 @@ describe("generateFetchers", () => {
        * Get all the pets
        */
       export const listPets = () => petstoreFetch<ListPetsResponse, ListPetsError, undefined, {}, {}, {}>({ url: \\"/pets\\", method: \\"get\\" });
+
+      export type PetstoreError = Responses.NotFoundError | Schemas.Error;
       "
     `);
   });
@@ -103,8 +126,16 @@ describe("generateFetchers", () => {
       import type * as Fetcher from \\"./fetcher\\";
       import { fetch } from \\"./fetcher\\";
       import type * as Schemas from \\"./petstoreSchemas\\";
+      import type * as Responses from \\"./petstoreResponses\\";
+      import { ServerErrorStatus } from \\"././utils\\";
 
-      export type ListPetsError = Fetcher.ErrorWrapper<undefined>;
+      export type ListPetsError = Fetcher.ErrorWrapper<{
+          status: 404;
+          payload: Responses.NotFoundError;
+      } | {
+          status: ServerErrorStatus;
+          payload: Schemas.Error;
+      }>;
 
       export type ListPetsResponse = Schemas.Pet[];
 
@@ -112,6 +143,8 @@ describe("generateFetchers", () => {
        * Get all the pets
        */
       export const listPets = () => fetch<ListPetsResponse, ListPetsError, undefined, {}, {}, {}>({ url: \\"/pets\\", method: \\"get\\" });
+
+      export type Error = Responses.NotFoundError | Schemas.Error;
       "
     `);
   });
@@ -146,8 +179,16 @@ describe("generateFetchers", () => {
       import type * as Fetcher from \\"./petstoreFetcher\\";
       import { petstoreFetch, PetstoreFetcherExtraProps } from \\"./petstoreFetcher\\";
       import type * as Schemas from \\"./petstoreSchemas\\";
+      import type * as Responses from \\"./petstoreResponses\\";
+      import { ServerErrorStatus } from \\"././petstoreUtils\\";
 
-      export type ListPetsError = Fetcher.ErrorWrapper<undefined>;
+      export type ListPetsError = Fetcher.ErrorWrapper<{
+          status: 404;
+          payload: Responses.NotFoundError;
+      } | {
+          status: ServerErrorStatus;
+          payload: Schemas.Error;
+      }>;
 
       export type ListPetsResponse = Schemas.Pet[];
 
@@ -157,6 +198,8 @@ describe("generateFetchers", () => {
        * Get all the pets
        */
       export const listPets = (variables: ListPetsVariables) => petstoreFetch<ListPetsResponse, ListPetsError, undefined, {}, {}, {}>({ url: \\"/pets\\", method: \\"get\\", ...variables });
+
+      export type PetstoreError = Responses.NotFoundError | Schemas.Error;
       "
     `);
   });
@@ -190,8 +233,16 @@ describe("generateFetchers", () => {
       import type * as Fetcher from \\"./petstoreFetcher\\";
       import { petstoreFetch } from \\"./petstoreFetcher\\";
       import type * as Schemas from \\"./petstoreSchemas\\";
+      import type * as Responses from \\"./petstoreResponses\\";
+      import { ServerErrorStatus } from \\"././petstoreUtils\\";
 
-      export type ListPetsError = Fetcher.ErrorWrapper<undefined>;
+      export type ListPetsError = Fetcher.ErrorWrapper<{
+          status: 404;
+          payload: Responses.NotFoundError;
+      } | {
+          status: ServerErrorStatus;
+          payload: Schemas.Error;
+      }>;
 
       export type ListPetsResponse = Schemas.Pet[];
 
@@ -201,6 +252,8 @@ describe("generateFetchers", () => {
       export const listPets = () => petstoreFetch<ListPetsResponse, ListPetsError, undefined, {}, {}, {}>({ url: \\"/pets\\", method: \\"get\\" });
 
       export const operationsByTag = { \\"pets\\": { listPets } };
+
+      export type PetstoreError = Responses.NotFoundError | Schemas.Error;
       "
     `);
   });
