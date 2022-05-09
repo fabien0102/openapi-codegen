@@ -14,6 +14,7 @@ import { getOperationTypes } from "../core/getOperationTypes";
 import { createNamedImport } from "../core/createNamedImport";
 
 import { getFetcher } from "../templates/fetcher";
+import { getUtils } from "../templates/utils";
 import { createNamespaceImport } from "../core/createNamespaceImport";
 
 export type Config = ConfigBase & {
@@ -74,6 +75,8 @@ export const generateFetchers = async (context: Context, config: Config) => {
 
   const fetcherFilename = formatFilename(filenamePrefix + "-fetcher");
   const utilsFilename = formatFilename(filenamePrefix + "-utils");
+
+  await context.writeFile(`${utilsFilename}.ts`, getUtils());
 
   const fetcherExtraPropsTypeName = `${c.pascal(
     filenamePrefix

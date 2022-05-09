@@ -15,6 +15,7 @@ import { createNamedImport } from "../core/createNamedImport";
 
 import { getFetcher } from "../templates/fetcher";
 import { getContext } from "../templates/context";
+import { getUtils } from "../templates/utils";
 import { createNamespaceImport } from "../core/createNamespaceImport";
 
 export type Config = ConfigBase & {
@@ -81,6 +82,8 @@ export const generateReactQueryComponents = async (
   const fetcherFilename = formatFilename(filenamePrefix + "-fetcher");
   const contextFilename = formatFilename(filenamePrefix + "-context");
   const utilsFilename = formatFilename(filenamePrefix + "-utils");
+
+  context.writeFile(`${utilsFilename}.ts`, getUtils());
 
   if (!context.existsFile(`${fetcherFilename}.ts`)) {
     context.writeFile(
