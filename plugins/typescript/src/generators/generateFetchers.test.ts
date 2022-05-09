@@ -64,8 +64,11 @@ describe("generateFetchers", () => {
        * 
        * @version 1.0.0
        */
+      import type * as Fetcher from \\"./petstoreFetcher\\";
       import { petstoreFetch } from \\"./petstoreFetcher\\";
       import type * as Schemas from \\"./petstoreSchemas\\";
+
+      export type ListPetsError = Fetcher.ErrorWrapper<undefined>;
 
       export type ListPetsResponse = Schemas.Pet[];
 
@@ -97,8 +100,11 @@ describe("generateFetchers", () => {
        * 
        * @version 1.0.0
        */
+      import type * as Fetcher from \\"./fetcher\\";
       import { fetch } from \\"./fetcher\\";
       import type * as Schemas from \\"./petstoreSchemas\\";
+
+      export type ListPetsError = Fetcher.ErrorWrapper<undefined>;
 
       export type ListPetsResponse = Schemas.Pet[];
 
@@ -137,8 +143,11 @@ describe("generateFetchers", () => {
        * 
        * @version 1.0.0
        */
+      import type * as Fetcher from \\"./petstoreFetcher\\";
       import { petstoreFetch, PetstoreFetcherExtraProps } from \\"./petstoreFetcher\\";
       import type * as Schemas from \\"./petstoreSchemas\\";
+
+      export type ListPetsError = Fetcher.ErrorWrapper<undefined>;
 
       export type ListPetsResponse = Schemas.Pet[];
 
@@ -178,8 +187,11 @@ describe("generateFetchers", () => {
        * 
        * @version 1.0.0
        */
+      import type * as Fetcher from \\"./petstoreFetcher\\";
       import { petstoreFetch } from \\"./petstoreFetcher\\";
       import type * as Schemas from \\"./petstoreSchemas\\";
+
+      export type ListPetsError = Fetcher.ErrorWrapper<undefined>;
 
       export type ListPetsResponse = Schemas.Pet[];
 

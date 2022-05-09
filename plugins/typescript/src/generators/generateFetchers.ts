@@ -14,6 +14,7 @@ import { getOperationTypes } from "../core/getOperationTypes";
 import { createNamedImport } from "../core/createNamedImport";
 
 import { getFetcher } from "../templates/fetcher";
+import { createNamespaceImport } from "../core/createNamespaceImport";
 
 export type Config = ConfigBase & {
   /**
@@ -72,6 +73,7 @@ export const generateFetchers = async (context: Context, config: Config) => {
   const fetcherImports = [fetcherFn];
 
   const fetcherFilename = formatFilename(filenamePrefix + "-fetcher");
+  const utilsFilename = formatFilename(filenamePrefix + "-utils");
 
   const fetcherExtraPropsTypeName = `${c.pascal(
     filenamePrefix
@@ -207,8 +209,12 @@ export const generateFetchers = async (context: Context, config: Config) => {
     filename + ".ts",
     printNodes([
       createWatermark(context.openAPIDocument.info),
+      createNamespaceImport("Fetcher", `./${fetcherFilename}`),
       createNamedImport(fetcherImports, `./${fetcherFilename}`),
-      ...getUsedImports(nodes, config.schemasFiles),
+      ...getUsedImports(nodes, {
+        ...config.schemasFiles,
+        utils: `./${utilsFilename}`,
+      }),
       ...nodes,
     ])
   );

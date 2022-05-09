@@ -26,6 +26,7 @@ describe("getUsedImports", () => {
         requestBodies: "./requestBodies",
         responses: "./responses",
         schemas: "./schemas",
+        utils: "./utils",
       })
         .map(print)
         .join("\n")
@@ -57,6 +58,7 @@ describe("getUsedImports", () => {
         requestBodies: "./requestBodies",
         responses: "./responses",
         schemas: "./schemas",
+        utils: "./utils",
       })
         .map(print)
         .join("\n")
@@ -88,6 +90,7 @@ describe("getUsedImports", () => {
         requestBodies: "./requestBodies",
         responses: "./responses",
         schemas: "./schemas",
+        utils: "./utils",
       })
         .map(print)
         .join("\n")
@@ -119,6 +122,7 @@ describe("getUsedImports", () => {
         requestBodies: "./requestBodies",
         responses: "./responses",
         schemas: "./schemas",
+        utils: "./utils",
       })
         .map(print)
         .join("\n")
@@ -189,6 +193,7 @@ describe("getUsedImports", () => {
         requestBodies: "./requestBodies",
         responses: "./responses",
         schemas: "./schemas",
+        utils: "./utils",
       })
         .map(print)
         .join("\n")
@@ -198,5 +203,110 @@ describe("getUsedImports", () => {
       import type * as RequestBodies from \\"././requestBodies\\";
       import type * as Responses from \\"././responses\\";"
     `);
+  });
+
+  it("should generate utils import (ClientErrorStatus)", () => {
+    const nodes = [
+      f.createTypeAliasDeclaration(
+        undefined,
+        undefined,
+        f.createIdentifier("A"),
+        undefined,
+        f.createTypeReferenceNode(f.createIdentifier("ErrorWrapper"), [
+          f.createTypeReferenceNode(
+            f.createIdentifier("ClientErrorStatus"), // should be detected
+            undefined
+          ),
+        ])
+      ),
+    ];
+
+    expect(
+      getUsedImports(nodes, {
+        parameters: "./parameters",
+        requestBodies: "./requestBodies",
+        responses: "./responses",
+        schemas: "./schemas",
+        utils: "./utils",
+      })
+        .map(print)
+        .join("\n")
+    ).toMatchInlineSnapshot(
+      `"import { ClientErrorStatus } from \\"././utils\\";"`
+    );
+  });
+
+  it("should generate utils import (ServerErrorStatus)", () => {
+    const nodes = [
+      f.createTypeAliasDeclaration(
+        undefined,
+        undefined,
+        f.createIdentifier("A"),
+        undefined,
+        f.createTypeReferenceNode(f.createIdentifier("ErrorWrapper"), [
+          f.createTypeReferenceNode(
+            f.createIdentifier("ServerErrorStatus"), // should be detected
+            undefined
+          ),
+        ])
+      ),
+    ];
+
+    expect(
+      getUsedImports(nodes, {
+        parameters: "./parameters",
+        requestBodies: "./requestBodies",
+        responses: "./responses",
+        schemas: "./schemas",
+        utils: "./utils",
+      })
+        .map(print)
+        .join("\n")
+    ).toMatchInlineSnapshot(
+      `"import { ServerErrorStatus } from \\"././utils\\";"`
+    );
+  });
+
+  it("should generate utils import (ServerErrorStatus & ClientErrorStatus)", () => {
+    const nodes = [
+      f.createTypeAliasDeclaration(
+        undefined,
+        undefined,
+        f.createIdentifier("A"),
+        undefined,
+        f.createTypeReferenceNode(f.createIdentifier("ErrorWrapper"), [
+          f.createTypeReferenceNode(
+            f.createIdentifier("ServerErrorStatus"), // should be detected
+            undefined
+          ),
+        ])
+      ),
+      f.createTypeAliasDeclaration(
+        undefined,
+        undefined,
+        f.createIdentifier("A"),
+        undefined,
+        f.createTypeReferenceNode(f.createIdentifier("ErrorWrapper"), [
+          f.createTypeReferenceNode(
+            f.createIdentifier("ClientErrorStatus"), // should be detected
+            undefined
+          ),
+        ])
+      ),
+    ];
+
+    expect(
+      getUsedImports(nodes, {
+        parameters: "./parameters",
+        requestBodies: "./requestBodies",
+        responses: "./responses",
+        schemas: "./schemas",
+        utils: "./utils",
+      })
+        .map(print)
+        .join("\n")
+    ).toMatchInlineSnapshot(
+      `"import { ServerErrorStatus, ClientErrorStatus } from \\"././utils\\";"`
+    );
   });
 });

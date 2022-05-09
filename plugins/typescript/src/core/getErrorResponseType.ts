@@ -11,6 +11,9 @@ import { findCompatibleMediaType } from "./findCompatibleMediaType";
 import { getType } from "./schemaToTypeAliasDeclaration";
 import { pascal } from "case";
 
+export const clientErrorStatus = "ClientErrorStatus";
+export const serverErrorStatus = "ServerErrorStatus";
+
 /**
  * Extract types from error responses (4xx + 5xx)
  */
@@ -104,7 +107,7 @@ const createStatusDeclaration = (
     );
     if (usedClientCode.length > 0) {
       statusType = f.createTypeReferenceNode("Exclude", [
-        f.createTypeReferenceNode("ClientErrorStatus"),
+        f.createTypeReferenceNode(clientErrorStatus),
         usedClientCode.length === 1
           ? f.createLiteralTypeNode(f.createNumericLiteral(usedClientCode[0]))
           : f.createUnionTypeNode(
@@ -114,7 +117,7 @@ const createStatusDeclaration = (
             ),
       ]);
     } else {
-      statusType = f.createTypeReferenceNode("ClientErrorStatus");
+      statusType = f.createTypeReferenceNode(clientErrorStatus);
     }
   }
 
@@ -127,7 +130,7 @@ const createStatusDeclaration = (
     );
     if (usedServerCode.length > 0) {
       statusType = f.createTypeReferenceNode("Exclude", [
-        f.createTypeReferenceNode("ServerErrorStatus"),
+        f.createTypeReferenceNode(serverErrorStatus),
         usedServerCode.length === 1
           ? f.createLiteralTypeNode(f.createNumericLiteral(usedServerCode[0]))
           : f.createUnionTypeNode(
@@ -137,7 +140,7 @@ const createStatusDeclaration = (
             ),
       ]);
     } else {
-      statusType = f.createTypeReferenceNode("ServerErrorStatus");
+      statusType = f.createTypeReferenceNode(serverErrorStatus);
     }
   }
 
@@ -150,8 +153,8 @@ const createStatusDeclaration = (
     if (otherCodes.length > 0) {
       statusType = f.createTypeReferenceNode("Exclude", [
         f.createUnionTypeNode([
-          f.createTypeReferenceNode("ClientErrorStatus"),
-          f.createTypeReferenceNode("ServerErrorStatus"),
+          f.createTypeReferenceNode(clientErrorStatus),
+          f.createTypeReferenceNode(serverErrorStatus),
         ]),
         otherCodes.length === 1
           ? f.createLiteralTypeNode(f.createNumericLiteral(otherCodes[0]))
@@ -163,8 +166,8 @@ const createStatusDeclaration = (
       ]);
     } else {
       statusType = f.createUnionTypeNode([
-        f.createTypeReferenceNode("ClientErrorStatus"),
-        f.createTypeReferenceNode("ServerErrorStatus"),
+        f.createTypeReferenceNode(clientErrorStatus),
+        f.createTypeReferenceNode(serverErrorStatus),
       ]);
     }
   }
