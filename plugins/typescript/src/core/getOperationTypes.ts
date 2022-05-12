@@ -10,13 +10,11 @@ import { isRequestBodyOptional } from "./isRequestBodyOptional";
 import { paramsToSchema } from "./paramsToSchema";
 import { schemaToTypeAliasDeclaration } from "./schemaToTypeAliasDeclaration";
 import { getErrorResponseType } from "./getErrorResponseType";
-import { collectErrors } from "./collectErrors";
 
 export type GetOperationTypesOptions = {
   operationId: string;
   operation: OperationObject;
   openAPIDocument: OpenAPIObject;
-  allErrors: Map<string, ts.Node>;
   injectedHeaders?: string[];
   pathParameters?: PathItemObject["parameters"];
   printNodes: (nodes: ts.Node[]) => string;
@@ -42,7 +40,6 @@ export const getOperationTypes = ({
   operation,
   openAPIDocument,
   printNodes,
-  allErrors,
   pathParameters = [],
   injectedHeaders = [],
   variablesExtraPropsType,
@@ -61,13 +58,6 @@ export const getOperationTypes = ({
     responses: operation.responses,
     components: openAPIDocument.components,
     printNodes,
-  });
-
-  // Collect errors
-  collectErrors({
-    printNodes,
-    errorType,
-    allErrors,
   });
 
   // Retrieve requestBodyType

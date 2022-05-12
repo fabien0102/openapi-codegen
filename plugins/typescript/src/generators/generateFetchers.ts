@@ -122,7 +122,6 @@ export const generateFetchers = async (context: Context, config: Config) => {
 
   const operationIds: string[] = [];
   const operationByTags: Record<string, string[]> = {};
-  const allErrors = new Map<string, ts.TypeNode>();
 
   Object.entries(context.openAPIDocument.paths).forEach(
     ([route, verbs]: [string, PathItemObject]) => {
@@ -151,7 +150,6 @@ export const generateFetchers = async (context: Context, config: Config) => {
           headersType,
           declarationNodes,
         } = getOperationTypes({
-          allErrors,
           openAPIDocument: context.openAPIDocument,
           operation,
           operationId,
@@ -208,18 +206,6 @@ export const generateFetchers = async (context: Context, config: Config) => {
           ],
           ts.NodeFlags.Const
         )
-      )
-    );
-  }
-
-  if (allErrors.size > 0) {
-    nodes.push(
-      f.createTypeAliasDeclaration(
-        undefined,
-        [f.createModifier(ts.SyntaxKind.ExportKeyword)],
-        f.createIdentifier(c.pascal(filenamePrefix + "-error")),
-        undefined,
-        f.createUnionTypeNode(Array.from(allErrors.values()))
       )
     );
   }

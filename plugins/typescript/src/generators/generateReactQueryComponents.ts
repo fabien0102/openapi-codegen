@@ -105,7 +105,6 @@ export const generateReactQueryComponents = async (
 
   // Generate `useQuery` & `useMutation`
   const operationIds: string[] = [];
-  const allErrors = new Map<string, ts.TypeNode>();
 
   Object.entries(context.openAPIDocument.paths).forEach(
     ([route, verbs]: [string, PathItemObject]) => {
@@ -129,7 +128,6 @@ export const generateReactQueryComponents = async (
           headersType,
           declarationNodes,
         } = getOperationTypes({
-          allErrors,
           openAPIDocument: context.openAPIDocument,
           operation,
           operationId,
@@ -251,18 +249,6 @@ export const generateReactQueryComponents = async (
           ),
         ])
   );
-
-  if (allErrors.size > 0) {
-    nodes.push(
-      f.createTypeAliasDeclaration(
-        undefined,
-        [f.createModifier(ts.SyntaxKind.ExportKeyword)],
-        f.createIdentifier(c.pascal(filenamePrefix + "-error")),
-        undefined,
-        f.createUnionTypeNode(Array.from(allErrors.values()))
-      )
-    );
-  }
 
   await context.writeFile(
     filename + ".ts",

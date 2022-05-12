@@ -97,8 +97,6 @@ describe("generateFetchers", () => {
        * Get all the pets
        */
       export const listPets = () => petstoreFetch<ListPetsResponse, ListPetsError, undefined, {}, {}, {}>({ url: \\"/pets\\", method: \\"get\\" });
-
-      export type PetstoreError = Responses.NotFoundError | Schemas.Error;
       "
     `);
   });
@@ -143,8 +141,6 @@ describe("generateFetchers", () => {
        * Get all the pets
        */
       export const listPets = () => fetch<ListPetsResponse, ListPetsError, undefined, {}, {}, {}>({ url: \\"/pets\\", method: \\"get\\" });
-
-      export type Error = Responses.NotFoundError | Schemas.Error;
       "
     `);
   });
@@ -198,8 +194,6 @@ describe("generateFetchers", () => {
        * Get all the pets
        */
       export const listPets = (variables: ListPetsVariables) => petstoreFetch<ListPetsResponse, ListPetsError, undefined, {}, {}, {}>({ url: \\"/pets\\", method: \\"get\\", ...variables });
-
-      export type PetstoreError = Responses.NotFoundError | Schemas.Error;
       "
     `);
   });
@@ -252,8 +246,6 @@ describe("generateFetchers", () => {
       export const listPets = () => petstoreFetch<ListPetsResponse, ListPetsError, undefined, {}, {}, {}>({ url: \\"/pets\\", method: \\"get\\" });
 
       export const operationsByTag = { \\"pets\\": { listPets } };
-
-      export type PetstoreError = Responses.NotFoundError | Schemas.Error;
       "
     `);
   });

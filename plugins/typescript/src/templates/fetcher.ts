@@ -14,8 +14,7 @@ export const getFetcher = ({
   contextPath?: string;
   baseUrl?: string;
 }) =>
-  `import { ${pascal(prefix)}Error } from "./${camel(prefix)}Components";
-  ${
+  `${
     contextPath
       ? `import { ${pascal(prefix)}Context } from "./${contextPath}";`
       : `export type ${pascal(prefix)}FetcherExtraProps = {

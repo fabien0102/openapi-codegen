@@ -589,11 +589,6 @@ describe("generateReactQueryComponents", () => {
           return reactQuery.useMutation<string, AddPetError, AddPetVariables>((variables: AddPetVariables) => fetchAddPet({ ...fetcherOptions, ...variables }), options);
       };
 
-      export type PetstoreError = {
-          code: 500;
-          message: string;
-      };
-
       export type QueryOperation = {
           path: string;
           operationId: never;
@@ -725,11 +720,6 @@ describe("generateReactQueryComponents", () => {
           return reactQuery.useMutation<string, AddPetError, AddPetVariables>((variables: AddPetVariables) => fetchAddPet({ ...fetcherOptions, ...variables }), options);
       };
 
-      export type PetstoreError = {
-          code: 500;
-          message: string;
-      };
-
       export type QueryOperation = {
           path: string;
           operationId: never;
@@ -859,11 +849,6 @@ describe("generateReactQueryComponents", () => {
       export const useAddPet = (options?: Omit<reactQuery.UseMutationOptions<string, AddPetError, AddPetVariables>, \\"mutationFn\\">) => {
           const { fetcherOptions } = usePetstoreContext();
           return reactQuery.useMutation<string, AddPetError, AddPetVariables>((variables: AddPetVariables) => fetchAddPet({ ...fetcherOptions, ...variables }), options);
-      };
-
-      export type PetstoreError = {
-          code: 500;
-          message: string;
       };
 
       export type QueryOperation = {
