@@ -54,6 +54,7 @@ export const generateSchemaTypes = async (
     schemas: formatFilename(filenamePrefix + "-schemas"),
     parameters: formatFilename(filenamePrefix + "-parameters"),
     responses: formatFilename(filenamePrefix + "-responses"),
+    utils: formatFilename(filenamePrefix + "-utils"),
   };
 
   // Generate `components/schemas` types
