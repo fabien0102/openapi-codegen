@@ -14,7 +14,8 @@ export const getFetcher = ({
   contextPath?: string;
   baseUrl?: string;
 }) =>
-  `${
+  `import { ${pascal(prefix)}Error } from "./${camel(prefix)}Components";
+  ${
     contextPath
       ? `import { ${pascal(prefix)}Context } from "./${contextPath}";`
       : `export type ${pascal(prefix)}FetcherExtraProps = {
@@ -31,7 +32,7 @@ export const getFetcher = ({
 
 const baseUrl = ${baseUrl ? `"${baseUrl}"` : `""; // TODO add your baseUrl`}
 
-export type ErrorWrapper<TError> = TError
+export type ErrorWrapper<TError> = TError | string;
 
 export type ${pascal(
     prefix
@@ -79,12 +80,14 @@ export async function ${camel(prefix)}Fetch<
     }
   );
   if (!response.ok) {
-    // TODO validate & parse the error to fit the generated error types 
-    let error: TError;
+    let error: ErrorWrapper<TError>;
     try {
       error = await response.json();
-    } catch {
-      error = "Network response was not ok";
+    } catch (e) {
+      error =
+        e instanceof Error
+          ? \`Unexpected error (\${e.message})\`
+          : "Unexpected error";
     }
 
     throw error;
