@@ -31,7 +31,9 @@ export const getFetcher = ({
 
 const baseUrl = ${baseUrl ? `"${baseUrl}"` : `""; // TODO add your baseUrl`}
 
-export type ErrorWrapper<TError> = TError | string;
+export type ErrorWrapper<TError> = 
+  | TError
+  | { status: "unknown"; payload: string };
 
 export type ${pascal(
     prefix
@@ -83,10 +85,13 @@ export async function ${camel(prefix)}Fetch<
     try {
       error = await response.json();
     } catch (e) {
-      error =
-        e instanceof Error
-          ? \`Unexpected error (\${e.message})\`
-          : "Unexpected error";
+      error = {
+        status: "unknown" as const,
+        payload:
+          e instanceof Error
+            ? \`Unexpected error (\${e.message})\`
+            : "Unexpected error"
+      };
     }
 
     throw error;
