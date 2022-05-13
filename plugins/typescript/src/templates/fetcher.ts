@@ -70,34 +70,44 @@ export async function ${camel(prefix)}Fetch<
   TQueryParams,
   TPathParams
 >): Promise<TData> {
-  const response = await window.fetch(\`\${baseUrl}\${resolveUrl(url, queryParams, pathParams)}\`,
-    {
-      method: method.toUpperCase(),
-      body: body ? JSON.stringify(body) : undefined,
-      headers: {
-        "Content-Type": "application/json",
-        ...headers,
-      },
-    }
-  );
-  if (!response.ok) {
-    let error: ErrorWrapper<TError>;
-    try {
-      error = await response.json();
-    } catch (e) {
-      error = {
-        status: "unknown" as const,
-        payload:
-          e instanceof Error
-            ? \`Unexpected error (\${e.message})\`
-            : "Unexpected error"
-      };
+  try {
+    const response = await window.fetch(\`\${baseUrl}\${resolveUrl(url, queryParams, pathParams)}\`,
+      {
+        method: method.toUpperCase(),
+        body: body ? JSON.stringify(body) : undefined,
+        headers: {
+          "Content-Type": "application/json",
+          ...headers,
+        },
+      }
+    );
+    if (!response.ok) {
+      let error: ErrorWrapper<TError>;
+      try {
+        error = await response.json();
+      } catch (e) {
+        error = {
+          status: "unknown" as const,
+          payload:
+            e instanceof Error
+              ? \`Unexpected error (\${e.message})\`
+              : "Unexpected error"
+        };
+      }
+
+      throw error;
     }
 
-    throw error;
+    return await response.json();
+  } catch (e) {
+    throw {
+      status: "unknown" as const,
+      payload:
+        e instanceof Error
+          ? \`Network error (\${e.message})\`
+          : "Network error"
+    }
   }
-
-  return await response.json();
 }
 
 const resolveUrl = (
