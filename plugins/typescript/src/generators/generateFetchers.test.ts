@@ -81,7 +81,7 @@ describe("generateFetchers", () => {
       import { petstoreFetch } from \\"./petstoreFetcher\\";
       import type * as Schemas from \\"./petstoreSchemas\\";
       import type * as Responses from \\"./petstoreResponses\\";
-      import { ServerErrorStatus } from \\"././petstoreUtils\\";
+      import { ServerErrorStatus } from \\"./petstoreUtils\\";
 
       export type ListPetsError = Fetcher.ErrorWrapper<{
           status: 404;
@@ -125,7 +125,7 @@ describe("generateFetchers", () => {
       import { fetch } from \\"./fetcher\\";
       import type * as Schemas from \\"./petstoreSchemas\\";
       import type * as Responses from \\"./petstoreResponses\\";
-      import { ServerErrorStatus } from \\"././utils\\";
+      import { ServerErrorStatus } from \\"./utils\\";
 
       export type ListPetsError = Fetcher.ErrorWrapper<{
           status: 404;
@@ -176,7 +176,7 @@ describe("generateFetchers", () => {
       import { petstoreFetch, PetstoreFetcherExtraProps } from \\"./petstoreFetcher\\";
       import type * as Schemas from \\"./petstoreSchemas\\";
       import type * as Responses from \\"./petstoreResponses\\";
-      import { ServerErrorStatus } from \\"././petstoreUtils\\";
+      import { ServerErrorStatus } from \\"./petstoreUtils\\";
 
       export type ListPetsError = Fetcher.ErrorWrapper<{
           status: 404;
@@ -228,7 +228,7 @@ describe("generateFetchers", () => {
       import { petstoreFetch } from \\"./petstoreFetcher\\";
       import type * as Schemas from \\"./petstoreSchemas\\";
       import type * as Responses from \\"./petstoreResponses\\";
-      import { ServerErrorStatus } from \\"././petstoreUtils\\";
+      import { ServerErrorStatus } from \\"./petstoreUtils\\";
 
       export type ListPetsError = Fetcher.ErrorWrapper<{
           status: 404;

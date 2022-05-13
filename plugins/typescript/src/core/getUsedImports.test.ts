@@ -28,7 +28,7 @@ describe("getUsedImports", () => {
         schemas: "./schemas",
         utils: "./utils",
       })
-        .map(print)
+        .nodes.map(print)
         .join("\n")
     ).toMatchInlineSnapshot(
       `"import type * as RequestBodies from \\"././requestBodies\\";"`
@@ -60,7 +60,7 @@ describe("getUsedImports", () => {
         schemas: "./schemas",
         utils: "./utils",
       })
-        .map(print)
+        .nodes.map(print)
         .join("\n")
     ).toMatchInlineSnapshot(
       `"import type * as Schemas from \\"././schemas\\";"`
@@ -92,7 +92,7 @@ describe("getUsedImports", () => {
         schemas: "./schemas",
         utils: "./utils",
       })
-        .map(print)
+        .nodes.map(print)
         .join("\n")
     ).toMatchInlineSnapshot(
       `"import type * as Parameters from \\"././parameters\\";"`
@@ -124,7 +124,7 @@ describe("getUsedImports", () => {
         schemas: "./schemas",
         utils: "./utils",
       })
-        .map(print)
+        .nodes.map(print)
         .join("\n")
     ).toMatchInlineSnapshot(
       `"import type * as Responses from \\"././responses\\";"`
@@ -195,7 +195,7 @@ describe("getUsedImports", () => {
         schemas: "./schemas",
         utils: "./utils",
       })
-        .map(print)
+        .nodes.map(print)
         .join("\n")
     ).toMatchInlineSnapshot(`
       "import type * as Parameters from \\"././parameters\\";
@@ -229,7 +229,7 @@ describe("getUsedImports", () => {
         schemas: "./schemas",
         utils: "./utils",
       })
-        .map(print)
+        .nodes.map(print)
         .join("\n")
     ).toMatchInlineSnapshot(
       `"import { ClientErrorStatus } from \\"././utils\\";"`
@@ -260,7 +260,7 @@ describe("getUsedImports", () => {
         schemas: "./schemas",
         utils: "./utils",
       })
-        .map(print)
+        .nodes.map(print)
         .join("\n")
     ).toMatchInlineSnapshot(
       `"import { ServerErrorStatus } from \\"././utils\\";"`
@@ -303,7 +303,7 @@ describe("getUsedImports", () => {
         schemas: "./schemas",
         utils: "./utils",
       })
-        .map(print)
+        .nodes.map(print)
         .join("\n")
     ).toMatchInlineSnapshot(
       `"import { ServerErrorStatus, ClientErrorStatus } from \\"././utils\\";"`

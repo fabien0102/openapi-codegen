@@ -83,8 +83,6 @@ export const generateReactQueryComponents = async (
   const contextFilename = formatFilename(filenamePrefix + "-context");
   const utilsFilename = formatFilename(filenamePrefix + "-utils");
 
-  context.writeFile(`${utilsFilename}.ts`, getUtils());
-
   if (!context.existsFile(`${fetcherFilename}.ts`)) {
     context.writeFile(
       `${fetcherFilename}.ts`,
@@ -250,6 +248,18 @@ export const generateReactQueryComponents = async (
         ])
   );
 
+  const { nodes: usedImportsNodes, keys: usedImportsKeys } = getUsedImports(
+    nodes,
+    {
+      ...config.schemasFiles,
+      utils: utilsFilename,
+    }
+  );
+
+  if (usedImportsKeys.includes("utils")) {
+    await context.writeFile(`${utilsFilename}.ts`, getUtils());
+  }
+
   await context.writeFile(
     filename + ".ts",
     printNodes([
@@ -261,10 +271,7 @@ export const generateReactQueryComponents = async (
       ),
       createNamespaceImport("Fetcher", `./${fetcherFilename}`),
       createNamedImport(fetcherFn, `./${fetcherFilename}`),
-      ...getUsedImports(nodes, {
-        ...config.schemasFiles,
-        utils: `./${utilsFilename}`,
-      }),
+      ...usedImportsNodes,
       ...nodes,
       queryKeyManager,
     ])

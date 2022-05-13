@@ -20,7 +20,7 @@ export const getUsedImports = (
     responses: string;
     utils: string;
   }
-): ts.Node[] => {
+): { keys: string[]; nodes: ts.Node[] } => {
   const imports: Record<
     keyof typeof files,
     | { type: "namespace"; used: boolean; namespace: string; from: string }
@@ -81,13 +81,16 @@ export const getUsedImports = (
 
   ts.visitNodes(f.createNodeArray(nodes), visitor);
 
-  return Object.values(imports)
-    .filter((i) => i.used)
-    .map((i) => {
+  const usedImports = Object.entries(imports).filter(([_key, i]) => i.used);
+
+  return {
+    keys: usedImports.map(([key]) => key),
+    nodes: usedImports.map(([_key, i]) => {
       if (i.type === "namespace") {
         return createNamespaceImport(i.namespace, `./${i.from}`);
       } else {
         return createNamedImport(Array.from(i.imports.values()), `./${i.from}`);
       }
-    });
+    }),
+  };
 };
