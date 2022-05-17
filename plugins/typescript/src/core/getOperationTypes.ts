@@ -4,11 +4,12 @@ import ts, { factory as f } from "typescript";
 
 import { getParamsGroupByType } from "./getParamsGroupByType";
 import { getRequestBodyType } from "./getRequestBodyType";
-import { getResponseType } from "./getResponseType";
+import { getDataResponseType } from "./getDataResponseType";
 import { getVariablesType } from "./getVariablesType";
 import { isRequestBodyOptional } from "./isRequestBodyOptional";
 import { paramsToSchema } from "./paramsToSchema";
 import { schemaToTypeAliasDeclaration } from "./schemaToTypeAliasDeclaration";
+import { getErrorResponseType } from "./getErrorResponseType";
 
 export type GetOperationTypesOptions = {
   operationId: string;
@@ -46,18 +47,16 @@ export const getOperationTypes = ({
   const declarationNodes: ts.Node[] = [];
 
   // Retrieve dataType
-  let dataType = getResponseType({
+  let dataType = getDataResponseType({
     responses: operation.responses,
     components: openAPIDocument.components,
-    filter: (statusCode) => statusCode.startsWith("2"),
     printNodes,
   });
 
   // Retrieve errorType
-  let errorType = getResponseType({
+  let errorType = getErrorResponseType({
     responses: operation.responses,
     components: openAPIDocument.components,
-    filter: (statusCode) => !statusCode.startsWith("2"),
     printNodes,
   });
 
@@ -128,21 +127,19 @@ export const getOperationTypes = ({
     );
   }
 
-  // Export error type if needed
-  if (shouldExtractNode(errorType)) {
-    const errorTypeIdentifier = pascal(`${operationId}Error`);
-    declarationNodes.push(
-      f.createTypeAliasDeclaration(
-        undefined,
-        [f.createModifier(ts.SyntaxKind.ExportKeyword)],
-        f.createIdentifier(errorTypeIdentifier),
-        undefined,
-        errorType
-      )
-    );
+  // Export error type
+  const errorTypeIdentifier = pascal(`${operationId}Error`);
+  declarationNodes.push(
+    f.createTypeAliasDeclaration(
+      undefined,
+      [f.createModifier(ts.SyntaxKind.ExportKeyword)],
+      f.createIdentifier(errorTypeIdentifier),
+      undefined,
+      errorType
+    )
+  );
 
-    errorType = f.createTypeReferenceNode(errorTypeIdentifier);
-  }
+  errorType = f.createTypeReferenceNode(errorTypeIdentifier);
 
   // Export data type if needed
   if (shouldExtractNode(dataType)) {

@@ -31,6 +31,10 @@ export const getFetcher = ({
 
 const baseUrl = ${baseUrl ? `"${baseUrl}"` : `""; // TODO add your baseUrl`}
 
+export type ErrorWrapper<TError> = 
+  | TError
+  | { status: "unknown"; payload: string };
+
 export type ${pascal(
     prefix
   )}FetcherOptions<TBody, THeaders, TQueryParams, TPathParams> = {
@@ -48,6 +52,7 @@ export type ${pascal(
 
 export async function ${camel(prefix)}Fetch<
   TData,
+  TError,
   TBody extends {} | undefined | null,
   THeaders extends {},
   TQueryParams extends {},
@@ -65,21 +70,44 @@ export async function ${camel(prefix)}Fetch<
   TQueryParams,
   TPathParams
 >): Promise<TData> {
-  const response = await window.fetch(\`\${baseUrl}\${resolveUrl(url, queryParams, pathParams)}\`,
-    {
-      method: method.toUpperCase(),
-      body: body ? JSON.stringify(body) : undefined,
-      headers: {
-        "Content-Type": "application/json",
-        ...headers,
-      },
+  try {
+    const response = await window.fetch(\`\${baseUrl}\${resolveUrl(url, queryParams, pathParams)}\`,
+      {
+        method: method.toUpperCase(),
+        body: body ? JSON.stringify(body) : undefined,
+        headers: {
+          "Content-Type": "application/json",
+          ...headers,
+        },
+      }
+    );
+    if (!response.ok) {
+      let error: ErrorWrapper<TError>;
+      try {
+        error = await response.json();
+      } catch (e) {
+        error = {
+          status: "unknown" as const,
+          payload:
+            e instanceof Error
+              ? \`Unexpected error (\${e.message})\`
+              : "Unexpected error"
+        };
+      }
+
+      throw error;
     }
-  );
-  if (!response.ok) {
-    // TODO validate & parse the error to fit the generated error types 
-    throw new Error("Network response was not ok");
+
+    return await response.json();
+  } catch (e) {
+    throw {
+      status: "unknown" as const,
+      payload:
+        e instanceof Error
+          ? \`Network error (\${e.message})\`
+          : "Network error"
+    }
   }
-  return await response.json();
 }
 
 const resolveUrl = (

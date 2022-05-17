@@ -14,6 +14,8 @@ import { getOperationTypes } from "../core/getOperationTypes";
 import { createNamedImport } from "../core/createNamedImport";
 
 import { getFetcher } from "../templates/fetcher";
+import { getUtils } from "../templates/utils";
+import { createNamespaceImport } from "../core/createNamespaceImport";
 
 export type Config = ConfigBase & {
   /**
@@ -72,6 +74,7 @@ export const generateFetchers = async (context: Context, config: Config) => {
   const fetcherImports = [fetcherFn];
 
   const fetcherFilename = formatFilename(filenamePrefix + "-fetcher");
+  const utilsFilename = formatFilename(filenamePrefix + "-utils");
 
   const fetcherExtraPropsTypeName = `${c.pascal(
     filenamePrefix
@@ -137,6 +140,7 @@ export const generateFetchers = async (context: Context, config: Config) => {
 
         const {
           dataType,
+          errorType,
           requestBodyType,
           pathParamsType,
           variablesType,
@@ -157,6 +161,7 @@ export const generateFetchers = async (context: Context, config: Config) => {
           ...declarationNodes,
           ...createOperationFetcherFnNodes({
             dataType,
+            errorType,
             requestBodyType,
             pathParamsType,
             variablesType,
@@ -203,12 +208,25 @@ export const generateFetchers = async (context: Context, config: Config) => {
     );
   }
 
+  const { nodes: usedImportsNodes, keys: usedImportsKeys } = getUsedImports(
+    nodes,
+    {
+      ...config.schemasFiles,
+      utils: utilsFilename,
+    }
+  );
+
+  if (usedImportsKeys.includes("utils")) {
+    await context.writeFile(`${utilsFilename}.ts`, getUtils());
+  }
+
   await context.writeFile(
     filename + ".ts",
     printNodes([
       createWatermark(context.openAPIDocument.info),
+      createNamespaceImport("Fetcher", `./${fetcherFilename}`),
       createNamedImport(fetcherImports, `./${fetcherFilename}`),
-      ...getUsedImports(nodes, config.schemasFiles),
+      ...usedImportsNodes,
       ...nodes,
     ])
   );

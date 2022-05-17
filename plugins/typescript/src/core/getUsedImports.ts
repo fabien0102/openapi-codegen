@@ -1,6 +1,9 @@
 import { camel } from "case";
 import { get } from "lodash";
 import ts, { factory as f } from "typescript";
+import { createNamedImport } from "./createNamedImport";
+import { createNamespaceImport } from "./createNamespaceImport";
+import { clientErrorStatus, serverErrorStatus } from "./getErrorResponseType";
 
 /**
  * Generate the needed imports regarding the generated nodes usage.
@@ -15,24 +18,44 @@ export const getUsedImports = (
     schemas: string;
     parameters: string;
     responses: string;
+    utils: string;
   }
-): ts.Node[] => {
+): { keys: string[]; nodes: ts.Node[] } => {
   const imports: Record<
     keyof typeof files,
-    { used: boolean; namespace: string; from: string }
+    | { type: "namespace"; used: boolean; namespace: string; from: string }
+    | { type: "named"; used: boolean; imports: Set<string>; from: string }
   > = {
     parameters: {
+      type: "namespace",
       used: false,
       namespace: "Parameters",
       from: files.parameters,
     },
-    schemas: { used: false, namespace: "Schemas", from: files.schemas },
+    schemas: {
+      type: "namespace",
+      used: false,
+      namespace: "Schemas",
+      from: files.schemas,
+    },
     requestBodies: {
+      type: "namespace",
       used: false,
       namespace: "RequestBodies",
       from: files.requestBodies,
     },
-    responses: { used: false, namespace: "Responses", from: files.responses },
+    responses: {
+      type: "namespace",
+      used: false,
+      namespace: "Responses",
+      from: files.responses,
+    },
+    utils: {
+      type: "named",
+      used: false,
+      from: files.utils,
+      imports: new Set(),
+    },
   };
 
   const visitor: ts.Visitor = (node) => {
@@ -43,32 +66,31 @@ export const getUsedImports = (
         imports[text as keyof typeof imports].used = true;
       }
     }
+    if (imports.utils.type === "named" && ts.isTypeReferenceNode(node)) {
+      if (get(node.typeName, "escapedText", "") === clientErrorStatus) {
+        imports.utils.used = true;
+        imports.utils.imports.add(clientErrorStatus);
+      }
+      if (get(node.typeName, "escapedText", "") === serverErrorStatus) {
+        imports.utils.used = true;
+        imports.utils.imports.add(serverErrorStatus);
+      }
+    }
     return node.forEachChild(visitor);
   };
 
   ts.visitNodes(f.createNodeArray(nodes), visitor);
 
-  return Object.values(imports)
-    .filter((i) => i.used)
-    .map((i) => createImportDeclaration(i.namespace, `./${i.from}`));
-};
+  const usedImports = Object.entries(imports).filter(([_key, i]) => i.used);
 
-/**
- * Create an `ImportDeclaration` typescript node
- *
- * @param namespace
- * @param from
- * @returns
- */
-const createImportDeclaration = (namespace: string, from: string) =>
-  f.createImportDeclaration(
-    undefined,
-    undefined,
-    f.createImportClause(
-      true,
-      undefined,
-      f.createNamespaceImport(f.createIdentifier(namespace))
-    ),
-    f.createStringLiteral(from),
-    undefined
-  );
+  return {
+    keys: usedImports.map(([key]) => key),
+    nodes: usedImports.map(([_key, i]) => {
+      if (i.type === "namespace") {
+        return createNamespaceImport(i.namespace, `./${i.from}`);
+      } else {
+        return createNamedImport(Array.from(i.imports.values()), `./${i.from}`);
+      }
+    }),
+  };
+};

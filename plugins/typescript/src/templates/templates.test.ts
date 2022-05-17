@@ -5,7 +5,7 @@ import { getFetcher } from "./fetcher";
 
 describe("context", () => {
   it("should be parsable by prettier", () => {
-    const template = getContext("petstore");
+    const template = getContext("petstore", "./components");
     expect(() => {
       prettier.format(template, { parser: "babel-ts" });
     }).not.toThrow();
@@ -14,7 +14,10 @@ describe("context", () => {
 
 describe("fetcher", () => {
   it("should be parsable by prettier", () => {
-    const template = getFetcher("petstore", "./context");
+    const template = getFetcher({
+      prefix: "petstore",
+      contextPath: "./context",
+    });
     expect(() => {
       prettier.format(template, { parser: "babel-ts" });
     }).not.toThrow();

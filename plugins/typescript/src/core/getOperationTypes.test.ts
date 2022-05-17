@@ -4,6 +4,7 @@ import { OperationObject } from "openapi3-ts";
 
 import { petstore } from "../fixtures/petstore";
 import { getOperationTypes } from "./getOperationTypes";
+import { print } from "../testUtils";
 
 describe("getOperationTypes", () => {
   it("should generate a variable type (with extra props)", () => {
@@ -15,7 +16,7 @@ describe("getOperationTypes", () => {
       variablesExtraPropsType: factory.createTypeReferenceNode("ExtraProps"),
     });
 
-    expect(print(output.declarationNodes[2])).toMatchInlineSnapshot(`
+    expect(print(output.declarationNodes[3])).toMatchInlineSnapshot(`
       "export type ListPetVariables = {
           queryParams?: ListPetQueryParams;
       } & ExtraProps;"
@@ -33,7 +34,7 @@ describe("getOperationTypes", () => {
       ),
     });
 
-    expect(print(output.declarationNodes[2])).toMatchInlineSnapshot(`
+    expect(print(output.declarationNodes[3])).toMatchInlineSnapshot(`
       "export type ListPetVariables = {
           queryParams?: ListPetQueryParams;
       };"
@@ -52,7 +53,7 @@ describe("getOperationTypes", () => {
       variablesExtraPropsType: factory.createTypeReferenceNode("ExtraProps"),
     });
 
-    expect(print(output.declarationNodes[1])).toMatchInlineSnapshot(
+    expect(print(output.declarationNodes[2])).toMatchInlineSnapshot(
       `"export type ListPetVariables = ExtraProps;"`
     );
   });
@@ -71,17 +72,6 @@ describe("getOperationTypes", () => {
       ),
     });
 
-    expect(output.declarationNodes.length).toBe(1);
+    expect(output.declarationNodes.length).toBe(2);
   });
 });
-
-// Helpers
-const sourceFile = ts.createSourceFile("index.ts", "", ts.ScriptTarget.Latest);
-
-const printer = ts.createPrinter({
-  newLine: ts.NewLineKind.LineFeed,
-  removeComments: false,
-});
-
-const print = (node: ts.Node) =>
-  printer.printNode(ts.EmitHint.Unspecified, node, sourceFile);

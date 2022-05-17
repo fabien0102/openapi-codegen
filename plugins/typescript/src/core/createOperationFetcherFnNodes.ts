@@ -9,6 +9,7 @@ import ts, { factory as f } from "typescript";
  */
 export const createOperationFetcherFnNodes = ({
   dataType,
+  errorType,
   requestBodyType,
   queryParamsType,
   pathParamsType,
@@ -21,6 +22,7 @@ export const createOperationFetcherFnNodes = ({
   name,
 }: {
   dataType: ts.TypeNode;
+  errorType: ts.TypeNode;
   requestBodyType: ts.TypeNode;
   headersType: ts.TypeNode;
   pathParamsType: ts.TypeNode;
@@ -68,6 +70,7 @@ export const createOperationFetcherFnNodes = ({
                 f.createIdentifier(fetcherFn),
                 [
                   dataType,
+                  errorType,
                   requestBodyType,
                   headersType,
                   queryParamsType,

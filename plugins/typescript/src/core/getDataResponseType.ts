@@ -13,17 +13,15 @@ import { findCompatibleMediaType } from "./findCompatibleMediaType";
 import { getType } from "./schemaToTypeAliasDeclaration";
 
 /**
- * Extract types from responses
+ * Extract types from success responses (2xx)
  */
-export const getResponseType = ({
+export const getDataResponseType = ({
   responses,
   components,
-  filter,
   printNodes,
 }: {
   responses: ResponsesObject;
   components?: ComponentsObject;
-  filter: (statusCode: string) => boolean;
   printNodes: (nodes: ts.Node[]) => string;
 }) => {
   const responseTypes = uniqBy(
@@ -32,7 +30,7 @@ export const getResponseType = ({
         mem,
         [statusCode, response]: [string, ResponseObject | ReferenceObject]
       ) => {
-        if (!filter(statusCode)) return mem;
+        if (!statusCode.startsWith("2")) return mem;
         if (isReferenceObject(response)) {
           const [hash, topLevel, namespace, name] = response.$ref.split("/");
           if (hash !== "#" || topLevel !== "components") {

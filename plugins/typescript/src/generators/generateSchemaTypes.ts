@@ -54,6 +54,7 @@ export const generateSchemaTypes = async (
     schemas: formatFilename(filenamePrefix + "-schemas"),
     parameters: formatFilename(filenamePrefix + "-parameters"),
     responses: formatFilename(filenamePrefix + "-responses"),
+    utils: formatFilename(filenamePrefix + "-utils"),
   };
 
   // Generate `components/schemas` types
@@ -75,7 +76,7 @@ export const generateSchemaTypes = async (
       files.schemas + ".ts",
       printNodes([
         createWatermark(context.openAPIDocument.info),
-        ...getUsedImports(componentsSchemas, files),
+        ...getUsedImports(componentsSchemas, files).nodes,
         ...componentsSchemas,
       ])
     );
@@ -103,7 +104,7 @@ export const generateSchemaTypes = async (
         files.responses + ".ts",
         printNodes([
           createWatermark(context.openAPIDocument.info),
-          ...getUsedImports(componentsResponses, files),
+          ...getUsedImports(componentsResponses, files).nodes,
           ...componentsResponses,
         ])
       );
@@ -133,7 +134,7 @@ export const generateSchemaTypes = async (
         files.requestBodies + ".ts",
         printNodes([
           createWatermark(context.openAPIDocument.info),
-          ...getUsedImports(componentsRequestBodies, files),
+          ...getUsedImports(componentsRequestBodies, files).nodes,
           ...componentsRequestBodies,
         ])
       );
@@ -161,7 +162,7 @@ export const generateSchemaTypes = async (
       files.parameters + ".ts",
       printNodes([
         createWatermark(context.openAPIDocument.info),
-        ...getUsedImports(componentsParameters, files),
+        ...getUsedImports(componentsParameters, files).nodes,
         ...componentsParameters,
       ])
     );
