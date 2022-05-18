@@ -24,7 +24,9 @@
   ],
   "license": "MIT",
   "scripts": {
-    "build": "tsc -p tsconfig.package.json",
+    "build": "npm run build:tsc && npm run build:rollup",
+    "build:tsc": "tsc -p tsconfig.package.json",
+    "build:rollup": "rollup -c",
     "prepublishOnly": "npm run build",
     "gen": "graphql-codegen --config codegen.yml -r dotenv/config"
   },
@@ -60,12 +62,19 @@
     "@graphql-codegen/typescript": "^2.4.5",
     "@graphql-codegen/typescript-operations": "^2.3.2",
     "@graphql-codegen/typescript-react-apollo": "^3.2.8",
+    "@rollup/plugin-commonjs": "^22.0.0",
+    "@rollup/plugin-json": "^4.1.0",
+    "@rollup/plugin-node-resolve": "^13.3.0",
+    "@rollup/plugin-typescript": "^8.3.2",
     "@swc-node/register": "^1.4.0",
     "@types/fs-extra": "^9.0.13",
     "@types/js-yaml": "^4.0.3",
     "@types/nock": "^11.1.0",
     "@types/react": "^17.0.39",
     "@types/slash": "^3.0.0",
-    "nock": "^13.2.1"
+    "nock": "^13.2.1",
+    "rollup-plugin-auto-external": "^2.0.0",
+    "rollup-plugin-internal": "^1.0.4",
+    "rollup-plugin-preserve-shebang": "^1.0.1"
   }
 }
