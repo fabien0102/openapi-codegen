@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.5.1](https://github.com/fabien0102/openapi-codegen/compare/cli-v1.5.0...cli-v1.5.1) (2022-05-18)
+
+
+### Bug Fixes
+
+* Bundle cli with react ([#65](https://github.com/fabien0102/openapi-codegen/issues/65)) ([36b9a35](https://github.com/fabien0102/openapi-codegen/commit/36b9a35652b8adb95e70e8bffca0683ff11281d9))
+
 ## [1.5.0](https://github.com/fabien0102/openapi-codegen/compare/cli-v1.4.1...cli-v1.5.0) (2022-03-25)
 
 
