@@ -45,7 +45,7 @@ export const Github = ({ onSubmit, token }: GithubProps) => {
                 Authorization: `Bearer ${token}`,
               }
             : {},
-          fetch,
+          fetch: fetch as any,
         }),
         cache: new InMemoryCache(),
       }),
