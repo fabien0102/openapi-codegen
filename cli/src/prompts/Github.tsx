@@ -8,10 +8,10 @@ import type { GithubOptions } from "../types";
 
 import { Message } from "./Message.js";
 import {
-  useSearchFileQuery,
   useSearchRepositoryQuery,
   useSearchUserQuery,
 } from "./queries/github.js";
+import { useGetTree } from "./queries/useGetTree.js";
 import { Select } from "./Select.js";
 import { TextInput } from "./TextInput.js";
 import { GithubToken } from "./GithubToken.js";
@@ -75,7 +75,7 @@ export const Github = ({ onSubmit }: GithubProps) => {
     loading: repositoriesLoading,
   } = useSearchRepositoryQuery({
     variables: {
-      query: (state.step === 2 && `${state.owner}/`) || "",
+      query: (state.step === 2 && `${state.owner}/${state.repository}`) || "",
     },
     skip: state.step !== 2,
     client: apolloClient,
@@ -85,15 +85,11 @@ export const Github = ({ onSubmit }: GithubProps) => {
     data: files,
     error: filesError,
     loading: filesLoading,
-  } = useSearchFileQuery({
-    variables: {
-      expression:
-        state.step === 3 && state.specPath ? `HEAD:${state.specPath}` : "HEAD:",
-      owner: state.owner || "",
-      repositoryName: (state.step === 3 && state.repository) || "",
-    },
+  } = useGetTree({
+    token,
+    owner: state.step === 3 ? state.owner : "",
+    repo: state.step === 3 ? state.repository : "",
     skip: state.step !== 3,
-    client: apolloClient,
   });
 
   if (!token) {
@@ -103,7 +99,7 @@ export const Github = ({ onSubmit }: GithubProps) => {
   switch (state.step) {
     case 1:
       return (
-        <Box flexDirection="column">
+        <Box flexDirection="column" key="step-1">
           <Box>
             <Message>Owner?</Message>
             <TextInput
@@ -121,7 +117,8 @@ export const Github = ({ onSubmit }: GithubProps) => {
           {users && users.search.nodes && (
             <Select
               choices={users.search.nodes.map((node) =>
-                node?.__typename === "User"
+                node?.__typename === "User" ||
+                node?.__typename === "Organization"
                   ? { label: node.login, value: node.login }
                   : { label: "-", value: "-" }
               )}
@@ -132,7 +129,7 @@ export const Github = ({ onSubmit }: GithubProps) => {
       );
     case 2:
       return (
-        <Box flexDirection="column">
+        <Box flexDirection="column" key="step-2">
           <Box>
             <Message>Owner?</Message>
             <Answer>{state.owner}</Answer>
@@ -171,7 +168,7 @@ export const Github = ({ onSubmit }: GithubProps) => {
 
     case 3:
       return (
-        <Box flexDirection="column">
+        <Box flexDirection="column" key="step-3">
           <Box>
             <Message>Owner?</Message>
             <Answer>{state.owner}</Answer>
@@ -182,7 +179,6 @@ export const Github = ({ onSubmit }: GithubProps) => {
           </Box>
           <Box>
             <Message>OpenAPI file?</Message>
-            <Answer>{state.specPath}/</Answer>
             <TextInput onChange={setSearch} value={search} />
           </Box>
           {filesError && <Box>{filesError}</Box>}
@@ -192,51 +188,34 @@ export const Github = ({ onSubmit }: GithubProps) => {
               Loading…
             </Text>
           )}
-          {files &&
-            files.repository?.object?.__typename === "Tree" &&
-            files.repository.object.entries && (
-              <Select
-                choices={files.repository.object.entries
-                  .filter((file) => {
-                    if (search) {
-                      return new RegExp(search, "i").exec(file.name);
-                    }
+          <Select
+            choices={files
+              .filter((file) => {
+                if (search) {
+                  return new RegExp(search, "i").exec(file.path);
+                }
 
-                    return true;
-                  })
-                  .map((file) => ({
-                    label: file.name,
-                    value: file,
-                  }))}
-                onSubmit={(value) => {
-                  setSearch("");
-                  if (value.type === "blob") {
-                    const specPath = `${
-                      state.specPath ? state.specPath + "/" : ""
-                    }${value.name}`;
-                    setState({ ...state, step: 4, specPath });
-                    onSubmit({
-                      owner: state.owner,
-                      repository: state.repository,
-                      source: "github",
-                      specPath,
-                    });
-                  } else if (value.type === "tree") {
-                    setState({
-                      ...state,
-                      specPath: `${state.specPath ? state.specPath + "/" : ""}${
-                        value.name
-                      }`,
-                    });
-                  }
-                }}
-              />
-            )}
+                return true;
+              })
+              .map((file) => ({
+                label: file.path,
+                value: file,
+              }))}
+            onSubmit={(value) => {
+              setState({ ...state, step: 4, specPath: value.path });
+              onSubmit({
+                owner: state.owner,
+                repository: state.repository,
+                source: "github",
+                specPath: value.path,
+              });
+            }}
+          />
         </Box>
       );
     case 4:
       return (
-        <Box flexDirection="column">
+        <Box flexDirection="column" key="step-4">
           <Box>
             <Message>Owner?</Message>
             <Answer>{state.owner}</Answer>

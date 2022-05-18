@@ -898,6 +898,8 @@ export type BranchProtectionRule = Node & {
   allowsDeletions: Scalars["Boolean"];
   /** Are force pushes allowed on this branch. */
   allowsForcePushes: Scalars["Boolean"];
+  /** Is branch creation a protected operation. */
+  blocksCreations: Scalars["Boolean"];
   /** A list of conflicts matching branches protection rule and other branch protection rules */
   branchProtectionRuleConflicts: BranchProtectionRuleConflictConnection;
   /** A list of actors able to force push for this branch protection rule. */
@@ -2752,6 +2754,8 @@ export type CreateBranchProtectionRuleInput = {
   allowsDeletions?: InputMaybe<Scalars["Boolean"]>;
   /** Are force pushes allowed on this branch. */
   allowsForcePushes?: InputMaybe<Scalars["Boolean"]>;
+  /** Is branch creation a protected operation. */
+  blocksCreations?: InputMaybe<Scalars["Boolean"]>;
   /** A list of User or Team IDs allowed to bypass force push targeting matching branches. */
   bypassForcePushActorIds?: InputMaybe<Array<Scalars["ID"]>>;
   /** A list of User or Team IDs allowed to bypass pull requests targeting matching branches. */
@@ -13284,7 +13288,10 @@ export type ProjectNext = Closable &
     resourcePath: Scalars["URI"];
     /** The project's short description. */
     shortDescription?: Maybe<Scalars["String"]>;
-    /** The project's name. */
+    /**
+     * The project's name. Falls back to "Untitled table" if blank.
+     *
+     */
     title?: Maybe<Scalars["String"]>;
     /** Identifies the date and time when the object was last updated. */
     updatedAt: Scalars["DateTime"];
@@ -15594,6 +15601,8 @@ export type RefUpdateRule = {
   allowsDeletions: Scalars["Boolean"];
   /** Are force pushes allowed on this branch. */
   allowsForcePushes: Scalars["Boolean"];
+  /** Can matching branches be created. */
+  blocksCreations: Scalars["Boolean"];
   /** Identifies the protection rule pattern. */
   pattern: Scalars["String"];
   /** Number of approving reviews required to update matching branches. */
@@ -19965,6 +19974,8 @@ export type StartRepositoryMigrationInput = {
   ownerId: Scalars["ID"];
   /** The name of the imported repository. */
   repositoryName: Scalars["String"];
+  /** Whether to skip migrating releases for the repository. */
+  skipReleases?: InputMaybe<Scalars["Boolean"]>;
   /** The ID of the Octoshift migration source. */
   sourceId: Scalars["ID"];
   /** The Octoshift migration source repository URL. */
@@ -21288,6 +21299,8 @@ export type TreeEntry = {
   extension?: Maybe<Scalars["String"]>;
   /** Whether or not this tree entry is generated */
   isGenerated: Scalars["Boolean"];
+  /** Number of lines in the file. */
+  lineCount?: Maybe<Scalars["Int"]>;
   /** Entry file mode. */
   mode: Scalars["Int"];
   /** Entry file name. */
@@ -21616,6 +21629,8 @@ export type UpdateBranchProtectionRuleInput = {
   allowsDeletions?: InputMaybe<Scalars["Boolean"]>;
   /** Are force pushes allowed on this branch. */
   allowsForcePushes?: InputMaybe<Scalars["Boolean"]>;
+  /** Is branch creation a protected operation. */
+  blocksCreations?: InputMaybe<Scalars["Boolean"]>;
   /** The global relay id of the branch protection rule to be updated. */
   branchProtectionRuleId: Scalars["ID"];
   /** A list of User or Team IDs allowed to bypass force push targeting matching branches. */
@@ -23652,7 +23667,7 @@ export type SearchUserQuery = {
       | { __typename?: "Discussion" }
       | { __typename?: "Issue" }
       | { __typename?: "MarketplaceListing" }
-      | { __typename?: "Organization" }
+      | { __typename?: "Organization"; login: string }
       | { __typename?: "PullRequest" }
       | { __typename?: "Repository" }
       | { __typename?: "User"; login: string }
@@ -23872,6 +23887,9 @@ export const SearchUserDocument = gql`
     search(first: 10, query: $query, type: USER) {
       nodes {
         ... on User {
+          login
+        }
+        ... on Organization {
           login
         }
       }

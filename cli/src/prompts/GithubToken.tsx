@@ -33,7 +33,9 @@ export const GithubToken = ({ onSubmit }: GithubTokenProps) => {
         }}
       />
       <Box marginTop={1} paddingLeft={2} flexDirection="column">
-        <Text>Please provide a GitHub token with `repo` rules checked</Text>
+        <Text>
+          Please provide a GitHub token with `['read:org']` rule checked
+        </Text>
         <Text color="cyan">
           https://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line
         </Text>

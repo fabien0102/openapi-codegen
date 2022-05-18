@@ -4,6 +4,7 @@ import { Box, Text, useInput } from "ink";
 import { Answer } from "./Answer.js";
 import { Hint } from "./Hint.js";
 import { Message } from "./Message.js";
+import { useStdoutRows } from "./useStdoutRows.js";
 
 export type Choice<T> = {
   value: T;
@@ -22,24 +23,30 @@ export function Select<TChoice>({
   choices,
   onSubmit,
 }: SelectProps<TChoice>) {
-  const [selectedChoice, setSelectedChoice] = useState(0);
+  const [arrowIndex, setArrowIndex] = useState(0);
+  const [offset, setOffset] = useState(0);
   const [answer, setAnswer] = useState<string>();
+  const rows = useStdoutRows();
+  const pageSize = rows - 1; // bit of margin to display the question
 
-  useInput((input, key) => {
+  useInput((_input, key) => {
     if (key.downArrow) {
-      setSelectedChoice((prev) => (prev + 1) % choices.length);
+      if (arrowIndex + 1 < Math.min(pageSize, choices.length))
+        setArrowIndex((prev) => prev + 1);
+      if (arrowIndex === pageSize - 1 && offset < choices.length - pageSize)
+        setOffset((prev) => prev + 1);
     }
 
     if (key.upArrow) {
-      setSelectedChoice((prev) => {
-        if (prev === 0) return choices.length - 1;
-        return prev - 1;
-      });
+      if (arrowIndex > 0) setArrowIndex((prev) => prev - 1);
+      if (arrowIndex === 0 && offset > 0) setOffset((prev) => prev - 1);
     }
 
     if (key.return) {
-      setAnswer(choices[selectedChoice].label);
-      onSubmit(choices[selectedChoice].value);
+      const currentChoice = choices[arrowIndex + offset];
+      console.clear(); // Avoid the choices list to leak on the next prompt
+      setAnswer(currentChoice.label);
+      onSubmit(currentChoice.value);
     }
   });
 
@@ -54,10 +61,10 @@ export function Select<TChoice>({
         <Answer>{answer}</Answer>
       ) : (
         <Box flexDirection="column">
-          {choices.map((choice, i) => (
-            <Box key={`choice-${i}`}>
+          {choices.slice(offset, offset + pageSize).map((choice, i) => (
+            <Box key={`choice-${choice.label}`}>
               <Box minWidth={2}>
-                {i === selectedChoice && <Text color="cyan">❯</Text>}
+                {arrowIndex === i && <Text color="cyan">❯</Text>}
               </Box>
               <Box minWidth={choiceMaxLength + 1}>
                 <Text>{choice.label}</Text>

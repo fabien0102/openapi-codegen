@@ -4,6 +4,9 @@ query searchUser($query: String!) {
       ... on User {
         login
       }
+      ... on Organization {
+        login
+      }
     }
   }
 }
