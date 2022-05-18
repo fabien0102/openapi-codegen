@@ -1,5 +1,16 @@
 # Changelog
 
+## [4.0.0](https://github.com/fabien0102/openapi-codegen/compare/typescript-v3.0.2...typescript-v4.0.0) (2022-05-18)
+
+
+### ⚠ BREAKING CHANGES
+
+* Improve error type safety (#63)
+
+### Features
+
+* Improve error type safety ([#63](https://github.com/fabien0102/openapi-codegen/issues/63)) ([d32d84a](https://github.com/fabien0102/openapi-codegen/commit/d32d84a566c52a2b0b7a97b6b240fdf4ca3facca))
+
 ### [3.0.2](https://github.com/fabien0102/openapi-codegen/compare/typescript-v3.0.1...typescript-v3.0.2) (2022-04-20)
 
 
