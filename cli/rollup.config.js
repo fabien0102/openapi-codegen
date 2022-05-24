@@ -27,7 +27,7 @@ export default {
     commonjs(),
     json(),
     autoExternal(),
-    internal(["react", "ink"]),
+    internal(["react", "ink", "@apollo/client"]),
   ],
   external: ["yoga-layout-prebuilt"],
 };

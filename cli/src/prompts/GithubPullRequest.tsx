@@ -1,4 +1,4 @@
-import Apollo from "@apollo/client";
+import { ApolloClient, HttpLink, InMemoryCache } from "@apollo/client";
 
 import React, { useEffect, useState } from "react";
 import { Box, Text } from "ink";
@@ -10,8 +10,6 @@ import { Select } from "./Select.js";
 import { TextInput } from "./TextInput.js";
 import { Confirm } from "./Confirm.js";
 import { Spinner } from "./Spinner.js";
-
-const { ApolloClient, HttpLink, InMemoryCache } = Apollo;
 
 export type PullRequest = {
   ref: string;

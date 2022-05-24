@@ -1,5 +1,5 @@
-import Apollo from "@apollo/client";
-const { gql } = Apollo;
+import type Apollo from "@apollo/client";
+import { gql, useQuery, useLazyQuery } from "@apollo/client";
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = {
@@ -23669,7 +23669,7 @@ export function useSearchFileQuery(
   >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<SearchFileQuery, SearchFileQueryVariables>(
+  return useQuery<SearchFileQuery, SearchFileQueryVariables>(
     SearchFileDocument,
     options
   );
@@ -23681,7 +23681,7 @@ export function useSearchFileLazyQuery(
   >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<SearchFileQuery, SearchFileQueryVariables>(
+  return useLazyQuery<SearchFileQuery, SearchFileQueryVariables>(
     SearchFileDocument,
     options
   );
@@ -23741,10 +23741,10 @@ export function useSearchPullRequestQuery(
   >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<
-    SearchPullRequestQuery,
-    SearchPullRequestQueryVariables
-  >(SearchPullRequestDocument, options);
+  return useQuery<SearchPullRequestQuery, SearchPullRequestQueryVariables>(
+    SearchPullRequestDocument,
+    options
+  );
 }
 export function useSearchPullRequestLazyQuery(
   baseOptions?: Apollo.LazyQueryHookOptions<
@@ -23753,10 +23753,10 @@ export function useSearchPullRequestLazyQuery(
   >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<
-    SearchPullRequestQuery,
-    SearchPullRequestQueryVariables
-  >(SearchPullRequestDocument, options);
+  return useLazyQuery<SearchPullRequestQuery, SearchPullRequestQueryVariables>(
+    SearchPullRequestDocument,
+    options
+  );
 }
 export type SearchPullRequestQueryHookResult = ReturnType<
   typeof useSearchPullRequestQuery
@@ -23803,7 +23803,7 @@ export function useSearchRepositoryQuery(
   >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<SearchRepositoryQuery, SearchRepositoryQueryVariables>(
+  return useQuery<SearchRepositoryQuery, SearchRepositoryQueryVariables>(
     SearchRepositoryDocument,
     options
   );
@@ -23815,10 +23815,10 @@ export function useSearchRepositoryLazyQuery(
   >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<
-    SearchRepositoryQuery,
-    SearchRepositoryQueryVariables
-  >(SearchRepositoryDocument, options);
+  return useLazyQuery<SearchRepositoryQuery, SearchRepositoryQueryVariables>(
+    SearchRepositoryDocument,
+    options
+  );
 }
 export type SearchRepositoryQueryHookResult = ReturnType<
   typeof useSearchRepositoryQuery
@@ -23865,7 +23865,7 @@ export function useSearchUserQuery(
   >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<SearchUserQuery, SearchUserQueryVariables>(
+  return useQuery<SearchUserQuery, SearchUserQueryVariables>(
     SearchUserDocument,
     options
   );
@@ -23877,7 +23877,7 @@ export function useSearchUserLazyQuery(
   >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<SearchUserQuery, SearchUserQueryVariables>(
+  return useLazyQuery<SearchUserQuery, SearchUserQueryVariables>(
     SearchUserDocument,
     options
   );
