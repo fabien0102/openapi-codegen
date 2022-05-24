@@ -178,6 +178,10 @@ export const generateFetchers = async (context: Context, config: Config) => {
     }
   );
 
+  if (operationIds.length === 0) {
+    console.log(`⚠️ You don't have any operation with "operationId" defined!`);
+  }
+
   if (Object.keys(operationByTags).length > 0) {
     nodes.push(
       f.createVariableStatement(
