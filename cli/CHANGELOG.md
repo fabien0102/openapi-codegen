@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.5.2](https://github.com/fabien0102/openapi-codegen/compare/cli-v1.5.1...cli-v1.5.2) (2022-05-25)
+
+
+### Bug Fixes
+
+* Fix `gen --pr` command ([#71](https://github.com/fabien0102/openapi-codegen/issues/71)) ([bc9bed4](https://github.com/fabien0102/openapi-codegen/commit/bc9bed4dfad6820556709736db43357d657dbda2))
+
 ### [1.5.1](https://github.com/fabien0102/openapi-codegen/compare/cli-v1.5.0...cli-v1.5.1) (2022-05-18)
 
 
