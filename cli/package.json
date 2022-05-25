@@ -24,9 +24,7 @@
   ],
   "license": "MIT",
   "scripts": {
-    "build": "npm run build:tsc && npm run build:rollup",
-    "build:tsc": "tsc -p tsconfig.package.json",
-    "build:rollup": "rollup -c",
+    "build": "rollup -c",
     "prepublishOnly": "npm run build",
     "gen": "graphql-codegen --config codegen.yml -r dotenv/config"
   },
@@ -49,7 +47,6 @@
     "js-yaml": "^4.1.0",
     "openapi3-ts": "^2.0.1",
     "prettier": "^2.6.2",
-    "react": "^17.0.2",
     "rxjs": "^7.5.4",
     "slash": "^4.0.0",
     "swagger2openapi": "^7.0.8",
@@ -74,6 +71,7 @@
     "@types/react": "^17.0.39",
     "@types/slash": "^3.0.0",
     "nock": "^13.2.1",
+    "react": "^17.0.2",
     "rollup-plugin-auto-external": "^2.0.0",
     "rollup-plugin-internal": "^1.0.4",
     "rollup-plugin-preserve-shebang": "^1.0.1"

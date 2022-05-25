@@ -10,6 +10,7 @@ import slash from "slash";
 import { Config, FromOptions, Namespace } from "../types";
 import { getOpenAPISourceFile } from "../core/getOpenAPISourceFile.js";
 import { parseOpenAPISourceFile } from "../core/parseOpenAPISourceFile.js";
+import { Prompt } from "../prompts/Prompt.js";
 
 const __filename = fileURLToPath(import.meta.url);
 
@@ -210,7 +211,6 @@ export class GenerateCommand extends Command {
     const config = configs[this.namespace];
     const options = this.getFromOptions(config);
     if (options.source === "github" && this.pullRequest) {
-      const { Prompt } = await import("../prompts/Prompt.js");
       const prompt = new Prompt();
       const token = await prompt.githubToken();
       const pullRequest = await prompt.githubPullRequest({

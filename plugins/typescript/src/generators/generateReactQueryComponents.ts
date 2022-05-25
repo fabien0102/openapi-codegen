@@ -219,6 +219,9 @@ export const generateReactQueryComponents = async (
     }
   );
 
+  if (operationIds.length === 0) {
+    console.log(`⚠️ You don't have any operation with "operationId" defined!`);
+  }
   const queryKeyManager = f.createTypeAliasDeclaration(
     undefined,
     [f.createModifier(ts.SyntaxKind.ExportKeyword)],

@@ -1,4 +1,4 @@
-import Apollo from "@apollo/client";
+import { ApolloClient, HttpLink, InMemoryCache } from "@apollo/client";
 
 import { Box, Text } from "ink";
 import fetch from "got-fetch";
@@ -13,8 +13,6 @@ import {
 } from "./queries/github.js";
 import { Select } from "./Select.js";
 import { TextInput } from "./TextInput.js";
-
-const { ApolloClient, HttpLink, InMemoryCache } = Apollo;
 
 type Step1 = Pick<Partial<GithubOptions>, "owner">;
 type Step2 = Required<Step1> & Pick<Partial<GithubOptions>, "repository">;
