@@ -1,5 +1,12 @@
 # Changelog
 
+### [4.0.1](https://github.com/fabien0102/openapi-codegen/compare/typescript-v4.0.0...typescript-v4.0.1) (2022-05-25)
+
+
+### Bug Fixes
+
+* Fix `gen --pr` command ([#71](https://github.com/fabien0102/openapi-codegen/issues/71)) ([bc9bed4](https://github.com/fabien0102/openapi-codegen/commit/bc9bed4dfad6820556709736db43357d657dbda2))
+
 ## [4.0.0](https://github.com/fabien0102/openapi-codegen/compare/typescript-v3.0.2...typescript-v4.0.0) (2022-05-18)
 
 
