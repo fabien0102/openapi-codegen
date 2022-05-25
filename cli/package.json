@@ -24,9 +24,7 @@
   ],
   "license": "MIT",
   "scripts": {
-    "build": "npm run build:tsc && npm run build:rollup",
-    "build:tsc": "tsc -p tsconfig.package.json",
-    "build:rollup": "rollup -c",
+    "build": "rollup -c",
     "prepublishOnly": "npm run build",
     "gen": "graphql-codegen --config codegen.yml -r dotenv/config"
   },

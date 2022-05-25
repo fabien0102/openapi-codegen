@@ -6,28 +6,41 @@ import autoExternal from "rollup-plugin-auto-external";
 import internal from "rollup-plugin-internal";
 import typescript from "@rollup/plugin-typescript";
 
-export default {
-  input: "src/cli.ts",
-  output: {
-    file: "lib/cli.js",
-    format: "es",
-    banner: "#!/usr/bin/env node",
+const typescriptPlugin = typescript({
+  tsconfig: "./tsconfig.package.json",
+  compilerOptions: {
+    outDir: ".",
+    sourceMap: false,
   },
-  cache: false,
-  plugins: [
-    shebang(),
-    resolve(),
-    typescript({
-      tsconfig: "./tsconfig.package.json",
-      compilerOptions: {
-        outDir: ".",
-        sourceMap: false,
-      },
-    }),
-    commonjs(),
-    json(),
-    autoExternal(),
-    internal(["react", "ink", "@apollo/client"]),
-  ],
-  external: ["yoga-layout-prebuilt"],
-};
+});
+
+export default [
+  {
+    input: "src/index.ts",
+    output: {
+      file: "lib/index.js",
+      format: "es",
+    },
+    cache: false,
+    plugins: [typescriptPlugin],
+  },
+  {
+    input: "src/cli.ts",
+    output: {
+      file: "lib/cli.js",
+      format: "es",
+      banner: "#!/usr/bin/env node",
+    },
+    cache: false,
+    plugins: [
+      shebang(),
+      resolve(),
+      typescriptPlugin,
+      commonjs(),
+      json(),
+      autoExternal(),
+      internal(["react", "ink", "@apollo/client"]),
+    ],
+    external: ["yoga-layout-prebuilt"],
+  },
+];
