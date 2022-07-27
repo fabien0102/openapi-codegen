@@ -1,4 +1,4 @@
-import type { QueryKey, UseQueryOptions } from "react-query";
+import type { QueryKey, UseQueryOptions } from "@tanstack/react-query";
 import { useToken } from "../Auth";
 import { QueryOperation } from "./githubComponents";
 

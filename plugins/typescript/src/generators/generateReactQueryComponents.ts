@@ -625,6 +625,6 @@ const createReactQueryImport = () =>
       undefined,
       f.createNamespaceImport(f.createIdentifier("reactQuery"))
     ),
-    f.createStringLiteral("react-query"),
+    f.createStringLiteral("@tanstack/react-query"),
     undefined
   );

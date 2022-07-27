@@ -1,7 +1,7 @@
 import { pascal } from "case";
 
 export const getContext = (prefix: string, componentsFile: string) =>
-  `import type { QueryKey, UseQueryOptions } from "react-query";
+  `import type { QueryKey, UseQueryOptions } from "@tanstack/react-query";
   import { QueryOperation } from './${componentsFile}';
   
   export type ${pascal(prefix)}Context = {
