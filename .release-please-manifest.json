@@ -1,4 +1,4 @@
 {
   "cli": "1.5.2",
-  "plugins/typescript": "4.0.1"
+  "plugins/typescript": "5.0.0"
 }
