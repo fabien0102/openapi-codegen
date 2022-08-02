@@ -1,5 +1,16 @@
 # Changelog
 
+## [5.0.0](https://github.com/fabien0102/openapi-codegen/compare/typescript-v4.0.1...typescript-v5.0.0) (2022-08-02)
+
+
+### ⚠ BREAKING CHANGES
+
+* Update to react-query v4 (#77)
+
+### Features
+
+* Update to react-query v4 ([#77](https://github.com/fabien0102/openapi-codegen/issues/77)) ([a019e39](https://github.com/fabien0102/openapi-codegen/commit/a019e3936169e39109c5bd2cb5f3eb44d3d771f3))
+
 ### [4.0.1](https://github.com/fabien0102/openapi-codegen/compare/typescript-v4.0.0...typescript-v4.0.1) (2022-05-25)
 
 
