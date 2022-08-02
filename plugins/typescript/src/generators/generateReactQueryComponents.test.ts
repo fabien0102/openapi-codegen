@@ -89,7 +89,7 @@ describe("generateReactQueryComponents", () => {
        * 
        * @version 1.0.0
        */
-      import * as reactQuery from \\"react-query\\";
+      import * as reactQuery from \\"@tanstack/react-query\\";
       import { usePetstoreContext, PetstoreContext } from \\"./petstoreContext\\";
       import type * as Fetcher from \\"./petstoreFetcher\\";
       import { petstoreFetch } from \\"./petstoreFetcher\\";
@@ -198,7 +198,7 @@ describe("generateReactQueryComponents", () => {
        * 
        * @version 1.0.0
        */
-      import * as reactQuery from \\"react-query\\";
+      import * as reactQuery from \\"@tanstack/react-query\\";
       import { usePetstoreContext, PetstoreContext } from \\"./petstoreContext\\";
       import type * as Fetcher from \\"./petstoreFetcher\\";
       import { petstoreFetch } from \\"./petstoreFetcher\\";
@@ -320,7 +320,7 @@ describe("generateReactQueryComponents", () => {
        * 
        * @version 1.0.0
        */
-      import * as reactQuery from \\"react-query\\";
+      import * as reactQuery from \\"@tanstack/react-query\\";
       import { usePetstoreContext, PetstoreContext } from \\"./petstoreContext\\";
       import type * as Fetcher from \\"./petstoreFetcher\\";
       import { petstoreFetch } from \\"./petstoreFetcher\\";
@@ -434,7 +434,7 @@ describe("generateReactQueryComponents", () => {
        * 
        * @version 1.0.0
        */
-      import * as reactQuery from \\"react-query\\";
+      import * as reactQuery from \\"@tanstack/react-query\\";
       import { usePetstoreContext, PetstoreContext } from \\"./petstoreContext\\";
       import type * as Fetcher from \\"./petstoreFetcher\\";
       import { petstoreFetch } from \\"./petstoreFetcher\\";
@@ -558,7 +558,7 @@ describe("generateReactQueryComponents", () => {
        * 
        * @version 1.0.0
        */
-      import * as reactQuery from \\"react-query\\";
+      import * as reactQuery from \\"@tanstack/react-query\\";
       import { usePetstoreContext, PetstoreContext } from \\"./petstoreContext\\";
       import type * as Fetcher from \\"./petstoreFetcher\\";
       import { petstoreFetch } from \\"./petstoreFetcher\\";
@@ -689,7 +689,7 @@ describe("generateReactQueryComponents", () => {
        * 
        * @version 1.0.0
        */
-      import * as reactQuery from \\"react-query\\";
+      import * as reactQuery from \\"@tanstack/react-query\\";
       import { usePetstoreContext, PetstoreContext } from \\"./petstoreContext\\";
       import type * as Fetcher from \\"./petstoreFetcher\\";
       import { petstoreFetch } from \\"./petstoreFetcher\\";
@@ -826,7 +826,7 @@ describe("generateReactQueryComponents", () => {
        * 
        * @version 1.0.0
        */
-      import * as reactQuery from \\"react-query\\";
+      import * as reactQuery from \\"@tanstack/react-query\\";
       import { usePetstoreContext, PetstoreContext } from \\"./petstoreContext\\";
       import type * as Fetcher from \\"./petstoreFetcher\\";
       import { petstoreFetch } from \\"./petstoreFetcher\\";
@@ -936,7 +936,7 @@ describe("generateReactQueryComponents", () => {
        * 
        * @version 1.0.0
        */
-      import * as reactQuery from \\"react-query\\";
+      import * as reactQuery from \\"@tanstack/react-query\\";
       import { usePetstoreContext, PetstoreContext } from \\"./petstoreContext\\";
       import type * as Fetcher from \\"./petstoreFetcher\\";
       import { petstoreFetch } from \\"./petstoreFetcher\\";
@@ -1045,7 +1045,7 @@ describe("generateReactQueryComponents", () => {
        * 
        * @version 1.0.0
        */
-      import * as reactQuery from \\"react-query\\";
+      import * as reactQuery from \\"@tanstack/react-query\\";
       import { useContext, Context } from \\"./context\\";
       import type * as Fetcher from \\"./fetcher\\";
       import { fetch } from \\"./fetcher\\";
@@ -1138,7 +1138,7 @@ describe("generateReactQueryComponents", () => {
        * 
        * @version 1.0.0
        */
-      import * as reactQuery from \\"react-query\\";
+      import * as reactQuery from \\"@tanstack/react-query\\";
       import { usePetstoreContext, PetstoreContext } from \\"./petstoreContext\\";
       import type * as Fetcher from \\"./petstoreFetcher\\";
       import { petstoreFetch } from \\"./petstoreFetcher\\";

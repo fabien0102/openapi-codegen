@@ -9,9 +9,9 @@
     "gen:github": "openapi-codegen gen github"
   },
   "dependencies": {
+    "@tanstack/react-query": "^4.0.10",
     "react": "^18.0.0",
-    "react-dom": "^18.0.0",
-    "react-query": "^3.38.0"
+    "react-dom": "^18.0.0"
   },
   "devDependencies": {
     "@openapi-codegen/cli": "^1.5.0",

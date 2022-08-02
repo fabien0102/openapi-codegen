@@ -3,7 +3,7 @@
  *
  * @version 1.1.4
  */
-import * as reactQuery from "react-query";
+import * as reactQuery from "@tanstack/react-query";
 import { useGithubContext, GithubContext } from "./githubContext";
 import { githubFetch } from "./githubFetcher";
 import type * as Schemas from "./githubSchemas";

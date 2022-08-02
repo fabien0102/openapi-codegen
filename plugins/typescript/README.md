@@ -57,7 +57,7 @@ The `{filenamePrefix}Context.ts` can be tweak to inject any props in the generat
 
 ```ts
 // `PetStoreContext.ts`
-import type { QueryKey, UseQueryOptions } from "react-query";
+import type { QueryKey, UseQueryOptions } from "@tanstack/react-query";
 
 export type PetStoreContext = {
   fetcherOptions: {
