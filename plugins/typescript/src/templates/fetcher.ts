@@ -69,7 +69,7 @@ export async function ${camel(prefix)}Fetch<
   THeaders,
   TQueryParams,
   TPathParams
->): Promise<TData> {
+>) {
   try {
     const response = await window.fetch(\`\${baseUrl}\${resolveUrl(url, queryParams, pathParams)}\`,
       {
@@ -98,7 +98,12 @@ export async function ${camel(prefix)}Fetch<
       throw error;
     }
 
-    return await response.json();
+    if (response.headers.get('content-type').includes('json')) {
+      return await response.json();
+    } else {
+      // if it is not a json response, asume it is a blob
+      return await response.blob();
+    }
   } catch (e) {
     throw {
       status: "unknown" as const,
