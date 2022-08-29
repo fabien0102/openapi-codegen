@@ -109,7 +109,7 @@ describe("generateReactQueryComponents", () => {
       /**
        * Get all the pets
        */
-      export const useListPets = (variables: ListPetsVariables, options?: Omit<reactQuery.UseQueryOptions<ListPetsResponse, ListPetsError, ListPetsResponse>, \\"queryKey\\" | \\"queryFn\\">) => { const { fetcherOptions, queryOptions, queryKeyFn } = usePetstoreContext(options); return reactQuery.useQuery<ListPetsResponse, ListPetsError, ListPetsResponse>(queryKeyFn({ path: \\"/pets\\", operationId: \\"listPets\\", variables }), () => fetchListPets({ ...fetcherOptions, ...variables }), {
+      export const useListPets = <TSelectData = ListPetsResponse>(variables: ListPetsVariables, options?: Omit<reactQuery.UseQueryOptions<ListPetsResponse, ListPetsError, TSelectData>, \\"queryKey\\" | \\"queryFn\\">): reactQuery.UseQueryResult<TSelectData, ListPetsError> => { const { fetcherOptions, queryOptions, queryKeyFn } = usePetstoreContext(options); return reactQuery.useQuery<ListPetsResponse, ListPetsError, ListPetsResponse>(queryKeyFn({ path: \\"/pets\\", operationId: \\"listPets\\", variables }), () => fetchListPets({ ...fetcherOptions, ...variables }), {
           ...options,
           ...queryOptions
       }); };
@@ -231,7 +231,7 @@ describe("generateReactQueryComponents", () => {
       /**
        * Get all the pets
        */
-      export const useListPets = (variables: ListPetsVariables, options?: Omit<reactQuery.UseQueryOptions<ListPetsResponse, ListPetsError, ListPetsResponse>, \\"queryKey\\" | \\"queryFn\\">) => { const { fetcherOptions, queryOptions, queryKeyFn } = usePetstoreContext(options); return reactQuery.useQuery<ListPetsResponse, ListPetsError, ListPetsResponse>(queryKeyFn({ path: \\"/pets\\", operationId: \\"listPets\\", variables }), () => fetchListPets({ ...fetcherOptions, ...variables }), {
+      export const useListPets = <TSelectData = ListPetsResponse>(variables: ListPetsVariables, options?: Omit<reactQuery.UseQueryOptions<ListPetsResponse, ListPetsError, TSelectData>, \\"queryKey\\" | \\"queryFn\\">): reactQuery.UseQueryResult<TSelectData, ListPetsError> => { const { fetcherOptions, queryOptions, queryKeyFn } = usePetstoreContext(options); return reactQuery.useQuery<ListPetsResponse, ListPetsError, ListPetsResponse>(queryKeyFn({ path: \\"/pets\\", operationId: \\"listPets\\", variables }), () => fetchListPets({ ...fetcherOptions, ...variables }), {
           ...options,
           ...queryOptions
       }); };
@@ -357,7 +357,7 @@ describe("generateReactQueryComponents", () => {
       /**
        * Get all the pets
        */
-      export const useListPets = (variables: ListPetsVariables, options?: Omit<reactQuery.UseQueryOptions<ListPetsResponse, ListPetsError, ListPetsResponse>, \\"queryKey\\" | \\"queryFn\\">) => { const { fetcherOptions, queryOptions, queryKeyFn } = usePetstoreContext(options); return reactQuery.useQuery<ListPetsResponse, ListPetsError, ListPetsResponse>(queryKeyFn({ path: \\"/pets\\", operationId: \\"listPets\\", variables }), () => fetchListPets({ ...fetcherOptions, ...variables }), {
+      export const useListPets = <TSelectData = ListPetsResponse>(variables: ListPetsVariables, options?: Omit<reactQuery.UseQueryOptions<ListPetsResponse, ListPetsError, TSelectData>, \\"queryKey\\" | \\"queryFn\\">): reactQuery.UseQueryResult<TSelectData, ListPetsError> => { const { fetcherOptions, queryOptions, queryKeyFn } = usePetstoreContext(options); return reactQuery.useQuery<ListPetsResponse, ListPetsError, ListPetsResponse>(queryKeyFn({ path: \\"/pets\\", operationId: \\"listPets\\", variables }), () => fetchListPets({ ...fetcherOptions, ...variables }), {
           ...options,
           ...queryOptions
       }); };
@@ -454,7 +454,7 @@ describe("generateReactQueryComponents", () => {
       /**
        * Get all the pets
        */
-      export const useListPets = (variables: ListPetsVariables, options?: Omit<reactQuery.UseQueryOptions<ListPetsResponse, ListPetsError, ListPetsResponse>, \\"queryKey\\" | \\"queryFn\\">) => { const { fetcherOptions, queryOptions, queryKeyFn } = usePetstoreContext(options); return reactQuery.useQuery<ListPetsResponse, ListPetsError, ListPetsResponse>(queryKeyFn({ path: \\"/pets\\", operationId: \\"listPets\\", variables }), () => fetchListPets({ ...fetcherOptions, ...variables }), {
+      export const useListPets = <TSelectData = ListPetsResponse>(variables: ListPetsVariables, options?: Omit<reactQuery.UseQueryOptions<ListPetsResponse, ListPetsError, TSelectData>, \\"queryKey\\" | \\"queryFn\\">): reactQuery.UseQueryResult<TSelectData, ListPetsError> => { const { fetcherOptions, queryOptions, queryKeyFn } = usePetstoreContext(options); return reactQuery.useQuery<ListPetsResponse, ListPetsError, ListPetsResponse>(queryKeyFn({ path: \\"/pets\\", operationId: \\"listPets\\", variables }), () => fetchListPets({ ...fetcherOptions, ...variables }), {
           ...options,
           ...queryOptions
       }); };
@@ -1162,7 +1162,7 @@ describe("generateReactQueryComponents", () => {
       /**
        * Get all the pets
        */
-      export const useListPets = (variables: ListPetsVariables, options?: Omit<reactQuery.UseQueryOptions<ListPetsResponse, ListPetsError, ListPetsResponse>, \\"queryKey\\" | \\"queryFn\\">) => { const { fetcherOptions, queryOptions, queryKeyFn } = usePetstoreContext(options); return reactQuery.useQuery<ListPetsResponse, ListPetsError, ListPetsResponse>(queryKeyFn({ path: \\"/pets\\", operationId: \\"listPets\\", variables }), () => fetchListPets({ ...fetcherOptions, ...variables }), {
+      export const useListPets = <TSelectData = ListPetsResponse>(variables: ListPetsVariables, options?: Omit<reactQuery.UseQueryOptions<ListPetsResponse, ListPetsError, TSelectData>, \\"queryKey\\" | \\"queryFn\\">): reactQuery.UseQueryResult<TSelectData, ListPetsError> => { const { fetcherOptions, queryOptions, queryKeyFn } = usePetstoreContext(options); return reactQuery.useQuery<ListPetsResponse, ListPetsError, ListPetsResponse>(queryKeyFn({ path: \\"/pets\\", operationId: \\"listPets\\", variables }), () => fetchListPets({ ...fetcherOptions, ...variables }), {
           ...options,
           ...queryOptions
       }); };

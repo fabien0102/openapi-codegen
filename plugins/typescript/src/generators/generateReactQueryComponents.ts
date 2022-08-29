@@ -462,7 +462,13 @@ const createQueryHook = ({
             undefined,
             f.createArrowFunction(
               undefined,
-              undefined,
+              [
+                f.createTypeParameterDeclaration(
+                  "TSelectData",
+                  undefined,
+                  dataType
+                ),
+              ],
               [
                 f.createParameterDeclaration(
                   undefined,
@@ -481,7 +487,10 @@ const createQueryHook = ({
                   createUseQueryOptionsType(dataType, errorType)
                 ),
               ],
-              undefined,
+              createUseUseQueryResultType(
+                f.createTypeReferenceNode("TSelectData"),
+                errorType
+              ),
               f.createToken(ts.SyntaxKind.EqualsGreaterThanToken),
               f.createBlock([
                 f.createVariableStatement(
@@ -608,13 +617,29 @@ const createUseQueryOptionsType = (
         f.createIdentifier("reactQuery"),
         f.createIdentifier("UseQueryOptions")
       ),
-      [dataType, errorType, dataType]
+      [
+        dataType,
+        errorType,
+        f.createTypeReferenceNode(f.createIdentifier("TSelectData"), []),
+      ]
     ),
     f.createUnionTypeNode([
       f.createLiteralTypeNode(f.createStringLiteral("queryKey")),
       f.createLiteralTypeNode(f.createStringLiteral("queryFn")),
     ]),
   ]);
+
+const createUseUseQueryResultType = (
+  dataType: ts.TypeNode,
+  errorType: ts.TypeNode
+) =>
+  f.createTypeReferenceNode(
+    f.createQualifiedName(
+      f.createIdentifier("reactQuery"),
+      f.createIdentifier("UseQueryResult")
+    ),
+    [dataType, errorType]
+  );
 
 const createReactQueryImport = () =>
   f.createImportDeclaration(
