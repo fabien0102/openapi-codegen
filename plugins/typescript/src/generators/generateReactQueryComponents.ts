@@ -536,7 +536,14 @@ const createQueryHook = ({
                       f.createIdentifier("reactQuery"),
                       f.createIdentifier("useQuery")
                     ),
-                    [dataType, errorType, dataType],
+                    [
+                      dataType,
+                      errorType,
+                      f.createTypeReferenceNode(
+                        f.createIdentifier("TSelectData"),
+                        []
+                      ),
+                    ],
                     [
                       f.createCallExpression(
                         f.createIdentifier("queryKeyFn"),
