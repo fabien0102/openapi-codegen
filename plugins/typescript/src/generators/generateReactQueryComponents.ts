@@ -487,7 +487,7 @@ const createQueryHook = ({
                   createUseQueryOptionsType(dataType, errorType)
                 ),
               ],
-              createUseUseQueryResultType(
+              createUseQueryResultType(
                 f.createTypeReferenceNode("TSelectData"),
                 errorType
               ),
@@ -629,7 +629,7 @@ const createUseQueryOptionsType = (
     ]),
   ]);
 
-const createUseUseQueryResultType = (
+const createUseQueryResultType = (
   dataType: ts.TypeNode,
   errorType: ts.TypeNode
 ) =>
