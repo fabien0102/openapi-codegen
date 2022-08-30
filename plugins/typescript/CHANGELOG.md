@@ -1,5 +1,13 @@
 # Changelog
 
+## [5.1.0](https://github.com/fabien0102/openapi-codegen/compare/typescript-v5.0.0...typescript-v5.1.0) (2022-08-30)
+
+
+### Features
+
+* added file upload and download support ([#84](https://github.com/fabien0102/openapi-codegen/issues/84)) ([3a15e0c](https://github.com/fabien0102/openapi-codegen/commit/3a15e0ceb55b8d93947d06b99b699f405af3d469))
+* select support added for react-query components ([#83](https://github.com/fabien0102/openapi-codegen/issues/83)) ([01574bc](https://github.com/fabien0102/openapi-codegen/commit/01574bcb41694d11b928f7d1f3723777001b6b4a))
+
 ## [5.0.0](https://github.com/fabien0102/openapi-codegen/compare/typescript-v4.0.1...typescript-v5.0.0) (2022-08-02)
 
 
