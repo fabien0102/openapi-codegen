@@ -165,6 +165,9 @@ export const getType = (
         schema.nullable
       );
     case "string":
+      if (schema.format === "binary") {
+        return f.createTypeReferenceNode("Blob");
+      }
       return withNullable(
         f.createKeywordTypeNode(ts.SyntaxKind.StringKeyword),
         schema.nullable
