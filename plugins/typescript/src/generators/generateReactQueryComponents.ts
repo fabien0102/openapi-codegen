@@ -462,13 +462,7 @@ const createQueryHook = ({
             undefined,
             f.createArrowFunction(
               undefined,
-              [
-                f.createTypeParameterDeclaration(
-                  "TSelectData",
-                  undefined,
-                  dataType
-                ),
-              ],
+              [f.createTypeParameterDeclaration("TData", undefined, dataType)],
               [
                 f.createParameterDeclaration(
                   undefined,
@@ -487,10 +481,7 @@ const createQueryHook = ({
                   createUseQueryOptionsType(dataType, errorType)
                 ),
               ],
-              createUseQueryResultType(
-                f.createTypeReferenceNode("TSelectData"),
-                errorType
-              ),
+              undefined,
               f.createToken(ts.SyntaxKind.EqualsGreaterThanToken),
               f.createBlock([
                 f.createVariableStatement(
@@ -540,7 +531,7 @@ const createQueryHook = ({
                       dataType,
                       errorType,
                       f.createTypeReferenceNode(
-                        f.createIdentifier("TSelectData"),
+                        f.createIdentifier("TData"),
                         []
                       ),
                     ],
@@ -627,7 +618,7 @@ const createUseQueryOptionsType = (
       [
         dataType,
         errorType,
-        f.createTypeReferenceNode(f.createIdentifier("TSelectData"), []),
+        f.createTypeReferenceNode(f.createIdentifier("TData"), []),
       ]
     ),
     f.createUnionTypeNode([
@@ -635,18 +626,6 @@ const createUseQueryOptionsType = (
       f.createLiteralTypeNode(f.createStringLiteral("queryFn")),
     ]),
   ]);
-
-const createUseQueryResultType = (
-  dataType: ts.TypeNode,
-  errorType: ts.TypeNode
-) =>
-  f.createTypeReferenceNode(
-    f.createQualifiedName(
-      f.createIdentifier("reactQuery"),
-      f.createIdentifier("UseQueryResult")
-    ),
-    [dataType, errorType]
-  );
 
 const createReactQueryImport = () =>
   f.createImportDeclaration(
