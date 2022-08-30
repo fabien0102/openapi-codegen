@@ -462,7 +462,7 @@ const createQueryHook = ({
             undefined,
             f.createArrowFunction(
               undefined,
-              undefined,
+              [f.createTypeParameterDeclaration("TData", undefined, dataType)],
               [
                 f.createParameterDeclaration(
                   undefined,
@@ -527,7 +527,14 @@ const createQueryHook = ({
                       f.createIdentifier("reactQuery"),
                       f.createIdentifier("useQuery")
                     ),
-                    [dataType, errorType, dataType],
+                    [
+                      dataType,
+                      errorType,
+                      f.createTypeReferenceNode(
+                        f.createIdentifier("TData"),
+                        []
+                      ),
+                    ],
                     [
                       f.createCallExpression(
                         f.createIdentifier("queryKeyFn"),
@@ -608,7 +615,11 @@ const createUseQueryOptionsType = (
         f.createIdentifier("reactQuery"),
         f.createIdentifier("UseQueryOptions")
       ),
-      [dataType, errorType, dataType]
+      [
+        dataType,
+        errorType,
+        f.createTypeReferenceNode(f.createIdentifier("TData"), []),
+      ]
     ),
     f.createUnionTypeNode([
       f.createLiteralTypeNode(f.createStringLiteral("queryKey")),
