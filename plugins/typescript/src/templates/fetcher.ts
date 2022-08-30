@@ -69,7 +69,7 @@ export async function ${camel(prefix)}Fetch<
   THeaders,
   TQueryParams,
   TPathParams
->) {
+>): Promise<TData> {
   try {
     const response = await window.fetch(\`\${baseUrl}\${resolveUrl(url, queryParams, pathParams)}\`,
       {
