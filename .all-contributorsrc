@@ -53,6 +53,26 @@
         "code",
         "ideas"
       ]
+    },
+    {
+      "login": "needim",
+      "name": "Nedim Arabacı",
+      "avatar_url": "https://avatars.githubusercontent.com/u/271912?v=4",
+      "profile": "https://ned.im/",
+      "contributions": [
+        "question",
+        "code",
+        "ideas"
+      ]
+    },
+    {
+      "login": "antoniel",
+      "name": "Antoniel Magalhães",
+      "avatar_url": "https://avatars.githubusercontent.com/u/17225358?v=4",
+      "profile": "https://github.com/antoniel",
+      "contributions": [
+        "example"
+      ]
     }
   ],
   "contributorsPerLine": 7
