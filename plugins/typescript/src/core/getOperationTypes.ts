@@ -131,7 +131,6 @@ export const getOperationTypes = ({
   const errorTypeIdentifier = pascal(`${operationId}Error`);
   declarationNodes.push(
     f.createTypeAliasDeclaration(
-      undefined,
       [f.createModifier(ts.SyntaxKind.ExportKeyword)],
       f.createIdentifier(errorTypeIdentifier),
       undefined,
@@ -146,7 +145,6 @@ export const getOperationTypes = ({
     const dataTypeIdentifier = pascal(`${operationId}Response`);
     declarationNodes.push(
       f.createTypeAliasDeclaration(
-        undefined,
         [f.createModifier(ts.SyntaxKind.ExportKeyword)],
         f.createIdentifier(dataTypeIdentifier),
         undefined,
@@ -162,7 +160,6 @@ export const getOperationTypes = ({
     const requestBodyIdentifier = pascal(`${operationId}RequestBody`);
     declarationNodes.push(
       f.createTypeAliasDeclaration(
-        undefined,
         [f.createModifier(ts.SyntaxKind.ExportKeyword)],
         f.createIdentifier(requestBodyIdentifier),
         undefined,
@@ -215,7 +212,6 @@ export const getOperationTypes = ({
   if (variablesType.kind !== ts.SyntaxKind.VoidKeyword) {
     declarationNodes.push(
       f.createTypeAliasDeclaration(
-        undefined,
         [f.createModifier(ts.SyntaxKind.ExportKeyword)],
         f.createIdentifier(variablesIdentifier),
         undefined,

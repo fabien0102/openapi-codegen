@@ -223,7 +223,6 @@ export const generateReactQueryComponents = async (
     console.log(`⚠️ You don't have any operation with "operationId" defined!`);
   }
   const queryKeyManager = f.createTypeAliasDeclaration(
-    undefined,
     [f.createModifier(ts.SyntaxKind.ExportKeyword)],
     "QueryOperation",
     undefined,
@@ -319,7 +318,6 @@ const createMutationHook = ({
                 f.createParameterDeclaration(
                   undefined,
                   undefined,
-                  undefined,
                   f.createIdentifier("options"),
                   f.createToken(ts.SyntaxKind.QuestionToken),
                   f.createTypeReferenceNode(f.createIdentifier("Omit"), [
@@ -379,7 +377,6 @@ const createMutationHook = ({
                           undefined,
                           [
                             f.createParameterDeclaration(
-                              undefined,
                               undefined,
                               undefined,
                               f.createIdentifier("variables"),
@@ -462,10 +459,16 @@ const createQueryHook = ({
             undefined,
             f.createArrowFunction(
               undefined,
-              [f.createTypeParameterDeclaration("TData", undefined, dataType)],
+              [
+                f.createTypeParameterDeclaration(
+                  undefined,
+                  "TData",
+                  undefined,
+                  dataType
+                ),
+              ],
               [
                 f.createParameterDeclaration(
-                  undefined,
                   undefined,
                   undefined,
                   f.createIdentifier("variables"),
@@ -473,7 +476,6 @@ const createQueryHook = ({
                   variablesType
                 ),
                 f.createParameterDeclaration(
-                  undefined,
                   undefined,
                   undefined,
                   f.createIdentifier("options"),
@@ -629,7 +631,6 @@ const createUseQueryOptionsType = (
 
 const createReactQueryImport = () =>
   f.createImportDeclaration(
-    undefined,
     undefined,
     f.createImportClause(
       false,

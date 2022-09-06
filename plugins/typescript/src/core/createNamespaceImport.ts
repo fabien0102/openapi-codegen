@@ -10,7 +10,6 @@ import { factory as f } from "typescript";
 export const createNamespaceImport = (namespace: string, filename: string) =>
   f.createImportDeclaration(
     undefined,
-    undefined,
     f.createImportClause(
       true,
       undefined,

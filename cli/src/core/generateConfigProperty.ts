@@ -63,7 +63,6 @@ export function generateConfigProperty({
               factory.createParameterDeclaration(
                 undefined,
                 undefined,
-                undefined,
                 factory.createIdentifier("context"),
                 undefined,
                 undefined,

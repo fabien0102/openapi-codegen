@@ -7,7 +7,14 @@ import prettier from "prettier";
 import { fileURLToPath } from "url";
 import slash from "slash";
 
-import { Config, FromOptions, Namespace } from "../types";
+import {
+  Config,
+  FileOptions,
+  FromOptions,
+  GithubOptions,
+  Namespace,
+  UrlOptions,
+} from "../types";
 import { getOpenAPISourceFile } from "../core/getOpenAPISourceFile.js";
 import { parseOpenAPISourceFile } from "../core/parseOpenAPISourceFile.js";
 import { Prompt } from "../prompts/Prompt.js";
@@ -136,7 +143,7 @@ export class GenerateCommand extends Command {
           return {
             ...config.from,
             relativePath: this.relativePath ?? config.from.relativePath,
-          };
+          } as FileOptions;
         } else {
           if (!this.relativePath) {
             throw new UsageError("--relativePath argument is missing");
@@ -144,7 +151,7 @@ export class GenerateCommand extends Command {
           return {
             source: "file",
             relativePath: this.relativePath,
-          };
+          } as FileOptions;
         }
       }
 
@@ -154,7 +161,7 @@ export class GenerateCommand extends Command {
             ...config.from,
             url: this.url ?? config.from.url,
             method: this.method ?? config.from.method,
-          };
+          } as UrlOptions;
         } else {
           if (!this.url) {
             throw new UsageError("--url argument is missing");
@@ -163,7 +170,7 @@ export class GenerateCommand extends Command {
             source: "url",
             url: this.url,
             method: this.method,
-          };
+          } as UrlOptions;
         }
 
       case "github":
@@ -174,7 +181,7 @@ export class GenerateCommand extends Command {
             ref: this.ref ?? config.from.ref,
             repository: this.repository ?? config.from.repository,
             specPath: this.specPath ?? config.from.specPath,
-          };
+          } as GithubOptions;
         } else {
           if (!this.owner) {
             throw new UsageError("--owner argument is missing");
@@ -195,8 +202,11 @@ export class GenerateCommand extends Command {
             owner: this.owner,
             repository: this.repository,
             specPath: this.specPath,
-          };
+          } as GithubOptions;
         }
+
+      default:
+        throw new UsageError("--source argument is invalid");
     }
   }
 

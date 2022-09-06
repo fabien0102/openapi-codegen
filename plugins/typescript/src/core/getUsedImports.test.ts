@@ -7,7 +7,6 @@ describe("getUsedImports", () => {
     const nodes: ts.Node[] = [
       f.createTypeAliasDeclaration(
         undefined,
-        undefined,
         f.createIdentifier("A"),
         undefined,
         f.createTypeReferenceNode(
@@ -38,7 +37,6 @@ describe("getUsedImports", () => {
   it("should generate schemas import", () => {
     const nodes: ts.Node[] = [
       f.createTypeAliasDeclaration(
-        undefined,
         undefined,
         f.createIdentifier("A"),
         undefined,
@@ -71,7 +69,6 @@ describe("getUsedImports", () => {
     const nodes: ts.Node[] = [
       f.createTypeAliasDeclaration(
         undefined,
-        undefined,
         f.createIdentifier("A"),
         undefined,
         f.createTypeReferenceNode(
@@ -102,7 +99,6 @@ describe("getUsedImports", () => {
   it("should generate responses import", () => {
     const nodes: ts.Node[] = [
       f.createTypeAliasDeclaration(
-        undefined,
         undefined,
         f.createIdentifier("A"),
         undefined,
@@ -135,7 +131,6 @@ describe("getUsedImports", () => {
     const nodes: ts.Node[] = [
       f.createTypeAliasDeclaration(
         undefined,
-        undefined,
         f.createIdentifier("A"),
         undefined,
         f.createTypeReferenceNode(
@@ -147,7 +142,6 @@ describe("getUsedImports", () => {
         )
       ),
       f.createTypeAliasDeclaration(
-        undefined,
         undefined,
         f.createIdentifier("A"),
         undefined,
@@ -161,7 +155,6 @@ describe("getUsedImports", () => {
       ),
       f.createTypeAliasDeclaration(
         undefined,
-        undefined,
         f.createIdentifier("A"),
         undefined,
         f.createTypeReferenceNode(
@@ -173,7 +166,6 @@ describe("getUsedImports", () => {
         )
       ),
       f.createTypeAliasDeclaration(
-        undefined,
         undefined,
         f.createIdentifier("A"),
         undefined,
@@ -209,7 +201,6 @@ describe("getUsedImports", () => {
     const nodes = [
       f.createTypeAliasDeclaration(
         undefined,
-        undefined,
         f.createIdentifier("A"),
         undefined,
         f.createTypeReferenceNode(f.createIdentifier("ErrorWrapper"), [
@@ -239,7 +230,6 @@ describe("getUsedImports", () => {
   it("should generate utils import (ServerErrorStatus)", () => {
     const nodes = [
       f.createTypeAliasDeclaration(
-        undefined,
         undefined,
         f.createIdentifier("A"),
         undefined,
@@ -271,7 +261,6 @@ describe("getUsedImports", () => {
     const nodes = [
       f.createTypeAliasDeclaration(
         undefined,
-        undefined,
         f.createIdentifier("A"),
         undefined,
         f.createTypeReferenceNode(f.createIdentifier("ErrorWrapper"), [
@@ -282,7 +271,6 @@ describe("getUsedImports", () => {
         ])
       ),
       f.createTypeAliasDeclaration(
-        undefined,
         undefined,
         f.createIdentifier("A"),
         undefined,

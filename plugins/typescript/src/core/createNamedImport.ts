@@ -14,7 +14,6 @@ export const createNamedImport = (
   const fnNames = Array.isArray(fnName) ? fnName : [fnName];
   return f.createImportDeclaration(
     undefined,
-    undefined,
     f.createImportClause(
       false,
       undefined,
