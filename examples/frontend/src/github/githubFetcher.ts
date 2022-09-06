@@ -65,7 +65,7 @@ export async function githubFetch<
     }
 
     if (response.headers.get("content-type")?.includes("json")) {
-      return (await response.json()) as TData;
+      return await response.json();
     } else {
       // if it is not a json response, asume it is a blob and cast it to TData
       return (await response.blob()) as unknown as TData;
