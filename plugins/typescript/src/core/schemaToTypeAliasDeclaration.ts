@@ -51,7 +51,6 @@ export const schemaToTypeAliasDeclaration = (
 ): ts.Node[] => {
   const jsDocNode = getJSDocComment(schema, context);
   const declarationNode = f.createTypeAliasDeclaration(
-    undefined,
     [f.createModifier(ts.SyntaxKind.ExportKeyword)],
     pascal(name),
     undefined,
@@ -659,10 +658,8 @@ const getAdditionalProperties = (
 
   return f.createIndexSignature(
     undefined,
-    undefined,
     [
       f.createParameterDeclaration(
-        undefined,
         undefined,
         undefined,
         f.createIdentifier("key"),

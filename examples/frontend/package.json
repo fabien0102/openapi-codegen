@@ -14,12 +14,12 @@
     "react-dom": "^18.0.0"
   },
   "devDependencies": {
-    "@openapi-codegen/cli": "^1.5.0",
-    "@openapi-codegen/typescript": "^3.0.1",
+    "@openapi-codegen/cli": "^1.5.2",
+    "@openapi-codegen/typescript": "^5.1.0",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
     "@vitejs/plugin-react": "^1.3.0",
-    "typescript": "^4.6.3",
+    "typescript": "4.8.2",
     "vite": "^2.9.5"
   }
 }

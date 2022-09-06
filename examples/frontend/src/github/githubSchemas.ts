@@ -2412,7 +2412,7 @@ export type ContributorActivity = {
    */
   total: number;
   /*
-   * @example [object Object]
+   * @example {"a":6898,"c":10,"d":77,"w":"1367712000"}
    */
   weeks: {
     a?: number;
@@ -3892,7 +3892,7 @@ export type GitTree = {
   /*
    * Objects specifying a tree structure
    *
-   * @example [object Object]
+   * @example {"mode":"100644","path":"file.rb","properties":{"mode":{"type":"string"},"path":{"type":"string"},"sha":{"type":"string"},"size":{"type":"integer"},"type":{"type":"string"},"url":{"type":"string"}},"required":["path","mode","type","sha","url","size"],"sha":"44b4fc6d56897b048c772eb4087f854f46256132","size":30,"type":"blob","url":"https://api.github.com/repos/octocat/Hello-World/git/blobs/44b4fc6d56897b048c772eb4087f854f46256132"}
    */
   tree: {
     /*
@@ -3995,7 +3995,7 @@ export type GpgKey = {
    */
   created_at: string;
   /*
-   * @example [object Object]
+   * @example {"email":"mastahyeti@users.noreply.github.com","verified":true}
    */
   emails: {
     email?: string;
@@ -4020,7 +4020,7 @@ export type GpgKey = {
   public_key: string;
   raw_key: string | null;
   /*
-   * @example [object Object]
+   * @example {"can_certify":false,"can_encrypt_comms":true,"can_encrypt_storage":true,"can_sign":false,"created_at":"2016-03-24T17:31:04.000Z","emails":[],"expires_at":null,"id":4,"key_id":"4A595D4C72EE49C7","primary_key_id":3,"public_key":"zsBNBFayYZ...","subkeys":[]}
    */
   subkeys: {
     can_certify?: boolean;
@@ -4046,8 +4046,8 @@ export type GroupMapping = {
   /*
    * Array of groups to be mapped to this team
    *
-   * @example [object Object]
-   * @example [object Object]
+   * @example {"group_description":"A group of Developers working on AzureAD SAML SSO","group_id":"111a1a11-aaa1-1aaa-11a1-a1a1a1a1a1aa","group_name":"saml-azuread-test"}
+   * @example {"group_description":"Another group of Developers working on AzureAD SAML SSO","group_id":"2bb2bb2b-bb22-22bb-2bb2-bb2bbb2bb2b2","group_name":"saml-azuread-test2"}
    */
   groups?: {
     /*
@@ -9740,8 +9740,8 @@ export type ScimUser = {
   /*
    * user emails
    *
-   * @example [object Object]
-   * @example [object Object]
+   * @example {"primary":true,"value":"someone@example.com"}
+   * @example {"primary":false,"value":"another@example.com"}
    * @minItems 1
    */
   emails: {
@@ -9799,7 +9799,7 @@ export type ScimUser = {
   /*
    * Set of operations to be performed
    *
-   * @example [object Object]
+   * @example {"op":"replace","value":{"active":false}}
    * @minItems 1
    */
   operations?: {

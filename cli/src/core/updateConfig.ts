@@ -70,7 +70,6 @@ export function updateConfig({
         });
 
         return f.createImportDeclaration(
-          node.decorators,
           node.modifiers,
           f.createImportClause(
             false,
@@ -153,7 +152,6 @@ function createImportStatements(imports: Map<string, string[]>) {
   const statements = Array.from(imports.entries()).map(
     ([module, namedImports]) =>
       f.createImportDeclaration(
-        undefined,
         undefined,
         f.createImportClause(
           false,

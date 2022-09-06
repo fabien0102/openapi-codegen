@@ -45,7 +45,7 @@ export class GenerateCommand extends Command {
   method = Option.String("--method", {
     description: "[source=url] HTTP Method",
     env: "OPENAPI_CODEGEN_URL_METHOD",
-    validator: t.isEnum(["get", "post"]),
+    validator: t.isEnum(["get", "post"] as const),
   });
 
   // source=github options
@@ -197,6 +197,9 @@ export class GenerateCommand extends Command {
             specPath: this.specPath,
           };
         }
+
+      default:
+        throw new UsageError("--source argument is invalid");
     }
   }
 

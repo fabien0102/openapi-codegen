@@ -29,8 +29,7 @@ function Users() {
   if (error) {
     return (
       <div>
-        <p>{error.message}</p>
-        <a href={error.documentation_url}>Documentation</a>
+        <pre>{JSON.stringify(error, null, 2)}</pre>
       </div>
     );
   }

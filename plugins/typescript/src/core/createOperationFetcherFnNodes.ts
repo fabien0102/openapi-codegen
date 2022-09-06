@@ -56,7 +56,6 @@ export const createOperationFetcherFnNodes = ({
                     f.createParameterDeclaration(
                       undefined,
                       undefined,
-                      undefined,
                       f.createIdentifier("variables"),
                       undefined,
                       variablesType,
