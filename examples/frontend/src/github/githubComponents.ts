@@ -9,9 +9,8 @@ import type * as Fetcher from "./githubFetcher";
 import { githubFetch } from "./githubFetcher";
 import type * as Schemas from "./githubSchemas";
 import type * as Responses from "./githubResponses";
-import { BasicError } from "./githubSchemas";
 
-export type MetaRootError = Fetcher.ErrorWrapper<BasicError>;
+export type MetaRootError = Fetcher.ErrorWrapper<undefined>;
 
 export type MetaRootResponse = {
   /*
