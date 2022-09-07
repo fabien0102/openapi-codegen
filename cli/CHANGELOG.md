@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.6.0](https://github.com/fabien0102/openapi-codegen/compare/cli-v1.5.2...cli-v1.6.0) (2022-09-07)
+
+
+### Features
+
+* bump typescript & lerna versions ([#89](https://github.com/fabien0102/openapi-codegen/issues/89)) ([cf22aa1](https://github.com/fabien0102/openapi-codegen/commit/cf22aa1b999b86934ec907aa37dc53477ed0a3e2))
+
 ### [1.5.2](https://github.com/fabien0102/openapi-codegen/compare/cli-v1.5.1...cli-v1.5.2) (2022-05-25)
 
 
