@@ -142,7 +142,7 @@ describe("generateSchemaTypes", () => {
          * A new pet.
          */
         export type Pet = NewPet & {
-            /*
+            /**
              * @format int64
              */
             id: number;
@@ -185,7 +185,7 @@ describe("generateSchemaTypes", () => {
          * An error :(
          */
         export type Error = {
-            /*
+            /**
              * @format int32
              */
             code: number;

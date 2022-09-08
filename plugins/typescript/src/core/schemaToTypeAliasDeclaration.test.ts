@@ -101,7 +101,7 @@ describe("schemaToTypeAliasDeclaration", () => {
        * Cron timing schema for create requests.
        */
       export type Test = {
-          /*
+          /**
            * The string representing the timing's cron expression.
            *
            * @format cron-string
@@ -202,13 +202,13 @@ describe("schemaToTypeAliasDeclaration", () => {
        * An object
        */
       export type Test = {
-          /*
+          /**
            * I’m a foo
            *
            * @default boom
            */
           foo: string;
-          /*
+          /**
            * @minimum 0
            * @maximum 42
            */
@@ -273,19 +273,19 @@ describe("schemaToTypeAliasDeclaration", () => {
        * An object
        */
       export type Test = {
-          /*
+          /**
            * I’m a foo
            *
            * @default boom
            */
           foo: {
-              /*
+              /**
                * @minimum 0
                * @maximum 42
                */
               bar?: number;
               baz?: {
-                  /*
+                  /**
                    * @default yeah
                    */
                   oh?: string;
@@ -690,7 +690,7 @@ describe("schemaToTypeAliasDeclaration", () => {
          * A nice top-level description
          */
         export type Test = {
-            /*
+            /**
              * A nice description for foo
              */
             foo?: string;
@@ -793,66 +793,66 @@ describe("schemaToTypeAliasDeclaration", () => {
 
       expect(printSchema(schema)).toMatchInlineSnapshot(`
         "export type Test = {
-            /*
+            /**
              * Description of the gist
              *
              * @example Example Ruby script
              */
             description: string;
-            /*
+            /**
              * Names of files to be updated
              *
              * @example {\\"hello.rb\\":{\\"content\\":\\"blah\\",\\"filename\\":\\"goodbye.rb\\"}}
              */
             files?: {
                 [key: string]: {
-                    /*
+                    /**
                      * The new content of the file
                      */
                     content: string;
-                    /*
+                    /**
                      * The new filename for the file
                      */
                     filename?: string | null;
                 } | {
-                    /*
+                    /**
                      * The new content of the file
                      */
                     content?: string;
-                    /*
+                    /**
                      * The new filename for the file
                      */
                     filename: string | null;
                 } | {} | null;
             };
         } | {
-            /*
+            /**
              * Description of the gist
              *
              * @example Example Ruby script
              */
             description?: string;
-            /*
+            /**
              * Names of files to be updated
              *
              * @example {\\"hello.rb\\":{\\"content\\":\\"blah\\",\\"filename\\":\\"goodbye.rb\\"}}
              */
             files: {
                 [key: string]: {
-                    /*
+                    /**
                      * The new content of the file
                      */
                     content: string;
-                    /*
+                    /**
                      * The new filename for the file
                      */
                     filename?: string | null;
                 } | {
-                    /*
+                    /**
                      * The new content of the file
                      */
                     content?: string;
-                    /*
+                    /**
                      * The new filename for the file
                      */
                     filename: string | null;

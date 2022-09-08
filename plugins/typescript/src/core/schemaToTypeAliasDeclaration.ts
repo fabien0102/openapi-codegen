@@ -638,7 +638,7 @@ const addJSDocToNode = (node: ts.Node, jsDocComment: ts.JSDoc) => {
   ts.addSyntheticLeadingComment(
     node,
     ts.SyntaxKind.MultiLineCommentTrivia,
-    jsDocString,
+    "*" + jsDocString, // https://github.com/microsoft/TypeScript/issues/17146
     true
   );
 };

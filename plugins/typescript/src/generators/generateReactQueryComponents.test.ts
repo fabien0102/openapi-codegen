@@ -205,11 +205,11 @@ describe("generateReactQueryComponents", () => {
       import type * as Schemas from \\"./petstoreSchemas\\";
 
       export type ListPetsQueryParams = {
-          /*
+          /**
            * Filter on the dog breed
            */
           breed: string;
-          /*
+          /**
            * Color of the dog
            */
           color?: \\"white\\" | \\"black\\" | \\"grey\\";
@@ -327,14 +327,14 @@ describe("generateReactQueryComponents", () => {
       import type * as Schemas from \\"./petstoreSchemas\\";
 
       export type ListPetsQueryParams = {
-          /*
+          /**
            * Color of the dog
            */
           color?: \\"white\\" | \\"black\\" | \\"grey\\";
       };
 
       export type ListPetsHeaders = {
-          /*
+          /**
            * Filter on the dog breed
            */
           breed?: string;
