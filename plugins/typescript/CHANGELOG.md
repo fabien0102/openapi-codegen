@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.2.1](https://github.com/fabien0102/openapi-codegen/compare/typescript-v5.2.0...typescript-v5.2.1) (2022-09-08)
+
+
+### Bug Fixes
+
+* JSDoc generation ([#92](https://github.com/fabien0102/openapi-codegen/issues/92)) ([2dcfa87](https://github.com/fabien0102/openapi-codegen/commit/2dcfa87fa6285ba8e2b8963eb24e542e9f0d6f91))
+
 ## [5.2.0](https://github.com/fabien0102/openapi-codegen/compare/typescript-v5.1.0...typescript-v5.2.0) (2022-09-07)
 
 
