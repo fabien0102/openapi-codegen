@@ -14,7 +14,7 @@
     "plugins/typescript"
   ],
   "scripts": {
-    "test": "jest",
+    "test": "jest --clearCache && jest",
     "build:all": "npx lerna run build",
     "all-contrib": "all-contributors"
   },
@@ -26,6 +26,7 @@
     "eslint": "^8.0.1",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
+    "got": "^12.4.1",
     "husky": "^7.0.2",
     "jest": "^27.2.5",
     "lerna": "^5.5.0",
