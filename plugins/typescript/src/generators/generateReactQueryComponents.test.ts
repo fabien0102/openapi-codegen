@@ -1143,7 +1143,7 @@ describe("generateReactQueryComponents", () => {
       import type * as Fetcher from \\"./petstoreFetcher\\";
       import { petstoreFetch } from \\"./petstoreFetcher\\";
       import type * as Schemas from \\"./petstoreSchemas\\";
-      import { ServerErrorStatus } from \\"./petstoreUtils\\";
+      import type { ServerErrorStatus } from \\"./petstoreUtils\\";
 
       export type ListPetsError = Fetcher.ErrorWrapper<{
           status: ServerErrorStatus;
