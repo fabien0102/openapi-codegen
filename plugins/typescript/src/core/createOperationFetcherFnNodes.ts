@@ -71,7 +71,17 @@ export const createOperationFetcherFnNodes = ({
                       )
                     ),
                   ]
-                : [],
+                : [
+                    f.createParameterDeclaration(
+                      undefined,
+                      undefined,
+                      f.createIdentifier("signal"),
+                      f.createToken(ts.SyntaxKind.QuestionToken),
+                      f.createTypeReferenceNode(
+                        f.createIdentifier("AbortSignal")
+                      )
+                    ),
+                  ],
               undefined,
               f.createToken(ts.SyntaxKind.EqualsGreaterThanToken),
               f.createCallExpression(

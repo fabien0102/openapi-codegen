@@ -96,7 +96,7 @@ describe("generateFetchers", () => {
       /**
        * Get all the pets
        */
-      export const listPets = () => petstoreFetch<ListPetsResponse, ListPetsError, undefined, {}, {}, {}>({ url: \\"/pets\\", method: \\"get\\", signal });
+      export const listPets = (signal?: AbortSignal) => petstoreFetch<ListPetsResponse, ListPetsError, undefined, {}, {}, {}>({ url: \\"/pets\\", method: \\"get\\", signal });
       "
     `);
   });
@@ -140,7 +140,7 @@ describe("generateFetchers", () => {
       /**
        * Get all the pets
        */
-      export const listPets = () => fetch<ListPetsResponse, ListPetsError, undefined, {}, {}, {}>({ url: \\"/pets\\", method: \\"get\\", signal });
+      export const listPets = (signal?: AbortSignal) => fetch<ListPetsResponse, ListPetsError, undefined, {}, {}, {}>({ url: \\"/pets\\", method: \\"get\\", signal });
       "
     `);
   });
@@ -243,7 +243,7 @@ describe("generateFetchers", () => {
       /**
        * Get all the pets
        */
-      export const listPets = () => petstoreFetch<ListPetsResponse, ListPetsError, undefined, {}, {}, {}>({ url: \\"/pets\\", method: \\"get\\", signal });
+      export const listPets = (signal?: AbortSignal) => petstoreFetch<ListPetsResponse, ListPetsError, undefined, {}, {}, {}>({ url: \\"/pets\\", method: \\"get\\", signal });
 
       export const operationsByTag = { \\"pets\\": { listPets } };
       "
