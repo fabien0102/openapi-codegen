@@ -14,7 +14,7 @@
     "plugins/typescript"
   ],
   "scripts": {
-    "test": "jest --clearCache && jest",
+    "test": "jest",
     "build:all": "npx lerna run build",
     "all-contrib": "all-contributors"
   },
