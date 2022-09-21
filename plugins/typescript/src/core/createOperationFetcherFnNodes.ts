@@ -61,8 +61,27 @@ export const createOperationFetcherFnNodes = ({
                       variablesType,
                       undefined
                     ),
+                    f.createParameterDeclaration(
+                      undefined,
+                      undefined,
+                      f.createIdentifier("signal"),
+                      f.createToken(ts.SyntaxKind.QuestionToken),
+                      f.createTypeReferenceNode(
+                        f.createIdentifier("AbortSignal")
+                      )
+                    ),
                   ]
-                : [],
+                : [
+                    f.createParameterDeclaration(
+                      undefined,
+                      undefined,
+                      f.createIdentifier("signal"),
+                      f.createToken(ts.SyntaxKind.QuestionToken),
+                      f.createTypeReferenceNode(
+                        f.createIdentifier("AbortSignal")
+                      )
+                    ),
+                  ],
               undefined,
               f.createToken(ts.SyntaxKind.EqualsGreaterThanToken),
               f.createCallExpression(
@@ -91,8 +110,15 @@ export const createOperationFetcherFnNodes = ({
                             f.createSpreadAssignment(
                               f.createIdentifier("variables")
                             ),
+                            f.createShorthandPropertyAssignment(
+                              f.createIdentifier("signal")
+                            ),
                           ]
-                        : []),
+                        : [
+                            f.createShorthandPropertyAssignment(
+                              f.createIdentifier("signal")
+                            ),
+                          ]),
                     ],
                     false
                   ),

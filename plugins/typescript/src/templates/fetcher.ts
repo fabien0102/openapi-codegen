@@ -44,6 +44,7 @@ export type ${pascal(
   headers?: THeaders;
   queryParams?: TQueryParams;
   pathParams?: TPathParams;
+  signal?: AbortSignal;
 } & ${
     contextPath
       ? `${pascal(prefix)}Context["fetcherOptions"];`
@@ -64,6 +65,7 @@ export async function ${camel(prefix)}Fetch<
   headers,
   pathParams,
   queryParams,
+  signal,
 }: ${pascal(prefix)}FetcherOptions<
   TBody,
   THeaders,
@@ -73,6 +75,7 @@ export async function ${camel(prefix)}Fetch<
   try {
     const response = await window.fetch(\`\${baseUrl}\${resolveUrl(url, queryParams, pathParams)}\`,
       {
+        signal,
         method: method.toUpperCase(),
         body: body ? JSON.stringify(body) : undefined,
         headers: {

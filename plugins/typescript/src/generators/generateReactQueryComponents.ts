@@ -560,7 +560,19 @@ const createQueryHook = ({
                       f.createArrowFunction(
                         undefined,
                         undefined,
-                        [],
+                        [
+                          f.createParameterDeclaration(
+                            undefined,
+                            undefined,
+                            f.createObjectBindingPattern([
+                              f.createBindingElement(
+                                undefined,
+                                undefined,
+                                "signal"
+                              ),
+                            ])
+                          ),
+                        ],
                         undefined,
                         f.createToken(ts.SyntaxKind.EqualsGreaterThanToken),
                         f.createCallExpression(
@@ -578,6 +590,7 @@ const createQueryHook = ({
                               ],
                               false
                             ),
+                            f.createIdentifier("signal"),
                           ]
                         )
                       ),
