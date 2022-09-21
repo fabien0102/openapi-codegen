@@ -223,7 +223,7 @@ describe("getUsedImports", () => {
         .nodes.map(print)
         .join("\n")
     ).toMatchInlineSnapshot(
-      `"import { ClientErrorStatus } from \\"././utils\\";"`
+      `"import type { ClientErrorStatus } from \\"././utils\\";"`
     );
   });
 
@@ -253,7 +253,7 @@ describe("getUsedImports", () => {
         .nodes.map(print)
         .join("\n")
     ).toMatchInlineSnapshot(
-      `"import { ServerErrorStatus } from \\"././utils\\";"`
+      `"import type { ServerErrorStatus } from \\"././utils\\";"`
     );
   });
 
@@ -294,7 +294,7 @@ describe("getUsedImports", () => {
         .nodes.map(print)
         .join("\n")
     ).toMatchInlineSnapshot(
-      `"import { ServerErrorStatus, ClientErrorStatus } from \\"././utils\\";"`
+      `"import type { ServerErrorStatus, ClientErrorStatus } from \\"././utils\\";"`
     );
   });
 });

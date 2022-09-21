@@ -89,7 +89,7 @@ export const getUsedImports = (
       if (i.type === "namespace") {
         return createNamespaceImport(i.namespace, `./${i.from}`);
       } else {
-        return createNamedImport(Array.from(i.imports.values()), `./${i.from}`);
+        return createNamedImport(Array.from(i.imports.values()), `./${i.from}`, true);
       }
     }),
   };

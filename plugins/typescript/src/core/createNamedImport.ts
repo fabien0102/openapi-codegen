@@ -5,17 +5,19 @@ import { factory as f } from "typescript";
  *
  * @param fnName functions to imports
  * @param filename path of the module
+ * @param isTypeOnly whether fnName are used as types only
  * @returns ts.Node of the import declaration
  */
 export const createNamedImport = (
   fnName: string | string[],
-  filename: string
+  filename: string,
+  isTypeOnly = false
 ) => {
   const fnNames = Array.isArray(fnName) ? fnName : [fnName];
   return f.createImportDeclaration(
     undefined,
     f.createImportClause(
-      false,
+      isTypeOnly,
       undefined,
       f.createNamedImports(
         fnNames.map((name) =>
