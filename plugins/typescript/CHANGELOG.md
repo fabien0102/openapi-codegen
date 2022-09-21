@@ -1,5 +1,16 @@
 # Changelog
 
+## [6.0.0](https://github.com/fabien0102/openapi-codegen/compare/typescript-v5.2.1...typescript-v6.0.0) (2022-09-21)
+
+
+### ⚠ BREAKING CHANGES
+
+* Implement query cancellation in react-query generated components (#95)
+
+### Features
+
+* Implement query cancellation in react-query generated components ([#95](https://github.com/fabien0102/openapi-codegen/issues/95)) ([450b069](https://github.com/fabien0102/openapi-codegen/commit/450b0696073746615d61ab66a7f09de337139a00))
+
 ## [5.2.1](https://github.com/fabien0102/openapi-codegen/compare/typescript-v5.2.0...typescript-v5.2.1) (2022-09-08)
 
 
