@@ -44,6 +44,7 @@ export type ${pascal(
   headers?: THeaders;
   queryParams?: TQueryParams;
   pathParams?: TPathParams;
+  signal?: AbortSignal;
 } & ${
     contextPath
       ? `${pascal(prefix)}Context["fetcherOptions"];`

@@ -14,10 +14,6 @@ export const getContext = (prefix: string, componentsFile: string) =>
        * Query params to inject in the fetcher
        */
       queryParams?: {};
-      /**
-       * AbortSignal for fetcher
-       */
-      signal?: AbortSignal;
     };
     queryOptions: {
       /**

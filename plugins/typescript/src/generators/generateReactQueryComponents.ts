@@ -587,10 +587,10 @@ const createQueryHook = ({
                                 f.createSpreadAssignment(
                                   f.createIdentifier("variables")
                                 ),
-                                f.createShorthandPropertyAssignment("signal"),
                               ],
                               false
                             ),
+                            f.createIdentifier("signal"),
                           ]
                         )
                       ),
