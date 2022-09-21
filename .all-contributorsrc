@@ -73,6 +73,15 @@
       "contributions": [
         "example"
       ]
+    },
+    {
+      "login": "DreierF",
+      "name": "Florian Dreier",
+      "avatar_url": "https://avatars.githubusercontent.com/u/5631865?v=4",
+      "profile": "https://github.com/DreierF",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7
