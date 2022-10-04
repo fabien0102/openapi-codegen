@@ -7,6 +7,12 @@
 
 Tooling to give you full type-safety around OpenAPI specs.
 
+### You can generate
+- TypeScript types
+- Type-safe Generic Fetchers
+- Type-safe React Query hooks (https://github.com/tanstack/query) [*this option also generates the fetchers*]
+
+
 **For frontend:**
 
 This will give you full auto-completion and type-safety of your APIs
@@ -18,13 +24,12 @@ This will generate everything you need to deliver a perfect API, spec driven.
 ## Getting started
 
 ```bash
-$ npm i -D @openapi-codegen/{cli,typescript}
-$ npx openapi-codegen init
+$ npx @openapi-codegen/cli init
 ```
 
 Follow the steps, this will generate a configuration file for you (openapi-codegen.config.ts).
 
-You should have a bunch of types / components ready to be used.
+After that, you should have a bunch of types / components ready to be used in the output folder you provided.
 
 Note: The generated `{namespace}Fetcher.ts` assume a global `fetch`, if you want to use this in a nodejs environment, please update this file (this is just a template)
 
@@ -81,27 +86,35 @@ SignUpInput:
 
 OpenAPI Codegen will be able to generate all the relevant validation (or at least give you the choice to do it).
 
-Note: You can also attach any custom logic by using the `x-*` tag, the possibilities are endless!
+> **Note**
+> You can also attach any custom logic by using the `x-*` tag, the possibilities are endless!
 
 ### Frontend side
 
 Having to reverse engineer a backend response is the least productive/fun task ever! However, given a nice OpenAPI specs, we can actually generate nicely typed code for you that lets you interact with your API in a safe manner.
 
-Taking React as example, calling an API can be as simple as this:
+Taking React as example, calling an API can be as simple as this: *(this hooks are using **Tanstack Query** under the hood)*
 
+
+> **Warning**
+> Please follow the setup guide for React Query if you wanna use generated hooks: https://tanstack.com/query/v4/docs/adapters/react-query
 ```tsx
 import { useListPets } from "./petStore/petStoreComponents"; // <- output from openapi-codegen
 
-const App = () => {
+const Example = () => {
   const { data, loading, error } = useListPets();
 
   // `data` is fully typed and have all documentation from OpenAPI
 };
 ```
 
+> **Note**
+> You can also check this blog post about using generated hooks in React https://xata.io/blog/openapi-typesafe-react-query-hooks
+
 And since this generated from the specs, everything is safe at build time!
 
-Note: If you can’t trust your backend, some runtime validation can be useful to avoid surprises in production 😅
+> **Note**
+> If you can’t trust your backend, some runtime validation can be useful to avoid surprises in production 😅
 
 ## Configuration
 
