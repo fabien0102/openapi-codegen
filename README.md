@@ -42,7 +42,10 @@ This will generate everything you need to deliver a perfect API, spec driven.
     - `{namespace}Fetcher.ts` - defines a function that will make requests to your API.
     - `{namespace}Context.tsx` - the context that provides `{namespace}Fetcher` to other components.
     - `{namespace}Components.tsx` - generated React Query components (if you selected React Query as part of initialization). 
-    - `{namespace}Schemas.tsx` - the generated Typescript types from the provided Open API schemas.
+    - `{namespace}Schemas.ts` - the generated Typescript types from the provided Open API schemas.
+
+    > **Warning**
+    > If `{namespace}Fetcher.ts` or `{namespace}Context.tsx` already exist in the output folder, they will not be replaced. However, `{namespace}Components.tsx` and `{namespace}Schemas.ts` will be re-generated each time based on the Open API spec file provided.
 
 3. **Configure the Fetcher** (optional)
 
@@ -124,8 +127,6 @@ Having to reverse engineer a backend response is the least productive/fun task e
 Taking React as example, calling an API can be as simple as this: *(this hooks are using **Tanstack Query** under the hood)*
 
 
-> **Warning**
-> Please follow the setup guide for React Query if you wanna use generated hooks: https://tanstack.com/query/v4/docs/adapters/react-query
 ```tsx
 import { useListPets } from "./petStore/petStoreComponents"; // <- output from openapi-codegen
 
