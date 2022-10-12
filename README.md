@@ -23,16 +23,48 @@ This will generate everything you need to deliver a perfect API, spec driven.
 
 ## Getting started
 
-```bash
-$ npx @openapi-codegen/cli init
-```
+1. **Initialize the generator**
 
-Follow the steps, this will generate a configuration file for you (openapi-codegen.config.ts).
+    ```bash
+    $ npx @openapi-codegen/cli init
+    ```
+    
+    If you wish to change any of the selections made, you can do so in the generated `openapi-codegen.config.ts` file.
 
-After that, you should have a bunch of types / components ready to be used in the output folder you provided.
+2. **Generate the API access code**
 
-Note: The generated `{namespace}Fetcher.ts` assume a global `fetch`, if you want to use this in a nodejs environment, please update this file (this is just a template)
+    ```bash
+    $ npx openapi-codegen gen {namespace}
+    ```
 
+    After the code generation is done you will notice the following files:
+    
+    - `{namespace}Fetcher.ts` - defines a function that will make requests to your API.
+    - `{namespace}Context.tsx` - the context that provides `{namespace}Fetcher` to other components.
+    - `{namespace}Components.tsx` - generated React Query components (if you selected React Query as part of initialization). 
+    - `{namespace}Schemas.ts` - the generated Typescript types from the provided Open API schemas.
+    
+    &nbsp;
+    > **Warning**
+    > If `{namespace}Fetcher.ts` or `{namespace}Context.tsx` already exist in the output folder, they will not be replaced. However, `{namespace}Components.tsx` and `{namespace}Schemas.ts` will be re-generated each time based on the Open API spec file provided.
+
+3. **Configure the Fetcher** (optional)
+
+    After the first step you should see a file called `{namespace}Fetcher.ts` in your ouput directory. This file 
+    
+    By default it uses the built-in Fetch API, you are free to change this to your fetching library of choice (Axios, Got etc.)
+
+    If your Open API spec contains a configured server, then the base URL for all requests will default to that server's URL. If no such configuration exists, you'll need to specify the base URL value.
+
+4. **Install and Configure React Query** (optional)
+
+    If during generator setup you picked `> React Query components`, then you will need to install and configure React Query in order for the generated React hooks to work properly:
+
+    - Install the library
+      ```bash
+      npm i @tanstack/react-query
+      ```
+    - Wire up the `QueryClient` as described [here](https://tanstack.com/query/v4/docs/adapters/react-query).
 ## Philosophy
 
 In software development, communication between components and documentation around it is often no fun.
@@ -96,8 +128,6 @@ Having to reverse engineer a backend response is the least productive/fun task e
 Taking React as example, calling an API can be as simple as this: *(this hooks are using **Tanstack Query** under the hood)*
 
 
-> **Warning**
-> Please follow the setup guide for React Query if you wanna use generated hooks: https://tanstack.com/query/v4/docs/adapters/react-query
 ```tsx
 import { useListPets } from "./petStore/petStoreComponents"; // <- output from openapi-codegen
 
