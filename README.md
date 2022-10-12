@@ -43,7 +43,8 @@ This will generate everything you need to deliver a perfect API, spec driven.
     - `{namespace}Context.tsx` - the context that provides `{namespace}Fetcher` to other components.
     - `{namespace}Components.tsx` - generated React Query components (if you selected React Query as part of initialization). 
     - `{namespace}Schemas.ts` - the generated Typescript types from the provided Open API schemas.
-
+    
+    &nbsp;
     > **Warning**
     > If `{namespace}Fetcher.ts` or `{namespace}Context.tsx` already exist in the output folder, they will not be replaced. However, `{namespace}Components.tsx` and `{namespace}Schemas.ts` will be re-generated each time based on the Open API spec file provided.
 
