@@ -54,7 +54,7 @@ export type ${pascal(
 export async function ${camel(prefix)}Fetch<
   TData,
   TError,
-  TBody extends {} | undefined | null,
+  TBody extends {} | FormData | undefined | null,
   THeaders extends {},
   TQueryParams extends {},
   TPathParams extends {}
@@ -77,7 +77,7 @@ export async function ${camel(prefix)}Fetch<
       {
         signal,
         method: method.toUpperCase(),
-        body: body ? JSON.stringify(body) : undefined,
+        body: body ? (body instanceof FormData ? body : JSON.stringify(body)) : undefined,
         headers: {
           "Content-Type": "application/json",
           ...headers,
