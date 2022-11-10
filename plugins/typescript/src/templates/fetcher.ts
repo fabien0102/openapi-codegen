@@ -78,10 +78,12 @@ export async function ${camel(prefix)}Fetch<
         signal,
         method: method.toUpperCase(),
         body: body ? (body instanceof FormData ? body : JSON.stringify(body)) : undefined,
-        headers: {
-          "Content-Type": "application/json",
-          ...headers,
-        },
+        headers: headers
+          ? headers
+          : {
+              "Content-Type": "application/json",
+              ...headers
+            }
       }
     );
     if (!response.ok) {
