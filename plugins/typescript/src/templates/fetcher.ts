@@ -81,8 +81,7 @@ export async function ${camel(prefix)}Fetch<
         headers: headers
           ? headers
           : {
-              "Content-Type": "application/json",
-              ...headers
+              "Content-Type": "application/json"
             }
       }
     );
