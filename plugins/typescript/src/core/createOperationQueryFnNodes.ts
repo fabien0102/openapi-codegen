@@ -76,10 +76,10 @@ export const createOperationQueryFnNodes = ({
                     ),
                   ],
               f.createTupleTypeNode([
-                f.createTypeReferenceNode(f.createIdentifier("unknown[]")),
+                f.createTypeReferenceNode(f.createIdentifier("reactQuery.QueryKey")),
                 f.createTypeReferenceNode(
                   f.createIdentifier(
-                    "({ signal }: { signal?: any; }) => Promise"
+                    "({ signal }: { signal?: AbortSignal; }) => Promise"
                   ),
                   [dataType]
                 ),
