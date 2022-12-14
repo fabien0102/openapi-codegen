@@ -269,7 +269,7 @@ export const generateReactQueryComponents = async (
       createWatermark(context.openAPIDocument.info),
       createReactQueryImport(),
       createNamedImport(
-        [contextHookName, contextTypeName, 'queryKeyFn' ],
+        [contextHookName, contextTypeName ],
         `./${contextFilename}`
       ),
       createNamespaceImport("Fetcher", `./${fetcherFilename}`),

@@ -73,11 +73,10 @@ export const generateReactQueryFunctions = async (
 
   const formatFilename = config.filenameCase ? c[config.filenameCase] : c.camel;
 
-  const filename = formatFilename(filenamePrefix + "-components");
+  const filename = formatFilename(filenamePrefix + "-functions");
 
   const fetcherFn = c.camel(`${filenamePrefix}-fetch`);
   const contextTypeName = `${c.pascal(filenamePrefix)}Context`;
-  const contextHookName = `use${c.pascal(filenamePrefix)}Context`;
   const nodes: ts.Node[] = [];
   const keyManagerItems: ts.TypeLiteralNode[] = [];
 
@@ -265,7 +264,7 @@ export const generateReactQueryFunctions = async (
       createWatermark(context.openAPIDocument.info),
       createReactQueryImport(),
       createNamedImport(
-        [contextHookName, contextTypeName, 'queryKeyFn' ],
+        [contextTypeName, 'queryKeyFn' ],
         `./${contextFilename}`
       ),
       createNamespaceImport("Fetcher", `./${fetcherFilename}`),
