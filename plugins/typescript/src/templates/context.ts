@@ -44,27 +44,28 @@ export const getContext = (prefix: string, componentsFile: string) =>
     return {
       fetcherOptions: {},
       queryOptions: {},
-      queryKeyFn: (operation) => {
-        const queryKey: unknown[] = hasPathParams(operation)
-          ? operation.path
-              .split("/")
-              .filter(Boolean)
-              .map((i) => resolvePathParam(i, operation.variables.pathParams))
-          : operation.path.split("/").filter(Boolean);
+      queryKeyFn: queryKeyFn
+  }
+};
 
-        if (hasQueryParams(operation)) {
-          queryKey.push(operation.variables.queryParams);
-        }
-
-        if (hasBody(operation)) {
-          queryKey.push(operation.variables.body);
-        }
-
-        return queryKey;
-      }
+  export const queryKeyFn = (operation:any) => {
+    const queryKey: unknown[] = hasPathParams(operation)
+      ? operation.path
+          .split("/")
+          .filter(Boolean)
+          .map((i) => resolvePathParam(i, operation.variables.pathParams))
+      : operation.path.split("/").filter(Boolean);
+  
+    if (hasQueryParams(operation)) {
+      queryKey.push(operation.variables.queryParams);
     }
-  };
-
+  
+    if (hasBody(operation)) {
+      queryKey.push(operation.variables.body);
+    }
+  
+    return queryKey;
+  }
   // Helpers
   const resolvePathParam = (
     key: string,
