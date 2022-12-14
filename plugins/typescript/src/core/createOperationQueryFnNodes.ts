@@ -1,10 +1,9 @@
-// import { camel } from "case";
 import { camelCase } from "lodash";
 import { OperationObject } from "openapi3-ts";
 import ts, { factory as f } from "typescript";
 
 /**
- * Create the declaration of the fetcher function.
+ * Create the declaration of the react-router queries.
  *
  * @returns Array of nodes
  */
@@ -64,7 +63,6 @@ export const createOperationQueryFnNodes = ({
                       variablesType,
                       undefined
                     ),
-                    
                   ]
                 : [
                     f.createParameterDeclaration(
@@ -77,98 +75,61 @@ export const createOperationQueryFnNodes = ({
                       )
                     ),
                   ],
-              undefined,
+              f.createTypeReferenceNode("[unknown[], any]"),
               f.createToken(ts.SyntaxKind.EqualsGreaterThanToken),
-              // f.createReturnStatement(
-                f.createObjectLiteralExpression([
-                  f.createPropertyAssignment(
-                    "queryKey",
-                    f.createCallExpression(
-                      f.createIdentifier("queryKeyFn"),
+              f.createArrayLiteralExpression([
+                f.createCallExpression(
+                  f.createIdentifier("queryKeyFn"),
+                  undefined,
+                  [
+                    f.createObjectLiteralExpression([
+                      f.createPropertyAssignment(
+                        "path",
+                        f.createStringLiteral(url)
+                      ),
+                      f.createPropertyAssignment(
+                        "operationId",
+                        f.createStringLiteral(operation.operationId as string)
+                      ),
+                      f.createShorthandPropertyAssignment(
+                        f.createIdentifier("variables")
+                      ),
+                    ]),
+                  ]
+                ),
+                f.createArrowFunction(
+                  f.createModifiersFromModifierFlags(ts.ModifierFlags.Async),
+                  undefined,
+                  [
+                    f.createParameterDeclaration(
                       undefined,
-                      [
-                        f.createObjectLiteralExpression([
-                          f.createPropertyAssignment(
-                            "path",
-                            f.createStringLiteral(url)
-                          ),
-                          f.createPropertyAssignment(
-                            "operationId",
-                            f.createStringLiteral(operation.operationId as string)
-                          ),
-                          f.createShorthandPropertyAssignment(
+                      undefined,
+                      f.createIdentifier("{signal}"),
+                      undefined,
+                      f.createTypeReferenceNode(
+                        f.createIdentifier("{signal?:any}")
+                      )
+                    ),
+                  ],
+                  undefined,
+                  f.createToken(ts.SyntaxKind.EqualsGreaterThanToken),
+                  f.createCallExpression(
+                    f.createIdentifier(operationFetcherFnName),
+                    undefined,
+                    [
+                      f.createObjectLiteralExpression(
+                        [
+                          f.createSpreadAssignment(
                             f.createIdentifier("variables")
                           ),
-                        ]),
-                      ]
-                    )),
-                    f.createPropertyAssignment(
-                    "queryFn",
-                    f.createArrowFunction(
-                      f.createModifiersFromModifierFlags(ts.ModifierFlags.Async),
-                      undefined,
-                      // [
-                      //   f.createParameterDeclaration(
-                      //     undefined,
-                      //     undefined,
-                      //     f.createIdentifier("signal"),
-                      //     f.createToken(ts.SyntaxKind.QuestionToken),
-                      //     f.createTypeReferenceNode(
-                      //       f.createIdentifier("any")
-                      //     )
-                      //   ),
-                      // ]
-                      []
-                      ,
-                      undefined,
-                      f.createToken(ts.SyntaxKind.EqualsGreaterThanToken),
-                      f.createCallExpression(
-                        f.createIdentifier(operationFetcherFnName),
-                        undefined,
-                        [
-                          f.createObjectLiteralExpression(
-                            [
-                              // f.createSpreadAssignment(
-                              //   f.createIdentifier("fetcherOptions")
-                              // ),
-                              f.createSpreadAssignment(
-                                f.createIdentifier("variables")
-                              ),
-                            ],
-                            false
-                          ),
-                          // f.createIdentifier("signal"),
-                        ]
-                      )
-                    )
+                        ],
+                        false
+                      ),
+                      f.createIdentifier("signal"),
+                    ]
                   )
-                ])
-              // ),
-              // f.createCallExpression(
-              //   f.createPropertyAccessExpression(
-              //     f.createIdentifier("reactQuery"),
-              //     f.createIdentifier("useQuery")
-              //   ),
-              //   [
-              //     dataType,
-              //     errorType,
-              //     f.createTypeReferenceNode(f.createIdentifier("TData"), []),
-              //   ],
-              //   [
-              //     ,
-              //     // f.createObjectLiteralExpression(
-              //     //   [
-              //     //     f.createSpreadAssignment(
-              //     //       f.createIdentifier("options")
-              //     //     ),
-              //     //     f.createSpreadAssignment(
-              //     //       f.createIdentifier("queryOptions")
-              //     //     ),
-              //     //   ],
-              //     //   true
-              //     // ),
-              //   ]
-              // )
+                ),
+              ])
             )
           ),
         ],
@@ -179,11 +140,3 @@ export const createOperationQueryFnNodes = ({
   return nodes;
 };
 
-/**
- * Transform url params case to camel.
- *
- * @example
- * `pet/{pet_id}` -> `pet/{petId}`
- */
-// const camelizedPathParams = (url: string) =>
-//   url.replace(/\{\w*\}/g, (match) => `{${camel(match)}}`);
