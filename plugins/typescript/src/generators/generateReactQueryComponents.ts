@@ -8,6 +8,8 @@ import { OperationObject, PathItemObject } from "openapi3-ts";
 import { getUsedImports } from "../core/getUsedImports";
 import { createWatermark } from "../core/createWatermark";
 import { createOperationFetcherFnNodes } from "../core/createOperationFetcherFnNodes";
+import { createOperationQueryFnNodes } from "../core/createOperationQueryFnNodes";
+
 import { isVerb } from "../core/isVerb";
 import { isOperationObject } from "../core/isOperationObject";
 import { getOperationTypes } from "../core/getOperationTypes";
@@ -144,6 +146,7 @@ export const generateReactQueryComponents = async (
         nodes.push(...declarationNodes);
 
         const operationFetcherFnName = `fetch${c.pascal(operationId)}`;
+        const operationQueryFnName = `${c.pascal(operationId)}Query`;
         const component: "useQuery" | "useMutate" =
           operation["x-openapi-codegen-component"] ||
           (verb === "get" ? "useQuery" : "useMutate");
@@ -192,6 +195,21 @@ export const generateReactQueryComponents = async (
             url: route,
             verb,
             name: operationFetcherFnName,
+          }),
+          ...createOperationQueryFnNodes({
+            operationFetcherFnName,
+            dataType,
+            errorType,
+            requestBodyType,
+            pathParamsType,
+            variablesType,
+            queryParamsType,
+            headersType,
+            operation,
+            fetcherFn,
+            url: route,
+            verb,
+            name: operationQueryFnName,
           }),
           ...(component === "useQuery"
             ? createQueryHook({
@@ -268,7 +286,7 @@ export const generateReactQueryComponents = async (
       createWatermark(context.openAPIDocument.info),
       createReactQueryImport(),
       createNamedImport(
-        [contextHookName, contextTypeName],
+        [contextHookName, contextTypeName, 'queryKeyFn' ],
         `./${contextFilename}`
       ),
       createNamespaceImport("Fetcher", `./${fetcherFilename}`),
