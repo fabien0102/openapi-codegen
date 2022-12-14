@@ -75,7 +75,16 @@ export const createOperationQueryFnNodes = ({
                       )
                     ),
                   ],
-              f.createTypeReferenceNode("[unknown[], any]"),
+              f.createTupleTypeNode([
+                f.createTypeReferenceNode(f.createIdentifier("unknown[]")),
+                f.createTypeReferenceNode(
+                  f.createIdentifier(
+                    "({ signal }: { signal?: any; }) => Promise"
+                  ),
+                  [dataType]
+                ),
+              ]),
+
               f.createToken(ts.SyntaxKind.EqualsGreaterThanToken),
               f.createArrayLiteralExpression([
                 f.createCallExpression(
@@ -139,4 +148,3 @@ export const createOperationQueryFnNodes = ({
   );
   return nodes;
 };
-
