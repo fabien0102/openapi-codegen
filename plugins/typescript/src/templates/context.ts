@@ -44,7 +44,7 @@ export const getContext = (prefix: string, componentsFile: string) =>
     return {
       fetcherOptions: {},
       queryOptions: {},
-      queryKeyFn: queryKeyFn
+      queryKeyFn
   }
 };
 
