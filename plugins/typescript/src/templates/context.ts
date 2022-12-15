@@ -64,7 +64,7 @@ export const getContext = (prefix: string, componentsFile: string) =>
       queryKey.push(operation.variables.body);
     }
   
-    return queryKey as QueryKey;
+    return queryKey;
   }
   // Helpers
   const resolvePathParam = (
