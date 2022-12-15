@@ -155,7 +155,7 @@ export const generateReactQueryFunctions = async (
           Valid options: "useMutate", "useQuery"`);
         }
 
-        if (component === "useQuery") {
+        
           keyManagerItems.push(
             f.createTypeLiteralNode([
               f.createPropertySignature(
@@ -178,7 +178,6 @@ export const generateReactQueryFunctions = async (
               ),
             ])
           );
-        }
 
         nodes.push(
           ...createOperationFetcherFnNodes({
