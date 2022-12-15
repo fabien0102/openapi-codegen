@@ -8,7 +8,6 @@ import { OperationObject, PathItemObject } from "openapi3-ts";
 import { getUsedImports } from "../core/getUsedImports";
 import { createWatermark } from "../core/createWatermark";
 import { createOperationFetcherFnNodes } from "../core/createOperationFetcherFnNodes";
-
 import { isVerb } from "../core/isVerb";
 import { isOperationObject } from "../core/isOperationObject";
 import { getOperationTypes } from "../core/getOperationTypes";
