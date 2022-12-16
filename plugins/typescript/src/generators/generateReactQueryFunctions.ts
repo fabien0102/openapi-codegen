@@ -142,7 +142,7 @@ export const generateReactQueryFunctions = async (
           ),
         });
 
-        nodes.push(...declarationNodes);
+        
 
         const operationFetcherFnName = `fetch${c.pascal(operationId)}`;
         const operationQueryFnName = `${c.pascal(operationId)}Query`;
@@ -155,7 +155,10 @@ export const generateReactQueryFunctions = async (
           Valid options: "useMutate", "useQuery"`);
         }
 
-        
+        if (component === "useQuery") {
+          
+          nodes.push(...declarationNodes);
+
           keyManagerItems.push(
             f.createTypeLiteralNode([
               f.createPropertySignature(
@@ -179,37 +182,38 @@ export const generateReactQueryFunctions = async (
             ])
           );
 
-        nodes.push(
-          ...createOperationFetcherFnNodes({
-            dataType,
-            errorType,
-            requestBodyType,
-            pathParamsType,
-            variablesType,
-            queryParamsType,
-            headersType,
-            operation,
-            fetcherFn,
-            url: route,
-            verb,
-            name: operationFetcherFnName,
-          }),
-          ...createOperationQueryFnNodes({
-            operationFetcherFnName,
-            dataType,
-            errorType,
-            requestBodyType,
-            pathParamsType,
-            variablesType,
-            queryParamsType,
-            headersType,
-            operation,
-            fetcherFn,
-            url: route,
-            verb,
-            name: operationQueryFnName,
-          })
-        );
+          nodes.push(
+            ...createOperationFetcherFnNodes({
+              dataType,
+              errorType,
+              requestBodyType,
+              pathParamsType,
+              variablesType,
+              queryParamsType,
+              headersType,
+              operation,
+              fetcherFn,
+              url: route,
+              verb,
+              name: operationFetcherFnName,
+            }),
+            ...createOperationQueryFnNodes({
+              operationFetcherFnName,
+              dataType,
+              errorType,
+              requestBodyType,
+              pathParamsType,
+              variablesType,
+              queryParamsType,
+              headersType,
+              operation,
+              fetcherFn,
+              url: route,
+              verb,
+              name: operationQueryFnName,
+            })
+          );
+        }
       });
     }
   );
@@ -263,7 +267,7 @@ export const generateReactQueryFunctions = async (
       createWatermark(context.openAPIDocument.info),
       createReactQueryImport(),
       createNamedImport(
-        [contextTypeName, 'queryKeyFn' ],
+        [contextTypeName, "queryKeyFn"],
         `./${contextFilename}`
       ),
       createNamespaceImport("Fetcher", `./${fetcherFilename}`),
@@ -274,7 +278,6 @@ export const generateReactQueryFunctions = async (
     ])
   );
 };
-
 
 const createReactQueryImport = () =>
   f.createImportDeclaration(

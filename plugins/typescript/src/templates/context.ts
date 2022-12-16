@@ -48,7 +48,7 @@ export const getContext = (prefix: string, componentsFile: string) =>
   }
 };
 
-  export const queryKeyFn = (operation:any) => {
+  export const queryKeyFn = (operation: QueryOperation) => {
     const queryKey: unknown[] = hasPathParams(operation)
       ? operation.path
           .split("/")

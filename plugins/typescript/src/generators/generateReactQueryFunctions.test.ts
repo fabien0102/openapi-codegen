@@ -607,45 +607,6 @@ describe("generateReactQueryFunctions", () => {
       import type * as Fetcher from \\"./petstoreFetcher\\";
       import { petstoreFetch } from \\"./petstoreFetcher\\";
 
-      export type AddPetError = Fetcher.ErrorWrapper<{
-          status: 500;
-          payload: {
-              code: 500;
-              message: string;
-          };
-      }>;
-
-      export type AddPetRequestBody = {
-          name: string;
-          color?: string;
-          breed: string;
-          age: number;
-      };
-
-      export type AddPetVariables = {
-          body: AddPetRequestBody;
-      } & PetstoreContext[\\"fetcherOptions\\"];
-
-      export const fetchAddPet = (variables: AddPetVariables, signal?: AbortSignal) => petstoreFetch<string, AddPetError, AddPetRequestBody, {}, {}, {}>({ url: \\"/pet\\", method: \\"post\\", ...variables, signal });
-
-      export const addPetQuery = (variables: AddPetVariables): [
-          reactQuery.QueryKey,
-          ({ variables, signal }: {
-              variables: AddPetVariables;
-              signal?: AbortSignal;
-          }) => Promise<string>
-      ] => [
-          queryKeyFn({
-              path: \\"/pet\\",
-              operationId: \\"AddPet\\",
-              variables
-          }),
-          async ({ variables, signal }: {
-              variables: AddPetVariables;
-              signal?: AbortSignal;
-          }) => fetchAddPet({ ...variables }, signal)
-      ];
-
       export type QueryOperation = {
           path: string;
           operationId: never;
@@ -750,43 +711,6 @@ describe("generateReactQueryFunctions", () => {
       import { PetstoreContext, queryKeyFn } from \\"./petstoreContext\\";
       import type * as Fetcher from \\"./petstoreFetcher\\";
       import { petstoreFetch } from \\"./petstoreFetcher\\";
-
-      export type AddPetError = Fetcher.ErrorWrapper<{
-          status: 500;
-          payload: {
-              code: 500;
-              message: string;
-          };
-      }>;
-
-      export type AddPetRequestBody = {
-          name: string;
-          color?: string;
-          breed: string;
-          age: number;
-      };
-
-      export type AddPetVariables = {
-          body: AddPetRequestBody;
-      } & PetstoreContext[\\"fetcherOptions\\"];
-
-      export const fetchAddPet = (variables: AddPetVariables, signal?: AbortSignal) => petstoreFetch<string, AddPetError, AddPetRequestBody, {}, {}, {}>({ url: \\"/pet\\", method: \\"get\\", ...variables, signal });
-
-      export const addPetQuery = (variables: AddPetVariables): [
-          reactQuery.QueryKey,
-          ({ signal }: {
-              signal?: AbortSignal;
-          }) => Promise<string>
-      ] => [
-          queryKeyFn({
-              path: \\"/pet\\",
-              operationId: \\"AddPet\\",
-              variables
-          }),
-          async ({ signal }: {
-              signal?: AbortSignal;
-          }) => fetchAddPet({ ...variables }, signal)
-      ];
 
       export type QueryOperation = {
           path: string;
@@ -898,39 +822,6 @@ describe("generateReactQueryFunctions", () => {
       import { PetstoreContext, queryKeyFn } from \\"./petstoreContext\\";
       import type * as Fetcher from \\"./petstoreFetcher\\";
       import { petstoreFetch } from \\"./petstoreFetcher\\";
-      import type * as RequestBodies from \\"./petstoreRequestBodies\\";
-
-      export type AddPetError = Fetcher.ErrorWrapper<{
-          status: 500;
-          payload: {
-              code: 500;
-              message: string;
-          };
-      }>;
-
-      export type AddPetVariables = {
-          body: RequestBodies.Dog;
-      } & PetstoreContext[\\"fetcherOptions\\"];
-
-      export const fetchAddPet = (variables: AddPetVariables, signal?: AbortSignal) => petstoreFetch<string, AddPetError, RequestBodies.Dog, {}, {}, {}>({ url: \\"/pet\\", method: \\"post\\", ...variables, signal });
-
-      export const addPetQuery = (variables: AddPetVariables): [
-          reactQuery.QueryKey,
-          ({ variables, signal }: {
-              variables: AddPetVariables;
-              signal?: AbortSignal;
-          }) => Promise<string>
-      ] => [
-          queryKeyFn({
-              path: \\"/pet\\",
-              operationId: \\"AddPet\\",
-              variables
-          }),
-          async ({ variables, signal }: {
-              variables: AddPetVariables;
-              signal?: AbortSignal;
-          }) => fetchAddPet({ ...variables }, signal)
-      ];
 
       export type QueryOperation = {
           path: string;
@@ -1021,38 +912,6 @@ describe("generateReactQueryFunctions", () => {
       import { PetstoreContext, queryKeyFn } from \\"./petstoreContext\\";
       import type * as Fetcher from \\"./petstoreFetcher\\";
       import { petstoreFetch } from \\"./petstoreFetcher\\";
-      import type * as RequestBodies from \\"./petstoreRequestBodies\\";
-
-      export type UpdatePetPathParams = {
-          petId: string;
-      };
-
-      export type UpdatePetError = Fetcher.ErrorWrapper<undefined>;
-
-      export type UpdatePetVariables = {
-          body?: RequestBodies.UpdatePetRequestBody;
-          pathParams: UpdatePetPathParams;
-      } & PetstoreContext[\\"fetcherOptions\\"];
-
-      export const fetchUpdatePet = (variables: UpdatePetVariables, signal?: AbortSignal) => petstoreFetch<string, UpdatePetError, RequestBodies.UpdatePetRequestBody, {}, {}, UpdatePetPathParams>({ url: \\"/pet/{petId}\\", method: \\"put\\", ...variables, signal });
-
-      export const updatePetQuery = (variables: UpdatePetVariables): [
-          reactQuery.QueryKey,
-          ({ variables, signal }: {
-              variables: UpdatePetVariables;
-              signal?: AbortSignal;
-          }) => Promise<string>
-      ] => [
-          queryKeyFn({
-              path: \\"/pet/{pet_id}\\",
-              operationId: \\"updatePet\\",
-              variables
-          }),
-          async ({ variables, signal }: {
-              variables: UpdatePetVariables;
-              signal?: AbortSignal;
-          }) => fetchUpdatePet({ ...variables }, signal)
-      ];
 
       export type QueryOperation = {
           path: string;
@@ -1143,38 +1002,6 @@ describe("generateReactQueryFunctions", () => {
       import { Context, queryKeyFn } from \\"./context\\";
       import type * as Fetcher from \\"./fetcher\\";
       import { fetch } from \\"./fetcher\\";
-      import type * as RequestBodies from \\"./petstoreRequestBodies\\";
-
-      export type UpdatePetPathParams = {
-          petId: string;
-      };
-
-      export type UpdatePetError = Fetcher.ErrorWrapper<undefined>;
-
-      export type UpdatePetVariables = {
-          body?: RequestBodies.UpdatePetRequestBody;
-          pathParams: UpdatePetPathParams;
-      } & Context[\\"fetcherOptions\\"];
-
-      export const fetchUpdatePet = (variables: UpdatePetVariables, signal?: AbortSignal) => fetch<string, UpdatePetError, RequestBodies.UpdatePetRequestBody, {}, {}, UpdatePetPathParams>({ url: \\"/pet/{petId}\\", method: \\"put\\", ...variables, signal });
-
-      export const updatePetQuery = (variables: UpdatePetVariables): [
-          reactQuery.QueryKey,
-          ({ variables, signal }: {
-              variables: UpdatePetVariables;
-              signal?: AbortSignal;
-          }) => Promise<string>
-      ] => [
-          queryKeyFn({
-              path: \\"/pet/{pet_id}\\",
-              operationId: \\"updatePet\\",
-              variables
-          }),
-          async ({ variables, signal }: {
-              variables: UpdatePetVariables;
-              signal?: AbortSignal;
-          }) => fetchUpdatePet({ ...variables }, signal)
-      ];
 
       export type QueryOperation = {
           path: string;
