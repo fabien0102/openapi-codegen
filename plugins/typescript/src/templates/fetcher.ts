@@ -120,13 +120,13 @@ export async function ${camel(prefix)}Fetch<
       return (await response.blob()) as unknown as TData;
     }
   } catch (e) {
-    throw {
-      status: "unknown" as const,
-      payload:
-        e instanceof Error
-          ? \`Network error (\${e.message})\`
-          : "Network error"
-    }
+    let errorObject: Error = {
+      name: "unknown" as const,
+      message:
+        e instanceof Error ? \`Network error (\${e.message})\` : "Network error",
+      stack: e as string,
+    };
+    throw errorObject;
   }
 }
 
