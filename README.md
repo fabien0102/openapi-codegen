@@ -207,6 +207,45 @@ export default defineConfig({
 });
 ```
 
+### Plugins
+the `@openapi-codegen/cli` supports these generator plugins:
+#### **generateSchemaTypes** (frontend/backend)
+  generate all schema types for your specification:
+  ```ts
+   const { schemasFiles } = await generateSchemaTypes(context, {
+        /* config */
+      });
+  ```
+
+#### **generateFetchers** (frontend)
+  generate all fetchers with types for your specification *needs schemafiles*
+  ```ts
+     await generateFetchers(context, {
+        /* config */
+        schemasFiles,
+      });
+  ```
+#### **generateReactQueryComponents** (frontend)
+  generate all React Query Components
+  ```ts
+      await generateReactQueryComponents(context, {
+        /* config*/
+        schemasFiles,
+      });
+  ```
+#### **generateReactQueryFunctions** (frontend)
+  generate all React Query Functions used for e.g. React-Router 6.6.0+ loader functions
+  ```ts
+     await generateReactQueryFunctions(context, {
+        filenamePrefix,
+        schemasFiles,
+      });
+  ```
+
+#### planned plugins
+- generateExpressControllers (Backend)
+- generateRestfulReactComponents (Frontend)
+
 You can import any generator into the `to` section, those can be the ones provided by this project or your own custom ones. You have full control of what you are generating!
 
 Have fun!
