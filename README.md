@@ -108,6 +108,62 @@ Note: If you can’t trust your backend, some runtime validation can be useful t
 The only thing you need to manage is the configuration.
 Everything is typed and self-documented, but just in case, you can find here example configuration below:
 
+
+### Config Options
+
+A Plugin uses the `context` as first paramter and a `config` object as second optional Paramter.
+The known config parameters are:
+#### **filenamePrefix**
+
+| optionName | type | default value | example | output |
+|---|---|---|---|---|
+| filenamePrefix | string | "" | yourPrefix | yourPrefix{PluginName}.ts |
+
+```ts
+const filenamePrefix = "yourPrefix"
+await generate{PluginName}(context,{ filenamePrefix })
+
+```
+output to: `yourPrefix{PluginName}.ts`
+
+#### **filenameCase**
+
+| optionName | type | default value | example | output |
+|---|---|---|---|---|
+| filenameCase | "snake" \| "camel" \| "kebab" \| "pascal" | camel | snake | your-prefix-{plugin-name}.ts |
+
+```ts
+const filenameCase = "snake"
+await generate{PluginName}(context,{ filenameCase })
+
+```
+output to: `{plugin-name}.ts`
+
+#### **schemasFiles**
+
+generated `schemasFiles` from `generateSchemaTypes`. can be used for all other generator plugins.
+
+ ```ts
+const { schemasFiles } = await generateSchemaTypes(context);
+```
+output to: `Schemas.ts`
+
+#### **injected header**
+  List of headers injected in the custom fetcher. 
+  This will mark the header as optional in the component API
+| injectedHeaders | type | default value | example | output |
+|---|---|---|---|---|
+| *any header options* | string[] | [] | [] | |
+
+```ts
+const injectedHeaders = 'credentials-include'
+await generate{PluginName}(context,{ injectedHeaders })
+
+```
+output to: `{plugin-name}.ts`
+
+
+### Example Config
 ```ts
 // openapi-codegen.config.ts
 import { defineConfig } from "@openapi-codegen/cli";
