@@ -7,6 +7,25 @@
 
 Tooling to give you full type-safety around OpenAPI specs.
 
+- [Getting started](#getting-started)
+- [Philosophy](#philosophy)
+  - [Backend side](#backend-side)
+  - [Frontend side](#frontend-side)
+- [Configuration](#configuration)
+  - [Config Options](#config-options)
+    - [**filenamePrefix**](#filenameprefix)
+    - [**filenameCase**](#filenamecase)
+    - [**schemasFiles**](#schemasfiles)
+    - [**injected header**](#injected-header)
+  - [Example Config](#example-config)
+  - [Plugins](#plugins)
+    - [**generateSchemaTypes** (frontend/backend)](#generateschematypes-frontendbackend)
+    - [**generateFetchers** (frontend)](#generatefetchers-frontend)
+    - [**generateReactQueryComponents** (frontend)](#generatereactquerycomponents-frontend)
+    - [**generateReactQueryFunctions** (frontend)](#generatereactqueryfunctions-frontend)
+    - [**planned plugins**](#planned-plugins)
+- [Contributors ✨](#contributors-)
+
 **For frontend:**
 
 This will give you full auto-completion and type-safety of your APIs
@@ -108,6 +127,62 @@ Note: If you can’t trust your backend, some runtime validation can be useful t
 The only thing you need to manage is the configuration.
 Everything is typed and self-documented, but just in case, you can find here example configuration below:
 
+
+### Config Options
+
+A Plugin uses the `context` as first paramter and a `config` object as second optional Paramter.
+The known config parameters are:
+#### **filenamePrefix**
+
+| optionName     | type   | default value | example    | output                    |
+| -------------- | ------ | ------------- | ---------- | ------------------------- |
+| filenamePrefix | string | ""            | yourPrefix | yourPrefix{PluginName}.ts |
+
+```ts
+const filenamePrefix = "yourPrefix"
+await generate{PluginName}(context,{ filenamePrefix })
+
+```
+output to: `yourPrefix{PluginName}.ts`
+
+#### **filenameCase**
+
+| optionName   | type                                      | default value | example | output                       |
+| ------------ | ----------------------------------------- | ------------- | ------- | ---------------------------- |
+| filenameCase | "snake" \| "camel" \| "kebab" \| "pascal" | camel         | snake   | your-prefix-{plugin-name}.ts |
+
+```ts
+const filenameCase = "snake"
+await generate{PluginName}(context,{ filenameCase })
+
+```
+output to: `{plugin-name}.ts`
+
+#### **schemasFiles**
+
+generated `schemasFiles` from `generateSchemaTypes`. can be used for all other generator plugins.
+
+ ```ts
+const { schemasFiles } = await generateSchemaTypes(context);
+```
+output to: `Schemas.ts`
+
+#### **injected header**
+  List of headers injected in the custom fetcher. 
+  This will mark the header as optional in the component API
+| injectedHeaders      | type     | default value | example | output |
+| -------------------- | -------- | ------------- | ------- | ------ |
+| *any header options* | string[] | []            | []      |        |
+
+```ts
+const injectedHeaders = 'credentials-include'
+await generate{PluginName}(context,{ injectedHeaders })
+
+```
+output to: `{plugin-name}.ts`
+
+
+### Example Config
 ```ts
 // openapi-codegen.config.ts
 import { defineConfig } from "@openapi-codegen/cli";
@@ -151,6 +226,60 @@ export default defineConfig({
 });
 ```
 
+### Plugins
+the `@openapi-codegen/cli` supports these generator plugins:
+#### **generateSchemaTypes** (frontend/backend)
+  generate all schema types for your specification:
+  ```ts
+   const { schemasFiles } = await generateSchemaTypes(context, {
+        /* config */
+      });
+  ```
+output: `schemas.ts`
+
+#### **generateFetchers** (frontend)
+  generate all fetchers with types for your specification *needs schemafiles*
+  ```ts
+     await generateFetchers(context, {
+        /* config */
+        schemasFiles,
+      });
+  ```
+output: `fetchers.ts`
+
+#### **generateReactQueryComponents** (frontend)
+  generate all React Query Components for useQuery() and useMutation()
+  ```ts
+      await generateReactQueryComponents(context, {
+        /* config*/
+        schemasFiles,
+      });
+  ```
+  output: `components.ts`
+#### **generateReactQueryFunctions** (frontend)
+  generate all React Query Functions used for e.g. React-Router 6.6.0+ loader functions
+  ```ts
+     await generateReactQueryFunctions(context, {
+        filenamePrefix,
+        schemasFiles,
+      });
+  ```
+  outout: `queryFunctions.ts`
+
+  example useage in react-route-loader:
+  ```ts
+  export const routeLoader = (queryClient: QueryClient) =>
+    async ({ params }: any) => 
+      await queryClient.fetchQuery(...getYourQueryNameQuery({}), {
+        /*options*/
+      })
+  ```
+  *more infos: https://reactrouter.com/en/main/guides/data-libs*
+
+#### **planned plugins**
+- generateExpressControllers (Backend)
+- generateRestfulReactComponents (Frontend)
+
 You can import any generator into the `to` section, those can be the ones provided by this project or your own custom ones. You have full control of what you are generating!
 
 Have fun!
@@ -174,7 +303,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
       <td align="center"><a href="https://github.com/DreierF"><img src="https://avatars.githubusercontent.com/u/5631865?v=4?s=100" width="100px;" alt="Florian Dreier"/><br /><sub><b>Florian Dreier</b></sub></a><br /><a href="https://github.com/fabien0102/openapi-codegen/commits?author=DreierF" title="Code">💻</a></td>
     </tr>
     <tr>
-      <td align="center"><a href="http://fabianalthaus.de"><img src="https://avatars.githubusercontent.com/u/2795534?v=4?s=100" width="100px;" alt="Fabian Althaus"/><br /><sub><b>Fabian Althaus</b></sub></a><br /><a href="https://github.com/fabien0102/openapi-codegen/commits?author=el-j" title="Code">💻</a></td>
+      <td align="center"><a href="https://fabianalthaus.de"><img src="https://avatars.githubusercontent.com/u/2795534?v=4?s=100" width="100px;" alt="Fabian Althaus [el-j]"/><br /><sub><b>Fabian Althaus [el-j]</b></sub></a><br /><a href="https://github.com/fabien0102/openapi-codegen/commits?author=el-j" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
