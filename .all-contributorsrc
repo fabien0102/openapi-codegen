@@ -82,6 +82,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "el-j",
+      "name": "Fabian Althaus",
+      "avatar_url": "https://avatars.githubusercontent.com/u/2795534?v=4",
+      "profile": "http://fabianalthaus.de",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7
