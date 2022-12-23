@@ -30,7 +30,7 @@ export const getDataResponseType = ({
         mem,
         [statusCode, response]: [string, ResponseObject | ReferenceObject]
       ) => {
-        if (!statusCode.startsWith("2")) return mem;
+        if (!statusCode.startsWith("2") && statusCode !== "default") return mem;
         if (isReferenceObject(response)) {
           const [hash, topLevel, namespace, name] = response.$ref.split("/");
           if (hash !== "#" || topLevel !== "components") {
