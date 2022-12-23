@@ -23,7 +23,7 @@ Tooling to give you full type-safety around OpenAPI specs.
     - [**generateFetchers** (frontend)](#generatefetchers-frontend)
     - [**generateReactQueryComponents** (frontend)](#generatereactquerycomponents-frontend)
     - [**generateReactQueryFunctions** (frontend)](#generatereactqueryfunctions-frontend)
-    - [planned plugins](#planned-plugins)
+    - [**planned plugins**](#planned-plugins)
 - [Contributors ✨](#contributors-)
 
 **For frontend:**
@@ -134,9 +134,9 @@ A Plugin uses the `context` as first paramter and a `config` object as second op
 The known config parameters are:
 #### **filenamePrefix**
 
-| optionName | type | default value | example | output |
-|---|---|---|---|---|
-| filenamePrefix | string | "" | yourPrefix | yourPrefix{PluginName}.ts |
+| optionName     | type   | default value | example    | output                    |
+| -------------- | ------ | ------------- | ---------- | ------------------------- |
+| filenamePrefix | string | ""            | yourPrefix | yourPrefix{PluginName}.ts |
 
 ```ts
 const filenamePrefix = "yourPrefix"
@@ -147,9 +147,9 @@ output to: `yourPrefix{PluginName}.ts`
 
 #### **filenameCase**
 
-| optionName | type | default value | example | output |
-|---|---|---|---|---|
-| filenameCase | "snake" \| "camel" \| "kebab" \| "pascal" | camel | snake | your-prefix-{plugin-name}.ts |
+| optionName   | type                                      | default value | example | output                       |
+| ------------ | ----------------------------------------- | ------------- | ------- | ---------------------------- |
+| filenameCase | "snake" \| "camel" \| "kebab" \| "pascal" | camel         | snake   | your-prefix-{plugin-name}.ts |
 
 ```ts
 const filenameCase = "snake"
@@ -170,9 +170,9 @@ output to: `Schemas.ts`
 #### **injected header**
   List of headers injected in the custom fetcher. 
   This will mark the header as optional in the component API
-| injectedHeaders | type | default value | example | output |
-|---|---|---|---|---|
-| *any header options* | string[] | [] | [] | |
+| injectedHeaders      | type     | default value | example | output |
+| -------------------- | -------- | ------------- | ------- | ------ |
+| *any header options* | string[] | []            | []      |        |
 
 ```ts
 const injectedHeaders = 'credentials-include'
@@ -235,6 +235,7 @@ the `@openapi-codegen/cli` supports these generator plugins:
         /* config */
       });
   ```
+output: `schemas.ts`
 
 #### **generateFetchers** (frontend)
   generate all fetchers with types for your specification *needs schemafiles*
@@ -244,14 +245,17 @@ the `@openapi-codegen/cli` supports these generator plugins:
         schemasFiles,
       });
   ```
+output: `fetchers.ts`
+
 #### **generateReactQueryComponents** (frontend)
-  generate all React Query Components
+  generate all React Query Components for useQuery() and useMutation()
   ```ts
       await generateReactQueryComponents(context, {
         /* config*/
         schemasFiles,
       });
   ```
+  output: `components.ts`
 #### **generateReactQueryFunctions** (frontend)
   generate all React Query Functions used for e.g. React-Router 6.6.0+ loader functions
   ```ts
@@ -260,8 +264,19 @@ the `@openapi-codegen/cli` supports these generator plugins:
         schemasFiles,
       });
   ```
+  outout: `queryFunctions.ts`
 
-#### planned plugins
+  example useage in react-route-loader:
+  ```ts
+  export const routeLoader = (queryClient: QueryClient) =>
+    async ({ params }: any) => 
+      await queryClient.fetchQuery(...getYourQueryNameQuery({}), {
+        /*options*/
+      })
+  ```
+  *more infos: https://reactrouter.com/en/main/guides/data-libs*
+
+#### **planned plugins**
 - generateExpressControllers (Backend)
 - generateRestfulReactComponents (Frontend)
 
