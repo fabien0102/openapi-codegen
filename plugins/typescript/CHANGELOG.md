@@ -1,5 +1,18 @@
 # Changelog
 
+## [6.1.0](https://github.com/fabien0102/openapi-codegen/compare/typescript-v6.0.0...typescript-v6.1.0) (2022-12-23)
+
+
+### Features
+
+* Create Query Functions (eg. for react-router v6.4+) ([#122](https://github.com/fabien0102/openapi-codegen/issues/122)) ([5ff77ef](https://github.com/fabien0102/openapi-codegen/commit/5ff77ef55537036e0ce46b3cc89f391c9892c9f7))
+* Support FormData in the TS fetcher generator ([#117](https://github.com/fabien0102/openapi-codegen/issues/117)) ([c51203d](https://github.com/fabien0102/openapi-codegen/commit/c51203d77d9fc1cd0414a63538f91c014f2e4841))
+
+
+### Bug Fixes
+
+* error return for fetcher ([#125](https://github.com/fabien0102/openapi-codegen/issues/125)) ([934ea0c](https://github.com/fabien0102/openapi-codegen/commit/934ea0cfcd7dbe78cec965a0b8437ec844b4429a))
+
 ## [6.0.0](https://github.com/fabien0102/openapi-codegen/compare/typescript-v5.2.1...typescript-v6.0.0) (2022-09-21)
 
 
