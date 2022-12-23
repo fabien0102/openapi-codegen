@@ -7,6 +7,25 @@
 
 Tooling to give you full type-safety around OpenAPI specs.
 
+- [Getting started](#getting-started)
+- [Philosophy](#philosophy)
+  - [Backend side](#backend-side)
+  - [Frontend side](#frontend-side)
+- [Configuration](#configuration)
+  - [Config Options](#config-options)
+    - [**filenamePrefix**](#filenameprefix)
+    - [**filenameCase**](#filenamecase)
+    - [**schemasFiles**](#schemasfiles)
+    - [**injected header**](#injected-header)
+  - [Example Config](#example-config)
+  - [Plugins](#plugins)
+    - [**generateSchemaTypes** (frontend/backend)](#generateschematypes-frontendbackend)
+    - [**generateFetchers** (frontend)](#generatefetchers-frontend)
+    - [**generateReactQueryComponents** (frontend)](#generatereactquerycomponents-frontend)
+    - [**generateReactQueryFunctions** (frontend)](#generatereactqueryfunctions-frontend)
+    - [planned plugins](#planned-plugins)
+- [Contributors ✨](#contributors-)
+
 **For frontend:**
 
 This will give you full auto-completion and type-safety of your APIs
@@ -269,7 +288,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
       <td align="center"><a href="https://github.com/DreierF"><img src="https://avatars.githubusercontent.com/u/5631865?v=4?s=100" width="100px;" alt="Florian Dreier"/><br /><sub><b>Florian Dreier</b></sub></a><br /><a href="https://github.com/fabien0102/openapi-codegen/commits?author=DreierF" title="Code">💻</a></td>
     </tr>
     <tr>
-      <td align="center"><a href="http://fabianalthaus.de"><img src="https://avatars.githubusercontent.com/u/2795534?v=4?s=100" width="100px;" alt="Fabian Althaus"/><br /><sub><b>Fabian Althaus</b></sub></a><br /><a href="https://github.com/fabien0102/openapi-codegen/commits?author=el-j" title="Code">💻</a></td>
+      <td align="center"><a href="https://fabianalthaus.de"><img src="https://avatars.githubusercontent.com/u/2795534?v=4?s=100" width="100px;" alt="Fabian Althaus [el-j]"/><br /><sub><b>Fabian Althaus [el-j]</b></sub></a><br /><a href="https://github.com/fabien0102/openapi-codegen/commits?author=el-j" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
