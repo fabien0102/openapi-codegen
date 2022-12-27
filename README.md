@@ -235,7 +235,7 @@ the `@openapi-codegen/cli` supports these generator plugins:
         /* config */
       });
   ```
-output: `schemas.ts`
+output: `{namespace}Schemas.ts`
 
 #### **generateFetchers** (frontend)
   generate all fetchers with types for your specification *needs schemafiles*
