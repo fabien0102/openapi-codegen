@@ -245,7 +245,7 @@ output: `{namespace}Schemas.ts`
         schemasFiles,
       });
   ```
-output: `fetchers.ts`
+output: `{namespace}Fetchers.ts`
 
 #### **generateReactQueryComponents** (frontend)
   generate all React Query Components for useQuery() and useMutation()
