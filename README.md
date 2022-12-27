@@ -269,7 +269,7 @@ output: `{namespace}Fetchers.ts`
   example usage in react-route-loader:
   ```ts
   export const routeLoader = (queryClient: QueryClient) =>
-    async ({ params }: any) => 
+    async ({ params }: MyParams) => 
       await queryClient.fetchQuery(...getYourQueryNameQuery({}), {
         /*options*/
       })
