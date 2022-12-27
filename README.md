@@ -255,7 +255,7 @@ output: `{namespace}Fetchers.ts`
         schemasFiles,
       });
   ```
-  output: `components.ts`
+  output: `{namespace}Components.ts`
 #### **generateReactQueryFunctions** (frontend)
   generate all React Query Functions used for e.g. React-Router 6.6.0+ loader functions
   ```ts
