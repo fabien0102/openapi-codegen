@@ -264,7 +264,7 @@ output: `{namespace}Fetchers.ts`
         schemasFiles,
       });
   ```
-  outout: `queryFunctions.ts`
+  output: `{namespace}Functions.ts`
 
   example usage in react-route-loader:
   ```ts
