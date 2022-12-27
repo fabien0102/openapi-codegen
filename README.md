@@ -266,7 +266,7 @@ output: `fetchers.ts`
   ```
   outout: `queryFunctions.ts`
 
-  example useage in react-route-loader:
+  example usage in react-route-loader:
   ```ts
   export const routeLoader = (queryClient: QueryClient) =>
     async ({ params }: any) => 
