@@ -228,6 +228,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     </tr>
     <tr>
       <td align="center"><a href="https://fabianalthaus.de"><img src="https://avatars.githubusercontent.com/u/2795534?v=4?s=100" width="100px;" alt="Fabian Althaus [el-j]"/><br /><sub><b>Fabian Althaus [el-j]</b></sub></a><br /><a href="https://github.com/fabien0102/openapi-codegen/commits?author=el-j" title="Code">💻</a></td>
+      <td align="center"><a href="https://github.com/hubertokf"><img src="https://avatars.githubusercontent.com/u/5043263?v=4" width="100px;" alt="Huberto Kaiser Filho"/><br /><sub><b>Huberto Kaiser Filho</b></sub></a><br /><a href="https://github.com/fabien0102/openapi-codegen/commits?author=hubertokf" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
