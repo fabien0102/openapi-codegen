@@ -103,6 +103,7 @@ export const generateReactQueryComponents = async (
 
   // Generate `useQuery` & `useMutation`
   const operationIds: string[] = [];
+  const operationByTags: Record<string, string[]> = {};
 
   Object.entries(context.openAPIDocument.paths).forEach(
     ([route, verbs]: [string, PathItemObject]) => {
@@ -114,7 +115,12 @@ export const generateReactQueryComponents = async (
             `The operationId "${operation.operationId}" is duplicated in your schema definition!`
           );
         }
+
         operationIds.push(operationId);
+        operation.tags?.forEach((tag) => {
+          if (!operationByTags[tag]) operationByTags[tag] = [];
+          operationByTags[tag].push(operationId);
+        });
 
         const {
           dataType,
@@ -249,6 +255,36 @@ export const generateReactQueryComponents = async (
           ),
         ])
   );
+
+  if (Object.keys(operationByTags).length > 0) {
+    nodes.push(
+      f.createVariableStatement(
+        [f.createModifier(ts.SyntaxKind.ExportKeyword)],
+        f.createVariableDeclarationList(
+          [
+            f.createVariableDeclaration(
+              f.createIdentifier("operationsByTag"),
+              undefined,
+              undefined,
+              f.createObjectLiteralExpression(
+                Object.entries(operationByTags).map(([tag, operationIds]) => {
+                  return f.createPropertyAssignment(
+                    f.createStringLiteral(c.camel(tag)),
+                    f.createObjectLiteralExpression(
+                      operationIds.map((operationId) =>
+                        f.createShorthandPropertyAssignment(operationId)
+                      )
+                    )
+                  );
+                })
+              )
+            ),
+          ],
+          ts.NodeFlags.Const
+        )
+      )
+    );
+  }
 
   const { nodes: usedImportsNodes, keys: usedImportsKeys } = getUsedImports(
     nodes,
