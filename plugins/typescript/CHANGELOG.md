@@ -1,5 +1,12 @@
 # Changelog
 
+## [6.1.1](https://github.com/fabien0102/openapi-codegen/compare/typescript-v6.1.0...typescript-v6.1.1) (2023-02-21)
+
+
+### Bug Fixes
+
+* Handle TypeScript breaking changes [#136](https://github.com/fabien0102/openapi-codegen/issues/136) ([#142](https://github.com/fabien0102/openapi-codegen/issues/142)) ([f05ab09](https://github.com/fabien0102/openapi-codegen/commit/f05ab09dfb451061ff234629206362293743bea9))
+
 ## [6.1.0](https://github.com/fabien0102/openapi-codegen/compare/typescript-v6.0.0...typescript-v6.1.0) (2022-12-23)
 
 
