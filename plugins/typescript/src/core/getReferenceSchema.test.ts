@@ -1,6 +1,6 @@
 import { getReferenceSchema } from "./getReferenceSchema";
 
-import type { OpenAPIObject, ReferenceObject, SchemasObject } from "openapi3-ts";
+import type { OpenAPIObject, SchemasObject } from "openapi3-ts";
 
 type OpenAPIDocWithComponents = Pick<OpenAPIObject, "components">;
 
