@@ -1,5 +1,13 @@
 # Changelog
 
+## [6.1.2](https://github.com/fabien0102/openapi-codegen/compare/typescript-v6.1.1...typescript-v6.1.2) (2023-03-14)
+
+
+### Bug Fixes
+
+* getReferenceSchema for names with '.' chars ([#141](https://github.com/fabien0102/openapi-codegen/issues/141)) ([865fcf6](https://github.com/fabien0102/openapi-codegen/commit/865fcf654c84ff798cdd063336ab6bf11c843fff))
+* Support for nullable enums ([#146](https://github.com/fabien0102/openapi-codegen/issues/146)) ([151d47a](https://github.com/fabien0102/openapi-codegen/commit/151d47af08d43c8a0c94a244df8da3c4c40e6cd5))
+
 ## [6.1.1](https://github.com/fabien0102/openapi-codegen/compare/typescript-v6.1.0...typescript-v6.1.1) (2023-02-21)
 
 
