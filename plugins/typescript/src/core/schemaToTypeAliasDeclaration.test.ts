@@ -69,6 +69,18 @@ describe("schemaToTypeAliasDeclaration", () => {
     );
   });
 
+  it("should generate nullable enums (strings)", () => {
+    const schema: SchemaObject = {
+      type: "string",
+      enum: ["foo", "bar", "baz"],
+      nullable: true,
+    };
+
+    expect(printSchema(schema)).toBe(
+      `export type Test = "foo" | "bar" | "baz" | null;`
+    );
+  });
+
   it("should generate enums (numbers)", () => {
     const schema: SchemaObject = {
       type: "integer",

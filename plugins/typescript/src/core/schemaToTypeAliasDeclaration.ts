@@ -126,8 +126,8 @@ export const getType = (
   }
 
   if (schema.enum) {
-    return f.createUnionTypeNode(
-      schema.enum.map((value) => {
+    return f.createUnionTypeNode([
+      ...schema.enum.map((value) => {
         if (typeof value === "string") {
           return f.createLiteralTypeNode(f.createStringLiteral(value));
         }
@@ -140,8 +140,9 @@ export const getType = (
           );
         }
         return f.createKeywordTypeNode(ts.SyntaxKind.AnyKeyword);
-      })
-    );
+      }),
+      ...(schema.nullable ? [f.createLiteralTypeNode(f.createNull())] : []),
+    ]);
   }
 
   // Handle implicit object
