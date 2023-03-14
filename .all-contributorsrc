@@ -91,6 +91,16 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "ci-vamp",
+      "name": "ci-vamp",
+      "avatar_url": "https://avatars.githubusercontent.com/u/116516277?v=4",
+      "profile": "https://github.com/ci-vamp",
+      "contributions": [
+        "bug",
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7
