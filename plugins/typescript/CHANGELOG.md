@@ -1,5 +1,12 @@
 # Changelog
 
+## [6.1.3](https://github.com/fabien0102/openapi-codegen/compare/typescript-v6.1.2...typescript-v6.1.3) (2023-04-07)
+
+
+### Bug Fixes
+
+* Allow components to have dots in their names ([#151](https://github.com/fabien0102/openapi-codegen/issues/151)) ([c91200e](https://github.com/fabien0102/openapi-codegen/commit/c91200e7c714084bcb236e6f0862b74e03b3ba0f))
+
 ## [6.1.2](https://github.com/fabien0102/openapi-codegen/compare/typescript-v6.1.1...typescript-v6.1.2) (2023-03-14)
 
 
