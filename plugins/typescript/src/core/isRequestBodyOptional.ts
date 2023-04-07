@@ -41,7 +41,7 @@ export const isRequestBodyOptional = ({
 
     const schema: RequestBodyObject | ReferenceObject = get(
       components,
-      requestBody.$ref.replace("#/components/", "").replace("/", ".")
+      requestBody.$ref.replace("#/components/", "").split("/")
     );
 
     if (!schema) {
