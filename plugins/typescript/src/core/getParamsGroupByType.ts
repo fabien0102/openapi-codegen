@@ -25,7 +25,7 @@ export const getParamsGroupByType = (
       if (isReferenceObject(p)) {
         const schema = get(
           components,
-          p.$ref.replace("#/components/", "").replace("/", ".")
+          p.$ref.replace("#/components/", "").split("/")
         );
         if (!schema) {
           throw new Error(`${p.$ref} not found!`);
