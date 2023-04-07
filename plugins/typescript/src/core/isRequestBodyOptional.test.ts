@@ -110,4 +110,33 @@ describe("isRequestBodyOptional", () => {
       })
     ).toBe(false);
   });
+
+  it("should resolve with dots in names", () => {
+    expect(
+      isRequestBodyOptional({
+        requestBody: {
+          $ref: "#/components/requestBodies/Foo.Request",
+        },
+        components: {
+          requestBodies: {
+            "Foo.Request": {
+              content: {
+                "application/json": {
+                  schema: {
+                    type: "object",
+                    properties: {
+                      foo: {
+                        type: "string",
+                      },
+                    },
+                    required: ["foo"],
+                  },
+                },
+              },
+            },
+          },
+        },
+      })
+    ).toBe(false);
+  });
 });
