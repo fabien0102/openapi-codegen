@@ -268,7 +268,7 @@ describe("generateSchemaTypes", () => {
          */
         export type Cat = {
             type: string;
-            breed: PetStatus;
+            breed: CatBreed;
         };
 
         /**
@@ -276,7 +276,7 @@ describe("generateSchemaTypes", () => {
          */
         export type Dog = {
             type: string;
-            breed: PetStatus;
+            breed: DogBreed;
         };
 
         /**

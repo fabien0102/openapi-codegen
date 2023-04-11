@@ -90,7 +90,7 @@ describe("schemaToTypeAliasDeclaration", () => {
     expect(printSchema(schema, "schemas", components, true))
       .toMatchInlineSnapshot(`
       "export type Test = {
-          status?: PetStatus;
+          status?: TestStatus;
       };"
     `);
   });
