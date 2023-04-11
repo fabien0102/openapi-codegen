@@ -37,18 +37,22 @@ export type Context = {
   currentComponent: OpenAPIComponentType | null;
 };
 
+let useEnumsConfigBase: boolean | undefined;
+
 /**
  * Transform an OpenAPI Schema Object to Typescript Nodes (comment & declaration).
  *
- * @param name  Name of the schema
+ * @param name Name of the schema
  * @param schema OpenAPI Schema object
  * @param context Context
  */
 export const schemaToTypeAliasDeclaration = (
   name: string,
   schema: SchemaObject,
-  context: Context
+  context: Context,
+  useEnums?: boolean
 ): ts.Node[] => {
+  useEnumsConfigBase = useEnums;
   const jsDocNode = getJSDocComment(schema, context);
   const declarationNode = f.createTypeAliasDeclaration(
     [f.createModifier(ts.SyntaxKind.ExportKeyword)],
@@ -68,7 +72,9 @@ export const schemaToTypeAliasDeclaration = (
  */
 export const getType = (
   schema: SchemaObject | ReferenceObject,
-  context: Context
+  context: Context,
+  isNodeEnum?: boolean,
+  enumKey?: string
 ): ts.TypeNode => {
   if (isReferenceObject(schema)) {
     const [hash, topLevel, namespace, name] = schema.$ref.split("/");
@@ -126,7 +132,12 @@ export const getType = (
   }
 
   if (schema.enum) {
-    return f.createUnionTypeNode([
+    if (isNodeEnum) {
+      const enumName = f.createIdentifier(enumKey || "");
+      return f.createTypeReferenceNode(enumName);
+    }
+
+    const unionTypes = f.createUnionTypeNode([
       ...schema.enum.map((value) => {
         if (typeof value === "string") {
           return f.createLiteralTypeNode(f.createStringLiteral(value));
@@ -143,6 +154,8 @@ export const getType = (
       }),
       ...(schema.nullable ? [f.createLiteralTypeNode(f.createNull())] : []),
     ]);
+
+    return unionTypes;
   }
 
   // Handle implicit object
@@ -195,9 +208,24 @@ export const getType = (
         );
       }
 
+      const contextSchemas = context.openAPIDocument.components?.schemas;
+      const propertiesKeys = Object.keys(schema?.properties || {});
+
       const members: ts.TypeElement[] = Object.entries(
         schema.properties || {}
       ).map(([key, property]) => {
+        const isEnum = "enum" in property && useEnumsConfigBase;
+        const schemaKey =
+          Object.entries(contextSchemas || {}).find(([key, schema]) => {
+            if ("properties" in schema) {
+              const schemaObject = schema as SchemaObject;
+              return propertiesKeys.every((propertyKey) =>
+                schemaObject.properties?.hasOwnProperty(propertyKey)
+              );
+            }
+            return false;
+          })?.[0] || null;
+
         const propertyNode = f.createPropertySignature(
           undefined,
           isValidIdentifier(key)
@@ -206,7 +234,7 @@ export const getType = (
           schema.required?.includes(key)
             ? undefined
             : f.createToken(ts.SyntaxKind.QuestionToken),
-          getType(property, context)
+          getType(property, context, isEnum, `${schemaKey}${pascal(key)}`)
         );
         const jsDocNode = getJSDocComment(property, context);
         if (jsDocNode) addJSDocToNode(propertyNode, jsDocNode);
@@ -528,7 +556,7 @@ const keysToExpressAsJsDocProperty: Array<keyof RemoveIndex<SchemaObject>> = [
  * @param context
  * @returns JSDoc node
  */
-const getJSDocComment = (
+export const getJSDocComment = (
   schema: SchemaObject,
   context: Context
 ): ts.JSDoc | undefined => {
