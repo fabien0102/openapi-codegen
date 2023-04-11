@@ -1,12 +1,19 @@
-import { isReferenceObject } from "openapi3-ts";
 import * as c from "case";
 import ts from "typescript";
 
-import { ConfigBase, Context } from "./types";
-import { schemaToTypeAliasDeclaration } from "../core/schemaToTypeAliasDeclaration";
-import { findCompatibleMediaType } from "../core/findCompatibleMediaType";
-import { getUsedImports } from "../core/getUsedImports";
+import { ReferenceObject, SchemaObject } from "openapi3-ts";
 import { createWatermark } from "../core/createWatermark";
+import { getUsedImports } from "../core/getUsedImports";
+import {
+  schemaToEnumDeclaration,
+  schemaToTypeAliasDeclaration,
+} from "../core/schemaToTypeAliasDeclaration";
+import { getEnumProperties } from "../utils/getEnumProperties";
+import { ConfigBase, Context } from "./types";
+
+import { isReferenceObject } from "openapi3-ts";
+
+import { findCompatibleMediaType } from "../core/findCompatibleMediaType";
 
 type Config = ConfigBase;
 
@@ -45,6 +52,25 @@ export const generateSchemaTypes = async (
       })
       .join("\n");
 
+  const handleTypeAlias = (
+    componentSchema: [string, SchemaObject | ReferenceObject][]
+  ) =>
+    componentSchema.reduce<ts.Node[]>(
+      (mem, [name, schema]) => [
+        ...mem,
+        ...schemaToTypeAliasDeclaration(
+          name,
+          schema,
+          {
+            openAPIDocument: context.openAPIDocument,
+            currentComponent: "schemas",
+          },
+          config.useEnums
+        ),
+      ],
+      []
+    );
+
   const filenamePrefix =
     c.snake(config.filenamePrefix ?? context.openAPIDocument.info.title) + "-";
 
@@ -59,25 +85,40 @@ export const generateSchemaTypes = async (
 
   // Generate `components/schemas` types
   if (components.schemas) {
-    const componentsSchemas = Object.entries(components.schemas).reduce<
-      ts.Node[]
-    >(
-      (mem, [name, schema]) => [
-        ...mem,
-        ...schemaToTypeAliasDeclaration(name, schema, {
-          openAPIDocument: context.openAPIDocument,
-          currentComponent: "schemas",
-        }),
-      ],
-      []
-    );
+    const schemas: ts.Node[] = [];
+    const componentSchemaEntries = Object.entries(components.schemas);
+
+    if (config.useEnums) {
+      const enumSchemaEntries = getEnumProperties(componentSchemaEntries);
+      const enumSchemas = enumSchemaEntries.reduce<ts.Node[]>(
+        (mem, [name, schema]) => [
+          ...mem,
+          ...schemaToEnumDeclaration(name, schema, {
+            openAPIDocument: context.openAPIDocument,
+            currentComponent: "schemas",
+          }),
+        ],
+        []
+      );
+
+      const componentsSchemas = handleTypeAlias(
+        componentSchemaEntries.filter(
+          ([name]) => !enumSchemaEntries.some(([enumName]) => name === enumName)
+        )
+      );
+
+      schemas.push(...enumSchemas, ...componentsSchemas);
+    } else {
+      const componentsSchemas = handleTypeAlias(componentSchemaEntries);
+      schemas.push(...componentsSchemas);
+    }
 
     await context.writeFile(
       files.schemas + ".ts",
       printNodes([
         createWatermark(context.openAPIDocument.info),
-        ...getUsedImports(componentsSchemas, files).nodes,
-        ...componentsSchemas,
+        ...getUsedImports(schemas, files).nodes,
+        ...schemas,
       ])
     );
   }
