@@ -4,16 +4,14 @@ import ts from "typescript";
 import { ReferenceObject, SchemaObject } from "openapi3-ts";
 import { createWatermark } from "../core/createWatermark";
 import { getUsedImports } from "../core/getUsedImports";
-import {
-  schemaToEnumDeclaration,
-  schemaToTypeAliasDeclaration,
-} from "../core/schemaToTypeAliasDeclaration";
+import { schemaToTypeAliasDeclaration } from "../core/schemaToTypeAliasDeclaration";
 import { getEnumProperties } from "../utils/getEnumProperties";
 import { ConfigBase, Context } from "./types";
 
 import { isReferenceObject } from "openapi3-ts";
 
 import { findCompatibleMediaType } from "../core/findCompatibleMediaType";
+import { schemaToEnumDeclaration } from "../core/schemaToEnumDeclaration";
 
 type Config = ConfigBase;
 
