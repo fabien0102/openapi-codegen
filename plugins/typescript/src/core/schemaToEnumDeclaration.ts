@@ -1,6 +1,7 @@
 import { pascal } from "case";
 import { SchemaObject } from "openapi3-ts";
 import ts, { factory as f } from "typescript";
+import { convertNumberToWord } from "../utils/getEnumProperties";
 import { Context, getJSDocComment } from "./schemaToTypeAliasDeclaration";
 
 /**
@@ -37,15 +38,19 @@ function getEnumMembers(
   }
 
   return schema.enum.map((enumValue, index) => {
-    const enumName = enumValue;
-    let enumValueNode: ts.Expression;
+    let enumName: string;
+    let enumValueNode: ts.Expression | undefined = undefined;
 
     if (typeof enumValue === "string") {
+      enumName = enumValue;
       enumValueNode = f.createStringLiteral(enumValue);
     } else if (typeof enumValue === "number") {
+      enumName = convertNumberToWord(enumValue)
+        .toUpperCase()
+        .replace(/[-\s]/g, "_");
       enumValueNode = f.createNumericLiteral(enumValue);
     } else if (typeof enumValue === "boolean") {
-      enumValueNode = enumValue ? f.createTrue() : f.createFalse();
+      enumName = enumValue ? "True" : "False";
     } else {
       throw new Error(`Unsupported enum value type: ${typeof enumValue}`);
     }

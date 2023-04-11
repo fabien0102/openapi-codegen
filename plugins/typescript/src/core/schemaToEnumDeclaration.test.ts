@@ -4,7 +4,7 @@ import { schemaToEnumDeclaration } from "./schemaToEnumDeclaration";
 import { OpenAPIComponentType } from "./schemaToTypeAliasDeclaration";
 
 describe("schemaToTypeAliasDeclaration", () => {
-  it("should generate enums", () => {
+  it("should generate a string enums", () => {
     const schema: SchemaObject = {
       type: "string",
       enum: ["AVAILABLE", "PENDING", "SOLD"],
@@ -15,6 +15,35 @@ describe("schemaToTypeAliasDeclaration", () => {
           AVAILABLE = \\"AVAILABLE\\",
           PENDING = \\"PENDING\\",
           SOLD = \\"SOLD\\"
+      }"
+    `);
+  });
+
+  it("should generate a int enum", () => {
+    const schema: SchemaObject = {
+      type: "string",
+      enum: [1, 2, 3],
+    };
+
+    expect(printSchema(schema)).toMatchInlineSnapshot(`
+      "export enum Test {
+          ONE = 1,
+          TWO = 2,
+          THREE = 3
+      }"
+    `);
+  });
+
+  it("should generate a boolean enum", () => {
+    const schema: SchemaObject = {
+      type: "string",
+      enum: [true, false],
+    };
+
+    expect(printSchema(schema)).toMatchInlineSnapshot(`
+      "export enum Test {
+          True,
+          False
       }"
     `);
   });
