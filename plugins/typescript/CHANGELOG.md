@@ -1,5 +1,12 @@
 # Changelog
 
+## [6.2.0](https://github.com/fabien0102/openapi-codegen/compare/typescript-v6.1.3...typescript-v6.2.0) (2023-04-12)
+
+
+### Features
+
+* enum support ([#153](https://github.com/fabien0102/openapi-codegen/issues/153)) ([aecaa73](https://github.com/fabien0102/openapi-codegen/commit/aecaa738280837256d669b21a1a3de1988b9607d))
+
 ## [6.1.3](https://github.com/fabien0102/openapi-codegen/compare/typescript-v6.1.2...typescript-v6.1.3) (2023-04-07)
 
 
