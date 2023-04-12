@@ -69,6 +69,32 @@ describe("schemaToTypeAliasDeclaration", () => {
     );
   });
 
+  it("should reference to an previously created enum", () => {
+    const schema: SchemaObject = {
+      type: "object",
+      properties: {
+        status: {
+          type: "string",
+          enum: ["AVAILABLE", "PENDING", "SOLD"],
+        },
+      },
+      xml: { name: "pet" },
+    };
+
+    const components: OpenAPIObject["components"] = {
+      schemas: {
+        Pet: schema,
+      },
+    };
+
+    expect(printSchema(schema, "schemas", components, true))
+      .toMatchInlineSnapshot(`
+      "export type Test = {
+          status?: TestStatus;
+      };"
+    `);
+  });
+
   it("should generate nullable enums (strings)", () => {
     const schema: SchemaObject = {
       type: "string",
@@ -879,12 +905,18 @@ describe("schemaToTypeAliasDeclaration", () => {
 const printSchema = (
   schema: SchemaObject,
   currentComponent: OpenAPIComponentType = "schemas",
-  components?: OpenAPIObject["components"]
+  components?: OpenAPIObject["components"],
+  useEnums?: boolean
 ) => {
-  const nodes = schemaToTypeAliasDeclaration("Test", schema, {
-    currentComponent,
-    openAPIDocument: { components },
-  });
+  const nodes = schemaToTypeAliasDeclaration(
+    "Test",
+    schema,
+    {
+      currentComponent,
+      openAPIDocument: { components },
+    },
+    useEnums
+  );
 
   const sourceFile = ts.createSourceFile(
     "index.ts",

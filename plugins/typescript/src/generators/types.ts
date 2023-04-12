@@ -25,4 +25,10 @@ export type ConfigBase = {
    * @default camel
    */
   filenameCase?: keyof Pick<typeof c, "snake" | "camel" | "kebab" | "pascal">;
+  /**
+   * Allows using explicit enums instead of string unions.
+   *
+   * @default false
+   */
+  useEnums?: boolean;
 };
