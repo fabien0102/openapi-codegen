@@ -101,6 +101,15 @@
         "bug",
         "code"
       ]
+    },
+    {
+      "login": "alan-oliv",
+      "name": "Alan Oliveira",
+      "avatar_url": "https://avatars.githubusercontent.com/u/4368481?v=4",
+      "profile": "https://twitter.com/oalanoliv",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7
