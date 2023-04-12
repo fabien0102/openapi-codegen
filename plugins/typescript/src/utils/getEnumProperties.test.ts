@@ -1,5 +1,5 @@
 import { SchemaObject } from "openapi3-ts";
-import { getEnumProperties } from "./getEnumProperties";
+import { convertNumberToWord, getEnumProperties } from "./getEnumProperties";
 
 describe("getEnumProperties", () => {
   it("should return an empty array when input schema array is empty", () => {
@@ -106,5 +106,31 @@ describe("getEnumProperties", () => {
         ],
       ]
     `);
+  });
+});
+
+describe("convertNumberToWord", () => {
+  const testCases: Array<[number, string]> = [
+    [0, "zero"],
+    [7, "seven"],
+    [15, "fifteen"],
+    [27, "twenty-seven"],
+    [42, "forty-two"],
+    [99, "ninety-nine"],
+    [100, "one hundred"],
+    [110, "one hundred ten"],
+    [134, "one hundred thirty-four"],
+    [201, "two hundred one"],
+    [999, "nine hundred ninety-nine"],
+    [1000, "one thousand"],
+    [1234, "one thousand two hundred thirty-four"],
+    [3456, "three thousand four hundred fifty-six"],
+    [9999, "nine thousand nine hundred ninety-nine"],
+  ];
+
+  testCases.forEach(([input, expected]) => {
+    it(`should convert ${input} to '${expected}'`, () => {
+      expect(convertNumberToWord(input)).toBe(expected);
+    });
   });
 });

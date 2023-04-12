@@ -34,6 +34,25 @@ describe("schemaToTypeAliasDeclaration", () => {
     `);
   });
 
+  it("should generate a int enum (using big numbers)", () => {
+    const schema: SchemaObject = {
+      type: "string",
+      enum: [0, 7, 15, 100, 1000, 1456, 3217],
+    };
+
+    expect(printSchema(schema)).toMatchInlineSnapshot(`
+      "export enum Test {
+          ZERO = 0,
+          SEVEN = 7,
+          FIFTEEN = 15,
+          ONE_HUNDRED = 100,
+          ONE_THOUSAND = 1000,
+          ONE_THOUSAND_FOUR_HUNDRED_FIFTY_SIX = 1456,
+          THREE_THOUSAND_TWO_HUNDRED_SEVENTEEN = 3217
+      }"
+    `);
+  });
+
   it("should generate a boolean enum", () => {
     const schema: SchemaObject = {
       type: "string",
