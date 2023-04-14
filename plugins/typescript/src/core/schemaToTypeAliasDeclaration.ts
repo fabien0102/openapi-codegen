@@ -13,6 +13,7 @@ import { singular } from "pluralize";
 import { isValidIdentifier } from "tsutils";
 import ts, { factory as f } from "typescript";
 import { getReferenceSchema } from "./getReferenceSchema";
+import { Schema } from "inspector";
 
 type RemoveIndex<T> = {
   [P in keyof T as string extends P
@@ -128,7 +129,24 @@ export const getType = (
   }
 
   if (schema.allOf) {
-    return getAllOf(schema.allOf, context);
+    const adHocSchemas: Array<SchemaObject> = [];
+    if (schema.properties) {
+      adHocSchemas.push({
+        type: 'object',
+        properties: schema.properties,
+        required: schema.required
+      });
+    }
+    if (schema.additionalProperties) {
+      adHocSchemas.push({
+        type: 'object',
+        additionalProperties: schema.additionalProperties
+      });
+    }
+    return getAllOf([
+      ...schema.allOf,
+      ...adHocSchemas
+     ], context);
   }
 
   if (schema.enum) {
