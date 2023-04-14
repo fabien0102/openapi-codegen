@@ -13,7 +13,6 @@ import { singular } from "pluralize";
 import { isValidIdentifier } from "tsutils";
 import ts, { factory as f } from "typescript";
 import { getReferenceSchema } from "./getReferenceSchema";
-import { Schema } from "inspector";
 
 type RemoveIndex<T> = {
   [P in keyof T as string extends P
