@@ -674,14 +674,15 @@ describe("schemaToTypeAliasDeclaration", () => {
         },
         properties: {
           foobar: {type: "string"}
-        }
+        },
+        required: ['bar', 'foobar']
       };
 
       expect(printSchema(schema)).toMatchInlineSnapshot(`
       "export type Test = {
           foo?: string;
-          bar?: number;
-          foobar?: string;
+          bar: number;
+          foobar: string;
       } & {
           [key: string]: string;
       };"
