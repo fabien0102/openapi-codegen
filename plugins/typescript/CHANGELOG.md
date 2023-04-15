@@ -1,5 +1,12 @@
 # Changelog
 
+## [6.2.1](https://github.com/fabien0102/openapi-codegen/compare/typescript-v6.2.0...typescript-v6.2.1) (2023-04-15)
+
+
+### Bug Fixes
+
+* [#157](https://github.com/fabien0102/openapi-codegen/issues/157) allOf w/ properties ([#158](https://github.com/fabien0102/openapi-codegen/issues/158)) ([9a39e52](https://github.com/fabien0102/openapi-codegen/commit/9a39e5244563b3f57b5be0c55c6e8fc514a5d6ad))
+
 ## [6.2.0](https://github.com/fabien0102/openapi-codegen/compare/typescript-v6.1.3...typescript-v6.2.0) (2023-04-12)
 
 
