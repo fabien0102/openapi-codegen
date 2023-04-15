@@ -128,7 +128,24 @@ export const getType = (
   }
 
   if (schema.allOf) {
-    return getAllOf(schema.allOf, context);
+    const adHocSchemas: Array<SchemaObject> = [];
+    if (schema.properties) {
+      adHocSchemas.push({
+        type: 'object',
+        properties: schema.properties,
+        required: schema.required
+      });
+    }
+    if (schema.additionalProperties) {
+      adHocSchemas.push({
+        type: 'object',
+        additionalProperties: schema.additionalProperties
+      });
+    }
+    return getAllOf([
+      ...schema.allOf,
+      ...adHocSchemas
+     ], context);
   }
 
   if (schema.enum) {

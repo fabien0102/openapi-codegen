@@ -621,6 +621,74 @@ describe("schemaToTypeAliasDeclaration", () => {
   });
 
   describe("allOf", () => {
+    it("should combine properties and allOf", () => {
+      const schema: SchemaObject = {
+        allOf: [
+          { type: "object", properties: { foo: { type: "string" } } },
+          { type: "object", properties: { bar: { type: "number" } } },
+        ],
+        properties: {
+          foobar: {type: "string"}
+        },
+        required: ['foo', 'foobar']
+      };
+
+      expect(printSchema(schema)).toMatchInlineSnapshot(`
+      "export type Test = {
+          foo: string;
+          bar?: number;
+          foobar: string;
+      };"
+    `);
+    });
+    
+    it("should combine additionalProperties and allOf", () => {
+      const schema: SchemaObject = {
+        allOf: [
+          { type: "object", properties: { foo: { type: "string" } } },
+          { type: "object", properties: { bar: { type: "number" } } },
+        ],
+        additionalProperties: {
+          type: "string"
+        }
+      };
+
+      expect(printSchema(schema)).toMatchInlineSnapshot(`
+      "export type Test = {
+          foo?: string;
+          bar?: number;
+      } & {
+          [key: string]: string;
+      };"
+    `);
+    });
+    
+    it("should combine properties & additionalProperties & allOf", () => {
+      const schema: SchemaObject = {
+        allOf: [
+          { type: "object", properties: { foo: { type: "string" } } },
+          { type: "object", properties: { bar: { type: "number" } } },
+        ],
+        additionalProperties: {
+          type: "string"
+        },
+        properties: {
+          foobar: {type: "string"}
+        },
+        required: ['bar', 'foobar']
+      };
+
+      expect(printSchema(schema)).toMatchInlineSnapshot(`
+      "export type Test = {
+          foo?: string;
+          bar: number;
+          foobar: string;
+      } & {
+          [key: string]: string;
+      };"
+    `);
+    });
+
     it("should combine inline types", () => {
       const schema: SchemaObject = {
         allOf: [
