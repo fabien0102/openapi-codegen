@@ -19,7 +19,8 @@ export const findCompatibleMediaType = (
       contentType.startsWith("*/*") ||
       contentType.startsWith("application/json") ||
       contentType.startsWith("application/octet-stream") ||
-      contentType.startsWith("multipart/form-data")
+      contentType.startsWith("multipart/form-data") ||
+      contentType.startsWith("application/x-www-form-urlencoded")
     ) {
       return requestBodyOrResponseObject.content[contentType];
     }
