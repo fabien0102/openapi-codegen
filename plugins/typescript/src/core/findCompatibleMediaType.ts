@@ -12,7 +12,7 @@ import {
  */
 export const findCompatibleMediaType = (
   requestBodyOrResponseObject: RequestBodyObject | ResponseObject
-): MediaTypeObject | undefined => {
+): (MediaTypeObject & { contentType: string }) | undefined => {
   if (!requestBodyOrResponseObject.content) return;
   for (let contentType of Object.keys(requestBodyOrResponseObject.content)) {
     if (
@@ -22,7 +22,10 @@ export const findCompatibleMediaType = (
       contentType.startsWith("multipart/form-data") ||
       contentType.startsWith("application/x-www-form-urlencoded")
     ) {
-      return requestBodyOrResponseObject.content[contentType];
+      return {
+        ...requestBodyOrResponseObject.content[contentType],
+        contentType,
+      };
     }
   }
 };
