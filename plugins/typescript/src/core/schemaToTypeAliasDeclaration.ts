@@ -227,7 +227,7 @@ export const getType = (
       const members: ts.TypeElement[] = Object.entries(
         schema.properties || {}
       ).map(([key, property]) => {
-        const isEnum = "enum" in property && useEnumsConfigBase;
+        const isEnum = typeof property === "object" && "enum" in property && useEnumsConfigBase;
 
         const propertyNode = f.createPropertySignature(
           undefined,
