@@ -1,5 +1,12 @@
 # Changelog
 
+## [6.2.2](https://github.com/fabien0102/openapi-codegen/compare/typescript-v6.2.1...typescript-v6.2.2) (2023-05-02)
+
+
+### Bug Fixes
+
+* Check that property is an object ([#162](https://github.com/fabien0102/openapi-codegen/issues/162)) ([76005e0](https://github.com/fabien0102/openapi-codegen/commit/76005e0c68e87efe5899e205ae63b7e55fb62eae))
+
 ## [6.2.1](https://github.com/fabien0102/openapi-codegen/compare/typescript-v6.2.0...typescript-v6.2.1) (2023-04-15)
 
 
