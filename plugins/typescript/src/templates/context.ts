@@ -67,12 +67,19 @@ export const getContext = (prefix: string, componentsFile: string) =>
     return queryKey;
   }
   // Helpers
+  export const parseToCamelCaseIfKebabCase = (key: string) => {
+    if (key.includes('-')) {
+      return key.replace(/-([a-z])/g, (g) => g[1].toUpperCase())
+    }
+    return key
+  }
+
   const resolvePathParam = (
     key: string,
     pathParams: Record<string, string>
   ) => {
     if (key.startsWith("{") && key.endsWith("}")) {
-      return pathParams[key.slice(1, -1)];
+      return pathParams[parseToCamelCaseIfKebabCase(key.slice(1, -1))];
     }
     return key;
   };
