@@ -130,13 +130,21 @@ export async function ${camel(prefix)}Fetch<
   }
 }
 
-const resolveUrl = (
-  url: string,
-  queryParams: Record<string, string> = {},
-  pathParams: Record<string, string> = {}
-) => {
-  let query = new URLSearchParams(queryParams).toString();
+const resolveUrl = (url: string, queryParams: Record<string, string> = {}, pathParams: Record<string, string> = {}) => {
+  let query = new URLSearchParams(queryParams).toString()
   if (query) query = \`?\${query}\`;
-  return url.replace(/\\{\\w*\\}/g, (key) => pathParams[key.slice(1, -1)]) + query;
-};
+  return (
+    url.replace(/\{[\w-]*\}/g, (key) => {
+      const keyWithoutCurlyBrackets = key.slice(1, -1)
+      return pathParams[parseToCamelCaseIfKebabCase(keyWithoutCurlyBrackets)]
+    }) + query
+  )
+}
+const parseToCamelCaseIfKebabCase = (key: string) => {
+  if (key.includes('-')) {
+    return key.replace(/-([a-z])/g, (g) => g[1].toUpperCase())
+  }
+  return key
+}
+
 `;
