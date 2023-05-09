@@ -141,4 +141,4 @@ export const createOperationFetcherFnNodes = ({
  * `pet/{pet_id}` -> `pet/{petId}`
  */
 const camelizedPathParams = (url: string) =>
-  url.replace(/\{\w*\}/g, (match) => `{${camel(match)}}`);
+  url.replace(/\{.*\}/g, (match) => `{${camel(match)}}`);
