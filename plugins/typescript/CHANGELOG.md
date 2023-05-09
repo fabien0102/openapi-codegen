@@ -1,5 +1,12 @@
 # Changelog
 
+## [6.2.3](https://github.com/fabien0102/openapi-codegen/compare/typescript-v6.2.2...typescript-v6.2.3) (2023-05-09)
+
+
+### Bug Fixes
+
+* Fix path param regex ([#166](https://github.com/fabien0102/openapi-codegen/issues/166)) ([59bae62](https://github.com/fabien0102/openapi-codegen/commit/59bae62ce64f9652e4ab15021ed8e61624b69ccc))
+
 ## [6.2.2](https://github.com/fabien0102/openapi-codegen/compare/typescript-v6.2.1...typescript-v6.2.2) (2023-05-02)
 
 
