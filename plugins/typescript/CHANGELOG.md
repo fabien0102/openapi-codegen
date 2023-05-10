@@ -1,5 +1,12 @@
 # Changelog
 
+## [6.2.4](https://github.com/fabien0102/openapi-codegen/compare/typescript-v6.2.3...typescript-v6.2.4) (2023-05-10)
+
+
+### Bug Fixes
+
+* fix camelizedPathParams ([#172](https://github.com/fabien0102/openapi-codegen/issues/172)) ([53c7fd0](https://github.com/fabien0102/openapi-codegen/commit/53c7fd02ff28f913a16bb6ab583e36a1b399242c))
+
 ## [6.2.3](https://github.com/fabien0102/openapi-codegen/compare/typescript-v6.2.2...typescript-v6.2.3) (2023-05-09)
 
 
