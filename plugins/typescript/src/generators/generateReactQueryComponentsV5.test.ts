@@ -1,7 +1,7 @@
 import { OpenAPIObject } from "openapi3-ts";
 import {
   Config,
-  generateReactQueryComponents,
+  generateReactQueryComponentsV5,
 } from "./generateReactQueryComponentsV5";
 
 const config: Config = {
@@ -26,7 +26,7 @@ describe("generateReactQueryComponents", () => {
       paths: {},
     };
 
-    await generateReactQueryComponents(
+    await generateReactQueryComponentsV5(
       {
         openAPIDocument,
         writeFile,
@@ -72,7 +72,7 @@ describe("generateReactQueryComponents", () => {
       },
     };
 
-    await generateReactQueryComponents(
+    await generateReactQueryComponentsV5(
       {
         openAPIDocument,
         writeFile,
@@ -109,7 +109,9 @@ describe("generateReactQueryComponents", () => {
       /**
        * Get all the pets
        */
-      export const useListPets = <TData = ListPetsResponse>(variables: ListPetsVariables, options?: Omit<reactQuery.UseQueryOptions<ListPetsResponse, ListPetsError, TData>, \\"queryKey\\" | \\"queryFn\\">) => { const { fetcherOptions, queryOptions, queryKeyFn } = usePetstoreContext(options); return reactQuery.useQuery<ListPetsResponse, ListPetsError, TData>(queryKeyFn({ path: \\"/pets\\", operationId: \\"listPets\\", variables }), ({ signal }) => fetchListPets({ ...fetcherOptions, ...variables }, signal), {
+      export const useListPets = <TData = ListPetsResponse>(variables: ListPetsVariables, options?: Omit<reactQuery.UseQueryOptions<ListPetsResponse, ListPetsError, TData>, \\"queryKey\\" | \\"queryFn\\">) => { const { fetcherOptions, queryOptions, queryKeyFn } = usePetstoreContext(options); return reactQuery.useQuery<ListPetsResponse, ListPetsError, TData>({
+          queryKey: queryKeyFn({ path: \\"/pets\\", operationId: \\"listPets\\", variables }),
+          queryFn: ({ signal }) => fetchListPets({ ...fetcherOptions, ...variables }, signal),
           ...options,
           ...queryOptions
       }); };
@@ -181,7 +183,7 @@ describe("generateReactQueryComponents", () => {
       },
     };
 
-    await generateReactQueryComponents(
+    await generateReactQueryComponentsV5(
       {
         openAPIDocument,
         writeFile,
@@ -231,7 +233,9 @@ describe("generateReactQueryComponents", () => {
       /**
        * Get all the pets
        */
-      export const useListPets = <TData = ListPetsResponse>(variables: ListPetsVariables, options?: Omit<reactQuery.UseQueryOptions<ListPetsResponse, ListPetsError, TData>, \\"queryKey\\" | \\"queryFn\\">) => { const { fetcherOptions, queryOptions, queryKeyFn } = usePetstoreContext(options); return reactQuery.useQuery<ListPetsResponse, ListPetsError, TData>(queryKeyFn({ path: \\"/pets\\", operationId: \\"listPets\\", variables }), ({ signal }) => fetchListPets({ ...fetcherOptions, ...variables }, signal), {
+      export const useListPets = <TData = ListPetsResponse>(variables: ListPetsVariables, options?: Omit<reactQuery.UseQueryOptions<ListPetsResponse, ListPetsError, TData>, \\"queryKey\\" | \\"queryFn\\">) => { const { fetcherOptions, queryOptions, queryKeyFn } = usePetstoreContext(options); return reactQuery.useQuery<ListPetsResponse, ListPetsError, TData>({
+          queryKey: queryKeyFn({ path: \\"/pets\\", operationId: \\"listPets\\", variables }),
+          queryFn: ({ signal }) => fetchListPets({ ...fetcherOptions, ...variables }, signal),
           ...options,
           ...queryOptions
       }); };
@@ -303,7 +307,7 @@ describe("generateReactQueryComponents", () => {
       },
     };
 
-    await generateReactQueryComponents(
+    await generateReactQueryComponentsV5(
       {
         openAPIDocument,
         writeFile,
@@ -357,7 +361,9 @@ describe("generateReactQueryComponents", () => {
       /**
        * Get all the pets
        */
-      export const useListPets = <TData = ListPetsResponse>(variables: ListPetsVariables, options?: Omit<reactQuery.UseQueryOptions<ListPetsResponse, ListPetsError, TData>, \\"queryKey\\" | \\"queryFn\\">) => { const { fetcherOptions, queryOptions, queryKeyFn } = usePetstoreContext(options); return reactQuery.useQuery<ListPetsResponse, ListPetsError, TData>(queryKeyFn({ path: \\"/pets\\", operationId: \\"listPets\\", variables }), ({ signal }) => fetchListPets({ ...fetcherOptions, ...variables }, signal), {
+      export const useListPets = <TData = ListPetsResponse>(variables: ListPetsVariables, options?: Omit<reactQuery.UseQueryOptions<ListPetsResponse, ListPetsError, TData>, \\"queryKey\\" | \\"queryFn\\">) => { const { fetcherOptions, queryOptions, queryKeyFn } = usePetstoreContext(options); return reactQuery.useQuery<ListPetsResponse, ListPetsError, TData>({
+          queryKey: queryKeyFn({ path: \\"/pets\\", operationId: \\"listPets\\", variables }),
+          queryFn: ({ signal }) => fetchListPets({ ...fetcherOptions, ...variables }, signal),
           ...options,
           ...queryOptions
       }); };
@@ -417,7 +423,7 @@ describe("generateReactQueryComponents", () => {
       },
     };
 
-    await generateReactQueryComponents(
+    await generateReactQueryComponentsV5(
       {
         openAPIDocument,
         writeFile,
@@ -454,7 +460,9 @@ describe("generateReactQueryComponents", () => {
       /**
        * Get all the pets
        */
-      export const useListPets = <TData = ListPetsResponse>(variables: ListPetsVariables, options?: Omit<reactQuery.UseQueryOptions<ListPetsResponse, ListPetsError, TData>, \\"queryKey\\" | \\"queryFn\\">) => { const { fetcherOptions, queryOptions, queryKeyFn } = usePetstoreContext(options); return reactQuery.useQuery<ListPetsResponse, ListPetsError, TData>(queryKeyFn({ path: \\"/pets\\", operationId: \\"listPets\\", variables }), ({ signal }) => fetchListPets({ ...fetcherOptions, ...variables }, signal), {
+      export const useListPets = <TData = ListPetsResponse>(variables: ListPetsVariables, options?: Omit<reactQuery.UseQueryOptions<ListPetsResponse, ListPetsError, TData>, \\"queryKey\\" | \\"queryFn\\">) => { const { fetcherOptions, queryOptions, queryKeyFn } = usePetstoreContext(options); return reactQuery.useQuery<ListPetsResponse, ListPetsError, TData>({
+          queryKey: queryKeyFn({ path: \\"/pets\\", operationId: \\"listPets\\", variables }),
+          queryFn: ({ signal }) => fetchListPets({ ...fetcherOptions, ...variables }, signal),
           ...options,
           ...queryOptions
       }); };
@@ -541,7 +549,7 @@ describe("generateReactQueryComponents", () => {
       },
     };
 
-    await generateReactQueryComponents(
+    await generateReactQueryComponentsV5(
       {
         openAPIDocument,
         writeFile,
@@ -586,7 +594,7 @@ describe("generateReactQueryComponents", () => {
 
       export const useAddPet = (options?: Omit<reactQuery.UseMutationOptions<string, AddPetError, AddPetVariables>, \\"mutationFn\\">) => {
           const { fetcherOptions } = usePetstoreContext();
-          return reactQuery.useMutation<string, AddPetError, AddPetVariables>((variables: AddPetVariables) => fetchAddPet({ ...fetcherOptions, ...variables }), options);
+          return reactQuery.useMutation<string, AddPetError, AddPetVariables>({ mutationFn: (variables: AddPetVariables) => fetchAddPet({ ...fetcherOptions, ...variables }), ...options });
       };
 
       export type QueryOperation = {
@@ -672,7 +680,7 @@ describe("generateReactQueryComponents", () => {
       },
     };
 
-    await generateReactQueryComponents(
+    await generateReactQueryComponentsV5(
       {
         openAPIDocument,
         writeFile,
@@ -717,7 +725,7 @@ describe("generateReactQueryComponents", () => {
 
       export const useAddPet = (options?: Omit<reactQuery.UseMutationOptions<string, AddPetError, AddPetVariables>, \\"mutationFn\\">) => {
           const { fetcherOptions } = usePetstoreContext();
-          return reactQuery.useMutation<string, AddPetError, AddPetVariables>((variables: AddPetVariables) => fetchAddPet({ ...fetcherOptions, ...variables }), options);
+          return reactQuery.useMutation<string, AddPetError, AddPetVariables>({ mutationFn: (variables: AddPetVariables) => fetchAddPet({ ...fetcherOptions, ...variables }), ...options });
       };
 
       export type QueryOperation = {
@@ -809,7 +817,7 @@ describe("generateReactQueryComponents", () => {
       },
     };
 
-    await generateReactQueryComponents(
+    await generateReactQueryComponentsV5(
       {
         openAPIDocument,
         writeFile,
@@ -848,7 +856,7 @@ describe("generateReactQueryComponents", () => {
 
       export const useAddPet = (options?: Omit<reactQuery.UseMutationOptions<string, AddPetError, AddPetVariables>, \\"mutationFn\\">) => {
           const { fetcherOptions } = usePetstoreContext();
-          return reactQuery.useMutation<string, AddPetError, AddPetVariables>((variables: AddPetVariables) => fetchAddPet({ ...fetcherOptions, ...variables }), options);
+          return reactQuery.useMutation<string, AddPetError, AddPetVariables>({ mutationFn: (variables: AddPetVariables) => fetchAddPet({ ...fetcherOptions, ...variables }), ...options });
       };
 
       export type QueryOperation = {
@@ -919,7 +927,7 @@ describe("generateReactQueryComponents", () => {
         },
       },
     };
-    await generateReactQueryComponents(
+    await generateReactQueryComponentsV5(
       {
         openAPIDocument,
         writeFile,
@@ -957,7 +965,7 @@ describe("generateReactQueryComponents", () => {
 
       export const useUpdatePet = (options?: Omit<reactQuery.UseMutationOptions<string, UpdatePetError, UpdatePetVariables>, \\"mutationFn\\">) => {
           const { fetcherOptions } = usePetstoreContext();
-          return reactQuery.useMutation<string, UpdatePetError, UpdatePetVariables>((variables: UpdatePetVariables) => fetchUpdatePet({ ...fetcherOptions, ...variables }), options);
+          return reactQuery.useMutation<string, UpdatePetError, UpdatePetVariables>({ mutationFn: (variables: UpdatePetVariables) => fetchUpdatePet({ ...fetcherOptions, ...variables }), ...options });
       };
 
       export type QueryOperation = {
@@ -1028,7 +1036,7 @@ describe("generateReactQueryComponents", () => {
         },
       },
     };
-    await generateReactQueryComponents(
+    await generateReactQueryComponentsV5(
       {
         openAPIDocument,
         writeFile,
@@ -1066,7 +1074,7 @@ describe("generateReactQueryComponents", () => {
 
       export const useUpdatePet = (options?: Omit<reactQuery.UseMutationOptions<string, UpdatePetError, UpdatePetVariables>, \\"mutationFn\\">) => {
           const { fetcherOptions } = usePetstoreContext();
-          return reactQuery.useMutation<string, UpdatePetError, UpdatePetVariables>((variables: UpdatePetVariables) => fetchUpdatePet({ ...fetcherOptions, ...variables }), options);
+          return reactQuery.useMutation<string, UpdatePetError, UpdatePetVariables>({ mutationFn: (variables: UpdatePetVariables) => fetchUpdatePet({ ...fetcherOptions, ...variables }), ...options });
       };
 
       export type QueryOperation = {
@@ -1137,7 +1145,7 @@ describe("generateReactQueryComponents", () => {
         },
       },
     };
-    await generateReactQueryComponents(
+    await generateReactQueryComponentsV5(
       {
         openAPIDocument,
         writeFile,
@@ -1175,7 +1183,7 @@ describe("generateReactQueryComponents", () => {
 
       export const useUpdatePet = (options?: Omit<reactQuery.UseMutationOptions<string, UpdatePetError, UpdatePetVariables>, \\"mutationFn\\">) => {
           const { fetcherOptions } = useContext();
-          return reactQuery.useMutation<string, UpdatePetError, UpdatePetVariables>((variables: UpdatePetVariables) => fetchUpdatePet({ ...fetcherOptions, ...variables }), options);
+          return reactQuery.useMutation<string, UpdatePetError, UpdatePetVariables>({ mutationFn: (variables: UpdatePetVariables) => fetchUpdatePet({ ...fetcherOptions, ...variables }), ...options });
       };
 
       export type QueryOperation = {
@@ -1230,7 +1238,7 @@ describe("generateReactQueryComponents", () => {
       },
     };
 
-    await generateReactQueryComponents(
+    await generateReactQueryComponentsV5(
       {
         openAPIDocument,
         writeFile,
@@ -1271,7 +1279,9 @@ describe("generateReactQueryComponents", () => {
       /**
        * Get all the pets
        */
-      export const useListPets = <TData = ListPetsResponse>(variables: ListPetsVariables, options?: Omit<reactQuery.UseQueryOptions<ListPetsResponse, ListPetsError, TData>, \\"queryKey\\" | \\"queryFn\\">) => { const { fetcherOptions, queryOptions, queryKeyFn } = usePetstoreContext(options); return reactQuery.useQuery<ListPetsResponse, ListPetsError, TData>(queryKeyFn({ path: \\"/pets\\", operationId: \\"listPets\\", variables }), ({ signal }) => fetchListPets({ ...fetcherOptions, ...variables }, signal), {
+      export const useListPets = <TData = ListPetsResponse>(variables: ListPetsVariables, options?: Omit<reactQuery.UseQueryOptions<ListPetsResponse, ListPetsError, TData>, \\"queryKey\\" | \\"queryFn\\">) => { const { fetcherOptions, queryOptions, queryKeyFn } = usePetstoreContext(options); return reactQuery.useQuery<ListPetsResponse, ListPetsError, TData>({
+          queryKey: queryKeyFn({ path: \\"/pets\\", operationId: \\"listPets\\", variables }),
+          queryFn: ({ signal }) => fetchListPets({ ...fetcherOptions, ...variables }, signal),
           ...options,
           ...queryOptions
       }); };

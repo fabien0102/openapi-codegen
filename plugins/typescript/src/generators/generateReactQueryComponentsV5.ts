@@ -36,7 +36,7 @@ export type Config = ConfigBase & {
   injectedHeaders?: string[];
 };
 
-export const generateReactQueryComponents = async (
+export const generateReactQueryComponentsV5 = async (
   context: Context,
   config: Config
 ) => {
@@ -372,49 +372,52 @@ const createMutationHook = ({
                       ),
                       [dataType, errorType, variablesType],
                       [
-                        f.createObjectLiteralExpression([
-                          f.createPropertyAssignment(
-                            "mutationFn",
-                            f.createArrowFunction(
-                              undefined,
-                              undefined,
-                              [
-                                f.createParameterDeclaration(
-                                  undefined,
-                                  undefined,
-                                  f.createIdentifier("variables"),
-                                  undefined,
-                                  variablesType,
-                                  undefined
-                                ),
-                              ],
-                              undefined,
-                              f.createToken(
-                                ts.SyntaxKind.EqualsGreaterThanToken
-                              ),
-                              f.createCallExpression(
-                                f.createIdentifier(operationFetcherFnName),
+                        f.createObjectLiteralExpression(
+                          [
+                            f.createPropertyAssignment(
+                              "mutationFn",
+                              f.createArrowFunction(
+                                undefined,
                                 undefined,
                                 [
-                                  f.createObjectLiteralExpression(
-                                    [
-                                      f.createSpreadAssignment(
-                                        f.createIdentifier("fetcherOptions")
-                                      ),
-                                      f.createSpreadAssignment(
-                                        f.createIdentifier("variables")
-                                      ),
-                                    ],
-                                    false
+                                  f.createParameterDeclaration(
+                                    undefined,
+                                    undefined,
+                                    f.createIdentifier("variables"),
+                                    undefined,
+                                    variablesType,
+                                    undefined
                                   ),
-                                ]
+                                ],
+                                undefined,
+                                f.createToken(
+                                  ts.SyntaxKind.EqualsGreaterThanToken
+                                ),
+                                f.createCallExpression(
+                                  f.createIdentifier(operationFetcherFnName),
+                                  undefined,
+                                  [
+                                    f.createObjectLiteralExpression(
+                                      [
+                                        f.createSpreadAssignment(
+                                          f.createIdentifier("fetcherOptions")
+                                        ),
+                                        f.createSpreadAssignment(
+                                          f.createIdentifier("variables")
+                                        ),
+                                      ],
+                                      false
+                                    ),
+                                  ]
+                                )
                               )
-                            )
-                          ),
-                          f.createSpreadAssignment(
-                            f.createIdentifier("options")
-                          ),
-                        ]),
+                            ),
+                            f.createSpreadAssignment(
+                              f.createIdentifier("options")
+                            ),
+                          ],
+                          true
+                        ),
                       ]
                     )
                   ),
