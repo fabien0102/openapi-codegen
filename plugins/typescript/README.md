@@ -45,43 +45,6 @@ export default defineConfig({
 });
 ```
 
-### generateReactQueryComponents for react query V5
-
-
-Generate `useQuery` & `useMutation` wrapper from [react-query V5](https://tanstack.com/query/v5/docs/react/).
-
-Example:
-
-```ts
-// openapi-codegen.config.ts
-
-import { defineConfig } from "@openapi-codegen/cli";
-import {
-  generateReactQueryComponentsV5,
-  generateSchemaTypes,
-} from "@openapi-codegen/typescript";
-
-export default defineConfig({
-  petstore: {
-    from: {
-      /* file, url or github */
-    },
-    outputDir: "./petStore",
-    to: async (context) => {
-      const filenamePrefix = "petStore";
-      const { schemasFiles } = await generateSchemaTypes(context, {
-        filenamePrefix,
-      });
-      await generateReactQueryComponentsV5(context, {
-        filenamePrefix,
-        schemasFiles,
-      });
-    },
-  },
-});
-```
-
-
 This generator will generate 3 files:
 
 - `{filenamePrefix}Components.ts`

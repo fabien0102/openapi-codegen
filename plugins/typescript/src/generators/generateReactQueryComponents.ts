@@ -372,40 +372,52 @@ const createMutationHook = ({
                       ),
                       [dataType, errorType, variablesType],
                       [
-                        f.createArrowFunction(
-                          undefined,
-                          undefined,
+                        f.createObjectLiteralExpression(
                           [
-                            f.createParameterDeclaration(
-                              undefined,
-                              undefined,
-                              f.createIdentifier("variables"),
-                              undefined,
-                              variablesType,
-                              undefined
-                            ),
-                          ],
-                          undefined,
-                          f.createToken(ts.SyntaxKind.EqualsGreaterThanToken),
-                          f.createCallExpression(
-                            f.createIdentifier(operationFetcherFnName),
-                            undefined,
-                            [
-                              f.createObjectLiteralExpression(
+                            f.createPropertyAssignment(
+                              "mutationFn",
+                              f.createArrowFunction(
+                                undefined,
+                                undefined,
                                 [
-                                  f.createSpreadAssignment(
-                                    f.createIdentifier("fetcherOptions")
-                                  ),
-                                  f.createSpreadAssignment(
-                                    f.createIdentifier("variables")
+                                  f.createParameterDeclaration(
+                                    undefined,
+                                    undefined,
+                                    f.createIdentifier("variables"),
+                                    undefined,
+                                    variablesType,
+                                    undefined
                                   ),
                                 ],
-                                false
-                              ),
-                            ]
-                          )
+                                undefined,
+                                f.createToken(
+                                  ts.SyntaxKind.EqualsGreaterThanToken
+                                ),
+                                f.createCallExpression(
+                                  f.createIdentifier(operationFetcherFnName),
+                                  undefined,
+                                  [
+                                    f.createObjectLiteralExpression(
+                                      [
+                                        f.createSpreadAssignment(
+                                          f.createIdentifier("fetcherOptions")
+                                        ),
+                                        f.createSpreadAssignment(
+                                          f.createIdentifier("variables")
+                                        ),
+                                      ],
+                                      false
+                                    ),
+                                  ]
+                                )
+                              )
+                            ),
+                            f.createSpreadAssignment(
+                              f.createIdentifier("options")
+                            ),
+                          ],
+                          true
                         ),
-                        f.createIdentifier("options"),
                       ]
                     )
                   ),
@@ -538,64 +550,72 @@ const createQueryHook = ({
                       ),
                     ],
                     [
-                      f.createCallExpression(
-                        f.createIdentifier("queryKeyFn"),
-                        undefined,
-                        [
-                          f.createObjectLiteralExpression([
-                            f.createPropertyAssignment(
-                              "path",
-                              f.createStringLiteral(url)
-                            ),
-                            f.createPropertyAssignment(
-                              "operationId",
-                              f.createStringLiteral(operationId)
-                            ),
-                            f.createShorthandPropertyAssignment(
-                              f.createIdentifier("variables")
-                            ),
-                          ]),
-                        ]
-                      ),
-                      f.createArrowFunction(
-                        undefined,
-                        undefined,
-                        [
-                          f.createParameterDeclaration(
-                            undefined,
-                            undefined,
-                            f.createObjectBindingPattern([
-                              f.createBindingElement(
-                                undefined,
-                                undefined,
-                                "signal"
-                              ),
-                            ])
-                          ),
-                        ],
-                        undefined,
-                        f.createToken(ts.SyntaxKind.EqualsGreaterThanToken),
-                        f.createCallExpression(
-                          f.createIdentifier(operationFetcherFnName),
-                          undefined,
-                          [
-                            f.createObjectLiteralExpression(
-                              [
-                                f.createSpreadAssignment(
-                                  f.createIdentifier("fetcherOptions")
-                                ),
-                                f.createSpreadAssignment(
-                                  f.createIdentifier("variables")
-                                ),
-                              ],
-                              false
-                            ),
-                            f.createIdentifier("signal"),
-                          ]
-                        )
-                      ),
                       f.createObjectLiteralExpression(
                         [
+                          f.createPropertyAssignment(
+                            "queryKey",
+                            f.createCallExpression(
+                              f.createIdentifier("queryKeyFn"),
+                              undefined,
+                              [
+                                f.createObjectLiteralExpression([
+                                  f.createPropertyAssignment(
+                                    "path",
+                                    f.createStringLiteral(url)
+                                  ),
+                                  f.createPropertyAssignment(
+                                    "operationId",
+                                    f.createStringLiteral(operationId)
+                                  ),
+                                  f.createShorthandPropertyAssignment(
+                                    f.createIdentifier("variables")
+                                  ),
+                                ]),
+                              ]
+                            )
+                          ),
+                          f.createPropertyAssignment(
+                            "queryFn",
+                            f.createArrowFunction(
+                              undefined,
+                              undefined,
+                              [
+                                f.createParameterDeclaration(
+                                  undefined,
+                                  undefined,
+                                  f.createObjectBindingPattern([
+                                    f.createBindingElement(
+                                      undefined,
+                                      undefined,
+                                      "signal"
+                                    ),
+                                  ])
+                                ),
+                              ],
+                              undefined,
+                              f.createToken(
+                                ts.SyntaxKind.EqualsGreaterThanToken
+                              ),
+                              f.createCallExpression(
+                                f.createIdentifier(operationFetcherFnName),
+                                undefined,
+                                [
+                                  f.createObjectLiteralExpression(
+                                    [
+                                      f.createSpreadAssignment(
+                                        f.createIdentifier("fetcherOptions")
+                                      ),
+                                      f.createSpreadAssignment(
+                                        f.createIdentifier("variables")
+                                      ),
+                                    ],
+                                    false
+                                  ),
+                                  f.createIdentifier("signal"),
+                                ]
+                              )
+                            )
+                          ),
                           f.createSpreadAssignment(
                             f.createIdentifier("options")
                           ),
