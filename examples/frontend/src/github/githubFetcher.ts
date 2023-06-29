@@ -36,7 +36,7 @@ export async function githubFetch<
   TPathParams
 >): Promise<TData> {
   try {
-    const response = await window.fetch(
+    const response = await fetch(
       `${baseUrl}${resolveUrl(url, queryParams, pathParams)}`,
       {
         method: method.toUpperCase(),

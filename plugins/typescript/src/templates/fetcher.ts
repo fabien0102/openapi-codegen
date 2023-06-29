@@ -88,7 +88,7 @@ export async function ${camel(prefix)}Fetch<
       delete requestHeaders["Content-Type"];
     }
 
-    const response = await window.fetch(\`\${baseUrl}\${resolveUrl(url, queryParams, pathParams)}\`,
+    const response = await fetch(\`\${baseUrl}\${resolveUrl(url, queryParams, pathParams)}\`,
       {
         signal,
         method: method.toUpperCase(),
