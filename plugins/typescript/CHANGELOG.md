@@ -1,5 +1,16 @@
 # Changelog
 
+## [7.0.0](https://github.com/fabien0102/openapi-codegen/compare/typescript-v6.2.4...typescript-v7.0.0) (2023-07-02)
+
+
+### ⚠ BREAKING CHANGES
+
+* Support react-query v5 (use object signatures) #179
+
+### Features
+
+* Support react-query v5 (use object signatures) [#179](https://github.com/fabien0102/openapi-codegen/issues/179) ([e1076af](https://github.com/fabien0102/openapi-codegen/commit/e1076af6387c5eba15306e647bda051c80185164))
+
 ## [6.2.4](https://github.com/fabien0102/openapi-codegen/compare/typescript-v6.2.3...typescript-v6.2.4) (2023-05-10)
 
 
