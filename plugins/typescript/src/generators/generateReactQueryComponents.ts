@@ -659,6 +659,7 @@ const createUseQueryOptionsType = (
     f.createUnionTypeNode([
       f.createLiteralTypeNode(f.createStringLiteral("queryKey")),
       f.createLiteralTypeNode(f.createStringLiteral("queryFn")),
+      f.createLiteralTypeNode(f.createStringLiteral("initialData")),
     ]),
   ]);
 
