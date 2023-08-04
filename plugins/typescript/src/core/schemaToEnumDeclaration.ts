@@ -42,7 +42,7 @@ function getEnumMembers(
     let enumValueNode: ts.Expression | undefined = undefined;
 
     if (typeof enumValue === "string") {
-      enumName = enumValue;
+      enumName = `"${enumValue}"`;
       enumValueNode = f.createStringLiteral(enumValue);
     } else if (typeof enumValue === "number") {
       enumName = convertNumberToWord(enumValue)
