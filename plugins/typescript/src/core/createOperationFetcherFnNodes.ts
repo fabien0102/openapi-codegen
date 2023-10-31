@@ -1,6 +1,6 @@
-import { camel } from "case";
 import { OperationObject } from "openapi3-ts";
 import ts, { factory as f } from "typescript";
+import { camelizedPathParams } from "./camelizedPathParams";
 
 /**
  * Create the declaration of the fetcher function.
@@ -133,12 +133,3 @@ export const createOperationFetcherFnNodes = ({
   );
   return nodes;
 };
-
-/**
- * Transform url params case to camel.
- *
- * @example
- * `pet/{pet_id}` -> `pet/{petId}`
- */
-const camelizedPathParams = (url: string) =>
-  url.replace(/\{[\w\d\-_.]*\}/g, (match) => `{${camel(match)}}`);
