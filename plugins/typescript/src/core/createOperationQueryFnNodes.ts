@@ -1,6 +1,7 @@
 import { camelCase } from "lodash";
 import { OperationObject } from "openapi3-ts";
 import ts, { factory as f } from "typescript";
+import { camelizedPathParams } from "./camelizedPathParams";
 
 /**
  * Create the declaration of the react-router queries.
@@ -156,7 +157,7 @@ export const createOperationQueryFnNodes = ({
                         [
                           f.createPropertyAssignment(
                             f.createIdentifier("path"),
-                            f.createStringLiteral(url)
+                            f.createStringLiteral(camelizedPathParams(url))
                           ),
                           f.createPropertyAssignment(
                             f.createIdentifier("operationId"),

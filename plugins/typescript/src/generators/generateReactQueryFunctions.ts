@@ -19,6 +19,7 @@ import { getFetcher } from "../templates/fetcher";
 import { getContext } from "../templates/context";
 import { getUtils } from "../templates/utils";
 import { createNamespaceImport } from "../core/createNamespaceImport";
+import { camelizedPathParams } from "../core/camelizedPathParams";
 
 export type Config = ConfigBase & {
   /**
@@ -165,7 +166,9 @@ export const generateReactQueryFunctions = async (
                 undefined,
                 f.createIdentifier("path"),
                 undefined,
-                f.createLiteralTypeNode(f.createStringLiteral(route))
+                f.createLiteralTypeNode(
+                  f.createStringLiteral(camelizedPathParams(route))
+                )
               ),
               f.createPropertySignature(
                 undefined,
