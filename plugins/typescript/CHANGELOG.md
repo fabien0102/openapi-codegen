@@ -1,5 +1,24 @@
 # Changelog
 
+## [8.0.0](https://github.com/fabien0102/openapi-codegen/compare/typescript-v7.0.1...typescript-v8.0.0) (2023-11-01)
+
+
+### ⚠ BREAKING CHANGES
+
+* Add camelize to queryKeyFn path parameters ([#203](https://github.com/fabien0102/openapi-codegen/issues/203))
+
+### Bug Fixes
+
+* Add camelize to queryKeyFn path parameters ([#203](https://github.com/fabien0102/openapi-codegen/issues/203)) ([a24d31b](https://github.com/fabien0102/openapi-codegen/commit/a24d31b721f629f5b5da2c284be61341a5ba616f))
+
+## [7.0.1](https://github.com/fabien0102/openapi-codegen/compare/typescript-v7.0.0...typescript-v7.0.1) (2023-09-17)
+
+
+### Bug Fixes
+
+* omit `initialData` to support tanstack-query v5 ([35a28b5](https://github.com/fabien0102/openapi-codegen/commit/35a28b5047ee4ee7e4c0975dec0060d831585a58))
+* Parse dot case in path params ([#201](https://github.com/fabien0102/openapi-codegen/issues/201)) ([84b7928](https://github.com/fabien0102/openapi-codegen/commit/84b79284ee832070b08138e5585873124ce30150)), closes [#101](https://github.com/fabien0102/openapi-codegen/issues/101)
+
 ## [7.0.0](https://github.com/fabien0102/openapi-codegen/compare/typescript-v6.2.4...typescript-v7.0.0) (2023-07-02)
 
 
