@@ -1,4 +1,4 @@
-import { pascal } from "case";
+import { camel, pascal } from "case";
 import { findKey, get, intersection, merge, omit } from "lodash";
 import {
   ComponentsObject,
@@ -38,6 +38,7 @@ export type Context = {
 };
 
 let useEnumsConfigBase: boolean | undefined;
+let useCamelCasedPropsConfigBase: boolean | undefined;
 
 /**
  * Transform an OpenAPI Schema Object to Typescript Nodes (comment & declaration).
@@ -50,9 +51,11 @@ export const schemaToTypeAliasDeclaration = (
   name: string,
   schema: SchemaObject,
   context: Context,
-  useEnums?: boolean
+  useEnums?: boolean,
+  useCamelCasedProps?: boolean
 ): ts.Node[] => {
   useEnumsConfigBase = useEnums;
+  useCamelCasedPropsConfigBase = useCamelCasedProps;
   const jsDocNode = getJSDocComment(schema, context);
   const declarationNode = f.createTypeAliasDeclaration(
     [f.createModifier(ts.SyntaxKind.ExportKeyword)],
@@ -228,12 +231,13 @@ export const getType = (
         schema.properties || {}
       ).map(([key, property]) => {
         const isEnum = typeof property === "object" && "enum" in property && useEnumsConfigBase;
+        const camelizeProps = useCamelCasedPropsConfigBase;
 
         const propertyNode = f.createPropertySignature(
           undefined,
           isValidIdentifier(key)
-            ? f.createIdentifier(key)
-            : f.createComputedPropertyName(f.createStringLiteral(key)),
+            ? f.createIdentifier(camelizeProps ? camel(key): key)
+            : f.createComputedPropertyName(f.createStringLiteral(camelizeProps ? key.split('.').map(camel).join('.') : key)),
           schema.required?.includes(key)
             ? undefined
             : f.createToken(ts.SyntaxKind.QuestionToken),

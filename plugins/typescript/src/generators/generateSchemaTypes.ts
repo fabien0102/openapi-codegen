@@ -56,14 +56,15 @@ export const generateSchemaTypes = async (
     componentSchema.reduce<ts.Node[]>(
       (mem, [name, schema]) => [
         ...mem,
-        ...schemaToTypeAliasDeclaration(
+        ...schemaToTypeAliasDeclaration( // @note schemaToTypeAliasDeclaration called here
           name,
           schema,
           {
             openAPIDocument: context.openAPIDocument,
             currentComponent: "schemas",
           },
-          config.useEnums
+          config.useEnums,
+          config.useCamelCasedProps
         ),
       ],
       []
@@ -91,7 +92,7 @@ export const generateSchemaTypes = async (
       const enumSchemas = enumSchemaEntries.reduce<ts.Node[]>(
         (mem, [name, schema]) => [
           ...mem,
-          ...schemaToEnumDeclaration(name, schema, {
+          ...schemaToEnumDeclaration(name, schema, { // @note schemaToEnumDeclaration called here
             openAPIDocument: context.openAPIDocument,
             currentComponent: "schemas",
           }),
@@ -99,7 +100,7 @@ export const generateSchemaTypes = async (
         []
       );
 
-      const componentsSchemas = handleTypeAlias(
+      const componentsSchemas = handleTypeAlias( // @note schemaToTypeAliasDeclaration indirectly called here
         componentSchemaEntries.filter(
           ([name]) => !enumSchemaEntries.some(([enumName]) => name === enumName)
         )
@@ -107,7 +108,7 @@ export const generateSchemaTypes = async (
 
       schemas.push(...enumSchemas, ...componentsSchemas);
     } else {
-      const componentsSchemas = handleTypeAlias(componentSchemaEntries);
+      const componentsSchemas = handleTypeAlias(componentSchemaEntries); // @note schemaToTypeAliasDeclaration called here
       schemas.push(...componentsSchemas);
     }
 
@@ -131,10 +132,12 @@ export const generateSchemaTypes = async (
 
       return [
         ...mem,
-        ...schemaToTypeAliasDeclaration(name, mediaType?.schema || {}, {
+        ...schemaToTypeAliasDeclaration(name, mediaType?.schema || {}, { // @note schemaToTypeAliasDeclaration called here
           openAPIDocument: context.openAPIDocument,
           currentComponent: "responses",
-        }),
+        },
+          undefined,
+          config.useCamelCasedProps),
       ];
     }, []);
 
@@ -161,10 +164,12 @@ export const generateSchemaTypes = async (
 
       return [
         ...mem,
-        ...schemaToTypeAliasDeclaration(name, mediaType.schema, {
+        ...schemaToTypeAliasDeclaration(name, mediaType.schema, { // @note schemaToTypeAliasDeclaration called here
           openAPIDocument: context.openAPIDocument,
           currentComponent: "requestBodies",
-        }),
+        },
+          undefined,
+          config.useCamelCasedProps),
       ];
     }, []);
 
@@ -190,10 +195,12 @@ export const generateSchemaTypes = async (
       }
       return [
         ...mem,
-        ...schemaToTypeAliasDeclaration(name, parameterObject.schema, {
+        ...schemaToTypeAliasDeclaration(name, parameterObject.schema, { // @note schemaToTypeAliasDeclaration called here
           openAPIDocument: context.openAPIDocument,
           currentComponent: "parameters",
-        }),
+        },
+          undefined,
+          config.useCamelCasedProps),
       ];
     }, []);
 
