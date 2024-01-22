@@ -19,6 +19,7 @@ import { getFetcher } from "../templates/fetcher";
 import { getContext } from "../templates/context";
 import { getUtils } from "../templates/utils";
 import { createNamespaceImport } from "../core/createNamespaceImport";
+import { createZodNamespaceImport } from "../utils/zodHelper";
 import { camelizedPathParams } from "../core/camelizedPathParams";
 
 export type Config = ConfigBase & {
@@ -37,6 +38,12 @@ export type Config = ConfigBase & {
    * This will mark the header as optional in the component API
    */
   injectedHeaders?: string[];
+  
+  zodFiles?: {
+    schemas: string;
+    inferredTypes: string;
+    integrationTests: string;
+  }
 };
 
 export const generateReactQueryFunctions = async (
@@ -196,6 +203,7 @@ export const generateReactQueryFunctions = async (
               url: route,
               verb,
               name: operationFetcherFnName,
+              printNodes,
             }),
             ...createOperationQueryFnNodes({
               operationFetcherFnName,
@@ -273,6 +281,7 @@ export const generateReactQueryFunctions = async (
       ),
       createNamespaceImport("Fetcher", `./${fetcherFilename}`),
       createNamedImport(fetcherFn, `./${fetcherFilename}`),
+      ...createZodNamespaceImport(config.zodFiles?.schemas),
       ...usedImportsNodes,
       ...nodes,
       queryKeyManager,
