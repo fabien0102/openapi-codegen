@@ -7,11 +7,11 @@ import { factory as f } from "typescript";
  * @param filename path of the module
  * @returns ts.Node of the import declaration
  */
-export const createNamespaceImport = (namespace: string, filename: string) =>
+export const createNamespaceImport = (namespace: string, filename: string, isTypeOnly = true) =>
   f.createImportDeclaration(
     undefined,
     f.createImportClause(
-      true,
+      isTypeOnly,
       undefined,
       f.createNamespaceImport(f.createIdentifier(namespace))
     ),

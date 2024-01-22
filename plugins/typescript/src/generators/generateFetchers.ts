@@ -1,21 +1,22 @@
-import ts, { factory as f } from "typescript";
 import * as c from "case";
 import { get } from "lodash";
+import ts, { factory as f } from "typescript";
 
-import { ConfigBase, Context } from "./types";
 import { PathItemObject } from "openapi3-ts";
+import { ConfigBase, Context } from "./types";
 
-import { getUsedImports } from "../core/getUsedImports";
-import { createWatermark } from "../core/createWatermark";
-import { createOperationFetcherFnNodes } from "../core/createOperationFetcherFnNodes";
-import { isVerb } from "../core/isVerb";
-import { isOperationObject } from "../core/isOperationObject";
-import { getOperationTypes } from "../core/getOperationTypes";
 import { createNamedImport } from "../core/createNamedImport";
+import { createOperationFetcherFnNodes } from "../core/createOperationFetcherFnNodes";
+import { createWatermark } from "../core/createWatermark";
+import { getOperationTypes } from "../core/getOperationTypes";
+import { getUsedImports } from "../core/getUsedImports";
+import { isOperationObject } from "../core/isOperationObject";
+import { isVerb } from "../core/isVerb";
 
+import { createNamespaceImport } from "../core/createNamespaceImport";
 import { getFetcher } from "../templates/fetcher";
 import { getUtils } from "../templates/utils";
-import { createNamespaceImport } from "../core/createNamespaceImport";
+import { createZodNamespaceImport } from "../utils/zodHelper";
 
 export type Config = ConfigBase & {
   /**
@@ -33,6 +34,12 @@ export type Config = ConfigBase & {
    * This will mark the header as optional in the component API
    */
   injectedHeaders?: string[];
+  
+  zodFiles?: {
+    schemas: string;
+    inferredTypes: string;
+    integrationTests: string;
+  }
 };
 
 export const generateFetchers = async (context: Context, config: Config) => {
@@ -172,6 +179,7 @@ export const generateFetchers = async (context: Context, config: Config) => {
             url: route,
             verb,
             name: operationId,
+            printNodes,
           })
         );
       });
@@ -230,6 +238,7 @@ export const generateFetchers = async (context: Context, config: Config) => {
       createWatermark(context.openAPIDocument.info),
       createNamespaceImport("Fetcher", `./${fetcherFilename}`),
       createNamedImport(fetcherImports, `./${fetcherFilename}`),
+      ...createZodNamespaceImport(config.zodFiles?.schemas),
       ...usedImportsNodes,
       ...nodes,
     ])
