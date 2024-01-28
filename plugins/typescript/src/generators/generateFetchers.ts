@@ -179,6 +179,7 @@ export const generateFetchers = async (context: Context, config: Config) => {
             url: route,
             verb,
             name: operationId,
+            validateResponseWithZod: config.zodFiles !== undefined,
             printNodes,
           })
         );
