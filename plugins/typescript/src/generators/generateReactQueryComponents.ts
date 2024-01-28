@@ -202,6 +202,7 @@ export const generateReactQueryComponents = async (
             url: route,
             verb,
             name: operationFetcherFnName,
+            validateResponseWithZod: config.zodFiles !== undefined,
             printNodes,
           }),
           ...(component === "useQuery"
