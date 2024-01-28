@@ -21,6 +21,7 @@ export const createOperationFetcherFnNodes = ({
   url,
   verb,
   name,
+  validateResponseWithZod,
   printNodes,
 }: {
   dataType: ts.TypeNode;
@@ -35,6 +36,7 @@ export const createOperationFetcherFnNodes = ({
   url: string;
   verb: string;
   name: string;
+  validateResponseWithZod: boolean;
   printNodes: (nodes: ts.Node[]) => string;
 }) => {
   const nodes: ts.Node[] = [];
@@ -122,7 +124,7 @@ export const createOperationFetcherFnNodes = ({
                               f.createIdentifier("signal")
                             ),
                           ]),
-                      ...createZodValidatorResponse(dataType, printNodes),
+                      ...(validateResponseWithZod ? createZodValidatorResponse(dataType, printNodes) : []),
                     ],
                     false
                   ),
