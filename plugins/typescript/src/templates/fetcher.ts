@@ -130,12 +130,34 @@ export async function ${camel(prefix)}Fetch<
   }
 }
 
+/**
+ * Converts queryParams object into a list of ['key', 'value'] pairs
+ * Changes the way how lists were serialized from key=A%2CB to key=A&key=B
+ */
+const getQueryParamList = (
+  queryParams: Record<string, string> = {}
+): Array<[string, string]> => {
+  const queryParamsList = []
+  for (let param of Object.keys(queryParams)) {
+    const value = queryParams[param]
+    if (Array.isArray(value)) {
+      for (let item of value) {
+        queryParamsList.push([param, item])
+      }
+    } else {
+      queryParamsList.push([param, value])
+    }
+  }
+  return queryParamsList
+}
+
 const resolveUrl = (
   url: string,
   queryParams: Record<string, string> = {},
   pathParams: Record<string, string> = {}
 ) => {
-  let query = new URLSearchParams(queryParams).toString();
+  const queryParamsList = getQueryParamList(queryParams);
+  let query = new URLSearchParams(queryParamsList).toString();
   if (query) query = \`?\${query}\`;
   return url.replace(/\\{\\w*\\}/g, (key) => pathParams[key.slice(1, -1)]) + query;
 };
