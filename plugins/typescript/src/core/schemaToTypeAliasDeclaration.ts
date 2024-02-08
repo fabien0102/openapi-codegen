@@ -150,7 +150,7 @@ export const getType = (
 
   if (schema.enum) {
     if (isNodeEnum) {
-      return f.createTypeReferenceNode(f.createIdentifier(name || ""));
+      return f.createTypeReferenceNode(f.createIdentifier(pascal(name || "")));
     }
 
     const unionTypes = f.createUnionTypeNode([
