@@ -189,6 +189,11 @@ export const getType = (
     schema.type = "array";
   }
 
+  // Handle string constant
+  if (schema.const && !schema.type) {
+    return f.createLiteralTypeNode(f.createStringLiteral(schema.const));
+  }
+
   switch (schema.type) {
     case "null":
       return f.createLiteralTypeNode(f.createNull());
