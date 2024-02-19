@@ -37,7 +37,7 @@ export type ErrorWrapper<TError> =
 
 export type ${pascal(
     prefix
-  )}FetcherOptions<TBody, THeaders, TQueryParams, TPathParams> = {
+  )}FetcherOptions<TBody, THeaders, TQueryParams, TPathParams, TData> = {
   url: string;
   method: string;
   body?: TBody;
@@ -45,6 +45,7 @@ export type ${pascal(
   queryParams?: TQueryParams;
   pathParams?: TPathParams;
   signal?: AbortSignal;
+  responseValidator?: (response: TData) => Promise<TData>;
 } & ${
     contextPath
       ? `${pascal(prefix)}Context["fetcherOptions"];`
@@ -66,11 +67,13 @@ export async function ${camel(prefix)}Fetch<
   pathParams,
   queryParams,
   signal,
+  responseValidator,
 }: ${pascal(prefix)}FetcherOptions<
   TBody,
   THeaders,
   TQueryParams,
-  TPathParams
+  TPathParams,
+  TData
 >): Promise<TData> {
   try {
     const requestHeaders: HeadersInit = {
@@ -114,7 +117,12 @@ export async function ${camel(prefix)}Fetch<
     }
 
     if (response.headers.get('content-type')?.includes('json')) {
-      return await response.json();
+      const json = await response.json();
+      if (responseValidator) {
+        return responseValidator(json);
+      } else {
+        return json;
+      }
     } else {
       // if it is not a json response, assume it is a blob and cast it to TData
       return (await response.blob()) as unknown as TData;
@@ -135,7 +143,11 @@ const resolveUrl = (
   queryParams: Record<string, string> = {},
   pathParams: Record<string, string> = {}
 ) => {
-  let query = new URLSearchParams(queryParams).toString();
+  const filteredQueryParams = Object.entries(queryParams)
+    .filter(([_, value]) => value !== undefined && value !== null)
+    .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {})
+
+  let query = new URLSearchParams(filteredQueryParams).toString()
   if (query) query = \`?\${query}\`;
   return url.replace(/\\{\\w*\\}/g, (key) => pathParams[key.slice(1, -1)]) + query;
 };

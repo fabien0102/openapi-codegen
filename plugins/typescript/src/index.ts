@@ -3,6 +3,7 @@ export { generateSchemaTypes } from "./generators/generateSchemaTypes";
 export { generateReactQueryComponents } from "./generators/generateReactQueryComponents";
 export { generateReactQueryFunctions } from "./generators/generateReactQueryFunctions";
 export { generateFetchers } from "./generators/generateFetchers";
+export { generateZod } from "./generators/generateZod";
 
 // Utils
 export { renameComponent } from "./utils/renameComponent";
