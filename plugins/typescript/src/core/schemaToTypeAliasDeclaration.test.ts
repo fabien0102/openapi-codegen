@@ -4,6 +4,7 @@ import {
   OpenAPIComponentType,
   schemaToTypeAliasDeclaration,
 } from "./schemaToTypeAliasDeclaration";
+import { unset } from "lodash";
 
 describe("schemaToTypeAliasDeclaration", () => {
   it("should generate null", () => {
@@ -119,10 +120,10 @@ describe("schemaToTypeAliasDeclaration", () => {
   it("should skip example which contains `*/` to avoid confusion", () => {
     const schema: SchemaObject = {
       title: "CronTimingCreate",
-      required: ["type", "cron_expression"],
+      required: ["type", "expression"],
       type: "object",
       properties: {
-        cron_expression: {
+        expression: {
           title: "Cron Expression",
           type: "string",
           description: "The string representing the timing's cron expression.",
@@ -145,7 +146,7 @@ describe("schemaToTypeAliasDeclaration", () => {
            * @format cron-string
            * @example [see original specs]
            */
-          cron_expression: string;
+          expression: string;
       };"
     `);
   });
@@ -269,6 +270,78 @@ describe("schemaToTypeAliasDeclaration", () => {
     expect(printSchema(schema)).toMatchInlineSnapshot(`
       "export type Test = {
           [\\"foo.bar\\"]?: string;
+      };"
+    `);
+  });
+  
+  it("should generate an object with escaped keys", () => {
+
+    const schema: SchemaObject = {
+      type: "object",
+      properties: {
+        ["foo.foo_bar"]: {
+          type: "string",
+        },
+      },
+    };
+
+    expect(printSchema(schema)).toMatchInlineSnapshot(`
+      "export type Test = {
+          [\\"foo.foo_bar\\"]?: string;
+      };"
+    `);
+  });
+  
+  
+  it("should generate an object with keys", () => {
+    const schema: SchemaObject = {
+      type: "object",
+      properties: {
+        ["foo_bar"]: {
+          type: "string",
+        },
+      },
+    };
+
+    expect(printSchema(schema)).toMatchInlineSnapshot(`
+      "export type Test = {
+          foo_bar?: string;
+      };"
+    `);
+  });
+
+  it("should generate an object with escaped camelized keys", () => {
+
+    const schema: SchemaObject = {
+      type: "object",
+      properties: {
+        ["foo.foo_bar"]: {
+          type: "string",
+        },
+      },
+    };
+
+    expect(printSchema(schema, undefined, undefined, undefined, true)).toMatchInlineSnapshot(`
+      "export type Test = {
+          [\\"foo.fooBar\\"]?: string;
+      };"
+    `);
+  });
+  
+  
+  it("should generate an object with camelized keys", () => {
+    const schema: SchemaObject = {
+      type: "object",
+      properties: {
+        ["foo_bar"]: {
+          type: "string",
+        },
+      },
+    };
+
+    expect(printSchema(schema, undefined, undefined, undefined, true)).toMatchInlineSnapshot(`
+      "export type Test = {
+          fooBar?: string;
       };"
     `);
   });
@@ -974,7 +1047,8 @@ const printSchema = (
   schema: SchemaObject,
   currentComponent: OpenAPIComponentType = "schemas",
   components?: OpenAPIObject["components"],
-  useEnums?: boolean
+  useEnums?: boolean,
+  useCamelCasedProps?: boolean
 ) => {
   const nodes = schemaToTypeAliasDeclaration(
     "Test",
@@ -983,7 +1057,8 @@ const printSchema = (
       currentComponent,
       openAPIDocument: { components },
     },
-    useEnums
+    useEnums,
+    useCamelCasedProps
   );
 
   const sourceFile = ts.createSourceFile(
