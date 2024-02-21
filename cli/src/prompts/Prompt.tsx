@@ -106,11 +106,10 @@ export class Prompt {
   /**
    * Smart prompt for selecting a github file.
    */
-  public github(token: string): Promise<GithubOptions> {
+  public github(): Promise<GithubOptions> {
     return new Promise<GithubOptions>((resolve) => {
       this.state.next({
         type: "github",
-        token,
         onSubmit: resolve,
       });
     });

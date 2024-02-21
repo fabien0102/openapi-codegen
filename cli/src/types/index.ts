@@ -57,8 +57,10 @@ export type GithubOptions = {
 
   /**
    * Git reference (branch name, commit sha or tag)
+   *
+   * @default HEAD
    */
-  ref: string;
+  ref?: string;
 
   /**
    * OpenAPI specs file path
