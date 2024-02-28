@@ -14,7 +14,7 @@
     "plugins/typescript"
   ],
   "scripts": {
-    "test": "jest",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
     "build:all": "npx lerna run build",
     "all-contrib": "all-contributors"
   },
