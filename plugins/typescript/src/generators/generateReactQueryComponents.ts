@@ -49,7 +49,7 @@ export const generateReactQueryComponents = async (
 
   const printer = ts.createPrinter({
     newLine: ts.NewLineKind.LineFeed,
-    removeComments: false
+    removeComments: false,
   });
 
   const printNodes = (nodes: ts.Node[]) =>
@@ -90,7 +90,7 @@ export const generateReactQueryComponents = async (
       getFetcher({
         prefix: filenamePrefix,
         contextPath: contextFilename,
-        baseUrl: get(context.openAPIDocument, "servers.0.url")
+        baseUrl: get(context.openAPIDocument, "servers.0.url"),
       })
     );
   }
@@ -125,7 +125,7 @@ export const generateReactQueryComponents = async (
           variablesType,
           queryParamsType,
           headersType,
-          declarationNodes
+          declarationNodes,
         } = getOperationTypes({
           openAPIDocument: context.openAPIDocument,
           operation,
@@ -139,7 +139,7 @@ export const generateReactQueryComponents = async (
               undefined
             ),
             f.createLiteralTypeNode(f.createStringLiteral("fetcherOptions"))
-          )
+          ),
         });
 
         nodes.push(...declarationNodes);
@@ -176,7 +176,7 @@ export const generateReactQueryComponents = async (
                 f.createIdentifier("variables"),
                 undefined,
                 variablesType
-              )
+              ),
             ])
           );
         }
@@ -194,7 +194,7 @@ export const generateReactQueryComponents = async (
             fetcherFn,
             url: route,
             verb,
-            name: operationFetcherFnName
+            name: operationFetcherFnName,
           }),
           ...(component === "useQuery"
             ? createQueryHook({
@@ -206,7 +206,7 @@ export const generateReactQueryComponents = async (
                 contextHookName,
                 name: `use${c.pascal(operationId)}`,
                 operationId,
-                url: route
+                url: route,
               })
             : createMutationHook({
                 operationFetcherFnName,
@@ -215,7 +215,7 @@ export const generateReactQueryComponents = async (
                 errorType,
                 variablesType,
                 contextHookName,
-                name: `use${c.pascal(operationId)}`
+                name: `use${c.pascal(operationId)}`,
               }))
         );
       });
@@ -249,7 +249,7 @@ export const generateReactQueryComponents = async (
             f.createIdentifier("variables"),
             undefined,
             f.createKeywordTypeNode(ts.SyntaxKind.UnknownKeyword)
-          )
+          ),
         ])
   );
 
@@ -257,7 +257,7 @@ export const generateReactQueryComponents = async (
     nodes,
     {
       ...config.schemasFiles,
-      utils: utilsFilename
+      utils: utilsFilename,
     }
   );
 
@@ -279,7 +279,7 @@ export const generateReactQueryComponents = async (
       createNamedImport(fetcherFn, `./${fetcherFilename}`),
       ...usedImportsNodes,
       ...nodes,
-      queryKeyManager
+      queryKeyManager,
     ])
   );
 };
@@ -291,7 +291,7 @@ const createMutationHook = ({
   errorType,
   variablesType,
   name,
-  operation
+  operation,
 }: {
   operationFetcherFnName: string;
   contextHookName: string;
@@ -332,10 +332,12 @@ const createMutationHook = ({
                       ),
                       [dataType, errorType, variablesType]
                     ),
-                    f.createLiteralTypeNode(f.createStringLiteral("mutationFn"))
+                    f.createLiteralTypeNode(
+                      f.createStringLiteral("mutationFn")
+                    ),
                   ]),
                   undefined
-                )
+                ),
               ],
               undefined,
               f.createToken(ts.SyntaxKind.EqualsGreaterThanToken),
@@ -352,7 +354,7 @@ const createMutationHook = ({
                               undefined,
                               f.createIdentifier("fetcherOptions"),
                               undefined
-                            )
+                            ),
                           ]),
                           undefined,
                           undefined,
@@ -361,7 +363,7 @@ const createMutationHook = ({
                             undefined,
                             []
                           )
-                        )
+                        ),
                       ],
                       ts.NodeFlags.Const
                     )
@@ -389,7 +391,7 @@ const createMutationHook = ({
                                     undefined,
                                     variablesType,
                                     undefined
-                                  )
+                                  ),
                                 ],
                                 undefined,
                                 f.createToken(
@@ -406,28 +408,28 @@ const createMutationHook = ({
                                         ),
                                         f.createSpreadAssignment(
                                           f.createIdentifier("variables")
-                                        )
+                                        ),
                                       ],
                                       false
-                                    )
+                                    ),
                                   ]
                                 )
                               )
                             ),
                             f.createSpreadAssignment(
                               f.createIdentifier("options")
-                            )
+                            ),
                           ],
                           true
-                        )
+                        ),
                       ]
                     )
-                  )
+                  ),
                 ],
                 true
               )
             )
-          )
+          ),
         ],
         ts.NodeFlags.Const
       )
@@ -446,7 +448,7 @@ const createQueryHook = ({
   name,
   operationId,
   operation,
-  url
+  url,
 }: {
   operationFetcherFnName: string;
   contextHookName: string;
@@ -479,7 +481,7 @@ const createQueryHook = ({
                   "TData",
                   undefined,
                   dataType
-                )
+                ),
               ],
               [
                 f.createParameterDeclaration(
@@ -495,7 +497,7 @@ const createQueryHook = ({
                   f.createIdentifier("options"),
                   f.createToken(ts.SyntaxKind.QuestionToken),
                   createUseQueryOptionsType(dataType, errorType)
-                )
+                ),
               ],
               undefined,
               f.createToken(ts.SyntaxKind.EqualsGreaterThanToken),
@@ -523,7 +525,7 @@ const createQueryHook = ({
                             undefined,
                             f.createIdentifier("queryKeyFn"),
                             undefined
-                          )
+                          ),
                         ]),
                         undefined,
                         undefined,
@@ -532,7 +534,7 @@ const createQueryHook = ({
                           undefined,
                           [f.createIdentifier("options")]
                         )
-                      )
+                      ),
                     ],
                     ts.NodeFlags.Const
                   )
@@ -546,7 +548,10 @@ const createQueryHook = ({
                     [
                       dataType,
                       errorType,
-                      f.createTypeReferenceNode(f.createIdentifier("TData"), [])
+                      f.createTypeReferenceNode(
+                        f.createIdentifier("TData"),
+                        []
+                      ),
                     ],
                     [
                       f.createObjectLiteralExpression(
@@ -570,8 +575,8 @@ const createQueryHook = ({
                                   ),
                                   f.createShorthandPropertyAssignment(
                                     f.createIdentifier("variables")
-                                  )
-                                ])
+                                  ),
+                                ]),
                               ]
                             )
                           ),
@@ -589,9 +594,9 @@ const createQueryHook = ({
                                       undefined,
                                       undefined,
                                       "signal"
-                                    )
+                                    ),
                                   ])
-                                )
+                                ),
                               ],
                               undefined,
                               f.createToken(
@@ -611,14 +616,14 @@ const createQueryHook = ({
                                             f.createIdentifier(
                                               "fetcherOptions"
                                             ),
-                                            f.createIdentifier("variables")
+                                            f.createIdentifier("variables"),
                                           ]
                                         )
-                                      )
+                                      ),
                                     ],
                                     false
                                   ),
-                                  f.createIdentifier("signal")
+                                  f.createIdentifier("signal"),
                                 ]
                               )
                             )
@@ -628,16 +633,16 @@ const createQueryHook = ({
                           ),
                           f.createSpreadAssignment(
                             f.createIdentifier("queryOptions")
-                          )
+                          ),
                         ],
                         true
-                      )
+                      ),
                     ]
                   )
-                )
+                ),
               ])
             )
-          )
+          ),
         ],
         ts.NodeFlags.Const
       )
@@ -660,14 +665,14 @@ const createUseQueryOptionsType = (
       [
         dataType,
         errorType,
-        f.createTypeReferenceNode(f.createIdentifier("TData"), [])
+        f.createTypeReferenceNode(f.createIdentifier("TData"), []),
       ]
     ),
     f.createUnionTypeNode([
       f.createLiteralTypeNode(f.createStringLiteral("queryKey")),
       f.createLiteralTypeNode(f.createStringLiteral("queryFn")),
-      f.createLiteralTypeNode(f.createStringLiteral("initialData"))
-    ])
+      f.createLiteralTypeNode(f.createStringLiteral("initialData")),
+    ]),
   ]);
 
 const createReactQueryImport = () =>
