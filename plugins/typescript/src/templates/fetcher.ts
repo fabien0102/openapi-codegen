@@ -84,7 +84,7 @@ export async function ${camel(prefix)}Fetch<
      * the correct boundary.
      * https://developer.mozilla.org/en-US/docs/Web/API/FormData/Using_FormData_Objects#sending_files_using_a_formdata_object
      */
-    if (requestHeaders["Content-Type"].toLowerCase().includes("multipart/form-data")) {
+    if (requestHeaders["Content-Type"]?.toLowerCase().includes("multipart/form-data")) {
       delete requestHeaders["Content-Type"];
     }
 
@@ -137,6 +137,6 @@ const resolveUrl = (
 ) => {
   let query = new URLSearchParams(queryParams).toString();
   if (query) query = \`?\${query}\`;
-  return url.replace(/\\{\\w*\\}/g, (key) => pathParams[key.slice(1, -1)]) + query;
+  return url.replace(/\\{\\w*\\}/g, (key) => pathParams[key.slice(1, -1)] || key) + query;
 };
 `;
