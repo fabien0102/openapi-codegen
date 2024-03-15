@@ -80,6 +80,7 @@ export const generateReactQueryFunctions = async (
   const contextTypeName = `${c.pascal(filenamePrefix)}Context`;
   const nodes: ts.Node[] = [];
   const keyManagerItems: ts.TypeLiteralNode[] = [];
+  const queryOperationDataTypeItems: ts.TypeElement[] = [];
 
   const fetcherFilename = formatFilename(filenamePrefix + "-fetcher");
   const contextFilename = formatFilename(filenamePrefix + "-context");
@@ -143,8 +144,6 @@ export const generateReactQueryFunctions = async (
           ),
         });
 
-        
-
         const operationFetcherFnName = `fetch${c.pascal(operationId)}`;
         const operationQueryFnName = `${c.pascal(operationId)}Query`;
         const component: "useQuery" | "useMutate" =
@@ -157,7 +156,6 @@ export const generateReactQueryFunctions = async (
         }
 
         if (component === "useQuery") {
-          
           nodes.push(...declarationNodes);
 
           keyManagerItems.push(
@@ -183,6 +181,15 @@ export const generateReactQueryFunctions = async (
                 variablesType
               ),
             ])
+          );
+
+          queryOperationDataTypeItems.push(
+            f.createPropertySignature(
+              undefined,
+              f.createIdentifier(operationId),
+              undefined,
+              dataType
+            )
           );
 
           nodes.push(
@@ -252,6 +259,13 @@ export const generateReactQueryFunctions = async (
         ])
   );
 
+  const queryOperationDataTypes = f.createTypeAliasDeclaration(
+    [f.createModifier(ts.SyntaxKind.ExportKeyword)],
+    "QueryDataTypes",
+    undefined,
+    f.createTypeLiteralNode(queryOperationDataTypeItems)
+  );
+
   const { nodes: usedImportsNodes, keys: usedImportsKeys } = getUsedImports(
     nodes,
     {
@@ -278,6 +292,7 @@ export const generateReactQueryFunctions = async (
       ...usedImportsNodes,
       ...nodes,
       queryKeyManager,
+      queryOperationDataTypes,
     ])
   );
 };
