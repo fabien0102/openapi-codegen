@@ -32,54 +32,54 @@ describe("paramsToSchema", () => {
 
   it("should convert params to an openAPI schema", () => {
     expect(paramsToSchema(params)).toMatchInlineSnapshot(`
-      Object {
-        "properties": Object {
-          "age": Object {
-            "description": undefined,
-            "type": "number",
-          },
-          "breed": Object {
-            "$ref": "#/components/schemas/Breed",
-            "description": undefined,
-          },
-          "color": Object {
-            "description": "The color of the pet",
-            "type": "string",
-          },
-        },
-        "required": Array [
-          "breed",
-          "color",
-          "age",
-        ],
-        "type": "object",
-      }
+     {
+       "properties": {
+         "age": {
+           "description": undefined,
+           "type": "number",
+         },
+         "breed": {
+           "$ref": "#/components/schemas/Breed",
+           "description": undefined,
+         },
+         "color": {
+           "description": "The color of the pet",
+           "type": "string",
+         },
+       },
+       "required": [
+         "breed",
+         "color",
+         "age",
+       ],
+       "type": "object",
+     }
     `);
   });
 
   it("should deal with optional parameters", () => {
     expect(paramsToSchema(params, ["age"])).toMatchInlineSnapshot(`
-      Object {
-        "properties": Object {
-          "age": Object {
-            "description": undefined,
-            "type": "number",
-          },
-          "breed": Object {
-            "$ref": "#/components/schemas/Breed",
-            "description": undefined,
-          },
-          "color": Object {
-            "description": "The color of the pet",
-            "type": "string",
-          },
-        },
-        "required": Array [
-          "breed",
-          "color",
-        ],
-        "type": "object",
-      }
+     {
+       "properties": {
+         "age": {
+           "description": undefined,
+           "type": "number",
+         },
+         "breed": {
+           "$ref": "#/components/schemas/Breed",
+           "description": undefined,
+         },
+         "color": {
+           "description": "The color of the pet",
+           "type": "string",
+         },
+       },
+       "required": [
+         "breed",
+         "color",
+       ],
+       "type": "object",
+     }
     `);
   });
 
@@ -95,16 +95,16 @@ describe("paramsToSchema", () => {
     ]);
 
     expect(schema).toMatchInlineSnapshot(`
-      Object {
-        "properties": Object {
-          "iAmAMonster": Object {
-            "description": undefined,
-            "type": "string",
-          },
-        },
-        "required": Array [],
-        "type": "object",
-      }
+     {
+       "properties": {
+         "iAmAMonster": {
+           "description": undefined,
+           "type": "string",
+         },
+       },
+       "required": [],
+       "type": "object",
+     }
     `);
   });
 
@@ -120,16 +120,16 @@ describe("paramsToSchema", () => {
     ]);
 
     expect(schema).toMatchInlineSnapshot(`
-      Object {
-        "properties": Object {
-          "I am a monster": Object {
-            "description": undefined,
-            "type": "string",
-          },
-        },
-        "required": Array [],
-        "type": "object",
-      }
+     {
+       "properties": {
+         "I am a monster": {
+           "description": undefined,
+           "type": "string",
+         },
+       },
+       "required": [],
+       "type": "object",
+     }
     `);
   });
 });

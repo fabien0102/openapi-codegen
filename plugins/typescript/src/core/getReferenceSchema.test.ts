@@ -4,78 +4,74 @@ import type { OpenAPIObject, SchemasObject } from "openapi3-ts";
 
 type OpenAPIDocWithComponents = Pick<OpenAPIObject, "components">;
 
-const schemas: SchemasObject =  {
-  "Pet": {
-    "type": "object",
-    "description": "Pet",
-    "required": [
-      "id",
-      "name"
-    ],
-    "properties": {
-      "id": {
-        "type": "integer",
-        "format": "int64"
+const schemas: SchemasObject = {
+  Pet: {
+    type: "object",
+    description: "Pet",
+    required: ["id", "name"],
+    properties: {
+      id: {
+        type: "integer",
+        format: "int64",
       },
-      "name": {
-        "type": "string"
+      name: {
+        type: "string",
       },
-      "tag": {
-        "type": "string"
-      }
-    }
+      tag: {
+        type: "string",
+      },
+    },
   },
   "Pet.With.Dot": {
-    "type": "object",
-    "description": "Pet.With.Dot",
-    "required": [
-      "id",
-      "name"
-    ],
-    "properties": {
-      "id": {
-        "type": "integer",
-        "format": "int64"
+    type: "object",
+    description: "Pet.With.Dot",
+    required: ["id", "name"],
+    properties: {
+      id: {
+        type: "integer",
+        format: "int64",
       },
-      "name": {
-        "type": "string"
+      name: {
+        type: "string",
       },
-      "tag": {
-        "type": "string"
-      }
-    }
+      tag: {
+        type: "string",
+      },
+    },
   },
-  "PetRef": {
-    $ref: "#/components/schemas/Pet"
+  PetRef: {
+    $ref: "#/components/schemas/Pet",
   },
 };
 
 const document: OpenAPIDocWithComponents = {
   components: {
-    schemas
-  }
+    schemas,
+  },
 };
 
 const base$Ref = "#/components/schemas";
 
-describe('getReferenceSchema', () => {
-  it('should return the SchemaObject from $ref with a nested leaf path', () => {
+describe("getReferenceSchema", () => {
+  it("should return the SchemaObject from $ref with a nested leaf path", () => {
     const $ref = `${base$Ref}/Pet`;
     const schema = getReferenceSchema($ref, document);
     expect(schema).toBeDefined();
     expect(schema.description).toBe(schemas.Pet.description);
   });
 
-  it('should return the SchemaObject from $ref with a dot-separated leaf path', () => {
+  it("should return the SchemaObject from $ref with a dot-separated leaf path", () => {
     const $ref = `${base$Ref}/Pet.With.Dot`;
     const schema = getReferenceSchema($ref, document);
     expect(schema).toBeDefined();
-    expect(schema.description).toBe(schemas['Pet.With.Dot'].description);
+    expect(schema.description).toBe(schemas["Pet.With.Dot"].description);
   });
 
-  it('should throw an Error if the $ref cannot be found', () => {
+  it("should throw an Error if the $ref cannot be found", () => {
     const $ref = `${base$Ref}/does/not/exist`;
-    expect(() => getReferenceSchema($ref, document)).toThrowError(new RegExp($ref, 'g'));
+    expect(() => getReferenceSchema($ref, document)).toThrow(
+      new RegExp($ref, "g")
+    );
   });
 
   it("should resolve the schema if the $ref has a nested $ref", () => {
