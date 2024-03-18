@@ -140,8 +140,8 @@ export class InitCommand extends Command {
       source === "file"
         ? await this.askForFile()
         : source === "url"
-        ? await this.askForUrl()
-        : await this.prompt.github("todo: inject the token");
+          ? await this.askForUrl()
+          : await this.prompt.github("todo: inject the token");
 
     const namespace = format.camel(
       await this.prompt.input({
@@ -188,7 +188,7 @@ export class InitCommand extends Command {
 
     const prettierConfig = await prettier.resolveConfig(process.cwd());
 
-    const updatedConfig = prettier.format(
+    const updatedConfig = await prettier.format(
       printer.printFile(updatedConfigSourceFile),
       { parser: "babel-ts", ...prettierConfig }
     );
