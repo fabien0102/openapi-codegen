@@ -15,7 +15,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "author": "Fabien Bernard",
+  "author": "Basile Vernouillet",
   "keywords": [
     "openapi",
     "codegen",

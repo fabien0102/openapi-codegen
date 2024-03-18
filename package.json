@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "OpenAPI code generator framework",
   "repository": "https://github.com/karnak19/openapi-codegen",
-  "author": "Fabien Bernard",
+  "author": "Basile Vernouillet",
   "license": "MIT",
   "private": true,
   "engines": {

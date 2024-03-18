@@ -25,7 +25,7 @@
     "plugin",
     "typescript"
   ],
-  "author": "Fabien Bernard",
+  "author": "Basile Vernouillet",
   "license": "MIT",
   "dependencies": {
     "case": "^1.6.3",
