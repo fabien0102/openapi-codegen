@@ -22,7 +22,7 @@ jobs:
         uses: actions/setup-node@v1
         if: ${{ steps.release.outputs.releases_created }}
         with:
-          node-version: 16
+          node-version: 20
           registry-url: "https://registry.npmjs.org"
       - name: Build Packages
         if: ${{ steps.release.outputs.releases_created }}
