@@ -12,10 +12,10 @@ describe("renameComponent", () => {
     const updatedSpecsAsString = JSON.stringify(updatedSpecs);
 
     expect(updatedSpecsAsString.includes("#/components/schemas/Pet")).toBe(
-      false
+      false,
     );
     expect(updatedSpecsAsString.includes("#/components/schemas/APet")).toBe(
-      true
+      true,
     );
   });
 
@@ -28,7 +28,7 @@ describe("renameComponent", () => {
 
     expect(updatedSpecs.components?.schemas?.Pet).toEqual(undefined);
     expect(updatedSpecs.components?.schemas?.APet).toEqual(
-      petstore.components?.schemas?.Pet
+      petstore.components?.schemas?.Pet,
     );
   });
 
@@ -70,39 +70,39 @@ describe("renameComponent", () => {
         openAPIDocument,
         from: "#/components/schemas/Foo",
         to: "#/components/schemas/Baz",
-      })
+      }),
     ).toMatchInlineSnapshot(`
-      Object {
-        "components": Object {
-          "schemas": Object {
-            "Bar": Object {
-              "properties": Object {
-                "foo": Object {
-                  "$ref": "#/components/schemas/Baz",
-                  "description": "Should be rename in Baz",
-                },
-                "fooFoo": Object {
-                  "$ref": "#/components/schemas/FooFoo",
-                },
-              },
-              "type": "object",
-            },
-            "Baz": Object {
-              "description": "Should be rename in Baz",
-              "type": "string",
-            },
-            "FooFoo": Object {
-              "type": "number",
-            },
-          },
-        },
-        "info": Object {
-          "title": "Test",
-          "version": "1.0.0",
-        },
-        "openapi": "3.0.0",
-        "paths": Object {},
-      }
+     {
+       "components": {
+         "schemas": {
+           "Bar": {
+             "properties": {
+               "foo": {
+                 "$ref": "#/components/schemas/Baz",
+                 "description": "Should be rename in Baz",
+               },
+               "fooFoo": {
+                 "$ref": "#/components/schemas/FooFoo",
+               },
+             },
+             "type": "object",
+           },
+           "Baz": {
+             "description": "Should be rename in Baz",
+             "type": "string",
+           },
+           "FooFoo": {
+             "type": "number",
+           },
+         },
+       },
+       "info": {
+         "title": "Test",
+         "version": "1.0.0",
+       },
+       "openapi": "3.0.0",
+       "paths": {},
+     }
     `);
   });
 });

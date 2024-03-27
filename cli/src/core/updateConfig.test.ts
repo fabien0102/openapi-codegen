@@ -4,7 +4,7 @@ import { updateConfig } from "./updateConfig";
 describe("updateConfig", () => {
   const configProperty = ts.factory.createPropertyAssignment(
     "test",
-    ts.factory.createObjectLiteralExpression([], false)
+    ts.factory.createObjectLiteralExpression([], false),
   );
 
   it("should add import statement if not already existing", () => {
@@ -15,7 +15,7 @@ describe("updateConfig", () => {
     const sourceFile = ts.createSourceFile(
       "openapi-codegen.config.ts",
       sourceText,
-      ts.ScriptTarget.Latest
+      ts.ScriptTarget.Latest,
     );
 
     const transformedSourceFile = updateConfig({
@@ -31,13 +31,13 @@ describe("updateConfig", () => {
     });
 
     expect(printer.printFile(transformedSourceFile)).toMatchInlineSnapshot(`
-      "import { generateReactQueryComponents, generateSchemaTypes } from \\"@openapi-codegen/typescript\\";
-      import { defineConfig } from \\"@openapi-codegen/cli\\";
-      // This comment should stay
-      export default defineConfig({
-          test: {}
-      });
-      "
+     "import { generateReactQueryComponents, generateSchemaTypes } from "@openapi-codegen/typescript";
+     import { defineConfig } from "@openapi-codegen/cli";
+     // This comment should stay
+     export default defineConfig({
+         test: {}
+     });
+     "
     `);
   });
 
@@ -51,7 +51,7 @@ describe("updateConfig", () => {
     const sourceFile = ts.createSourceFile(
       "openapi-codegen.config.ts",
       sourceText,
-      ts.ScriptTarget.Latest
+      ts.ScriptTarget.Latest,
     );
 
     const transformedSourceFile = updateConfig({
@@ -67,13 +67,13 @@ describe("updateConfig", () => {
     });
 
     expect(printer.printFile(transformedSourceFile)).toMatchInlineSnapshot(`
-      "import { defineConfig } from \\"@openapi-codegen/cli\\";
-      import { renameComponent, generateReactQueryComponents, generateSchemaTypes } from \\"@openapi-codegen/typescript\\";
-      export default defineConfig({
-          plop: {},
-          test: {}
-      });
-      "
+     "import { defineConfig } from "@openapi-codegen/cli";
+     import { renameComponent, generateReactQueryComponents, generateSchemaTypes } from "@openapi-codegen/typescript";
+     export default defineConfig({
+         plop: {},
+         test: {}
+     });
+     "
     `);
   });
 
@@ -85,7 +85,7 @@ describe("updateConfig", () => {
     const sourceFile = ts.createSourceFile(
       "openapi-codegen.config.ts",
       sourceText,
-      ts.ScriptTarget.Latest
+      ts.ScriptTarget.Latest,
     );
 
     const transformedSourceFile = updateConfig({
@@ -101,12 +101,12 @@ describe("updateConfig", () => {
     });
 
     expect(printer.printFile(transformedSourceFile)).toMatchInlineSnapshot(`
-      "import { defineConfig } from \\"@openapi-codegen/cli\\";
-      import { renameComponent, generateReactQueryComponents, generateSchemaTypes } from \\"@openapi-codegen/typescript\\";
-      export default defineConfig({
-          test: {}
-      });
-      "
+     "import { defineConfig } from "@openapi-codegen/cli";
+     import { renameComponent, generateReactQueryComponents, generateSchemaTypes } from "@openapi-codegen/typescript";
+     export default defineConfig({
+         test: {}
+     });
+     "
     `);
   });
 });

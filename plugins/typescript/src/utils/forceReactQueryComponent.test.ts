@@ -20,7 +20,7 @@ describe("forceReactQueryComponent", () => {
         component: "useMutate",
         operationId: "notFound",
       })
-    ).toThrowError(
+    ).toThrow(
       `[forceReactQueryComponent] Operation with the operationId "notFound" not found`
     );
   });
