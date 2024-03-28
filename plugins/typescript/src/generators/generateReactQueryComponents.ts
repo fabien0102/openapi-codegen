@@ -204,7 +204,7 @@ export const generateReactQueryComponents = async (
                 errorType,
                 variablesType,
                 contextHookName,
-                name: `use${c.pascal(operationId)}`,
+                name: c.pascal(operationId),
                 operationId,
                 url: route,
               })
@@ -463,13 +463,14 @@ const createQueryHook = ({
   if (operation.description) {
     nodes.push(f.createJSDocComment(operation.description.trim(), []));
   }
+  // Create usePrepareX hook
   nodes.push(
     f.createVariableStatement(
       [f.createModifier(ts.SyntaxKind.ExportKeyword)],
       f.createVariableDeclarationList(
         [
           f.createVariableDeclaration(
-            f.createIdentifier(name),
+            f.createIdentifier(`usePrepare${name}`),
             undefined,
             undefined,
             f.createArrowFunction(
@@ -483,13 +484,6 @@ const createQueryHook = ({
                 ),
               ],
               [
-                f.createParameterDeclaration(
-                  undefined,
-                  undefined,
-                  f.createIdentifier("variables"),
-                  undefined,
-                  variablesType
-                ),
                 f.createParameterDeclaration(
                   undefined,
                   undefined,
@@ -539,6 +533,177 @@ const createQueryHook = ({
                   )
                 ),
                 f.createReturnStatement(
+                  f.createArrowFunction(
+                    undefined,
+                    undefined,
+                    [
+                      f.createParameterDeclaration(
+                        undefined,
+                        undefined,
+                        f.createIdentifier("variables"),
+                        undefined,
+                        variablesType
+                      ),
+                    ],
+                    f.createTypeReferenceNode(
+                      f.createQualifiedName(
+                        f.createIdentifier("reactQuery"),
+                        f.createIdentifier("UseQueryOptions")
+                      ),
+                      [
+                        dataType,
+                        errorType,
+                        f.createTypeReferenceNode(
+                          f.createIdentifier("TData"),
+                          []
+                        ),
+                      ]
+                    ),
+                    undefined,
+                    f.createObjectLiteralExpression(
+                      [
+                        f.createPropertyAssignment(
+                          "queryKey",
+                          f.createCallExpression(
+                            f.createIdentifier("queryKeyFn"),
+                            undefined,
+                            [
+                              f.createObjectLiteralExpression([
+                                f.createPropertyAssignment(
+                                  "path",
+                                  f.createStringLiteral(
+                                    camelizedPathParams(url)
+                                  )
+                                ),
+                                f.createPropertyAssignment(
+                                  "operationId",
+                                  f.createStringLiteral(operationId)
+                                ),
+                                f.createShorthandPropertyAssignment(
+                                  f.createIdentifier("variables")
+                                ),
+                              ]),
+                            ]
+                          )
+                        ),
+                        f.createPropertyAssignment(
+                          "queryFn",
+                          f.createArrowFunction(
+                            undefined,
+                            undefined,
+                            [
+                              f.createParameterDeclaration(
+                                undefined,
+                                undefined,
+                                f.createObjectBindingPattern([
+                                  f.createBindingElement(
+                                    undefined,
+                                    undefined,
+                                    "signal"
+                                  ),
+                                ])
+                              ),
+                            ],
+                            undefined,
+                            f.createToken(ts.SyntaxKind.EqualsGreaterThanToken),
+                            f.createCallExpression(
+                              f.createIdentifier(operationFetcherFnName),
+                              undefined,
+                              [
+                                f.createObjectLiteralExpression(
+                                  [
+                                    f.createSpreadAssignment(
+                                      f.createIdentifier("fetcherOptions")
+                                    ),
+                                    f.createSpreadAssignment(
+                                      f.createIdentifier("variables")
+                                    ),
+                                  ],
+                                  false
+                                ),
+                                f.createIdentifier("signal"),
+                              ]
+                            )
+                          )
+                        ),
+                        f.createSpreadAssignment(f.createIdentifier("options")),
+                        f.createSpreadAssignment(
+                          f.createIdentifier("queryOptions")
+                        ),
+                      ],
+                      true
+                    )
+                  )
+                ),
+              ])
+            )
+          ),
+        ],
+        ts.NodeFlags.Const
+      )
+    )
+  );
+  if (operation.description) {
+    nodes.push(f.createJSDocComment(operation.description.trim(), []));
+  }
+  // Create useX hook that uses usePrepareX
+  nodes.push(
+    f.createVariableStatement(
+      [f.createModifier(ts.SyntaxKind.ExportKeyword)],
+      f.createVariableDeclarationList(
+        [
+          f.createVariableDeclaration(
+            f.createIdentifier(`use${name}`),
+            undefined,
+            undefined,
+            f.createArrowFunction(
+              undefined,
+              [
+                f.createTypeParameterDeclaration(
+                  undefined,
+                  "TData",
+                  undefined,
+                  dataType
+                ),
+              ],
+              [
+                f.createParameterDeclaration(
+                  undefined,
+                  undefined,
+                  f.createIdentifier("variables"),
+                  undefined,
+                  variablesType
+                ),
+                f.createParameterDeclaration(
+                  undefined,
+                  undefined,
+                  f.createIdentifier("options"),
+                  f.createToken(ts.SyntaxKind.QuestionToken),
+                  createUseQueryOptionsType(dataType, errorType)
+                ),
+              ],
+              undefined,
+              f.createToken(ts.SyntaxKind.EqualsGreaterThanToken),
+              f.createBlock([
+                f.createVariableStatement(
+                  undefined,
+                  f.createVariableDeclarationList(
+                    [
+                      f.createVariableDeclaration(
+                        f.createIdentifier("prepare"),
+                        undefined,
+                        undefined,
+                        f.createCallExpression(
+                          f.createIdentifier(`usePrepare${name}`),
+                          undefined,
+                          [f.createIdentifier("options")]
+                        )
+                      ),
+                    ],
+                    ts.NodeFlags.Const
+                  )
+                ),
+                f.createReturnStatement(
                   f.createCallExpression(
                     f.createPropertyAccessExpression(
                       f.createIdentifier("reactQuery"),
@@ -553,82 +718,10 @@ const createQueryHook = ({
                       ),
                     ],
                     [
-                      f.createObjectLiteralExpression(
-                        [
-                          f.createPropertyAssignment(
-                            "queryKey",
-                            f.createCallExpression(
-                              f.createIdentifier("queryKeyFn"),
-                              undefined,
-                              [
-                                f.createObjectLiteralExpression([
-                                  f.createPropertyAssignment(
-                                    "path",
-                                    f.createStringLiteral(
-                                      camelizedPathParams(url)
-                                    )
-                                  ),
-                                  f.createPropertyAssignment(
-                                    "operationId",
-                                    f.createStringLiteral(operationId)
-                                  ),
-                                  f.createShorthandPropertyAssignment(
-                                    f.createIdentifier("variables")
-                                  ),
-                                ]),
-                              ]
-                            )
-                          ),
-                          f.createPropertyAssignment(
-                            "queryFn",
-                            f.createArrowFunction(
-                              undefined,
-                              undefined,
-                              [
-                                f.createParameterDeclaration(
-                                  undefined,
-                                  undefined,
-                                  f.createObjectBindingPattern([
-                                    f.createBindingElement(
-                                      undefined,
-                                      undefined,
-                                      "signal"
-                                    ),
-                                  ])
-                                ),
-                              ],
-                              undefined,
-                              f.createToken(
-                                ts.SyntaxKind.EqualsGreaterThanToken
-                              ),
-                              f.createCallExpression(
-                                f.createIdentifier(operationFetcherFnName),
-                                undefined,
-                                [
-                                  f.createObjectLiteralExpression(
-                                    [
-                                      f.createSpreadAssignment(
-                                        f.createIdentifier("fetcherOptions")
-                                      ),
-                                      f.createSpreadAssignment(
-                                        f.createIdentifier("variables")
-                                      ),
-                                    ],
-                                    false
-                                  ),
-                                  f.createIdentifier("signal"),
-                                ]
-                              )
-                            )
-                          ),
-                          f.createSpreadAssignment(
-                            f.createIdentifier("options")
-                          ),
-                          f.createSpreadAssignment(
-                            f.createIdentifier("queryOptions")
-                          ),
-                        ],
-                        true
+                      f.createCallExpression(
+                        f.createIdentifier("prepare"),
+                        undefined,
+                        [f.createIdentifier("variables")]
                       ),
                     ]
                   )
