@@ -210,6 +210,7 @@ export const generateReactQueryFunctions = async (
               queryParamsType,
               headersType,
               operation,
+              operationId,
               fetcherFn,
               url: route,
               verb,

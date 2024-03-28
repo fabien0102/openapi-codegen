@@ -19,6 +19,7 @@ export const createOperationQueryFnNodes = ({
   variablesType,
   fetcherFn,
   operation,
+  operationId,
   url,
   verb,
   name,
@@ -32,6 +33,7 @@ export const createOperationQueryFnNodes = ({
   queryParamsType: ts.TypeNode;
   variablesType: ts.TypeNode;
   operation: OperationObject;
+  operationId: string;
   fetcherFn: string;
   url: string;
   verb: string;
@@ -161,9 +163,7 @@ export const createOperationQueryFnNodes = ({
                           ),
                           f.createPropertyAssignment(
                             f.createIdentifier("operationId"),
-                            f.createStringLiteral(
-                              operation.operationId as string
-                            )
+                            f.createStringLiteral(operationId)
                           ),
                           f.createShorthandPropertyAssignment(
                             f.createIdentifier("variables"),
