@@ -20,7 +20,7 @@
   },
   "devDependencies": {
     "@swc/jest": "^0.2.36",
-    "@types/jest": "^27.0.2",
+    "@types/jest": "^29.5.12",
     "@types/node": "^20.11.30",
     "all-contributors-cli": "^6.26.1",
     "eslint": "^8.57.0",
