@@ -233,7 +233,7 @@ describe("generateSchemaTypes", () => {
         export enum DogBreed {
             saimois = \\"saimois\\",
             bengal = \\"bengal\\",
-            british shorthair = \\"british shorthair\\"
+            british_shorthair = \\"british shorthair\\"
         }
 
         /**

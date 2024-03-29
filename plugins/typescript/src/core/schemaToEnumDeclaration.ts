@@ -42,7 +42,8 @@ function getEnumMembers(
     let enumValueNode: ts.Expression | undefined = undefined;
 
     if (typeof enumValue === "string") {
-      enumName = enumValue;
+      enumName = enumValue
+        .replace(/[^a-z0-9_]/gi, "_");
       enumValueNode = f.createStringLiteral(enumValue);
     } else if (typeof enumValue === "number") {
       enumName = convertNumberToWord(enumValue)
