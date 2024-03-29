@@ -4,7 +4,7 @@ import { convertNumberToWord, getEnumProperties } from "./getEnumProperties";
 describe("getEnumProperties", () => {
   it("should return an empty array when input schema array is empty", () => {
     const result = getEnumProperties([]);
-    expect(result).toMatchInlineSnapshot(`Array []`);
+    expect(result).toMatchInlineSnapshot(`[]`);
   });
 
   it("should correctly extract root enum properties", () => {
@@ -20,18 +20,18 @@ describe("getEnumProperties", () => {
 
     const result = getEnumProperties(mockRootEnumSchema);
     expect(result).toMatchInlineSnapshot(`
-      Array [
-        Array [
-          "MyUserStatus",
-          Object {
-            "enum": Array [
-              "ENABLED",
-              "DISABLED",
-            ],
-            "type": "string",
-          },
-        ],
-      ]
+     [
+       [
+         "MyUserStatus",
+         {
+           "enum": [
+             "ENABLED",
+             "DISABLED",
+           ],
+           "type": "string",
+         },
+       ],
+     ]
     `);
   });
 
@@ -91,20 +91,20 @@ describe("getEnumProperties", () => {
 
     const result = getEnumProperties(mockSchemaWithNestedEnums);
     expect(result).toMatchInlineSnapshot(`
-      Array [
-        Array [
-          "PetStatus",
-          Object {
-            "description": "pet status in the store",
-            "enum": Array [
-              "AVAILABLE",
-              "PENDING",
-              "SOLD",
-            ],
-            "type": "string",
-          },
-        ],
-      ]
+     [
+       [
+         "PetStatus",
+         {
+           "description": "pet status in the store",
+           "enum": [
+             "AVAILABLE",
+             "PENDING",
+             "SOLD",
+           ],
+           "type": "string",
+         },
+       ],
+     ]
     `);
   });
 });
