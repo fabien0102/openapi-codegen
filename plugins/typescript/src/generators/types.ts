@@ -31,4 +31,10 @@ export type ConfigBase = {
    * @default false
    */
   useEnums?: boolean;
+  /**
+   * Uses camelized property names instead of snake case.
+   *
+   * @default false
+   */
+  useCamelCasedProps?: boolean;
 };
