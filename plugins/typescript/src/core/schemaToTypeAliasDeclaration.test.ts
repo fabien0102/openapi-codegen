@@ -65,7 +65,7 @@ describe("schemaToTypeAliasDeclaration", () => {
     };
 
     expect(printSchema(schema)).toBe(
-      `export type Test = "foo" | "bar" | "baz";`
+      `export type Test = "foo" | "bar" | "baz";`,
     );
   });
 
@@ -103,7 +103,7 @@ describe("schemaToTypeAliasDeclaration", () => {
     };
 
     expect(printSchema(schema)).toBe(
-      `export type Test = "foo" | "bar" | "baz" | null;`
+      `export type Test = "foo" | "bar" | "baz" | null;`,
     );
   });
 
@@ -267,9 +267,9 @@ describe("schemaToTypeAliasDeclaration", () => {
     };
 
     expect(printSchema(schema)).toMatchInlineSnapshot(`
-      "export type Test = {
-          [\\"foo.bar\\"]?: string;
-      };"
+     "export type Test = {
+         ["foo.bar"]?: string;
+     };"
     `);
   });
 
@@ -339,7 +339,7 @@ describe("schemaToTypeAliasDeclaration", () => {
     };
 
     expect(printSchema(schema)).toMatchInlineSnapshot(
-      `"export type Test = User;"`
+      `"export type Test = User;"`,
     );
   });
 
@@ -349,7 +349,7 @@ describe("schemaToTypeAliasDeclaration", () => {
     };
 
     expect(printSchema(schema, "parameters")).toMatchInlineSnapshot(
-      `"export type Test = Schemas.User;"`
+      `"export type Test = Schemas.User;"`,
     );
   });
 
@@ -359,7 +359,7 @@ describe("schemaToTypeAliasDeclaration", () => {
     };
 
     expect(printSchema(schema)).toMatchInlineSnapshot(
-      `"export type Test = Record<string, any>;"`
+      `"export type Test = Record<string, any>;"`,
     );
   });
 
@@ -482,7 +482,7 @@ describe("schemaToTypeAliasDeclaration", () => {
     };
 
     expect(printSchema(schema)).toMatchInlineSnapshot(
-      `"export type Test = Foo[];"`
+      `"export type Test = Foo[];"`,
     );
   });
 
@@ -490,7 +490,7 @@ describe("schemaToTypeAliasDeclaration", () => {
     const schema: SchemaObject = {};
 
     expect(printSchema(schema)).toMatchInlineSnapshot(
-      `"export type Test = void;"`
+      `"export type Test = void;"`,
     );
   });
 
@@ -500,7 +500,7 @@ describe("schemaToTypeAliasDeclaration", () => {
     };
 
     expect(printSchema(schema)).toMatchInlineSnapshot(
-      `"export type Test = string | number;"`
+      `"export type Test = string | number;"`,
     );
   });
 
@@ -549,15 +549,15 @@ describe("schemaToTypeAliasDeclaration", () => {
               },
             },
           },
-        })
+        }),
       ).toMatchInlineSnapshot(`
-        "export type Test = (Omit<Foo, \\"discriminatorPropertyName\\"> & {
-            discriminatorPropertyName: \\"foo\\";
-        }) | (Omit<Bar, \\"discriminatorPropertyName\\"> & {
-            discriminatorPropertyName: \\"bar\\";
-        }) | (Omit<Baz, \\"discriminatorPropertyName\\"> & {
-            discriminatorPropertyName: \\"baz\\";
-        });"
+       "export type Test = (Omit<Foo, "discriminatorPropertyName"> & {
+           discriminatorPropertyName: "foo";
+       }) | (Omit<Bar, "discriminatorPropertyName"> & {
+           discriminatorPropertyName: "bar";
+       }) | (Omit<Baz, "discriminatorPropertyName"> & {
+           discriminatorPropertyName: "baz";
+       });"
       `);
     });
 
@@ -569,15 +569,15 @@ describe("schemaToTypeAliasDeclaration", () => {
             Bar: { type: "object", properties: { bar: { type: "string" } } },
             Baz: { type: "object", properties: { baz: { type: "string" } } },
           },
-        })
+        }),
       ).toMatchInlineSnapshot(`
-        "export type Test = (Foo & {
-            discriminatorPropertyName: \\"foo\\";
-        }) | (Bar & {
-            discriminatorPropertyName: \\"bar\\";
-        }) | (Baz & {
-            discriminatorPropertyName: \\"baz\\";
-        });"
+       "export type Test = (Foo & {
+           discriminatorPropertyName: "foo";
+       }) | (Bar & {
+           discriminatorPropertyName: "bar";
+       }) | (Baz & {
+           discriminatorPropertyName: "baz";
+       });"
       `);
     });
 
@@ -615,7 +615,7 @@ describe("schemaToTypeAliasDeclaration", () => {
               required: ["discriminatorPropertyName"],
             },
           },
-        })
+        }),
       ).toMatchInlineSnapshot(`"export type Test = Foo | Bar | Baz;"`);
     });
   });
@@ -628,20 +628,20 @@ describe("schemaToTypeAliasDeclaration", () => {
           { type: "object", properties: { bar: { type: "number" } } },
         ],
         properties: {
-          foobar: {type: "string"}
+          foobar: { type: "string" },
         },
-        required: ['foo', 'foobar']
+        required: ["foo", "foobar"],
       };
 
       expect(printSchema(schema)).toMatchInlineSnapshot(`
-      "export type Test = {
-          foo: string;
-          bar?: number;
-          foobar: string;
-      };"
-    `);
+             "export type Test = {
+                 foo: string;
+                 bar?: number;
+                 foobar: string;
+             };"
+          `);
     });
-    
+
     it("should combine additionalProperties and allOf", () => {
       const schema: SchemaObject = {
         allOf: [
@@ -649,20 +649,20 @@ describe("schemaToTypeAliasDeclaration", () => {
           { type: "object", properties: { bar: { type: "number" } } },
         ],
         additionalProperties: {
-          type: "string"
-        }
+          type: "string",
+        },
       };
 
       expect(printSchema(schema)).toMatchInlineSnapshot(`
-      "export type Test = {
-          foo?: string;
-          bar?: number;
-      } & {
-          [key: string]: string;
-      };"
-    `);
+             "export type Test = {
+                 foo?: string;
+                 bar?: number;
+             } & {
+                 [key: string]: string;
+             };"
+          `);
     });
-    
+
     it("should combine properties & additionalProperties & allOf", () => {
       const schema: SchemaObject = {
         allOf: [
@@ -670,23 +670,23 @@ describe("schemaToTypeAliasDeclaration", () => {
           { type: "object", properties: { bar: { type: "number" } } },
         ],
         additionalProperties: {
-          type: "string"
+          type: "string",
         },
         properties: {
-          foobar: {type: "string"}
+          foobar: { type: "string" },
         },
-        required: ['bar', 'foobar']
+        required: ["bar", "foobar"],
       };
 
       expect(printSchema(schema)).toMatchInlineSnapshot(`
-      "export type Test = {
-          foo?: string;
-          bar: number;
-          foobar: string;
-      } & {
-          [key: string]: string;
-      };"
-    `);
+             "export type Test = {
+                 foo?: string;
+                 bar: number;
+                 foobar: string;
+             } & {
+                 [key: string]: string;
+             };"
+          `);
     });
 
     it("should combine inline types", () => {
@@ -760,7 +760,7 @@ describe("schemaToTypeAliasDeclaration", () => {
       };
 
       expect(printSchema(schema)).toMatchInlineSnapshot(
-        `"export type Test = never;"`
+        `"export type Test = never;"`,
       );
     });
 
@@ -834,7 +834,7 @@ describe("schemaToTypeAliasDeclaration", () => {
       };
 
       expect(printSchema(schema)).toMatchInlineSnapshot(
-        `"export type Test = string | number;"`
+        `"export type Test = string | number;"`,
       );
     });
 
@@ -898,73 +898,73 @@ describe("schemaToTypeAliasDeclaration", () => {
       };
 
       expect(printSchema(schema)).toMatchInlineSnapshot(`
-        "export type Test = {
-            /**
-             * Description of the gist
-             *
-             * @example Example Ruby script
-             */
-            description: string;
-            /**
-             * Names of files to be updated
-             *
-             * @example {\\"hello.rb\\":{\\"content\\":\\"blah\\",\\"filename\\":\\"goodbye.rb\\"}}
-             */
-            files?: {
-                [key: string]: {
-                    /**
-                     * The new content of the file
-                     */
-                    content: string;
-                    /**
-                     * The new filename for the file
-                     */
-                    filename?: string | null;
-                } | {
-                    /**
-                     * The new content of the file
-                     */
-                    content?: string;
-                    /**
-                     * The new filename for the file
-                     */
-                    filename: string | null;
-                } | {} | null;
-            };
-        } | {
-            /**
-             * Description of the gist
-             *
-             * @example Example Ruby script
-             */
-            description?: string;
-            /**
-             * Names of files to be updated
-             *
-             * @example {\\"hello.rb\\":{\\"content\\":\\"blah\\",\\"filename\\":\\"goodbye.rb\\"}}
-             */
-            files: {
-                [key: string]: {
-                    /**
-                     * The new content of the file
-                     */
-                    content: string;
-                    /**
-                     * The new filename for the file
-                     */
-                    filename?: string | null;
-                } | {
-                    /**
-                     * The new content of the file
-                     */
-                    content?: string;
-                    /**
-                     * The new filename for the file
-                     */
-                    filename: string | null;
-                } | {} | null;
-            };
-        } | null;"
+       "export type Test = {
+           /**
+            * Description of the gist
+            *
+            * @example Example Ruby script
+            */
+           description: string;
+           /**
+            * Names of files to be updated
+            *
+            * @example {"hello.rb":{"content":"blah","filename":"goodbye.rb"}}
+            */
+           files?: {
+               [key: string]: {
+                   /**
+                    * The new content of the file
+                    */
+                   content: string;
+                   /**
+                    * The new filename for the file
+                    */
+                   filename?: string | null;
+               } | {
+                   /**
+                    * The new content of the file
+                    */
+                   content?: string;
+                   /**
+                    * The new filename for the file
+                    */
+                   filename: string | null;
+               } | {} | null;
+           };
+       } | {
+           /**
+            * Description of the gist
+            *
+            * @example Example Ruby script
+            */
+           description?: string;
+           /**
+            * Names of files to be updated
+            *
+            * @example {"hello.rb":{"content":"blah","filename":"goodbye.rb"}}
+            */
+           files: {
+               [key: string]: {
+                   /**
+                    * The new content of the file
+                    */
+                   content: string;
+                   /**
+                    * The new filename for the file
+                    */
+                   filename?: string | null;
+               } | {
+                   /**
+                    * The new content of the file
+                    */
+                   content?: string;
+                   /**
+                    * The new filename for the file
+                    */
+                   filename: string | null;
+               } | {} | null;
+           };
+       } | null;"
       `);
     });
   });
@@ -974,7 +974,7 @@ const printSchema = (
   schema: SchemaObject,
   currentComponent: OpenAPIComponentType = "schemas",
   components?: OpenAPIObject["components"],
-  useEnums?: boolean
+  useEnums?: boolean,
 ) => {
   const nodes = schemaToTypeAliasDeclaration(
     "Test",
@@ -983,13 +983,13 @@ const printSchema = (
       currentComponent,
       openAPIDocument: { components },
     },
-    useEnums
+    useEnums,
   );
 
   const sourceFile = ts.createSourceFile(
     "index.ts",
     "",
-    ts.ScriptTarget.Latest
+    ts.ScriptTarget.Latest,
   );
 
   const printer = ts.createPrinter({
@@ -999,7 +999,7 @@ const printSchema = (
 
   return nodes
     .map((node: ts.Node) =>
-      printer.printNode(ts.EmitHint.Unspecified, node, sourceFile)
+      printer.printNode(ts.EmitHint.Unspecified, node, sourceFile),
     )
     .join("\n");
 };

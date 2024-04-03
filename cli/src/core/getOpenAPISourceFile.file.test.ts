@@ -9,19 +9,19 @@ describe("getOpenAPISourceFile (source = file)", () => {
 
     expect(format).toBe("yaml");
     expect(text).toMatchInlineSnapshot(`
-      "openapi: \\"3.0.2\\"
-      info:
-        title: API Title
-        version: \\"1.0\\"
-      servers:
-        - url: https://api.server.test/v1
-      paths:
-        /test:
-          get:
-            responses:
-              \\"200\\":
-                description: OK
-      "
+     "openapi: "3.0.2"
+     info:
+       title: API Title
+       version: "1.0"
+     servers:
+       - url: https://api.server.test/v1
+     paths:
+       /test:
+         get:
+           responses:
+             "200":
+               description: OK
+     "
     `);
   });
 
@@ -33,19 +33,19 @@ describe("getOpenAPISourceFile (source = file)", () => {
 
     expect(format).toBe("yaml");
     expect(text).toMatchInlineSnapshot(`
-      "openapi: \\"3.0.2\\"
-      info:
-        title: API Title
-        version: \\"1.0\\"
-      servers:
-        - url: https://api.server.test/v1
-      paths:
-        /test:
-          get:
-            responses:
-              \\"200\\":
-                description: OK
-      "
+     "openapi: "3.0.2"
+     info:
+       title: API Title
+       version: "1.0"
+     servers:
+       - url: https://api.server.test/v1
+     paths:
+       /test:
+         get:
+           responses:
+             "200":
+               description: OK
+     "
     `);
   });
 
@@ -57,30 +57,30 @@ describe("getOpenAPISourceFile (source = file)", () => {
 
     expect(format).toBe("json");
     expect(text).toMatchInlineSnapshot(`
-      "{
-        \\"openapi\\": \\"3.0.2\\",
-        \\"info\\": {
-          \\"title\\": \\"API Title\\",
-          \\"version\\": \\"1.0\\"
-        },
-        \\"servers\\": [
-          {
-            \\"url\\": \\"https://api.server.test/v1\\"
-          }
-        ],
-        \\"paths\\": {
-          \\"/test\\": {
-            \\"get\\": {
-              \\"responses\\": {
-                \\"200\\": {
-                  \\"description\\": \\"OK\\"
-                }
-              }
-            }
-          }
-        }
-      }
-      "
+     "{
+       "openapi": "3.0.2",
+       "info": {
+         "title": "API Title",
+         "version": "1.0"
+       },
+       "servers": [
+         {
+           "url": "https://api.server.test/v1"
+         }
+       ],
+       "paths": {
+         "/test": {
+           "get": {
+             "responses": {
+               "200": {
+                 "description": "OK"
+               }
+             }
+           }
+         }
+       }
+     }
+     "
     `);
   });
 
@@ -93,7 +93,7 @@ describe("getOpenAPISourceFile (source = file)", () => {
       fail("should throw an error");
     } catch (e) {
       expect(e).toMatchInlineSnapshot(
-        `[Error: "yolo" extension file is not supported!]`
+        `[Error: "yolo" extension file is not supported!]`,
       );
     }
   });

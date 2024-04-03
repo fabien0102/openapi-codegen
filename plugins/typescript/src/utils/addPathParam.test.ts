@@ -41,46 +41,46 @@ describe("addPathParam", () => {
     });
 
     expect(openAPIDocumentWithPathParam).toMatchInlineSnapshot(`
-      Object {
-        "info": Object {
-          "title": "petshop",
-          "version": "1.0.0",
-        },
-        "openapi": "3.0.0",
-        "paths": Object {
-          "/pets": Object {
-            "get": Object {
-              "description": "Get all the pets",
-              "operationId": "listPets",
-              "responses": Object {
-                "200": Object {
-                  "content": Object {
-                    "application/json": Object {
-                      "schema": Object {
-                        "items": Object {
-                          "$ref": "#/components/schemas/Pet",
-                        },
-                        "type": "array",
-                      },
-                    },
-                  },
-                  "description": "pet response",
-                },
-              },
-            },
-            "parameters": Array [
-              Object {
-                "in": "path",
-                "name": "breed",
-                "required": false,
-                "schema": Object {
-                  "type": "string",
-                },
-              },
-            ],
-          },
-        },
-      }
+     {
+       "info": {
+         "title": "petshop",
+         "version": "1.0.0",
+       },
+       "openapi": "3.0.0",
+       "paths": {
+         "/pets": {
+           "get": {
+             "description": "Get all the pets",
+             "operationId": "listPets",
+             "responses": {
+               "200": {
+                 "content": {
+                   "application/json": {
+                     "schema": {
+                       "items": {
+                         "$ref": "#/components/schemas/Pet",
+                       },
+                       "type": "array",
+                     },
+                   },
+                 },
+                 "description": "pet response",
+               },
+             },
+           },
+           "parameters": [
+             {
+               "in": "path",
+               "name": "breed",
+               "required": false,
+               "schema": {
+                 "type": "string",
+               },
+             },
+           ],
+         },
+       },
+     }
     `);
   });
 
@@ -92,46 +92,46 @@ describe("addPathParam", () => {
     });
 
     expect(openAPIDocumentWithPathParam).toMatchInlineSnapshot(`
-      Object {
-        "info": Object {
-          "title": "petshop",
-          "version": "1.0.0",
-        },
-        "openapi": "3.0.0",
-        "paths": Object {
-          "/pets": Object {
-            "get": Object {
-              "description": "Get all the pets",
-              "operationId": "listPets",
-              "responses": Object {
-                "200": Object {
-                  "content": Object {
-                    "application/json": Object {
-                      "schema": Object {
-                        "items": Object {
-                          "$ref": "#/components/schemas/Pet",
-                        },
-                        "type": "array",
-                      },
-                    },
-                  },
-                  "description": "pet response",
-                },
-              },
-            },
-            "parameters": Array [
-              Object {
-                "in": "path",
-                "name": "breed",
-                "required": true,
-                "schema": Object {
-                  "type": "string",
-                },
-              },
-            ],
-          },
-        },
-      }
+     {
+       "info": {
+         "title": "petshop",
+         "version": "1.0.0",
+       },
+       "openapi": "3.0.0",
+       "paths": {
+         "/pets": {
+           "get": {
+             "description": "Get all the pets",
+             "operationId": "listPets",
+             "responses": {
+               "200": {
+                 "content": {
+                   "application/json": {
+                     "schema": {
+                       "items": {
+                         "$ref": "#/components/schemas/Pet",
+                       },
+                       "type": "array",
+                     },
+                   },
+                 },
+                 "description": "pet response",
+               },
+             },
+           },
+           "parameters": [
+             {
+               "in": "path",
+               "name": "breed",
+               "required": true,
+               "schema": {
+                 "type": "string",
+               },
+             },
+           ],
+         },
+       },
+     }
     `);
   });
 
@@ -144,36 +144,36 @@ describe("addPathParam", () => {
     });
 
     expect(openAPIDocumentWithPathParam).toMatchInlineSnapshot(`
-      Object {
-        "info": Object {
-          "title": "petshop",
-          "version": "1.0.0",
-        },
-        "openapi": "3.0.0",
-        "paths": Object {
-          "/pets": Object {
-            "get": Object {
-              "description": "Get all the pets",
-              "operationId": "listPets",
-              "responses": Object {
-                "200": Object {
-                  "content": Object {
-                    "application/json": Object {
-                      "schema": Object {
-                        "items": Object {
-                          "$ref": "#/components/schemas/Pet",
-                        },
-                        "type": "array",
-                      },
-                    },
-                  },
-                  "description": "pet response",
-                },
-              },
-            },
-          },
-        },
-      }
+     {
+       "info": {
+         "title": "petshop",
+         "version": "1.0.0",
+       },
+       "openapi": "3.0.0",
+       "paths": {
+         "/pets": {
+           "get": {
+             "description": "Get all the pets",
+             "operationId": "listPets",
+             "responses": {
+               "200": {
+                 "content": {
+                   "application/json": {
+                     "schema": {
+                       "items": {
+                         "$ref": "#/components/schemas/Pet",
+                       },
+                       "type": "array",
+                     },
+                   },
+                 },
+                 "description": "pet response",
+               },
+             },
+           },
+         },
+       },
+     }
     `);
   });
 });

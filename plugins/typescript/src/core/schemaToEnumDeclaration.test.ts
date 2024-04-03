@@ -11,11 +11,11 @@ describe("schemaToTypeAliasDeclaration", () => {
     };
 
     expect(printSchema(schema)).toMatchInlineSnapshot(`
-      "export enum Test {
-          AVAILABLE = \\"AVAILABLE\\",
-          PENDING = \\"PENDING\\",
-          SOLD = \\"SOLD\\"
-      }"
+     "export enum Test {
+         AVAILABLE = "AVAILABLE",
+         PENDING = "PENDING",
+         SOLD = "SOLD"
+     }"
     `);
   });
 
@@ -71,7 +71,7 @@ describe("schemaToTypeAliasDeclaration", () => {
 const printSchema = (
   schema: SchemaObject,
   currentComponent: OpenAPIComponentType = "schemas",
-  components?: OpenAPIObject["components"]
+  components?: OpenAPIObject["components"],
 ) => {
   const nodes = schemaToEnumDeclaration("Test", schema, {
     currentComponent,
@@ -81,7 +81,7 @@ const printSchema = (
   const sourceFile = ts.createSourceFile(
     "index.ts",
     "",
-    ts.ScriptTarget.Latest
+    ts.ScriptTarget.Latest,
   );
 
   const printer = ts.createPrinter({
@@ -91,7 +91,7 @@ const printSchema = (
 
   return nodes
     .map((node: ts.Node) =>
-      printer.printNode(ts.EmitHint.Unspecified, node, sourceFile)
+      printer.printNode(ts.EmitHint.Unspecified, node, sourceFile),
     )
     .join("\n");
 };

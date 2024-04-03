@@ -75,7 +75,7 @@ describe('getReferenceSchema', () => {
 
   it('should throw an Error if the $ref cannot be found', () => {
     const $ref = `${base$Ref}/does/not/exist`;
-    expect(() => getReferenceSchema($ref, document)).toThrowError(new RegExp($ref, 'g'));
+    expect(() => getReferenceSchema($ref, document)).toThrow(new RegExp($ref, 'g'));
   });
 
   it("should resolve the schema if the $ref has a nested $ref", () => {

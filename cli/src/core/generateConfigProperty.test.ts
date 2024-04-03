@@ -16,18 +16,18 @@ describe("generateConfigProperty", () => {
     });
 
     expect(print(config)).toMatchInlineSnapshot(`
-      "foo: {
-          from: {
-              source: \\"file\\",
-              relativePath: \\"specs.yaml\\"
-          },
-          outputDir: \\"specs\\",
-          to: async (context) => {
-              await generateSchemaTypes(context, {
-                  filenamePrefix: \\"foo\\"
-              });
-          }
-      }"
+     "foo: {
+         from: {
+             source: "file",
+             relativePath: "specs.yaml"
+         },
+         outputDir: "specs",
+         to: async (context) => {
+             await generateSchemaTypes(context, {
+                 filenamePrefix: "foo"
+             });
+         }
+     }"
     `);
   });
 
@@ -45,23 +45,23 @@ describe("generateConfigProperty", () => {
     });
 
     expect(print(config)).toMatchInlineSnapshot(`
-      "foo: {
-          from: {
-              source: \\"file\\",
-              relativePath: \\"specs.yaml\\"
-          },
-          outputDir: \\"specs\\",
-          to: async (context) => {
-              const filenamePrefix = \\"foo\\";
-              const { schemasFiles } = await generateSchemaTypes(context, {
-                  filenamePrefix
-              });
-              await generateReactQueryComponents(context, {
-                  filenamePrefix,
-                  schemasFiles
-              });
-          }
-      }"
+     "foo: {
+         from: {
+             source: "file",
+             relativePath: "specs.yaml"
+         },
+         outputDir: "specs",
+         to: async (context) => {
+             const filenamePrefix = "foo";
+             const { schemasFiles } = await generateSchemaTypes(context, {
+                 filenamePrefix
+             });
+             await generateReactQueryComponents(context, {
+                 filenamePrefix,
+                 schemasFiles
+             });
+         }
+     }"
     `);
   });
 
@@ -82,26 +82,26 @@ describe("generateConfigProperty", () => {
     });
 
     expect(print(config)).toMatchInlineSnapshot(`
-      "foo: {
-          from: {
-              source: \\"github\\",
-              ref: \\"main\\",
-              owner: \\"fabien0102\\",
-              repository: \\"openapi-codegen\\",
-              specPath: \\"examples/petstore.json\\"
-          },
-          outputDir: \\"specs\\",
-          to: async (context) => {
-              const filenamePrefix = \\"foo\\";
-              const { schemasFiles } = await generateSchemaTypes(context, {
-                  filenamePrefix
-              });
-              await generateFetchers(context, {
-                  filenamePrefix,
-                  schemasFiles
-              });
-          }
-      }"
+     "foo: {
+         from: {
+             source: "github",
+             ref: "main",
+             owner: "fabien0102",
+             repository: "openapi-codegen",
+             specPath: "examples/petstore.json"
+         },
+         outputDir: "specs",
+         to: async (context) => {
+             const filenamePrefix = "foo";
+             const { schemasFiles } = await generateSchemaTypes(context, {
+                 filenamePrefix
+             });
+             await generateFetchers(context, {
+                 filenamePrefix,
+                 schemasFiles
+             });
+         }
+     }"
     `);
   });
 });
