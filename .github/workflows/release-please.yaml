@@ -28,7 +28,7 @@ jobs:
         if: ${{ steps.release.outputs.releases_created }}
         run: |
           npm ci
-          npx lerna bootstrap
+          npm run build:all
 
       # Release Please has already incremented versions and published tags, so we just
       # need to publish all unpublished versions to NPM here
