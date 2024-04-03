@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.0.1](https://github.com/fabien0102/openapi-codegen/compare/cli-v2.0.0...cli-v2.0.1) (2024-04-03)
+
+
+### Bug Fixes
+
+* update prettier ([#205](https://github.com/fabien0102/openapi-codegen/issues/205)) ([c8152b9](https://github.com/fabien0102/openapi-codegen/commit/c8152b9b303902997f399690f0a4ac753af497aa))
+* Update prettier version to 3.2.5 ([#237](https://github.com/fabien0102/openapi-codegen/issues/237)) ([9c9af24](https://github.com/fabien0102/openapi-codegen/commit/9c9af24bb931b61e878c937b5608e7498d36778b))
+
 ## [2.0.0](https://github.com/fabien0102/openapi-codegen/compare/cli-v1.6.0...cli-v2.0.0) (2022-09-21)
 
 
