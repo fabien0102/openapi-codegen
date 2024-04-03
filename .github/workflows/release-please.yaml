@@ -2,6 +2,11 @@ on:
   push:
     branches:
       - main
+
+permissions:
+  contents: write
+  pull-requests: write
+
 name: Run Release Please
 jobs:
   release-please:
@@ -10,7 +15,6 @@ jobs:
       - uses: google-github-actions/release-please-action@v4
         id: release
         with:
-          command: manifest
           token: ${{secrets.GITHUB_TOKEN}}
           default-branch: main
 
