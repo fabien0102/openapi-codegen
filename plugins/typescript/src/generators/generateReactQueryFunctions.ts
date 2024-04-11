@@ -143,8 +143,6 @@ export const generateReactQueryFunctions = async (
           ),
         });
 
-        
-
         const operationFetcherFnName = `fetch${c.pascal(operationId)}`;
         const operationQueryFnName = `${c.pascal(operationId)}Query`;
         const component: "useQuery" | "useMutate" =
@@ -157,7 +155,6 @@ export const generateReactQueryFunctions = async (
         }
 
         if (component === "useQuery") {
-          
           nodes.push(...declarationNodes);
 
           keyManagerItems.push(
@@ -210,6 +207,7 @@ export const generateReactQueryFunctions = async (
               queryParamsType,
               headersType,
               operation,
+              operationId,
               fetcherFn,
               url: route,
               verb,
