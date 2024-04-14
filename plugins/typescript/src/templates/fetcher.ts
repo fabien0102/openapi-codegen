@@ -68,6 +68,7 @@ export async function ${camel(prefix)}Fetch<
   queryParams,
   signal,
   responseValidator,
+  responseValidatorEnabled,
 }: ${pascal(prefix)}FetcherOptions<
   TBody,
   THeaders,
@@ -118,7 +119,7 @@ export async function ${camel(prefix)}Fetch<
 
     if (response.headers.get('content-type')?.includes('json')) {
       const json = await response.json();
-      if (responseValidator) {
+      if (responseValidator && responseValidatorEnabled) {
         return responseValidator(json);
       } else {
         return json;
