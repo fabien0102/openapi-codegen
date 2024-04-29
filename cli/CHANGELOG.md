@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.2](https://github.com/fabien0102/openapi-codegen/compare/cli-v2.0.1...cli-v2.0.2) (2024-04-29)
+
+
+### Bug Fixes
+
+* camelCase query function operationId ([93b6669](https://github.com/fabien0102/openapi-codegen/commit/93b6669997da806a2f7b6046e09a2b96e401f1f9))
+
 ## [2.0.1](https://github.com/fabien0102/openapi-codegen/compare/cli-v2.0.0...cli-v2.0.1) (2024-04-03)
 
 
