@@ -70,7 +70,7 @@ export const getOpenAPISourceFile = async (
         prompt.close();
 
         if (!raw.content) {
-          throw new UsageError("Content is empty");
+          throw new UsageError(`No content found at "${options.specPath}"`);
         }
 
         const encoding: BufferEncoding =
