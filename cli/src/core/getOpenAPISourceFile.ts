@@ -53,48 +53,38 @@ export const getOpenAPISourceFile = async (
       const { default: got } = await import("got");
 
       try {
-        const raw = await got
-          .post("https://api.github.com/graphql", {
+        const raw = await got(
+          `https://api.github.com/repos/${options.owner}/${options.repository}/contents/${options.specPath}?ref=${options.ref}`,
+          {
             headers: {
               "content-type": "application/json",
               "user-agent": "openapi-codegen",
               authorization: `bearer ${token}`,
             },
-            body: JSON.stringify({
-              query: `query {
-            repository(name: "${options.repository}", owner: "${options.owner}") {
-              object(expression: "${options.ref}:${options.specPath}") {
-                ... on Blob {
-                  text
-                }
-              }
-            }
-          }`,
-            }),
-          })
-          .json<{
-            data: { repository: { object: { text: string } | null } };
-            errors?: [
-              {
-                message: string;
-              }
-            ];
-          }>();
+          }
+        ).json<{
+          content: string;
+          encoding: string | null;
+        }>();
 
         prompt.close();
-        if (raw.errors) {
-          throw new UsageError(raw.errors[0].message);
+
+        if (!raw.content) {
+          throw new UsageError("Content is empty");
         }
-        if (raw.data.repository.object === null) {
-          throw new UsageError(`No file found at "${options.specPath}"`);
-        }
+
+        const encoding: BufferEncoding =
+          (raw.encoding as BufferEncoding) || "base64";
+        const textContent = Buffer.from(raw.content, encoding).toString(
+          "utf-8"
+        );
 
         let format: OpenAPISourceFile["format"] = "yaml";
         if (options.specPath.toLowerCase().endsWith("json")) {
           format = "json";
         }
 
-        return { text: raw.data.repository.object.text, format };
+        return { text: textContent, format };
       } catch (e) {
         if (
           e instanceof HTTPError &&
@@ -111,6 +101,10 @@ export const getOpenAPISourceFile = async (
             unlinkSync(githubTokenPath);
             return await getOpenAPISourceFile(options);
           }
+        }
+
+        if (e instanceof HTTPError && e.response.statusCode === 404) {
+          throw new UsageError(`No file found at "${options.specPath}"`);
         }
         throw e;
       }
