@@ -253,17 +253,13 @@ export const generateReactQueryComponents = async (
         ])
   );
 
-  const { nodes: usedImportsNodes, keys: usedImportsKeys } = getUsedImports(
-    nodes,
-    {
-      ...config.schemasFiles,
-      utils: utilsFilename,
-    }
-  );
+  const { nodes: usedImportsNodes } = getUsedImports(nodes, {
+    ...config.schemasFiles,
+    utils: utilsFilename,
+  });
 
-  if (usedImportsKeys.includes("utils")) {
-    await context.writeFile(`${utilsFilename}.ts`, getUtils());
-  }
+  // we should always import utils now we need to deepMerge
+  await context.writeFile(`${utilsFilename}.ts`, getUtils());
 
   await context.writeFile(
     filename + ".ts",
@@ -276,6 +272,7 @@ export const generateReactQueryComponents = async (
       ),
       createNamespaceImport("Fetcher", `./${fetcherFilename}`),
       createNamedImport(fetcherFn, `./${fetcherFilename}`),
+      createNamedImport("deepMerge", `./${utilsFilename}`),
       ...usedImportsNodes,
       ...nodes,
       queryKeyManager,
@@ -403,10 +400,16 @@ const createMutationHook = ({
                                     f.createObjectLiteralExpression(
                                       [
                                         f.createSpreadAssignment(
-                                          f.createIdentifier("fetcherOptions")
-                                        ),
-                                        f.createSpreadAssignment(
-                                          f.createIdentifier("variables")
+                                          f.createCallExpression(
+                                            f.createIdentifier("deepMerge"),
+                                            undefined,
+                                            [
+                                              f.createIdentifier(
+                                                "fetcherOptions"
+                                              ),
+                                              f.createIdentifier("variables"),
+                                            ]
+                                          )
                                         ),
                                       ],
                                       false
@@ -608,10 +611,16 @@ const createQueryHook = ({
                                   f.createObjectLiteralExpression(
                                     [
                                       f.createSpreadAssignment(
-                                        f.createIdentifier("fetcherOptions")
-                                      ),
-                                      f.createSpreadAssignment(
-                                        f.createIdentifier("variables")
+                                        f.createCallExpression(
+                                          f.createIdentifier("deepMerge"),
+                                          undefined,
+                                          [
+                                            f.createIdentifier(
+                                              "fetcherOptions"
+                                            ),
+                                            f.createIdentifier("variables"),
+                                          ]
+                                        )
                                       ),
                                     ],
                                     false
