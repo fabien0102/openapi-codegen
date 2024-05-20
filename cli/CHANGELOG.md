@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.3](https://github.com/fabien0102/openapi-codegen/compare/cli-v2.0.2...cli-v2.0.3) (2024-05-20)
+
+
+### Bug Fixes
+
+* Changed Read API Method for Github from Graphql API to Rest API ([#253](https://github.com/fabien0102/openapi-codegen/issues/253)) ([a1abe62](https://github.com/fabien0102/openapi-codegen/commit/a1abe62f70910d1b418aa1a75cc317fac926b857))
+
 ## [2.0.2](https://github.com/fabien0102/openapi-codegen/compare/cli-v2.0.1...cli-v2.0.2) (2024-04-29)
 
 
