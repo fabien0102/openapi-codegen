@@ -65,7 +65,12 @@ export const generateFetchers = async (context: Context, config: Config) => {
   const filenamePrefix =
     c.snake(config.filenamePrefix ?? context.openAPIDocument.info.title) + "-";
 
-  const formatFilename = config.filenameCase ? c[config.filenameCase] : c.camel;
+  const formatFilename =
+    typeof config.formatFilename === "function"
+      ? config.formatFilename
+      : config.filenameCase
+        ? c[config.filenameCase]
+        : c.camel;
 
   const filename = formatFilename(filenamePrefix + "-components");
 
