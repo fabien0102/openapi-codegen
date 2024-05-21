@@ -14,6 +14,10 @@ export const getContext = (prefix: string, componentsFile: string) =>
        * Query params to inject in the fetcher
        */
       queryParams?: {};
+      /**
+       * Enable response validation
+       */
+      responseValidatorEnabled?: boolean
     };
     queryOptions: {
       /**

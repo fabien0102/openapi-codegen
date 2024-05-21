@@ -16,6 +16,7 @@ import { createNamedImport } from "../core/createNamedImport";
 import { getFetcher } from "../templates/fetcher";
 import { getContext } from "../templates/context";
 import { getUtils } from "../templates/utils";
+import { createZodNamespaceImport } from "../utils/zodHelper";
 import { createNamespaceImport } from "../core/createNamespaceImport";
 import { camelizedPathParams } from "../core/camelizedPathParams";
 
@@ -35,6 +36,12 @@ export type Config = ConfigBase & {
    * This will mark the header as optional in the component API
    */
   injectedHeaders?: string[];
+
+  zodFiles?: {
+    schemas: string;
+    inferredTypes: string;
+    integrationTests: string;
+  }
 };
 
 export const generateReactQueryComponents = async (
@@ -58,9 +65,9 @@ export const generateReactQueryComponents = async (
         return (
           printer.printNode(ts.EmitHint.Unspecified, node, sourceFile) +
           (ts.isJSDoc(node) ||
-          (ts.isImportDeclaration(node) &&
-            nodes[i + 1] &&
-            ts.isImportDeclaration(nodes[i + 1]))
+            (ts.isImportDeclaration(node) &&
+              nodes[i + 1] &&
+              ts.isImportDeclaration(nodes[i + 1]))
             ? ""
             : "\n")
         );
@@ -195,28 +202,30 @@ export const generateReactQueryComponents = async (
             url: route,
             verb,
             name: operationFetcherFnName,
+            validateResponseWithZod: config.zodFiles !== undefined,
+            printNodes,
           }),
           ...(component === "useQuery"
             ? createQueryHook({
-                operationFetcherFnName,
-                operation,
-                dataType,
-                errorType,
-                variablesType,
-                contextHookName,
-                name: `use${c.pascal(operationId)}`,
-                operationId,
-                url: route,
-              })
+              operationFetcherFnName,
+              operation,
+              dataType,
+              errorType,
+              variablesType,
+              contextHookName,
+              name: `use${c.pascal(operationId)}`,
+              operationId,
+              url: route,
+            })
             : createMutationHook({
-                operationFetcherFnName,
-                operation,
-                dataType,
-                errorType,
-                variablesType,
-                contextHookName,
-                name: `use${c.pascal(operationId)}`,
-              }))
+              operationFetcherFnName,
+              operation,
+              dataType,
+              errorType,
+              variablesType,
+              contextHookName,
+              name: `use${c.pascal(operationId)}`,
+            }))
         );
       });
     }
@@ -232,25 +241,25 @@ export const generateReactQueryComponents = async (
     keyManagerItems.length > 0
       ? f.createUnionTypeNode(keyManagerItems)
       : f.createTypeLiteralNode([
-          f.createPropertySignature(
-            undefined,
-            f.createIdentifier("path"),
-            undefined,
-            f.createKeywordTypeNode(ts.SyntaxKind.StringKeyword)
-          ),
-          f.createPropertySignature(
-            undefined,
-            f.createIdentifier("operationId"),
-            undefined,
-            f.createKeywordTypeNode(ts.SyntaxKind.NeverKeyword)
-          ),
-          f.createPropertySignature(
-            undefined,
-            f.createIdentifier("variables"),
-            undefined,
-            f.createKeywordTypeNode(ts.SyntaxKind.UnknownKeyword)
-          ),
-        ])
+        f.createPropertySignature(
+          undefined,
+          f.createIdentifier("path"),
+          undefined,
+          f.createKeywordTypeNode(ts.SyntaxKind.StringKeyword)
+        ),
+        f.createPropertySignature(
+          undefined,
+          f.createIdentifier("operationId"),
+          undefined,
+          f.createKeywordTypeNode(ts.SyntaxKind.NeverKeyword)
+        ),
+        f.createPropertySignature(
+          undefined,
+          f.createIdentifier("variables"),
+          undefined,
+          f.createKeywordTypeNode(ts.SyntaxKind.UnknownKeyword)
+        ),
+      ])
   );
 
   const { nodes: usedImportsNodes, keys: usedImportsKeys } = getUsedImports(
@@ -276,6 +285,7 @@ export const generateReactQueryComponents = async (
       ),
       createNamespaceImport("Fetcher", `./${fetcherFilename}`),
       createNamedImport(fetcherFn, `./${fetcherFilename}`),
+      ...createZodNamespaceImport(config.zodFiles?.schemas),
       ...usedImportsNodes,
       ...nodes,
       queryKeyManager,

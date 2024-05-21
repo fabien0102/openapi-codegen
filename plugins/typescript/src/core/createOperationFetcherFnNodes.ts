@@ -1,5 +1,6 @@
 import { OperationObject } from "openapi3-ts";
 import ts, { factory as f } from "typescript";
+import { createZodValidatorResponse } from "../utils/zodHelper";
 import { camelizedPathParams } from "./camelizedPathParams";
 
 /**
@@ -20,6 +21,8 @@ export const createOperationFetcherFnNodes = ({
   url,
   verb,
   name,
+  validateResponseWithZod,
+  printNodes,
 }: {
   dataType: ts.TypeNode;
   errorType: ts.TypeNode;
@@ -33,6 +36,8 @@ export const createOperationFetcherFnNodes = ({
   url: string;
   verb: string;
   name: string;
+  validateResponseWithZod: boolean;
+  printNodes: (nodes: ts.Node[]) => string;
 }) => {
   const nodes: ts.Node[] = [];
   if (operation.description) {
@@ -119,6 +124,7 @@ export const createOperationFetcherFnNodes = ({
                               f.createIdentifier("signal")
                             ),
                           ]),
+                      ...(validateResponseWithZod ? createZodValidatorResponse(dataType, printNodes) : []),
                     ],
                     false
                   ),
