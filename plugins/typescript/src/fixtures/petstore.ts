@@ -243,6 +243,16 @@ export const petstore: OpenAPIObject = {
           type: "string",
         },
       },
+      petFilterParam: {
+        name: "petFilter",
+        in: "query",
+        required: false,
+        schema: {
+          description: "Filter by type",
+          type: "string",
+          enum: ["cat", "dog"],
+        },
+      },
     },
     requestBodies: {
       updatePetRequest: {
@@ -250,6 +260,17 @@ export const petstore: OpenAPIObject = {
           "application/json": {
             schema: {
               $ref: "#/components/schemas/NewPet",
+            },
+          },
+        },
+        required: true,
+      },
+      searchPetRequest: {
+        content: {
+          "application/json": {
+            schema: {
+              type: "string",
+              enum: ["cat", "dog"],
             },
           },
         },
@@ -266,6 +287,17 @@ export const petstore: OpenAPIObject = {
           "application/json": {
             schema: {
               $ref: "#/components/schemas/Pet",
+            },
+          },
+        },
+      },
+      PetTypeResponse: {
+        description: "Type of pet",
+        content: {
+          "application/json": {
+            schema: {
+              type: "string",
+              enum: ["cat", "dog"],
             },
           },
         },
