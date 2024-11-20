@@ -114,16 +114,16 @@ describe("generateReactQueryFunctions", () => {
          ({ signal }: {
              signal?: AbortSignal;
          }) => Promise<ListPetsResponse>
-     ] => [
-         queryKeyFn({
+     ] => ({
+         queryKey: queryKeyFn({
              path: "/pets",
              operationId: "listPets",
              variables
          }),
-         async ({ signal }: {
+         queryFn: async ({ signal }: {
              signal?: AbortSignal;
          }) => fetchListPets({ ...variables }, signal)
-     ];
+     });
 
      export type QueryOperation = {
          path: "/pets";
@@ -247,16 +247,16 @@ describe("generateReactQueryFunctions", () => {
          ({ signal }: {
              signal?: AbortSignal;
          }) => Promise<ListPetsResponse>
-     ] => [
-         queryKeyFn({
+     ] => ({
+         queryKey: queryKeyFn({
              path: "/pets",
              operationId: "listPets",
              variables
          }),
-         async ({ signal }: {
+         queryFn: async ({ signal }: {
              signal?: AbortSignal;
          }) => fetchListPets({ ...variables }, signal)
-     ];
+     });
 
      export type QueryOperation = {
          path: "/pets";
@@ -362,16 +362,16 @@ describe("generateReactQueryFunctions", () => {
          ({ signal }: {
              signal?: AbortSignal;
          }) => Promise<ShowPetByIdResponse>
-     ] => [
-         queryKeyFn({
+     ] => ({
+         queryKey: queryKeyFn({
              path: "/pets/{petId}",
              operationId: "showPetById",
              variables
          }),
-         async ({ signal }: {
+         queryFn: async ({ signal }: {
              signal?: AbortSignal;
          }) => fetchShowPetById({ ...variables }, signal)
-     ];
+     });
 
      export type QueryOperation = {
          path: "/pets/{petId}";
@@ -499,16 +499,16 @@ describe("generateReactQueryFunctions", () => {
          ({ signal }: {
              signal?: AbortSignal;
          }) => Promise<ListPetsResponse>
-     ] => [
-         queryKeyFn({
+     ] => ({
+         queryKey: queryKeyFn({
              path: "/pets",
              operationId: "listPets",
              variables
          }),
-         async ({ signal }: {
+         queryFn: async ({ signal }: {
              signal?: AbortSignal;
          }) => fetchListPets({ ...variables }, signal)
-     ];
+     });
 
      export type QueryOperation = {
          path: "/pets";
@@ -607,16 +607,16 @@ describe("generateReactQueryFunctions", () => {
          ({ signal }: {
              signal?: AbortSignal;
          }) => Promise<ListPetsResponse>
-     ] => [
-         queryKeyFn({
+     ] => ({
+         queryKey: queryKeyFn({
              path: "/pets",
              operationId: "listPets",
              variables
          }),
-         async ({ signal }: {
+         queryFn: async ({ signal }: {
              signal?: AbortSignal;
          }) => fetchListPets({ ...variables }, signal)
-     ];
+     });
 
      export type QueryOperation = {
          path: "/pets";
@@ -1216,16 +1216,16 @@ describe("generateReactQueryFunctions", () => {
          ({ signal }: {
              signal?: AbortSignal;
          }) => Promise<ListPetsResponse>
-     ] => [
-         queryKeyFn({
+     ] => ({
+         queryKey: queryKeyFn({
              path: "/pets",
              operationId: "listPets",
              variables
          }),
-         async ({ signal }: {
+         queryFn: async ({ signal }: {
              signal?: AbortSignal;
          }) => fetchListPets({ ...variables }, signal)
-     ];
+     });
 
      export type QueryOperation = {
          path: "/pets";
@@ -1311,16 +1311,16 @@ describe("generateReactQueryFunctions", () => {
          ({ signal }: {
              signal?: AbortSignal;
          }) => Promise<ListPetsResponse>
-     ] => [
-         queryKeyFn({
+     ] => ({
+         queryKey: queryKeyFn({
              path: "/pets",
              operationId: "listPets",
              variables
          }),
-         async ({ signal }: {
+         queryFn: async ({ signal }: {
              signal?: AbortSignal;
          }) => fetchListPets({ ...variables }, signal)
-     ];
+     });
 
      export type QueryOperation = {
          path: "/pets";
