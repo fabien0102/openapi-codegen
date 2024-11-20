@@ -2,6 +2,12 @@
 
 Collection of typescript generators & utils
 
+## Options
+
+### generateSuspenseQueries
+
+Generate `useSuspenseQuery` wrapper along side `useQuery`.
+
 ## Generators
 
 ### generateSchemaType

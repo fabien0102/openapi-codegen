@@ -35,6 +35,12 @@ export type Config = ConfigBase & {
    * This will mark the header as optional in the component API
    */
   injectedHeaders?: string[];
+  /**
+   * Generate React Query components with `useSuspenseQuery` hook.
+   *
+   * @default false
+   */
+  generateSuspenseQueries?: boolean;
 };
 
 export const generateReactQueryComponents = async (
@@ -73,6 +79,8 @@ export const generateReactQueryComponents = async (
   const formatFilename = config.filenameCase ? c[config.filenameCase] : c.camel;
 
   const filename = formatFilename(filenamePrefix + "-components");
+
+  const { generateSuspenseQueries = false } = config;
 
   const fetcherFn = c.camel(`${filenamePrefix}-fetch`);
   const contextTypeName = `${c.pascal(filenamePrefix)}Context`;
@@ -181,6 +189,18 @@ export const generateReactQueryComponents = async (
           );
         }
 
+        const hookOptions = {
+          operationFetcherFnName,
+          operation,
+          dataType,
+          errorType,
+          variablesType,
+          contextHookName,
+          name: `use${c.pascal(operationId)}`,
+          operationId,
+          url: route,
+        };
+
         nodes.push(
           ...createOperationFetcherFnNodes({
             dataType,
@@ -195,29 +215,23 @@ export const generateReactQueryComponents = async (
             url: route,
             verb,
             name: operationFetcherFnName,
-          }),
-          ...(component === "useQuery"
-            ? createQueryHook({
-                operationFetcherFnName,
-                operation,
-                dataType,
-                errorType,
-                variablesType,
-                contextHookName,
-                name: `use${c.pascal(operationId)}`,
-                operationId,
-                url: route,
-              })
-            : createMutationHook({
-                operationFetcherFnName,
-                operation,
-                dataType,
-                errorType,
-                variablesType,
-                contextHookName,
-                name: `use${c.pascal(operationId)}`,
-              }))
+          })
         );
+
+        if (component === "useQuery") {
+          nodes.push(...createQueryHook(hookOptions));
+          if (generateSuspenseQueries) {
+            nodes.push(
+              ...createQueryHook({
+                ...hookOptions,
+                name: `useSuspense${c.pascal(operationId)}`,
+                useQueryIdentifier: "useSuspenseQuery",
+              })
+            );
+          }
+        } else {
+          nodes.push(...createMutationHook(hookOptions));
+        }
       });
     }
   );
@@ -448,6 +462,7 @@ const createQueryHook = ({
   operationId,
   operation,
   url,
+  useQueryIdentifier = "useQuery",
 }: {
   operationFetcherFnName: string;
   contextHookName: string;
@@ -458,6 +473,7 @@ const createQueryHook = ({
   errorType: ts.TypeNode;
   variablesType: ts.TypeNode;
   operation: OperationObject;
+  useQueryIdentifier?: "useQuery" | "useSuspenseQuery";
 }) => {
   const nodes: ts.Node[] = [];
   if (operation.description) {
@@ -542,7 +558,7 @@ const createQueryHook = ({
                   f.createCallExpression(
                     f.createPropertyAccessExpression(
                       f.createIdentifier("reactQuery"),
-                      f.createIdentifier("useQuery")
+                      f.createIdentifier(useQueryIdentifier)
                     ),
                     [
                       dataType,
