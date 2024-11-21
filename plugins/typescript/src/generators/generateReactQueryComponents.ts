@@ -85,7 +85,7 @@ export const generateReactQueryComponents = async (
 
   const fetcherFn = c.camel(`${filenamePrefix}-fetch`);
   const contextTypeName = `${c.pascal(filenamePrefix)}Context`;
-  const contextHookName = `get${c.pascal(filenamePrefix)}Context`;
+  const contextHookName = `use${c.pascal(filenamePrefix)}Context`;
   const nodes: ts.Node[] = [];
   const keyManagerItems: ts.TypeLiteralNode[] = [];
 
