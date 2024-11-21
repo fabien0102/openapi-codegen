@@ -326,7 +326,7 @@ export const generateReactQueryComponents = async (
       createWatermark(context.openAPIDocument.info),
       createReactQueryImport(),
       createNamedImport(
-        [contextHookName, contextTypeName],
+        [contextHookName, contextTypeName, "queryKeyFn"],
         `./${contextFilename}`
       ),
       createNamespaceImport("Fetcher", `./${fetcherFilename}`),
@@ -585,24 +585,6 @@ const createQueryHook = ({
                     ts.NodeFlags.Const
                   )
                 ),
-                f.createVariableStatement(
-                  undefined,
-                  f.createVariableDeclarationList(
-                    [
-                      f.createVariableDeclaration(
-                        f.createIdentifier("baseQuery"),
-                        undefined,
-                        undefined,
-                        f.createCallExpression(
-                          f.createIdentifier(operationQueryFnName),
-                          undefined,
-                          [f.createIdentifier("variables")]
-                        )
-                      ),
-                    ],
-                    ts.NodeFlags.Const
-                  )
-                ),
                 f.createReturnStatement(
                   f.createCallExpression(
                     f.createPropertyAccessExpression(
@@ -621,7 +603,11 @@ const createQueryHook = ({
                       f.createObjectLiteralExpression(
                         [
                           f.createSpreadAssignment(
-                            f.createIdentifier("baseQuery")
+                            f.createCallExpression(
+                              f.createIdentifier(operationQueryFnName),
+                              undefined,
+                              [f.createIdentifier("variables")]
+                            )
                           ),
                           f.createSpreadAssignment(
                             f.createIdentifier("options")
