@@ -29,7 +29,7 @@ export const getContext = (prefix: string, componentsFile: string) =>
    * 
    * @param queryOptions options from the useQuery wrapper
    */
-   export function get${pascal(prefix)}Context<
+   export function use${pascal(prefix)}Context<
    TQueryFnData = unknown,
    TError = unknown,
    TData = TQueryFnData,
