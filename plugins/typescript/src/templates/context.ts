@@ -22,10 +22,6 @@ export const getContext = (prefix: string, componentsFile: string) =>
        */
       enabled?: boolean;
     };
-    /**
-     * Query key manager.
-     */
-    queryKeyFn: (operation: QueryOperation) => QueryKey;
   };
   
   /**
@@ -33,7 +29,7 @@ export const getContext = (prefix: string, componentsFile: string) =>
    * 
    * @param queryOptions options from the useQuery wrapper
    */
-   export function use${pascal(prefix)}Context<
+   export function get${pascal(prefix)}Context<
    TQueryFnData = unknown,
    TError = unknown,
    TData = TQueryFnData,
@@ -43,8 +39,7 @@ export const getContext = (prefix: string, componentsFile: string) =>
  ): ${pascal(prefix)}Context {
     return {
       fetcherOptions: {},
-      queryOptions: {},
-      queryKeyFn
+      queryOptions: {}
   }
 };
 

@@ -109,18 +109,13 @@ describe("generateReactQueryFunctions", () => {
      /**
       * Get all the pets
       */
-     export const listPetsQuery = (variables: ListPetsVariables): {
-         queryKey: reactQuery.QueryKey;
-         queryFn: ({ signal }: {
-             signal?: AbortSignal;
-         }) => Promise<ListPetsResponse>;
-     } => ({
+     export const listPetsQuery = (variables: ListPetsVariables) => reactQuery.queryOptions({
          queryKey: queryKeyFn({
              path: "/pets",
              operationId: "listPets",
              variables
          }),
-         queryFn: async ({ signal }: {
+         queryFn: ({ signal }: {
              signal?: AbortSignal;
          }) => fetchListPets({ ...variables }, signal)
      });
@@ -242,18 +237,13 @@ describe("generateReactQueryFunctions", () => {
      /**
       * Get all the pets
       */
-     export const listPetsQuery = (variables: ListPetsVariables): {
-         queryKey: reactQuery.QueryKey;
-         queryFn: ({ signal }: {
-             signal?: AbortSignal;
-         }) => Promise<ListPetsResponse>;
-     } => ({
+     export const listPetsQuery = (variables: ListPetsVariables) => reactQuery.queryOptions({
          queryKey: queryKeyFn({
              path: "/pets",
              operationId: "listPets",
              variables
          }),
-         queryFn: async ({ signal }: {
+         queryFn: ({ signal }: {
              signal?: AbortSignal;
          }) => fetchListPets({ ...variables }, signal)
      });
@@ -357,18 +347,13 @@ describe("generateReactQueryFunctions", () => {
      /**
       * Info for a specific pet
       */
-     export const showPetByIdQuery = (variables: ShowPetByIdVariables): {
-         queryKey: reactQuery.QueryKey;
-         queryFn: ({ signal }: {
-             signal?: AbortSignal;
-         }) => Promise<ShowPetByIdResponse>;
-     } => ({
+     export const showPetByIdQuery = (variables: ShowPetByIdVariables) => reactQuery.queryOptions({
          queryKey: queryKeyFn({
              path: "/pets/{petId}",
              operationId: "showPetById",
              variables
          }),
-         queryFn: async ({ signal }: {
+         queryFn: ({ signal }: {
              signal?: AbortSignal;
          }) => fetchShowPetById({ ...variables }, signal)
      });
@@ -494,18 +479,13 @@ describe("generateReactQueryFunctions", () => {
      /**
       * Get all the pets
       */
-     export const listPetsQuery = (variables: ListPetsVariables): {
-         queryKey: reactQuery.QueryKey;
-         queryFn: ({ signal }: {
-             signal?: AbortSignal;
-         }) => Promise<ListPetsResponse>;
-     } => ({
+     export const listPetsQuery = (variables: ListPetsVariables) => reactQuery.queryOptions({
          queryKey: queryKeyFn({
              path: "/pets",
              operationId: "listPets",
              variables
          }),
-         queryFn: async ({ signal }: {
+         queryFn: ({ signal }: {
              signal?: AbortSignal;
          }) => fetchListPets({ ...variables }, signal)
      });
@@ -602,18 +582,13 @@ describe("generateReactQueryFunctions", () => {
      /**
       * Get all the pets
       */
-     export const listPetsQuery = (variables: ListPetsVariables): {
-         queryKey: reactQuery.QueryKey;
-         queryFn: ({ signal }: {
-             signal?: AbortSignal;
-         }) => Promise<ListPetsResponse>;
-     } => ({
+     export const listPetsQuery = (variables: ListPetsVariables) => reactQuery.queryOptions({
          queryKey: queryKeyFn({
              path: "/pets",
              operationId: "listPets",
              variables
          }),
-         queryFn: async ({ signal }: {
+         queryFn: ({ signal }: {
              signal?: AbortSignal;
          }) => fetchListPets({ ...variables }, signal)
      });
@@ -1211,18 +1186,13 @@ describe("generateReactQueryFunctions", () => {
      /**
       * Get all the pets
       */
-     export const listPetsQuery = (variables: ListPetsVariables): {
-         queryKey: reactQuery.QueryKey;
-         queryFn: ({ signal }: {
-             signal?: AbortSignal;
-         }) => Promise<ListPetsResponse>;
-     } => ({
+     export const listPetsQuery = (variables: ListPetsVariables) => reactQuery.queryOptions({
          queryKey: queryKeyFn({
              path: "/pets",
              operationId: "listPets",
              variables
          }),
-         queryFn: async ({ signal }: {
+         queryFn: ({ signal }: {
              signal?: AbortSignal;
          }) => fetchListPets({ ...variables }, signal)
      });
@@ -1306,18 +1276,13 @@ describe("generateReactQueryFunctions", () => {
      /**
       * Get all the pets
       */
-     export const listPetsQuery = (variables: ListPetsVariables): {
-         queryKey: reactQuery.QueryKey;
-         queryFn: ({ signal }: {
-             signal?: AbortSignal;
-         }) => Promise<ListPetsResponse>;
-     } => ({
+     export const listPetsQuery = (variables: ListPetsVariables) => reactQuery.queryOptions({
          queryKey: queryKeyFn({
              path: "/pets",
              operationId: "listPets",
              variables
          }),
-         queryFn: async ({ signal }: {
+         queryFn: ({ signal }: {
              signal?: AbortSignal;
          }) => fetchListPets({ ...variables }, signal)
      });
