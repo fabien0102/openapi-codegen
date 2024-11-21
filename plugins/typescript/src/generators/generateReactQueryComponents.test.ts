@@ -90,7 +90,7 @@ describe("generateReactQueryComponents", () => {
       * @version 1.0.0
       */
      import * as reactQuery from "@tanstack/react-query";
-     import { getPetstoreContext, PetstoreContext, queryKeyFn } from "./petstoreContext";
+     import { usePetstoreContext, PetstoreContext, queryKeyFn } from "./petstoreContext";
      import type * as Fetcher from "./petstoreFetcher";
      import { petstoreFetch } from "./petstoreFetcher";
      import type * as Schemas from "./petstoreSchemas";
@@ -128,7 +128,7 @@ describe("generateReactQueryComponents", () => {
      /**
       * Get all the pets
       */
-     export const useSuspenseListPets = <TData = ListPetsResponse>(variables: ListPetsVariables, options?: Omit<reactQuery.UseQueryOptions<ListPetsResponse, ListPetsError, TData>, "queryKey" | "queryFn" | "initialData">) => { const { queryOptions } = getPetstoreContext(options); return reactQuery.useSuspenseQuery<ListPetsResponse, ListPetsError, TData>({
+     export const useSuspenseListPets = <TData = ListPetsResponse>(variables: ListPetsVariables, options?: Omit<reactQuery.UseQueryOptions<ListPetsResponse, ListPetsError, TData>, "queryKey" | "queryFn" | "initialData">) => { const { queryOptions } = usePetstoreContext(options); return reactQuery.useSuspenseQuery<ListPetsResponse, ListPetsError, TData>({
          ...listPetsQuery(variables),
          ...options,
          ...queryOptions
@@ -137,7 +137,7 @@ describe("generateReactQueryComponents", () => {
      /**
       * Get all the pets
       */
-     export const useListPets = <TData = ListPetsResponse>(variables: ListPetsVariables, options?: Omit<reactQuery.UseQueryOptions<ListPetsResponse, ListPetsError, TData>, "queryKey" | "queryFn" | "initialData">) => { const { queryOptions } = getPetstoreContext(options); return reactQuery.useQuery<ListPetsResponse, ListPetsError, TData>({
+     export const useListPets = <TData = ListPetsResponse>(variables: ListPetsVariables, options?: Omit<reactQuery.UseQueryOptions<ListPetsResponse, ListPetsError, TData>, "queryKey" | "queryFn" | "initialData">) => { const { queryOptions } = usePetstoreContext(options); return reactQuery.useQuery<ListPetsResponse, ListPetsError, TData>({
          ...listPetsQuery(variables),
          ...options,
          ...queryOptions
@@ -228,7 +228,7 @@ describe("generateReactQueryComponents", () => {
       * @version 1.0.0
       */
      import * as reactQuery from "@tanstack/react-query";
-     import { getPetstoreContext, PetstoreContext, queryKeyFn } from "./petstoreContext";
+     import { usePetstoreContext, PetstoreContext, queryKeyFn } from "./petstoreContext";
      import type * as Fetcher from "./petstoreFetcher";
      import { petstoreFetch } from "./petstoreFetcher";
      import type * as Schemas from "./petstoreSchemas";
@@ -279,7 +279,7 @@ describe("generateReactQueryComponents", () => {
      /**
       * Get all the pets
       */
-     export const useSuspenseListPets = <TData = ListPetsResponse>(variables: ListPetsVariables, options?: Omit<reactQuery.UseQueryOptions<ListPetsResponse, ListPetsError, TData>, "queryKey" | "queryFn" | "initialData">) => { const { queryOptions } = getPetstoreContext(options); return reactQuery.useSuspenseQuery<ListPetsResponse, ListPetsError, TData>({
+     export const useSuspenseListPets = <TData = ListPetsResponse>(variables: ListPetsVariables, options?: Omit<reactQuery.UseQueryOptions<ListPetsResponse, ListPetsError, TData>, "queryKey" | "queryFn" | "initialData">) => { const { queryOptions } = usePetstoreContext(options); return reactQuery.useSuspenseQuery<ListPetsResponse, ListPetsError, TData>({
          ...listPetsQuery(variables),
          ...options,
          ...queryOptions
@@ -288,7 +288,7 @@ describe("generateReactQueryComponents", () => {
      /**
       * Get all the pets
       */
-     export const useListPets = <TData = ListPetsResponse>(variables: ListPetsVariables, options?: Omit<reactQuery.UseQueryOptions<ListPetsResponse, ListPetsError, TData>, "queryKey" | "queryFn" | "initialData">) => { const { queryOptions } = getPetstoreContext(options); return reactQuery.useQuery<ListPetsResponse, ListPetsError, TData>({
+     export const useListPets = <TData = ListPetsResponse>(variables: ListPetsVariables, options?: Omit<reactQuery.UseQueryOptions<ListPetsResponse, ListPetsError, TData>, "queryKey" | "queryFn" | "initialData">) => { const { queryOptions } = usePetstoreContext(options); return reactQuery.useQuery<ListPetsResponse, ListPetsError, TData>({
          ...listPetsQuery(variables),
          ...options,
          ...queryOptions
@@ -365,7 +365,7 @@ describe("generateReactQueryComponents", () => {
       * @version 1.0.0
       */
      import * as reactQuery from "@tanstack/react-query";
-     import { getPetstoreContext, PetstoreContext, queryKeyFn } from "./petstoreContext";
+     import { usePetstoreContext, PetstoreContext, queryKeyFn } from "./petstoreContext";
      import type * as Fetcher from "./petstoreFetcher";
      import { petstoreFetch } from "./petstoreFetcher";
      import type * as Schemas from "./petstoreSchemas";
@@ -412,7 +412,7 @@ describe("generateReactQueryComponents", () => {
      /**
       * Info for a specific pet
       */
-     export const useSuspenseShowPetById = <TData = ShowPetByIdResponse>(variables: ShowPetByIdVariables, options?: Omit<reactQuery.UseQueryOptions<ShowPetByIdResponse, ShowPetByIdError, TData>, "queryKey" | "queryFn" | "initialData">) => { const { queryOptions } = getPetstoreContext(options); return reactQuery.useSuspenseQuery<ShowPetByIdResponse, ShowPetByIdError, TData>({
+     export const useSuspenseShowPetById = <TData = ShowPetByIdResponse>(variables: ShowPetByIdVariables, options?: Omit<reactQuery.UseQueryOptions<ShowPetByIdResponse, ShowPetByIdError, TData>, "queryKey" | "queryFn" | "initialData">) => { const { queryOptions } = usePetstoreContext(options); return reactQuery.useSuspenseQuery<ShowPetByIdResponse, ShowPetByIdError, TData>({
          ...showPetByIdQuery(variables),
          ...options,
          ...queryOptions
@@ -421,7 +421,7 @@ describe("generateReactQueryComponents", () => {
      /**
       * Info for a specific pet
       */
-     export const useShowPetById = <TData = ShowPetByIdResponse>(variables: ShowPetByIdVariables, options?: Omit<reactQuery.UseQueryOptions<ShowPetByIdResponse, ShowPetByIdError, TData>, "queryKey" | "queryFn" | "initialData">) => { const { queryOptions } = getPetstoreContext(options); return reactQuery.useQuery<ShowPetByIdResponse, ShowPetByIdError, TData>({
+     export const useShowPetById = <TData = ShowPetByIdResponse>(variables: ShowPetByIdVariables, options?: Omit<reactQuery.UseQueryOptions<ShowPetByIdResponse, ShowPetByIdError, TData>, "queryKey" | "queryFn" | "initialData">) => { const { queryOptions } = usePetstoreContext(options); return reactQuery.useQuery<ShowPetByIdResponse, ShowPetByIdError, TData>({
          ...showPetByIdQuery(variables),
          ...options,
          ...queryOptions
@@ -512,7 +512,7 @@ describe("generateReactQueryComponents", () => {
       * @version 1.0.0
       */
      import * as reactQuery from "@tanstack/react-query";
-     import { getPetstoreContext, PetstoreContext, queryKeyFn } from "./petstoreContext";
+     import { usePetstoreContext, PetstoreContext, queryKeyFn } from "./petstoreContext";
      import type * as Fetcher from "./petstoreFetcher";
      import { petstoreFetch } from "./petstoreFetcher";
      import type * as Schemas from "./petstoreSchemas";
@@ -567,7 +567,7 @@ describe("generateReactQueryComponents", () => {
      /**
       * Get all the pets
       */
-     export const useSuspenseListPets = <TData = ListPetsResponse>(variables: ListPetsVariables, options?: Omit<reactQuery.UseQueryOptions<ListPetsResponse, ListPetsError, TData>, "queryKey" | "queryFn" | "initialData">) => { const { queryOptions } = getPetstoreContext(options); return reactQuery.useSuspenseQuery<ListPetsResponse, ListPetsError, TData>({
+     export const useSuspenseListPets = <TData = ListPetsResponse>(variables: ListPetsVariables, options?: Omit<reactQuery.UseQueryOptions<ListPetsResponse, ListPetsError, TData>, "queryKey" | "queryFn" | "initialData">) => { const { queryOptions } = usePetstoreContext(options); return reactQuery.useSuspenseQuery<ListPetsResponse, ListPetsError, TData>({
          ...listPetsQuery(variables),
          ...options,
          ...queryOptions
@@ -576,7 +576,7 @@ describe("generateReactQueryComponents", () => {
      /**
       * Get all the pets
       */
-     export const useListPets = <TData = ListPetsResponse>(variables: ListPetsVariables, options?: Omit<reactQuery.UseQueryOptions<ListPetsResponse, ListPetsError, TData>, "queryKey" | "queryFn" | "initialData">) => { const { queryOptions } = getPetstoreContext(options); return reactQuery.useQuery<ListPetsResponse, ListPetsError, TData>({
+     export const useListPets = <TData = ListPetsResponse>(variables: ListPetsVariables, options?: Omit<reactQuery.UseQueryOptions<ListPetsResponse, ListPetsError, TData>, "queryKey" | "queryFn" | "initialData">) => { const { queryOptions } = usePetstoreContext(options); return reactQuery.useQuery<ListPetsResponse, ListPetsError, TData>({
          ...listPetsQuery(variables),
          ...options,
          ...queryOptions
@@ -655,7 +655,7 @@ describe("generateReactQueryComponents", () => {
       * @version 1.0.0
       */
      import * as reactQuery from "@tanstack/react-query";
-     import { getPetstoreContext, PetstoreContext, queryKeyFn } from "./petstoreContext";
+     import { usePetstoreContext, PetstoreContext, queryKeyFn } from "./petstoreContext";
      import type * as Fetcher from "./petstoreFetcher";
      import { petstoreFetch } from "./petstoreFetcher";
      import type * as Schemas from "./petstoreSchemas";
@@ -693,7 +693,7 @@ describe("generateReactQueryComponents", () => {
      /**
       * Get all the pets
       */
-     export const useSuspenseListPets = <TData = ListPetsResponse>(variables: ListPetsVariables, options?: Omit<reactQuery.UseQueryOptions<ListPetsResponse, ListPetsError, TData>, "queryKey" | "queryFn" | "initialData">) => { const { queryOptions } = getPetstoreContext(options); return reactQuery.useSuspenseQuery<ListPetsResponse, ListPetsError, TData>({
+     export const useSuspenseListPets = <TData = ListPetsResponse>(variables: ListPetsVariables, options?: Omit<reactQuery.UseQueryOptions<ListPetsResponse, ListPetsError, TData>, "queryKey" | "queryFn" | "initialData">) => { const { queryOptions } = usePetstoreContext(options); return reactQuery.useSuspenseQuery<ListPetsResponse, ListPetsError, TData>({
          ...listPetsQuery(variables),
          ...options,
          ...queryOptions
@@ -702,7 +702,7 @@ describe("generateReactQueryComponents", () => {
      /**
       * Get all the pets
       */
-     export const useListPets = <TData = ListPetsResponse>(variables: ListPetsVariables, options?: Omit<reactQuery.UseQueryOptions<ListPetsResponse, ListPetsError, TData>, "queryKey" | "queryFn" | "initialData">) => { const { queryOptions } = getPetstoreContext(options); return reactQuery.useQuery<ListPetsResponse, ListPetsError, TData>({
+     export const useListPets = <TData = ListPetsResponse>(variables: ListPetsVariables, options?: Omit<reactQuery.UseQueryOptions<ListPetsResponse, ListPetsError, TData>, "queryKey" | "queryFn" | "initialData">) => { const { queryOptions } = usePetstoreContext(options); return reactQuery.useQuery<ListPetsResponse, ListPetsError, TData>({
          ...listPetsQuery(variables),
          ...options,
          ...queryOptions
@@ -808,7 +808,7 @@ describe("generateReactQueryComponents", () => {
       * @version 1.0.0
       */
      import * as reactQuery from "@tanstack/react-query";
-     import { getPetstoreContext, PetstoreContext, queryKeyFn } from "./petstoreContext";
+     import { usePetstoreContext, PetstoreContext, queryKeyFn } from "./petstoreContext";
      import type * as Fetcher from "./petstoreFetcher";
      import { petstoreFetch } from "./petstoreFetcher";
 
@@ -834,7 +834,7 @@ describe("generateReactQueryComponents", () => {
      export const fetchAddPet = (variables: AddPetVariables, signal?: AbortSignal) => petstoreFetch<string, AddPetError, AddPetRequestBody, {}, {}, {}>({ url: "/pet", method: "post", ...variables, signal });
 
      export const useAddPet = (options?: Omit<reactQuery.UseMutationOptions<string, AddPetError, AddPetVariables>, "mutationFn">) => {
-         const { fetcherOptions } = getPetstoreContext();
+         const { fetcherOptions } = usePetstoreContext();
          return reactQuery.useMutation<string, AddPetError, AddPetVariables>({
              mutationFn: (variables: AddPetVariables) => fetchAddPet({ ...fetcherOptions, ...variables }),
              ...options
@@ -942,7 +942,7 @@ describe("generateReactQueryComponents", () => {
       * @version 1.0.0
       */
      import * as reactQuery from "@tanstack/react-query";
-     import { getPetstoreContext, PetstoreContext, queryKeyFn } from "./petstoreContext";
+     import { usePetstoreContext, PetstoreContext, queryKeyFn } from "./petstoreContext";
      import type * as Fetcher from "./petstoreFetcher";
      import { petstoreFetch } from "./petstoreFetcher";
 
@@ -968,7 +968,7 @@ describe("generateReactQueryComponents", () => {
      export const fetchAddPet = (variables: AddPetVariables, signal?: AbortSignal) => petstoreFetch<string, AddPetError, AddPetRequestBody, {}, {}, {}>({ url: "/pet", method: "get", ...variables, signal });
 
      export const useAddPet = (options?: Omit<reactQuery.UseMutationOptions<string, AddPetError, AddPetVariables>, "mutationFn">) => {
-         const { fetcherOptions } = getPetstoreContext();
+         const { fetcherOptions } = usePetstoreContext();
          return reactQuery.useMutation<string, AddPetError, AddPetVariables>({
              mutationFn: (variables: AddPetVariables) => fetchAddPet({ ...fetcherOptions, ...variables }),
              ...options
@@ -1082,7 +1082,7 @@ describe("generateReactQueryComponents", () => {
       * @version 1.0.0
       */
      import * as reactQuery from "@tanstack/react-query";
-     import { getPetstoreContext, PetstoreContext, queryKeyFn } from "./petstoreContext";
+     import { usePetstoreContext, PetstoreContext, queryKeyFn } from "./petstoreContext";
      import type * as Fetcher from "./petstoreFetcher";
      import { petstoreFetch } from "./petstoreFetcher";
      import type * as RequestBodies from "./petstoreRequestBodies";
@@ -1102,7 +1102,7 @@ describe("generateReactQueryComponents", () => {
      export const fetchAddPet = (variables: AddPetVariables, signal?: AbortSignal) => petstoreFetch<string, AddPetError, RequestBodies.Dog, {}, {}, {}>({ url: "/pet", method: "post", ...variables, signal });
 
      export const useAddPet = (options?: Omit<reactQuery.UseMutationOptions<string, AddPetError, AddPetVariables>, "mutationFn">) => {
-         const { fetcherOptions } = getPetstoreContext();
+         const { fetcherOptions } = usePetstoreContext();
          return reactQuery.useMutation<string, AddPetError, AddPetVariables>({
              mutationFn: (variables: AddPetVariables) => fetchAddPet({ ...fetcherOptions, ...variables }),
              ...options
@@ -1195,7 +1195,7 @@ describe("generateReactQueryComponents", () => {
       * @version 1.0.0
       */
      import * as reactQuery from "@tanstack/react-query";
-     import { getPetstoreContext, PetstoreContext, queryKeyFn } from "./petstoreContext";
+     import { usePetstoreContext, PetstoreContext, queryKeyFn } from "./petstoreContext";
      import type * as Fetcher from "./petstoreFetcher";
      import { petstoreFetch } from "./petstoreFetcher";
      import type * as RequestBodies from "./petstoreRequestBodies";
@@ -1214,7 +1214,7 @@ describe("generateReactQueryComponents", () => {
      export const fetchUpdatePet = (variables: UpdatePetVariables, signal?: AbortSignal) => petstoreFetch<string, UpdatePetError, RequestBodies.UpdatePetRequestBody, {}, {}, UpdatePetPathParams>({ url: "/pet/{petId}", method: "put", ...variables, signal });
 
      export const useUpdatePet = (options?: Omit<reactQuery.UseMutationOptions<string, UpdatePetError, UpdatePetVariables>, "mutationFn">) => {
-         const { fetcherOptions } = getPetstoreContext();
+         const { fetcherOptions } = usePetstoreContext();
          return reactQuery.useMutation<string, UpdatePetError, UpdatePetVariables>({
              mutationFn: (variables: UpdatePetVariables) => fetchUpdatePet({ ...fetcherOptions, ...variables }),
              ...options
@@ -1307,7 +1307,7 @@ describe("generateReactQueryComponents", () => {
       * @version 1.0.0
       */
      import * as reactQuery from "@tanstack/react-query";
-     import { getPetstoreContext, PetstoreContext, queryKeyFn } from "./petstoreContext";
+     import { usePetstoreContext, PetstoreContext, queryKeyFn } from "./petstoreContext";
      import type * as Fetcher from "./petstoreFetcher";
      import { petstoreFetch } from "./petstoreFetcher";
      import type * as RequestBodies from "./petstoreRequestBodies";
@@ -1326,7 +1326,7 @@ describe("generateReactQueryComponents", () => {
      export const fetchUpdatePet = (variables: UpdatePetVariables, signal?: AbortSignal) => petstoreFetch<string, UpdatePetError, RequestBodies.UpdatePetRequestBody, {}, {}, UpdatePetPathParams>({ url: "/pet/{petId}", method: "put", ...variables, signal });
 
      export const useUpdatePet = (options?: Omit<reactQuery.UseMutationOptions<string, UpdatePetError, UpdatePetVariables>, "mutationFn">) => {
-         const { fetcherOptions } = getPetstoreContext();
+         const { fetcherOptions } = usePetstoreContext();
          return reactQuery.useMutation<string, UpdatePetError, UpdatePetVariables>({
              mutationFn: (variables: UpdatePetVariables) => fetchUpdatePet({ ...fetcherOptions, ...variables }),
              ...options
@@ -1419,7 +1419,7 @@ describe("generateReactQueryComponents", () => {
       * @version 1.0.0
       */
      import * as reactQuery from "@tanstack/react-query";
-     import { getPetstoreContext, PetstoreContext, queryKeyFn } from "./petstoreContext";
+     import { usePetstoreContext, PetstoreContext, queryKeyFn } from "./petstoreContext";
      import type * as Fetcher from "./petstoreFetcher";
      import { petstoreFetch } from "./petstoreFetcher";
      import type * as RequestBodies from "./petstoreRequestBodies";
@@ -1438,7 +1438,7 @@ describe("generateReactQueryComponents", () => {
      export const fetchUpdatePet = (variables: UpdatePetVariables, signal?: AbortSignal) => petstoreFetch<string, UpdatePetError, RequestBodies.UpdatePetRequestBody, {}, {}, UpdatePetPathParams>({ url: "/pet/{petId}", method: "put", ...variables, signal });
 
      export const useUpdatePet = (options?: Omit<reactQuery.UseMutationOptions<string, UpdatePetError, UpdatePetVariables>, "mutationFn">) => {
-         const { fetcherOptions } = getPetstoreContext();
+         const { fetcherOptions } = usePetstoreContext();
          return reactQuery.useMutation<string, UpdatePetError, UpdatePetVariables>({
              mutationFn: (variables: UpdatePetVariables) => fetchUpdatePet({ ...fetcherOptions, ...variables }),
              ...options
@@ -1531,7 +1531,7 @@ describe("generateReactQueryComponents", () => {
       * @version 1.0.0
       */
      import * as reactQuery from "@tanstack/react-query";
-     import { getContext, Context, queryKeyFn } from "./context";
+     import { useContext, Context, queryKeyFn } from "./context";
      import type * as Fetcher from "./fetcher";
      import { fetch } from "./fetcher";
      import type * as RequestBodies from "./petstoreRequestBodies";
@@ -1550,7 +1550,7 @@ describe("generateReactQueryComponents", () => {
      export const fetchUpdatePet = (variables: UpdatePetVariables, signal?: AbortSignal) => fetch<string, UpdatePetError, RequestBodies.UpdatePetRequestBody, {}, {}, UpdatePetPathParams>({ url: "/pet/{petId}", method: "put", ...variables, signal });
 
      export const useUpdatePet = (options?: Omit<reactQuery.UseMutationOptions<string, UpdatePetError, UpdatePetVariables>, "mutationFn">) => {
-         const { fetcherOptions } = getContext();
+         const { fetcherOptions } = useContext();
          return reactQuery.useMutation<string, UpdatePetError, UpdatePetVariables>({
              mutationFn: (variables: UpdatePetVariables) => fetchUpdatePet({ ...fetcherOptions, ...variables }),
              ...options
@@ -1627,7 +1627,7 @@ describe("generateReactQueryComponents", () => {
       * @version 1.0.0
       */
      import * as reactQuery from "@tanstack/react-query";
-     import { getPetstoreContext, PetstoreContext, queryKeyFn } from "./petstoreContext";
+     import { usePetstoreContext, PetstoreContext, queryKeyFn } from "./petstoreContext";
      import type * as Fetcher from "./petstoreFetcher";
      import { petstoreFetch } from "./petstoreFetcher";
      import type * as Schemas from "./petstoreSchemas";
@@ -1669,7 +1669,7 @@ describe("generateReactQueryComponents", () => {
      /**
       * Get all the pets
       */
-     export const useSuspenseListPets = <TData = ListPetsResponse>(variables: ListPetsVariables, options?: Omit<reactQuery.UseQueryOptions<ListPetsResponse, ListPetsError, TData>, "queryKey" | "queryFn" | "initialData">) => { const { queryOptions } = getPetstoreContext(options); return reactQuery.useSuspenseQuery<ListPetsResponse, ListPetsError, TData>({
+     export const useSuspenseListPets = <TData = ListPetsResponse>(variables: ListPetsVariables, options?: Omit<reactQuery.UseQueryOptions<ListPetsResponse, ListPetsError, TData>, "queryKey" | "queryFn" | "initialData">) => { const { queryOptions } = usePetstoreContext(options); return reactQuery.useSuspenseQuery<ListPetsResponse, ListPetsError, TData>({
          ...listPetsQuery(variables),
          ...options,
          ...queryOptions
@@ -1678,7 +1678,7 @@ describe("generateReactQueryComponents", () => {
      /**
       * Get all the pets
       */
-     export const useListPets = <TData = ListPetsResponse>(variables: ListPetsVariables, options?: Omit<reactQuery.UseQueryOptions<ListPetsResponse, ListPetsError, TData>, "queryKey" | "queryFn" | "initialData">) => { const { queryOptions } = getPetstoreContext(options); return reactQuery.useQuery<ListPetsResponse, ListPetsError, TData>({
+     export const useListPets = <TData = ListPetsResponse>(variables: ListPetsVariables, options?: Omit<reactQuery.UseQueryOptions<ListPetsResponse, ListPetsError, TData>, "queryKey" | "queryFn" | "initialData">) => { const { queryOptions } = usePetstoreContext(options); return reactQuery.useQuery<ListPetsResponse, ListPetsError, TData>({
          ...listPetsQuery(variables),
          ...options,
          ...queryOptions
