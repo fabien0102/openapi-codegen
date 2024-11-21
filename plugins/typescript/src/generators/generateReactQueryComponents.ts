@@ -1,6 +1,6 @@
 import ts, { factory as f } from "typescript";
 import * as c from "case";
-import { get } from "lodash";
+import { get, camelCase } from "lodash";
 
 import { ConfigBase, Context } from "./types";
 import { OperationObject, PathItemObject } from "openapi3-ts";
@@ -154,7 +154,7 @@ export const generateReactQueryComponents = async (
         nodes.push(...declarationNodes);
 
         const operationFetcherFnName = `fetch${c.pascal(operationId)}`;
-        const operationQueryFnName = `${c.camel(operationId)}Query`;
+        const operationQueryFnName = camelCase(`${c.camel(operationId)}Query`);
 
         const component: "useQuery" | "useMutate" =
           operation["x-openapi-codegen-component"] ||
