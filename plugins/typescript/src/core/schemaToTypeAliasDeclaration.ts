@@ -142,10 +142,13 @@ export const getType = (
         additionalProperties: schema.additionalProperties
       });
     }
-    return getAllOf([
-      ...schema.allOf,
-      ...adHocSchemas
-     ], context);
+    return f.createUnionTypeNode([
+      getAllOf([
+        ...schema.allOf,
+        ...adHocSchemas
+      ], context),
+      ...(schema.nullable ? [f.createLiteralTypeNode(f.createNull())] : []),
+    ]);
   }
 
   if (schema.enum) {
