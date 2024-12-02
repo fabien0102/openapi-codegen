@@ -1,5 +1,12 @@
 # Changelog
 
+## [8.1.0](https://github.com/fabien0102/openapi-codegen/compare/typescript-v8.0.2...typescript-v8.1.0) (2024-12-02)
+
+
+### Features
+
+* Add suspense ([#261](https://github.com/fabien0102/openapi-codegen/issues/261)) ([8b12827](https://github.com/fabien0102/openapi-codegen/commit/8b12827ec9bcbc07678cbd7077bbc3706fad631e))
+
 ## [8.0.2](https://github.com/fabien0102/openapi-codegen/compare/typescript-v8.0.1...typescript-v8.0.2) (2024-04-29)
 
 
