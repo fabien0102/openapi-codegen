@@ -1,6 +1,6 @@
 {
   "name": "@openapi-codegen/cli",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "OpenAPI Codegen cli",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
