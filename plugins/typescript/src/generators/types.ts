@@ -26,6 +26,11 @@ export type ConfigBase = {
    */
   filenameCase?: keyof Pick<typeof c, "snake" | "camel" | "kebab" | "pascal">;
   /**
+   * Allows customizing the filename.
+   * If provided, `filenameCase` will be ignored.
+   */
+  formatFilename?: (filename: string) => string;
+  /**
    * Allows using explicit enums instead of string unions.
    *
    * @default false
