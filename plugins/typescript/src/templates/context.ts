@@ -100,4 +100,23 @@ export const getContext = (prefix: string, componentsFile: string) =>
   } => {
     return Boolean((operation.variables as any).queryParams);
   };
+
+  /**
+   * Set the data of a query operation
+   * 
+   * @example
+   * const setQueryOperationData = useSetQueryOperationData();
+   * setQueryOperationData({
+   *   operationId: "getUser",
+   *   path: "/users/{id}",
+   *   variables: { pathParams: { id: "1" } }
+   * }, data /* data must have the type expected by that operation * /);
+   */
+  export function useSetQueryOperationData() {
+    const { queryKeyFn } = useAcApiContext();
+    const queryClient = useQueryClient();
+    return <Op extends QueryOperation>(operation: Op, data: QueryDataTypes[Op["operationId"]]) => {
+      queryClient.setQueryData(queryKeyFn(operation), data);
+    };
+  } 
   `;
