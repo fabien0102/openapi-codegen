@@ -87,7 +87,33 @@ describe("schemaToTypeAliasDeclaration", () => {
       },
     };
 
-    expect(printSchema(schema, "schemas", components, true))
+    expect(printSchema(schema, "Test", "schemas", components, true))
+      .toMatchInlineSnapshot(`
+      "export type Test = {
+          status?: TestStatus;
+      };"
+    `);
+  });
+
+  it("should reference created enum with pascal typename", () => {
+    const schema: SchemaObject = {
+      type: "object",
+      properties: {
+        status: {
+          type: "string",
+          enum: ["AVAILABLE", "PENDING", "SOLD"],
+        },
+      },
+      xml: { name: "pet" },
+    };
+
+    const components: OpenAPIObject["components"] = {
+      schemas: {
+        Pet: schema,
+      },
+    };
+
+    expect(printSchema(schema, "test", "schemas", components, true))
       .toMatchInlineSnapshot(`
       "export type Test = {
           status?: TestStatus;
@@ -348,7 +374,7 @@ describe("schemaToTypeAliasDeclaration", () => {
       $ref: "#/components/schemas/User",
     };
 
-    expect(printSchema(schema, "parameters")).toMatchInlineSnapshot(
+    expect(printSchema(schema, "Test", "parameters")).toMatchInlineSnapshot(
       `"export type Test = Schemas.User;"`,
     );
   });
@@ -523,7 +549,7 @@ describe("schemaToTypeAliasDeclaration", () => {
 
     it("should omit the base value if present", () => {
       expect(
-        printSchema(schema, "schemas", {
+        printSchema(schema, "Test", "schemas", {
           schemas: {
             Foo: {
               type: "object",
@@ -563,7 +589,7 @@ describe("schemaToTypeAliasDeclaration", () => {
 
     it("should not add the `Omit` if not necessary", () => {
       expect(
-        printSchema(schema, "schemas", {
+        printSchema(schema, "Test", "schemas", {
           schemas: {
             Foo: { type: "object", properties: { foo: { type: "string" } } },
             Bar: { type: "object", properties: { bar: { type: "string" } } },
@@ -583,7 +609,7 @@ describe("schemaToTypeAliasDeclaration", () => {
 
     it("should use the original type if compliant", () => {
       expect(
-        printSchema(schema, "schemas", {
+        printSchema(schema, "Test", "schemas", {
           schemas: {
             Foo: {
               type: "object",
@@ -724,7 +750,8 @@ describe("schemaToTypeAliasDeclaration", () => {
         },
       };
 
-      expect(printSchema(schema, undefined, components)).toMatchInlineSnapshot(`
+      expect(printSchema(schema, "Test", undefined, components))
+        .toMatchInlineSnapshot(`
         "export type Test = Foo & {
             bar?: number;
         };"
@@ -747,7 +774,8 @@ describe("schemaToTypeAliasDeclaration", () => {
         },
       };
 
-      expect(printSchema(schema, undefined, components)).toMatchInlineSnapshot(`
+      expect(printSchema(schema, "Test", undefined, components))
+        .toMatchInlineSnapshot(`
         "export type Test = {
             bar: string;
         };"
@@ -972,12 +1000,13 @@ describe("schemaToTypeAliasDeclaration", () => {
 
 const printSchema = (
   schema: SchemaObject,
+  schemaName: string = "Test",
   currentComponent: OpenAPIComponentType = "schemas",
   components?: OpenAPIObject["components"],
   useEnums?: boolean,
 ) => {
   const nodes = schemaToTypeAliasDeclaration(
-    "Test",
+    schemaName,
     schema,
     {
       currentComponent,

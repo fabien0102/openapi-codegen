@@ -66,14 +66,30 @@ describe("schemaToTypeAliasDeclaration", () => {
       }"
     `);
   });
+
+  it("should generate uppercase type when providing lowercase schema names", () => {
+    const schema: SchemaObject = {
+      type: "string",
+      enum: ["AVAILABLE", "PENDING", "SOLD"],
+    };
+
+    expect(printSchema(schema, "test")).toMatchInlineSnapshot(`
+      "export enum Test {
+          AVAILABLE = "AVAILABLE",
+          PENDING = "PENDING",
+          SOLD = "SOLD"
+      }"
+    `);
+  });
 });
 
 const printSchema = (
   schema: SchemaObject,
+  schemaName: string = "Test",
   currentComponent: OpenAPIComponentType = "schemas",
   components?: OpenAPIObject["components"],
 ) => {
-  const nodes = schemaToEnumDeclaration("Test", schema, {
+  const nodes = schemaToEnumDeclaration(schemaName, schema, {
     currentComponent,
     openAPIDocument: { components },
   });
