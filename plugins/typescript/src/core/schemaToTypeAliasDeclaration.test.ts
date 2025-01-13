@@ -610,6 +610,7 @@ describe("schemaToTypeAliasDeclaration", () => {
         mapping: {
           foo: "#/components/schemas/Foo",
           bar: "#/components/schemas/Bar",
+          fiz: "#/components/schemas/Baz",
           baz: "#/components/schemas/Baz",
         },
       },
@@ -650,7 +651,7 @@ describe("schemaToTypeAliasDeclaration", () => {
        }) | (Omit<Bar, "discriminatorPropertyName"> & {
            discriminatorPropertyName: "bar";
        }) | (Omit<Baz, "discriminatorPropertyName"> & {
-           discriminatorPropertyName: "baz";
+           discriminatorPropertyName: "fiz" | "baz";
        });"
       `);
     });
@@ -670,7 +671,7 @@ describe("schemaToTypeAliasDeclaration", () => {
        }) | (Bar & {
            discriminatorPropertyName: "bar";
        }) | (Baz & {
-           discriminatorPropertyName: "baz";
+           discriminatorPropertyName: "fiz" | "baz";
        });"
       `);
     });
@@ -703,7 +704,10 @@ describe("schemaToTypeAliasDeclaration", () => {
               type: "object",
               properties: {
                 baz: { type: "string" },
-                discriminatorPropertyName: { type: "string", enum: ["baz"] },
+                discriminatorPropertyName: {
+                  type: "string",
+                  enum: ["fiz", "baz"],
+                },
               },
 
               required: ["discriminatorPropertyName"],
