@@ -66,11 +66,11 @@ $ npm run gen example
 1. Build the CLI (watch mode)
 
 ```bash
-$ npm run watch
+npm run watch
 ```
 
 1. Start working working (new terminal)
 
 ```bash
-$ ./lib/cli.js init --dry-run
+./lib/cli.js init --dry-run
 ```

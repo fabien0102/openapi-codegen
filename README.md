@@ -33,7 +33,7 @@
 1. **Initialize the generator**
 
    ```bash
-   $ npx @openapi-codegen/cli init
+   npx @openapi-codegen/cli init
    ```
    
    <img style="max-width: 400px" src="https://user-images.githubusercontent.com/271912/194000679-5a4501b8-5fc0-430c-9217-028bf91a5dcd.gif">
@@ -43,7 +43,7 @@
 2. **Start Generation**
 
    ```bash
-   $ npx openapi-codegen gen {namespace}
+   npx openapi-codegen gen {namespace}
    ```
    After the code generation is done, you will notice the following files:
 
@@ -55,7 +55,7 @@
    &nbsp;
 
    > **Warning**
-   > 
+   >
    > If `{namespace}Fetcher.ts` or `{namespace}Context.tsx` already exist in the output folder, they will not be replaced. However, `{namespace}Components.tsx` and `{namespace}Schemas.ts` will be re-generated each time based on the Open API spec file provided.
 
 3. **Configure the Fetcher** (optional)
@@ -71,9 +71,11 @@
    If during generator setup you picked `> React Query components`, then you will need to install and configure React Query in order for the generated React hooks to work properly:
 
    - Install the library
-     ```bash
-     npm i @tanstack/react-query
-     ```
+
+      ```bash
+      npm i @tanstack/react-query
+      ```
+
    - Wire up the `QueryClient` as described [here](https://tanstack.com/query/v4/docs/adapters/react-query).
 
 ## Philosophy
@@ -161,8 +163,8 @@ And since this generated from the specs, everything is safe at build time!
 The only thing you need to manage is the configuration.
 Everything is typed and self-documented, but just in case, you can find here example configuration below:
 
-
 ### Example Config
+
 ```ts
 // openapi-codegen.config.ts
 import { defineConfig } from "@openapi-codegen/cli";
@@ -204,46 +206,62 @@ export default defineConfig({
 ```
 
 ### Plugins
+
 the `@openapi-codegen/cli` supports these generator plugins:
+
 #### **generateSchemaTypes** (frontend/backend)
+
   generate all schema types for your specification:
+  
   ```ts
    const { schemasFiles } = await generateSchemaTypes(context, {
         /* config */
       });
   ```
+  
 output: `{namespace}Schemas.ts`
 
 #### **generateFetchers** (frontend)
-  generate all fetchers with types for your specification *needs schemafiles*
+
+  generate all fetchers with types for your specification _needs schemafiles_
+  
   ```ts
      await generateFetchers(context, {
         /* config */
         schemasFiles,
       });
   ```
+  
 output: `{namespace}Fetchers.ts`
 
 #### **generateReactQueryComponents** (frontend)
+
   generate all React Query Components for useQuery() and useMutation()
+  
   ```ts
       await generateReactQueryComponents(context, {
         /* config*/
         schemasFiles,
       });
   ```
+  
   output: `{namespace}Components.ts`
+  
 #### **generateReactQueryFunctions** (frontend)
+
   generate all React Query Functions used for e.g. React-Router 6.6.0+ loader functions
+  
   ```ts
      await generateReactQueryFunctions(context, {
         filenamePrefix,
         schemasFiles,
       });
   ```
+  
   output: `{namespace}Functions.ts`
 
   example usage in react-route-loader:
+  
   ```ts
   export const routeLoader = (queryClient: QueryClient) =>
     async ({ params }: MyParams) => 
@@ -251,7 +269,8 @@ output: `{namespace}Fetchers.ts`
         /*options*/
       })
   ```
-  *more infos: https://reactrouter.com/en/main/guides/data-libs*
+  
+  _more infos: https://reactrouter.com/en/main/guides/data-libs_
 
 
 You can import any generator into the `to` section, those can be the ones provided by this project or your own custom ones. You have full control of what you are generating!
