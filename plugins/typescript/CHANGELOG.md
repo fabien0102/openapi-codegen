@@ -1,5 +1,12 @@
 # Changelog
 
+## [8.1.1](https://github.com/fabien0102/openapi-codegen/compare/typescript-v8.1.0...typescript-v8.1.1) (2025-01-17)
+
+
+### Bug Fixes
+
+* Fix pascal enum reference ([#219](https://github.com/fabien0102/openapi-codegen/issues/219)) ([f5b8902](https://github.com/fabien0102/openapi-codegen/commit/f5b8902a66924b3ce62c1acc2d673ff604def57b))
+
 ## [8.1.0](https://github.com/fabien0102/openapi-codegen/compare/typescript-v8.0.2...typescript-v8.1.0) (2024-12-02)
 
 

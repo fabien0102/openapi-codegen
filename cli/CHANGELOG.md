@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.4](https://github.com/fabien0102/openapi-codegen/compare/cli-v2.0.3...cli-v2.0.4) (2025-01-17)
+
+
+### Bug Fixes
+
+* **cli:** update rollup config ([#265](https://github.com/fabien0102/openapi-codegen/issues/265)) ([6c02ab3](https://github.com/fabien0102/openapi-codegen/commit/6c02ab3bdf93e3ae7a79d4ccc62321842152dc3c))
+
 ## [2.0.3](https://github.com/fabien0102/openapi-codegen/compare/cli-v2.0.2...cli-v2.0.3) (2024-12-02)
 
 
