@@ -9,7 +9,7 @@ import typescript from "@rollup/plugin-typescript";
 const typescriptPlugin = typescript({
   tsconfig: "./tsconfig.package.json",
   compilerOptions: {
-    outDir: ".",
+    outDir: "lib",
     sourceMap: false,
   },
 });
@@ -18,7 +18,7 @@ export default [
   {
     input: "src/index.ts",
     output: {
-      file: "lib/index.js",
+      dir: "lib",
       format: "es",
     },
     cache: false,
@@ -27,7 +27,7 @@ export default [
   {
     input: "src/cli.ts",
     output: {
-      file: "lib/cli.js",
+      dir: "lib",
       format: "es",
       banner: "#!/usr/bin/env node",
     },
