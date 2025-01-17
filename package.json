@@ -29,7 +29,7 @@
     "got": "^14.2.1",
     "husky": "^9.0.11",
     "jest": "^30.0.0-alpha.1",
-    "lerna": "^8.1.2",
+    "lerna": "^8.1.9",
     "prettier": "^3.2.5",
     "pretty-quick": "^4.0.0",
     "typescript": "5.4.3"

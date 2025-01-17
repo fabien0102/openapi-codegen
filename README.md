@@ -169,9 +169,6 @@ import { defineConfig } from "@openapi-codegen/cli";
 import {
   generateSchemaTypes,
   generateReactQueryComponents,
-  /* generateExpressControllers, */
-  /* generateRestfulReactComponents, */
-  /* ... */
 } from "@openapi-codegen/typescript";
 
 export default defineConfig({
