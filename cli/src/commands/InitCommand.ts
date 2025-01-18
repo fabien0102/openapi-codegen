@@ -130,7 +130,7 @@ export class InitCommand extends Command {
           message: "Url",
           placeholder: "https://.../openapi.json",
           validate(value) {
-            if (!value.startsWith("https://") || !value.startsWith("http://")) {
+            if (!value.startsWith("https://") && !value.startsWith("http://")) {
               return "Url must starts with http or https protocol";
             }
             if (
