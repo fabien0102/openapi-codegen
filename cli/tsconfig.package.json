@@ -3,6 +3,6 @@
   "compilerOptions": {
     "outDir": "lib"
   },
-
-  "exclude": ["src/fixtures/**/*", "src/**/*.test.ts"]
+  "files": ["src/index.ts"],
+  "include": ["src/types/**/*"]
 }

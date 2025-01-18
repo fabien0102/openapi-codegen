@@ -1,3 +1,4 @@
+import * as prompt from "@clack/prompts";
 import { Command, Option } from "clipanion";
 import { posix as path } from "path";
 import fsExtra from "fs-extra";
@@ -12,10 +13,10 @@ import {
   generateConfigProperty,
   getImports,
 } from "../core/generateConfigProperty.js";
-import { Prompt } from "../prompts/Prompt.js";
 import { getText } from "../utils/getText.js";
 import emptyConfig from "../templates/emptyConfig.js";
 import { updateConfig } from "../core/updateConfig.js";
+import { handlePromptCancel } from "src/utils/handlePromptCancel";
 
 export class InitCommand extends Command {
   static paths = [["init"]];
@@ -27,8 +28,6 @@ export class InitCommand extends Command {
   dryRun = Option.Boolean("--dry-run", {
     description: "Print the file in the stdout",
   });
-
-  private prompt = new Prompt();
 
   private hasDependencyInstalled(name: string, packageJSON: any) {
     if (typeof packageJSON !== "object") return false;
@@ -101,10 +100,24 @@ export class InitCommand extends Command {
 
   private async askForFile(): Promise<FileOptions> {
     return {
-      relativePath: await this.prompt.input({
-        message: "Relative path",
-        hint: "Example: ./openapi.json",
-      }),
+      relativePath: await prompt
+        .text({
+          message: "Relative path",
+          placeholder: "./openapi.json",
+          validate(value) {
+            if (!value.startsWith("./") && !value.startsWith("../"))
+              return "The path should be relative";
+
+            if (
+              !value.endsWith(".json") &&
+              !value.endsWith(".yaml") &&
+              !value.endsWith(".yml")
+            ) {
+              return "The file must be a json or yaml";
+            }
+          },
+        })
+        .then(handlePromptCancel),
       source: "file",
     };
   }
@@ -112,10 +125,24 @@ export class InitCommand extends Command {
   private async askForUrl(): Promise<UrlOptions> {
     return {
       source: "url",
-      url: await this.prompt.input({
-        message: "Url",
-        hint: "Example: https://.../openapi.json",
-      }),
+      url: await prompt
+        .text({
+          message: "Url",
+          placeholder: "https://.../openapi.json",
+          validate(value) {
+            if (!value.startsWith("https://") || !value.startsWith("http://")) {
+              return "Url must starts with http or https protocol";
+            }
+            if (
+              !value.endsWith(".json") &&
+              !value.endsWith(".yaml") &&
+              !value.endsWith(".yml")
+            ) {
+              return "Url must ends with `.json` or `.yaml` or `.yml`";
+            }
+          },
+        })
+        .then(handlePromptCancel),
     };
   }
 
@@ -127,41 +154,44 @@ export class InitCommand extends Command {
 
     const config = await this.getConfigSourceFile(userConfigPath);
 
-    const source = await this.prompt.select({
-      choices: [
-        { label: "File", value: "file" as const },
-        { label: "Url", value: "url" as const },
-        // { label: "Github", value: "github" as const },
-      ],
-      message: "Select the source of your OpenAPI",
-    });
+    const source = await prompt
+      .select({
+        options: [
+          { label: "File", value: "file" },
+          { label: "Url", value: "url" },
+          // { label: "Github", value: "github" },
+        ],
+        message: "Select the source of your OpenAPI",
+      })
+      .then(handlePromptCancel);
 
     const from: FromOptions =
-      source === "file"
-        ? await this.askForFile()
-        : source === "url"
-          ? await this.askForUrl()
-          : await this.prompt.github("todo: inject the token");
+      source === "file" ? await this.askForFile() : await this.askForUrl();
 
     const namespace = format.camel(
-      await this.prompt.input({
-        message: "What namespace do you want for your API?",
-      })
+      await prompt
+        .text({
+          message: "What namespace do you want for your API?",
+        })
+        .then(handlePromptCancel)
     );
 
-    const plugin = await this.prompt.select<Plugin>({
-      message: "What do you want to generate?",
-      choices: [
-        { label: "Types only", value: "typescript/types-only" },
-        { label: "Generic Fetchers", value: "typescript/fetch" },
-        { label: "React Query components", value: "typescript/react-query" },
-      ],
-    });
+    const plugin = await prompt
+      .select<Plugin>({
+        message: "What do you want to generate?",
+        options: [
+          { label: "Types only", value: "typescript/types-only" },
+          { label: "Generic Fetchers", value: "typescript/fetch" },
+          { label: "React Query components", value: "typescript/react-query" },
+        ],
+      })
+      .then(handlePromptCancel);
 
-    const outputDir = await this.prompt.input({
-      message: "Which folder do you want to generate?",
-    });
-    this.prompt.close();
+    const outputDir = await prompt
+      .text({
+        message: "Which folder do you want to generate?",
+      })
+      .then(handlePromptCancel);
 
     const configProperty = generateConfigProperty({
       namespace,

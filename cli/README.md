@@ -2,7 +2,7 @@
 
 ## Getting started
 
-1. Add a `openapi-codegen.config.ts` at the root of your project
+1. Add a `openapi-codegen.config.ts` at the root of your project or run `npx @openapi-codegen/cli init`
 
 ```ts
 // openapi-codegen.config.ts
@@ -56,7 +56,21 @@ export default defineConfig({
 3. Run the generator (`example` is the config key defined in the step 1)
 
 ```bash
-$ yarn gen example
+$ npm run gen example
 ```
 
 4. Start playing! 🥳
+
+## How to test the cli locally
+
+1. Build the CLI (watch mode)
+
+```bash
+npm run watch
+```
+
+1. Start working working (new terminal)
+
+```bash
+./lib/cli.js init --dry-run
+```

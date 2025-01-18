@@ -1,10 +1,14 @@
+import * as prompt from "@clack/prompts";
 import { UsageError } from "clipanion";
 import { readFileSync, unlinkSync } from "fs";
 import { HTTPError } from "got";
 import { homedir } from "os";
 import { join, parse } from "path";
 import { URL } from "url";
+
 import { FromOptions, OpenAPISourceFile } from "../types";
+import { getGithubToken } from "../utils/getGithubToken";
+import { handlePromptCancel } from "../utils/handlePromptCancel";
 
 /**
  * Retrieve the OpenAPI source.
@@ -44,10 +48,7 @@ export const getOpenAPISourceFile = async (
 
     case "github": {
       // Retrieve Github token
-      const { Prompt } = await import("../prompts/Prompt.js");
-      const prompt = new Prompt();
-
-      const token = await prompt.githubToken();
+      const token = await getGithubToken();
 
       // Retrieve specs
       const { default: got } = await import("got");
@@ -66,8 +67,6 @@ export const getOpenAPISourceFile = async (
           content: string;
           encoding: string | null;
         }>();
-
-        prompt.close();
 
         if (!raw.content) {
           throw new UsageError(`No content found at "${options.specPath}"`);
@@ -91,10 +90,12 @@ export const getOpenAPISourceFile = async (
           e.response.statusCode === 401 &&
           !process.env.GITHUB_TOKEN
         ) {
-          const removeToken = await prompt.confirm(
-            "Your token doesn't have the correct permissions, should we remove it?"
-          );
-          prompt.close();
+          const removeToken = await prompt
+            .confirm({
+              message:
+                "Your token doesn't have the correct permissions, should we remove it?",
+            })
+            .then(handlePromptCancel);
 
           if (removeToken) {
             const githubTokenPath = join(homedir(), ".openapi-codegen");

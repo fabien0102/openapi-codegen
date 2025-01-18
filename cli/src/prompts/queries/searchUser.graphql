@@ -1,9 +1,0 @@
-query searchUser($query: String!) {
-  search(first: 10, query: $query, type: USER) {
-    nodes {
-      ... on User {
-        login
-      }
-    }
-  }
-}

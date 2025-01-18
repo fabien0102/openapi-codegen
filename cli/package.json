@@ -24,56 +24,43 @@
   ],
   "license": "MIT",
   "scripts": {
-    "build": "rollup -c",
-    "prepublishOnly": "npm run build",
-    "gen": "graphql-codegen --config codegen.yml -r dotenv/config"
+    "watch": "tsup src/index.ts src/cli.ts --outDir lib --format esm --watch",
+    "prebuild": "tsc --emitDeclarationOnly --declaration -p tsconfig.package.json",
+    "build": "tsup src/index.ts src/cli.ts --outDir lib --format esm",
+    "prepublishOnly": "npm run build"
   },
   "files": [
     "lib",
     "README.md"
   ],
   "dependencies": {
-    "@apollo/client": "^3.5.10",
+    "@clack/prompts": "^0.9.1",
+    "@octokit/request": "^9.2.0",
     "@swc/core": "^1.2.118",
     "case": "^1.6.3",
-    "chalk": "^5.0.0",
     "cli-highlight": "^2.1.11",
-    "clipanion": "^3.2.0-rc.10",
+    "clipanion": "^4.0.0-rc.4",
     "fs-extra": "^10.0.0",
     "got": "^12.0.0",
     "got-fetch": "^5.1.1",
-    "graphql": "^15.8.0",
-    "ink": "^5.0.0",
     "js-yaml": "^4.1.0",
     "openapi3-ts": "^2.0.1",
     "prettier": "^3.2.5",
-    "rxjs": "^7.5.4",
     "slash": "^4.0.0",
     "swagger2openapi": "^7.0.8",
     "tslib": "^2.3.1",
-    "typanion": "^3.7.1",
+    "typanion": "^3.14.0",
     "typescript": "4.8.2"
   },
   "devDependencies": {
-    "@graphql-codegen/cli": "^2.6.2",
-    "@graphql-codegen/typescript": "^2.4.5",
-    "@graphql-codegen/typescript-operations": "^2.3.2",
-    "@graphql-codegen/typescript-react-apollo": "^3.2.8",
-    "@rollup/plugin-commonjs": "^22.0.0",
-    "@rollup/plugin-json": "^4.1.0",
-    "@rollup/plugin-node-resolve": "^13.3.0",
-    "@rollup/plugin-typescript": "^8.3.2",
     "@swc-node/register": "^1.4.0",
     "@types/fs-extra": "^9.0.13",
     "@types/js-yaml": "^4.0.3",
     "@types/nock": "^11.1.0",
     "@types/prettier": "^3.0.0",
-    "@types/react": "^18.3.2",
     "@types/slash": "^3.0.0",
     "nock": "^13.2.1",
     "react": "^18.3.1",
-    "rollup-plugin-auto-external": "^2.0.0",
-    "rollup-plugin-internal": "^1.0.4",
-    "rollup-plugin-preserve-shebang": "^1.0.1"
+    "tsup": "^8.3.5"
   }
 }

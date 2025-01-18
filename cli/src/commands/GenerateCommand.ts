@@ -10,7 +10,8 @@ import slash from "slash";
 import { Config, FromOptions, Namespace } from "../types";
 import { getOpenAPISourceFile } from "../core/getOpenAPISourceFile.js";
 import { parseOpenAPISourceFile } from "../core/parseOpenAPISourceFile.js";
-import { Prompt } from "../prompts/Prompt.js";
+import { getGithubToken } from "../utils/getGithubToken";
+import { resolveGithubPullRequest } from "../utils/resolveGithubPullRequest";
 
 const __filename = fileURLToPath(import.meta.url);
 
@@ -69,7 +70,6 @@ export class GenerateCommand extends Command {
     description: "[source=github] Select a specific pull-request as ref",
     env: "OPENAPI_CODEGEN_GITHUB_PULL_REQUEST",
     validator: t.isNumber(),
-    tolerateBoolean: true,
   });
 
   static paths = [["gen"], ["generate"], Command.Default];
@@ -214,13 +214,11 @@ export class GenerateCommand extends Command {
     const config = configs[this.namespace];
     const options = this.getFromOptions(config);
     if (options.source === "github" && this.pullRequest) {
-      const prompt = new Prompt();
-      const token = await prompt.githubToken();
-      const pullRequest = await prompt.githubPullRequest({
-        ...options,
+      const token = await getGithubToken();
+      const pullRequest = await resolveGithubPullRequest({
+        pullRequestNumber: this.pullRequest,
+        options,
         token,
-        pullRequestNumber:
-          typeof this.pullRequest === "number" ? this.pullRequest : undefined,
       });
 
       options.ref = pullRequest.ref;
