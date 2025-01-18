@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.0.1](https://github.com/fabien0102/openapi-codegen/compare/cli-v3.0.0...cli-v3.0.1) (2025-01-18)
+
+
+### Bug Fixes
+
+* fix url validation on the init command ([0184dd4](https://github.com/fabien0102/openapi-codegen/commit/0184dd4283a4f7f50161122e270d051b1d3b2243))
+
 ## [3.0.0](https://github.com/fabien0102/openapi-codegen/compare/cli-v2.0.4...cli-v3.0.0) (2025-01-18)
 
 
