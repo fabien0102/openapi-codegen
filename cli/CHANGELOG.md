@@ -1,5 +1,16 @@
 # Changelog
 
+## [3.0.0](https://github.com/fabien0102/openapi-codegen/compare/cli-v2.0.4...cli-v3.0.0) (2025-01-18)
+
+
+### ⚠ BREAKING CHANGES
+
+* Refactor/Simplify cli ([#268](https://github.com/fabien0102/openapi-codegen/issues/268))
+
+### Features
+
+* Refactor/Simplify cli ([#268](https://github.com/fabien0102/openapi-codegen/issues/268)) ([33b5a36](https://github.com/fabien0102/openapi-codegen/commit/33b5a36a9332f5d7fc9b7990e9f233ba9fc82e5a))
+
 ## [2.0.4](https://github.com/fabien0102/openapi-codegen/compare/cli-v2.0.3...cli-v2.0.4) (2025-01-17)
 
 
