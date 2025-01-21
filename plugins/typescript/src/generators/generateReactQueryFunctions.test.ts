@@ -122,7 +122,7 @@ describe("generateReactQueryFunctions", () => {
          }),
          queryFn: ({ signal }: {
              signal?: AbortSignal;
-         }) => fetchListPets({ ...variables }, signal)
+         }) => fetchListPets(variables, signal)
      });
 
      export type QueryOperation = {
@@ -255,7 +255,7 @@ describe("generateReactQueryFunctions", () => {
          }),
          queryFn: ({ signal }: {
              signal?: AbortSignal;
-         }) => fetchListPets({ ...variables }, signal)
+         }) => fetchListPets(variables, signal)
      });
 
      export type QueryOperation = {
@@ -370,7 +370,7 @@ describe("generateReactQueryFunctions", () => {
          }),
          queryFn: ({ signal }: {
              signal?: AbortSignal;
-         }) => fetchShowPetById({ ...variables }, signal)
+         }) => fetchShowPetById(variables, signal)
      });
 
      export type QueryOperation = {
@@ -507,7 +507,7 @@ describe("generateReactQueryFunctions", () => {
          }),
          queryFn: ({ signal }: {
              signal?: AbortSignal;
-         }) => fetchListPets({ ...variables }, signal)
+         }) => fetchListPets(variables, signal)
      });
 
      export type QueryOperation = {
@@ -615,7 +615,7 @@ describe("generateReactQueryFunctions", () => {
          }),
          queryFn: ({ signal }: {
              signal?: AbortSignal;
-         }) => fetchListPets({ ...variables }, signal)
+         }) => fetchListPets(variables, signal)
      });
 
      export type QueryOperation = {
@@ -1224,7 +1224,7 @@ describe("generateReactQueryFunctions", () => {
          }),
          queryFn: ({ signal }: {
              signal?: AbortSignal;
-         }) => fetchListPets({ ...variables }, signal)
+         }) => fetchListPets(variables, signal)
      });
 
      export type QueryOperation = {
@@ -1319,7 +1319,7 @@ describe("generateReactQueryFunctions", () => {
          }),
          queryFn: ({ signal }: {
              signal?: AbortSignal;
-         }) => fetchListPets({ ...variables }, signal)
+         }) => fetchListPets(variables, signal)
      });
 
      export type QueryOperation = {

@@ -266,14 +266,7 @@ export const createOperationQueryFnNodes = ({
                         f.createIdentifier(operationFetcherFnName),
                         undefined,
                         [
-                          f.createObjectLiteralExpression(
-                            [
-                              f.createSpreadAssignment(
-                                f.createIdentifier("variables")
-                              ),
-                            ],
-                            false
-                          ),
+                          f.createIdentifier("variables"),
                           f.createIdentifier("signal"),
                         ]
                       )

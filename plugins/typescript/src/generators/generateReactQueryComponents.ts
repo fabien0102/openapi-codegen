@@ -36,12 +36,6 @@ export type Config = ConfigBase & {
    * This will mark the header as optional in the component API
    */
   injectedHeaders?: string[];
-  /**
-   * Generate React Query components with `useSuspenseQuery` hook.
-   *
-   * @default false
-   */
-  generateSuspenseQueries?: boolean;
 };
 
 export const generateReactQueryComponents = async (
@@ -80,8 +74,6 @@ export const generateReactQueryComponents = async (
   const formatFilename = config.filenameCase ? c[config.filenameCase] : c.camel;
 
   const filename = formatFilename(filenamePrefix + "-components");
-
-  const { generateSuspenseQueries = false } = config;
 
   const fetcherFn = c.camel(`${filenamePrefix}-fetch`);
   const contextTypeName = `${c.pascal(filenamePrefix)}Context`;
@@ -192,16 +184,17 @@ export const generateReactQueryComponents = async (
           );
         }
 
-        const hookOptions = {
+        const useQueryHookOptions = {
           operationFetcherFnName,
+          operationQueryFnName,
           operation,
           dataType,
           errorType,
           variablesType,
           contextHookName,
-          name: `use${c.pascal(operationId)}`,
           operationId,
           url: route,
+          name: `use${c.pascal(operationId)}`,
         };
 
         nodes.push(
@@ -238,29 +231,13 @@ export const generateReactQueryComponents = async (
                   name: operationQueryFnName,
                 }),
                 ...createQueryHook({
-                  operationFetcherFnName,
-                  operationQueryFnName,
-                  operation,
-                  dataType,
-                  errorType,
-                  variablesType,
-                  contextHookName,
+                  ...useQueryHookOptions,
                   name: `useSuspense${c.pascal(operationId)}`,
-                  operationId,
-                  url: route,
                   useQueryIdentifier: "useSuspenseQuery",
                 }),
                 ...createQueryHook({
-                  operationFetcherFnName,
-                  operationQueryFnName,
-                  operation,
-                  dataType,
-                  errorType,
-                  variablesType,
-                  contextHookName,
+                  ...useQueryHookOptions,
                   name: `use${c.pascal(operationId)}`,
-                  operationId,
-                  url: route,
                 }),
               ]
             : createMutationHook({

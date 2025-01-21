@@ -122,7 +122,7 @@ describe("generateReactQueryComponents", () => {
          }),
          queryFn: ({ signal }: {
              signal?: AbortSignal;
-         }) => fetchListPets({ ...variables }, signal)
+         }) => fetchListPets(variables, signal)
      });
 
      /**
@@ -191,7 +191,7 @@ describe("generateReactQueryComponents", () => {
         existsFile: () => true,
         readFile: async () => "",
       },
-      { ...config, generateSuspenseQueries: true },
+      { ...config },
     );
 
     expect(writeFile.mock.calls[0][0]).toBe("petstoreComponents.ts");
@@ -234,7 +234,7 @@ describe("generateReactQueryComponents", () => {
          }),
          queryFn: ({ signal }: {
              signal?: AbortSignal;
-         }) => fetchListPets({ ...variables }, signal)
+         }) => fetchListPets(variables, signal)
      });
 
      /**
@@ -384,7 +384,7 @@ describe("generateReactQueryComponents", () => {
          }),
          queryFn: ({ signal }: {
              signal?: AbortSignal;
-         }) => fetchListPets({ ...variables }, signal)
+         }) => fetchListPets(variables, signal)
      });
 
      /**
@@ -478,7 +478,7 @@ describe("generateReactQueryComponents", () => {
         existsFile: () => true,
         readFile: async () => "",
       },
-      { ...config, generateSuspenseQueries: true },
+      { ...config },
     );
 
     expect(writeFile.mock.calls[0][0]).toBe("petstoreComponents.ts");
@@ -534,7 +534,7 @@ describe("generateReactQueryComponents", () => {
          }),
          queryFn: ({ signal }: {
              signal?: AbortSignal;
-         }) => fetchListPets({ ...variables }, signal)
+         }) => fetchListPets(variables, signal)
      });
 
      /**
@@ -666,7 +666,7 @@ describe("generateReactQueryComponents", () => {
          }),
          queryFn: ({ signal }: {
              signal?: AbortSignal;
-         }) => fetchShowPetById({ ...variables }, signal)
+         }) => fetchShowPetById(variables, signal)
      });
 
      /**
@@ -747,7 +747,7 @@ describe("generateReactQueryComponents", () => {
         existsFile: () => true,
         readFile: async () => "",
       },
-      { ...config, generateSuspenseQueries: true },
+      { ...config },
     );
 
     expect(writeFile.mock.calls[0][0]).toBe("petstoreComponents.ts");
@@ -799,7 +799,7 @@ describe("generateReactQueryComponents", () => {
          }),
          queryFn: ({ signal }: {
              signal?: AbortSignal;
-         }) => fetchShowPetById({ ...variables }, signal)
+         }) => fetchShowPetById(variables, signal)
      });
 
      /**
@@ -954,7 +954,7 @@ describe("generateReactQueryComponents", () => {
          }),
          queryFn: ({ signal }: {
              signal?: AbortSignal;
-         }) => fetchListPets({ ...variables }, signal)
+         }) => fetchListPets(variables, signal)
      });
 
      /**
@@ -1080,7 +1080,7 @@ describe("generateReactQueryComponents", () => {
          }),
          queryFn: ({ signal }: {
              signal?: AbortSignal;
-         }) => fetchListPets({ ...variables }, signal)
+         }) => fetchListPets(variables, signal)
      });
 
      /**
@@ -2056,7 +2056,7 @@ describe("generateReactQueryComponents", () => {
          }),
          queryFn: ({ signal }: {
              signal?: AbortSignal;
-         }) => fetchListPets({ ...variables }, signal)
+         }) => fetchListPets(variables, signal)
      });
 
      /**
