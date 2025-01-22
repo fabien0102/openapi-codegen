@@ -109,11 +109,8 @@ export async function ${camel(prefix)}Fetch<
               : "Unexpected error"
         };
       }
-
-      throw error;
     }
-
-    if (response.headers.get('content-type')?.includes('json')) {
+    else if (response.headers.get('content-type')?.includes('json')) {
       return await response.json();
     } else {
       // if it is not a json response, assume it is a blob and cast it to TData
@@ -128,6 +125,7 @@ export async function ${camel(prefix)}Fetch<
     };
     throw errorObject;
   }
+  throw error;
 }
 
 const resolveUrl = (
