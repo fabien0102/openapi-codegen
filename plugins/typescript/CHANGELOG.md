@@ -1,5 +1,12 @@
 # Changelog
 
+## [8.1.2](https://github.com/fabien0102/openapi-codegen/compare/typescript-v8.1.1...typescript-v8.1.2) (2025-01-22)
+
+
+### Bug Fixes
+
+* properly handle request errors ([#260](https://github.com/fabien0102/openapi-codegen/issues/260)) ([88e09cc](https://github.com/fabien0102/openapi-codegen/commit/88e09cc6c2216ab50341623c29622051c8220d6e))
+
 ## [8.1.1](https://github.com/fabien0102/openapi-codegen/compare/typescript-v8.1.0...typescript-v8.1.1) (2025-01-17)
 
 
