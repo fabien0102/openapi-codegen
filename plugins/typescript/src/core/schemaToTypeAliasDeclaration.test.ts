@@ -715,6 +715,23 @@ describe("schemaToTypeAliasDeclaration", () => {
           `);
     });
 
+    it("should combine nullable & allOf", () => {
+      const schema: SchemaObject = {
+        allOf: [
+          { type: "object", properties: { foo: { type: "string" } } },
+          { type: "object", properties: { bar: { type: "number" } } },
+        ],
+        nullable: true,
+      };
+
+      expect(printSchema(schema)).toMatchInlineSnapshot(`
+      "export type Test = {
+          foo?: string;
+          bar?: number;
+      } | null;"
+    `);
+    });
+
     it("should combine inline types", () => {
       const schema: SchemaObject = {
         allOf: [
