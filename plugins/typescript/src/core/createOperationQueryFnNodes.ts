@@ -152,130 +152,125 @@ export const createOperationQueryFnNodes = ({
                             undefined
                           ),
                         ],
-                    f.createTypeReferenceNode(f.createIdentifier("Promise"), [dataType])
+                    f.createTypeReferenceNode(f.createIdentifier("Promise"), [
+                      dataType,
+                    ])
                   )
                 ),
               ]),
-              
+
               f.createToken(ts.SyntaxKind.EqualsGreaterThanToken),
               f.createObjectLiteralExpression(
                 [
                   f.createPropertyAssignment(
                     f.createIdentifier("queryKey"),
                     f.createCallExpression(
-                        f.createIdentifier("queryKeyFn"),
-                        undefined,
-                        [
-                          f.createObjectLiteralExpression(
-                            [
-                              f.createPropertyAssignment(
-                                f.createIdentifier("path"),
-                                f.createStringLiteral(camelizedPathParams(url))
-                              ),
-                              f.createPropertyAssignment(
-                                f.createIdentifier("operationId"),
-                                f.createStringLiteral(operationId)
-                              ),
-                              f.createShorthandPropertyAssignment(
-                                f.createIdentifier("variables"),
-                                undefined
-                              ),
-                            ],
-                            true
-                          ),
-                        ]
-                      )
+                      f.createIdentifier("queryKeyFn"),
+                      undefined,
+                      [
+                        f.createObjectLiteralExpression(
+                          [
+                            f.createPropertyAssignment(
+                              f.createIdentifier("path"),
+                              f.createStringLiteral(camelizedPathParams(url))
+                            ),
+                            f.createPropertyAssignment(
+                              f.createIdentifier("operationId"),
+                              f.createStringLiteral(operationId)
+                            ),
+                            f.createShorthandPropertyAssignment(
+                              f.createIdentifier("variables"),
+                              undefined
+                            ),
+                          ],
+                          true
+                        ),
+                      ]
+                    )
                   ),
                   f.createPropertyAssignment(
                     f.createIdentifier("queryFn"),
                     f.createArrowFunction(
-                        [f.createModifier(ts.SyntaxKind.AsyncKeyword)],
-                        undefined,
-                        verb === "get"
-                          ? [
-                              f.createParameterDeclaration(
-                                undefined,
-                                undefined,
-                                f.createObjectBindingPattern([
-                                  f.createBindingElement(
-                                    undefined,
-                                    undefined,
-                                    f.createIdentifier("signal"),
-                                    undefined
-                                  ),
-                                ]),
-                                undefined,
-                                f.createTypeLiteralNode([
-                                  f.createPropertySignature(
-                                    undefined,
-                                    f.createIdentifier("signal"),
-                                    f.createToken(ts.SyntaxKind.QuestionToken),
-                                    f.createTypeReferenceNode(
-                                      f.createIdentifier("AbortSignal"),
-                                      undefined
-                                    )
-                                  ),
-                                ]),
-                                undefined
-                              ),
-                            ]
-                          : [
-                              f.createParameterDeclaration(
-                                undefined,
-                                undefined,
-                                f.createObjectBindingPattern([
-                                  f.createBindingElement(
-                                    undefined,
-                                    undefined,
-                                    f.createIdentifier("variables"),
-                                    undefined
-                                  ),
-                                  f.createBindingElement(
-                                    undefined,
-                                    undefined,
-                                    f.createIdentifier("signal"),
-                                    undefined
-                                  ),
-                                ]),
-                                undefined,
-                                f.createTypeLiteralNode([
-                                  f.createPropertySignature(
-                                    undefined,
-                                    f.createIdentifier("variables"),
-                                    undefined,
-                                    variablesType
-                                  ),
-                                  f.createPropertySignature(
-                                    undefined,
-                                    f.createIdentifier("signal"),
-                                    f.createToken(ts.SyntaxKind.QuestionToken),
-                                    f.createTypeReferenceNode(
-                                      f.createIdentifier("AbortSignal"),
-                                      undefined
-                                    )
-                                  ),
-                                ]),
-                                undefined
-                              ),
-                            ],
-                        undefined,
-                        f.createToken(ts.SyntaxKind.EqualsGreaterThanToken),
-                        f.createCallExpression(
-                          f.createIdentifier(operationFetcherFnName),
-                          undefined,
-                          [
-                            f.createObjectLiteralExpression(
-                              [
-                                f.createSpreadAssignment(
-                                  f.createIdentifier("variables")
+                      undefined,
+                      undefined,
+                      verb === "get"
+                        ? [
+                            f.createParameterDeclaration(
+                              undefined,
+                              undefined,
+                              f.createObjectBindingPattern([
+                                f.createBindingElement(
+                                  undefined,
+                                  undefined,
+                                  f.createIdentifier("signal"),
+                                  undefined
                                 ),
-                              ],
-                              false
+                              ]),
+                              undefined,
+                              f.createTypeLiteralNode([
+                                f.createPropertySignature(
+                                  undefined,
+                                  f.createIdentifier("signal"),
+                                  f.createToken(ts.SyntaxKind.QuestionToken),
+                                  f.createTypeReferenceNode(
+                                    f.createIdentifier("AbortSignal"),
+                                    undefined
+                                  )
+                                ),
+                              ]),
+                              undefined
                             ),
-                            f.createIdentifier("signal"),
                           ]
-                        )
+                        : [
+                            f.createParameterDeclaration(
+                              undefined,
+                              undefined,
+                              f.createObjectBindingPattern([
+                                f.createBindingElement(
+                                  undefined,
+                                  undefined,
+                                  f.createIdentifier("variables"),
+                                  undefined
+                                ),
+                                f.createBindingElement(
+                                  undefined,
+                                  undefined,
+                                  f.createIdentifier("signal"),
+                                  undefined
+                                ),
+                              ]),
+                              undefined,
+                              f.createTypeLiteralNode([
+                                f.createPropertySignature(
+                                  undefined,
+                                  f.createIdentifier("variables"),
+                                  undefined,
+                                  variablesType
+                                ),
+                                f.createPropertySignature(
+                                  undefined,
+                                  f.createIdentifier("signal"),
+                                  f.createToken(ts.SyntaxKind.QuestionToken),
+                                  f.createTypeReferenceNode(
+                                    f.createIdentifier("AbortSignal"),
+                                    undefined
+                                  )
+                                ),
+                              ]),
+                              undefined
+                            ),
+                          ],
+                      undefined,
+                      f.createToken(ts.SyntaxKind.EqualsGreaterThanToken),
+                      f.createCallExpression(
+                        f.createIdentifier(operationFetcherFnName),
+                        undefined,
+                        [
+                          f.createIdentifier("variables"),
+                          f.createIdentifier("signal"),
+                        ]
                       )
+                    )
                   ),
                 ],
                 true

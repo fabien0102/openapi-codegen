@@ -22,10 +22,6 @@ export const getContext = (prefix: string, componentsFile: string) =>
        */
       enabled?: boolean;
     };
-    /**
-     * Query key manager.
-     */
-    queryKeyFn: (operation: QueryOperation) => QueryKey;
   };
   
   /**
@@ -43,8 +39,7 @@ export const getContext = (prefix: string, componentsFile: string) =>
  ): ${pascal(prefix)}Context {
     return {
       fetcherOptions: {},
-      queryOptions: {},
-      queryKeyFn
+      queryOptions: {}
   }
 };
 
