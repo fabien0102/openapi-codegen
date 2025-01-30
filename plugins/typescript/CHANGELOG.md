@@ -1,5 +1,21 @@
 # Changelog
 
+## [9.0.0](https://github.com/fabien0102/openapi-codegen/compare/typescript-v8.1.1...typescript-v9.0.0) (2025-01-30)
+
+
+### ⚠ BREAKING CHANGES
+
+* Use query option pattern and support useSuspense ([#263](https://github.com/fabien0102/openapi-codegen/issues/263))
+
+### Features
+
+* Use query option pattern and support useSuspense ([#263](https://github.com/fabien0102/openapi-codegen/issues/263)) ([b97044f](https://github.com/fabien0102/openapi-codegen/commit/b97044ff5f8aa6a85336a1629ce31d0195b09cc7))
+
+
+### Bug Fixes
+
+* properly handle request errors ([#260](https://github.com/fabien0102/openapi-codegen/issues/260)) ([88e09cc](https://github.com/fabien0102/openapi-codegen/commit/88e09cc6c2216ab50341623c29622051c8220d6e))
+
 ## [8.1.1](https://github.com/fabien0102/openapi-codegen/compare/typescript-v8.1.0...typescript-v8.1.1) (2025-01-17)
 
 
