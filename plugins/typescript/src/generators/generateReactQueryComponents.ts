@@ -1,6 +1,6 @@
 import ts, { factory as f } from "typescript";
 import * as c from "case";
-import { get } from "lodash";
+import { get, camelCase } from "lodash";
 
 import { ConfigBase, Context } from "./types";
 import { OperationObject, PathItemObject } from "openapi3-ts";
@@ -18,6 +18,7 @@ import { getContext } from "../templates/context";
 import { getUtils } from "../templates/utils";
 import { createNamespaceImport } from "../core/createNamespaceImport";
 import { camelizedPathParams } from "../core/camelizedPathParams";
+import { createOperationQueryFnNodes } from "../core/createOperationQueryFnNodes";
 
 export type Config = ConfigBase & {
   /**
@@ -35,12 +36,6 @@ export type Config = ConfigBase & {
    * This will mark the header as optional in the component API
    */
   injectedHeaders?: string[];
-  /**
-   * Generate React Query components with `useSuspenseQuery` hook.
-   *
-   * @default false
-   */
-  generateSuspenseQueries?: boolean;
 };
 
 export const generateReactQueryComponents = async (
@@ -79,8 +74,6 @@ export const generateReactQueryComponents = async (
   const formatFilename = config.filenameCase ? c[config.filenameCase] : c.camel;
 
   const filename = formatFilename(filenamePrefix + "-components");
-
-  const { generateSuspenseQueries = false } = config;
 
   const fetcherFn = c.camel(`${filenamePrefix}-fetch`);
   const contextTypeName = `${c.pascal(filenamePrefix)}Context`;
@@ -153,6 +146,8 @@ export const generateReactQueryComponents = async (
         nodes.push(...declarationNodes);
 
         const operationFetcherFnName = `fetch${c.pascal(operationId)}`;
+        const operationQueryFnName = camelCase(`${c.camel(operationId)}Query`);
+
         const component: "useQuery" | "useMutate" =
           operation["x-openapi-codegen-component"] ||
           (verb === "get" ? "useQuery" : "useMutate");
@@ -189,16 +184,17 @@ export const generateReactQueryComponents = async (
           );
         }
 
-        const hookOptions = {
+        const useQueryHookOptions = {
           operationFetcherFnName,
+          operationQueryFnName,
           operation,
           dataType,
           errorType,
           variablesType,
           contextHookName,
-          name: `use${c.pascal(operationId)}`,
           operationId,
           url: route,
+          name: `use${c.pascal(operationId)}`,
         };
 
         nodes.push(
@@ -215,23 +211,45 @@ export const generateReactQueryComponents = async (
             url: route,
             verb,
             name: operationFetcherFnName,
-          })
+          }),
+          ...(component === "useQuery"
+            ? [
+                ...createOperationQueryFnNodes({
+                  operationFetcherFnName,
+                  dataType,
+                  errorType,
+                  requestBodyType,
+                  pathParamsType,
+                  variablesType,
+                  queryParamsType,
+                  headersType,
+                  operation,
+                  operationId,
+                  fetcherFn,
+                  url: route,
+                  verb,
+                  name: operationQueryFnName,
+                }),
+                ...createQueryHook({
+                  ...useQueryHookOptions,
+                  name: `useSuspense${c.pascal(operationId)}`,
+                  useQueryIdentifier: "useSuspenseQuery",
+                }),
+                ...createQueryHook({
+                  ...useQueryHookOptions,
+                  name: `use${c.pascal(operationId)}`,
+                }),
+              ]
+            : createMutationHook({
+                operationFetcherFnName,
+                operation,
+                dataType,
+                errorType,
+                variablesType,
+                contextHookName,
+                name: `use${c.pascal(operationId)}`,
+              }))
         );
-
-        if (component === "useQuery") {
-          nodes.push(...createQueryHook(hookOptions));
-          if (generateSuspenseQueries) {
-            nodes.push(
-              ...createQueryHook({
-                ...hookOptions,
-                name: `useSuspense${c.pascal(operationId)}`,
-                useQueryIdentifier: "useSuspenseQuery",
-              })
-            );
-          }
-        } else {
-          nodes.push(...createMutationHook(hookOptions));
-        }
       });
     }
   );
@@ -285,7 +303,7 @@ export const generateReactQueryComponents = async (
       createWatermark(context.openAPIDocument.info),
       createReactQueryImport(),
       createNamedImport(
-        [contextHookName, contextTypeName],
+        [contextHookName, contextTypeName, "queryKeyFn"],
         `./${contextFilename}`
       ),
       createNamespaceImport("Fetcher", `./${fetcherFilename}`),
@@ -454,6 +472,7 @@ const createMutationHook = ({
 
 const createQueryHook = ({
   operationFetcherFnName,
+  operationQueryFnName,
   contextHookName,
   dataType,
   errorType,
@@ -465,6 +484,7 @@ const createQueryHook = ({
   useQueryIdentifier = "useQuery",
 }: {
   operationFetcherFnName: string;
+  operationQueryFnName: string;
   contextHookName: string;
   name: string;
   operationId: string;
@@ -526,19 +546,7 @@ const createQueryHook = ({
                           f.createBindingElement(
                             undefined,
                             undefined,
-                            f.createIdentifier("fetcherOptions"),
-                            undefined
-                          ),
-                          f.createBindingElement(
-                            undefined,
-                            undefined,
                             f.createIdentifier("queryOptions"),
-                            undefined
-                          ),
-                          f.createBindingElement(
-                            undefined,
-                            undefined,
-                            f.createIdentifier("queryKeyFn"),
                             undefined
                           ),
                         ]),
@@ -571,70 +579,11 @@ const createQueryHook = ({
                     [
                       f.createObjectLiteralExpression(
                         [
-                          f.createPropertyAssignment(
-                            "queryKey",
+                          f.createSpreadAssignment(
                             f.createCallExpression(
-                              f.createIdentifier("queryKeyFn"),
+                              f.createIdentifier(operationQueryFnName),
                               undefined,
-                              [
-                                f.createObjectLiteralExpression([
-                                  f.createPropertyAssignment(
-                                    "path",
-                                    f.createStringLiteral(
-                                      camelizedPathParams(url)
-                                    )
-                                  ),
-                                  f.createPropertyAssignment(
-                                    "operationId",
-                                    f.createStringLiteral(operationId)
-                                  ),
-                                  f.createShorthandPropertyAssignment(
-                                    f.createIdentifier("variables")
-                                  ),
-                                ]),
-                              ]
-                            )
-                          ),
-                          f.createPropertyAssignment(
-                            "queryFn",
-                            f.createArrowFunction(
-                              undefined,
-                              undefined,
-                              [
-                                f.createParameterDeclaration(
-                                  undefined,
-                                  undefined,
-                                  f.createObjectBindingPattern([
-                                    f.createBindingElement(
-                                      undefined,
-                                      undefined,
-                                      "signal"
-                                    ),
-                                  ])
-                                ),
-                              ],
-                              undefined,
-                              f.createToken(
-                                ts.SyntaxKind.EqualsGreaterThanToken
-                              ),
-                              f.createCallExpression(
-                                f.createIdentifier(operationFetcherFnName),
-                                undefined,
-                                [
-                                  f.createObjectLiteralExpression(
-                                    [
-                                      f.createSpreadAssignment(
-                                        f.createIdentifier("fetcherOptions")
-                                      ),
-                                      f.createSpreadAssignment(
-                                        f.createIdentifier("variables")
-                                      ),
-                                    ],
-                                    false
-                                  ),
-                                  f.createIdentifier("signal"),
-                                ]
-                              )
+                              [f.createIdentifier("variables")]
                             )
                           ),
                           f.createSpreadAssignment(

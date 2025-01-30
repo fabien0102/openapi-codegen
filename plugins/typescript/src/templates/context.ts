@@ -1,10 +1,20 @@
 import { pascal } from "case";
 
 export const getContext = (prefix: string, componentsFile: string) =>
-  `import type { QueryKey, UseQueryOptions } from "@tanstack/react-query";
+  `import type { 
+    DefaultError,
+    Enabled,
+    QueryKey,
+    UseQueryOptions,
+ } from "@tanstack/react-query";
   import { QueryOperation } from './${componentsFile}';
   
-  export type ${pascal(prefix)}Context = {
+  export type ${pascal(prefix)}Context<
+    TQueryFnData = unknown,
+    TError = DefaultError,
+    TData = TQueryFnData,
+    TQueryKey extends QueryKey = QueryKey,
+> = {
     fetcherOptions: {
       /**
        * Headers to inject in the fetcher
@@ -20,12 +30,8 @@ export const getContext = (prefix: string, componentsFile: string) =>
        * Set this to \`false\` to disable automatic refetching when the query mounts or changes query keys.
        * Defaults to \`true\`.
        */
-      enabled?: boolean;
+      enabled?: Enabled<TQueryFnData, TError, TQueryFnData, TQueryKey>;
     };
-    /**
-     * Query key manager.
-     */
-    queryKeyFn: (operation: QueryOperation) => QueryKey;
   };
   
   /**
@@ -35,16 +41,15 @@ export const getContext = (prefix: string, componentsFile: string) =>
    */
    export function use${pascal(prefix)}Context<
    TQueryFnData = unknown,
-   TError = unknown,
+   TError = DefaultError,
    TData = TQueryFnData,
    TQueryKey extends QueryKey = QueryKey
  >(
    _queryOptions?: Omit<UseQueryOptions<TQueryFnData, TError, TData, TQueryKey>, 'queryKey' | 'queryFn'>
- ): ${pascal(prefix)}Context {
+ ): ${pascal(prefix)}Context<TQueryFnData, TError, TData, TQueryKey> {
     return {
       fetcherOptions: {},
-      queryOptions: {},
-      queryKeyFn
+      queryOptions: {}
   }
 };
 
@@ -66,6 +71,7 @@ export const getContext = (prefix: string, componentsFile: string) =>
   
     return queryKey;
   }
+
   // Helpers
   const resolvePathParam = (
     key: string,
