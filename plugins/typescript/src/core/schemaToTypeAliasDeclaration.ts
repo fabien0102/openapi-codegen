@@ -18,8 +18,8 @@ type RemoveIndex<T> = {
   [P in keyof T as string extends P
     ? never
     : number extends P
-    ? never
-    : P]: T[P];
+      ? never
+      : P]: T[P];
 };
 
 export type OpenAPIComponentType = Extract<
@@ -131,21 +131,18 @@ export const getType = (
     const adHocSchemas: Array<SchemaObject> = [];
     if (schema.properties) {
       adHocSchemas.push({
-        type: 'object',
+        type: "object",
         properties: schema.properties,
-        required: schema.required
+        required: schema.required,
       });
     }
     if (schema.additionalProperties) {
       adHocSchemas.push({
-        type: 'object',
-        additionalProperties: schema.additionalProperties
+        type: "object",
+        additionalProperties: schema.additionalProperties,
       });
     }
-    return getAllOf([
-      ...schema.allOf,
-      ...adHocSchemas
-     ], context);
+    return getAllOf([...schema.allOf, ...adHocSchemas], context);
   }
 
   if (schema.enum) {
@@ -227,7 +224,10 @@ export const getType = (
       const members: ts.TypeElement[] = Object.entries(
         schema.properties || {}
       ).map(([key, property]) => {
-        const isEnum = typeof property === "object" && "enum" in property && useEnumsConfigBase;
+        const isEnum =
+          typeof property === "object" &&
+          "enum" in property &&
+          useEnumsConfigBase;
 
         const propertyNode = f.createPropertySignature(
           undefined,
@@ -601,7 +601,7 @@ export const getJSDocComment = (
       return f.createIdentifier(value.toString());
     }
 
-    // Value is not stringifiable
+    // Value is not stringifyable
     // See https://github.com/fabien0102/openapi-codegen/issues/36, https://github.com/fabien0102/openapi-codegen/issues/57
     return f.createIdentifier("[see original specs]");
   };
@@ -635,16 +635,34 @@ export const getJSDocComment = (
       }
     });
 
-  if (schemaWithAllOfResolved.description || propertyTags.length > 0) {
+  const description = sanitizeDescription(schemaWithAllOfResolved.description);
+  if (description || propertyTags.length > 0) {
     return f.createJSDocComment(
-      schemaWithAllOfResolved.description
-        ? schemaWithAllOfResolved.description.trim() +
-            (propertyTags.length ? "\n" : "")
-        : undefined,
+      description ? description + (propertyTags.length ? "\n" : "") : undefined,
       propertyTags
     );
   }
   return undefined;
+};
+
+/**
+ * Remove any unwanted chars from the description to avoid
+ * unparsable multiline comment.
+ *
+ * @param description
+ */
+const sanitizeDescription = (description?: string) => {
+  if (!description || description.trim().length === 0) return undefined;
+  if (!description.includes("*/")) {
+    return description.trim();
+  }
+  // Try to return first line, since it’s more likely than the `*/` is the body
+  const [title] = description.trim().split("\n");
+  if (title && !title.includes("*/")) {
+    return `${title}\n\n[see original specs]`;
+  }
+
+  return "[see original specs]";
 };
 
 /**
