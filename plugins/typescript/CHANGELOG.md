@@ -1,5 +1,12 @@
 # Changelog
 
+## [9.1.0](https://github.com/fabien0102/openapi-codegen/compare/typescript-v9.0.1...typescript-v9.1.0) (2025-01-31)
+
+
+### Features
+
+* Support nullable on allOf schemas ([#229](https://github.com/fabien0102/openapi-codegen/issues/229)) ([867f451](https://github.com/fabien0102/openapi-codegen/commit/867f4511fb67b3227bf5845366ff1a99cd6ebe53))
+
 ## [9.0.1](https://github.com/fabien0102/openapi-codegen/compare/typescript-v9.0.0...typescript-v9.0.1) (2025-01-31)
 
 
