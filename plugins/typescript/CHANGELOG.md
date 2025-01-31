@@ -1,5 +1,13 @@
 # Changelog
 
+## [9.2.0](https://github.com/fabien0102/openapi-codegen/compare/typescript-v9.1.0...typescript-v9.2.0) (2025-01-31)
+
+
+### Features
+
+* Added config formatFilename to allow more custom formatting of filenames ([#231](https://github.com/fabien0102/openapi-codegen/issues/231)) ([ea2cac8](https://github.com/fabien0102/openapi-codegen/commit/ea2cac812d59603dddfb630674e47af97a6345df))
+* Extend useEnums to all schema files ([#223](https://github.com/fabien0102/openapi-codegen/issues/223)) ([447ef09](https://github.com/fabien0102/openapi-codegen/commit/447ef09207328e1e8897d6247315bf574390c1da))
+
 ## [9.1.0](https://github.com/fabien0102/openapi-codegen/compare/typescript-v9.0.1...typescript-v9.1.0) (2025-01-31)
 
 
