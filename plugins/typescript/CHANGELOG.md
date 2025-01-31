@@ -1,5 +1,12 @@
 # Changelog
 
+## [9.0.1](https://github.com/fabien0102/openapi-codegen/compare/typescript-v9.0.0...typescript-v9.0.1) (2025-01-31)
+
+
+### Bug Fixes
+
+* Deal with forbidden chars in description ([#272](https://github.com/fabien0102/openapi-codegen/issues/272)) ([df5912c](https://github.com/fabien0102/openapi-codegen/commit/df5912c917af82152b86550220e122b65e0e6d19))
+
 ## [9.0.0](https://github.com/fabien0102/openapi-codegen/compare/typescript-v8.1.1...typescript-v9.0.0) (2025-01-30)
 
 
