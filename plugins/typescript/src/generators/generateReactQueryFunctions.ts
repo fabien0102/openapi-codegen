@@ -72,7 +72,12 @@ export const generateReactQueryFunctions = async (
   const filenamePrefix =
     c.snake(config.filenamePrefix ?? context.openAPIDocument.info.title) + "-";
 
-  const formatFilename = config.filenameCase ? c[config.filenameCase] : c.camel;
+  const formatFilename =
+    typeof config.formatFilename === "function"
+      ? config.formatFilename
+      : config.filenameCase
+        ? c[config.filenameCase]
+        : c.camel;
 
   const filename = formatFilename(filenamePrefix + "-functions");
 

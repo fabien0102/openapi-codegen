@@ -106,7 +106,12 @@ export const generateSchemaTypes = async (
   const filenamePrefix =
     c.snake(config.filenamePrefix ?? context.openAPIDocument.info.title) + "-";
 
-  const formatFilename = config.filenameCase ? c[config.filenameCase] : c.camel;
+  const formatFilename =
+    typeof config.formatFilename === "function"
+      ? config.formatFilename
+      : config.filenameCase
+        ? c[config.filenameCase]
+        : c.camel;
   const files = {
     requestBodies: formatFilename(filenamePrefix + "-request-bodies"),
     schemas: formatFilename(filenamePrefix + "-schemas"),
