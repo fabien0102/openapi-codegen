@@ -16,7 +16,7 @@ import {
 import { getText } from "../utils/getText.js";
 import emptyConfig from "../templates/emptyConfig.js";
 import { updateConfig } from "../core/updateConfig.js";
-import { handlePromptCancel } from "src/utils/handlePromptCancel";
+import { handlePromptCancel } from "../utils/handlePromptCancel";
 
 export class InitCommand extends Command {
   static paths = [["init"]];
@@ -29,16 +29,18 @@ export class InitCommand extends Command {
     description: "Print the file in the stdout",
   });
 
-  private hasDependencyInstalled(name: string, packageJSON: any) {
-    if (typeof packageJSON !== "object") return false;
+  private hasDependencyInstalled(name: string, packageJSON: unknown) {
+    if (!isObject(packageJSON)) return false;
     if (
-      typeof packageJSON.dependencies === "object" &&
-      packageJSON.dependencies[name]
+      "dependencies" in packageJSON &&
+      isObject(packageJSON.dependencies) &&
+      name in packageJSON.dependencies
     )
       return true;
     if (
-      typeof packageJSON.devDependencies === "object" &&
-      packageJSON.devDependencies[name]
+      "devDependencies" in packageJSON &&
+      isObject(packageJSON.devDependencies) &&
+      name in packageJSON.devDependencies
     )
       return true;
 
@@ -51,7 +53,7 @@ export class InitCommand extends Command {
       const sourceFile = ts.createSourceFile(
         "openapi-codegen.config.ts",
         sourceText,
-        ts.ScriptTarget.Latest
+        ts.ScriptTarget.Latest,
       );
 
       // Check if the config have `export default defineConfig({})`
@@ -88,7 +90,7 @@ export class InitCommand extends Command {
     const sourceFile = ts.createSourceFile(
       "openapi-codegen.config.ts",
       emptyConfig,
-      ts.ScriptTarget.Latest
+      ts.ScriptTarget.Latest,
     );
 
     return {
@@ -149,7 +151,7 @@ export class InitCommand extends Command {
   async execute() {
     const userConfigPath = path.join(
       process.cwd(),
-      this.config || "openapi-codegen.config.ts"
+      this.config || "openapi-codegen.config.ts",
     );
 
     const config = await this.getConfigSourceFile(userConfigPath);
@@ -173,7 +175,7 @@ export class InitCommand extends Command {
         .text({
           message: "What namespace do you want for your API?",
         })
-        .then(handlePromptCancel)
+        .then(handlePromptCancel),
     );
 
     const plugin = await prompt
@@ -220,28 +222,28 @@ export class InitCommand extends Command {
 
     const updatedConfig = await prettier.format(
       printer.printFile(updatedConfigSourceFile),
-      { parser: "babel-ts", ...prettierConfig }
+      { parser: "babel-ts", ...prettierConfig },
     );
 
     if (this.dryRun) {
       this.context.stdout.write(
         highlight(updatedConfig, {
           language: "typescript",
-        })
+        }),
       );
     } else {
       const nextSteps: string[] = [];
       try {
         const packageJson = await fsExtra.readJSON(
-          path.join(process.cwd(), "package.json")
+          path.join(process.cwd(), "package.json"),
         );
         const hasCli = this.hasDependencyInstalled(
           "@openapi-codegen/cli",
-          packageJson
+          packageJson,
         );
         const hasTsPlugin = this.hasDependencyInstalled(
           "@openapi-codegen/typescript",
-          packageJson
+          packageJson,
         );
         if (!hasCli && !hasTsPlugin) {
           nextSteps.push("npm install -D @openapi-codegen/{cli,typescript}");
@@ -258,15 +260,19 @@ export class InitCommand extends Command {
       await fsExtra.writeFile(userConfigPath, updatedConfig);
       if (config.isExistingConfig) {
         this.context.stdout.write(
-          `The config "${namespace}" has been added to your current config successfully 🥳\n`
+          `The config "${namespace}" has been added to your current config successfully 🥳\n`,
         );
       } else {
         this.context.stdout.write(`A new config file has been created!\n`);
       }
 
       this.context.stdout.write(
-        `\n  Next steps:\n   - ${nextSteps.join("\n   - ")}\n`
+        `\n  Next steps:\n   - ${nextSteps.join("\n   - ")}\n`,
       );
     }
   }
+}
+
+function isObject(obj: unknown) {
+  return typeof obj === "object" && obj !== null;
 }

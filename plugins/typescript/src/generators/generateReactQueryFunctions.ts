@@ -41,12 +41,12 @@ export type Config = ConfigBase & {
 
 export const generateReactQueryFunctions = async (
   context: Context,
-  config: Config
+  config: Config,
 ) => {
   const sourceFile = ts.createSourceFile(
     "index.ts",
     "",
-    ts.ScriptTarget.Latest
+    ts.ScriptTarget.Latest,
   );
 
   const printer = ts.createPrinter({
@@ -97,14 +97,14 @@ export const generateReactQueryFunctions = async (
         prefix: filenamePrefix,
         contextPath: contextFilename,
         baseUrl: get(context.openAPIDocument, "servers.0.url"),
-      })
+      }),
     );
   }
 
   if (!context.existsFile(`${contextFilename}.ts`)) {
     context.writeFile(
       `${contextFilename}.ts`,
-      getContext(filenamePrefix, filename)
+      getContext(filenamePrefix, filename),
     );
   }
 
@@ -118,7 +118,7 @@ export const generateReactQueryFunctions = async (
         const operationId = c.camel(operation.operationId);
         if (operationIds.includes(operationId)) {
           throw new Error(
-            `The operationId "${operation.operationId}" is duplicated in your schema definition!`
+            `The operationId "${operation.operationId}" is duplicated in your schema definition!`,
           );
         }
         operationIds.push(operationId);
@@ -142,9 +142,9 @@ export const generateReactQueryFunctions = async (
           variablesExtraPropsType: f.createIndexedAccessTypeNode(
             f.createTypeReferenceNode(
               f.createIdentifier(contextTypeName),
-              undefined
+              undefined,
             ),
-            f.createLiteralTypeNode(f.createStringLiteral("fetcherOptions"))
+            f.createLiteralTypeNode(f.createStringLiteral("fetcherOptions")),
           ),
         });
 
@@ -169,22 +169,22 @@ export const generateReactQueryFunctions = async (
                 f.createIdentifier("path"),
                 undefined,
                 f.createLiteralTypeNode(
-                  f.createStringLiteral(camelizedPathParams(route))
-                )
+                  f.createStringLiteral(camelizedPathParams(route)),
+                ),
               ),
               f.createPropertySignature(
                 undefined,
                 f.createIdentifier("operationId"),
                 undefined,
-                f.createLiteralTypeNode(f.createStringLiteral(operationId))
+                f.createLiteralTypeNode(f.createStringLiteral(operationId)),
               ),
               f.createPropertySignature(
                 undefined,
                 f.createIdentifier("variables"),
                 undefined,
-                variablesType
+                variablesType,
               ),
-            ])
+            ]),
           );
 
           nodes.push(
@@ -205,23 +205,17 @@ export const generateReactQueryFunctions = async (
             ...createOperationQueryFnNodes({
               operationFetcherFnName,
               dataType,
-              errorType,
-              requestBodyType,
-              pathParamsType,
               variablesType,
-              queryParamsType,
-              headersType,
               operation,
               operationId,
-              fetcherFn,
               url: route,
               verb,
               name: operationQueryFnName,
-            })
+            }),
           );
         }
       });
-    }
+    },
   );
 
   if (operationIds.length === 0) {
@@ -238,21 +232,21 @@ export const generateReactQueryFunctions = async (
             undefined,
             f.createIdentifier("path"),
             undefined,
-            f.createKeywordTypeNode(ts.SyntaxKind.StringKeyword)
+            f.createKeywordTypeNode(ts.SyntaxKind.StringKeyword),
           ),
           f.createPropertySignature(
             undefined,
             f.createIdentifier("operationId"),
             undefined,
-            f.createKeywordTypeNode(ts.SyntaxKind.NeverKeyword)
+            f.createKeywordTypeNode(ts.SyntaxKind.NeverKeyword),
           ),
           f.createPropertySignature(
             undefined,
             f.createIdentifier("variables"),
             undefined,
-            f.createKeywordTypeNode(ts.SyntaxKind.UnknownKeyword)
+            f.createKeywordTypeNode(ts.SyntaxKind.UnknownKeyword),
           ),
-        ])
+        ]),
   );
 
   const { nodes: usedImportsNodes, keys: usedImportsKeys } = getUsedImports(
@@ -260,7 +254,7 @@ export const generateReactQueryFunctions = async (
     {
       ...config.schemasFiles,
       utils: utilsFilename,
-    }
+    },
   );
 
   if (usedImportsKeys.includes("utils")) {
@@ -274,14 +268,14 @@ export const generateReactQueryFunctions = async (
       createReactQueryImport(),
       createNamedImport(
         [contextTypeName, "queryKeyFn"],
-        `./${contextFilename}`
+        `./${contextFilename}`,
       ),
       createNamespaceImport("Fetcher", `./${fetcherFilename}`),
       createNamedImport(fetcherFn, `./${fetcherFilename}`),
       ...usedImportsNodes,
       ...nodes,
       queryKeyManager,
-    ])
+    ]),
   );
 };
 
@@ -291,8 +285,8 @@ const createReactQueryImport = () =>
     f.createImportClause(
       false,
       undefined,
-      f.createNamespaceImport(f.createIdentifier("reactQuery"))
+      f.createNamespaceImport(f.createIdentifier("reactQuery")),
     ),
     f.createStringLiteral("@tanstack/react-query"),
-    undefined
+    undefined,
   );

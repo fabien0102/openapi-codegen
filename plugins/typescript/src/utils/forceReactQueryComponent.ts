@@ -33,12 +33,12 @@ export const forceReactQueryComponent = <OperationId extends string>({
           extensionPath = `paths.${route}.${verb}.x-openapi-codegen-component`;
         }
       });
-    }
+    },
   );
 
   if (!extensionPath) {
     throw new Error(
-      `[forceReactQueryComponent] Operation with the operationId "${operationId}" not found`
+      `[forceReactQueryComponent] Operation with the operationId "${operationId}" not found`,
     );
   }
 

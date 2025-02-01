@@ -5,6 +5,18 @@
  */
 import type * as Schemas from "./githubSchemas";
 
+export type Accepted = Record<string, any>;
+
+export type ActionsRunnerLabels = {
+  labels: Schemas.RunnerLabel[];
+  total_count: number;
+};
+
+export type ActionsRunnerLabelsReadonly = {
+  labels: Schemas.RunnerLabel[];
+  total_count: number;
+};
+
 export type BadRequest = Schemas.BasicError;
 
 export type CodeScanningForbiddenRead = Schemas.BasicError;
@@ -31,34 +43,25 @@ export type Gone = Schemas.BasicError;
 
 export type InternalError = Schemas.BasicError;
 
-export type MovedPermanently = void;
+export type MovedPermanently = Schemas.BasicError;
+
+export type NoContent = void;
 
 export type NotFound = Schemas.BasicError;
 
 export type NotModified = void;
 
-export type PreviewHeaderMissing = {
-  documentation_url: string;
-  message: string;
-};
+export type PorterMaintenance = Schemas.BasicError;
 
 export type RequiresAuthentication = Schemas.BasicError;
-
-export type ScimBadRequest = Schemas.ScimError;
-
-export type ScimConflict = Schemas.ScimError;
-
-export type ScimForbidden = Schemas.ScimError;
-
-export type ScimInternalError = Schemas.ScimError;
-
-export type ScimNotFound = Schemas.ScimError;
 
 export type ServiceUnavailable = {
   code?: string;
   documentation_url?: string;
   message?: string;
 };
+
+export type TemporaryRedirect = Schemas.BasicError;
 
 export type ValidationFailed = Schemas.ValidationError;
 

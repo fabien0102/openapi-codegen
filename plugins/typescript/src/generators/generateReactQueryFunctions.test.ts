@@ -1,3 +1,4 @@
+import { describe, expect, it, vi } from "vitest";
 import { OpenAPIObject } from "openapi3-ts";
 import {
   Config,
@@ -16,7 +17,7 @@ const config: Config = {
 
 describe("generateReactQueryFunctions", () => {
   it("should inject the customFetch import", async () => {
-    const writeFile = jest.fn();
+    const writeFile = vi.fn();
     const openAPIDocument: OpenAPIObject = {
       openapi: "3.0.0",
       info: {
@@ -40,7 +41,7 @@ describe("generateReactQueryFunctions", () => {
   });
 
   it("should generate a useQuery wrapper (no parameters)", async () => {
-    const writeFile = jest.fn();
+    const writeFile = vi.fn();
     const openAPIDocument: OpenAPIObject = {
       openapi: "3.0.0",
       info: {
@@ -135,7 +136,7 @@ describe("generateReactQueryFunctions", () => {
   });
 
   it("should generate a useQuery wrapper (with queryParams)", async () => {
-    const writeFile = jest.fn();
+    const writeFile = vi.fn();
     const openAPIDocument: OpenAPIObject = {
       openapi: "3.0.0",
       info: {
@@ -268,7 +269,7 @@ describe("generateReactQueryFunctions", () => {
   });
 
   it("should generate a useQuery wrapper (with pathParams)", async () => {
-    const writeFile = jest.fn();
+    const writeFile = vi.fn();
     const openAPIDocument: OpenAPIObject = {
       openapi: "3.0.0",
       info: {
@@ -383,7 +384,7 @@ describe("generateReactQueryFunctions", () => {
   });
 
   it("should deal with injected headers (marked them as optional)", async () => {
-    const writeFile = jest.fn();
+    const writeFile = vi.fn();
     const openAPIDocument: OpenAPIObject = {
       openapi: "3.0.0",
       info: {
@@ -520,7 +521,7 @@ describe("generateReactQueryFunctions", () => {
   });
 
   it("should not generated duplicated types", async () => {
-    const writeFile = jest.fn();
+    const writeFile = vi.fn();
     const openAPIDocument: OpenAPIObject = {
       openapi: "3.0.0",
       info: {
@@ -628,7 +629,7 @@ describe("generateReactQueryFunctions", () => {
   });
 
   it("should generate useMutation for POST operation", async () => {
-    const writeFile = jest.fn();
+    const writeFile = vi.fn();
     const openAPIDocument: OpenAPIObject = {
       openapi: "3.0.0",
       info: {
@@ -732,7 +733,7 @@ describe("generateReactQueryFunctions", () => {
   });
 
   it("should generate useMutation if openapi-codegen-component is defined", async () => {
-    const writeFile = jest.fn();
+    const writeFile = vi.fn();
     const openAPIDocument: OpenAPIObject = {
       openapi: "3.0.0",
       info: {
@@ -837,7 +838,7 @@ describe("generateReactQueryFunctions", () => {
   });
 
   it("should resolve requestBody ref", async () => {
-    const writeFile = jest.fn();
+    const writeFile = vi.fn();
     const openAPIDocument: OpenAPIObject = {
       openapi: "3.0.0",
       info: {
@@ -948,7 +949,7 @@ describe("generateReactQueryFunctions", () => {
   });
 
   it("should deal with pathParams", async () => {
-    const writeFile = jest.fn();
+    const writeFile = vi.fn();
     const openAPIDocument: OpenAPIObject = {
       openapi: "3.0.0",
       info: {
@@ -1038,7 +1039,7 @@ describe("generateReactQueryFunctions", () => {
   });
 
   it("should build components without prefix", async () => {
-    const writeFile = jest.fn();
+    const writeFile = vi.fn();
     const openAPIDocument: OpenAPIObject = {
       openapi: "3.0.0",
       info: {
@@ -1128,7 +1129,7 @@ describe("generateReactQueryFunctions", () => {
   });
 
   it("should generate utils file if needed", async () => {
-    const writeFile = jest.fn();
+    const writeFile = vi.fn();
     const openAPIDocument: OpenAPIObject = {
       openapi: "3.0.0",
       info: {
@@ -1237,7 +1238,7 @@ describe("generateReactQueryFunctions", () => {
   });
 
   it("should camel case operation IDs and remove special characters", async () => {
-    const writeFile = jest.fn();
+    const writeFile = vi.fn();
     const openAPIDocument: OpenAPIObject = {
       openapi: "3.0.0",
       info: {

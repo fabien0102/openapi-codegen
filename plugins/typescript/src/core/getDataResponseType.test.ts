@@ -1,3 +1,4 @@
+import { describe, expect, it } from "vitest";
 import { ResponsesObject } from "openapi3-ts";
 import { print } from "../testUtils";
 import { getDataResponseType } from "./getDataResponseType";
@@ -112,7 +113,7 @@ describe("getDataResponseType", () => {
     });
 
     expect(print(responseType)).toMatchInlineSnapshot(
-      `"Schemas.Pet[] | Schemas.Cat[]"`
+      `"Schemas.Pet[] | Schemas.Cat[]"`,
     );
   });
 

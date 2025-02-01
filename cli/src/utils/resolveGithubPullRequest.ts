@@ -1,5 +1,5 @@
 import { request } from "@octokit/request";
-import { GithubOptions } from "src/types";
+import { GithubOptions } from "../types";
 
 export type PullRequest = {
   ref: string;
@@ -25,7 +25,7 @@ export async function resolveGithubPullRequest({
       headers: {
         authorization: `Bearer ${token}`,
       },
-    }
+    },
   );
 
   return {

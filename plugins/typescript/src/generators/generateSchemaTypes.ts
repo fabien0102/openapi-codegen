@@ -25,7 +25,7 @@ type Config = ConfigBase;
  */
 export const generateSchemaTypes = async (
   context: Context,
-  config: Config = {}
+  config: Config = {},
 ) => {
   const { components } = context.openAPIDocument;
   if (!components) {
@@ -35,7 +35,7 @@ export const generateSchemaTypes = async (
   const sourceFile = ts.createSourceFile(
     "index.ts",
     "",
-    ts.ScriptTarget.Latest
+    ts.ScriptTarget.Latest,
   );
 
   const printer = ts.createPrinter({
@@ -55,7 +55,7 @@ export const generateSchemaTypes = async (
 
   const handleTypeAlias = (
     componentSchema: [string, SchemaObject | ReferenceObject][],
-    currentComponent: OpenAPIComponentType
+    currentComponent: OpenAPIComponentType,
   ) =>
     componentSchema.reduce<ts.Node[]>(
       (mem, [name, schema]) => [
@@ -67,15 +67,15 @@ export const generateSchemaTypes = async (
             openAPIDocument: context.openAPIDocument,
             currentComponent: currentComponent,
           },
-          config.useEnums
+          config.useEnums,
         ),
       ],
-      []
+      [],
     );
 
   const generateTypeAliasDeclarations = (
     componentSchemaEntries: [string, SchemaObject | ReferenceObject][],
-    currentComponent: OpenAPIComponentType
+    currentComponent: OpenAPIComponentType,
   ) => {
     if (config.useEnums) {
       const enumSchemaEntries = getEnumProperties(componentSchemaEntries);
@@ -87,14 +87,15 @@ export const generateSchemaTypes = async (
             currentComponent,
           }),
         ],
-        []
+        [],
       );
 
       const componentsSchemas = handleTypeAlias(
         componentSchemaEntries.filter(
-          ([name]) => !enumSchemaEntries.some(([enumName]) => name === enumName)
+          ([name]) =>
+            !enumSchemaEntries.some(([enumName]) => name === enumName),
         ),
-        currentComponent
+        currentComponent,
       );
 
       return [...enumSchemas, ...componentsSchemas];
@@ -125,7 +126,7 @@ export const generateSchemaTypes = async (
     const componentSchemaEntries = Object.entries(components.schemas);
     const schemas = generateTypeAliasDeclarations(
       componentSchemaEntries,
-      "schemas"
+      "schemas",
     );
 
     await context.writeFile(
@@ -134,7 +135,7 @@ export const generateSchemaTypes = async (
         createWatermark(context.openAPIDocument.info),
         ...getUsedImports(schemas, files).nodes,
         ...schemas,
-      ])
+      ]),
     );
   }
 
@@ -142,7 +143,7 @@ export const generateSchemaTypes = async (
   if (components.responses) {
     // Convert responses to schemas
     const componentsResponsesEntries = Object.entries(
-      components.responses
+      components.responses,
     ).reduce<[string, SchemaObject][]>((mem, [name, responseObject]) => {
       if (isReferenceObject(responseObject)) return mem;
       const mediaType = findCompatibleMediaType(responseObject);
@@ -153,7 +154,7 @@ export const generateSchemaTypes = async (
 
     const schemas = generateTypeAliasDeclarations(
       componentsResponsesEntries,
-      "responses"
+      "responses",
     );
 
     if (schemas.length) {
@@ -163,7 +164,7 @@ export const generateSchemaTypes = async (
           createWatermark(context.openAPIDocument.info),
           ...getUsedImports(schemas, files).nodes,
           ...schemas,
-        ])
+        ]),
       );
     }
   }
@@ -172,7 +173,7 @@ export const generateSchemaTypes = async (
   if (components.requestBodies) {
     // Convert requestBodies to schemas
     const componentsRequestBodiesEntries = Object.entries(
-      components.requestBodies
+      components.requestBodies,
     ).reduce<[string, SchemaObject][]>((mem, [name, requestBodyObject]) => {
       if (isReferenceObject(requestBodyObject)) return mem;
       const mediaType = findCompatibleMediaType(requestBodyObject);
@@ -184,7 +185,7 @@ export const generateSchemaTypes = async (
 
     const schemas = generateTypeAliasDeclarations(
       componentsRequestBodiesEntries,
-      "requestBodies"
+      "requestBodies",
     );
 
     if (schemas.length) {
@@ -194,7 +195,7 @@ export const generateSchemaTypes = async (
           createWatermark(context.openAPIDocument.info),
           ...getUsedImports(schemas, files).nodes,
           ...schemas,
-        ])
+        ]),
       );
     }
   }
@@ -203,7 +204,7 @@ export const generateSchemaTypes = async (
   if (components.parameters) {
     // Convert parameters to schemas
     const componentsParametersEntries = Object.entries(
-      components.parameters
+      components.parameters,
     ).reduce<[string, SchemaObject][]>((mem, [name, parameterObject]) => {
       if (isReferenceObject(parameterObject) || !parameterObject.schema)
         return mem;
@@ -213,7 +214,7 @@ export const generateSchemaTypes = async (
 
     const schemas = generateTypeAliasDeclarations(
       componentsParametersEntries,
-      "parameters"
+      "parameters",
     );
 
     await context.writeFile(
@@ -222,7 +223,7 @@ export const generateSchemaTypes = async (
         createWatermark(context.openAPIDocument.info),
         ...getUsedImports(schemas, files).nodes,
         ...schemas,
-      ])
+      ]),
     );
   }
 

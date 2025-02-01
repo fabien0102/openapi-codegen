@@ -15,7 +15,7 @@ import {
  */
 export const getReferenceSchema = (
   $ref: string,
-  openAPIDocument: Pick<OpenAPIObject, "components">
+  openAPIDocument: Pick<OpenAPIObject, "components">,
 ): SchemaObject => {
   const [hash, ...refPath] = $ref.split("/");
   if (hash !== "#") {
@@ -28,10 +28,16 @@ export const getReferenceSchema = (
   // get the last element of the refPath, [0] = 'components', [1] = 'schemas'
   const directSchemaName = refPath.at(-1);
   // try a direct access of the name from the schemas object
-  const defaultDirectSearch = openAPIDocument.components?.schemas && openAPIDocument.components.schemas[directSchemaName!];
+  const defaultDirectSearch =
+    openAPIDocument.components?.schemas &&
+    openAPIDocument.components.schemas[directSchemaName!];
 
   // try to perform the typical ref path search but use the direct search as a fallback
-  const referenceSchema = get(openAPIDocument, refPath.join("."), defaultDirectSearch);
+  const referenceSchema = get(
+    openAPIDocument,
+    refPath.join("."),
+    defaultDirectSearch,
+  );
 
   // if neither ref path nor direct search find the schema then throw that the ref cant be found
   if (!referenceSchema) {

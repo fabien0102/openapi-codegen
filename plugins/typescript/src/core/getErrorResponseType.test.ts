@@ -1,3 +1,4 @@
+import { describe, expect, it } from "vitest";
 import { ResponseObject } from "openapi3-ts";
 import { print } from "../testUtils";
 import { getErrorResponseType } from "./getErrorResponseType";
@@ -11,10 +12,8 @@ describe("getErrorResponseType", () => {
             "200": createResponse("Success"),
             "500": createResponse("SimpleError"),
           },
-
-          printNodes: (nodes) => nodes.map(print).join("\n"),
-        })
-      )
+        }),
+      ),
     ).toMatchInlineSnapshot(`
       "Fetcher.ErrorWrapper<{
           status: 500;
@@ -31,10 +30,8 @@ describe("getErrorResponseType", () => {
             "404": createResponse("NotFoundError"),
             "500": createResponse("SimpleError"),
           },
-
-          printNodes: (nodes) => nodes.map(print).join("\n"),
-        })
-      )
+        }),
+      ),
     ).toMatchInlineSnapshot(`
       "Fetcher.ErrorWrapper<{
           status: 404;
@@ -51,9 +48,8 @@ describe("getErrorResponseType", () => {
       print(
         getErrorResponseType({
           responses: {},
-          printNodes: (nodes) => nodes.map(print).join("\n"),
-        })
-      )
+        }),
+      ),
     ).toEqual("Fetcher.ErrorWrapper<undefined>");
   });
 
@@ -64,10 +60,8 @@ describe("getErrorResponseType", () => {
           responses: {
             default: createResponse("SimpleError"),
           },
-
-          printNodes: (nodes) => nodes.map(print).join("\n"),
-        })
-      )
+        }),
+      ),
     ).toMatchInlineSnapshot(`
       "Fetcher.ErrorWrapper<{
           status: ClientErrorStatus | ServerErrorStatus;
@@ -84,10 +78,8 @@ describe("getErrorResponseType", () => {
             "4xx": createResponse("ClientError"),
             default: createResponse("DefaultError"),
           },
-
-          printNodes: (nodes) => nodes.map(print).join("\n"),
-        })
-      )
+        }),
+      ),
     ).toMatchInlineSnapshot(`
       "Fetcher.ErrorWrapper<{
           status: ClientErrorStatus;
@@ -107,10 +99,8 @@ describe("getErrorResponseType", () => {
             "5xx": createResponse("ServerError"),
             default: createResponse("DefaultError"),
           },
-
-          printNodes: (nodes) => nodes.map(print).join("\n"),
-        })
-      )
+        }),
+      ),
     ).toMatchInlineSnapshot(`
       "Fetcher.ErrorWrapper<{
           status: ServerErrorStatus;
@@ -130,10 +120,8 @@ describe("getErrorResponseType", () => {
             422: createResponse("ValidationError"),
             "4xx": createResponse("ClientError"),
           },
-
-          printNodes: (nodes) => nodes.map(print).join("\n"),
-        })
-      )
+        }),
+      ),
     ).toMatchInlineSnapshot(`
       "Fetcher.ErrorWrapper<{
           status: 422;
@@ -154,10 +142,8 @@ describe("getErrorResponseType", () => {
             503: createResponse("NotAvailableError"),
             "5xx": createResponse("ServerError"),
           },
-
-          printNodes: (nodes) => nodes.map(print).join("\n"),
-        })
-      )
+        }),
+      ),
     ).toMatchInlineSnapshot(`
       "Fetcher.ErrorWrapper<{
           status: 501;
@@ -183,10 +169,8 @@ describe("getErrorResponseType", () => {
             "5xx": createResponse("ServerError"),
             default: createResponse("DefaultError"),
           },
-
-          printNodes: (nodes) => nodes.map(print).join("\n"),
-        })
-      )
+        }),
+      ),
     ).toMatchInlineSnapshot(`
       "Fetcher.ErrorWrapper<{
           status: 422;

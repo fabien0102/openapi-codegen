@@ -57,7 +57,6 @@ export const getOperationTypes = ({
   let errorType = getErrorResponseType({
     responses: operation.responses,
     components: openAPIDocument.components,
-    printNodes,
   });
 
   // Retrieve requestBodyType
@@ -69,7 +68,7 @@ export const getOperationTypes = ({
   // Generate params types
   const { pathParams, queryParams, headerParams } = getParamsGroupByType(
     [...pathParameters, ...(operation.parameters || [])],
-    openAPIDocument.components
+    openAPIDocument.components,
   );
 
   // Check if types can be marked as optional (all properties are optional)
@@ -96,8 +95,8 @@ export const getOperationTypes = ({
         {
           currentComponent: null,
           openAPIDocument,
-        }
-      )
+        },
+      ),
     );
   }
 
@@ -109,8 +108,8 @@ export const getOperationTypes = ({
         {
           currentComponent: null,
           openAPIDocument,
-        }
-      )
+        },
+      ),
     );
   }
 
@@ -122,8 +121,8 @@ export const getOperationTypes = ({
         {
           currentComponent: null,
           openAPIDocument,
-        }
-      )
+        },
+      ),
     );
   }
 
@@ -134,8 +133,8 @@ export const getOperationTypes = ({
       [f.createModifier(ts.SyntaxKind.ExportKeyword)],
       f.createIdentifier(errorTypeIdentifier),
       undefined,
-      errorType
-    )
+      errorType,
+    ),
   );
 
   errorType = f.createTypeReferenceNode(errorTypeIdentifier);
@@ -148,8 +147,8 @@ export const getOperationTypes = ({
         [f.createModifier(ts.SyntaxKind.ExportKeyword)],
         f.createIdentifier(dataTypeIdentifier),
         undefined,
-        dataType
-      )
+        dataType,
+      ),
     );
 
     dataType = f.createTypeReferenceNode(dataTypeIdentifier);
@@ -163,8 +162,8 @@ export const getOperationTypes = ({
         [f.createModifier(ts.SyntaxKind.ExportKeyword)],
         f.createIdentifier(requestBodyIdentifier),
         undefined,
-        requestBodyType
-      )
+        requestBodyType,
+      ),
     );
 
     requestBodyType = f.createTypeReferenceNode(requestBodyIdentifier);
@@ -215,8 +214,8 @@ export const getOperationTypes = ({
         [f.createModifier(ts.SyntaxKind.ExportKeyword)],
         f.createIdentifier(variablesIdentifier),
         undefined,
-        variablesType
-      )
+        variablesType,
+      ),
     );
 
     variablesType = f.createTypeReferenceNode(variablesIdentifier);

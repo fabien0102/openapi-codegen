@@ -1,3 +1,4 @@
+import { describe, expect, it } from "vitest";
 import { print } from "../testUtils";
 import ts, { factory as f } from "typescript";
 import { getVariablesType } from "./getVariablesType";
@@ -159,8 +160,8 @@ const createType = (namespace: string, name: string) =>
   f.createTypeReferenceNode(
     f.createQualifiedName(
       f.createIdentifier(namespace),
-      f.createIdentifier(name)
-    )
+      f.createIdentifier(name),
+    ),
   );
 
 const undefinedType = f.createKeywordTypeNode(ts.SyntaxKind.UndefinedKeyword);

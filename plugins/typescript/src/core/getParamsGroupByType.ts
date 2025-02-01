@@ -14,7 +14,7 @@ import {
  */
 export const getParamsGroupByType = (
   parameters: OperationObject["parameters"] = [],
-  components: ComponentsObject = {}
+  components: ComponentsObject = {},
 ) => {
   const {
     query: queryParams = [] as ParameterObject[],
@@ -25,7 +25,7 @@ export const getParamsGroupByType = (
       if (isReferenceObject(p)) {
         const schema = get(
           components,
-          p.$ref.replace("#/components/", "").split("/")
+          p.$ref.replace("#/components/", "").split("/"),
         );
         if (!schema) {
           throw new Error(`${p.$ref} not found!`);
@@ -35,7 +35,7 @@ export const getParamsGroupByType = (
         return p;
       }
     }),
-    "in"
+    "in",
   );
 
   return { queryParams, pathParams, headerParams };

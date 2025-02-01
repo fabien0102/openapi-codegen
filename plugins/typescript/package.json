@@ -12,8 +12,8 @@
     "access": "public"
   },
   "scripts": {
-    "build": "tsc -p tsconfig.package.json",
-    "prepublishOnly": "npm run build"
+    "build": "pnpm --workspace-root tsc -p plugins/typescript/tsconfig.package.json",
+    "prepublishOnly": "pnpm build"
   },
   "files": [
     "lib",

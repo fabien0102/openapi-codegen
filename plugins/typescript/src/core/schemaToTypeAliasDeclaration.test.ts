@@ -1,3 +1,4 @@
+import { describe, expect, it } from "vitest";
 import { OpenAPIObject, ReferenceObject, SchemaObject } from "openapi3-ts";
 import ts from "typescript";
 import {
@@ -65,7 +66,7 @@ describe("schemaToTypeAliasDeclaration", () => {
     };
 
     expect(printSchema(schema)).toBe(
-      `export type Test = "foo" | "bar" | "baz";`
+      `export type Test = "foo" | "bar" | "baz";`,
     );
   });
 
@@ -129,7 +130,7 @@ describe("schemaToTypeAliasDeclaration", () => {
     };
 
     expect(printSchema(schema)).toBe(
-      `export type Test = "foo" | "bar" | "baz" | null;`
+      `export type Test = "foo" | "bar" | "baz" | null;`,
     );
   });
 
@@ -423,7 +424,7 @@ describe("schemaToTypeAliasDeclaration", () => {
     };
 
     expect(printSchema(schema)).toMatchInlineSnapshot(
-      `"export type Test = User;"`
+      `"export type Test = User;"`,
     );
   });
 
@@ -433,7 +434,7 @@ describe("schemaToTypeAliasDeclaration", () => {
     };
 
     expect(printSchema(schema, "Test", "parameters")).toMatchInlineSnapshot(
-      `"export type Test = Schemas.User;"`
+      `"export type Test = Schemas.User;"`,
     );
   });
 
@@ -443,7 +444,7 @@ describe("schemaToTypeAliasDeclaration", () => {
     };
 
     expect(printSchema(schema)).toMatchInlineSnapshot(
-      `"export type Test = Record<string, any>;"`
+      `"export type Test = Record<string, any>;"`,
     );
   });
 
@@ -566,7 +567,7 @@ describe("schemaToTypeAliasDeclaration", () => {
     };
 
     expect(printSchema(schema)).toMatchInlineSnapshot(
-      `"export type Test = Foo[];"`
+      `"export type Test = Foo[];"`,
     );
   });
 
@@ -574,7 +575,7 @@ describe("schemaToTypeAliasDeclaration", () => {
     const schema: SchemaObject = {};
 
     expect(printSchema(schema)).toMatchInlineSnapshot(
-      `"export type Test = void;"`
+      `"export type Test = void;"`,
     );
   });
 
@@ -584,7 +585,7 @@ describe("schemaToTypeAliasDeclaration", () => {
     };
 
     expect(printSchema(schema)).toMatchInlineSnapshot(
-      `"export type Test = string | number;"`
+      `"export type Test = string | number;"`,
     );
   });
 
@@ -633,7 +634,7 @@ describe("schemaToTypeAliasDeclaration", () => {
               },
             },
           },
-        })
+        }),
       ).toMatchInlineSnapshot(`
        "export type Test = (Omit<Foo, "discriminatorPropertyName"> & {
            discriminatorPropertyName: "foo";
@@ -653,7 +654,7 @@ describe("schemaToTypeAliasDeclaration", () => {
             Bar: { type: "object", properties: { bar: { type: "string" } } },
             Baz: { type: "object", properties: { baz: { type: "string" } } },
           },
-        })
+        }),
       ).toMatchInlineSnapshot(`
        "export type Test = (Foo & {
            discriminatorPropertyName: "foo";
@@ -699,7 +700,7 @@ describe("schemaToTypeAliasDeclaration", () => {
               required: ["discriminatorPropertyName"],
             },
           },
-        })
+        }),
       ).toMatchInlineSnapshot(`"export type Test = Foo | Bar | Baz;"`);
     });
   });
@@ -863,7 +864,7 @@ describe("schemaToTypeAliasDeclaration", () => {
       };
 
       expect(printSchema(schema)).toMatchInlineSnapshot(
-        `"export type Test = never;"`
+        `"export type Test = never;"`,
       );
     });
 
@@ -937,7 +938,7 @@ describe("schemaToTypeAliasDeclaration", () => {
       };
 
       expect(printSchema(schema)).toMatchInlineSnapshot(
-        `"export type Test = string | number;"`
+        `"export type Test = string | number;"`,
       );
     });
 
@@ -1078,7 +1079,7 @@ const printSchema = (
   schemaName: string = "Test",
   currentComponent: OpenAPIComponentType = "schemas",
   components?: OpenAPIObject["components"],
-  useEnums?: boolean
+  useEnums?: boolean,
 ) => {
   const nodes = schemaToTypeAliasDeclaration(
     schemaName,
@@ -1087,13 +1088,13 @@ const printSchema = (
       currentComponent,
       openAPIDocument: { components },
     },
-    useEnums
+    useEnums,
   );
 
   const sourceFile = ts.createSourceFile(
     "index.ts",
     "",
-    ts.ScriptTarget.Latest
+    ts.ScriptTarget.Latest,
   );
 
   const printer = ts.createPrinter({
@@ -1103,7 +1104,7 @@ const printSchema = (
 
   return nodes
     .map((node: ts.Node) =>
-      printer.printNode(ts.EmitHint.Unspecified, node, sourceFile)
+      printer.printNode(ts.EmitHint.Unspecified, node, sourceFile),
     )
     .join("\n");
 };

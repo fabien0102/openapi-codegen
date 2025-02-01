@@ -39,7 +39,7 @@ export const generateFetchers = async (context: Context, config: Config) => {
   const sourceFile = ts.createSourceFile(
     "index.ts",
     "",
-    ts.ScriptTarget.Latest
+    ts.ScriptTarget.Latest,
   );
 
   const printer = ts.createPrinter({
@@ -82,11 +82,11 @@ export const generateFetchers = async (context: Context, config: Config) => {
   const utilsFilename = formatFilename(filenamePrefix + "-utils");
 
   const fetcherExtraPropsTypeName = `${c.pascal(
-    filenamePrefix
+    filenamePrefix,
   )}FetcherExtraProps`;
 
   let variablesExtraPropsType: ts.TypeNode = f.createKeywordTypeNode(
-    ts.SyntaxKind.VoidKeyword
+    ts.SyntaxKind.VoidKeyword,
   );
 
   if (!context.existsFile(`${fetcherFilename}.ts`)) {
@@ -95,7 +95,7 @@ export const generateFetchers = async (context: Context, config: Config) => {
       getFetcher({
         prefix: filenamePrefix,
         baseUrl: get(context.openAPIDocument, "servers.0.url"),
-      })
+      }),
     );
   } else {
     const fetcherSourceText = await context.readFile(`${fetcherFilename}.ts`);
@@ -103,7 +103,7 @@ export const generateFetchers = async (context: Context, config: Config) => {
     const fetcherSourceFile = ts.createSourceFile(
       `${fetcherFilename}.ts`,
       fetcherSourceText,
-      ts.ScriptTarget.Latest
+      ts.ScriptTarget.Latest,
     );
 
     // Lookup for {prefix}FetcherExtraProps declaration
@@ -116,7 +116,7 @@ export const generateFetchers = async (context: Context, config: Config) => {
       ) {
         // Use the type of defined
         variablesExtraPropsType = f.createTypeReferenceNode(
-          fetcherExtraPropsTypeName
+          fetcherExtraPropsTypeName,
         );
         fetcherImports.push(fetcherExtraPropsTypeName);
       }
@@ -133,7 +133,7 @@ export const generateFetchers = async (context: Context, config: Config) => {
         const operationId = c.camel(operation.operationId);
         if (operationIds.includes(operationId)) {
           throw new Error(
-            `The operationId "${operation.operationId}" is duplicated in your schema definition!`
+            `The operationId "${operation.operationId}" is duplicated in your schema definition!`,
           );
         }
 
@@ -177,10 +177,10 @@ export const generateFetchers = async (context: Context, config: Config) => {
             url: route,
             verb,
             name: operationId,
-          })
+          }),
         );
       });
-    }
+    },
   );
 
   if (operationIds.length === 0) {
@@ -203,17 +203,17 @@ export const generateFetchers = async (context: Context, config: Config) => {
                     f.createStringLiteral(c.camel(tag)),
                     f.createObjectLiteralExpression(
                       operationIds.map((operationId) =>
-                        f.createShorthandPropertyAssignment(operationId)
-                      )
-                    )
+                        f.createShorthandPropertyAssignment(operationId),
+                      ),
+                    ),
                   );
-                })
-              )
+                }),
+              ),
             ),
           ],
-          ts.NodeFlags.Const
-        )
-      )
+          ts.NodeFlags.Const,
+        ),
+      ),
     );
   }
 
@@ -222,7 +222,7 @@ export const generateFetchers = async (context: Context, config: Config) => {
     {
       ...config.schemasFiles,
       utils: utilsFilename,
-    }
+    },
   );
 
   if (usedImportsKeys.includes("utils")) {
@@ -237,6 +237,6 @@ export const generateFetchers = async (context: Context, config: Config) => {
       createNamedImport(fetcherImports, `./${fetcherFilename}`),
       ...usedImportsNodes,
       ...nodes,
-    ])
+    ]),
   );
 };

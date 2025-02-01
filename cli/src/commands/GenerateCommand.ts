@@ -84,7 +84,7 @@ export class GenerateCommand extends Command {
   private async loadConfigs(): Promise<Record<Namespace, Config>> {
     const userConfigPath = path.join(
       process.cwd(),
-      this.config || "openapi-codegen.config.ts"
+      this.config || "openapi-codegen.config.ts",
     );
     const { dir, name, ext } = path.parse(userConfigPath);
     const isTs = ext.toLowerCase() === ".ts";
@@ -207,7 +207,7 @@ export class GenerateCommand extends Command {
     const configs = await this.loadConfigs();
     if (!(this.namespace in configs)) {
       throw new UsageError(
-        `"${this.namespace}" is not defined in your configuration`
+        `"${this.namespace}" is not defined in your configuration`,
       );
     }
 
@@ -238,20 +238,20 @@ export class GenerateCommand extends Command {
 
       await fsExtra.outputFile(
         path.join(process.cwd(), config.outputDir, file),
-        updatedConfig
+        updatedConfig,
       );
     };
 
     const readFile = (file: string) => {
       return fsExtra.readFile(
         path.join(process.cwd(), config.outputDir, file),
-        "utf-8"
+        "utf-8",
       );
     };
 
     const existsFile = (file: string) => {
       return fsExtra.existsSync(
-        path.join(process.cwd(), config.outputDir, file)
+        path.join(process.cwd(), config.outputDir, file),
       );
     };
 

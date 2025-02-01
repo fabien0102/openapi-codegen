@@ -19,7 +19,7 @@ export const getUsedImports = (
     parameters: string;
     responses: string;
     utils: string;
-  }
+  },
 ): { keys: string[]; nodes: ts.Node[] } => {
   const imports: Record<
     keyof typeof files,
@@ -89,7 +89,11 @@ export const getUsedImports = (
       if (i.type === "namespace") {
         return createNamespaceImport(i.namespace, `./${i.from}`);
       } else {
-        return createNamedImport(Array.from(i.imports.values()), `./${i.from}`, true);
+        return createNamedImport(
+          Array.from(i.imports.values()),
+          `./${i.from}`,
+          true,
+        );
       }
     }),
   };

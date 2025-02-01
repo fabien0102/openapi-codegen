@@ -17,13 +17,13 @@ function App() {
 
 function Users() {
   const [query, setQuery] = useState("");
-  const { data, error, isLoading } = useSearchUsers(
+  const { data, error, isPending } = useSearchUsers(
     {
       queryParams: { q: query },
     },
     {
       enabled: Boolean(query),
-    }
+    },
   );
 
   if (error) {
@@ -37,11 +37,11 @@ function Users() {
   return (
     <div>
       <input value={query} onChange={(e) => setQuery(e.target.value)} />
-      {isLoading ? (
+      {isPending ? (
         <div>Loading…</div>
       ) : (
         <ul>
-          {data?.items.map((item) => (
+          {data.items.map((item) => (
             <li key={item.id}>{item.login}</li>
           ))}
         </ul>

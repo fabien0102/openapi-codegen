@@ -11,7 +11,7 @@ import { factory as f } from "typescript";
 export const createNamedImport = (
   fnName: string | string[],
   filename: string,
-  isTypeOnly = false
+  isTypeOnly = false,
 ) => {
   const fnNames = Array.isArray(fnName) ? fnName : [fnName];
   return f.createImportDeclaration(
@@ -21,11 +21,11 @@ export const createNamedImport = (
       undefined,
       f.createNamedImports(
         fnNames.map((name) =>
-          f.createImportSpecifier(false, undefined, f.createIdentifier(name))
-        )
-      )
+          f.createImportSpecifier(false, undefined, f.createIdentifier(name)),
+        ),
+      ),
     ),
     f.createStringLiteral(filename),
-    undefined
+    undefined,
   );
 };

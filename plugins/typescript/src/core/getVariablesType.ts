@@ -39,8 +39,8 @@ export const getVariablesType = ({
         requestBodyOptional
           ? f.createToken(ts.SyntaxKind.QuestionToken)
           : undefined,
-        requestBodyType
-      )
+        requestBodyType,
+      ),
     );
   }
   if (hasProperties(headersType)) {
@@ -51,8 +51,8 @@ export const getVariablesType = ({
         headersOptional
           ? f.createToken(ts.SyntaxKind.QuestionToken)
           : undefined,
-        headersType
-      )
+        headersType,
+      ),
     );
   }
   if (hasProperties(pathParamsType)) {
@@ -63,8 +63,8 @@ export const getVariablesType = ({
         pathParamsOptional
           ? f.createToken(ts.SyntaxKind.QuestionToken)
           : undefined,
-        pathParamsType
-      )
+        pathParamsType,
+      ),
     );
   }
   if (hasProperties(queryParamsType)) {
@@ -75,8 +75,8 @@ export const getVariablesType = ({
         queryParamsOptional
           ? f.createToken(ts.SyntaxKind.QuestionToken)
           : undefined,
-        queryParamsType
-      )
+        queryParamsType,
+      ),
     );
   }
 

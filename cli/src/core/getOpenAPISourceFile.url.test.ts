@@ -1,3 +1,4 @@
+import { describe, expect, it } from "vitest";
 import { getOpenAPISourceFile } from "./getOpenAPISourceFile";
 import nock from "nock";
 

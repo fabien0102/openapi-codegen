@@ -7,7 +7,7 @@ import { SchemaObject } from "openapi3-ts";
  * @returns A tuple array containing the property names with enum values and their corresponding schema objects
  */
 export const getEnumProperties = (
-  schemaArray: SchemaObject[]
+  schemaArray: SchemaObject[],
 ): [string, SchemaObject][] => {
   const enumProperties: [string, SchemaObject][] = [];
 
@@ -23,9 +23,9 @@ export const getEnumProperties = (
           processProperty(
             enumProperties,
             `${name}${pascal(propertyName)}`,
-            propertySchema
+            propertySchema,
           );
-        }
+        },
       );
     }
   });
@@ -36,7 +36,8 @@ export const getEnumProperties = (
 const processProperty = (
   enumProperties: [string, SchemaObject][],
   propertyName: string,
-  propertySchema: any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  propertySchema: any,
 ) => {
   if (propertySchema.enum) {
     enumProperties.push([`${pascal(propertyName)}`, propertySchema]);
@@ -46,9 +47,9 @@ const processProperty = (
         processProperty(
           enumProperties,
           `${propertyName}${pascal(nestedPropertyName)}`,
-          nestedPropertySchema
+          nestedPropertySchema,
         );
-      }
+      },
     );
   }
 };

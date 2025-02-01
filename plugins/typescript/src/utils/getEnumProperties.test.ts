@@ -1,3 +1,4 @@
+import { describe, expect, it } from "vitest";
 import { SchemaObject } from "openapi3-ts";
 import { convertNumberToWord, getEnumProperties } from "./getEnumProperties";
 

@@ -1,3 +1,4 @@
+import { describe, expect, it } from "vitest";
 import { isVerb } from "./isVerb";
 
 describe("isVerb", () => {
@@ -10,6 +11,6 @@ describe("isVerb", () => {
     { verb: "header", expected: false },
   ].forEach(({ verb, expected }) =>
     it(`should return ${expected} for the verb "${verb}"`, () =>
-      expect(isVerb(verb)).toBe(expected))
+      expect(isVerb(verb)).toBe(expected)),
   );
 });

@@ -1,3 +1,4 @@
+import { describe, expect, it } from "vitest";
 import { OpenAPIObject } from "openapi3-ts";
 import { addPathParam } from "./addPathParam";
 

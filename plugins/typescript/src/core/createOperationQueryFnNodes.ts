@@ -11,13 +11,7 @@ import { camelizedPathParams } from "./camelizedPathParams";
 export const createOperationQueryFnNodes = ({
   operationFetcherFnName,
   dataType,
-  errorType,
-  requestBodyType,
-  queryParamsType,
-  pathParamsType,
-  headersType,
   variablesType,
-  fetcherFn,
   operation,
   operationId,
   url,
@@ -26,15 +20,9 @@ export const createOperationQueryFnNodes = ({
 }: {
   operationFetcherFnName: string;
   dataType: ts.TypeNode;
-  errorType: ts.TypeNode;
-  requestBodyType: ts.TypeNode;
-  headersType: ts.TypeNode;
-  pathParamsType: ts.TypeNode;
-  queryParamsType: ts.TypeNode;
   variablesType: ts.TypeNode;
   operation: OperationObject;
   operationId: string;
-  fetcherFn: string;
   url: string;
   verb: string;
   name: string;
@@ -63,7 +51,7 @@ export const createOperationQueryFnNodes = ({
                   f.createIdentifier("variables"),
                   undefined,
                   variablesType,
-                  undefined
+                  undefined,
                 ),
               ],
               f.createTypeLiteralNode([
@@ -74,10 +62,10 @@ export const createOperationQueryFnNodes = ({
                   f.createTypeReferenceNode(
                     f.createQualifiedName(
                       f.createIdentifier("reactQuery"),
-                      f.createIdentifier("QueryKey")
+                      f.createIdentifier("QueryKey"),
                     ),
-                    undefined
-                  )
+                    undefined,
+                  ),
                 ),
                 f.createPropertySignature(
                   undefined,
@@ -95,7 +83,7 @@ export const createOperationQueryFnNodes = ({
                                 undefined,
                                 undefined,
                                 f.createIdentifier("signal"),
-                                undefined
+                                undefined,
                               ),
                             ]),
                             undefined,
@@ -106,11 +94,11 @@ export const createOperationQueryFnNodes = ({
                                 f.createToken(ts.SyntaxKind.QuestionToken),
                                 f.createTypeReferenceNode(
                                   f.createIdentifier("AbortSignal"),
-                                  undefined
-                                )
+                                  undefined,
+                                ),
                               ),
                             ]),
-                            undefined
+                            undefined,
                           ),
                         ]
                       : [
@@ -122,13 +110,13 @@ export const createOperationQueryFnNodes = ({
                                 undefined,
                                 undefined,
                                 f.createIdentifier("variables"),
-                                undefined
+                                undefined,
                               ),
                               f.createBindingElement(
                                 undefined,
                                 undefined,
                                 f.createIdentifier("signal"),
-                                undefined
+                                undefined,
                               ),
                             ]),
                             undefined,
@@ -137,7 +125,7 @@ export const createOperationQueryFnNodes = ({
                                 undefined,
                                 f.createIdentifier("variables"),
                                 undefined,
-                                variablesType
+                                variablesType,
                               ),
                               f.createPropertySignature(
                                 undefined,
@@ -145,17 +133,17 @@ export const createOperationQueryFnNodes = ({
                                 f.createToken(ts.SyntaxKind.QuestionToken),
                                 f.createTypeReferenceNode(
                                   f.createIdentifier("AbortSignal"),
-                                  undefined
-                                )
+                                  undefined,
+                                ),
                               ),
                             ]),
-                            undefined
+                            undefined,
                           ),
                         ],
                     f.createTypeReferenceNode(f.createIdentifier("Promise"), [
                       dataType,
-                    ])
-                  )
+                    ]),
+                  ),
                 ),
               ]),
 
@@ -172,21 +160,21 @@ export const createOperationQueryFnNodes = ({
                           [
                             f.createPropertyAssignment(
                               f.createIdentifier("path"),
-                              f.createStringLiteral(camelizedPathParams(url))
+                              f.createStringLiteral(camelizedPathParams(url)),
                             ),
                             f.createPropertyAssignment(
                               f.createIdentifier("operationId"),
-                              f.createStringLiteral(operationId)
+                              f.createStringLiteral(operationId),
                             ),
                             f.createShorthandPropertyAssignment(
                               f.createIdentifier("variables"),
-                              undefined
+                              undefined,
                             ),
                           ],
-                          true
+                          true,
                         ),
-                      ]
-                    )
+                      ],
+                    ),
                   ),
                   f.createPropertyAssignment(
                     f.createIdentifier("queryFn"),
@@ -203,7 +191,7 @@ export const createOperationQueryFnNodes = ({
                                   undefined,
                                   undefined,
                                   f.createIdentifier("signal"),
-                                  undefined
+                                  undefined,
                                 ),
                               ]),
                               undefined,
@@ -214,11 +202,11 @@ export const createOperationQueryFnNodes = ({
                                   f.createToken(ts.SyntaxKind.QuestionToken),
                                   f.createTypeReferenceNode(
                                     f.createIdentifier("AbortSignal"),
-                                    undefined
-                                  )
+                                    undefined,
+                                  ),
                                 ),
                               ]),
-                              undefined
+                              undefined,
                             ),
                           ]
                         : [
@@ -230,13 +218,13 @@ export const createOperationQueryFnNodes = ({
                                   undefined,
                                   undefined,
                                   f.createIdentifier("variables"),
-                                  undefined
+                                  undefined,
                                 ),
                                 f.createBindingElement(
                                   undefined,
                                   undefined,
                                   f.createIdentifier("signal"),
-                                  undefined
+                                  undefined,
                                 ),
                               ]),
                               undefined,
@@ -245,7 +233,7 @@ export const createOperationQueryFnNodes = ({
                                   undefined,
                                   f.createIdentifier("variables"),
                                   undefined,
-                                  variablesType
+                                  variablesType,
                                 ),
                                 f.createPropertySignature(
                                   undefined,
@@ -253,11 +241,11 @@ export const createOperationQueryFnNodes = ({
                                   f.createToken(ts.SyntaxKind.QuestionToken),
                                   f.createTypeReferenceNode(
                                     f.createIdentifier("AbortSignal"),
-                                    undefined
-                                  )
+                                    undefined,
+                                  ),
                                 ),
                               ]),
-                              undefined
+                              undefined,
                             ),
                           ],
                       undefined,
@@ -268,19 +256,19 @@ export const createOperationQueryFnNodes = ({
                         [
                           f.createIdentifier("variables"),
                           f.createIdentifier("signal"),
-                        ]
-                      )
-                    )
+                        ],
+                      ),
+                    ),
                   ),
                 ],
-                true
-              )
-            )
+                true,
+              ),
+            ),
           ),
         ],
-        ts.NodeFlags.Const
-      )
-    )
+        ts.NodeFlags.Const,
+      ),
+    ),
   );
   return nodes;
 };

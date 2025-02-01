@@ -1,3 +1,4 @@
+import { describe, expect, it } from "vitest";
 import { ParameterObject } from "openapi3-ts";
 import { paramsToSchema } from "./paramsToSchema";
 

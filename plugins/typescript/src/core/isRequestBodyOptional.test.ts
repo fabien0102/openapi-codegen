@@ -1,3 +1,4 @@
+import { describe, expect, it } from "vitest";
 import { isRequestBodyOptional } from "./isRequestBodyOptional";
 
 describe("isRequestBodyOptional", () => {
@@ -22,7 +23,7 @@ describe("isRequestBodyOptional", () => {
             },
           },
         },
-      })
+      }),
     ).toBe(true);
   });
 
@@ -44,7 +45,7 @@ describe("isRequestBodyOptional", () => {
             },
           },
         },
-      })
+      }),
     ).toBe(false);
   });
 
@@ -73,7 +74,7 @@ describe("isRequestBodyOptional", () => {
             },
           },
         },
-      })
+      }),
     ).toBe(false);
   });
 
@@ -107,7 +108,7 @@ describe("isRequestBodyOptional", () => {
             },
           },
         },
-      })
+      }),
     ).toBe(false);
   });
 
@@ -136,7 +137,7 @@ describe("isRequestBodyOptional", () => {
             },
           },
         },
-      })
+      }),
     ).toBe(false);
   });
 });
