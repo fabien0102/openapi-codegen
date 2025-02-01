@@ -72,6 +72,7 @@ export async function ${camel(prefix)}Fetch<
   TQueryParams,
   TPathParams
 >): Promise<TData> {
+  let error: ErrorWrapper<TError>;
   try {
     const requestHeaders: HeadersInit = {
       "Content-Type": "application/json",
@@ -97,7 +98,6 @@ export async function ${camel(prefix)}Fetch<
       }
     );
     if (!response.ok) {
-      let error: ErrorWrapper<TError>;
       try {
         error = await response.json();
       } catch (e) {
