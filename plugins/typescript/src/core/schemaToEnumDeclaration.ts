@@ -52,6 +52,9 @@ function getEnumMembers(schema: SchemaObject): ts.EnumMember[] {
       throw new Error(`Unsupported enum value type: ${typeof enumValue}`);
     }
 
-    return f.createEnumMember(f.createIdentifier(enumName), enumValueNode);
+    return f.createEnumMember(
+      f.createIdentifier(pascal(enumName)),
+      enumValueNode
+    );
   });
 }

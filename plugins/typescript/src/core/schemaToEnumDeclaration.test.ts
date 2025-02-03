@@ -12,11 +12,11 @@ describe("schemaToTypeAliasDeclaration", () => {
     };
 
     expect(printSchema(schema)).toMatchInlineSnapshot(`
-     "export enum Test {
-         AVAILABLE = "AVAILABLE",
-         PENDING = "PENDING",
-         SOLD = "SOLD"
-     }"
+      "export enum Test {
+          Available = "AVAILABLE",
+          Pending = "PENDING",
+          Sold = "SOLD"
+      }"
     `);
   });
 
@@ -28,9 +28,9 @@ describe("schemaToTypeAliasDeclaration", () => {
 
     expect(printSchema(schema)).toMatchInlineSnapshot(`
       "export enum Test {
-          ONE = 1,
-          TWO = 2,
-          THREE = 3
+          One = 1,
+          Two = 2,
+          Three = 3
       }"
     `);
   });
@@ -43,13 +43,13 @@ describe("schemaToTypeAliasDeclaration", () => {
 
     expect(printSchema(schema)).toMatchInlineSnapshot(`
       "export enum Test {
-          ZERO = 0,
-          SEVEN = 7,
-          FIFTEEN = 15,
-          ONE_HUNDRED = 100,
-          ONE_THOUSAND = 1000,
-          ONE_THOUSAND_FOUR_HUNDRED_FIFTY_SIX = 1456,
-          THREE_THOUSAND_TWO_HUNDRED_SEVENTEEN = 3217
+          Zero = 0,
+          Seven = 7,
+          Fifteen = 15,
+          OneHundred = 100,
+          OneThousand = 1000,
+          OneThousandFourHundredFiftySix = 1456,
+          ThreeThousandTwoHundredSeventeen = 3217
       }"
     `);
   });
@@ -68,17 +68,17 @@ describe("schemaToTypeAliasDeclaration", () => {
     `);
   });
 
-  it("should generate uppercase type when providing lowercase schema names", () => {
+  it("should generate valid enum with values that contains spaces", () => {
     const schema: SchemaObject = {
       type: "string",
-      enum: ["AVAILABLE", "PENDING", "SOLD"],
+      enum: ["saimois", "bengal", "british shorthair"],
     };
 
     expect(printSchema(schema, "test")).toMatchInlineSnapshot(`
       "export enum Test {
-          AVAILABLE = "AVAILABLE",
-          PENDING = "PENDING",
-          SOLD = "SOLD"
+          Saimois = "saimois",
+          Bengal = "bengal",
+          BritishShorthair = "british shorthair"
       }"
     `);
   });
