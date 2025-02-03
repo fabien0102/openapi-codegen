@@ -23,7 +23,7 @@ describe("isRequestBodyOptional", () => {
             },
           },
         },
-      }),
+      })
     ).toBe(true);
   });
 
@@ -45,7 +45,7 @@ describe("isRequestBodyOptional", () => {
             },
           },
         },
-      }),
+      })
     ).toBe(false);
   });
 
@@ -74,7 +74,7 @@ describe("isRequestBodyOptional", () => {
             },
           },
         },
-      }),
+      })
     ).toBe(false);
   });
 
@@ -108,7 +108,7 @@ describe("isRequestBodyOptional", () => {
             },
           },
         },
-      }),
+      })
     ).toBe(false);
   });
 
@@ -137,7 +137,7 @@ describe("isRequestBodyOptional", () => {
             },
           },
         },
-      }),
+      })
     ).toBe(false);
   });
 });

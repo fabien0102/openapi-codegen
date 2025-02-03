@@ -23,7 +23,7 @@ describe("queryKeyFn", () => {
 
   const resolvePathParam = (
     key: string,
-    pathParams: Record<string, string>,
+    pathParams: Record<string, string>
   ) => {
     if (key.startsWith("{") && key.endsWith("}")) {
       return pathParams[key.slice(1, -1)];
@@ -32,7 +32,7 @@ describe("queryKeyFn", () => {
   };
 
   const hasPathParams = (
-    operation: QueryOperation,
+    operation: QueryOperation
   ): operation is QueryOperation & {
     variables: { pathParams: Record<string, string> };
   } => {
@@ -40,7 +40,7 @@ describe("queryKeyFn", () => {
   };
 
   const hasBody = (
-    operation: QueryOperation,
+    operation: QueryOperation
   ): operation is QueryOperation & {
     variables: { body: Record<string, unknown> };
   } => {
@@ -48,7 +48,7 @@ describe("queryKeyFn", () => {
   };
 
   const hasQueryParams = (
-    operation: QueryOperation,
+    operation: QueryOperation
   ): operation is QueryOperation & {
     variables: { queryParams: Record<string, unknown> };
   } => {

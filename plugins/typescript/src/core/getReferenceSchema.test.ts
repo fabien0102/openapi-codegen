@@ -71,7 +71,7 @@ describe("getReferenceSchema", () => {
   it("should throw an Error if the $ref cannot be found", () => {
     const $ref = `${base$Ref}/does/not/exist`;
     expect(() => getReferenceSchema($ref, document)).toThrow(
-      new RegExp($ref, "g"),
+      new RegExp($ref, "g")
     );
   });
 

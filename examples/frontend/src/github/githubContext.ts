@@ -45,7 +45,7 @@ export function useGithubContext<
   _queryOptions?: Omit<
     UseQueryOptions<TQueryFnData, TError, TData, TQueryKey>,
     "queryKey" | "queryFn"
-  >,
+  >
 ): GithubContext<TQueryFnData, TError, TData, TQueryKey> {
   return {
     fetcherOptions: {},
@@ -81,7 +81,7 @@ const resolvePathParam = (key: string, pathParams: Record<string, string>) => {
 };
 
 const hasPathParams = (
-  operation: QueryOperation,
+  operation: QueryOperation
 ): operation is QueryOperation & {
   variables: { pathParams: Record<string, string> };
 } => {
@@ -89,7 +89,7 @@ const hasPathParams = (
 };
 
 const hasBody = (
-  operation: QueryOperation,
+  operation: QueryOperation
 ): operation is QueryOperation & {
   variables: { body: Record<string, unknown> };
 } => {
@@ -97,7 +97,7 @@ const hasBody = (
 };
 
 const hasQueryParams = (
-  operation: QueryOperation,
+  operation: QueryOperation
 ): operation is QueryOperation & {
   variables: { queryParams: Record<string, unknown> };
 } => {

@@ -68,7 +68,7 @@ export async function githubFetch<
             : JSON.stringify(body)
           : undefined,
         headers: requestHeaders,
-      },
+      }
     );
     if (!response.ok) {
       let error: ErrorWrapper<TError>;
@@ -107,7 +107,7 @@ export async function githubFetch<
 const resolveUrl = (
   url: string,
   queryParams: Record<string, string> = {},
-  pathParams: Record<string, string> = {},
+  pathParams: Record<string, string> = {}
 ) => {
   let query = new URLSearchParams(queryParams).toString();
   if (query) query = `?${query}`;

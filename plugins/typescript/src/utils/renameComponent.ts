@@ -25,8 +25,8 @@ export const renameComponent = ({
   const renamedOpenAPIDocument: OpenAPIObject = JSON.parse(
     JSON.stringify(openAPIDocument).replace(
       new RegExp(`"${from}"`, "g"),
-      `"${to}"`,
-    ),
+      `"${to}"`
+    )
   );
 
   const fromPath = from.slice("#/".length).replace(/\//g, ".");

@@ -28,19 +28,19 @@ export const getDataResponseType = ({
     Object.entries(responses).reduce(
       (
         mem,
-        [statusCode, response]: [string, ResponseObject | ReferenceObject],
+        [statusCode, response]: [string, ResponseObject | ReferenceObject]
       ) => {
         if (!statusCode.startsWith("2")) return mem;
         if (isReferenceObject(response)) {
           const [hash, topLevel, namespace, name] = response.$ref.split("/");
           if (hash !== "#" || topLevel !== "components") {
             throw new Error(
-              "This library only resolve $ref that are include into `#/components/*` for now",
+              "This library only resolve $ref that are include into `#/components/*` for now"
             );
           }
           if (namespace !== "responses") {
             throw new Error(
-              "$ref for responses must be on `#/components/responses`",
+              "$ref for responses must be on `#/components/responses`"
             );
           }
           return [
@@ -48,9 +48,9 @@ export const getDataResponseType = ({
             f.createTypeReferenceNode(
               f.createQualifiedName(
                 f.createIdentifier("Responses"),
-                f.createIdentifier(pascal(name)),
+                f.createIdentifier(pascal(name))
               ),
-              undefined,
+              undefined
             ),
           ];
         }
@@ -66,9 +66,9 @@ export const getDataResponseType = ({
           }),
         ];
       },
-      [] as ts.TypeNode[],
+      [] as ts.TypeNode[]
     ),
-    (node) => printNodes([node]),
+    (node) => printNodes([node])
   );
 
   return responseTypes.length === 0

@@ -30,18 +30,18 @@ export const isRequestBodyOptional = ({
     const [hash, topLevel, namespace, _name] = requestBody.$ref.split("/");
     if (hash !== "#" || topLevel !== "components") {
       throw new Error(
-        "This library only resolve $ref that are include into `#/components/*` for now",
+        "This library only resolve $ref that are include into `#/components/*` for now"
       );
     }
     if (namespace !== "requestBodies") {
       throw new Error(
-        "$ref for requestBody must be on `#/components/requestBodies`",
+        "$ref for requestBody must be on `#/components/requestBodies`"
       );
     }
 
     const schema: RequestBodyObject | ReferenceObject = get(
       components,
-      requestBody.$ref.replace("#/components/", "").split("/"),
+      requestBody.$ref.replace("#/components/", "").split("/")
     );
 
     if (!schema) {

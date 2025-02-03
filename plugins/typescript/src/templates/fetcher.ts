@@ -23,7 +23,7 @@ export const getFetcher = ({
        *
        * Note: You need to re-gen after adding the first property to
        * have the \`${pascal(prefix)}FetcherExtraProps\` injected in \`${pascal(
-         prefix,
+         prefix
        )}Components.ts\`
        **/
     }`
@@ -36,7 +36,7 @@ export type ErrorWrapper<TError> =
   | { status: "unknown"; payload: string };
 
 export type ${pascal(
-    prefix,
+    prefix
   )}FetcherOptions<TBody, THeaders, TQueryParams, TPathParams> = {
   url: string;
   method: string;

@@ -12,8 +12,8 @@ describe("getErrorResponseType", () => {
             "200": createResponse("Success"),
             "500": createResponse("SimpleError"),
           },
-        }),
-      ),
+        })
+      )
     ).toMatchInlineSnapshot(`
       "Fetcher.ErrorWrapper<{
           status: 500;
@@ -30,8 +30,8 @@ describe("getErrorResponseType", () => {
             "404": createResponse("NotFoundError"),
             "500": createResponse("SimpleError"),
           },
-        }),
-      ),
+        })
+      )
     ).toMatchInlineSnapshot(`
       "Fetcher.ErrorWrapper<{
           status: 404;
@@ -48,8 +48,8 @@ describe("getErrorResponseType", () => {
       print(
         getErrorResponseType({
           responses: {},
-        }),
-      ),
+        })
+      )
     ).toEqual("Fetcher.ErrorWrapper<undefined>");
   });
 
@@ -60,8 +60,8 @@ describe("getErrorResponseType", () => {
           responses: {
             default: createResponse("SimpleError"),
           },
-        }),
-      ),
+        })
+      )
     ).toMatchInlineSnapshot(`
       "Fetcher.ErrorWrapper<{
           status: ClientErrorStatus | ServerErrorStatus;
@@ -78,8 +78,8 @@ describe("getErrorResponseType", () => {
             "4xx": createResponse("ClientError"),
             default: createResponse("DefaultError"),
           },
-        }),
-      ),
+        })
+      )
     ).toMatchInlineSnapshot(`
       "Fetcher.ErrorWrapper<{
           status: ClientErrorStatus;
@@ -99,8 +99,8 @@ describe("getErrorResponseType", () => {
             "5xx": createResponse("ServerError"),
             default: createResponse("DefaultError"),
           },
-        }),
-      ),
+        })
+      )
     ).toMatchInlineSnapshot(`
       "Fetcher.ErrorWrapper<{
           status: ServerErrorStatus;
@@ -120,8 +120,8 @@ describe("getErrorResponseType", () => {
             422: createResponse("ValidationError"),
             "4xx": createResponse("ClientError"),
           },
-        }),
-      ),
+        })
+      )
     ).toMatchInlineSnapshot(`
       "Fetcher.ErrorWrapper<{
           status: 422;
@@ -142,8 +142,8 @@ describe("getErrorResponseType", () => {
             503: createResponse("NotAvailableError"),
             "5xx": createResponse("ServerError"),
           },
-        }),
-      ),
+        })
+      )
     ).toMatchInlineSnapshot(`
       "Fetcher.ErrorWrapper<{
           status: 501;
@@ -169,8 +169,8 @@ describe("getErrorResponseType", () => {
             "5xx": createResponse("ServerError"),
             default: createResponse("DefaultError"),
           },
-        }),
-      ),
+        })
+      )
     ).toMatchInlineSnapshot(`
       "Fetcher.ErrorWrapper<{
           status: 422;

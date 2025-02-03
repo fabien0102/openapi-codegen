@@ -17,7 +17,7 @@ describe("generateSchemaTypes", () => {
         },
         {
           filenameCase: "camel",
-        },
+        }
       );
       expect(writeFile.mock.calls[0][0]).toBe("swaggerPetstoreSchemas.ts");
     });
@@ -35,7 +35,7 @@ describe("generateSchemaTypes", () => {
         },
         {
           filenameCase: "snake",
-        },
+        }
       );
       expect(writeFile.mock.calls[0][0]).toBe("swagger_petstore_schemas.ts");
     });
@@ -53,7 +53,7 @@ describe("generateSchemaTypes", () => {
         },
         {
           filenameCase: "kebab",
-        },
+        }
       );
       expect(writeFile.mock.calls[0][0]).toBe("swagger-petstore-schemas.ts");
     });
@@ -71,7 +71,7 @@ describe("generateSchemaTypes", () => {
         },
         {
           filenameCase: "pascal",
-        },
+        }
       );
       expect(writeFile.mock.calls[0][0]).toBe("SwaggerPetstoreSchemas.ts");
     });
@@ -91,7 +91,7 @@ describe("generateSchemaTypes", () => {
         {
           filenameCase: "camel",
           filenamePrefix: "petstore",
-        },
+        }
       );
       expect(writeFile.mock.calls[0][0]).toBe("petstoreSchemas.ts");
     });
@@ -111,7 +111,7 @@ describe("generateSchemaTypes", () => {
         {
           filenameCase: "camel",
           filenamePrefix: "",
-        },
+        }
       );
       expect(writeFile.mock.calls[0][0]).toBe("schemas.ts");
     });
@@ -130,7 +130,7 @@ describe("generateSchemaTypes", () => {
         },
         {
           filenameCase: "camel",
-        },
+        }
       );
       expect(writeFile.mock.calls[0][0]).toBe("swaggerPetstoreSchemas.ts");
       expect(writeFile.mock.calls[0][1]).toMatchInlineSnapshot(`
@@ -216,7 +216,7 @@ describe("generateSchemaTypes", () => {
         {
           filenameCase: "camel",
           useEnums: true,
-        },
+        }
       );
       expect(writeFile.mock.calls[0][0]).toBe("swaggerPetstoreSchemas.ts");
       expect(writeFile.mock.calls[0][1]).toMatchInlineSnapshot(`
@@ -313,7 +313,7 @@ describe("generateSchemaTypes", () => {
         },
         {
           filenameCase: "camel",
-        },
+        }
       );
       expect(writeFile.mock.calls[1][0]).toBe("swaggerPetstoreResponses.ts");
       expect(writeFile.mock.calls[1][1]).toMatchInlineSnapshot(`
@@ -345,10 +345,10 @@ describe("generateSchemaTypes", () => {
         },
         {
           filenameCase: "camel",
-        },
+        }
       );
       expect(writeFile.mock.calls[2][0]).toBe(
-        "swaggerPetstoreRequestBodies.ts",
+        "swaggerPetstoreRequestBodies.ts"
       );
       expect(writeFile.mock.calls[2][1]).toMatchInlineSnapshot(`
        "/**
@@ -378,7 +378,7 @@ describe("generateSchemaTypes", () => {
         },
         {
           filenameCase: "camel",
-        },
+        }
       );
       expect(writeFile.mock.calls[3][0]).toBe("swaggerPetstoreParameters.ts");
       expect(writeFile.mock.calls[3][1]).toMatchInlineSnapshot(`
@@ -413,7 +413,7 @@ describe("generateSchemaTypes", () => {
         {
           filenameCase: "camel",
           useEnums: true,
-        },
+        }
       );
       expect(writeFile.mock.calls[1][0]).toBe("swaggerPetstoreResponses.ts");
       expect(writeFile.mock.calls[1][1]).toMatchInlineSnapshot(`
@@ -449,10 +449,10 @@ describe("generateSchemaTypes", () => {
         {
           filenameCase: "camel",
           useEnums: true,
-        },
+        }
       );
       expect(writeFile.mock.calls[2][0]).toBe(
-        "swaggerPetstoreRequestBodies.ts",
+        "swaggerPetstoreRequestBodies.ts"
       );
       expect(writeFile.mock.calls[2][1]).toMatchInlineSnapshot(`
         "/**
@@ -486,7 +486,7 @@ describe("generateSchemaTypes", () => {
         {
           filenameCase: "camel",
           useEnums: true,
-        },
+        }
       );
       expect(writeFile.mock.calls[3][0]).toBe("swaggerPetstoreParameters.ts");
       expect(writeFile.mock.calls[3][1]).toMatchInlineSnapshot(`

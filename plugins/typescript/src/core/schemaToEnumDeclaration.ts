@@ -14,14 +14,14 @@ import { Context, getJSDocComment } from "./schemaToTypeAliasDeclaration";
 export const schemaToEnumDeclaration = (
   name: string,
   schema: SchemaObject,
-  context: Context,
+  context: Context
 ): ts.Node[] => {
   const jsDocNode = getJSDocComment(schema, context);
   const members = getEnumMembers(schema);
   const declarationNode = f.createEnumDeclaration(
     [f.createModifier(ts.SyntaxKind.ExportKeyword)],
     pascal(name),
-    members,
+    members
   );
 
   return jsDocNode ? [jsDocNode, declarationNode] : [declarationNode];
@@ -30,7 +30,7 @@ export const schemaToEnumDeclaration = (
 function getEnumMembers(schema: SchemaObject): ts.EnumMember[] {
   if (!schema.enum || !Array.isArray(schema.enum)) {
     throw new Error(
-      "The provided schema does not have an 'enum' property or it is not an array.",
+      "The provided schema does not have an 'enum' property or it is not an array."
     );
   }
 

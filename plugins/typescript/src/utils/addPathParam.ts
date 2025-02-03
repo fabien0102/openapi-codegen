@@ -45,7 +45,7 @@ export const addPathParam = ({
                 },
               ],
             }
-          : value,
+          : value
     ),
   };
 };

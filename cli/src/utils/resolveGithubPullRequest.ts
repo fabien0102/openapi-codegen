@@ -25,7 +25,7 @@ export async function resolveGithubPullRequest({
       headers: {
         authorization: `Bearer ${token}`,
       },
-    },
+    }
   );
 
   return {

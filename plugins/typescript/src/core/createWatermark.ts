@@ -12,6 +12,6 @@ export const createWatermark = (info: InfoObject) =>
     f.createJSDocPropertyTag(
       f.createIdentifier("version"),
       f.createIdentifier(info.version),
-      false,
+      false
     ),
   ]);

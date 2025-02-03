@@ -13,8 +13,8 @@ export const createNamespaceImport = (namespace: string, filename: string) =>
     f.createImportClause(
       true,
       undefined,
-      f.createNamespaceImport(f.createIdentifier(namespace)),
+      f.createNamespaceImport(f.createIdentifier(namespace))
     ),
     f.createStringLiteral(filename),
-    undefined,
+    undefined
   );

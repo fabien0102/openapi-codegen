@@ -6,6 +6,6 @@ declare module "swagger2openapi" {
   function convertObj(
     schema: unknown,
     options: Record<string, never>,
-    callback: (err: Error, data: ConverObjCallbackData) => void,
+    callback: (err: Error, data: ConverObjCallbackData) => void
   ): void;
 }

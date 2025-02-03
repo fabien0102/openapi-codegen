@@ -94,7 +94,7 @@ describe("getOpenAPISourceFile (source = file)", () => {
       assert.fail("Should throw an error");
     } catch (e) {
       expect(e).toMatchInlineSnapshot(
-        `[Error: "yolo" extension file is not supported!]`,
+        `[Error: "yolo" extension file is not supported!]`
       );
     }
   });

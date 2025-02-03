@@ -113,7 +113,7 @@ describe("getDataResponseType", () => {
     });
 
     expect(print(responseType)).toMatchInlineSnapshot(
-      `"Schemas.Pet[] | Schemas.Cat[]"`,
+      `"Schemas.Pet[] | Schemas.Cat[]"`
     );
   });
 

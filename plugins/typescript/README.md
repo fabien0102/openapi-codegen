@@ -97,7 +97,7 @@ export function usePetStoreContext<
   queryOptions?: Omit<
     UseQueryOptions<TQueryFnData, TError, TData, TQueryKey>,
     "queryKey" | "queryFn"
-  >,
+  >
 ): BadassContext {
   const token = window.localStorage.getItem("token");
 

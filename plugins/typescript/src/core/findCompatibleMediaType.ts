@@ -11,7 +11,7 @@ import {
  * @returns
  */
 export const findCompatibleMediaType = (
-  requestBodyOrResponseObject: RequestBodyObject | ResponseObject,
+  requestBodyOrResponseObject: RequestBodyObject | ResponseObject
 ): MediaTypeObject | undefined => {
   if (!requestBodyOrResponseObject.content) return;
   for (const contentType of Object.keys(requestBodyOrResponseObject.content)) {

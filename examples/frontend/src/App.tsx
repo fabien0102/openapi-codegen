@@ -23,7 +23,7 @@ function Users() {
     },
     {
       enabled: Boolean(query),
-    },
+    }
   );
 
   if (error) {

@@ -59,7 +59,7 @@ export const createOperationFetcherFnNodes = ({
                       f.createIdentifier("variables"),
                       undefined,
                       variablesType,
-                      undefined,
+                      undefined
                     ),
                     f.createParameterDeclaration(
                       undefined,
@@ -67,8 +67,8 @@ export const createOperationFetcherFnNodes = ({
                       f.createIdentifier("signal"),
                       f.createToken(ts.SyntaxKind.QuestionToken),
                       f.createTypeReferenceNode(
-                        f.createIdentifier("AbortSignal"),
-                      ),
+                        f.createIdentifier("AbortSignal")
+                      )
                     ),
                   ]
                 : [
@@ -78,8 +78,8 @@ export const createOperationFetcherFnNodes = ({
                       f.createIdentifier("signal"),
                       f.createToken(ts.SyntaxKind.QuestionToken),
                       f.createTypeReferenceNode(
-                        f.createIdentifier("AbortSignal"),
-                      ),
+                        f.createIdentifier("AbortSignal")
+                      )
                     ),
                   ],
               undefined,
@@ -99,37 +99,37 @@ export const createOperationFetcherFnNodes = ({
                     [
                       f.createPropertyAssignment(
                         f.createIdentifier("url"),
-                        f.createStringLiteral(camelizedPathParams(url)),
+                        f.createStringLiteral(camelizedPathParams(url))
                       ),
                       f.createPropertyAssignment(
                         f.createIdentifier("method"),
-                        f.createStringLiteral(verb),
+                        f.createStringLiteral(verb)
                       ),
                       ...(variablesType.kind !== ts.SyntaxKind.VoidKeyword
                         ? [
                             f.createSpreadAssignment(
-                              f.createIdentifier("variables"),
+                              f.createIdentifier("variables")
                             ),
                             f.createShorthandPropertyAssignment(
-                              f.createIdentifier("signal"),
+                              f.createIdentifier("signal")
                             ),
                           ]
                         : [
                             f.createShorthandPropertyAssignment(
-                              f.createIdentifier("signal"),
+                              f.createIdentifier("signal")
                             ),
                           ]),
                     ],
-                    false,
+                    false
                   ),
-                ],
-              ),
-            ),
+                ]
+              )
+            )
           ),
         ],
-        ts.NodeFlags.Const,
-      ),
-    ),
+        ts.NodeFlags.Const
+      )
+    )
   );
   return nodes;
 };

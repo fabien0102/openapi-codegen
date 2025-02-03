@@ -5,7 +5,7 @@ import nock from "nock";
 describe("getOpenAPISourceFile (source = url)", () => {
   it("should retrieve a json file specs", async () => {
     nock(
-      "https://github.com/fabien0102/openapi-codegen/blob/main/cli/examples/petstore.json",
+      "https://github.com/fabien0102/openapi-codegen/blob/main/cli/examples/petstore.json"
     )
       .get("")
       .replyWithFile(200, "cli/src/fixtures/spec.json");
@@ -47,7 +47,7 @@ describe("getOpenAPISourceFile (source = url)", () => {
 
   it("should guess the format with search params", async () => {
     nock(
-      "https://github.com/fabien0102/openapi-codegen/blob/main/cli/examples/petstore.yaml",
+      "https://github.com/fabien0102/openapi-codegen/blob/main/cli/examples/petstore.yaml"
     )
       .get("?key=secret")
       .replyWithFile(200, "cli/src/fixtures/spec.yaml");

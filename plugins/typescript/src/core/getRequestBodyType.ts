@@ -28,20 +28,20 @@ export const getRequestBodyType = ({
     const [hash, topLevel, namespace, name] = requestBody.$ref.split("/");
     if (hash !== "#" || topLevel !== "components") {
       throw new Error(
-        "This library only resolve $ref that are include into `#/components/*` for now",
+        "This library only resolve $ref that are include into `#/components/*` for now"
       );
     }
     if (namespace !== "requestBodies") {
       throw new Error(
-        "$ref for requestBody must be on `#/components/requestBodies`",
+        "$ref for requestBody must be on `#/components/requestBodies`"
       );
     }
     return f.createTypeReferenceNode(
       f.createQualifiedName(
         f.createIdentifier("RequestBodies"),
-        f.createIdentifier(pascal(name)),
+        f.createIdentifier(pascal(name))
       ),
-      undefined,
+      undefined
     );
   }
 
@@ -54,7 +54,7 @@ export const getRequestBodyType = ({
     const [hash, topLevel, namespace, name] = mediaType.$ref.split("/");
     if (hash !== "#" || topLevel !== "components") {
       throw new Error(
-        "This library only resolve $ref that are include into `#/components/*` for now",
+        "This library only resolve $ref that are include into `#/components/*` for now"
       );
     }
     if (namespace !== "schemas") {
@@ -64,9 +64,9 @@ export const getRequestBodyType = ({
     return f.createTypeReferenceNode(
       f.createQualifiedName(
         f.createIdentifier("Schemas"),
-        f.createIdentifier(pascal(name)),
+        f.createIdentifier(pascal(name))
       ),
-      undefined,
+      undefined
     );
   }
 

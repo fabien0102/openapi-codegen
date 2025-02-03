@@ -34,7 +34,7 @@ describe("generateReactQueryFunctions", () => {
         existsFile: () => false, // customFetcher is not there
         readFile: async () => "",
       },
-      config,
+      config
     );
 
     expect(writeFile.mock.calls[0][0]).toBe("petstoreFetcher.ts");
@@ -80,7 +80,7 @@ describe("generateReactQueryFunctions", () => {
         existsFile: () => true,
         readFile: async () => "",
       },
-      config,
+      config
     );
 
     expect(writeFile.mock.calls[0][0]).toBe("petstoreFunctions.ts");
@@ -200,7 +200,7 @@ describe("generateReactQueryFunctions", () => {
         existsFile: () => true,
         readFile: async () => "",
       },
-      config,
+      config
     );
 
     expect(writeFile.mock.calls[0][0]).toBe("petstoreFunctions.ts");
@@ -319,7 +319,7 @@ describe("generateReactQueryFunctions", () => {
         existsFile: () => true,
         readFile: async () => "",
       },
-      config,
+      config
     );
 
     expect(writeFile.mock.calls[0][0]).toBe("petstoreFunctions.ts");
@@ -448,7 +448,7 @@ describe("generateReactQueryFunctions", () => {
         existsFile: () => true,
         readFile: async () => "",
       },
-      { ...config, injectedHeaders: ["breed"] },
+      { ...config, injectedHeaders: ["breed"] }
     );
 
     expect(writeFile.mock.calls[0][0]).toBe("petstoreFunctions.ts");
@@ -573,7 +573,7 @@ describe("generateReactQueryFunctions", () => {
         existsFile: () => true,
         readFile: async () => "",
       },
-      config,
+      config
     );
 
     expect(writeFile.mock.calls[0][0]).toBe("petstoreFunctions.ts");
@@ -708,7 +708,7 @@ describe("generateReactQueryFunctions", () => {
         existsFile: () => true,
         readFile: async () => "",
       },
-      config,
+      config
     );
 
     expect(writeFile.mock.calls[0][0]).toBe("petstoreFunctions.ts");
@@ -813,7 +813,7 @@ describe("generateReactQueryFunctions", () => {
         existsFile: () => true,
         readFile: async () => "",
       },
-      config,
+      config
     );
 
     expect(writeFile.mock.calls[0][0]).toBe("petstoreFunctions.ts");
@@ -924,7 +924,7 @@ describe("generateReactQueryFunctions", () => {
         existsFile: () => true,
         readFile: async () => "",
       },
-      config,
+      config
     );
 
     expect(writeFile.mock.calls[0][0]).toBe("petstoreFunctions.ts");
@@ -1014,7 +1014,7 @@ describe("generateReactQueryFunctions", () => {
         existsFile: () => true,
         readFile: async () => "",
       },
-      config,
+      config
     );
 
     expect(writeFile.mock.calls[0][0]).toBe("petstoreFunctions.ts");
@@ -1104,7 +1104,7 @@ describe("generateReactQueryFunctions", () => {
         existsFile: () => true,
         readFile: async () => "",
       },
-      { ...config, filenamePrefix: "" },
+      { ...config, filenamePrefix: "" }
     );
 
     expect(writeFile.mock.calls[0][0]).toBe("functions.ts");
@@ -1178,7 +1178,7 @@ describe("generateReactQueryFunctions", () => {
         existsFile: () => true,
         readFile: async () => "",
       },
-      config,
+      config
     );
 
     expect(writeFile.mock.calls[0][0]).toBe("petstoreUtils.ts");
@@ -1277,7 +1277,7 @@ describe("generateReactQueryFunctions", () => {
         existsFile: () => true,
         readFile: async () => "",
       },
-      config,
+      config
     );
 
     expect(writeFile.mock.calls[0][0]).toBe("petstoreFunctions.ts");

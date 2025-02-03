@@ -15,7 +15,7 @@ import {
  */
 export const getReferenceSchema = (
   $ref: string,
-  openAPIDocument: Pick<OpenAPIObject, "components">,
+  openAPIDocument: Pick<OpenAPIObject, "components">
 ): SchemaObject => {
   const [hash, ...refPath] = $ref.split("/");
   if (hash !== "#") {
@@ -36,7 +36,7 @@ export const getReferenceSchema = (
   const referenceSchema = get(
     openAPIDocument,
     refPath.join("."),
-    defaultDirectSearch,
+    defaultDirectSearch
   );
 
   // if neither ref path nor direct search find the schema then throw that the ref cant be found

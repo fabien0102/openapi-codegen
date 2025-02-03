@@ -44,11 +44,11 @@ export function updateConfig({
     {
       toInsert: new Map<string, string[]>(),
       toUpdate: new Map<string, string[]>(),
-    },
+    }
   );
 
   const addImportsAndConfigProperty: ts.TransformerFactory<ts.SourceFile> = (
-    context,
+    context
   ) => {
     const visit = (node: ts.Node): ts.Node => {
       node = ts.visitEachChild(node, visit, context);
@@ -58,7 +58,7 @@ export function updateConfig({
         toUpdate.has(getText(node.moduleSpecifier))
       ) {
         const importClauseNames: string[] = toUpdate.get(
-          getText(node.moduleSpecifier),
+          getText(node.moduleSpecifier)
         )!;
         node.importClause?.namedBindings?.forEachChild((child) => {
           if (
@@ -76,15 +76,11 @@ export function updateConfig({
             undefined,
             f.createNamedImports(
               importClauseNames.map((i) =>
-                f.createImportSpecifier(
-                  false,
-                  undefined,
-                  f.createIdentifier(i),
-                ),
-              ),
-            ),
+                f.createImportSpecifier(false, undefined, f.createIdentifier(i))
+              )
+            )
           ),
-          node.moduleSpecifier,
+          node.moduleSpecifier
         );
       }
 
@@ -95,7 +91,7 @@ export function updateConfig({
         node.expression.expression.escapedText === "defineConfig"
       ) {
         const prevProperties = ts.isObjectLiteralExpression(
-          node.expression.arguments[0],
+          node.expression.arguments[0]
         )
           ? node.expression.arguments[0].properties
           : [];
@@ -110,10 +106,10 @@ export function updateConfig({
             [
               f.createObjectLiteralExpression(
                 [...prevProperties, configProperty],
-                true,
+                true
               ),
-            ],
-          ),
+            ]
+          )
         );
       }
 
@@ -135,7 +131,7 @@ export function updateConfig({
   return ts.createSourceFile(
     "index.ts",
     createImportStatements(toInsert) + printer.printFile(sourceFileWithImports),
-    ts.ScriptTarget.ESNext,
+    ts.ScriptTarget.ESNext
   );
 }
 
@@ -145,7 +141,7 @@ function createImportStatements(imports: Map<string, string[]>) {
   const sourceFile = ts.createSourceFile(
     "index.ts",
     "",
-    ts.ScriptTarget.ESNext,
+    ts.ScriptTarget.ESNext
   );
   const printer = ts.createPrinter({
     newLine: ts.NewLineKind.LineFeed,
@@ -164,19 +160,19 @@ function createImportStatements(imports: Map<string, string[]>) {
               f.createImportSpecifier(
                 false,
                 undefined,
-                f.createIdentifier(name),
-              ),
-            ),
-          ),
+                f.createIdentifier(name)
+              )
+            )
+          )
         ),
         f.createStringLiteral(module),
-        undefined,
-      ),
+        undefined
+      )
   );
 
   return statements
     .map((statement) =>
-      printer.printNode(ts.EmitHint.Unspecified, statement, sourceFile),
+      printer.printNode(ts.EmitHint.Unspecified, statement, sourceFile)
     )
     .join("\n");
 }

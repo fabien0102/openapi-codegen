@@ -6,7 +6,7 @@ import { OperationObject } from "openapi3-ts";
  * @param obj
  */
 export const isOperationObject = (
-  obj: unknown,
+  obj: unknown
 ): obj is OperationObject & { operationId: string } =>
   typeof obj === "object" &&
   obj !== null &&

@@ -40,19 +40,19 @@ export function generateConfigProperty({
                         Object.entries(value).map(([k, v]) =>
                           factory.createPropertyAssignment(
                             factory.createIdentifier(k),
-                            factory.createStringLiteral(v),
-                          ),
-                        ),
-                      ),
+                            factory.createStringLiteral(v)
+                          )
+                        )
+                      )
                 ),
-              true,
+              true
             ),
-            true,
-          ),
+            true
+          )
         ),
         factory.createPropertyAssignment(
           factory.createIdentifier("outputDir"),
-          factory.createStringLiteral(options.outputDir),
+          factory.createStringLiteral(options.outputDir)
         ),
         factory.createPropertyAssignment(
           factory.createIdentifier("to"),
@@ -66,26 +66,26 @@ export function generateConfigProperty({
                 factory.createIdentifier("context"),
                 undefined,
                 undefined,
-                undefined,
+                undefined
               ),
             ],
             undefined,
             factory.createToken(ts.SyntaxKind.EqualsGreaterThanToken),
             factory.createBlock(
               getToFunctionStatements(options.plugin, namespace),
-              true,
-            ),
-          ),
+              true
+            )
+          )
         ),
       ],
-      true,
-    ),
+      true
+    )
   );
 }
 
 function getToFunctionStatements(
   plugin: Plugin,
-  namespace: string,
+  namespace: string
 ): ts.Statement[] {
   switch (plugin) {
     case "typescript/types-only":
@@ -101,14 +101,14 @@ function getToFunctionStatements(
                   [
                     factory.createPropertyAssignment(
                       factory.createIdentifier("filenamePrefix"),
-                      factory.createStringLiteral(namespace),
+                      factory.createStringLiteral(namespace)
                     ),
                   ],
-                  true,
+                  true
                 ),
-              ],
-            ),
-          ),
+              ]
+            )
+          )
         ),
       ];
     case "typescript/fetch":
@@ -121,14 +121,14 @@ function getToFunctionStatements(
                 factory.createIdentifier("filenamePrefix"),
                 undefined,
                 undefined,
-                factory.createStringLiteral(namespace),
+                factory.createStringLiteral(namespace)
               ),
             ],
             ts.NodeFlags.Const |
               ts.NodeFlags.AwaitContext |
               ts.NodeFlags.ContextFlags |
-              ts.NodeFlags.TypeExcludesFlags,
-          ),
+              ts.NodeFlags.TypeExcludesFlags
+          )
         ),
         factory.createVariableStatement(
           undefined,
@@ -140,7 +140,7 @@ function getToFunctionStatements(
                     undefined,
                     undefined,
                     factory.createIdentifier("schemasFiles"),
-                    undefined,
+                    undefined
                   ),
                 ]),
                 undefined,
@@ -155,21 +155,21 @@ function getToFunctionStatements(
                         [
                           factory.createShorthandPropertyAssignment(
                             factory.createIdentifier("filenamePrefix"),
-                            undefined,
+                            undefined
                           ),
                         ],
-                        true,
+                        true
                       ),
-                    ],
-                  ),
-                ),
+                    ]
+                  )
+                )
               ),
             ],
             ts.NodeFlags.Const |
               ts.NodeFlags.AwaitContext |
               ts.NodeFlags.ContextFlags |
-              ts.NodeFlags.TypeExcludesFlags,
-          ),
+              ts.NodeFlags.TypeExcludesFlags
+          )
         ),
         factory.createExpressionStatement(
           factory.createAwaitExpression(
@@ -182,18 +182,18 @@ function getToFunctionStatements(
                   [
                     factory.createShorthandPropertyAssignment(
                       factory.createIdentifier("filenamePrefix"),
-                      undefined,
+                      undefined
                     ),
                     factory.createShorthandPropertyAssignment(
                       factory.createIdentifier("schemasFiles"),
-                      undefined,
+                      undefined
                     ),
                   ],
-                  true,
+                  true
                 ),
-              ],
-            ),
-          ),
+              ]
+            )
+          )
         ),
       ];
     case "typescript/react-query":
@@ -206,14 +206,14 @@ function getToFunctionStatements(
                 factory.createIdentifier("filenamePrefix"),
                 undefined,
                 undefined,
-                factory.createStringLiteral(namespace),
+                factory.createStringLiteral(namespace)
               ),
             ],
             ts.NodeFlags.Const |
               ts.NodeFlags.AwaitContext |
               ts.NodeFlags.ContextFlags |
-              ts.NodeFlags.TypeExcludesFlags,
-          ),
+              ts.NodeFlags.TypeExcludesFlags
+          )
         ),
         factory.createVariableStatement(
           undefined,
@@ -225,7 +225,7 @@ function getToFunctionStatements(
                     undefined,
                     undefined,
                     factory.createIdentifier("schemasFiles"),
-                    undefined,
+                    undefined
                   ),
                 ]),
                 undefined,
@@ -240,21 +240,21 @@ function getToFunctionStatements(
                         [
                           factory.createShorthandPropertyAssignment(
                             factory.createIdentifier("filenamePrefix"),
-                            undefined,
+                            undefined
                           ),
                         ],
-                        true,
+                        true
                       ),
-                    ],
-                  ),
-                ),
+                    ]
+                  )
+                )
               ),
             ],
             ts.NodeFlags.Const |
               ts.NodeFlags.AwaitContext |
               ts.NodeFlags.ContextFlags |
-              ts.NodeFlags.TypeExcludesFlags,
-          ),
+              ts.NodeFlags.TypeExcludesFlags
+          )
         ),
         factory.createExpressionStatement(
           factory.createAwaitExpression(
@@ -267,18 +267,18 @@ function getToFunctionStatements(
                   [
                     factory.createShorthandPropertyAssignment(
                       factory.createIdentifier("filenamePrefix"),
-                      undefined,
+                      undefined
                     ),
                     factory.createShorthandPropertyAssignment(
                       factory.createIdentifier("schemasFiles"),
-                      undefined,
+                      undefined
                     ),
                   ],
-                  true,
+                  true
                 ),
-              ],
-            ),
-          ),
+              ]
+            )
+          )
         ),
       ];
   }

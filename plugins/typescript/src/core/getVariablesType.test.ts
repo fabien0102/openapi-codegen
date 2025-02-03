@@ -160,8 +160,8 @@ const createType = (namespace: string, name: string) =>
   f.createTypeReferenceNode(
     f.createQualifiedName(
       f.createIdentifier(namespace),
-      f.createIdentifier(name),
-    ),
+      f.createIdentifier(name)
+    )
   );
 
 const undefinedType = f.createKeywordTypeNode(ts.SyntaxKind.UndefinedKeyword);

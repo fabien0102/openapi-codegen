@@ -31,7 +31,7 @@ describe("getOperationTypes", () => {
       openAPIDocument: petstore,
       printNodes: () => "",
       variablesExtraPropsType: factory.createKeywordTypeNode(
-        ts.SyntaxKind.VoidKeyword,
+        ts.SyntaxKind.VoidKeyword
       ),
     });
 
@@ -47,7 +47,7 @@ describe("getOperationTypes", () => {
       operationId: "listPet",
       operation: omit(
         petstore.paths["/pets"].get,
-        "parameters",
+        "parameters"
       ) as OperationObject,
       openAPIDocument: petstore,
       printNodes: () => "",
@@ -55,7 +55,7 @@ describe("getOperationTypes", () => {
     });
 
     expect(print(output.declarationNodes[2])).toMatchInlineSnapshot(
-      `"export type ListPetVariables = ExtraProps;"`,
+      `"export type ListPetVariables = ExtraProps;"`
     );
   });
 
@@ -64,12 +64,12 @@ describe("getOperationTypes", () => {
       operationId: "listPet",
       operation: omit(
         petstore.paths["/pets"].get,
-        "parameters",
+        "parameters"
       ) as OperationObject,
       openAPIDocument: petstore,
       printNodes: () => "",
       variablesExtraPropsType: factory.createKeywordTypeNode(
-        ts.SyntaxKind.VoidKeyword,
+        ts.SyntaxKind.VoidKeyword
       ),
     });
 

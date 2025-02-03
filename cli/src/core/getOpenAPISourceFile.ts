@@ -16,13 +16,13 @@ import { handlePromptCancel } from "../utils/handlePromptCancel";
  * @param options
  */
 export const getOpenAPISourceFile = async (
-  options: FromOptions,
+  options: FromOptions
 ): Promise<OpenAPISourceFile> => {
   switch (options.source) {
     case "file": {
       const text = readFileSync(
         join(process.cwd(), options.relativePath),
-        "utf-8",
+        "utf-8"
       );
       const { ext } = parse(options.relativePath);
       const format = getFormat(ext);
@@ -62,7 +62,7 @@ export const getOpenAPISourceFile = async (
               "user-agent": "openapi-codegen",
               authorization: `bearer ${token}`,
             },
-          },
+          }
         ).json<{
           content: string;
           encoding: string | null;
@@ -75,7 +75,7 @@ export const getOpenAPISourceFile = async (
         const encoding: BufferEncoding =
           (raw.encoding as BufferEncoding) || "base64";
         const textContent = Buffer.from(raw.content, encoding).toString(
-          "utf-8",
+          "utf-8"
         );
 
         let format: OpenAPISourceFile["format"] = "yaml";

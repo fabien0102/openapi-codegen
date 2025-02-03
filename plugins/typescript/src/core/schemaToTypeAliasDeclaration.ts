@@ -50,7 +50,7 @@ export const schemaToTypeAliasDeclaration = (
   name: string,
   schema: SchemaObject,
   context: Context,
-  useEnums?: boolean,
+  useEnums?: boolean
 ): ts.Node[] => {
   useEnumsConfigBase = useEnums;
   const jsDocNode = getJSDocComment(schema, context);
@@ -58,7 +58,7 @@ export const schemaToTypeAliasDeclaration = (
     [f.createModifier(ts.SyntaxKind.ExportKeyword)],
     pascal(name),
     undefined,
-    getType(schema, context, name),
+    getType(schema, context, name)
   );
 
   return jsDocNode ? [jsDocNode, declarationNode] : [declarationNode];
@@ -74,13 +74,13 @@ export const getType = (
   schema: SchemaObject | ReferenceObject,
   context: Context,
   name?: string,
-  isNodeEnum?: boolean,
+  isNodeEnum?: boolean
 ): ts.TypeNode => {
   if (isReferenceObject(schema)) {
     const [hash, topLevel, namespace, name] = schema.$ref.split("/");
     if (hash !== "#" || topLevel !== "components") {
       throw new Error(
-        "This library only resolve $ref that are include into `#/components/*` for now",
+        "This library only resolve $ref that are include into `#/components/*` for now"
       );
     }
     if (namespace === context.currentComponent) {
@@ -90,8 +90,8 @@ export const getType = (
     return f.createTypeReferenceNode(
       f.createQualifiedName(
         f.createIdentifier(pascal(namespace)),
-        f.createIdentifier(pascal(name)),
-      ),
+        f.createIdentifier(pascal(name))
+      )
     );
   }
 
@@ -106,8 +106,8 @@ export const getType = (
           getType({ ...omit(schema, ["oneOf", "nullable"]), ...i }, context),
           i,
           schema.discriminator,
-          context,
-        ),
+          context
+        )
       ),
       ...(schema.nullable ? [f.createLiteralTypeNode(f.createNull())] : []),
     ]);
@@ -120,8 +120,8 @@ export const getType = (
           getType({ ...omit(schema, ["anyOf", "nullable"]), ...i }, context),
           i,
           schema.discriminator,
-          context,
-        ),
+          context
+        )
       ),
       ...(schema.nullable ? [f.createLiteralTypeNode(f.createNull())] : []),
     ]);
@@ -168,7 +168,7 @@ export const getType = (
         }
         if (typeof value === "boolean") {
           return f.createLiteralTypeNode(
-            value ? f.createTrue() : f.createFalse(),
+            value ? f.createTrue() : f.createFalse()
           );
         }
         return f.createKeywordTypeNode(ts.SyntaxKind.AnyKeyword);
@@ -196,7 +196,7 @@ export const getType = (
     case "number":
       return withNullable(
         f.createKeywordTypeNode(ts.SyntaxKind.NumberKeyword),
-        schema.nullable,
+        schema.nullable
       );
     case "string": {
       if (schema.format === "binary") {
@@ -204,13 +204,13 @@ export const getType = (
       }
       return withNullable(
         f.createKeywordTypeNode(ts.SyntaxKind.StringKeyword),
-        schema.nullable,
+        schema.nullable
       );
     }
     case "boolean": {
       return withNullable(
         f.createKeywordTypeNode(ts.SyntaxKind.BooleanKeyword),
-        schema.nullable,
+        schema.nullable
       );
     }
     case "object": {
@@ -227,12 +227,12 @@ export const getType = (
             f.createKeywordTypeNode(ts.SyntaxKind.StringKeyword),
             f.createKeywordTypeNode(ts.SyntaxKind.AnyKeyword),
           ]),
-          schema.nullable,
+          schema.nullable
         );
       }
 
       const members: ts.TypeElement[] = Object.entries(
-        schema.properties || {},
+        schema.properties || {}
       ).map(([key, property]) => {
         const isEnum =
           typeof property === "object" &&
@@ -251,8 +251,8 @@ export const getType = (
             property,
             context,
             `${name}${pascal(key)}`.replace(/[^a-zA-Z0-9 ]/g, ""),
-            isEnum,
-          ),
+            isEnum
+          )
         );
         const jsDocNode = getJSDocComment(property, context);
         if (jsDocNode) addJSDocToNode(propertyNode, jsDocNode);
@@ -270,7 +270,7 @@ export const getType = (
                 f.createTypeLiteralNode([additionalPropertiesNode]),
               ])
             : f.createTypeLiteralNode([additionalPropertiesNode]),
-          schema.nullable,
+          schema.nullable
         );
       }
 
@@ -281,15 +281,15 @@ export const getType = (
         f.createArrayTypeNode(
           !schema.items || Object.keys(schema.items).length === 0
             ? f.createKeywordTypeNode(ts.SyntaxKind.AnyKeyword)
-            : getType(schema.items, context),
+            : getType(schema.items, context)
         ),
-        schema.nullable,
+        schema.nullable
       );
     }
     default:
       return withNullable(
         f.createKeywordTypeNode(ts.SyntaxKind.VoidKeyword),
-        schema.nullable,
+        schema.nullable
       );
   }
 };
@@ -303,7 +303,7 @@ export const getType = (
  */
 const withNullable = (
   node: ts.TypeNode,
-  nullable: boolean | undefined,
+  nullable: boolean | undefined
 ): ts.TypeNode => {
   return nullable
     ? f.createUnionTypeNode([node, f.createLiteralTypeNode(f.createNull())])
@@ -321,7 +321,7 @@ const withDiscriminator = (
   node: ts.TypeNode,
   schema: SchemaObject | ReferenceObject,
   discriminator: DiscriminatorObject | undefined,
-  context: Context,
+  context: Context
 ): ts.TypeNode => {
   if (!discriminator || !discriminator.propertyName || !discriminator.mapping) {
     return node;
@@ -329,7 +329,7 @@ const withDiscriminator = (
 
   const discriminatedValue = findKey(
     discriminator.mapping,
-    (i) => i === schema.$ref,
+    (i) => i === schema.$ref
   );
   if (discriminatedValue) {
     const propertyNameAsLiteral = f.createTypeLiteralNode([
@@ -337,13 +337,13 @@ const withDiscriminator = (
         undefined,
         f.createIdentifier(discriminator.propertyName),
         undefined,
-        f.createLiteralTypeNode(f.createStringLiteral(discriminatedValue)),
+        f.createLiteralTypeNode(f.createStringLiteral(discriminatedValue))
       ),
     ]);
 
     const spec = get<SchemaObject | ReferenceObject>(
       context.openAPIDocument,
-      schema.$ref.slice(2).replace(/\//g, "."),
+      schema.$ref.slice(2).replace(/\//g, ".")
     );
     if (spec && isSchemaObject(spec) && spec.properties) {
       const property = spec.properties[discriminator.propertyName];
@@ -366,9 +366,9 @@ const withDiscriminator = (
       [
         node,
         f.createLiteralTypeNode(
-          f.createStringLiteral(discriminator.propertyName),
+          f.createStringLiteral(discriminator.propertyName)
         ),
-      ],
+      ]
     );
 
     return f.createIntersectionTypeNode([
@@ -385,7 +385,7 @@ const withDiscriminator = (
  */
 const getAllOf = (
   members: Required<SchemaObject>["allOf"],
-  context: Context,
+  context: Context
 ): ts.TypeNode => {
   const initialValue = {
     isSchemaObjectOnly: true,
@@ -411,7 +411,7 @@ const getAllOf = (
     if (isSchemaObject(member)) {
       const { mergedSchema, isColliding } = mergeSchemas(
         acc.mergedSchema,
-        member,
+        member
       );
 
       return {
@@ -429,11 +429,11 @@ const getAllOf = (
     if (isReferenceObject(member)) {
       const referenceSchema = getReferenceSchema(
         member.$ref,
-        context.openAPIDocument,
+        context.openAPIDocument
       );
       const { mergedSchema, isColliding } = mergeSchemas(
         acc.mergedSchema,
-        referenceSchema,
+        referenceSchema
       );
 
       return {
@@ -472,7 +472,7 @@ const getAllOf = (
  */
 const mergeSchemas = (
   a: SchemaObject,
-  b: SchemaObject,
+  b: SchemaObject
 ): { mergedSchema: SchemaObject; isColliding: boolean } => {
   if (Boolean(a.type) && Boolean(b.type) && a.type !== b.type) {
     return {
@@ -516,7 +516,7 @@ const mergeSchemas = (
 
         return { ...mergedProperties, [key]: propertyA };
       },
-      {} as typeof a.properties,
+      {} as typeof a.properties
     );
 
     return {
@@ -578,7 +578,7 @@ const keysToExpressAsJsDocProperty: string[] = [
  */
 export const getJSDocComment = (
   schema: SchemaObject,
-  context: Context,
+  context: Context
 ): ts.JSDoc | undefined => {
   // `allOf` can add some documentation to the schema, let’s merge all items as first step
   const schemaWithAllOfResolved = schema.allOf
@@ -586,7 +586,7 @@ export const getJSDocComment = (
         if (isReferenceObject(allOfItem)) {
           const referenceSchema = getReferenceSchema(
             allOfItem.$ref,
-            context.openAPIDocument,
+            context.openAPIDocument
           );
           return mergeSchemas(mem, referenceSchema).mergedSchema;
         } else {
@@ -623,7 +623,7 @@ export const getJSDocComment = (
     .filter(
       ([key, value]) =>
         keysToExpressAsJsDocProperty.includes(key) ||
-        (/^x-/.exec(key) && typeof value !== "object"),
+        (/^x-/.exec(key) && typeof value !== "object")
     )
     .forEach(([key, value]) => {
       if (Array.isArray(value)) {
@@ -632,17 +632,17 @@ export const getJSDocComment = (
             f.createJSDocPropertyTag(
               f.createIdentifier(singular(key)),
               getJsDocIdentifier(v),
-              false,
-            ),
-          ),
+              false
+            )
+          )
         );
       } else if (typeof value !== "undefined") {
         propertyTags.push(
           f.createJSDocPropertyTag(
             f.createIdentifier(key),
             getJsDocIdentifier(value),
-            false,
-          ),
+            false
+          )
         );
       }
     });
@@ -651,7 +651,7 @@ export const getJSDocComment = (
   if (description || propertyTags.length > 0) {
     return f.createJSDocComment(
       description ? description + (propertyTags.length ? "\n" : "") : undefined,
-      propertyTags,
+      propertyTags
     );
   }
   return undefined;
@@ -689,7 +689,7 @@ const addJSDocToNode = (node: ts.Node, jsDocComment: ts.JSDoc) => {
   const sourceFile = ts.createSourceFile(
     "index.ts",
     "",
-    ts.ScriptTarget.Latest,
+    ts.ScriptTarget.Latest
   );
 
   const printer = ts.createPrinter({
@@ -706,7 +706,7 @@ const addJSDocToNode = (node: ts.Node, jsDocComment: ts.JSDoc) => {
     node,
     ts.SyntaxKind.MultiLineCommentTrivia,
     "*" + jsDocString, // https://github.com/microsoft/TypeScript/issues/17146
-    true,
+    true
   );
 };
 
@@ -719,7 +719,7 @@ const addJSDocToNode = (node: ts.Node, jsDocComment: ts.JSDoc) => {
  */
 const getAdditionalProperties = (
   schema: SchemaObject,
-  context: Context,
+  context: Context
 ): ts.IndexSignatureDeclaration | undefined => {
   if (!schema.additionalProperties) return undefined;
 
@@ -732,12 +732,12 @@ const getAdditionalProperties = (
         f.createIdentifier("key"),
         undefined,
         f.createKeywordTypeNode(ts.SyntaxKind.StringKeyword),
-        undefined,
+        undefined
       ),
     ],
     schema.additionalProperties === true ||
       Object.keys(schema.additionalProperties).length === 0
       ? f.createKeywordTypeNode(ts.SyntaxKind.AnyKeyword)
-      : getType(schema.additionalProperties, context),
+      : getType(schema.additionalProperties, context)
   );
 };

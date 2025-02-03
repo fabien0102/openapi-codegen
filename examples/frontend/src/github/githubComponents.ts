@@ -19,7 +19,7 @@ export type MetaRootVariables = GithubContext["fetcherOptions"];
  */
 export const fetchMetaRoot = (
   variables: MetaRootVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<Schemas.Root, MetaRootError, undefined, {}, {}, {}>({
     url: "/",
@@ -32,7 +32,7 @@ export const fetchMetaRoot = (
  * Get Hypermedia links to resources accessible in GitHub's REST API
  */
 export const metaRootQuery = (
-  variables: MetaRootVariables,
+  variables: MetaRootVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({ signal }: { signal?: AbortSignal }) => Promise<Schemas.Root>;
@@ -54,7 +54,7 @@ export const useSuspenseMetaRoot = <TData = Schemas.Root>(
   options?: Omit<
     reactQuery.UseQueryOptions<Schemas.Root, MetaRootError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<Schemas.Root, MetaRootError, TData>({
@@ -72,7 +72,7 @@ export const useMetaRoot = <TData = Schemas.Root>(
   options?: Omit<
     reactQuery.UseQueryOptions<Schemas.Root, MetaRootError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.Root, MetaRootError, TData>({
@@ -93,7 +93,7 @@ export type AppsGetAuthenticatedVariables = GithubContext["fetcherOptions"];
  */
 export const fetchAppsGetAuthenticated = (
   variables: AppsGetAuthenticatedVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.Integration,
@@ -110,7 +110,7 @@ export const fetchAppsGetAuthenticated = (
  * You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint.
  */
 export const appsGetAuthenticatedQuery = (
-  variables: AppsGetAuthenticatedVariables,
+  variables: AppsGetAuthenticatedVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -142,7 +142,7 @@ export const useSuspenseAppsGetAuthenticated = <TData = Schemas.Integration>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -170,7 +170,7 @@ export const useAppsGetAuthenticated = <TData = Schemas.Integration>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -303,7 +303,7 @@ export type AppsCreateFromManifestVariables = {
  */
 export const fetchAppsCreateFromManifest = (
   variables: AppsCreateFromManifestVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     AppsCreateFromManifestResponse,
@@ -330,7 +330,7 @@ export const useAppsCreateFromManifest = (
       AppsCreateFromManifestVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -356,7 +356,7 @@ export type AppsGetWebhookConfigForAppVariables =
  */
 export const fetchAppsGetWebhookConfigForApp = (
   variables: AppsGetWebhookConfigForAppVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.WebhookConfig,
@@ -373,7 +373,7 @@ export const fetchAppsGetWebhookConfigForApp = (
  * You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint.
  */
 export const appsGetWebhookConfigForAppQuery = (
-  variables: AppsGetWebhookConfigForAppVariables,
+  variables: AppsGetWebhookConfigForAppVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -407,7 +407,7 @@ export const useSuspenseAppsGetWebhookConfigForApp = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -435,7 +435,7 @@ export const useAppsGetWebhookConfigForApp = <TData = Schemas.WebhookConfig>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -470,7 +470,7 @@ export type AppsUpdateWebhookConfigForAppVariables = {
  */
 export const fetchAppsUpdateWebhookConfigForApp = (
   variables: AppsUpdateWebhookConfigForAppVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.WebhookConfig,
@@ -494,7 +494,7 @@ export const useAppsUpdateWebhookConfigForApp = (
       AppsUpdateWebhookConfigForAppVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -546,7 +546,7 @@ export type AppsListWebhookDeliveriesVariables = {
  */
 export const fetchAppsListWebhookDeliveries = (
   variables: AppsListWebhookDeliveriesVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     AppsListWebhookDeliveriesResponse,
@@ -563,7 +563,7 @@ export const fetchAppsListWebhookDeliveries = (
  * You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint.
  */
 export const appsListWebhookDeliveriesQuery = (
-  variables: AppsListWebhookDeliveriesVariables,
+  variables: AppsListWebhookDeliveriesVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -597,7 +597,7 @@ export const useSuspenseAppsListWebhookDeliveries = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -627,7 +627,7 @@ export const useAppsListWebhookDeliveries = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -667,7 +667,7 @@ export type AppsGetWebhookDeliveryVariables = {
  */
 export const fetchAppsGetWebhookDelivery = (
   variables: AppsGetWebhookDeliveryVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.HookDelivery,
@@ -689,7 +689,7 @@ export const fetchAppsGetWebhookDelivery = (
  * You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint.
  */
 export const appsGetWebhookDeliveryQuery = (
-  variables: AppsGetWebhookDeliveryVariables,
+  variables: AppsGetWebhookDeliveryVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -721,7 +721,7 @@ export const useSuspenseAppsGetWebhookDelivery = <TData = Schemas.HookDelivery>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -749,7 +749,7 @@ export const useAppsGetWebhookDelivery = <TData = Schemas.HookDelivery>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -789,7 +789,7 @@ export type AppsRedeliverWebhookDeliveryVariables = {
  */
 export const fetchAppsRedeliverWebhookDelivery = (
   variables: AppsRedeliverWebhookDeliveryVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Responses.Accepted,
@@ -818,7 +818,7 @@ export const useAppsRedeliverWebhookDelivery = (
       AppsRedeliverWebhookDeliveryVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -869,7 +869,7 @@ export type AppsListInstallationsVariables = {
  */
 export const fetchAppsListInstallations = (
   variables: AppsListInstallationsVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     AppsListInstallationsResponse,
@@ -886,7 +886,7 @@ export const fetchAppsListInstallations = (
  * The permissions the installation has are included under the `permissions` key.
  */
 export const appsListInstallationsQuery = (
-  variables: AppsListInstallationsVariables,
+  variables: AppsListInstallationsVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -920,7 +920,7 @@ export const useSuspenseAppsListInstallations = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -948,7 +948,7 @@ export const useAppsListInstallations = <TData = AppsListInstallationsResponse>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -985,7 +985,7 @@ export type AppsDeleteInstallationVariables = {
  */
 export const fetchAppsDeleteInstallation = (
   variables: AppsDeleteInstallationVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -1014,7 +1014,7 @@ export const useAppsDeleteInstallation = (
       AppsDeleteInstallationVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -1051,7 +1051,7 @@ export type AppsGetInstallationVariables = {
  */
 export const fetchAppsGetInstallation = (
   variables: AppsGetInstallationVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.Installation,
@@ -1073,7 +1073,7 @@ export const fetchAppsGetInstallation = (
  * You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint.
  */
 export const appsGetInstallationQuery = (
-  variables: AppsGetInstallationVariables,
+  variables: AppsGetInstallationVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -1105,7 +1105,7 @@ export const useSuspenseAppsGetInstallation = <TData = Schemas.Installation>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -1133,7 +1133,7 @@ export const useAppsGetInstallation = <TData = Schemas.Installation>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -1199,7 +1199,7 @@ export type AppsCreateInstallationAccessTokenVariables = {
  */
 export const fetchAppsCreateInstallationAccessToken = (
   variables: AppsCreateInstallationAccessTokenVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.InstallationToken,
@@ -1228,7 +1228,7 @@ export const useAppsCreateInstallationAccessToken = (
       AppsCreateInstallationAccessTokenVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -1268,7 +1268,7 @@ export type AppsUnsuspendInstallationVariables = {
  */
 export const fetchAppsUnsuspendInstallation = (
   variables: AppsUnsuspendInstallationVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -1297,7 +1297,7 @@ export const useAppsUnsuspendInstallation = (
       AppsUnsuspendInstallationVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -1334,7 +1334,7 @@ export type AppsSuspendInstallationVariables = {
  */
 export const fetchAppsSuspendInstallation = (
   variables: AppsSuspendInstallationVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -1363,7 +1363,7 @@ export const useAppsSuspendInstallation = (
       AppsSuspendInstallationVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -1407,7 +1407,7 @@ export type AppsDeleteAuthorizationVariables = {
  */
 export const fetchAppsDeleteAuthorization = (
   variables: AppsDeleteAuthorizationVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -1435,7 +1435,7 @@ export const useAppsDeleteAuthorization = (
       AppsDeleteAuthorizationVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -1478,7 +1478,7 @@ export type AppsDeleteTokenVariables = {
  */
 export const fetchAppsDeleteToken = (
   variables: AppsDeleteTokenVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -1505,7 +1505,7 @@ export const useAppsDeleteToken = (
       AppsDeleteTokenVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -1548,7 +1548,7 @@ export type AppsResetTokenVariables = {
  */
 export const fetchAppsResetToken = (
   variables: AppsResetTokenVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.Authorization,
@@ -1575,7 +1575,7 @@ export const useAppsResetToken = (
       AppsResetTokenVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -1624,7 +1624,7 @@ export type AppsCheckTokenVariables = {
  */
 export const fetchAppsCheckToken = (
   variables: AppsCheckTokenVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.Authorization,
@@ -1651,7 +1651,7 @@ export const useAppsCheckToken = (
       AppsCheckTokenVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -1733,7 +1733,7 @@ export type AppsScopeTokenVariables = {
  */
 export const fetchAppsScopeToken = (
   variables: AppsScopeTokenVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.Authorization,
@@ -1760,7 +1760,7 @@ export const useAppsScopeToken = (
       AppsScopeTokenVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -1800,7 +1800,7 @@ export type AppsGetBySlugVariables = {
  */
 export const fetchAppsGetBySlug = (
   variables: AppsGetBySlugVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.Integration,
@@ -1817,7 +1817,7 @@ export const fetchAppsGetBySlug = (
  * If the GitHub App you specify is public, you can access this endpoint without authenticating. If the GitHub App you specify is private, you must authenticate with a [personal access token](https://docs.github.com/articles/creating-a-personal-access-token-for-the-command-line/) or an [installation access token](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-an-installation) to access this endpoint.
  */
 export const appsGetBySlugQuery = (
-  variables: AppsGetBySlugVariables,
+  variables: AppsGetBySlugVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -1845,7 +1845,7 @@ export const useSuspenseAppsGetBySlug = <TData = Schemas.Integration>(
   options?: Omit<
     reactQuery.UseQueryOptions<Schemas.Integration, AppsGetBySlugError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -1869,7 +1869,7 @@ export const useAppsGetBySlug = <TData = Schemas.Integration>(
   options?: Omit<
     reactQuery.UseQueryOptions<Schemas.Integration, AppsGetBySlugError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.Integration, AppsGetBySlugError, TData>({
@@ -1892,7 +1892,7 @@ export type CodesOfConductGetAllCodesOfConductVariables =
 
 export const fetchCodesOfConductGetAllCodesOfConduct = (
   variables: CodesOfConductGetAllCodesOfConductVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     CodesOfConductGetAllCodesOfConductResponse,
@@ -1904,7 +1904,7 @@ export const fetchCodesOfConductGetAllCodesOfConduct = (
   >({ url: "/codes_of_conduct", method: "get", ...variables, signal });
 
 export const codesOfConductGetAllCodesOfConductQuery = (
-  variables: CodesOfConductGetAllCodesOfConductVariables,
+  variables: CodesOfConductGetAllCodesOfConductVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -1933,7 +1933,7 @@ export const useSuspenseCodesOfConductGetAllCodesOfConduct = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -1958,7 +1958,7 @@ export const useCodesOfConductGetAllCodesOfConduct = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -1993,7 +1993,7 @@ export type CodesOfConductGetConductCodeVariables = {
 
 export const fetchCodesOfConductGetConductCode = (
   variables: CodesOfConductGetConductCodeVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.CodeOfConduct,
@@ -2005,7 +2005,7 @@ export const fetchCodesOfConductGetConductCode = (
   >({ url: "/codes_of_conduct/{key}", method: "get", ...variables, signal });
 
 export const codesOfConductGetConductCodeQuery = (
-  variables: CodesOfConductGetConductCodeVariables,
+  variables: CodesOfConductGetConductCodeVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -2034,7 +2034,7 @@ export const useSuspenseCodesOfConductGetConductCode = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -2057,7 +2057,7 @@ export const useCodesOfConductGetConductCode = <TData = Schemas.CodeOfConduct>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -2087,7 +2087,7 @@ export type EmojisGetVariables = GithubContext["fetcherOptions"];
  */
 export const fetchEmojisGet = (
   variables: EmojisGetVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<EmojisGetResponse, EmojisGetError, undefined, {}, {}, {}>({
     url: "/emojis",
@@ -2100,7 +2100,7 @@ export const fetchEmojisGet = (
  * Lists all the emojis available to use on GitHub.
  */
 export const emojisGetQuery = (
-  variables: EmojisGetVariables,
+  variables: EmojisGetVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({ signal }: { signal?: AbortSignal }) => Promise<EmojisGetResponse>;
@@ -2122,7 +2122,7 @@ export const useSuspenseEmojisGet = <TData = EmojisGetResponse>(
   options?: Omit<
     reactQuery.UseQueryOptions<EmojisGetResponse, EmojisGetError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<EmojisGetResponse, EmojisGetError, TData>({
@@ -2140,7 +2140,7 @@ export const useEmojisGet = <TData = EmojisGetResponse>(
   options?: Omit<
     reactQuery.UseQueryOptions<EmojisGetResponse, EmojisGetError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<EmojisGetResponse, EmojisGetError, TData>({
@@ -2268,7 +2268,7 @@ export type DependabotListAlertsForEnterpriseVariables = {
  */
 export const fetchDependabotListAlertsForEnterprise = (
   variables: DependabotListAlertsForEnterpriseVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     DependabotListAlertsForEnterpriseResponse,
@@ -2291,7 +2291,7 @@ export const fetchDependabotListAlertsForEnterprise = (
  * Alerts are only returned for organizations in the enterprise for which you are an organization owner or a security manager. For more information about security managers, see "[Managing security managers in your organization](https://docs.github.com/organizations/managing-peoples-access-to-your-organization-with-roles/managing-security-managers-in-your-organization)."
  */
 export const dependabotListAlertsForEnterpriseQuery = (
-  variables: DependabotListAlertsForEnterpriseVariables,
+  variables: DependabotListAlertsForEnterpriseVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -2326,7 +2326,7 @@ export const useSuspenseDependabotListAlertsForEnterprise = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -2357,7 +2357,7 @@ export const useDependabotListAlertsForEnterprise = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -2446,7 +2446,7 @@ export type SecretScanningListAlertsForEnterpriseVariables = {
  */
 export const fetchSecretScanningListAlertsForEnterprise = (
   variables: SecretScanningListAlertsForEnterpriseVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     SecretScanningListAlertsForEnterpriseResponse,
@@ -2467,7 +2467,7 @@ export const fetchSecretScanningListAlertsForEnterprise = (
  * To use this endpoint, you must be a member of the enterprise, and you must use an access token with the `repo` scope or `security_events` scope. Alerts are only returned for organizations in the enterprise for which you are an organization owner or a [security manager](https://docs.github.com/organizations/managing-peoples-access-to-your-organization-with-roles/managing-security-managers-in-your-organization).
  */
 export const secretScanningListAlertsForEnterpriseQuery = (
-  variables: SecretScanningListAlertsForEnterpriseVariables,
+  variables: SecretScanningListAlertsForEnterpriseVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -2500,7 +2500,7 @@ export const useSuspenseSecretScanningListAlertsForEnterprise = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -2529,7 +2529,7 @@ export const useSecretScanningListAlertsForEnterprise = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -2584,7 +2584,7 @@ export type ActivityListPublicEventsVariables = {
  */
 export const fetchActivityListPublicEvents = (
   variables: ActivityListPublicEventsVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ActivityListPublicEventsResponse,
@@ -2599,7 +2599,7 @@ export const fetchActivityListPublicEvents = (
  * We delay the public events feed by five minutes, which means the most recent event returned by the public events API actually occurred at least five minutes ago.
  */
 export const activityListPublicEventsQuery = (
-  variables: ActivityListPublicEventsVariables,
+  variables: ActivityListPublicEventsVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -2631,7 +2631,7 @@ export const useSuspenseActivityListPublicEvents = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -2659,7 +2659,7 @@ export const useActivityListPublicEvents = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -2692,7 +2692,7 @@ export type ActivityGetFeedsVariables = GithubContext["fetcherOptions"];
  */
 export const fetchActivityGetFeeds = (
   variables: ActivityGetFeedsVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<Schemas.Feed, ActivityGetFeedsError, undefined, {}, {}, {}>({
     url: "/feeds",
@@ -2715,7 +2715,7 @@ export const fetchActivityGetFeeds = (
  * **Note**: Private feeds are only returned when [authenticating via Basic Auth](https://docs.github.com/rest/overview/other-authentication-methods#basic-authentication) since current feed URIs use the older, non revocable auth tokens.
  */
 export const activityGetFeedsQuery = (
-  variables: ActivityGetFeedsVariables,
+  variables: ActivityGetFeedsVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({ signal }: { signal?: AbortSignal }) => Promise<Schemas.Feed>;
@@ -2747,7 +2747,7 @@ export const useSuspenseActivityGetFeeds = <TData = Schemas.Feed>(
   options?: Omit<
     reactQuery.UseQueryOptions<Schemas.Feed, ActivityGetFeedsError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -2779,7 +2779,7 @@ export const useActivityGetFeeds = <TData = Schemas.Feed>(
   options?: Omit<
     reactQuery.UseQueryOptions<Schemas.Feed, ActivityGetFeedsError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.Feed, ActivityGetFeedsError, TData>({
@@ -2832,7 +2832,7 @@ export type GistsListVariables = {
  */
 export const fetchGistsList = (
   variables: GistsListVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     GistsListResponse,
@@ -2847,7 +2847,7 @@ export const fetchGistsList = (
  * Lists the authenticated user's gists or if called anonymously, this endpoint returns all public gists:
  */
 export const gistsListQuery = (
-  variables: GistsListVariables,
+  variables: GistsListVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({ signal }: { signal?: AbortSignal }) => Promise<GistsListResponse>;
@@ -2869,7 +2869,7 @@ export const useSuspenseGistsList = <TData = GistsListResponse>(
   options?: Omit<
     reactQuery.UseQueryOptions<GistsListResponse, GistsListError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<GistsListResponse, GistsListError, TData>({
@@ -2887,7 +2887,7 @@ export const useGistsList = <TData = GistsListResponse>(
   options?: Omit<
     reactQuery.UseQueryOptions<GistsListResponse, GistsListError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<GistsListResponse, GistsListError, TData>({
@@ -2950,7 +2950,7 @@ export type GistsCreateVariables = {
  */
 export const fetchGistsCreate = (
   variables: GistsCreateVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.GistSimple,
@@ -2974,7 +2974,7 @@ export const useGistsCreate = (
       GistsCreateVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -3037,7 +3037,7 @@ export type GistsListPublicVariables = {
  */
 export const fetchGistsListPublic = (
   variables: GistsListPublicVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     GistsListPublicResponse,
@@ -3054,7 +3054,7 @@ export const fetchGistsListPublic = (
  * Note: With [pagination](https://docs.github.com/rest/overview/resources-in-the-rest-api#pagination), you can fetch up to 3000 gists. For example, you can fetch 100 pages with 30 gists per page or 30 pages with 100 gists per page.
  */
 export const gistsListPublicQuery = (
-  variables: GistsListPublicVariables,
+  variables: GistsListPublicVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -3086,7 +3086,7 @@ export const useSuspenseGistsListPublic = <TData = GistsListPublicResponse>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -3114,7 +3114,7 @@ export const useGistsListPublic = <TData = GistsListPublicResponse>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -3175,7 +3175,7 @@ export type GistsListStarredVariables = {
  */
 export const fetchGistsListStarred = (
   variables: GistsListStarredVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     GistsListStarredResponse,
@@ -3190,7 +3190,7 @@ export const fetchGistsListStarred = (
  * List the authenticated user's starred gists:
  */
 export const gistsListStarredQuery = (
-  variables: GistsListStarredVariables,
+  variables: GistsListStarredVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -3220,7 +3220,7 @@ export const useSuspenseGistsListStarred = <TData = GistsListStarredResponse>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -3246,7 +3246,7 @@ export const useGistsListStarred = <TData = GistsListStarredResponse>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -3288,7 +3288,7 @@ export type GistsDeleteVariables = {
 
 export const fetchGistsDelete = (
   variables: GistsDeleteVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -3307,7 +3307,7 @@ export const useGistsDelete = (
       GistsDeleteVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -3349,7 +3349,7 @@ export type GistsGetVariables = {
 
 export const fetchGistsGet = (
   variables: GistsGetVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.GistSimple,
@@ -3361,7 +3361,7 @@ export const fetchGistsGet = (
   >({ url: "/gists/{gistId}", method: "get", ...variables, signal });
 
 export const gistsGetQuery = (
-  variables: GistsGetVariables,
+  variables: GistsGetVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -3384,7 +3384,7 @@ export const useSuspenseGistsGet = <TData = Schemas.GistSimple>(
   options?: Omit<
     reactQuery.UseQueryOptions<Schemas.GistSimple, GistsGetError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<Schemas.GistSimple, GistsGetError, TData>({
@@ -3399,7 +3399,7 @@ export const useGistsGet = <TData = Schemas.GistSimple>(
   options?: Omit<
     reactQuery.UseQueryOptions<Schemas.GistSimple, GistsGetError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.GistSimple, GistsGetError, TData>({
@@ -3520,7 +3520,7 @@ export type GistsUpdateVariables = {
  */
 export const fetchGistsUpdate = (
   variables: GistsUpdateVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.GistSimple,
@@ -3624,7 +3624,7 @@ export const useGistsUpdate = (
       GistsUpdateVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -3684,7 +3684,7 @@ export type GistsListCommentsVariables = {
 
 export const fetchGistsListComments = (
   variables: GistsListCommentsVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     GistsListCommentsResponse,
@@ -3696,7 +3696,7 @@ export const fetchGistsListComments = (
   >({ url: "/gists/{gistId}/comments", method: "get", ...variables, signal });
 
 export const gistsListCommentsQuery = (
-  variables: GistsListCommentsVariables,
+  variables: GistsListCommentsVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -3723,7 +3723,7 @@ export const useSuspenseGistsListComments = <TData = GistsListCommentsResponse>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -3746,7 +3746,7 @@ export const useGistsListComments = <TData = GistsListCommentsResponse>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -3799,7 +3799,7 @@ export type GistsCreateCommentVariables = {
 
 export const fetchGistsCreateComment = (
   variables: GistsCreateCommentVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.GistComment,
@@ -3818,7 +3818,7 @@ export const useGistsCreateComment = (
       GistsCreateCommentVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -3864,7 +3864,7 @@ export type GistsDeleteCommentVariables = {
 
 export const fetchGistsDeleteComment = (
   variables: GistsDeleteCommentVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -3888,7 +3888,7 @@ export const useGistsDeleteComment = (
       GistsDeleteCommentVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -3934,7 +3934,7 @@ export type GistsGetCommentVariables = {
 
 export const fetchGistsGetComment = (
   variables: GistsGetCommentVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.GistComment,
@@ -3951,7 +3951,7 @@ export const fetchGistsGetComment = (
   });
 
 export const gistsGetCommentQuery = (
-  variables: GistsGetCommentVariables,
+  variables: GistsGetCommentVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -3978,7 +3978,7 @@ export const useSuspenseGistsGetComment = <TData = Schemas.GistComment>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -4001,7 +4001,7 @@ export const useGistsGetComment = <TData = Schemas.GistComment>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.GistComment, GistsGetCommentError, TData>({
@@ -4044,7 +4044,7 @@ export type GistsUpdateCommentVariables = {
 
 export const fetchGistsUpdateComment = (
   variables: GistsUpdateCommentVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.GistComment,
@@ -4068,7 +4068,7 @@ export const useGistsUpdateComment = (
       GistsUpdateCommentVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -4128,7 +4128,7 @@ export type GistsListCommitsVariables = {
 
 export const fetchGistsListCommits = (
   variables: GistsListCommitsVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     GistsListCommitsResponse,
@@ -4140,7 +4140,7 @@ export const fetchGistsListCommits = (
   >({ url: "/gists/{gistId}/commits", method: "get", ...variables, signal });
 
 export const gistsListCommitsQuery = (
-  variables: GistsListCommitsVariables,
+  variables: GistsListCommitsVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -4167,7 +4167,7 @@ export const useSuspenseGistsListCommits = <TData = GistsListCommitsResponse>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -4190,7 +4190,7 @@ export const useGistsListCommits = <TData = GistsListCommitsResponse>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -4250,7 +4250,7 @@ export type GistsListForksVariables = {
 
 export const fetchGistsListForks = (
   variables: GistsListForksVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     GistsListForksResponse,
@@ -4262,7 +4262,7 @@ export const fetchGistsListForks = (
   >({ url: "/gists/{gistId}/forks", method: "get", ...variables, signal });
 
 export const gistsListForksQuery = (
-  variables: GistsListForksVariables,
+  variables: GistsListForksVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -4289,7 +4289,7 @@ export const useSuspenseGistsListForks = <TData = GistsListForksResponse>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -4312,7 +4312,7 @@ export const useGistsListForks = <TData = GistsListForksResponse>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -4358,7 +4358,7 @@ export type GistsForkVariables = {
 
 export const fetchGistsFork = (
   variables: GistsForkVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.BaseGist,
@@ -4377,7 +4377,7 @@ export const useGistsFork = (
       GistsForkVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -4419,7 +4419,7 @@ export type GistsUnstarVariables = {
 
 export const fetchGistsUnstar = (
   variables: GistsUnstarVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -4438,7 +4438,7 @@ export const useGistsUnstar = (
       GistsUnstarVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -4480,7 +4480,7 @@ export type GistsCheckIsStarredVariables = {
 
 export const fetchGistsCheckIsStarred = (
   variables: GistsCheckIsStarredVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -4492,7 +4492,7 @@ export const fetchGistsCheckIsStarred = (
   >({ url: "/gists/{gistId}/star", method: "get", ...variables, signal });
 
 export const gistsCheckIsStarredQuery = (
-  variables: GistsCheckIsStarredVariables,
+  variables: GistsCheckIsStarredVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({ signal }: { signal?: AbortSignal }) => Promise<undefined>;
@@ -4511,7 +4511,7 @@ export const useSuspenseGistsCheckIsStarred = <TData = undefined>(
   options?: Omit<
     reactQuery.UseQueryOptions<undefined, GistsCheckIsStarredError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -4530,7 +4530,7 @@ export const useGistsCheckIsStarred = <TData = undefined>(
   options?: Omit<
     reactQuery.UseQueryOptions<undefined, GistsCheckIsStarredError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<undefined, GistsCheckIsStarredError, TData>({
@@ -4571,7 +4571,7 @@ export type GistsStarVariables = {
  */
 export const fetchGistsStar = (
   variables: GistsStarVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -4593,7 +4593,7 @@ export const useGistsStar = (
       GistsStarVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<undefined, GistsStarError, GistsStarVariables>({
@@ -4632,7 +4632,7 @@ export type GistsGetRevisionVariables = {
 
 export const fetchGistsGetRevision = (
   variables: GistsGetRevisionVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.GistSimple,
@@ -4644,7 +4644,7 @@ export const fetchGistsGetRevision = (
   >({ url: "/gists/{gistId}/{sha}", method: "get", ...variables, signal });
 
 export const gistsGetRevisionQuery = (
-  variables: GistsGetRevisionVariables,
+  variables: GistsGetRevisionVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -4671,7 +4671,7 @@ export const useSuspenseGistsGetRevision = <TData = Schemas.GistSimple>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -4694,7 +4694,7 @@ export const useGistsGetRevision = <TData = Schemas.GistSimple>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.GistSimple, GistsGetRevisionError, TData>({
@@ -4718,7 +4718,7 @@ export type GitignoreGetAllTemplatesVariables = GithubContext["fetcherOptions"];
  */
 export const fetchGitignoreGetAllTemplates = (
   variables: GitignoreGetAllTemplatesVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     GitignoreGetAllTemplatesResponse,
@@ -4733,7 +4733,7 @@ export const fetchGitignoreGetAllTemplates = (
  * List all templates available to pass as an option when [creating a repository](https://docs.github.com/rest/reference/repos#create-a-repository-for-the-authenticated-user).
  */
 export const gitignoreGetAllTemplatesQuery = (
-  variables: GitignoreGetAllTemplatesVariables,
+  variables: GitignoreGetAllTemplatesVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -4765,7 +4765,7 @@ export const useSuspenseGitignoreGetAllTemplates = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -4793,7 +4793,7 @@ export const useGitignoreGetAllTemplates = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -4826,7 +4826,7 @@ export type GitignoreGetTemplateVariables = {
  */
 export const fetchGitignoreGetTemplate = (
   variables: GitignoreGetTemplateVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.GitignoreTemplate,
@@ -4847,7 +4847,7 @@ export const fetchGitignoreGetTemplate = (
  * Use the raw [media type](https://docs.github.com/rest/overview/media-types/) to get the raw contents.
  */
 export const gitignoreGetTemplateQuery = (
-  variables: GitignoreGetTemplateVariables,
+  variables: GitignoreGetTemplateVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -4880,7 +4880,7 @@ export const useSuspenseGitignoreGetTemplate = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -4907,7 +4907,7 @@ export const useGitignoreGetTemplate = <TData = Schemas.GitignoreTemplate>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -4971,7 +4971,7 @@ export type AppsListReposAccessibleToInstallationVariables = {
  */
 export const fetchAppsListReposAccessibleToInstallation = (
   variables: AppsListReposAccessibleToInstallationVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     AppsListReposAccessibleToInstallationResponse,
@@ -4988,7 +4988,7 @@ export const fetchAppsListReposAccessibleToInstallation = (
  * You must use an [installation access token](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-an-installation) to access this endpoint.
  */
 export const appsListReposAccessibleToInstallationQuery = (
-  variables: AppsListReposAccessibleToInstallationVariables,
+  variables: AppsListReposAccessibleToInstallationVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -5022,7 +5022,7 @@ export const useSuspenseAppsListReposAccessibleToInstallation = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -5052,7 +5052,7 @@ export const useAppsListReposAccessibleToInstallation = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -5081,7 +5081,7 @@ export type AppsRevokeInstallationAccessTokenVariables =
  */
 export const fetchAppsRevokeInstallationAccessToken = (
   variables: AppsRevokeInstallationAccessTokenVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -5107,7 +5107,7 @@ export const useAppsRevokeInstallationAccessToken = (
       AppsRevokeInstallationAccessTokenVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -5217,7 +5217,7 @@ export type IssuesListVariables = {
  */
 export const fetchIssuesList = (
   variables: IssuesListVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     IssuesListResponse,
@@ -5240,7 +5240,7 @@ export const fetchIssuesList = (
  * request id, use the "[List pull requests](https://docs.github.com/rest/reference/pulls#list-pull-requests)" endpoint.
  */
 export const issuesListQuery = (
-  variables: IssuesListVariables,
+  variables: IssuesListVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -5274,7 +5274,7 @@ export const useSuspenseIssuesList = <TData = IssuesListResponse>(
   options?: Omit<
     reactQuery.UseQueryOptions<IssuesListResponse, IssuesListError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -5304,7 +5304,7 @@ export const useIssuesList = <TData = IssuesListResponse>(
   options?: Omit<
     reactQuery.UseQueryOptions<IssuesListResponse, IssuesListError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<IssuesListResponse, IssuesListError, TData>({
@@ -5343,7 +5343,7 @@ export type LicensesGetAllCommonlyUsedVariables = {
 
 export const fetchLicensesGetAllCommonlyUsed = (
   variables: LicensesGetAllCommonlyUsedVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     LicensesGetAllCommonlyUsedResponse,
@@ -5355,7 +5355,7 @@ export const fetchLicensesGetAllCommonlyUsed = (
   >({ url: "/licenses", method: "get", ...variables, signal });
 
 export const licensesGetAllCommonlyUsedQuery = (
-  variables: LicensesGetAllCommonlyUsedVariables,
+  variables: LicensesGetAllCommonlyUsedVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -5384,7 +5384,7 @@ export const useSuspenseLicensesGetAllCommonlyUsed = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -5409,7 +5409,7 @@ export const useLicensesGetAllCommonlyUsed = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -5448,7 +5448,7 @@ export type LicensesGetVariables = {
 
 export const fetchLicensesGet = (
   variables: LicensesGetVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.License,
@@ -5460,7 +5460,7 @@ export const fetchLicensesGet = (
   >({ url: "/licenses/{license}", method: "get", ...variables, signal });
 
 export const licensesGetQuery = (
-  variables: LicensesGetVariables,
+  variables: LicensesGetVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({ signal }: { signal?: AbortSignal }) => Promise<Schemas.License>;
@@ -5479,7 +5479,7 @@ export const useSuspenseLicensesGet = <TData = Schemas.License>(
   options?: Omit<
     reactQuery.UseQueryOptions<Schemas.License, LicensesGetError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<Schemas.License, LicensesGetError, TData>({
@@ -5494,7 +5494,7 @@ export const useLicensesGet = <TData = Schemas.License>(
   options?: Omit<
     reactQuery.UseQueryOptions<Schemas.License, LicensesGetError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.License, LicensesGetError, TData>({
@@ -5533,7 +5533,7 @@ export type MarkdownRenderVariables = {
 
 export const fetchMarkdownRender = (
   variables: MarkdownRenderVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -5552,7 +5552,7 @@ export const useMarkdownRender = (
       MarkdownRenderVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -5578,7 +5578,7 @@ export type MarkdownRenderRawVariables = GithubContext["fetcherOptions"];
  */
 export const fetchMarkdownRenderRaw = (
   variables: MarkdownRenderRawVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<undefined, MarkdownRenderRawError, undefined, {}, {}, {}>({
     url: "/markdown/raw",
@@ -5598,7 +5598,7 @@ export const useMarkdownRenderRaw = (
       MarkdownRenderRawVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -5641,7 +5641,7 @@ export type AppsGetSubscriptionPlanForAccountVariables = {
  */
 export const fetchAppsGetSubscriptionPlanForAccount = (
   variables: AppsGetSubscriptionPlanForAccountVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.MarketplacePurchase,
@@ -5663,7 +5663,7 @@ export const fetchAppsGetSubscriptionPlanForAccount = (
  * GitHub Apps must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint. OAuth Apps must use [basic authentication](https://docs.github.com/rest/overview/other-authentication-methods#basic-authentication) with their client ID and client secret to access this endpoint.
  */
 export const appsGetSubscriptionPlanForAccountQuery = (
-  variables: AppsGetSubscriptionPlanForAccountVariables,
+  variables: AppsGetSubscriptionPlanForAccountVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -5697,7 +5697,7 @@ export const useSuspenseAppsGetSubscriptionPlanForAccount = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -5727,7 +5727,7 @@ export const useAppsGetSubscriptionPlanForAccount = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -5780,7 +5780,7 @@ export type AppsListPlansVariables = {
  */
 export const fetchAppsListPlans = (
   variables: AppsListPlansVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     AppsListPlansResponse,
@@ -5797,7 +5797,7 @@ export const fetchAppsListPlans = (
  * GitHub Apps must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint. OAuth Apps must use [basic authentication](https://docs.github.com/rest/overview/other-authentication-methods#basic-authentication) with their client ID and client secret to access this endpoint.
  */
 export const appsListPlansQuery = (
-  variables: AppsListPlansVariables,
+  variables: AppsListPlansVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -5829,7 +5829,7 @@ export const useSuspenseAppsListPlans = <TData = AppsListPlansResponse>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -5857,7 +5857,7 @@ export const useAppsListPlans = <TData = AppsListPlansResponse>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<AppsListPlansResponse, AppsListPlansError, TData>({
@@ -5928,7 +5928,7 @@ export type AppsListAccountsForPlanVariables = {
  */
 export const fetchAppsListAccountsForPlan = (
   variables: AppsListAccountsForPlanVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     AppsListAccountsForPlanResponse,
@@ -5950,7 +5950,7 @@ export const fetchAppsListAccountsForPlan = (
  * GitHub Apps must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint. OAuth Apps must use [basic authentication](https://docs.github.com/rest/overview/other-authentication-methods#basic-authentication) with their client ID and client secret to access this endpoint.
  */
 export const appsListAccountsForPlanQuery = (
-  variables: AppsListAccountsForPlanVariables,
+  variables: AppsListAccountsForPlanVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -5984,7 +5984,7 @@ export const useSuspenseAppsListAccountsForPlan = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -6014,7 +6014,7 @@ export const useAppsListAccountsForPlan = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -6052,7 +6052,7 @@ export type AppsGetSubscriptionPlanForAccountStubbedVariables = {
  */
 export const fetchAppsGetSubscriptionPlanForAccountStubbed = (
   variables: AppsGetSubscriptionPlanForAccountStubbedVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.MarketplacePurchase,
@@ -6074,7 +6074,7 @@ export const fetchAppsGetSubscriptionPlanForAccountStubbed = (
  * GitHub Apps must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint. OAuth Apps must use [basic authentication](https://docs.github.com/rest/overview/other-authentication-methods#basic-authentication) with their client ID and client secret to access this endpoint.
  */
 export const appsGetSubscriptionPlanForAccountStubbedQuery = (
-  variables: AppsGetSubscriptionPlanForAccountStubbedVariables,
+  variables: AppsGetSubscriptionPlanForAccountStubbedVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -6108,7 +6108,7 @@ export const useSuspenseAppsGetSubscriptionPlanForAccountStubbed = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -6138,7 +6138,7 @@ export const useAppsGetSubscriptionPlanForAccountStubbed = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -6185,7 +6185,7 @@ export type AppsListPlansStubbedVariables = {
  */
 export const fetchAppsListPlansStubbed = (
   variables: AppsListPlansStubbedVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     AppsListPlansStubbedResponse,
@@ -6207,7 +6207,7 @@ export const fetchAppsListPlansStubbed = (
  * GitHub Apps must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint. OAuth Apps must use [basic authentication](https://docs.github.com/rest/overview/other-authentication-methods#basic-authentication) with their client ID and client secret to access this endpoint.
  */
 export const appsListPlansStubbedQuery = (
-  variables: AppsListPlansStubbedVariables,
+  variables: AppsListPlansStubbedVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -6241,7 +6241,7 @@ export const useSuspenseAppsListPlansStubbed = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -6269,7 +6269,7 @@ export const useAppsListPlansStubbed = <TData = AppsListPlansStubbedResponse>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -6335,7 +6335,7 @@ export type AppsListAccountsForPlanStubbedVariables = {
  */
 export const fetchAppsListAccountsForPlanStubbed = (
   variables: AppsListAccountsForPlanStubbedVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     AppsListAccountsForPlanStubbedResponse,
@@ -6357,7 +6357,7 @@ export const fetchAppsListAccountsForPlanStubbed = (
  * GitHub Apps must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint. OAuth Apps must use [basic authentication](https://docs.github.com/rest/overview/other-authentication-methods#basic-authentication) with their client ID and client secret to access this endpoint.
  */
 export const appsListAccountsForPlanStubbedQuery = (
-  variables: AppsListAccountsForPlanStubbedVariables,
+  variables: AppsListAccountsForPlanStubbedVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -6391,7 +6391,7 @@ export const useSuspenseAppsListAccountsForPlanStubbed = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -6421,7 +6421,7 @@ export const useAppsListAccountsForPlanStubbed = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -6451,7 +6451,7 @@ export type MetaGetVariables = GithubContext["fetcherOptions"];
  */
 export const fetchMetaGet = (
   variables: MetaGetVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<Schemas.ApiOverview, MetaGetError, undefined, {}, {}, {}>({
     url: "/meta",
@@ -6468,7 +6468,7 @@ export const fetchMetaGet = (
  * **Note:** The IP addresses shown in the documentation's response are only example values. You must always query the API directly to get the latest list of IP addresses.
  */
 export const metaGetQuery = (
-  variables: MetaGetVariables,
+  variables: MetaGetVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -6498,7 +6498,7 @@ export const useSuspenseMetaGet = <TData = Schemas.ApiOverview>(
   options?: Omit<
     reactQuery.UseQueryOptions<Schemas.ApiOverview, MetaGetError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<Schemas.ApiOverview, MetaGetError, TData>({
@@ -6520,7 +6520,7 @@ export const useMetaGet = <TData = Schemas.ApiOverview>(
   options?: Omit<
     reactQuery.UseQueryOptions<Schemas.ApiOverview, MetaGetError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.ApiOverview, MetaGetError, TData>({
@@ -6584,7 +6584,7 @@ export type ActivityListPublicEventsForRepoNetworkVariables = {
 
 export const fetchActivityListPublicEventsForRepoNetwork = (
   variables: ActivityListPublicEventsForRepoNetworkVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ActivityListPublicEventsForRepoNetworkResponse,
@@ -6601,7 +6601,7 @@ export const fetchActivityListPublicEventsForRepoNetwork = (
   });
 
 export const activityListPublicEventsForRepoNetworkQuery = (
-  variables: ActivityListPublicEventsForRepoNetworkVariables,
+  variables: ActivityListPublicEventsForRepoNetworkVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -6630,7 +6630,7 @@ export const useSuspenseActivityListPublicEventsForRepoNetwork = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -6655,7 +6655,7 @@ export const useActivityListPublicEventsForRepoNetwork = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -6740,7 +6740,7 @@ export type ActivityListNotificationsForAuthenticatedUserVariables = {
  */
 export const fetchActivityListNotificationsForAuthenticatedUser = (
   variables: ActivityListNotificationsForAuthenticatedUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ActivityListNotificationsForAuthenticatedUserResponse,
@@ -6755,7 +6755,7 @@ export const fetchActivityListNotificationsForAuthenticatedUser = (
  * List all notifications for the current user, sorted by most recently updated.
  */
 export const activityListNotificationsForAuthenticatedUserQuery = (
-  variables: ActivityListNotificationsForAuthenticatedUserVariables,
+  variables: ActivityListNotificationsForAuthenticatedUserVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -6787,7 +6787,7 @@ export const useSuspenseActivityListNotificationsForAuthenticatedUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -6815,7 +6815,7 @@ export const useActivityListNotificationsForAuthenticatedUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -6870,7 +6870,7 @@ export type ActivityMarkNotificationsAsReadVariables = {
  */
 export const fetchActivityMarkNotificationsAsRead = (
   variables: ActivityMarkNotificationsAsReadVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ActivityMarkNotificationsAsReadResponse,
@@ -6892,7 +6892,7 @@ export const useActivityMarkNotificationsAsRead = (
       ActivityMarkNotificationsAsReadVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -6937,7 +6937,7 @@ export type ActivityGetThreadVariables = {
  */
 export const fetchActivityGetThread = (
   variables: ActivityGetThreadVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.Thread,
@@ -6957,7 +6957,7 @@ export const fetchActivityGetThread = (
  * Gets information about a notification thread.
  */
 export const activityGetThreadQuery = (
-  variables: ActivityGetThreadVariables,
+  variables: ActivityGetThreadVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({ signal }: { signal?: AbortSignal }) => Promise<Schemas.Thread>;
@@ -6979,7 +6979,7 @@ export const useSuspenseActivityGetThread = <TData = Schemas.Thread>(
   options?: Omit<
     reactQuery.UseQueryOptions<Schemas.Thread, ActivityGetThreadError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -7001,7 +7001,7 @@ export const useActivityGetThread = <TData = Schemas.Thread>(
   options?: Omit<
     reactQuery.UseQueryOptions<Schemas.Thread, ActivityGetThreadError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.Thread, ActivityGetThreadError, TData>({
@@ -7038,7 +7038,7 @@ export type ActivityMarkThreadAsReadVariables = {
  */
 export const fetchActivityMarkThreadAsRead = (
   variables: ActivityMarkThreadAsReadVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -7065,7 +7065,7 @@ export const useActivityMarkThreadAsRead = (
       ActivityMarkThreadAsReadVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -7110,7 +7110,7 @@ export type ActivityDeleteThreadSubscriptionVariables = {
  */
 export const fetchActivityDeleteThreadSubscription = (
   variables: ActivityDeleteThreadSubscriptionVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -7137,7 +7137,7 @@ export const useActivityDeleteThreadSubscription = (
       ActivityDeleteThreadSubscriptionVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -7188,7 +7188,7 @@ export type ActivityGetThreadSubscriptionForAuthenticatedUserVariables = {
  */
 export const fetchActivityGetThreadSubscriptionForAuthenticatedUser = (
   variables: ActivityGetThreadSubscriptionForAuthenticatedUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.ThreadSubscription,
@@ -7210,7 +7210,7 @@ export const fetchActivityGetThreadSubscriptionForAuthenticatedUser = (
  * Note that subscriptions are only generated if a user is participating in a conversation--for example, they've replied to the thread, were **@mentioned**, or manually subscribe to a thread.
  */
 export const activityGetThreadSubscriptionForAuthenticatedUserQuery = (
-  variables: ActivityGetThreadSubscriptionForAuthenticatedUserVariables,
+  variables: ActivityGetThreadSubscriptionForAuthenticatedUserVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -7244,7 +7244,7 @@ export const useSuspenseActivityGetThreadSubscriptionForAuthenticatedUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -7274,7 +7274,7 @@ export const useActivityGetThreadSubscriptionForAuthenticatedUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -7333,7 +7333,7 @@ export type ActivitySetThreadSubscriptionVariables = {
  */
 export const fetchActivitySetThreadSubscription = (
   variables: ActivitySetThreadSubscriptionVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.ThreadSubscription,
@@ -7364,7 +7364,7 @@ export const useActivitySetThreadSubscription = (
       ActivitySetThreadSubscriptionVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -7396,7 +7396,7 @@ export type MetaGetOctocatVariables = {
  */
 export const fetchMetaGetOctocat = (
   variables: MetaGetOctocatVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -7411,7 +7411,7 @@ export const fetchMetaGetOctocat = (
  * Get the octocat as ASCII art
  */
 export const metaGetOctocatQuery = (
-  variables: MetaGetOctocatVariables,
+  variables: MetaGetOctocatVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({ signal }: { signal?: AbortSignal }) => Promise<undefined>;
@@ -7433,7 +7433,7 @@ export const useSuspenseMetaGetOctocat = <TData = undefined>(
   options?: Omit<
     reactQuery.UseQueryOptions<undefined, MetaGetOctocatError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<undefined, MetaGetOctocatError, TData>({
@@ -7451,7 +7451,7 @@ export const useMetaGetOctocat = <TData = undefined>(
   options?: Omit<
     reactQuery.UseQueryOptions<undefined, MetaGetOctocatError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<undefined, MetaGetOctocatError, TData>({
@@ -7492,7 +7492,7 @@ export type OrgsListVariables = {
  */
 export const fetchOrgsList = (
   variables: OrgsListVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     OrgsListResponse,
@@ -7509,7 +7509,7 @@ export const fetchOrgsList = (
  * **Note:** Pagination is powered exclusively by the `since` parameter. Use the [Link header](https://docs.github.com/rest/overview/resources-in-the-rest-api#link-header) to get the URL for the next page of organizations.
  */
 export const orgsListQuery = (
-  variables: OrgsListVariables,
+  variables: OrgsListVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({ signal }: { signal?: AbortSignal }) => Promise<OrgsListResponse>;
@@ -7533,7 +7533,7 @@ export const useSuspenseOrgsList = <TData = OrgsListResponse>(
   options?: Omit<
     reactQuery.UseQueryOptions<OrgsListResponse, OrgsListError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<OrgsListResponse, OrgsListError, TData>({
@@ -7553,7 +7553,7 @@ export const useOrgsList = <TData = OrgsListResponse>(
   options?: Omit<
     reactQuery.UseQueryOptions<OrgsListResponse, OrgsListError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<OrgsListResponse, OrgsListError, TData>({
@@ -7586,7 +7586,7 @@ export type OrgsGetVariables = {
  */
 export const fetchOrgsGet = (
   variables: OrgsGetVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.OrganizationFull,
@@ -7603,7 +7603,7 @@ export const fetchOrgsGet = (
  * GitHub Apps with the `Organization plan` permission can use this endpoint to retrieve information about an organization's GitHub plan. See "[Authenticating with GitHub Apps](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/)" for details. For an example response, see 'Response with GitHub plan information' below."
  */
 export const orgsGetQuery = (
-  variables: OrgsGetVariables,
+  variables: OrgsGetVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -7631,7 +7631,7 @@ export const useSuspenseOrgsGet = <TData = Schemas.OrganizationFull>(
   options?: Omit<
     reactQuery.UseQueryOptions<Schemas.OrganizationFull, OrgsGetError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -7655,7 +7655,7 @@ export const useOrgsGet = <TData = Schemas.OrganizationFull>(
   options?: Omit<
     reactQuery.UseQueryOptions<Schemas.OrganizationFull, OrgsGetError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.OrganizationFull, OrgsGetError, TData>({
@@ -7853,7 +7853,7 @@ export type OrgsUpdateVariables = {
  */
 export const fetchOrgsUpdate = (
   variables: OrgsUpdateVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.OrganizationFull,
@@ -7877,7 +7877,7 @@ export const useOrgsUpdate = (
       OrgsUpdateVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -7912,7 +7912,7 @@ export type ActionsGetActionsCacheUsageForOrgVariables = {
  */
 export const fetchActionsGetActionsCacheUsageForOrg = (
   variables: ActionsGetActionsCacheUsageForOrgVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.ActionsCacheUsageOrgEnterprise,
@@ -7934,7 +7934,7 @@ export const fetchActionsGetActionsCacheUsageForOrg = (
  * You must authenticate using an access token with the `read:org` scope to use this endpoint. GitHub Apps must have the `organization_admistration:read` permission to use this endpoint.
  */
 export const actionsGetActionsCacheUsageForOrgQuery = (
-  variables: ActionsGetActionsCacheUsageForOrgVariables,
+  variables: ActionsGetActionsCacheUsageForOrgVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -7968,7 +7968,7 @@ export const useSuspenseActionsGetActionsCacheUsageForOrg = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -7998,7 +7998,7 @@ export const useActionsGetActionsCacheUsageForOrg = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -8054,7 +8054,7 @@ export type ActionsGetActionsCacheUsageByRepoForOrgVariables = {
  */
 export const fetchActionsGetActionsCacheUsageByRepoForOrg = (
   variables: ActionsGetActionsCacheUsageByRepoForOrgVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ActionsGetActionsCacheUsageByRepoForOrgResponse,
@@ -8076,7 +8076,7 @@ export const fetchActionsGetActionsCacheUsageByRepoForOrg = (
  * You must authenticate using an access token with the `read:org` scope to use this endpoint. GitHub Apps must have the `organization_admistration:read` permission to use this endpoint.
  */
 export const actionsGetActionsCacheUsageByRepoForOrgQuery = (
-  variables: ActionsGetActionsCacheUsageByRepoForOrgVariables,
+  variables: ActionsGetActionsCacheUsageByRepoForOrgVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -8110,7 +8110,7 @@ export const useSuspenseActionsGetActionsCacheUsageByRepoForOrg = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -8140,7 +8140,7 @@ export const useActionsGetActionsCacheUsageByRepoForOrg = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -8175,7 +8175,7 @@ export type OidcGetOidcCustomSubTemplateForOrgVariables = {
  */
 export const fetchOidcGetOidcCustomSubTemplateForOrg = (
   variables: OidcGetOidcCustomSubTemplateForOrgVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.OidcCustomSub,
@@ -8197,7 +8197,7 @@ export const fetchOidcGetOidcCustomSubTemplateForOrg = (
  * GitHub Apps must have the `organization_administration:write` permission to use this endpoint.
  */
 export const oidcGetOidcCustomSubTemplateForOrgQuery = (
-  variables: OidcGetOidcCustomSubTemplateForOrgVariables,
+  variables: OidcGetOidcCustomSubTemplateForOrgVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -8231,7 +8231,7 @@ export const useSuspenseOidcGetOidcCustomSubTemplateForOrg = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -8261,7 +8261,7 @@ export const useOidcGetOidcCustomSubTemplateForOrg = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -8305,7 +8305,7 @@ export type OidcUpdateOidcCustomSubTemplateForOrgVariables = {
  */
 export const fetchOidcUpdateOidcCustomSubTemplateForOrg = (
   variables: OidcUpdateOidcCustomSubTemplateForOrgVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.EmptyObject,
@@ -8334,7 +8334,7 @@ export const useOidcUpdateOidcCustomSubTemplateForOrg = (
       OidcUpdateOidcCustomSubTemplateForOrgVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -8372,7 +8372,7 @@ export type ActionsGetGithubActionsPermissionsOrganizationVariables = {
  */
 export const fetchActionsGetGithubActionsPermissionsOrganization = (
   variables: ActionsGetGithubActionsPermissionsOrganizationVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.ActionsOrganizationPermissions,
@@ -8394,7 +8394,7 @@ export const fetchActionsGetGithubActionsPermissionsOrganization = (
  * You must authenticate using an access token with the `admin:org` scope to use this endpoint. GitHub Apps must have the `administration` organization permission to use this API.
  */
 export const actionsGetGithubActionsPermissionsOrganizationQuery = (
-  variables: ActionsGetGithubActionsPermissionsOrganizationVariables,
+  variables: ActionsGetGithubActionsPermissionsOrganizationVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -8428,7 +8428,7 @@ export const useSuspenseActionsGetGithubActionsPermissionsOrganization = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -8458,7 +8458,7 @@ export const useActionsGetGithubActionsPermissionsOrganization = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -8499,7 +8499,7 @@ export type ActionsSetGithubActionsPermissionsOrganizationVariables = {
  */
 export const fetchActionsSetGithubActionsPermissionsOrganization = (
   variables: ActionsSetGithubActionsPermissionsOrganizationVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -8528,7 +8528,7 @@ export const useActionsSetGithubActionsPermissionsOrganization = (
       ActionsSetGithubActionsPermissionsOrganizationVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -8537,7 +8537,7 @@ export const useActionsSetGithubActionsPermissionsOrganization = (
     ActionsSetGithubActionsPermissionsOrganizationVariables
   >({
     mutationFn: (
-      variables: ActionsSetGithubActionsPermissionsOrganizationVariables,
+      variables: ActionsSetGithubActionsPermissionsOrganizationVariables
     ) =>
       fetchActionsSetGithubActionsPermissionsOrganization({
         ...fetcherOptions,
@@ -8594,7 +8594,7 @@ export type ActionsListSelectedRepositoriesEnabledGithubActionsOrganizationVaria
 export const fetchActionsListSelectedRepositoriesEnabledGithubActionsOrganization =
   (
     variables: ActionsListSelectedRepositoriesEnabledGithubActionsOrganizationVariables,
-    signal?: AbortSignal,
+    signal?: AbortSignal
   ) =>
     githubFetch<
       ActionsListSelectedRepositoriesEnabledGithubActionsOrganizationResponse,
@@ -8617,7 +8617,7 @@ export const fetchActionsListSelectedRepositoriesEnabledGithubActionsOrganizatio
  */
 export const actionsListSelectedRepositoriesEnabledGithubActionsOrganizationQuery =
   (
-    variables: ActionsListSelectedRepositoriesEnabledGithubActionsOrganizationVariables,
+    variables: ActionsListSelectedRepositoriesEnabledGithubActionsOrganizationVariables
   ): {
     queryKey: reactQuery.QueryKey;
     queryFn: ({
@@ -8635,7 +8635,7 @@ export const actionsListSelectedRepositoriesEnabledGithubActionsOrganizationQuer
     queryFn: ({ signal }: { signal?: AbortSignal }) =>
       fetchActionsListSelectedRepositoriesEnabledGithubActionsOrganization(
         variables,
-        signal,
+        signal
       ),
   });
 
@@ -8656,7 +8656,7 @@ export const useSuspenseActionsListSelectedRepositoriesEnabledGithubActionsOrgan
         TData
       >,
       "queryKey" | "queryFn" | "initialData"
-    >,
+    >
   ) => {
     const { queryOptions } = useGithubContext(options);
     return reactQuery.useSuspenseQuery<
@@ -8665,7 +8665,7 @@ export const useSuspenseActionsListSelectedRepositoriesEnabledGithubActionsOrgan
       TData
     >({
       ...actionsListSelectedRepositoriesEnabledGithubActionsOrganizationQuery(
-        variables,
+        variables
       ),
       ...options,
       ...queryOptions,
@@ -8689,7 +8689,7 @@ export const useActionsListSelectedRepositoriesEnabledGithubActionsOrganization 
         TData
       >,
       "queryKey" | "queryFn" | "initialData"
-    >,
+    >
   ) => {
     const { queryOptions } = useGithubContext(options);
     return reactQuery.useQuery<
@@ -8698,7 +8698,7 @@ export const useActionsListSelectedRepositoriesEnabledGithubActionsOrganization 
       TData
     >({
       ...actionsListSelectedRepositoriesEnabledGithubActionsOrganizationQuery(
-        variables,
+        variables
       ),
       ...options,
       ...queryOptions,
@@ -8738,7 +8738,7 @@ export type ActionsSetSelectedRepositoriesEnabledGithubActionsOrganizationVariab
 export const fetchActionsSetSelectedRepositoriesEnabledGithubActionsOrganization =
   (
     variables: ActionsSetSelectedRepositoriesEnabledGithubActionsOrganizationVariables,
-    signal?: AbortSignal,
+    signal?: AbortSignal
   ) =>
     githubFetch<
       undefined,
@@ -8768,7 +8768,7 @@ export const useActionsSetSelectedRepositoriesEnabledGithubActionsOrganization =
         ActionsSetSelectedRepositoriesEnabledGithubActionsOrganizationVariables
       >,
       "mutationFn"
-    >,
+    >
   ) => {
     const { fetcherOptions } = useGithubContext();
     return reactQuery.useMutation<
@@ -8777,7 +8777,7 @@ export const useActionsSetSelectedRepositoriesEnabledGithubActionsOrganization =
       ActionsSetSelectedRepositoriesEnabledGithubActionsOrganizationVariables
     >({
       mutationFn: (
-        variables: ActionsSetSelectedRepositoriesEnabledGithubActionsOrganizationVariables,
+        variables: ActionsSetSelectedRepositoriesEnabledGithubActionsOrganizationVariables
       ) =>
         fetchActionsSetSelectedRepositoriesEnabledGithubActionsOrganization({
           ...fetcherOptions,
@@ -8814,7 +8814,7 @@ export type ActionsDisableSelectedRepositoryGithubActionsOrganizationVariables =
  */
 export const fetchActionsDisableSelectedRepositoryGithubActionsOrganization = (
   variables: ActionsDisableSelectedRepositoryGithubActionsOrganizationVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -8843,7 +8843,7 @@ export const useActionsDisableSelectedRepositoryGithubActionsOrganization = (
       ActionsDisableSelectedRepositoryGithubActionsOrganizationVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -8852,7 +8852,7 @@ export const useActionsDisableSelectedRepositoryGithubActionsOrganization = (
     ActionsDisableSelectedRepositoryGithubActionsOrganizationVariables
   >({
     mutationFn: (
-      variables: ActionsDisableSelectedRepositoryGithubActionsOrganizationVariables,
+      variables: ActionsDisableSelectedRepositoryGithubActionsOrganizationVariables
     ) =>
       fetchActionsDisableSelectedRepositoryGithubActionsOrganization({
         ...fetcherOptions,
@@ -8889,7 +8889,7 @@ export type ActionsEnableSelectedRepositoryGithubActionsOrganizationVariables =
  */
 export const fetchActionsEnableSelectedRepositoryGithubActionsOrganization = (
   variables: ActionsEnableSelectedRepositoryGithubActionsOrganizationVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -8918,7 +8918,7 @@ export const useActionsEnableSelectedRepositoryGithubActionsOrganization = (
       ActionsEnableSelectedRepositoryGithubActionsOrganizationVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -8927,7 +8927,7 @@ export const useActionsEnableSelectedRepositoryGithubActionsOrganization = (
     ActionsEnableSelectedRepositoryGithubActionsOrganizationVariables
   >({
     mutationFn: (
-      variables: ActionsEnableSelectedRepositoryGithubActionsOrganizationVariables,
+      variables: ActionsEnableSelectedRepositoryGithubActionsOrganizationVariables
     ) =>
       fetchActionsEnableSelectedRepositoryGithubActionsOrganization({
         ...fetcherOptions,
@@ -8958,7 +8958,7 @@ export type ActionsGetAllowedActionsOrganizationVariables = {
  */
 export const fetchActionsGetAllowedActionsOrganization = (
   variables: ActionsGetAllowedActionsOrganizationVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.SelectedActions,
@@ -8980,7 +8980,7 @@ export const fetchActionsGetAllowedActionsOrganization = (
  * You must authenticate using an access token with the `admin:org` scope to use this endpoint. GitHub Apps must have the `administration` organization permission to use this API.
  */
 export const actionsGetAllowedActionsOrganizationQuery = (
-  variables: ActionsGetAllowedActionsOrganizationVariables,
+  variables: ActionsGetAllowedActionsOrganizationVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -9014,7 +9014,7 @@ export const useSuspenseActionsGetAllowedActionsOrganization = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -9044,7 +9044,7 @@ export const useActionsGetAllowedActionsOrganization = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -9080,7 +9080,7 @@ export type ActionsSetAllowedActionsOrganizationVariables = {
  */
 export const fetchActionsSetAllowedActionsOrganization = (
   variables: ActionsSetAllowedActionsOrganizationVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -9109,7 +9109,7 @@ export const useActionsSetAllowedActionsOrganization = (
       ActionsSetAllowedActionsOrganizationVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -9152,7 +9152,7 @@ export type ActionsGetGithubActionsDefaultWorkflowPermissionsOrganizationVariabl
 export const fetchActionsGetGithubActionsDefaultWorkflowPermissionsOrganization =
   (
     variables: ActionsGetGithubActionsDefaultWorkflowPermissionsOrganizationVariables,
-    signal?: AbortSignal,
+    signal?: AbortSignal
   ) =>
     githubFetch<
       Schemas.ActionsGetDefaultWorkflowPermissions,
@@ -9177,7 +9177,7 @@ export const fetchActionsGetGithubActionsDefaultWorkflowPermissionsOrganization 
  */
 export const actionsGetGithubActionsDefaultWorkflowPermissionsOrganizationQuery =
   (
-    variables: ActionsGetGithubActionsDefaultWorkflowPermissionsOrganizationVariables,
+    variables: ActionsGetGithubActionsDefaultWorkflowPermissionsOrganizationVariables
   ): {
     queryKey: reactQuery.QueryKey;
     queryFn: ({
@@ -9195,7 +9195,7 @@ export const actionsGetGithubActionsDefaultWorkflowPermissionsOrganizationQuery 
     queryFn: ({ signal }: { signal?: AbortSignal }) =>
       fetchActionsGetGithubActionsDefaultWorkflowPermissionsOrganization(
         variables,
-        signal,
+        signal
       ),
   });
 
@@ -9216,7 +9216,7 @@ export const useSuspenseActionsGetGithubActionsDefaultWorkflowPermissionsOrganiz
         TData
       >,
       "queryKey" | "queryFn" | "initialData"
-    >,
+    >
   ) => {
     const { queryOptions } = useGithubContext(options);
     return reactQuery.useSuspenseQuery<
@@ -9225,7 +9225,7 @@ export const useSuspenseActionsGetGithubActionsDefaultWorkflowPermissionsOrganiz
       TData
     >({
       ...actionsGetGithubActionsDefaultWorkflowPermissionsOrganizationQuery(
-        variables,
+        variables
       ),
       ...options,
       ...queryOptions,
@@ -9249,7 +9249,7 @@ export const useActionsGetGithubActionsDefaultWorkflowPermissionsOrganization =
         TData
       >,
       "queryKey" | "queryFn" | "initialData"
-    >,
+    >
   ) => {
     const { queryOptions } = useGithubContext(options);
     return reactQuery.useQuery<
@@ -9258,7 +9258,7 @@ export const useActionsGetGithubActionsDefaultWorkflowPermissionsOrganization =
       TData
     >({
       ...actionsGetGithubActionsDefaultWorkflowPermissionsOrganizationQuery(
-        variables,
+        variables
       ),
       ...options,
       ...queryOptions,
@@ -9292,7 +9292,7 @@ export type ActionsSetGithubActionsDefaultWorkflowPermissionsOrganizationVariabl
 export const fetchActionsSetGithubActionsDefaultWorkflowPermissionsOrganization =
   (
     variables: ActionsSetGithubActionsDefaultWorkflowPermissionsOrganizationVariables,
-    signal?: AbortSignal,
+    signal?: AbortSignal
   ) =>
     githubFetch<
       undefined,
@@ -9324,7 +9324,7 @@ export const useActionsSetGithubActionsDefaultWorkflowPermissionsOrganization =
         ActionsSetGithubActionsDefaultWorkflowPermissionsOrganizationVariables
       >,
       "mutationFn"
-    >,
+    >
   ) => {
     const { fetcherOptions } = useGithubContext();
     return reactQuery.useMutation<
@@ -9333,7 +9333,7 @@ export const useActionsSetGithubActionsDefaultWorkflowPermissionsOrganization =
       ActionsSetGithubActionsDefaultWorkflowPermissionsOrganizationVariables
     >({
       mutationFn: (
-        variables: ActionsSetGithubActionsDefaultWorkflowPermissionsOrganizationVariables,
+        variables: ActionsSetGithubActionsDefaultWorkflowPermissionsOrganizationVariables
       ) =>
         fetchActionsSetGithubActionsDefaultWorkflowPermissionsOrganization({
           ...fetcherOptions,
@@ -9386,7 +9386,7 @@ export type ActionsListRequiredWorkflowsVariables = {
  */
 export const fetchActionsListRequiredWorkflows = (
   variables: ActionsListRequiredWorkflowsVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ActionsListRequiredWorkflowsResponse,
@@ -9410,7 +9410,7 @@ export const fetchActionsListRequiredWorkflows = (
  * For more information, see "[Required Workflows](https://docs.github.com/actions/using-workflows/required-workflows)."
  */
 export const actionsListRequiredWorkflowsQuery = (
-  variables: ActionsListRequiredWorkflowsVariables,
+  variables: ActionsListRequiredWorkflowsVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -9446,7 +9446,7 @@ export const useSuspenseActionsListRequiredWorkflows = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -9478,7 +9478,7 @@ export const useActionsListRequiredWorkflows = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -9539,7 +9539,7 @@ export type ActionsCreateRequiredWorkflowVariables = {
  */
 export const fetchActionsCreateRequiredWorkflow = (
   variables: ActionsCreateRequiredWorkflowVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.RequiredWorkflow,
@@ -9570,7 +9570,7 @@ export const useActionsCreateRequiredWorkflow = (
       ActionsCreateRequiredWorkflowVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -9611,7 +9611,7 @@ export type ActionsDeleteRequiredWorkflowVariables = {
  */
 export const fetchActionsDeleteRequiredWorkflow = (
   variables: ActionsDeleteRequiredWorkflowVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -9642,7 +9642,7 @@ export const useActionsDeleteRequiredWorkflow = (
       ActionsDeleteRequiredWorkflowVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -9682,7 +9682,7 @@ export type ActionsGetRequiredWorkflowVariables = {
  */
 export const fetchActionsGetRequiredWorkflow = (
   variables: ActionsGetRequiredWorkflowVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.RequiredWorkflow,
@@ -9706,7 +9706,7 @@ export const fetchActionsGetRequiredWorkflow = (
  * For more information, see "[Required Workflows](https://docs.github.com/actions/using-workflows/required-workflows)."
  */
 export const actionsGetRequiredWorkflowQuery = (
-  variables: ActionsGetRequiredWorkflowVariables,
+  variables: ActionsGetRequiredWorkflowVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -9742,7 +9742,7 @@ export const useSuspenseActionsGetRequiredWorkflow = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -9772,7 +9772,7 @@ export const useActionsGetRequiredWorkflow = <TData = Schemas.RequiredWorkflow>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -9837,7 +9837,7 @@ export type ActionsUpdateRequiredWorkflowVariables = {
  */
 export const fetchActionsUpdateRequiredWorkflow = (
   variables: ActionsUpdateRequiredWorkflowVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.RequiredWorkflow,
@@ -9868,7 +9868,7 @@ export const useActionsUpdateRequiredWorkflow = (
       ActionsUpdateRequiredWorkflowVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -9914,7 +9914,7 @@ export type ActionsListSelectedRepositoriesRequiredWorkflowVariables = {
  */
 export const fetchActionsListSelectedRepositoriesRequiredWorkflow = (
   variables: ActionsListSelectedRepositoriesRequiredWorkflowVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ActionsListSelectedRepositoriesRequiredWorkflowResponse,
@@ -9938,7 +9938,7 @@ export const fetchActionsListSelectedRepositoriesRequiredWorkflow = (
  * For more information, see "[Required Workflows](https://docs.github.com/actions/using-workflows/required-workflows)."
  */
 export const actionsListSelectedRepositoriesRequiredWorkflowQuery = (
-  variables: ActionsListSelectedRepositoriesRequiredWorkflowVariables,
+  variables: ActionsListSelectedRepositoriesRequiredWorkflowVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -9974,7 +9974,7 @@ export const useSuspenseActionsListSelectedRepositoriesRequiredWorkflow = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -10006,7 +10006,7 @@ export const useActionsListSelectedRepositoriesRequiredWorkflow = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -10055,7 +10055,7 @@ export type ActionsSetSelectedReposToRequiredWorkflowVariables = {
  */
 export const fetchActionsSetSelectedReposToRequiredWorkflow = (
   variables: ActionsSetSelectedReposToRequiredWorkflowVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -10086,7 +10086,7 @@ export const useActionsSetSelectedReposToRequiredWorkflow = (
       ActionsSetSelectedReposToRequiredWorkflowVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -10095,7 +10095,7 @@ export const useActionsSetSelectedReposToRequiredWorkflow = (
     ActionsSetSelectedReposToRequiredWorkflowVariables
   >({
     mutationFn: (
-      variables: ActionsSetSelectedReposToRequiredWorkflowVariables,
+      variables: ActionsSetSelectedReposToRequiredWorkflowVariables
     ) =>
       fetchActionsSetSelectedReposToRequiredWorkflow({
         ...fetcherOptions,
@@ -10136,7 +10136,7 @@ export type ActionsRemoveSelectedRepoFromRequiredWorkflowVariables = {
  */
 export const fetchActionsRemoveSelectedRepoFromRequiredWorkflow = (
   variables: ActionsRemoveSelectedRepoFromRequiredWorkflowVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -10167,7 +10167,7 @@ export const useActionsRemoveSelectedRepoFromRequiredWorkflow = (
       ActionsRemoveSelectedRepoFromRequiredWorkflowVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -10176,7 +10176,7 @@ export const useActionsRemoveSelectedRepoFromRequiredWorkflow = (
     ActionsRemoveSelectedRepoFromRequiredWorkflowVariables
   >({
     mutationFn: (
-      variables: ActionsRemoveSelectedRepoFromRequiredWorkflowVariables,
+      variables: ActionsRemoveSelectedRepoFromRequiredWorkflowVariables
     ) =>
       fetchActionsRemoveSelectedRepoFromRequiredWorkflow({
         ...fetcherOptions,
@@ -10217,7 +10217,7 @@ export type ActionsAddSelectedRepoToRequiredWorkflowVariables = {
  */
 export const fetchActionsAddSelectedRepoToRequiredWorkflow = (
   variables: ActionsAddSelectedRepoToRequiredWorkflowVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -10248,7 +10248,7 @@ export const useActionsAddSelectedRepoToRequiredWorkflow = (
       ActionsAddSelectedRepoToRequiredWorkflowVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -10257,7 +10257,7 @@ export const useActionsAddSelectedRepoToRequiredWorkflow = (
     ActionsAddSelectedRepoToRequiredWorkflowVariables
   >({
     mutationFn: (
-      variables: ActionsAddSelectedRepoToRequiredWorkflowVariables,
+      variables: ActionsAddSelectedRepoToRequiredWorkflowVariables
     ) =>
       fetchActionsAddSelectedRepoToRequiredWorkflow({
         ...fetcherOptions,
@@ -10309,7 +10309,7 @@ export type ActionsListSelfHostedRunnersForOrgVariables = {
  */
 export const fetchActionsListSelfHostedRunnersForOrg = (
   variables: ActionsListSelfHostedRunnersForOrgVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ActionsListSelfHostedRunnersForOrgResponse,
@@ -10331,7 +10331,7 @@ export const fetchActionsListSelfHostedRunnersForOrg = (
  * You must authenticate using an access token with the `admin:org` scope to use this endpoint.
  */
 export const actionsListSelfHostedRunnersForOrgQuery = (
-  variables: ActionsListSelfHostedRunnersForOrgVariables,
+  variables: ActionsListSelfHostedRunnersForOrgVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -10365,7 +10365,7 @@ export const useSuspenseActionsListSelfHostedRunnersForOrg = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -10395,7 +10395,7 @@ export const useActionsListSelfHostedRunnersForOrg = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -10433,7 +10433,7 @@ export type ActionsListRunnerApplicationsForOrgVariables = {
  */
 export const fetchActionsListRunnerApplicationsForOrg = (
   variables: ActionsListRunnerApplicationsForOrgVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ActionsListRunnerApplicationsForOrgResponse,
@@ -10455,7 +10455,7 @@ export const fetchActionsListRunnerApplicationsForOrg = (
  * You must authenticate using an access token with the `admin:org` scope to use this endpoint.
  */
 export const actionsListRunnerApplicationsForOrgQuery = (
-  variables: ActionsListRunnerApplicationsForOrgVariables,
+  variables: ActionsListRunnerApplicationsForOrgVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -10489,7 +10489,7 @@ export const useSuspenseActionsListRunnerApplicationsForOrg = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -10519,7 +10519,7 @@ export const useActionsListRunnerApplicationsForOrg = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -10562,7 +10562,7 @@ export type ActionsCreateRegistrationTokenForOrgVariables = {
  */
 export const fetchActionsCreateRegistrationTokenForOrg = (
   variables: ActionsCreateRegistrationTokenForOrgVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.AuthenticationToken,
@@ -10599,7 +10599,7 @@ export const useActionsCreateRegistrationTokenForOrg = (
       ActionsCreateRegistrationTokenForOrgVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -10646,7 +10646,7 @@ export type ActionsCreateRemoveTokenForOrgVariables = {
  */
 export const fetchActionsCreateRemoveTokenForOrg = (
   variables: ActionsCreateRemoveTokenForOrgVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.AuthenticationToken,
@@ -10684,7 +10684,7 @@ export const useActionsCreateRemoveTokenForOrg = (
       ActionsCreateRemoveTokenForOrgVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -10723,7 +10723,7 @@ export type ActionsDeleteSelfHostedRunnerFromOrgVariables = {
  */
 export const fetchActionsDeleteSelfHostedRunnerFromOrg = (
   variables: ActionsDeleteSelfHostedRunnerFromOrgVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -10752,7 +10752,7 @@ export const useActionsDeleteSelfHostedRunnerFromOrg = (
       ActionsDeleteSelfHostedRunnerFromOrgVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -10794,7 +10794,7 @@ export type ActionsGetSelfHostedRunnerForOrgVariables = {
  */
 export const fetchActionsGetSelfHostedRunnerForOrg = (
   variables: ActionsGetSelfHostedRunnerForOrgVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.Runner,
@@ -10816,7 +10816,7 @@ export const fetchActionsGetSelfHostedRunnerForOrg = (
  * You must authenticate using an access token with the `admin:org` scope to use this endpoint.
  */
 export const actionsGetSelfHostedRunnerForOrgQuery = (
-  variables: ActionsGetSelfHostedRunnerForOrgVariables,
+  variables: ActionsGetSelfHostedRunnerForOrgVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({ signal }: { signal?: AbortSignal }) => Promise<Schemas.Runner>;
@@ -10846,7 +10846,7 @@ export const useSuspenseActionsGetSelfHostedRunnerForOrg = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -10874,7 +10874,7 @@ export const useActionsGetSelfHostedRunnerForOrg = <TData = Schemas.Runner>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -10917,7 +10917,7 @@ export type ActionsRemoveAllCustomLabelsFromSelfHostedRunnerForOrgVariables = {
  */
 export const fetchActionsRemoveAllCustomLabelsFromSelfHostedRunnerForOrg = (
   variables: ActionsRemoveAllCustomLabelsFromSelfHostedRunnerForOrgVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Responses.ActionsRunnerLabelsReadonly,
@@ -10947,7 +10947,7 @@ export const useActionsRemoveAllCustomLabelsFromSelfHostedRunnerForOrg = (
       ActionsRemoveAllCustomLabelsFromSelfHostedRunnerForOrgVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -10956,7 +10956,7 @@ export const useActionsRemoveAllCustomLabelsFromSelfHostedRunnerForOrg = (
     ActionsRemoveAllCustomLabelsFromSelfHostedRunnerForOrgVariables
   >({
     mutationFn: (
-      variables: ActionsRemoveAllCustomLabelsFromSelfHostedRunnerForOrgVariables,
+      variables: ActionsRemoveAllCustomLabelsFromSelfHostedRunnerForOrgVariables
     ) =>
       fetchActionsRemoveAllCustomLabelsFromSelfHostedRunnerForOrg({
         ...fetcherOptions,
@@ -10994,7 +10994,7 @@ export type ActionsListLabelsForSelfHostedRunnerForOrgVariables = {
  */
 export const fetchActionsListLabelsForSelfHostedRunnerForOrg = (
   variables: ActionsListLabelsForSelfHostedRunnerForOrgVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Responses.ActionsRunnerLabels,
@@ -11016,7 +11016,7 @@ export const fetchActionsListLabelsForSelfHostedRunnerForOrg = (
  * You must authenticate using an access token with the `admin:org` scope to use this endpoint.
  */
 export const actionsListLabelsForSelfHostedRunnerForOrgQuery = (
-  variables: ActionsListLabelsForSelfHostedRunnerForOrgVariables,
+  variables: ActionsListLabelsForSelfHostedRunnerForOrgVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -11050,7 +11050,7 @@ export const useSuspenseActionsListLabelsForSelfHostedRunnerForOrg = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -11080,7 +11080,7 @@ export const useActionsListLabelsForSelfHostedRunnerForOrg = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -11139,7 +11139,7 @@ export type ActionsAddCustomLabelsToSelfHostedRunnerForOrgVariables = {
  */
 export const fetchActionsAddCustomLabelsToSelfHostedRunnerForOrg = (
   variables: ActionsAddCustomLabelsToSelfHostedRunnerForOrgVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Responses.ActionsRunnerLabels,
@@ -11168,7 +11168,7 @@ export const useActionsAddCustomLabelsToSelfHostedRunnerForOrg = (
       ActionsAddCustomLabelsToSelfHostedRunnerForOrgVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -11177,7 +11177,7 @@ export const useActionsAddCustomLabelsToSelfHostedRunnerForOrg = (
     ActionsAddCustomLabelsToSelfHostedRunnerForOrgVariables
   >({
     mutationFn: (
-      variables: ActionsAddCustomLabelsToSelfHostedRunnerForOrgVariables,
+      variables: ActionsAddCustomLabelsToSelfHostedRunnerForOrgVariables
     ) =>
       fetchActionsAddCustomLabelsToSelfHostedRunnerForOrg({
         ...fetcherOptions,
@@ -11233,7 +11233,7 @@ export type ActionsSetCustomLabelsForSelfHostedRunnerForOrgVariables = {
  */
 export const fetchActionsSetCustomLabelsForSelfHostedRunnerForOrg = (
   variables: ActionsSetCustomLabelsForSelfHostedRunnerForOrgVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Responses.ActionsRunnerLabels,
@@ -11263,7 +11263,7 @@ export const useActionsSetCustomLabelsForSelfHostedRunnerForOrg = (
       ActionsSetCustomLabelsForSelfHostedRunnerForOrgVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -11272,7 +11272,7 @@ export const useActionsSetCustomLabelsForSelfHostedRunnerForOrg = (
     ActionsSetCustomLabelsForSelfHostedRunnerForOrgVariables
   >({
     mutationFn: (
-      variables: ActionsSetCustomLabelsForSelfHostedRunnerForOrgVariables,
+      variables: ActionsSetCustomLabelsForSelfHostedRunnerForOrgVariables
     ) =>
       fetchActionsSetCustomLabelsForSelfHostedRunnerForOrg({
         ...fetcherOptions,
@@ -11324,7 +11324,7 @@ export type ActionsRemoveCustomLabelFromSelfHostedRunnerForOrgVariables = {
  */
 export const fetchActionsRemoveCustomLabelFromSelfHostedRunnerForOrg = (
   variables: ActionsRemoveCustomLabelFromSelfHostedRunnerForOrgVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Responses.ActionsRunnerLabels,
@@ -11357,7 +11357,7 @@ export const useActionsRemoveCustomLabelFromSelfHostedRunnerForOrg = (
       ActionsRemoveCustomLabelFromSelfHostedRunnerForOrgVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -11366,7 +11366,7 @@ export const useActionsRemoveCustomLabelFromSelfHostedRunnerForOrg = (
     ActionsRemoveCustomLabelFromSelfHostedRunnerForOrgVariables
   >({
     mutationFn: (
-      variables: ActionsRemoveCustomLabelFromSelfHostedRunnerForOrgVariables,
+      variables: ActionsRemoveCustomLabelFromSelfHostedRunnerForOrgVariables
     ) =>
       fetchActionsRemoveCustomLabelFromSelfHostedRunnerForOrg({
         ...fetcherOptions,
@@ -11415,7 +11415,7 @@ export type ActionsListOrgSecretsVariables = {
  */
 export const fetchActionsListOrgSecrets = (
   variables: ActionsListOrgSecretsVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ActionsListOrgSecretsResponse,
@@ -11435,7 +11435,7 @@ export const fetchActionsListOrgSecrets = (
  * Lists all secrets available in an organization without revealing their encrypted values. You must authenticate using an access token with the `admin:org` scope to use this endpoint. GitHub Apps must have the `secrets` organization permission to use this endpoint.
  */
 export const actionsListOrgSecretsQuery = (
-  variables: ActionsListOrgSecretsVariables,
+  variables: ActionsListOrgSecretsVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -11467,7 +11467,7 @@ export const useSuspenseActionsListOrgSecrets = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -11493,7 +11493,7 @@ export const useActionsListOrgSecrets = <TData = ActionsListOrgSecretsResponse>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -11525,7 +11525,7 @@ export type ActionsGetOrgPublicKeyVariables = {
  */
 export const fetchActionsGetOrgPublicKey = (
   variables: ActionsGetOrgPublicKeyVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.ActionsPublicKey,
@@ -11545,7 +11545,7 @@ export const fetchActionsGetOrgPublicKey = (
  * Gets your public key, which you need to encrypt secrets. You need to encrypt a secret before you can create or update secrets. You must authenticate using an access token with the `admin:org` scope to use this endpoint. GitHub Apps must have the `secrets` organization permission to use this endpoint.
  */
 export const actionsGetOrgPublicKeyQuery = (
-  variables: ActionsGetOrgPublicKeyVariables,
+  variables: ActionsGetOrgPublicKeyVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -11577,7 +11577,7 @@ export const useSuspenseActionsGetOrgPublicKey = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -11603,7 +11603,7 @@ export const useActionsGetOrgPublicKey = <TData = Schemas.ActionsPublicKey>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -11639,7 +11639,7 @@ export type ActionsDeleteOrgSecretVariables = {
  */
 export const fetchActionsDeleteOrgSecret = (
   variables: ActionsDeleteOrgSecretVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -11666,7 +11666,7 @@ export const useActionsDeleteOrgSecret = (
       ActionsDeleteOrgSecretVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -11702,7 +11702,7 @@ export type ActionsGetOrgSecretVariables = {
  */
 export const fetchActionsGetOrgSecret = (
   variables: ActionsGetOrgSecretVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.OrganizationActionsSecret,
@@ -11722,7 +11722,7 @@ export const fetchActionsGetOrgSecret = (
  * Gets a single organization secret without revealing its encrypted value. You must authenticate using an access token with the `admin:org` scope to use this endpoint. GitHub Apps must have the `secrets` organization permission to use this endpoint.
  */
 export const actionsGetOrgSecretQuery = (
-  variables: ActionsGetOrgSecretVariables,
+  variables: ActionsGetOrgSecretVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -11754,7 +11754,7 @@ export const useSuspenseActionsGetOrgSecret = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -11782,7 +11782,7 @@ export const useActionsGetOrgSecret = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -11916,7 +11916,7 @@ export type ActionsCreateOrUpdateOrgSecretVariables = {
  */
 export const fetchActionsCreateOrUpdateOrgSecret = (
   variables: ActionsCreateOrUpdateOrgSecretVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.EmptyObject,
@@ -12018,7 +12018,7 @@ export const useActionsCreateOrUpdateOrgSecret = (
       ActionsCreateOrUpdateOrgSecretVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -12076,7 +12076,7 @@ export type ActionsListSelectedReposForOrgSecretVariables = {
  */
 export const fetchActionsListSelectedReposForOrgSecret = (
   variables: ActionsListSelectedReposForOrgSecretVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ActionsListSelectedReposForOrgSecretResponse,
@@ -12096,7 +12096,7 @@ export const fetchActionsListSelectedReposForOrgSecret = (
  * Lists all repositories that have been selected when the `visibility` for repository access to a secret is set to `selected`. You must authenticate using an access token with the `admin:org` scope to use this endpoint. GitHub Apps must have the `secrets` organization permission to use this endpoint.
  */
 export const actionsListSelectedReposForOrgSecretQuery = (
-  variables: ActionsListSelectedReposForOrgSecretVariables,
+  variables: ActionsListSelectedReposForOrgSecretVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -12128,7 +12128,7 @@ export const useSuspenseActionsListSelectedReposForOrgSecret = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -12156,7 +12156,7 @@ export const useActionsListSelectedReposForOrgSecret = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -12201,7 +12201,7 @@ export type ActionsSetSelectedReposForOrgSecretVariables = {
  */
 export const fetchActionsSetSelectedReposForOrgSecret = (
   variables: ActionsSetSelectedReposForOrgSecretVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -12228,7 +12228,7 @@ export const useActionsSetSelectedReposForOrgSecret = (
       ActionsSetSelectedReposForOrgSecretVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -12269,7 +12269,7 @@ export type ActionsRemoveSelectedRepoFromOrgSecretVariables = {
  */
 export const fetchActionsRemoveSelectedRepoFromOrgSecret = (
   variables: ActionsRemoveSelectedRepoFromOrgSecretVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -12296,7 +12296,7 @@ export const useActionsRemoveSelectedRepoFromOrgSecret = (
       ActionsRemoveSelectedRepoFromOrgSecretVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -12337,7 +12337,7 @@ export type ActionsAddSelectedRepoToOrgSecretVariables = {
  */
 export const fetchActionsAddSelectedRepoToOrgSecret = (
   variables: ActionsAddSelectedRepoToOrgSecretVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -12364,7 +12364,7 @@ export const useActionsAddSelectedRepoToOrgSecret = (
       ActionsAddSelectedRepoToOrgSecretVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -12420,7 +12420,7 @@ export type ActionsListOrgVariablesVariables = {
  */
 export const fetchActionsListOrgVariables = (
   variables: ActionsListOrgVariablesVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ActionsListOrgVariablesResponse,
@@ -12440,7 +12440,7 @@ export const fetchActionsListOrgVariables = (
  * Lists all organization variables. You must authenticate using an access token with the `admin:org` scope to use this endpoint. GitHub Apps must have the `organization_actions_variables:read` organization permission to use this endpoint.
  */
 export const actionsListOrgVariablesQuery = (
-  variables: ActionsListOrgVariablesVariables,
+  variables: ActionsListOrgVariablesVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -12472,7 +12472,7 @@ export const useSuspenseActionsListOrgVariables = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -12500,7 +12500,7 @@ export const useActionsListOrgVariables = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -12554,7 +12554,7 @@ export type ActionsCreateOrgVariableVariables = {
  */
 export const fetchActionsCreateOrgVariable = (
   variables: ActionsCreateOrgVariableVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.EmptyObject,
@@ -12583,7 +12583,7 @@ export const useActionsCreateOrgVariable = (
       ActionsCreateOrgVariableVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -12621,7 +12621,7 @@ export type ActionsDeleteOrgVariableVariables = {
  */
 export const fetchActionsDeleteOrgVariable = (
   variables: ActionsDeleteOrgVariableVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -12650,7 +12650,7 @@ export const useActionsDeleteOrgVariable = (
       ActionsDeleteOrgVariableVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -12686,7 +12686,7 @@ export type ActionsGetOrgVariableVariables = {
  */
 export const fetchActionsGetOrgVariable = (
   variables: ActionsGetOrgVariableVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.OrganizationActionsVariable,
@@ -12706,7 +12706,7 @@ export const fetchActionsGetOrgVariable = (
  * Gets a specific variable in an organization. You must authenticate using an access token with the `admin:org` scope to use this endpoint. GitHub Apps must have the `organization_actions_variables:read` organization permission to use this endpoint.
  */
 export const actionsGetOrgVariableQuery = (
-  variables: ActionsGetOrgVariableVariables,
+  variables: ActionsGetOrgVariableVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -12738,7 +12738,7 @@ export const useSuspenseActionsGetOrgVariable = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -12766,7 +12766,7 @@ export const useActionsGetOrgVariable = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -12824,7 +12824,7 @@ export type ActionsUpdateOrgVariableVariables = {
  */
 export const fetchActionsUpdateOrgVariable = (
   variables: ActionsUpdateOrgVariableVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -12853,7 +12853,7 @@ export const useActionsUpdateOrgVariable = (
       ActionsUpdateOrgVariableVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -12911,7 +12911,7 @@ export type ActionsListSelectedReposForOrgVariableVariables = {
  */
 export const fetchActionsListSelectedReposForOrgVariable = (
   variables: ActionsListSelectedReposForOrgVariableVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ActionsListSelectedReposForOrgVariableResponse,
@@ -12931,7 +12931,7 @@ export const fetchActionsListSelectedReposForOrgVariable = (
  * Lists all repositories that can access an organization variable that is available to selected repositories. You must authenticate using an access token with the `admin:org` scope to use this endpoint. GitHub Apps must have the `organization_actions_variables:read` organization permission to use this endpoint.
  */
 export const actionsListSelectedReposForOrgVariableQuery = (
-  variables: ActionsListSelectedReposForOrgVariableVariables,
+  variables: ActionsListSelectedReposForOrgVariableVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -12963,7 +12963,7 @@ export const useSuspenseActionsListSelectedReposForOrgVariable = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -12991,7 +12991,7 @@ export const useActionsListSelectedReposForOrgVariable = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -13036,7 +13036,7 @@ export type ActionsSetSelectedReposForOrgVariableVariables = {
  */
 export const fetchActionsSetSelectedReposForOrgVariable = (
   variables: ActionsSetSelectedReposForOrgVariableVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -13063,7 +13063,7 @@ export const useActionsSetSelectedReposForOrgVariable = (
       ActionsSetSelectedReposForOrgVariableVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -13104,7 +13104,7 @@ export type ActionsRemoveSelectedRepoFromOrgVariableVariables = {
  */
 export const fetchActionsRemoveSelectedRepoFromOrgVariable = (
   variables: ActionsRemoveSelectedRepoFromOrgVariableVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -13131,7 +13131,7 @@ export const useActionsRemoveSelectedRepoFromOrgVariable = (
       ActionsRemoveSelectedRepoFromOrgVariableVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -13140,7 +13140,7 @@ export const useActionsRemoveSelectedRepoFromOrgVariable = (
     ActionsRemoveSelectedRepoFromOrgVariableVariables
   >({
     mutationFn: (
-      variables: ActionsRemoveSelectedRepoFromOrgVariableVariables,
+      variables: ActionsRemoveSelectedRepoFromOrgVariableVariables
     ) =>
       fetchActionsRemoveSelectedRepoFromOrgVariable({
         ...fetcherOptions,
@@ -13174,7 +13174,7 @@ export type ActionsAddSelectedRepoToOrgVariableVariables = {
  */
 export const fetchActionsAddSelectedRepoToOrgVariable = (
   variables: ActionsAddSelectedRepoToOrgVariableVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -13201,7 +13201,7 @@ export const useActionsAddSelectedRepoToOrgVariable = (
       ActionsAddSelectedRepoToOrgVariableVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -13254,7 +13254,7 @@ export type OrgsListBlockedUsersVariables = {
  */
 export const fetchOrgsListBlockedUsers = (
   variables: OrgsListBlockedUsersVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     OrgsListBlockedUsersResponse,
@@ -13269,7 +13269,7 @@ export const fetchOrgsListBlockedUsers = (
  * List the users blocked by an organization.
  */
 export const orgsListBlockedUsersQuery = (
-  variables: OrgsListBlockedUsersVariables,
+  variables: OrgsListBlockedUsersVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -13301,7 +13301,7 @@ export const useSuspenseOrgsListBlockedUsers = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -13327,7 +13327,7 @@ export const useOrgsListBlockedUsers = <TData = OrgsListBlockedUsersResponse>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -13360,7 +13360,7 @@ export type OrgsUnblockUserVariables = {
 
 export const fetchOrgsUnblockUser = (
   variables: OrgsUnblockUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -13384,7 +13384,7 @@ export const useOrgsUnblockUser = (
       OrgsUnblockUserVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -13420,7 +13420,7 @@ export type OrgsCheckBlockedUserVariables = {
 
 export const fetchOrgsCheckBlockedUser = (
   variables: OrgsCheckBlockedUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -13437,7 +13437,7 @@ export const fetchOrgsCheckBlockedUser = (
   });
 
 export const orgsCheckBlockedUserQuery = (
-  variables: OrgsCheckBlockedUserVariables,
+  variables: OrgsCheckBlockedUserVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({ signal }: { signal?: AbortSignal }) => Promise<undefined>;
@@ -13456,7 +13456,7 @@ export const useSuspenseOrgsCheckBlockedUser = <TData = undefined>(
   options?: Omit<
     reactQuery.UseQueryOptions<undefined, OrgsCheckBlockedUserError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -13475,7 +13475,7 @@ export const useOrgsCheckBlockedUser = <TData = undefined>(
   options?: Omit<
     reactQuery.UseQueryOptions<undefined, OrgsCheckBlockedUserError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<undefined, OrgsCheckBlockedUserError, TData>({
@@ -13507,7 +13507,7 @@ export type OrgsBlockUserVariables = {
 
 export const fetchOrgsBlockUser = (
   variables: OrgsBlockUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -13531,7 +13531,7 @@ export const useOrgsBlockUser = (
       OrgsBlockUserVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -13633,7 +13633,7 @@ export type CodeScanningListAlertsForOrgVariables = {
  */
 export const fetchCodeScanningListAlertsForOrg = (
   variables: CodeScanningListAlertsForOrgVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     CodeScanningListAlertsForOrgResponse,
@@ -13659,7 +13659,7 @@ export const fetchCodeScanningListAlertsForOrg = (
  * GitHub Apps must have the `security_events` read permission to use this endpoint.
  */
 export const codeScanningListAlertsForOrgQuery = (
-  variables: CodeScanningListAlertsForOrgVariables,
+  variables: CodeScanningListAlertsForOrgVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -13697,7 +13697,7 @@ export const useSuspenseCodeScanningListAlertsForOrg = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -13731,7 +13731,7 @@ export const useCodeScanningListAlertsForOrg = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -13807,7 +13807,7 @@ export type CodespacesListInOrganizationVariables = {
  */
 export const fetchCodespacesListInOrganization = (
   variables: CodespacesListInOrganizationVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     CodespacesListInOrganizationResponse,
@@ -13824,7 +13824,7 @@ export const fetchCodespacesListInOrganization = (
  * You must authenticate using an access token with the `admin:org` scope to use this endpoint.
  */
 export const codespacesListInOrganizationQuery = (
-  variables: CodespacesListInOrganizationVariables,
+  variables: CodespacesListInOrganizationVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -13858,7 +13858,7 @@ export const useSuspenseCodespacesListInOrganization = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -13888,7 +13888,7 @@ export const useCodespacesListInOrganization = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -13956,7 +13956,7 @@ export type CodespacesSetCodespacesBillingVariables = {
  */
 export const fetchCodespacesSetCodespacesBilling = (
   variables: CodespacesSetCodespacesBillingVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -13984,7 +13984,7 @@ export const useCodespacesSetCodespacesBilling = (
       CodespacesSetCodespacesBillingVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -14044,7 +14044,7 @@ export type CodespacesDeleteCodespacesBillingUsersVariables = {
  */
 export const fetchCodespacesDeleteCodespacesBillingUsers = (
   variables: CodespacesDeleteCodespacesBillingUsersVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -14072,7 +14072,7 @@ export const useCodespacesDeleteCodespacesBillingUsers = (
       CodespacesDeleteCodespacesBillingUsersVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -14135,7 +14135,7 @@ export type CodespacesSetCodespacesBillingUsersVariables = {
  */
 export const fetchCodespacesSetCodespacesBillingUsers = (
   variables: CodespacesSetCodespacesBillingUsersVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -14163,7 +14163,7 @@ export const useCodespacesSetCodespacesBillingUsers = (
       CodespacesSetCodespacesBillingUsersVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -14220,7 +14220,7 @@ export type CodespacesListOrgSecretsVariables = {
  */
 export const fetchCodespacesListOrgSecrets = (
   variables: CodespacesListOrgSecretsVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     CodespacesListOrgSecretsResponse,
@@ -14241,7 +14241,7 @@ export const fetchCodespacesListOrgSecrets = (
  * You must authenticate using an access token with the `admin:org` scope to use this endpoint.
  */
 export const codespacesListOrgSecretsQuery = (
-  variables: CodespacesListOrgSecretsVariables,
+  variables: CodespacesListOrgSecretsVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -14274,7 +14274,7 @@ export const useSuspenseCodespacesListOrgSecrets = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -14303,7 +14303,7 @@ export const useCodespacesListOrgSecrets = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -14335,7 +14335,7 @@ export type CodespacesGetOrgPublicKeyVariables = {
  */
 export const fetchCodespacesGetOrgPublicKey = (
   variables: CodespacesGetOrgPublicKeyVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.CodespacesPublicKey,
@@ -14355,7 +14355,7 @@ export const fetchCodespacesGetOrgPublicKey = (
  * Gets a public key for an organization, which is required in order to encrypt secrets. You need to encrypt the value of a secret before you can create or update secrets. You must authenticate using an access token with the `admin:org` scope to use this endpoint.
  */
 export const codespacesGetOrgPublicKeyQuery = (
-  variables: CodespacesGetOrgPublicKeyVariables,
+  variables: CodespacesGetOrgPublicKeyVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -14387,7 +14387,7 @@ export const useSuspenseCodespacesGetOrgPublicKey = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -14415,7 +14415,7 @@ export const useCodespacesGetOrgPublicKey = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -14454,7 +14454,7 @@ export type CodespacesDeleteOrgSecretVariables = {
  */
 export const fetchCodespacesDeleteOrgSecret = (
   variables: CodespacesDeleteOrgSecretVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -14481,7 +14481,7 @@ export const useCodespacesDeleteOrgSecret = (
       CodespacesDeleteOrgSecretVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -14518,7 +14518,7 @@ export type CodespacesGetOrgSecretVariables = {
  */
 export const fetchCodespacesGetOrgSecret = (
   variables: CodespacesGetOrgSecretVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.CodespacesOrgSecret,
@@ -14539,7 +14539,7 @@ export const fetchCodespacesGetOrgSecret = (
  * You must authenticate using an access token with the `admin:org` scope to use this endpoint.
  */
 export const codespacesGetOrgSecretQuery = (
-  variables: CodespacesGetOrgSecretVariables,
+  variables: CodespacesGetOrgSecretVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -14572,7 +14572,7 @@ export const useSuspenseCodespacesGetOrgSecret = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -14599,7 +14599,7 @@ export const useCodespacesGetOrgSecret = <TData = Schemas.CodespacesOrgSecret>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -14740,7 +14740,7 @@ export type CodespacesCreateOrUpdateOrgSecretVariables = {
  */
 export const fetchCodespacesCreateOrUpdateOrgSecret = (
   variables: CodespacesCreateOrUpdateOrgSecretVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.EmptyObject,
@@ -14841,7 +14841,7 @@ export const useCodespacesCreateOrUpdateOrgSecret = (
       CodespacesCreateOrUpdateOrgSecretVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -14905,7 +14905,7 @@ export type CodespacesListSelectedReposForOrgSecretVariables = {
  */
 export const fetchCodespacesListSelectedReposForOrgSecret = (
   variables: CodespacesListSelectedReposForOrgSecretVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     CodespacesListSelectedReposForOrgSecretResponse,
@@ -14925,7 +14925,7 @@ export const fetchCodespacesListSelectedReposForOrgSecret = (
  * Lists all repositories that have been selected when the `visibility` for repository access to a secret is set to `selected`. You must authenticate using an access token with the `admin:org` scope to use this endpoint.
  */
 export const codespacesListSelectedReposForOrgSecretQuery = (
-  variables: CodespacesListSelectedReposForOrgSecretVariables,
+  variables: CodespacesListSelectedReposForOrgSecretVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -14957,7 +14957,7 @@ export const useSuspenseCodespacesListSelectedReposForOrgSecret = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -14985,7 +14985,7 @@ export const useCodespacesListSelectedReposForOrgSecret = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -15032,7 +15032,7 @@ export type CodespacesSetSelectedReposForOrgSecretVariables = {
  */
 export const fetchCodespacesSetSelectedReposForOrgSecret = (
   variables: CodespacesSetSelectedReposForOrgSecretVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -15059,7 +15059,7 @@ export const useCodespacesSetSelectedReposForOrgSecret = (
       CodespacesSetSelectedReposForOrgSecretVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -15109,7 +15109,7 @@ export type CodespacesRemoveSelectedRepoFromOrgSecretVariables = {
  */
 export const fetchCodespacesRemoveSelectedRepoFromOrgSecret = (
   variables: CodespacesRemoveSelectedRepoFromOrgSecretVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -15136,7 +15136,7 @@ export const useCodespacesRemoveSelectedRepoFromOrgSecret = (
       CodespacesRemoveSelectedRepoFromOrgSecretVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -15145,7 +15145,7 @@ export const useCodespacesRemoveSelectedRepoFromOrgSecret = (
     CodespacesRemoveSelectedRepoFromOrgSecretVariables
   >({
     mutationFn: (
-      variables: CodespacesRemoveSelectedRepoFromOrgSecretVariables,
+      variables: CodespacesRemoveSelectedRepoFromOrgSecretVariables
     ) =>
       fetchCodespacesRemoveSelectedRepoFromOrgSecret({
         ...fetcherOptions,
@@ -15187,7 +15187,7 @@ export type CodespacesAddSelectedRepoToOrgSecretVariables = {
  */
 export const fetchCodespacesAddSelectedRepoToOrgSecret = (
   variables: CodespacesAddSelectedRepoToOrgSecretVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -15214,7 +15214,7 @@ export const useCodespacesAddSelectedRepoToOrgSecret = (
       CodespacesAddSelectedRepoToOrgSecretVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -15356,7 +15356,7 @@ export type DependabotListAlertsForOrgVariables = {
  */
 export const fetchDependabotListAlertsForOrg = (
   variables: DependabotListAlertsForOrgVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     DependabotListAlertsForOrgResponse,
@@ -15382,7 +15382,7 @@ export const fetchDependabotListAlertsForOrg = (
  * GitHub Apps must have **Dependabot alerts** read permission to use this endpoint.
  */
 export const dependabotListAlertsForOrgQuery = (
-  variables: DependabotListAlertsForOrgVariables,
+  variables: DependabotListAlertsForOrgVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -15420,7 +15420,7 @@ export const useSuspenseDependabotListAlertsForOrg = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -15454,7 +15454,7 @@ export const useDependabotListAlertsForOrg = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -15507,7 +15507,7 @@ export type DependabotListOrgSecretsVariables = {
  */
 export const fetchDependabotListOrgSecrets = (
   variables: DependabotListOrgSecretsVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     DependabotListOrgSecretsResponse,
@@ -15527,7 +15527,7 @@ export const fetchDependabotListOrgSecrets = (
  * Lists all secrets available in an organization without revealing their encrypted values. You must authenticate using an access token with the `admin:org` scope to use this endpoint. GitHub Apps must have the `dependabot_secrets` organization permission to use this endpoint.
  */
 export const dependabotListOrgSecretsQuery = (
-  variables: DependabotListOrgSecretsVariables,
+  variables: DependabotListOrgSecretsVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -15559,7 +15559,7 @@ export const useSuspenseDependabotListOrgSecrets = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -15587,7 +15587,7 @@ export const useDependabotListOrgSecrets = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -15619,7 +15619,7 @@ export type DependabotGetOrgPublicKeyVariables = {
  */
 export const fetchDependabotGetOrgPublicKey = (
   variables: DependabotGetOrgPublicKeyVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.DependabotPublicKey,
@@ -15639,7 +15639,7 @@ export const fetchDependabotGetOrgPublicKey = (
  * Gets your public key, which you need to encrypt secrets. You need to encrypt a secret before you can create or update secrets. You must authenticate using an access token with the `admin:org` scope to use this endpoint. GitHub Apps must have the `dependabot_secrets` organization permission to use this endpoint.
  */
 export const dependabotGetOrgPublicKeyQuery = (
-  variables: DependabotGetOrgPublicKeyVariables,
+  variables: DependabotGetOrgPublicKeyVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -15671,7 +15671,7 @@ export const useSuspenseDependabotGetOrgPublicKey = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -15699,7 +15699,7 @@ export const useDependabotGetOrgPublicKey = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -15735,7 +15735,7 @@ export type DependabotDeleteOrgSecretVariables = {
  */
 export const fetchDependabotDeleteOrgSecret = (
   variables: DependabotDeleteOrgSecretVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -15762,7 +15762,7 @@ export const useDependabotDeleteOrgSecret = (
       DependabotDeleteOrgSecretVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -15798,7 +15798,7 @@ export type DependabotGetOrgSecretVariables = {
  */
 export const fetchDependabotGetOrgSecret = (
   variables: DependabotGetOrgSecretVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.OrganizationDependabotSecret,
@@ -15818,7 +15818,7 @@ export const fetchDependabotGetOrgSecret = (
  * Gets a single organization secret without revealing its encrypted value. You must authenticate using an access token with the `admin:org` scope to use this endpoint. GitHub Apps must have the `dependabot_secrets` organization permission to use this endpoint.
  */
 export const dependabotGetOrgSecretQuery = (
-  variables: DependabotGetOrgSecretVariables,
+  variables: DependabotGetOrgSecretVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -15850,7 +15850,7 @@ export const useSuspenseDependabotGetOrgSecret = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -15878,7 +15878,7 @@ export const useDependabotGetOrgSecret = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -16012,7 +16012,7 @@ export type DependabotCreateOrUpdateOrgSecretVariables = {
  */
 export const fetchDependabotCreateOrUpdateOrgSecret = (
   variables: DependabotCreateOrUpdateOrgSecretVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.EmptyObject,
@@ -16114,7 +16114,7 @@ export const useDependabotCreateOrUpdateOrgSecret = (
       DependabotCreateOrUpdateOrgSecretVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -16175,7 +16175,7 @@ export type DependabotListSelectedReposForOrgSecretVariables = {
  */
 export const fetchDependabotListSelectedReposForOrgSecret = (
   variables: DependabotListSelectedReposForOrgSecretVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     DependabotListSelectedReposForOrgSecretResponse,
@@ -16195,7 +16195,7 @@ export const fetchDependabotListSelectedReposForOrgSecret = (
  * Lists all repositories that have been selected when the `visibility` for repository access to a secret is set to `selected`. You must authenticate using an access token with the `admin:org` scope to use this endpoint. GitHub Apps must have the `dependabot_secrets` organization permission to use this endpoint.
  */
 export const dependabotListSelectedReposForOrgSecretQuery = (
-  variables: DependabotListSelectedReposForOrgSecretVariables,
+  variables: DependabotListSelectedReposForOrgSecretVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -16227,7 +16227,7 @@ export const useSuspenseDependabotListSelectedReposForOrgSecret = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -16255,7 +16255,7 @@ export const useDependabotListSelectedReposForOrgSecret = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -16300,7 +16300,7 @@ export type DependabotSetSelectedReposForOrgSecretVariables = {
  */
 export const fetchDependabotSetSelectedReposForOrgSecret = (
   variables: DependabotSetSelectedReposForOrgSecretVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -16327,7 +16327,7 @@ export const useDependabotSetSelectedReposForOrgSecret = (
       DependabotSetSelectedReposForOrgSecretVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -16368,7 +16368,7 @@ export type DependabotRemoveSelectedRepoFromOrgSecretVariables = {
  */
 export const fetchDependabotRemoveSelectedRepoFromOrgSecret = (
   variables: DependabotRemoveSelectedRepoFromOrgSecretVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -16395,7 +16395,7 @@ export const useDependabotRemoveSelectedRepoFromOrgSecret = (
       DependabotRemoveSelectedRepoFromOrgSecretVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -16404,7 +16404,7 @@ export const useDependabotRemoveSelectedRepoFromOrgSecret = (
     DependabotRemoveSelectedRepoFromOrgSecretVariables
   >({
     mutationFn: (
-      variables: DependabotRemoveSelectedRepoFromOrgSecretVariables,
+      variables: DependabotRemoveSelectedRepoFromOrgSecretVariables
     ) =>
       fetchDependabotRemoveSelectedRepoFromOrgSecret({
         ...fetcherOptions,
@@ -16438,7 +16438,7 @@ export type DependabotAddSelectedRepoToOrgSecretVariables = {
  */
 export const fetchDependabotAddSelectedRepoToOrgSecret = (
   variables: DependabotAddSelectedRepoToOrgSecretVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -16465,7 +16465,7 @@ export const useDependabotAddSelectedRepoToOrgSecret = (
       DependabotAddSelectedRepoToOrgSecretVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -16515,7 +16515,7 @@ export type ActivityListPublicOrgEventsVariables = {
 
 export const fetchActivityListPublicOrgEvents = (
   variables: ActivityListPublicOrgEventsVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ActivityListPublicOrgEventsResponse,
@@ -16527,7 +16527,7 @@ export const fetchActivityListPublicOrgEvents = (
   >({ url: "/orgs/{org}/events", method: "get", ...variables, signal });
 
 export const activityListPublicOrgEventsQuery = (
-  variables: ActivityListPublicOrgEventsVariables,
+  variables: ActivityListPublicOrgEventsVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -16556,7 +16556,7 @@ export const useSuspenseActivityListPublicOrgEvents = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -16581,7 +16581,7 @@ export const useActivityListPublicOrgEvents = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -16635,7 +16635,7 @@ export type OrgsListFailedInvitationsVariables = {
  */
 export const fetchOrgsListFailedInvitations = (
   variables: OrgsListFailedInvitationsVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     OrgsListFailedInvitationsResponse,
@@ -16655,7 +16655,7 @@ export const fetchOrgsListFailedInvitations = (
  * The return hash contains `failed_at` and `failed_reason` fields which represent the time at which the invitation failed and the reason for the failure.
  */
 export const orgsListFailedInvitationsQuery = (
-  variables: OrgsListFailedInvitationsVariables,
+  variables: OrgsListFailedInvitationsVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -16687,7 +16687,7 @@ export const useSuspenseOrgsListFailedInvitations = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -16715,7 +16715,7 @@ export const useOrgsListFailedInvitations = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -16765,7 +16765,7 @@ export type OrgsListWebhooksVariables = {
 
 export const fetchOrgsListWebhooks = (
   variables: OrgsListWebhooksVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     OrgsListWebhooksResponse,
@@ -16777,7 +16777,7 @@ export const fetchOrgsListWebhooks = (
   >({ url: "/orgs/{org}/hooks", method: "get", ...variables, signal });
 
 export const orgsListWebhooksQuery = (
-  variables: OrgsListWebhooksVariables,
+  variables: OrgsListWebhooksVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -16804,7 +16804,7 @@ export const useSuspenseOrgsListWebhooks = <TData = OrgsListWebhooksResponse>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -16827,7 +16827,7 @@ export const useOrgsListWebhooks = <TData = OrgsListWebhooksResponse>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -16905,7 +16905,7 @@ export type OrgsCreateWebhookVariables = {
  */
 export const fetchOrgsCreateWebhook = (
   variables: OrgsCreateWebhookVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.OrgHook,
@@ -16927,7 +16927,7 @@ export const useOrgsCreateWebhook = (
       OrgsCreateWebhookVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -16963,7 +16963,7 @@ export type OrgsDeleteWebhookVariables = {
 
 export const fetchOrgsDeleteWebhook = (
   variables: OrgsDeleteWebhookVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -16987,7 +16987,7 @@ export const useOrgsDeleteWebhook = (
       OrgsDeleteWebhookVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -17026,7 +17026,7 @@ export type OrgsGetWebhookVariables = {
  */
 export const fetchOrgsGetWebhook = (
   variables: OrgsGetWebhookVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.OrgHook,
@@ -17041,7 +17041,7 @@ export const fetchOrgsGetWebhook = (
  * Returns a webhook configured in an organization. To get only the webhook `config` properties, see "[Get a webhook configuration for an organization](/rest/reference/orgs#get-a-webhook-configuration-for-an-organization)."
  */
 export const orgsGetWebhookQuery = (
-  variables: OrgsGetWebhookVariables,
+  variables: OrgsGetWebhookVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({ signal }: { signal?: AbortSignal }) => Promise<Schemas.OrgHook>;
@@ -17063,7 +17063,7 @@ export const useSuspenseOrgsGetWebhook = <TData = Schemas.OrgHook>(
   options?: Omit<
     reactQuery.UseQueryOptions<Schemas.OrgHook, OrgsGetWebhookError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -17085,7 +17085,7 @@ export const useOrgsGetWebhook = <TData = Schemas.OrgHook>(
   options?: Omit<
     reactQuery.UseQueryOptions<Schemas.OrgHook, OrgsGetWebhookError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.OrgHook, OrgsGetWebhookError, TData>({
@@ -17155,7 +17155,7 @@ export type OrgsUpdateWebhookVariables = {
  */
 export const fetchOrgsUpdateWebhook = (
   variables: OrgsUpdateWebhookVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.OrgHook,
@@ -17182,7 +17182,7 @@ export const useOrgsUpdateWebhook = (
       OrgsUpdateWebhookVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -17220,7 +17220,7 @@ export type OrgsGetWebhookConfigForOrgVariables = {
  */
 export const fetchOrgsGetWebhookConfigForOrg = (
   variables: OrgsGetWebhookConfigForOrgVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.WebhookConfig,
@@ -17242,7 +17242,7 @@ export const fetchOrgsGetWebhookConfigForOrg = (
  * Access tokens must have the `admin:org_hook` scope, and GitHub Apps must have the `organization_hooks:read` permission.
  */
 export const orgsGetWebhookConfigForOrgQuery = (
-  variables: OrgsGetWebhookConfigForOrgVariables,
+  variables: OrgsGetWebhookConfigForOrgVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -17276,7 +17276,7 @@ export const useSuspenseOrgsGetWebhookConfigForOrg = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -17304,7 +17304,7 @@ export const useOrgsGetWebhookConfigForOrg = <TData = Schemas.WebhookConfig>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -17351,7 +17351,7 @@ export type OrgsUpdateWebhookConfigForOrgVariables = {
  */
 export const fetchOrgsUpdateWebhookConfigForOrg = (
   variables: OrgsUpdateWebhookConfigForOrgVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.WebhookConfig,
@@ -17380,7 +17380,7 @@ export const useOrgsUpdateWebhookConfigForOrg = (
       OrgsUpdateWebhookConfigForOrgVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -17442,7 +17442,7 @@ export type OrgsListWebhookDeliveriesVariables = {
  */
 export const fetchOrgsListWebhookDeliveries = (
   variables: OrgsListWebhookDeliveriesVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     OrgsListWebhookDeliveriesResponse,
@@ -17462,7 +17462,7 @@ export const fetchOrgsListWebhookDeliveries = (
  * Returns a list of webhook deliveries for a webhook configured in an organization.
  */
 export const orgsListWebhookDeliveriesQuery = (
-  variables: OrgsListWebhookDeliveriesVariables,
+  variables: OrgsListWebhookDeliveriesVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -17494,7 +17494,7 @@ export const useSuspenseOrgsListWebhookDeliveries = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -17522,7 +17522,7 @@ export const useOrgsListWebhookDeliveries = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -17568,7 +17568,7 @@ export type OrgsGetWebhookDeliveryVariables = {
  */
 export const fetchOrgsGetWebhookDelivery = (
   variables: OrgsGetWebhookDeliveryVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.HookDelivery,
@@ -17588,7 +17588,7 @@ export const fetchOrgsGetWebhookDelivery = (
  * Returns a delivery for a webhook configured in an organization.
  */
 export const orgsGetWebhookDeliveryQuery = (
-  variables: OrgsGetWebhookDeliveryVariables,
+  variables: OrgsGetWebhookDeliveryVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -17618,7 +17618,7 @@ export const useSuspenseOrgsGetWebhookDelivery = <TData = Schemas.HookDelivery>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -17644,7 +17644,7 @@ export const useOrgsGetWebhookDelivery = <TData = Schemas.HookDelivery>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -17690,7 +17690,7 @@ export type OrgsRedeliverWebhookDeliveryVariables = {
  */
 export const fetchOrgsRedeliverWebhookDelivery = (
   variables: OrgsRedeliverWebhookDeliveryVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Responses.Accepted,
@@ -17717,7 +17717,7 @@ export const useOrgsRedeliverWebhookDelivery = (
       OrgsRedeliverWebhookDeliveryVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -17756,7 +17756,7 @@ export type OrgsPingWebhookVariables = {
  */
 export const fetchOrgsPingWebhook = (
   variables: OrgsPingWebhookVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -17783,7 +17783,7 @@ export const useOrgsPingWebhook = (
       OrgsPingWebhookVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -17817,7 +17817,7 @@ export type AppsGetOrgInstallationVariables = {
  */
 export const fetchAppsGetOrgInstallation = (
   variables: AppsGetOrgInstallationVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.Installation,
@@ -17834,7 +17834,7 @@ export const fetchAppsGetOrgInstallation = (
  * You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint.
  */
 export const appsGetOrgInstallationQuery = (
-  variables: AppsGetOrgInstallationVariables,
+  variables: AppsGetOrgInstallationVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -17866,7 +17866,7 @@ export const useSuspenseAppsGetOrgInstallation = <TData = Schemas.Installation>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -17894,7 +17894,7 @@ export const useAppsGetOrgInstallation = <TData = Schemas.Installation>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -17947,7 +17947,7 @@ export type OrgsListAppInstallationsVariables = {
  */
 export const fetchOrgsListAppInstallations = (
   variables: OrgsListAppInstallationsVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     OrgsListAppInstallationsResponse,
@@ -17962,7 +17962,7 @@ export const fetchOrgsListAppInstallations = (
  * Lists all GitHub Apps in an organization. The installation count includes all GitHub Apps installed on repositories in the organization. You must be an organization owner with `admin:read` scope to use this endpoint.
  */
 export const orgsListAppInstallationsQuery = (
-  variables: OrgsListAppInstallationsVariables,
+  variables: OrgsListAppInstallationsVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -17994,7 +17994,7 @@ export const useSuspenseOrgsListAppInstallations = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -18022,7 +18022,7 @@ export const useOrgsListAppInstallations = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -18055,7 +18055,7 @@ export type InteractionsRemoveRestrictionsForOrgVariables = {
  */
 export const fetchInteractionsRemoveRestrictionsForOrg = (
   variables: InteractionsRemoveRestrictionsForOrgVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -18082,7 +18082,7 @@ export const useInteractionsRemoveRestrictionsForOrg = (
       InteractionsRemoveRestrictionsForOrgVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -18118,7 +18118,7 @@ export type InteractionsGetRestrictionsForOrgVariables = {
  */
 export const fetchInteractionsGetRestrictionsForOrg = (
   variables: InteractionsGetRestrictionsForOrgVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.InteractionLimitResponse | {},
@@ -18138,7 +18138,7 @@ export const fetchInteractionsGetRestrictionsForOrg = (
  * Shows which type of GitHub user can interact with this organization and when the restriction expires. If there is no restrictions, you will see an empty response.
  */
 export const interactionsGetRestrictionsForOrgQuery = (
-  variables: InteractionsGetRestrictionsForOrgVariables,
+  variables: InteractionsGetRestrictionsForOrgVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -18170,7 +18170,7 @@ export const useSuspenseInteractionsGetRestrictionsForOrg = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -18198,7 +18198,7 @@ export const useInteractionsGetRestrictionsForOrg = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -18234,7 +18234,7 @@ export type InteractionsSetRestrictionsForOrgVariables = {
  */
 export const fetchInteractionsSetRestrictionsForOrg = (
   variables: InteractionsSetRestrictionsForOrgVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.InteractionLimitResponse,
@@ -18261,7 +18261,7 @@ export const useInteractionsSetRestrictionsForOrg = (
       InteractionsSetRestrictionsForOrgVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -18335,7 +18335,7 @@ export type OrgsListPendingInvitationsVariables = {
  */
 export const fetchOrgsListPendingInvitations = (
   variables: OrgsListPendingInvitationsVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     OrgsListPendingInvitationsResponse,
@@ -18350,7 +18350,7 @@ export const fetchOrgsListPendingInvitations = (
  * The return hash contains a `role` field which refers to the Organization Invitation role and will be one of the following values: `direct_member`, `admin`, `billing_manager`, or `hiring_manager`. If the invitee is not a GitHub member, the `login` field in the return hash will be `null`.
  */
 export const orgsListPendingInvitationsQuery = (
-  variables: OrgsListPendingInvitationsVariables,
+  variables: OrgsListPendingInvitationsVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -18382,7 +18382,7 @@ export const useSuspenseOrgsListPendingInvitations = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -18410,7 +18410,7 @@ export const useOrgsListPendingInvitations = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -18478,7 +18478,7 @@ export type OrgsCreateInvitationVariables = {
  */
 export const fetchOrgsCreateInvitation = (
   variables: OrgsCreateInvitationVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.OrganizationInvitation,
@@ -18502,7 +18502,7 @@ export const useOrgsCreateInvitation = (
       OrgsCreateInvitationVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -18549,7 +18549,7 @@ export type OrgsCancelInvitationVariables = {
  */
 export const fetchOrgsCancelInvitation = (
   variables: OrgsCancelInvitationVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -18578,7 +18578,7 @@ export const useOrgsCancelInvitation = (
       OrgsCancelInvitationVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -18635,7 +18635,7 @@ export type OrgsListInvitationTeamsVariables = {
  */
 export const fetchOrgsListInvitationTeams = (
   variables: OrgsListInvitationTeamsVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     OrgsListInvitationTeamsResponse,
@@ -18655,7 +18655,7 @@ export const fetchOrgsListInvitationTeams = (
  * List all teams associated with an invitation. In order to see invitations in an organization, the authenticated user must be an organization owner.
  */
 export const orgsListInvitationTeamsQuery = (
-  variables: OrgsListInvitationTeamsVariables,
+  variables: OrgsListInvitationTeamsVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -18687,7 +18687,7 @@ export const useSuspenseOrgsListInvitationTeams = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -18715,7 +18715,7 @@ export const useOrgsListInvitationTeams = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -18813,7 +18813,7 @@ export type IssuesListForOrgVariables = {
  */
 export const fetchIssuesListForOrg = (
   variables: IssuesListForOrgVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     IssuesListForOrgResponse,
@@ -18833,7 +18833,7 @@ export const fetchIssuesListForOrg = (
  * request id, use the "[List pull requests](https://docs.github.com/rest/reference/pulls#list-pull-requests)" endpoint.
  */
 export const issuesListForOrgQuery = (
-  variables: IssuesListForOrgVariables,
+  variables: IssuesListForOrgVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -18868,7 +18868,7 @@ export const useSuspenseIssuesListForOrg = <TData = IssuesListForOrgResponse>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -18899,7 +18899,7 @@ export const useIssuesListForOrg = <TData = IssuesListForOrgResponse>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -18964,7 +18964,7 @@ export type OrgsListMembersVariables = {
  */
 export const fetchOrgsListMembers = (
   variables: OrgsListMembersVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     OrgsListMembersResponse,
@@ -18979,7 +18979,7 @@ export const fetchOrgsListMembers = (
  * List all users who are members of an organization. If the authenticated user is also a member of this organization then both concealed and public members will be returned.
  */
 export const orgsListMembersQuery = (
-  variables: OrgsListMembersVariables,
+  variables: OrgsListMembersVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -19009,7 +19009,7 @@ export const useSuspenseOrgsListMembers = <TData = OrgsListMembersResponse>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -19035,7 +19035,7 @@ export const useOrgsListMembers = <TData = OrgsListMembersResponse>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -19074,7 +19074,7 @@ export type OrgsRemoveMemberVariables = {
  */
 export const fetchOrgsRemoveMember = (
   variables: OrgsRemoveMemberVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -19101,7 +19101,7 @@ export const useOrgsRemoveMember = (
       OrgsRemoveMemberVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -19137,7 +19137,7 @@ export type OrgsCheckMembershipForUserVariables = {
  */
 export const fetchOrgsCheckMembershipForUser = (
   variables: OrgsCheckMembershipForUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -19157,7 +19157,7 @@ export const fetchOrgsCheckMembershipForUser = (
  * Check if a user is, publicly or privately, a member of the organization.
  */
 export const orgsCheckMembershipForUserQuery = (
-  variables: OrgsCheckMembershipForUserVariables,
+  variables: OrgsCheckMembershipForUserVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({ signal }: { signal?: AbortSignal }) => Promise<undefined>;
@@ -19183,7 +19183,7 @@ export const useSuspenseOrgsCheckMembershipForUser = <TData = undefined>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -19209,7 +19209,7 @@ export const useOrgsCheckMembershipForUser = <TData = undefined>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<undefined, OrgsCheckMembershipForUserError, TData>(
@@ -19217,7 +19217,7 @@ export const useOrgsCheckMembershipForUser = <TData = undefined>(
       ...orgsCheckMembershipForUserQuery(variables),
       ...options,
       ...queryOptions,
-    },
+    }
   );
 };
 
@@ -19287,7 +19287,7 @@ export type CodespacesGetCodespacesForUserInOrgVariables = {
  */
 export const fetchCodespacesGetCodespacesForUserInOrg = (
   variables: CodespacesGetCodespacesForUserInOrgVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     CodespacesGetCodespacesForUserInOrgResponse,
@@ -19309,7 +19309,7 @@ export const fetchCodespacesGetCodespacesForUserInOrg = (
  * You must authenticate using an access token with the `admin:org` scope to use this endpoint.
  */
 export const codespacesGetCodespacesForUserInOrgQuery = (
-  variables: CodespacesGetCodespacesForUserInOrgVariables,
+  variables: CodespacesGetCodespacesForUserInOrgVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -19343,7 +19343,7 @@ export const useSuspenseCodespacesGetCodespacesForUserInOrg = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -19373,7 +19373,7 @@ export const useCodespacesGetCodespacesForUserInOrg = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -19436,7 +19436,7 @@ export type CodespacesDeleteFromOrganizationVariables = {
  */
 export const fetchCodespacesDeleteFromOrganization = (
   variables: CodespacesDeleteFromOrganizationVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Responses.Accepted,
@@ -19465,7 +19465,7 @@ export const useCodespacesDeleteFromOrganization = (
       CodespacesDeleteFromOrganizationVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -19531,7 +19531,7 @@ export type CodespacesStopInOrganizationVariables = {
  */
 export const fetchCodespacesStopInOrganization = (
   variables: CodespacesStopInOrganizationVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.Codespace,
@@ -19560,7 +19560,7 @@ export const useCodespacesStopInOrganization = (
       CodespacesStopInOrganizationVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -19607,7 +19607,7 @@ export type OrgsRemoveMembershipForUserVariables = {
  */
 export const fetchOrgsRemoveMembershipForUser = (
   variables: OrgsRemoveMembershipForUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -19636,7 +19636,7 @@ export const useOrgsRemoveMembershipForUser = (
       OrgsRemoveMembershipForUserVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -19681,7 +19681,7 @@ export type OrgsGetMembershipForUserVariables = {
  */
 export const fetchOrgsGetMembershipForUser = (
   variables: OrgsGetMembershipForUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.OrgMembership,
@@ -19701,7 +19701,7 @@ export const fetchOrgsGetMembershipForUser = (
  * In order to get a user's membership with an organization, the authenticated user must be an organization member. The `state` parameter in the response can be used to identify the user's membership status.
  */
 export const orgsGetMembershipForUserQuery = (
-  variables: OrgsGetMembershipForUserVariables,
+  variables: OrgsGetMembershipForUserVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -19733,7 +19733,7 @@ export const useSuspenseOrgsGetMembershipForUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -19759,7 +19759,7 @@ export const useOrgsGetMembershipForUser = <TData = Schemas.OrgMembership>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -19824,7 +19824,7 @@ export type OrgsSetMembershipForUserVariables = {
  */
 export const fetchOrgsSetMembershipForUser = (
   variables: OrgsSetMembershipForUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.OrgMembership,
@@ -19859,7 +19859,7 @@ export const useOrgsSetMembershipForUser = (
       OrgsSetMembershipForUserVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -19915,7 +19915,7 @@ export type MigrationsListForOrgVariables = {
  */
 export const fetchMigrationsListForOrg = (
   variables: MigrationsListForOrgVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     MigrationsListForOrgResponse,
@@ -19932,7 +19932,7 @@ export const fetchMigrationsListForOrg = (
  * A list of `repositories` is only returned for export migrations.
  */
 export const migrationsListForOrgQuery = (
-  variables: MigrationsListForOrgVariables,
+  variables: MigrationsListForOrgVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -19966,7 +19966,7 @@ export const useSuspenseMigrationsListForOrg = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -19994,7 +19994,7 @@ export const useMigrationsListForOrg = <TData = MigrationsListForOrgResponse>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -20094,7 +20094,7 @@ export type MigrationsStartForOrgVariables = {
  */
 export const fetchMigrationsStartForOrg = (
   variables: MigrationsStartForOrgVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.Migration,
@@ -20116,7 +20116,7 @@ export const useMigrationsStartForOrg = (
       MigrationsStartForOrgVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -20170,7 +20170,7 @@ export type MigrationsGetStatusForOrgVariables = {
  */
 export const fetchMigrationsGetStatusForOrg = (
   variables: MigrationsGetStatusForOrgVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.Migration,
@@ -20197,7 +20197,7 @@ export const fetchMigrationsGetStatusForOrg = (
  * *   `failed`, which means the migration failed.
  */
 export const migrationsGetStatusForOrgQuery = (
-  variables: MigrationsGetStatusForOrgVariables,
+  variables: MigrationsGetStatusForOrgVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({ signal }: { signal?: AbortSignal }) => Promise<Schemas.Migration>;
@@ -20230,7 +20230,7 @@ export const useSuspenseMigrationsGetStatusForOrg = <TData = Schemas.Migration>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -20263,7 +20263,7 @@ export const useMigrationsGetStatusForOrg = <TData = Schemas.Migration>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -20302,7 +20302,7 @@ export type MigrationsDeleteArchiveForOrgVariables = {
  */
 export const fetchMigrationsDeleteArchiveForOrg = (
   variables: MigrationsDeleteArchiveForOrgVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -20329,7 +20329,7 @@ export const useMigrationsDeleteArchiveForOrg = (
       MigrationsDeleteArchiveForOrgVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -20368,7 +20368,7 @@ export type MigrationsDownloadArchiveForOrgVariables = {
  */
 export const fetchMigrationsDownloadArchiveForOrg = (
   variables: MigrationsDownloadArchiveForOrgVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -20388,7 +20388,7 @@ export const fetchMigrationsDownloadArchiveForOrg = (
  * Fetches the URL to a migration archive.
  */
 export const migrationsDownloadArchiveForOrgQuery = (
-  variables: MigrationsDownloadArchiveForOrgVariables,
+  variables: MigrationsDownloadArchiveForOrgVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({ signal }: { signal?: AbortSignal }) => Promise<undefined>;
@@ -20414,7 +20414,7 @@ export const useSuspenseMigrationsDownloadArchiveForOrg = <TData = undefined>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -20440,7 +20440,7 @@ export const useMigrationsDownloadArchiveForOrg = <TData = undefined>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -20483,7 +20483,7 @@ export type MigrationsUnlockRepoForOrgVariables = {
  */
 export const fetchMigrationsUnlockRepoForOrg = (
   variables: MigrationsUnlockRepoForOrgVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -20510,7 +20510,7 @@ export const useMigrationsUnlockRepoForOrg = (
       MigrationsUnlockRepoForOrgVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -20567,7 +20567,7 @@ export type MigrationsListReposForOrgVariables = {
  */
 export const fetchMigrationsListReposForOrg = (
   variables: MigrationsListReposForOrgVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     MigrationsListReposForOrgResponse,
@@ -20587,7 +20587,7 @@ export const fetchMigrationsListReposForOrg = (
  * List all the repositories for this organization migration.
  */
 export const migrationsListReposForOrgQuery = (
-  variables: MigrationsListReposForOrgVariables,
+  variables: MigrationsListReposForOrgVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -20619,7 +20619,7 @@ export const useSuspenseMigrationsListReposForOrg = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -20647,7 +20647,7 @@ export const useMigrationsListReposForOrg = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -20703,7 +20703,7 @@ export type OrgsListOutsideCollaboratorsVariables = {
  */
 export const fetchOrgsListOutsideCollaborators = (
   variables: OrgsListOutsideCollaboratorsVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     OrgsListOutsideCollaboratorsResponse,
@@ -20723,7 +20723,7 @@ export const fetchOrgsListOutsideCollaborators = (
  * List all users who are outside collaborators of an organization.
  */
 export const orgsListOutsideCollaboratorsQuery = (
-  variables: OrgsListOutsideCollaboratorsVariables,
+  variables: OrgsListOutsideCollaboratorsVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -20755,7 +20755,7 @@ export const useSuspenseOrgsListOutsideCollaborators = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -20783,7 +20783,7 @@ export const useOrgsListOutsideCollaborators = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -20825,7 +20825,7 @@ export type OrgsRemoveOutsideCollaboratorVariables = {
  */
 export const fetchOrgsRemoveOutsideCollaborator = (
   variables: OrgsRemoveOutsideCollaboratorVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -20852,7 +20852,7 @@ export const useOrgsRemoveOutsideCollaborator = (
       OrgsRemoveOutsideCollaboratorVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -20901,7 +20901,7 @@ export type OrgsConvertMemberToOutsideCollaboratorVariables = {
  */
 export const fetchOrgsConvertMemberToOutsideCollaborator = (
   variables: OrgsConvertMemberToOutsideCollaboratorVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     {},
@@ -20928,7 +20928,7 @@ export const useOrgsConvertMemberToOutsideCollaborator = (
       OrgsConvertMemberToOutsideCollaboratorVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -21003,7 +21003,7 @@ export type PackagesListPackagesForOrganizationVariables = {
  */
 export const fetchPackagesListPackagesForOrganization = (
   variables: PackagesListPackagesForOrganizationVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     PackagesListPackagesForOrganizationResponse,
@@ -21020,7 +21020,7 @@ export const fetchPackagesListPackagesForOrganization = (
  * To use this endpoint, you must authenticate using an access token with the `read:packages` scope. If the `package_type` belongs to a registry that only supports repository-scoped permissions, your token must also include the `repo` scope. For the list of GitHub Packages registries that only support repository-scoped permissions, see "[About permissions for GitHub Packages](https://docs.github.com/packages/learn-github-packages/about-permissions-for-github-packages#permissions-for-repository-scoped-packages)."
  */
 export const packagesListPackagesForOrganizationQuery = (
-  variables: PackagesListPackagesForOrganizationVariables,
+  variables: PackagesListPackagesForOrganizationVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -21054,7 +21054,7 @@ export const useSuspensePackagesListPackagesForOrganization = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -21084,7 +21084,7 @@ export const usePackagesListPackagesForOrganization = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -21141,7 +21141,7 @@ export type PackagesDeletePackageForOrgVariables = {
  */
 export const fetchPackagesDeletePackageForOrg = (
   variables: PackagesDeletePackageForOrgVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -21172,7 +21172,7 @@ export const usePackagesDeletePackageForOrg = (
       PackagesDeletePackageForOrgVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -21215,7 +21215,7 @@ export type PackagesGetPackageForOrganizationVariables = {
  */
 export const fetchPackagesGetPackageForOrganization = (
   variables: PackagesGetPackageForOrganizationVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.Package,
@@ -21237,7 +21237,7 @@ export const fetchPackagesGetPackageForOrganization = (
  * To use this endpoint, you must authenticate using an access token with the `read:packages` scope. If the `package_type` belongs to a GitHub Packages registry that only supports repository-scoped permissions, your token must also include the `repo` scope. For the list of GitHub Packages registries that only support repository-scoped permissions, see "[About permissions for GitHub Packages](https://docs.github.com/packages/learn-github-packages/about-permissions-for-github-packages#permissions-for-repository-scoped-packages)."
  */
 export const packagesGetPackageForOrganizationQuery = (
-  variables: PackagesGetPackageForOrganizationVariables,
+  variables: PackagesGetPackageForOrganizationVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({ signal }: { signal?: AbortSignal }) => Promise<Schemas.Package>;
@@ -21267,7 +21267,7 @@ export const useSuspensePackagesGetPackageForOrganization = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -21295,7 +21295,7 @@ export const usePackagesGetPackageForOrganization = <TData = Schemas.Package>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -21364,7 +21364,7 @@ export type PackagesRestorePackageForOrgVariables = {
  */
 export const fetchPackagesRestorePackageForOrg = (
   variables: PackagesRestorePackageForOrgVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -21399,7 +21399,7 @@ export const usePackagesRestorePackageForOrg = (
       PackagesRestorePackageForOrgVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -21480,7 +21480,7 @@ export type PackagesGetAllPackageVersionsForPackageOwnedByOrgVariables = {
  */
 export const fetchPackagesGetAllPackageVersionsForPackageOwnedByOrg = (
   variables: PackagesGetAllPackageVersionsForPackageOwnedByOrgVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     PackagesGetAllPackageVersionsForPackageOwnedByOrgResponse,
@@ -21502,7 +21502,7 @@ export const fetchPackagesGetAllPackageVersionsForPackageOwnedByOrg = (
  * If the `package_type` belongs to a GitHub Packages registry that only supports repository-scoped permissions, your token must also include the `repo` scope. For the list of GitHub Packages registries that only support repository-scoped permissions, see "[About permissions for GitHub Packages](https://docs.github.com/packages/learn-github-packages/about-permissions-for-github-packages#permissions-for-repository-scoped-packages)."
  */
 export const packagesGetAllPackageVersionsForPackageOwnedByOrgQuery = (
-  variables: PackagesGetAllPackageVersionsForPackageOwnedByOrgVariables,
+  variables: PackagesGetAllPackageVersionsForPackageOwnedByOrgVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -21536,7 +21536,7 @@ export const useSuspensePackagesGetAllPackageVersionsForPackageOwnedByOrg = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -21566,7 +21566,7 @@ export const usePackagesGetAllPackageVersionsForPackageOwnedByOrg = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -21627,7 +21627,7 @@ export type PackagesDeletePackageVersionForOrgVariables = {
  */
 export const fetchPackagesDeletePackageVersionForOrg = (
   variables: PackagesDeletePackageVersionForOrgVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -21658,7 +21658,7 @@ export const usePackagesDeletePackageVersionForOrg = (
       PackagesDeletePackageVersionForOrgVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -21708,7 +21708,7 @@ export type PackagesGetPackageVersionForOrganizationVariables = {
  */
 export const fetchPackagesGetPackageVersionForOrganization = (
   variables: PackagesGetPackageVersionForOrganizationVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.PackageVersion,
@@ -21730,7 +21730,7 @@ export const fetchPackagesGetPackageVersionForOrganization = (
  * You must authenticate using an access token with the `read:packages` scope. If the `package_type` belongs to a GitHub Packages registry that only supports repository-scoped permissions, your token must also include the `repo` scope. For the list of GitHub Packages registries that only support repository-scoped permissions, see "[About permissions for GitHub Packages](https://docs.github.com/packages/learn-github-packages/about-permissions-for-github-packages#permissions-for-repository-scoped-packages)."
  */
 export const packagesGetPackageVersionForOrganizationQuery = (
-  variables: PackagesGetPackageVersionForOrganizationVariables,
+  variables: PackagesGetPackageVersionForOrganizationVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -21764,7 +21764,7 @@ export const useSuspensePackagesGetPackageVersionForOrganization = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -21794,7 +21794,7 @@ export const usePackagesGetPackageVersionForOrganization = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -21859,7 +21859,7 @@ export type PackagesRestorePackageVersionForOrgVariables = {
  */
 export const fetchPackagesRestorePackageVersionForOrg = (
   variables: PackagesRestorePackageVersionForOrgVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -21894,7 +21894,7 @@ export const usePackagesRestorePackageVersionForOrg = (
       PackagesRestorePackageVersionForOrgVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -21956,7 +21956,7 @@ export type ProjectsListForOrgVariables = {
  */
 export const fetchProjectsListForOrg = (
   variables: ProjectsListForOrgVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ProjectsListForOrgResponse,
@@ -21971,7 +21971,7 @@ export const fetchProjectsListForOrg = (
  * Lists the projects in an organization. Returns a `404 Not Found` status if projects are disabled in the organization. If you do not have sufficient privileges to perform this action, a `401 Unauthorized` or `410 Gone` status is returned.
  */
 export const projectsListForOrgQuery = (
-  variables: ProjectsListForOrgVariables,
+  variables: ProjectsListForOrgVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -22003,7 +22003,7 @@ export const useSuspenseProjectsListForOrg = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -22029,7 +22029,7 @@ export const useProjectsListForOrg = <TData = ProjectsListForOrgResponse>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -22094,7 +22094,7 @@ export type ProjectsCreateForOrgVariables = {
  */
 export const fetchProjectsCreateForOrg = (
   variables: ProjectsCreateForOrgVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.Project,
@@ -22116,7 +22116,7 @@ export const useProjectsCreateForOrg = (
       ProjectsCreateForOrgVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -22166,7 +22166,7 @@ export type OrgsListPublicMembersVariables = {
  */
 export const fetchOrgsListPublicMembers = (
   variables: OrgsListPublicMembersVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     OrgsListPublicMembersResponse,
@@ -22181,7 +22181,7 @@ export const fetchOrgsListPublicMembers = (
  * Members of an organization can choose to have their membership publicized or not.
  */
 export const orgsListPublicMembersQuery = (
-  variables: OrgsListPublicMembersVariables,
+  variables: OrgsListPublicMembersVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -22213,7 +22213,7 @@ export const useSuspenseOrgsListPublicMembers = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -22239,7 +22239,7 @@ export const useOrgsListPublicMembers = <TData = OrgsListPublicMembersResponse>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -22273,7 +22273,7 @@ export type OrgsRemovePublicMembershipForAuthenticatedUserVariables = {
 
 export const fetchOrgsRemovePublicMembershipForAuthenticatedUser = (
   variables: OrgsRemovePublicMembershipForAuthenticatedUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -22297,7 +22297,7 @@ export const useOrgsRemovePublicMembershipForAuthenticatedUser = (
       OrgsRemovePublicMembershipForAuthenticatedUserVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -22306,7 +22306,7 @@ export const useOrgsRemovePublicMembershipForAuthenticatedUser = (
     OrgsRemovePublicMembershipForAuthenticatedUserVariables
   >({
     mutationFn: (
-      variables: OrgsRemovePublicMembershipForAuthenticatedUserVariables,
+      variables: OrgsRemovePublicMembershipForAuthenticatedUserVariables
     ) =>
       fetchOrgsRemovePublicMembershipForAuthenticatedUser({
         ...fetcherOptions,
@@ -22336,7 +22336,7 @@ export type OrgsCheckPublicMembershipForUserVariables = {
 
 export const fetchOrgsCheckPublicMembershipForUser = (
   variables: OrgsCheckPublicMembershipForUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -22353,7 +22353,7 @@ export const fetchOrgsCheckPublicMembershipForUser = (
   });
 
 export const orgsCheckPublicMembershipForUserQuery = (
-  variables: OrgsCheckPublicMembershipForUserVariables,
+  variables: OrgsCheckPublicMembershipForUserVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({ signal }: { signal?: AbortSignal }) => Promise<undefined>;
@@ -22376,7 +22376,7 @@ export const useSuspenseOrgsCheckPublicMembershipForUser = <TData = undefined>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -22399,7 +22399,7 @@ export const useOrgsCheckPublicMembershipForUser = <TData = undefined>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -22441,7 +22441,7 @@ export type OrgsSetPublicMembershipForAuthenticatedUserVariables = {
  */
 export const fetchOrgsSetPublicMembershipForAuthenticatedUser = (
   variables: OrgsSetPublicMembershipForAuthenticatedUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -22470,7 +22470,7 @@ export const useOrgsSetPublicMembershipForAuthenticatedUser = (
       OrgsSetPublicMembershipForAuthenticatedUserVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -22479,7 +22479,7 @@ export const useOrgsSetPublicMembershipForAuthenticatedUser = (
     OrgsSetPublicMembershipForAuthenticatedUserVariables
   >({
     mutationFn: (
-      variables: OrgsSetPublicMembershipForAuthenticatedUserVariables,
+      variables: OrgsSetPublicMembershipForAuthenticatedUserVariables
     ) =>
       fetchOrgsSetPublicMembershipForAuthenticatedUser({
         ...fetcherOptions,
@@ -22541,7 +22541,7 @@ export type ReposListForOrgVariables = {
  */
 export const fetchReposListForOrg = (
   variables: ReposListForOrgVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ReposListForOrgResponse,
@@ -22558,7 +22558,7 @@ export const fetchReposListForOrg = (
  * **Note:** In order to see the `security_and_analysis` block for a repository you must have admin permissions for the repository or be an owner or security manager for the organization that owns the repository. For more information, see "[Managing security managers in your organization](https://docs.github.com/organizations/managing-peoples-access-to-your-organization-with-roles/managing-security-managers-in-your-organization)."
  */
 export const reposListForOrgQuery = (
-  variables: ReposListForOrgVariables,
+  variables: ReposListForOrgVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -22590,7 +22590,7 @@ export const useSuspenseReposListForOrg = <TData = ReposListForOrgResponse>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -22618,7 +22618,7 @@ export const useReposListForOrg = <TData = ReposListForOrgResponse>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -22808,7 +22808,7 @@ export type ReposCreateInOrgVariables = {
  */
 export const fetchReposCreateInOrg = (
   variables: ReposCreateInOrgVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.Repository,
@@ -22837,7 +22837,7 @@ export const useReposCreateInOrg = (
       ReposCreateInOrgVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -22935,7 +22935,7 @@ export type SecretScanningListAlertsForOrgVariables = {
  */
 export const fetchSecretScanningListAlertsForOrg = (
   variables: SecretScanningListAlertsForOrgVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     SecretScanningListAlertsForOrgResponse,
@@ -22959,7 +22959,7 @@ export const fetchSecretScanningListAlertsForOrg = (
  * GitHub Apps must have the `secret_scanning_alerts` read permission to use this endpoint.
  */
 export const secretScanningListAlertsForOrgQuery = (
-  variables: SecretScanningListAlertsForOrgVariables,
+  variables: SecretScanningListAlertsForOrgVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -22995,7 +22995,7 @@ export const useSuspenseSecretScanningListAlertsForOrg = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -23027,7 +23027,7 @@ export const useSecretScanningListAlertsForOrg = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -23065,7 +23065,7 @@ export type OrgsListSecurityManagerTeamsVariables = {
  */
 export const fetchOrgsListSecurityManagerTeams = (
   variables: OrgsListSecurityManagerTeamsVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     OrgsListSecurityManagerTeamsResponse,
@@ -23089,7 +23089,7 @@ export const fetchOrgsListSecurityManagerTeams = (
  * GitHub Apps must have the `administration` organization read permission to use this endpoint.
  */
 export const orgsListSecurityManagerTeamsQuery = (
-  variables: OrgsListSecurityManagerTeamsVariables,
+  variables: OrgsListSecurityManagerTeamsVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -23125,7 +23125,7 @@ export const useSuspenseOrgsListSecurityManagerTeams = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -23157,7 +23157,7 @@ export const useOrgsListSecurityManagerTeams = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -23198,7 +23198,7 @@ export type OrgsRemoveSecurityManagerTeamVariables = {
  */
 export const fetchOrgsRemoveSecurityManagerTeam = (
   variables: OrgsRemoveSecurityManagerTeamVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -23229,7 +23229,7 @@ export const useOrgsRemoveSecurityManagerTeam = (
       OrgsRemoveSecurityManagerTeamVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -23269,7 +23269,7 @@ export type OrgsAddSecurityManagerTeamVariables = {
  */
 export const fetchOrgsAddSecurityManagerTeam = (
   variables: OrgsAddSecurityManagerTeamVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -23300,7 +23300,7 @@ export const useOrgsAddSecurityManagerTeam = (
       OrgsAddSecurityManagerTeamVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -23337,7 +23337,7 @@ export type BillingGetGithubActionsBillingOrgVariables = {
  */
 export const fetchBillingGetGithubActionsBillingOrg = (
   variables: BillingGetGithubActionsBillingOrgVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.ActionsBillingUsage,
@@ -23361,7 +23361,7 @@ export const fetchBillingGetGithubActionsBillingOrg = (
  * Access tokens must have the `repo` or `admin:org` scope.
  */
 export const billingGetGithubActionsBillingOrgQuery = (
-  variables: BillingGetGithubActionsBillingOrgVariables,
+  variables: BillingGetGithubActionsBillingOrgVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -23397,7 +23397,7 @@ export const useSuspenseBillingGetGithubActionsBillingOrg = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -23429,7 +23429,7 @@ export const useBillingGetGithubActionsBillingOrg = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -23466,7 +23466,7 @@ export type BillingGetGithubPackagesBillingOrgVariables = {
  */
 export const fetchBillingGetGithubPackagesBillingOrg = (
   variables: BillingGetGithubPackagesBillingOrgVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.PackagesBillingUsage,
@@ -23490,7 +23490,7 @@ export const fetchBillingGetGithubPackagesBillingOrg = (
  * Access tokens must have the `repo` or `admin:org` scope.
  */
 export const billingGetGithubPackagesBillingOrgQuery = (
-  variables: BillingGetGithubPackagesBillingOrgVariables,
+  variables: BillingGetGithubPackagesBillingOrgVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -23526,7 +23526,7 @@ export const useSuspenseBillingGetGithubPackagesBillingOrg = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -23558,7 +23558,7 @@ export const useBillingGetGithubPackagesBillingOrg = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -23595,7 +23595,7 @@ export type BillingGetSharedStorageBillingOrgVariables = {
  */
 export const fetchBillingGetSharedStorageBillingOrg = (
   variables: BillingGetSharedStorageBillingOrgVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.CombinedBillingUsage,
@@ -23619,7 +23619,7 @@ export const fetchBillingGetSharedStorageBillingOrg = (
  * Access tokens must have the `repo` or `admin:org` scope.
  */
 export const billingGetSharedStorageBillingOrgQuery = (
-  variables: BillingGetSharedStorageBillingOrgVariables,
+  variables: BillingGetSharedStorageBillingOrgVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -23655,7 +23655,7 @@ export const useSuspenseBillingGetSharedStorageBillingOrg = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -23687,7 +23687,7 @@ export const useBillingGetSharedStorageBillingOrg = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -23740,7 +23740,7 @@ export type TeamsListVariables = {
  */
 export const fetchTeamsList = (
   variables: TeamsListVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     TeamsListResponse,
@@ -23755,7 +23755,7 @@ export const fetchTeamsList = (
  * Lists all teams in an organization that are visible to the authenticated user.
  */
 export const teamsListQuery = (
-  variables: TeamsListVariables,
+  variables: TeamsListVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({ signal }: { signal?: AbortSignal }) => Promise<TeamsListResponse>;
@@ -23777,7 +23777,7 @@ export const useSuspenseTeamsList = <TData = TeamsListResponse>(
   options?: Omit<
     reactQuery.UseQueryOptions<TeamsListResponse, TeamsListError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<TeamsListResponse, TeamsListError, TData>({
@@ -23795,7 +23795,7 @@ export const useTeamsList = <TData = TeamsListResponse>(
   options?: Omit<
     reactQuery.UseQueryOptions<TeamsListResponse, TeamsListError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<TeamsListResponse, TeamsListError, TData>({
@@ -23875,7 +23875,7 @@ export type TeamsCreateVariables = {
  */
 export const fetchTeamsCreate = (
   variables: TeamsCreateVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.TeamFull,
@@ -23899,7 +23899,7 @@ export const useTeamsCreate = (
       TeamsCreateVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -23939,7 +23939,7 @@ export type TeamsDeleteInOrgVariables = {
  */
 export const fetchTeamsDeleteInOrg = (
   variables: TeamsDeleteInOrgVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -23970,7 +23970,7 @@ export const useTeamsDeleteInOrg = (
       TeamsDeleteInOrgVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -24011,7 +24011,7 @@ export type TeamsGetByNameVariables = {
  */
 export const fetchTeamsGetByName = (
   variables: TeamsGetByNameVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.TeamFull,
@@ -24033,7 +24033,7 @@ export const fetchTeamsGetByName = (
  * **Note:** You can also specify a team by `org_id` and `team_id` using the route `GET /organizations/{org_id}/team/{team_id}`.
  */
 export const teamsGetByNameQuery = (
-  variables: TeamsGetByNameVariables,
+  variables: TeamsGetByNameVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({ signal }: { signal?: AbortSignal }) => Promise<Schemas.TeamFull>;
@@ -24057,7 +24057,7 @@ export const useSuspenseTeamsGetByName = <TData = Schemas.TeamFull>(
   options?: Omit<
     reactQuery.UseQueryOptions<Schemas.TeamFull, TeamsGetByNameError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -24081,7 +24081,7 @@ export const useTeamsGetByName = <TData = Schemas.TeamFull>(
   options?: Omit<
     reactQuery.UseQueryOptions<Schemas.TeamFull, TeamsGetByNameError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.TeamFull, TeamsGetByNameError, TData>({
@@ -24159,7 +24159,7 @@ export type TeamsUpdateInOrgVariables = {
  */
 export const fetchTeamsUpdateInOrg = (
   variables: TeamsUpdateInOrgVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.TeamFull,
@@ -24188,7 +24188,7 @@ export const useTeamsUpdateInOrg = (
       TeamsUpdateInOrgVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -24254,7 +24254,7 @@ export type TeamsListDiscussionsInOrgVariables = {
  */
 export const fetchTeamsListDiscussionsInOrg = (
   variables: TeamsListDiscussionsInOrgVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     TeamsListDiscussionsInOrgResponse,
@@ -24276,7 +24276,7 @@ export const fetchTeamsListDiscussionsInOrg = (
  * **Note:** You can also specify a team by `org_id` and `team_id` using the route `GET /organizations/{org_id}/team/{team_id}/discussions`.
  */
 export const teamsListDiscussionsInOrgQuery = (
-  variables: TeamsListDiscussionsInOrgVariables,
+  variables: TeamsListDiscussionsInOrgVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -24310,7 +24310,7 @@ export const useSuspenseTeamsListDiscussionsInOrg = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -24340,7 +24340,7 @@ export const useTeamsListDiscussionsInOrg = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -24398,7 +24398,7 @@ export type TeamsCreateDiscussionInOrgVariables = {
  */
 export const fetchTeamsCreateDiscussionInOrg = (
   variables: TeamsCreateDiscussionInOrgVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.TeamDiscussion,
@@ -24429,7 +24429,7 @@ export const useTeamsCreateDiscussionInOrg = (
       TeamsCreateDiscussionInOrgVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -24471,7 +24471,7 @@ export type TeamsDeleteDiscussionInOrgVariables = {
  */
 export const fetchTeamsDeleteDiscussionInOrg = (
   variables: TeamsDeleteDiscussionInOrgVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -24500,7 +24500,7 @@ export const useTeamsDeleteDiscussionInOrg = (
       TeamsDeleteDiscussionInOrgVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -24542,7 +24542,7 @@ export type TeamsGetDiscussionInOrgVariables = {
  */
 export const fetchTeamsGetDiscussionInOrg = (
   variables: TeamsGetDiscussionInOrgVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.TeamDiscussion,
@@ -24564,7 +24564,7 @@ export const fetchTeamsGetDiscussionInOrg = (
  * **Note:** You can also specify a team by `org_id` and `team_id` using the route `GET /organizations/{org_id}/team/{team_id}/discussions/{discussion_number}`.
  */
 export const teamsGetDiscussionInOrgQuery = (
-  variables: TeamsGetDiscussionInOrgVariables,
+  variables: TeamsGetDiscussionInOrgVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -24598,7 +24598,7 @@ export const useSuspenseTeamsGetDiscussionInOrg = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -24626,7 +24626,7 @@ export const useTeamsGetDiscussionInOrg = <TData = Schemas.TeamDiscussion>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -24680,7 +24680,7 @@ export type TeamsUpdateDiscussionInOrgVariables = {
  */
 export const fetchTeamsUpdateDiscussionInOrg = (
   variables: TeamsUpdateDiscussionInOrgVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.TeamDiscussion,
@@ -24709,7 +24709,7 @@ export const useTeamsUpdateDiscussionInOrg = (
       TeamsUpdateDiscussionInOrgVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -24777,7 +24777,7 @@ export type TeamsListDiscussionCommentsInOrgVariables = {
  */
 export const fetchTeamsListDiscussionCommentsInOrg = (
   variables: TeamsListDiscussionCommentsInOrgVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     TeamsListDiscussionCommentsInOrgResponse,
@@ -24799,7 +24799,7 @@ export const fetchTeamsListDiscussionCommentsInOrg = (
  * **Note:** You can also specify a team by `org_id` and `team_id` using the route `GET /organizations/{org_id}/team/{team_id}/discussions/{discussion_number}/comments`.
  */
 export const teamsListDiscussionCommentsInOrgQuery = (
-  variables: TeamsListDiscussionCommentsInOrgVariables,
+  variables: TeamsListDiscussionCommentsInOrgVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -24833,7 +24833,7 @@ export const useSuspenseTeamsListDiscussionCommentsInOrg = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -24863,7 +24863,7 @@ export const useTeamsListDiscussionCommentsInOrg = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -24916,7 +24916,7 @@ export type TeamsCreateDiscussionCommentInOrgVariables = {
  */
 export const fetchTeamsCreateDiscussionCommentInOrg = (
   variables: TeamsCreateDiscussionCommentInOrgVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.TeamDiscussionComment,
@@ -24947,7 +24947,7 @@ export const useTeamsCreateDiscussionCommentInOrg = (
       TeamsCreateDiscussionCommentInOrgVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -24997,7 +24997,7 @@ export type TeamsDeleteDiscussionCommentInOrgVariables = {
  */
 export const fetchTeamsDeleteDiscussionCommentInOrg = (
   variables: TeamsDeleteDiscussionCommentInOrgVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -25026,7 +25026,7 @@ export const useTeamsDeleteDiscussionCommentInOrg = (
       TeamsDeleteDiscussionCommentInOrgVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -25076,7 +25076,7 @@ export type TeamsGetDiscussionCommentInOrgVariables = {
  */
 export const fetchTeamsGetDiscussionCommentInOrg = (
   variables: TeamsGetDiscussionCommentInOrgVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.TeamDiscussionComment,
@@ -25098,7 +25098,7 @@ export const fetchTeamsGetDiscussionCommentInOrg = (
  * **Note:** You can also specify a team by `org_id` and `team_id` using the route `GET /organizations/{org_id}/team/{team_id}/discussions/{discussion_number}/comments/{comment_number}`.
  */
 export const teamsGetDiscussionCommentInOrgQuery = (
-  variables: TeamsGetDiscussionCommentInOrgVariables,
+  variables: TeamsGetDiscussionCommentInOrgVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -25132,7 +25132,7 @@ export const useSuspenseTeamsGetDiscussionCommentInOrg = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -25162,7 +25162,7 @@ export const useTeamsGetDiscussionCommentInOrg = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -25217,7 +25217,7 @@ export type TeamsUpdateDiscussionCommentInOrgVariables = {
  */
 export const fetchTeamsUpdateDiscussionCommentInOrg = (
   variables: TeamsUpdateDiscussionCommentInOrgVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.TeamDiscussionComment,
@@ -25246,7 +25246,7 @@ export const useTeamsUpdateDiscussionCommentInOrg = (
       TeamsUpdateDiscussionCommentInOrgVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -25327,7 +25327,7 @@ export type ReactionsListForTeamDiscussionCommentInOrgVariables = {
  */
 export const fetchReactionsListForTeamDiscussionCommentInOrg = (
   variables: ReactionsListForTeamDiscussionCommentInOrgVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ReactionsListForTeamDiscussionCommentInOrgResponse,
@@ -25349,7 +25349,7 @@ export const fetchReactionsListForTeamDiscussionCommentInOrg = (
  * **Note:** You can also specify a team by `org_id` and `team_id` using the route `GET /organizations/:org_id/team/:team_id/discussions/:discussion_number/comments/:comment_number/reactions`.
  */
 export const reactionsListForTeamDiscussionCommentInOrgQuery = (
-  variables: ReactionsListForTeamDiscussionCommentInOrgVariables,
+  variables: ReactionsListForTeamDiscussionCommentInOrgVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -25383,7 +25383,7 @@ export const useSuspenseReactionsListForTeamDiscussionCommentInOrg = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -25413,7 +25413,7 @@ export const useReactionsListForTeamDiscussionCommentInOrg = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -25476,7 +25476,7 @@ export type ReactionsCreateForTeamDiscussionCommentInOrgVariables = {
  */
 export const fetchReactionsCreateForTeamDiscussionCommentInOrg = (
   variables: ReactionsCreateForTeamDiscussionCommentInOrgVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.Reaction,
@@ -25505,7 +25505,7 @@ export const useReactionsCreateForTeamDiscussionCommentInOrg = (
       ReactionsCreateForTeamDiscussionCommentInOrgVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -25514,7 +25514,7 @@ export const useReactionsCreateForTeamDiscussionCommentInOrg = (
     ReactionsCreateForTeamDiscussionCommentInOrgVariables
   >({
     mutationFn: (
-      variables: ReactionsCreateForTeamDiscussionCommentInOrgVariables,
+      variables: ReactionsCreateForTeamDiscussionCommentInOrgVariables
     ) =>
       fetchReactionsCreateForTeamDiscussionCommentInOrg({
         ...fetcherOptions,
@@ -25561,7 +25561,7 @@ export type ReactionsDeleteForTeamDiscussionCommentVariables = {
  */
 export const fetchReactionsDeleteForTeamDiscussionComment = (
   variables: ReactionsDeleteForTeamDiscussionCommentVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -25590,7 +25590,7 @@ export const useReactionsDeleteForTeamDiscussionComment = (
       ReactionsDeleteForTeamDiscussionCommentVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -25666,7 +25666,7 @@ export type ReactionsListForTeamDiscussionInOrgVariables = {
  */
 export const fetchReactionsListForTeamDiscussionInOrg = (
   variables: ReactionsListForTeamDiscussionInOrgVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ReactionsListForTeamDiscussionInOrgResponse,
@@ -25688,7 +25688,7 @@ export const fetchReactionsListForTeamDiscussionInOrg = (
  * **Note:** You can also specify a team by `org_id` and `team_id` using the route `GET /organizations/:org_id/team/:team_id/discussions/:discussion_number/reactions`.
  */
 export const reactionsListForTeamDiscussionInOrgQuery = (
-  variables: ReactionsListForTeamDiscussionInOrgVariables,
+  variables: ReactionsListForTeamDiscussionInOrgVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -25722,7 +25722,7 @@ export const useSuspenseReactionsListForTeamDiscussionInOrg = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -25752,7 +25752,7 @@ export const useReactionsListForTeamDiscussionInOrg = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -25811,7 +25811,7 @@ export type ReactionsCreateForTeamDiscussionInOrgVariables = {
  */
 export const fetchReactionsCreateForTeamDiscussionInOrg = (
   variables: ReactionsCreateForTeamDiscussionInOrgVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.Reaction,
@@ -25840,7 +25840,7 @@ export const useReactionsCreateForTeamDiscussionInOrg = (
       ReactionsCreateForTeamDiscussionInOrgVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -25890,7 +25890,7 @@ export type ReactionsDeleteForTeamDiscussionVariables = {
  */
 export const fetchReactionsDeleteForTeamDiscussion = (
   variables: ReactionsDeleteForTeamDiscussionVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -25919,7 +25919,7 @@ export const useReactionsDeleteForTeamDiscussion = (
       ReactionsDeleteForTeamDiscussionVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -25980,7 +25980,7 @@ export type TeamsListPendingInvitationsInOrgVariables = {
  */
 export const fetchTeamsListPendingInvitationsInOrg = (
   variables: TeamsListPendingInvitationsInOrgVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     TeamsListPendingInvitationsInOrgResponse,
@@ -26002,7 +26002,7 @@ export const fetchTeamsListPendingInvitationsInOrg = (
  * **Note:** You can also specify a team by `org_id` and `team_id` using the route `GET /organizations/{org_id}/team/{team_id}/invitations`.
  */
 export const teamsListPendingInvitationsInOrgQuery = (
-  variables: TeamsListPendingInvitationsInOrgVariables,
+  variables: TeamsListPendingInvitationsInOrgVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -26036,7 +26036,7 @@ export const useSuspenseTeamsListPendingInvitationsInOrg = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -26066,7 +26066,7 @@ export const useTeamsListPendingInvitationsInOrg = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -26128,7 +26128,7 @@ export type TeamsListMembersInOrgVariables = {
  */
 export const fetchTeamsListMembersInOrg = (
   variables: TeamsListMembersInOrgVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     TeamsListMembersInOrgResponse,
@@ -26150,7 +26150,7 @@ export const fetchTeamsListMembersInOrg = (
  * To list members in a team, the team must be visible to the authenticated user.
  */
 export const teamsListMembersInOrgQuery = (
-  variables: TeamsListMembersInOrgVariables,
+  variables: TeamsListMembersInOrgVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -26184,7 +26184,7 @@ export const useSuspenseTeamsListMembersInOrg = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -26212,7 +26212,7 @@ export const useTeamsListMembersInOrg = <TData = TeamsListMembersInOrgResponse>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -26259,7 +26259,7 @@ export type TeamsRemoveMembershipForUserInOrgVariables = {
  */
 export const fetchTeamsRemoveMembershipForUserInOrg = (
   variables: TeamsRemoveMembershipForUserInOrgVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -26292,7 +26292,7 @@ export const useTeamsRemoveMembershipForUserInOrg = (
       TeamsRemoveMembershipForUserInOrgVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -26345,7 +26345,7 @@ export type TeamsGetMembershipForUserInOrgVariables = {
  */
 export const fetchTeamsGetMembershipForUserInOrg = (
   variables: TeamsGetMembershipForUserInOrgVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.TeamMembership,
@@ -26374,7 +26374,7 @@ export const fetchTeamsGetMembershipForUserInOrg = (
  * The `role` for organization owners is set to `maintainer`. For more information about `maintainer` roles, see see [Create a team](https://docs.github.com/rest/reference/teams#create-a-team).
  */
 export const teamsGetMembershipForUserInOrgQuery = (
-  variables: TeamsGetMembershipForUserInOrgVariables,
+  variables: TeamsGetMembershipForUserInOrgVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -26415,7 +26415,7 @@ export const useSuspenseTeamsGetMembershipForUserInOrg = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -26452,7 +26452,7 @@ export const useTeamsGetMembershipForUserInOrg = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -26513,7 +26513,7 @@ export type TeamsAddOrUpdateMembershipForUserInOrgVariables = {
  */
 export const fetchTeamsAddOrUpdateMembershipForUserInOrg = (
   variables: TeamsAddOrUpdateMembershipForUserInOrgVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.TeamMembership,
@@ -26550,7 +26550,7 @@ export const useTeamsAddOrUpdateMembershipForUserInOrg = (
       TeamsAddOrUpdateMembershipForUserInOrgVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -26609,7 +26609,7 @@ export type TeamsListProjectsInOrgVariables = {
  */
 export const fetchTeamsListProjectsInOrg = (
   variables: TeamsListProjectsInOrgVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     TeamsListProjectsInOrgResponse,
@@ -26631,7 +26631,7 @@ export const fetchTeamsListProjectsInOrg = (
  * **Note:** You can also specify a team by `org_id` and `team_id` using the route `GET /organizations/{org_id}/team/{team_id}/projects`.
  */
 export const teamsListProjectsInOrgQuery = (
-  variables: TeamsListProjectsInOrgVariables,
+  variables: TeamsListProjectsInOrgVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -26665,7 +26665,7 @@ export const useSuspenseTeamsListProjectsInOrg = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -26695,7 +26695,7 @@ export const useTeamsListProjectsInOrg = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -26737,7 +26737,7 @@ export type TeamsRemoveProjectInOrgVariables = {
  */
 export const fetchTeamsRemoveProjectInOrg = (
   variables: TeamsRemoveProjectInOrgVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -26766,7 +26766,7 @@ export const useTeamsRemoveProjectInOrg = (
       TeamsRemoveProjectInOrgVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -26809,7 +26809,7 @@ export type TeamsCheckPermissionsForProjectInOrgVariables = {
  */
 export const fetchTeamsCheckPermissionsForProjectInOrg = (
   variables: TeamsCheckPermissionsForProjectInOrgVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.TeamProject,
@@ -26831,7 +26831,7 @@ export const fetchTeamsCheckPermissionsForProjectInOrg = (
  * **Note:** You can also specify a team by `org_id` and `team_id` using the route `GET /organizations/{org_id}/team/{team_id}/projects/{project_id}`.
  */
 export const teamsCheckPermissionsForProjectInOrgQuery = (
-  variables: TeamsCheckPermissionsForProjectInOrgVariables,
+  variables: TeamsCheckPermissionsForProjectInOrgVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -26865,7 +26865,7 @@ export const useSuspenseTeamsCheckPermissionsForProjectInOrg = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -26895,7 +26895,7 @@ export const useTeamsCheckPermissionsForProjectInOrg = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -26950,7 +26950,7 @@ export type TeamsAddOrUpdateProjectPermissionsInOrgVariables = {
  */
 export const fetchTeamsAddOrUpdateProjectPermissionsInOrg = (
   variables: TeamsAddOrUpdateProjectPermissionsInOrgVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -26984,7 +26984,7 @@ export const useTeamsAddOrUpdateProjectPermissionsInOrg = (
       TeamsAddOrUpdateProjectPermissionsInOrgVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -27043,7 +27043,7 @@ export type TeamsListReposInOrgVariables = {
  */
 export const fetchTeamsListReposInOrg = (
   variables: TeamsListReposInOrgVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     TeamsListReposInOrgResponse,
@@ -27065,7 +27065,7 @@ export const fetchTeamsListReposInOrg = (
  * **Note:** You can also specify a team by `org_id` and `team_id` using the route `GET /organizations/{org_id}/team/{team_id}/repos`.
  */
 export const teamsListReposInOrgQuery = (
-  variables: TeamsListReposInOrgVariables,
+  variables: TeamsListReposInOrgVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -27099,7 +27099,7 @@ export const useSuspenseTeamsListReposInOrg = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -27127,7 +27127,7 @@ export const useTeamsListReposInOrg = <TData = TeamsListReposInOrgResponse>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -27173,7 +27173,7 @@ export type TeamsRemoveRepoInOrgVariables = {
  */
 export const fetchTeamsRemoveRepoInOrg = (
   variables: TeamsRemoveRepoInOrgVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -27202,7 +27202,7 @@ export const useTeamsRemoveRepoInOrg = (
       TeamsRemoveRepoInOrgVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -27253,7 +27253,7 @@ export type TeamsCheckPermissionsForRepoInOrgVariables = {
  */
 export const fetchTeamsCheckPermissionsForRepoInOrg = (
   variables: TeamsCheckPermissionsForRepoInOrgVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.TeamRepository,
@@ -27279,7 +27279,7 @@ export const fetchTeamsCheckPermissionsForRepoInOrg = (
  * **Note:** You can also specify a team by `org_id` and `team_id` using the route `GET /organizations/{org_id}/team/{team_id}/repos/{owner}/{repo}`.
  */
 export const teamsCheckPermissionsForRepoInOrgQuery = (
-  variables: TeamsCheckPermissionsForRepoInOrgVariables,
+  variables: TeamsCheckPermissionsForRepoInOrgVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -27317,7 +27317,7 @@ export const useSuspenseTeamsCheckPermissionsForRepoInOrg = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -27351,7 +27351,7 @@ export const useTeamsCheckPermissionsForRepoInOrg = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -27410,7 +27410,7 @@ export type TeamsAddOrUpdateRepoPermissionsInOrgVariables = {
  */
 export const fetchTeamsAddOrUpdateRepoPermissionsInOrg = (
   variables: TeamsAddOrUpdateRepoPermissionsInOrgVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -27441,7 +27441,7 @@ export const useTeamsAddOrUpdateRepoPermissionsInOrg = (
       TeamsAddOrUpdateRepoPermissionsInOrgVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -27500,7 +27500,7 @@ export type TeamsListChildInOrgVariables = {
  */
 export const fetchTeamsListChildInOrg = (
   variables: TeamsListChildInOrgVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     TeamsListChildInOrgResponse,
@@ -27522,7 +27522,7 @@ export const fetchTeamsListChildInOrg = (
  * **Note:** You can also specify a team by `org_id` and `team_id` using the route `GET /organizations/{org_id}/team/{team_id}/teams`.
  */
 export const teamsListChildInOrgQuery = (
-  variables: TeamsListChildInOrgVariables,
+  variables: TeamsListChildInOrgVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -27556,7 +27556,7 @@ export const useSuspenseTeamsListChildInOrg = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -27584,7 +27584,7 @@ export const useTeamsListChildInOrg = <TData = TeamsListChildInOrgResponse>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -27641,7 +27641,7 @@ export type OrgsEnableOrDisableSecurityProductOnAllOrgReposVariables = {
  */
 export const fetchOrgsEnableOrDisableSecurityProductOnAllOrgRepos = (
   variables: OrgsEnableOrDisableSecurityProductOnAllOrgReposVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -27675,7 +27675,7 @@ export const useOrgsEnableOrDisableSecurityProductOnAllOrgRepos = (
       OrgsEnableOrDisableSecurityProductOnAllOrgReposVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -27684,7 +27684,7 @@ export const useOrgsEnableOrDisableSecurityProductOnAllOrgRepos = (
     OrgsEnableOrDisableSecurityProductOnAllOrgReposVariables
   >({
     mutationFn: (
-      variables: OrgsEnableOrDisableSecurityProductOnAllOrgReposVariables,
+      variables: OrgsEnableOrDisableSecurityProductOnAllOrgReposVariables
     ) =>
       fetchOrgsEnableOrDisableSecurityProductOnAllOrgRepos({
         ...fetcherOptions,
@@ -27730,7 +27730,7 @@ export type ProjectsDeleteCardVariables = {
 
 export const fetchProjectsDeleteCard = (
   variables: ProjectsDeleteCardVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -27754,7 +27754,7 @@ export const useProjectsDeleteCard = (
       ProjectsDeleteCardVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -27800,7 +27800,7 @@ export type ProjectsGetCardVariables = {
 
 export const fetchProjectsGetCard = (
   variables: ProjectsGetCardVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.ProjectCard,
@@ -27817,7 +27817,7 @@ export const fetchProjectsGetCard = (
   });
 
 export const projectsGetCardQuery = (
-  variables: ProjectsGetCardVariables,
+  variables: ProjectsGetCardVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -27844,7 +27844,7 @@ export const useSuspenseProjectsGetCard = <TData = Schemas.ProjectCard>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -27867,7 +27867,7 @@ export const useProjectsGetCard = <TData = Schemas.ProjectCard>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.ProjectCard, ProjectsGetCardError, TData>({
@@ -27929,7 +27929,7 @@ export type ProjectsUpdateCardVariables = {
 
 export const fetchProjectsUpdateCard = (
   variables: ProjectsUpdateCardVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.ProjectCard,
@@ -27953,7 +27953,7 @@ export const useProjectsUpdateCard = (
       ProjectsUpdateCardVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -28037,7 +28037,7 @@ export type ProjectsMoveCardVariables = {
 
 export const fetchProjectsMoveCard = (
   variables: ProjectsMoveCardVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     {},
@@ -28061,7 +28061,7 @@ export const useProjectsMoveCard = (
       ProjectsMoveCardVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -28103,7 +28103,7 @@ export type ProjectsDeleteColumnVariables = {
 
 export const fetchProjectsDeleteColumn = (
   variables: ProjectsDeleteColumnVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -28127,7 +28127,7 @@ export const useProjectsDeleteColumn = (
       ProjectsDeleteColumnVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -28173,7 +28173,7 @@ export type ProjectsGetColumnVariables = {
 
 export const fetchProjectsGetColumn = (
   variables: ProjectsGetColumnVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.ProjectColumn,
@@ -28190,7 +28190,7 @@ export const fetchProjectsGetColumn = (
   });
 
 export const projectsGetColumnQuery = (
-  variables: ProjectsGetColumnVariables,
+  variables: ProjectsGetColumnVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -28217,7 +28217,7 @@ export const useSuspenseProjectsGetColumn = <TData = Schemas.ProjectColumn>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -28240,7 +28240,7 @@ export const useProjectsGetColumn = <TData = Schemas.ProjectColumn>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -28292,7 +28292,7 @@ export type ProjectsUpdateColumnVariables = {
 
 export const fetchProjectsUpdateColumn = (
   variables: ProjectsUpdateColumnVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.ProjectColumn,
@@ -28316,7 +28316,7 @@ export const useProjectsUpdateColumn = (
       ProjectsUpdateColumnVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -28382,7 +28382,7 @@ export type ProjectsListCardsVariables = {
 
 export const fetchProjectsListCards = (
   variables: ProjectsListCardsVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ProjectsListCardsResponse,
@@ -28399,7 +28399,7 @@ export const fetchProjectsListCards = (
   });
 
 export const projectsListCardsQuery = (
-  variables: ProjectsListCardsVariables,
+  variables: ProjectsListCardsVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -28426,7 +28426,7 @@ export const useSuspenseProjectsListCards = <TData = ProjectsListCardsResponse>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -28449,7 +28449,7 @@ export const useProjectsListCards = <TData = ProjectsListCardsResponse>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -28530,7 +28530,7 @@ export type ProjectsCreateCardVariables = {
 
 export const fetchProjectsCreateCard = (
   variables: ProjectsCreateCardVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.ProjectCard,
@@ -28575,7 +28575,7 @@ export const useProjectsCreateCard = (
       ProjectsCreateCardVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -28632,7 +28632,7 @@ export type ProjectsMoveColumnVariables = {
 
 export const fetchProjectsMoveColumn = (
   variables: ProjectsMoveColumnVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     {},
@@ -28656,7 +28656,7 @@ export const useProjectsMoveColumn = (
       ProjectsMoveColumnVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -28713,7 +28713,7 @@ export type ProjectsDeleteVariables = {
  */
 export const fetchProjectsDelete = (
   variables: ProjectsDeleteVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -28735,7 +28735,7 @@ export const useProjectsDelete = (
       ProjectsDeleteVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -28780,7 +28780,7 @@ export type ProjectsGetVariables = {
  */
 export const fetchProjectsGet = (
   variables: ProjectsGetVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.Project,
@@ -28795,7 +28795,7 @@ export const fetchProjectsGet = (
  * Gets a project by its `id`. Returns a `404 Not Found` status if projects are disabled. If you do not have sufficient privileges to perform this action, a `401 Unauthorized` or `410 Gone` status is returned.
  */
 export const projectsGetQuery = (
-  variables: ProjectsGetVariables,
+  variables: ProjectsGetVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({ signal }: { signal?: AbortSignal }) => Promise<Schemas.Project>;
@@ -28817,7 +28817,7 @@ export const useSuspenseProjectsGet = <TData = Schemas.Project>(
   options?: Omit<
     reactQuery.UseQueryOptions<Schemas.Project, ProjectsGetError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<Schemas.Project, ProjectsGetError, TData>({
@@ -28835,7 +28835,7 @@ export const useProjectsGet = <TData = Schemas.Project>(
   options?: Omit<
     reactQuery.UseQueryOptions<Schemas.Project, ProjectsGetError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.Project, ProjectsGetError, TData>({
@@ -28918,7 +28918,7 @@ export type ProjectsUpdateVariables = {
  */
 export const fetchProjectsUpdate = (
   variables: ProjectsUpdateVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.Project,
@@ -28940,7 +28940,7 @@ export const useProjectsUpdate = (
       ProjectsUpdateVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -29017,7 +29017,7 @@ export type ProjectsListCollaboratorsVariables = {
  */
 export const fetchProjectsListCollaborators = (
   variables: ProjectsListCollaboratorsVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ProjectsListCollaboratorsResponse,
@@ -29037,7 +29037,7 @@ export const fetchProjectsListCollaborators = (
  * Lists the collaborators for an organization project. For a project, the list of collaborators includes outside collaborators, organization members that are direct collaborators, organization members with access through team memberships, organization members with access through default organization permissions, and organization owners. You must be an organization owner or a project `admin` to list collaborators.
  */
 export const projectsListCollaboratorsQuery = (
-  variables: ProjectsListCollaboratorsVariables,
+  variables: ProjectsListCollaboratorsVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -29069,7 +29069,7 @@ export const useSuspenseProjectsListCollaborators = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -29097,7 +29097,7 @@ export const useProjectsListCollaborators = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -29154,7 +29154,7 @@ export type ProjectsRemoveCollaboratorVariables = {
  */
 export const fetchProjectsRemoveCollaborator = (
   variables: ProjectsRemoveCollaboratorVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -29181,7 +29181,7 @@ export const useProjectsRemoveCollaborator = (
       ProjectsRemoveCollaboratorVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -29247,7 +29247,7 @@ export type ProjectsAddCollaboratorVariables = {
  */
 export const fetchProjectsAddCollaborator = (
   variables: ProjectsAddCollaboratorVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -29282,7 +29282,7 @@ export const useProjectsAddCollaborator = (
       ProjectsAddCollaboratorVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -29339,7 +29339,7 @@ export type ProjectsGetPermissionForUserVariables = {
  */
 export const fetchProjectsGetPermissionForUser = (
   variables: ProjectsGetPermissionForUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.ProjectCollaboratorPermission,
@@ -29359,7 +29359,7 @@ export const fetchProjectsGetPermissionForUser = (
  * Returns the collaborator's permission level for an organization project. Possible values for the `permission` key: `admin`, `write`, `read`, `none`. You must be an organization owner or a project `admin` to review a user's permission level.
  */
 export const projectsGetPermissionForUserQuery = (
-  variables: ProjectsGetPermissionForUserVariables,
+  variables: ProjectsGetPermissionForUserVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -29391,7 +29391,7 @@ export const useSuspenseProjectsGetPermissionForUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -29419,7 +29419,7 @@ export const useProjectsGetPermissionForUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -29479,7 +29479,7 @@ export type ProjectsListColumnsVariables = {
 
 export const fetchProjectsListColumns = (
   variables: ProjectsListColumnsVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ProjectsListColumnsResponse,
@@ -29496,7 +29496,7 @@ export const fetchProjectsListColumns = (
   });
 
 export const projectsListColumnsQuery = (
-  variables: ProjectsListColumnsVariables,
+  variables: ProjectsListColumnsVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -29525,7 +29525,7 @@ export const useSuspenseProjectsListColumns = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -29548,7 +29548,7 @@ export const useProjectsListColumns = <TData = ProjectsListColumnsResponse>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -29604,7 +29604,7 @@ export type ProjectsCreateColumnVariables = {
 
 export const fetchProjectsCreateColumn = (
   variables: ProjectsCreateColumnVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.ProjectColumn,
@@ -29628,7 +29628,7 @@ export const useProjectsCreateColumn = (
       ProjectsCreateColumnVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -29662,7 +29662,7 @@ export type RateLimitGetVariables = GithubContext["fetcherOptions"];
  */
 export const fetchRateLimitGet = (
   variables: RateLimitGetVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.RateLimitOverview,
@@ -29679,7 +29679,7 @@ export const fetchRateLimitGet = (
  * **Note:** The `rate` object is deprecated. If you're writing new API client code or updating existing code, you should use the `core` object instead of the `rate` object. The `core` object contains the same information that is present in the `rate` object.
  */
 export const rateLimitGetQuery = (
-  variables: RateLimitGetVariables,
+  variables: RateLimitGetVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -29711,7 +29711,7 @@ export const useSuspenseRateLimitGet = <TData = Schemas.RateLimitOverview>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -29739,7 +29739,7 @@ export const useRateLimitGet = <TData = Schemas.RateLimitOverview>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -29799,7 +29799,7 @@ export type ActionsListRepoRequiredWorkflowsVariables = {
  */
 export const fetchActionsListRepoRequiredWorkflows = (
   variables: ActionsListRepoRequiredWorkflowsVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ActionsListRepoRequiredWorkflowsResponse,
@@ -29819,7 +29819,7 @@ export const fetchActionsListRepoRequiredWorkflows = (
  * Lists the required workflows in a repository. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint. For more information, see "[Required Workflows](https://docs.github.com/actions/using-workflows/required-workflows)."
  */
 export const actionsListRepoRequiredWorkflowsQuery = (
-  variables: ActionsListRepoRequiredWorkflowsVariables,
+  variables: ActionsListRepoRequiredWorkflowsVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -29851,7 +29851,7 @@ export const useSuspenseActionsListRepoRequiredWorkflows = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -29879,7 +29879,7 @@ export const useActionsListRepoRequiredWorkflows = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -29922,7 +29922,7 @@ export type ActionsGetRepoRequiredWorkflowVariables = {
  */
 export const fetchActionsGetRepoRequiredWorkflow = (
   variables: ActionsGetRepoRequiredWorkflowVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.RepoRequiredWorkflow,
@@ -29942,7 +29942,7 @@ export const fetchActionsGetRepoRequiredWorkflow = (
  * Gets a specific required workflow present in a repository. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint. For more information, see "[Required Workflows](https://docs.github.com/actions/using-workflows/required-workflows)."
  */
 export const actionsGetRepoRequiredWorkflowQuery = (
-  variables: ActionsGetRepoRequiredWorkflowVariables,
+  variables: ActionsGetRepoRequiredWorkflowVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -29974,7 +29974,7 @@ export const useSuspenseActionsGetRepoRequiredWorkflow = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -30002,7 +30002,7 @@ export const useActionsGetRepoRequiredWorkflow = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -30049,7 +30049,7 @@ export type ActionsGetRepoRequiredWorkflowUsageVariables = {
  */
 export const fetchActionsGetRepoRequiredWorkflowUsage = (
   variables: ActionsGetRepoRequiredWorkflowUsageVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.WorkflowUsage,
@@ -30073,7 +30073,7 @@ export const fetchActionsGetRepoRequiredWorkflowUsage = (
  * Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
  */
 export const actionsGetRepoRequiredWorkflowUsageQuery = (
-  variables: ActionsGetRepoRequiredWorkflowUsageVariables,
+  variables: ActionsGetRepoRequiredWorkflowUsageVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -30109,7 +30109,7 @@ export const useSuspenseActionsGetRepoRequiredWorkflowUsage = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -30141,7 +30141,7 @@ export const useActionsGetRepoRequiredWorkflowUsage = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -30196,7 +30196,7 @@ export type ReposDeleteVariables = {
  */
 export const fetchReposDelete = (
   variables: ReposDeleteVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -30221,7 +30221,7 @@ export const useReposDelete = (
       ReposDeleteVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -30272,7 +30272,7 @@ export type ReposGetVariables = {
  */
 export const fetchReposGet = (
   variables: ReposGetVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.FullRepository,
@@ -30289,7 +30289,7 @@ export const fetchReposGet = (
  * **Note:** In order to see the `security_and_analysis` block for a repository you must have admin permissions for the repository or be an owner or security manager for the organization that owns the repository. For more information, see "[Managing security managers in your organization](https://docs.github.com/organizations/managing-peoples-access-to-your-organization-with-roles/managing-security-managers-in-your-organization)."
  */
 export const reposGetQuery = (
-  variables: ReposGetVariables,
+  variables: ReposGetVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -30317,7 +30317,7 @@ export const useSuspenseReposGet = <TData = Schemas.FullRepository>(
   options?: Omit<
     reactQuery.UseQueryOptions<Schemas.FullRepository, ReposGetError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -30341,7 +30341,7 @@ export const useReposGet = <TData = Schemas.FullRepository>(
   options?: Omit<
     reactQuery.UseQueryOptions<Schemas.FullRepository, ReposGetError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.FullRepository, ReposGetError, TData>({
@@ -30575,7 +30575,7 @@ export type ReposUpdateVariables = {
  */
 export const fetchReposUpdate = (
   variables: ReposUpdateVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.FullRepository,
@@ -30597,7 +30597,7 @@ export const useReposUpdate = (
       ReposUpdateVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -30658,7 +30658,7 @@ export type ActionsListArtifactsForRepoVariables = {
  */
 export const fetchActionsListArtifactsForRepo = (
   variables: ActionsListArtifactsForRepoVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ActionsListArtifactsForRepoResponse,
@@ -30678,7 +30678,7 @@ export const fetchActionsListArtifactsForRepo = (
  * Lists all artifacts for a repository. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
  */
 export const actionsListArtifactsForRepoQuery = (
-  variables: ActionsListArtifactsForRepoVariables,
+  variables: ActionsListArtifactsForRepoVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -30710,7 +30710,7 @@ export const useSuspenseActionsListArtifactsForRepo = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -30738,7 +30738,7 @@ export const useActionsListArtifactsForRepo = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -30778,7 +30778,7 @@ export type ActionsDeleteArtifactVariables = {
  */
 export const fetchActionsDeleteArtifact = (
   variables: ActionsDeleteArtifactVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -30805,7 +30805,7 @@ export const useActionsDeleteArtifact = (
       ActionsDeleteArtifactVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -30845,7 +30845,7 @@ export type ActionsGetArtifactVariables = {
  */
 export const fetchActionsGetArtifact = (
   variables: ActionsGetArtifactVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.Artifact,
@@ -30865,7 +30865,7 @@ export const fetchActionsGetArtifact = (
  * Gets a specific artifact for a workflow run. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
  */
 export const actionsGetArtifactQuery = (
-  variables: ActionsGetArtifactVariables,
+  variables: ActionsGetArtifactVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({ signal }: { signal?: AbortSignal }) => Promise<Schemas.Artifact>;
@@ -30891,7 +30891,7 @@ export const useSuspenseActionsGetArtifact = <TData = Schemas.Artifact>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -30917,7 +30917,7 @@ export const useActionsGetArtifact = <TData = Schemas.Artifact>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.Artifact, ActionsGetArtifactError, TData>({
@@ -30960,7 +30960,7 @@ export type ActionsDownloadArtifactVariables = {
  */
 export const fetchActionsDownloadArtifact = (
   variables: ActionsDownloadArtifactVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -30983,7 +30983,7 @@ export const fetchActionsDownloadArtifact = (
  * GitHub Apps must have the `actions:read` permission to use this endpoint.
  */
 export const actionsDownloadArtifactQuery = (
-  variables: ActionsDownloadArtifactVariables,
+  variables: ActionsDownloadArtifactVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({ signal }: { signal?: AbortSignal }) => Promise<undefined>;
@@ -31008,7 +31008,7 @@ export const useSuspenseActionsDownloadArtifact = <TData = undefined>(
   options?: Omit<
     reactQuery.UseQueryOptions<undefined, ActionsDownloadArtifactError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -31033,7 +31033,7 @@ export const useActionsDownloadArtifact = <TData = undefined>(
   options?: Omit<
     reactQuery.UseQueryOptions<undefined, ActionsDownloadArtifactError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<undefined, ActionsDownloadArtifactError, TData>({
@@ -31067,7 +31067,7 @@ export type ActionsGetActionsCacheUsageVariables = {
  */
 export const fetchActionsGetActionsCacheUsage = (
   variables: ActionsGetActionsCacheUsageVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.ActionsCacheUsageByRepository,
@@ -31089,7 +31089,7 @@ export const fetchActionsGetActionsCacheUsage = (
  * Anyone with read access to the repository can use this endpoint. If the repository is private, you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
  */
 export const actionsGetActionsCacheUsageQuery = (
-  variables: ActionsGetActionsCacheUsageVariables,
+  variables: ActionsGetActionsCacheUsageVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -31123,7 +31123,7 @@ export const useSuspenseActionsGetActionsCacheUsage = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -31153,7 +31153,7 @@ export const useActionsGetActionsCacheUsage = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -31206,7 +31206,7 @@ export type ActionsDeleteActionsCacheByKeyVariables = {
  */
 export const fetchActionsDeleteActionsCacheByKey = (
   variables: ActionsDeleteActionsCacheByKeyVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.ActionsCacheList,
@@ -31237,7 +31237,7 @@ export const useActionsDeleteActionsCacheByKey = (
       ActionsDeleteActionsCacheByKeyVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -31311,7 +31311,7 @@ export type ActionsGetActionsCacheListVariables = {
  */
 export const fetchActionsGetActionsCacheList = (
   variables: ActionsGetActionsCacheListVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.ActionsCacheList,
@@ -31333,7 +31333,7 @@ export const fetchActionsGetActionsCacheList = (
  * GitHub Apps must have the `actions:read` permission to use this endpoint.
  */
 export const actionsGetActionsCacheListQuery = (
-  variables: ActionsGetActionsCacheListVariables,
+  variables: ActionsGetActionsCacheListVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -31367,7 +31367,7 @@ export const useSuspenseActionsGetActionsCacheList = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -31395,7 +31395,7 @@ export const useActionsGetActionsCacheList = <TData = Schemas.ActionsCacheList>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -31440,7 +31440,7 @@ export type ActionsDeleteActionsCacheByIdVariables = {
  */
 export const fetchActionsDeleteActionsCacheById = (
   variables: ActionsDeleteActionsCacheByIdVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -31471,7 +31471,7 @@ export const useActionsDeleteActionsCacheById = (
       ActionsDeleteActionsCacheByIdVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -31511,7 +31511,7 @@ export type ActionsGetJobForWorkflowRunVariables = {
  */
 export const fetchActionsGetJobForWorkflowRun = (
   variables: ActionsGetJobForWorkflowRunVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.Job,
@@ -31531,7 +31531,7 @@ export const fetchActionsGetJobForWorkflowRun = (
  * Gets a specific job in a workflow run. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
  */
 export const actionsGetJobForWorkflowRunQuery = (
-  variables: ActionsGetJobForWorkflowRunVariables,
+  variables: ActionsGetJobForWorkflowRunVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({ signal }: { signal?: AbortSignal }) => Promise<Schemas.Job>;
@@ -31557,7 +31557,7 @@ export const useSuspenseActionsGetJobForWorkflowRun = <TData = Schemas.Job>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -31583,7 +31583,7 @@ export const useActionsGetJobForWorkflowRun = <TData = Schemas.Job>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -31627,7 +31627,7 @@ export type ActionsDownloadJobLogsForWorkflowRunVariables = {
  */
 export const fetchActionsDownloadJobLogsForWorkflowRun = (
   variables: ActionsDownloadJobLogsForWorkflowRunVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -31650,7 +31650,7 @@ export const fetchActionsDownloadJobLogsForWorkflowRun = (
  * have the `actions:read` permission to use this endpoint.
  */
 export const actionsDownloadJobLogsForWorkflowRunQuery = (
-  variables: ActionsDownloadJobLogsForWorkflowRunVariables,
+  variables: ActionsDownloadJobLogsForWorkflowRunVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({ signal }: { signal?: AbortSignal }) => Promise<undefined>;
@@ -31681,7 +31681,7 @@ export const useSuspenseActionsDownloadJobLogsForWorkflowRun = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -31710,7 +31710,7 @@ export const useActionsDownloadJobLogsForWorkflowRun = <TData = undefined>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -31761,7 +31761,7 @@ export type ActionsReRunJobForWorkflowRunVariables = {
  */
 export const fetchActionsReRunJobForWorkflowRun = (
   variables: ActionsReRunJobForWorkflowRunVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.EmptyObject,
@@ -31795,7 +31795,7 @@ export const useActionsReRunJobForWorkflowRun = (
       ActionsReRunJobForWorkflowRunVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -31842,7 +31842,7 @@ export type ActionsGetCustomOidcSubClaimForRepoVariables = {
  */
 export const fetchActionsGetCustomOidcSubClaimForRepo = (
   variables: ActionsGetCustomOidcSubClaimForRepoVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.OidcCustomSubRepo,
@@ -31864,7 +31864,7 @@ export const fetchActionsGetCustomOidcSubClaimForRepo = (
  * endpoint. GitHub Apps must have the `organization_administration:read` permission to use this endpoint.
  */
 export const actionsGetCustomOidcSubClaimForRepoQuery = (
-  variables: ActionsGetCustomOidcSubClaimForRepoVariables,
+  variables: ActionsGetCustomOidcSubClaimForRepoVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -31898,7 +31898,7 @@ export const useSuspenseActionsGetCustomOidcSubClaimForRepo = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -31928,7 +31928,7 @@ export const useActionsGetCustomOidcSubClaimForRepo = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -31991,7 +31991,7 @@ export type ActionsSetCustomOidcSubClaimForRepoVariables = {
  */
 export const fetchActionsSetCustomOidcSubClaimForRepo = (
   variables: ActionsSetCustomOidcSubClaimForRepoVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.EmptyObject,
@@ -32020,7 +32020,7 @@ export const useActionsSetCustomOidcSubClaimForRepo = (
       ActionsSetCustomOidcSubClaimForRepoVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -32062,7 +32062,7 @@ export type ActionsGetGithubActionsPermissionsRepositoryVariables = {
  */
 export const fetchActionsGetGithubActionsPermissionsRepository = (
   variables: ActionsGetGithubActionsPermissionsRepositoryVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.ActionsRepositoryPermissions,
@@ -32084,7 +32084,7 @@ export const fetchActionsGetGithubActionsPermissionsRepository = (
  * You must authenticate using an access token with the `repo` scope to use this endpoint. GitHub Apps must have the `administration` repository permission to use this API.
  */
 export const actionsGetGithubActionsPermissionsRepositoryQuery = (
-  variables: ActionsGetGithubActionsPermissionsRepositoryVariables,
+  variables: ActionsGetGithubActionsPermissionsRepositoryVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -32118,7 +32118,7 @@ export const useSuspenseActionsGetGithubActionsPermissionsRepository = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -32148,7 +32148,7 @@ export const useActionsGetGithubActionsPermissionsRepository = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -32193,7 +32193,7 @@ export type ActionsSetGithubActionsPermissionsRepositoryVariables = {
  */
 export const fetchActionsSetGithubActionsPermissionsRepository = (
   variables: ActionsSetGithubActionsPermissionsRepositoryVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -32222,7 +32222,7 @@ export const useActionsSetGithubActionsPermissionsRepository = (
       ActionsSetGithubActionsPermissionsRepositoryVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -32231,7 +32231,7 @@ export const useActionsSetGithubActionsPermissionsRepository = (
     ActionsSetGithubActionsPermissionsRepositoryVariables
   >({
     mutationFn: (
-      variables: ActionsSetGithubActionsPermissionsRepositoryVariables,
+      variables: ActionsSetGithubActionsPermissionsRepositoryVariables
     ) =>
       fetchActionsSetGithubActionsPermissionsRepository({
         ...fetcherOptions,
@@ -32269,7 +32269,7 @@ export type ActionsGetWorkflowAccessToRepositoryVariables = {
  */
 export const fetchActionsGetWorkflowAccessToRepository = (
   variables: ActionsGetWorkflowAccessToRepositoryVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.ActionsWorkflowAccessToRepository,
@@ -32294,7 +32294,7 @@ export const fetchActionsGetWorkflowAccessToRepository = (
  * repository `administration` permission to use this endpoint.
  */
 export const actionsGetWorkflowAccessToRepositoryQuery = (
-  variables: ActionsGetWorkflowAccessToRepositoryVariables,
+  variables: ActionsGetWorkflowAccessToRepositoryVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -32331,7 +32331,7 @@ export const useSuspenseActionsGetWorkflowAccessToRepository = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -32364,7 +32364,7 @@ export const useActionsGetWorkflowAccessToRepository = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -32407,7 +32407,7 @@ export type ActionsSetWorkflowAccessToRepositoryVariables = {
  */
 export const fetchActionsSetWorkflowAccessToRepository = (
   variables: ActionsSetWorkflowAccessToRepositoryVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -32439,7 +32439,7 @@ export const useActionsSetWorkflowAccessToRepository = (
       ActionsSetWorkflowAccessToRepositoryVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -32481,7 +32481,7 @@ export type ActionsGetAllowedActionsRepositoryVariables = {
  */
 export const fetchActionsGetAllowedActionsRepository = (
   variables: ActionsGetAllowedActionsRepositoryVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.SelectedActions,
@@ -32503,7 +32503,7 @@ export const fetchActionsGetAllowedActionsRepository = (
  * You must authenticate using an access token with the `repo` scope to use this endpoint. GitHub Apps must have the `administration` repository permission to use this API.
  */
 export const actionsGetAllowedActionsRepositoryQuery = (
-  variables: ActionsGetAllowedActionsRepositoryVariables,
+  variables: ActionsGetAllowedActionsRepositoryVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -32537,7 +32537,7 @@ export const useSuspenseActionsGetAllowedActionsRepository = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -32567,7 +32567,7 @@ export const useActionsGetAllowedActionsRepository = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -32607,7 +32607,7 @@ export type ActionsSetAllowedActionsRepositoryVariables = {
  */
 export const fetchActionsSetAllowedActionsRepository = (
   variables: ActionsSetAllowedActionsRepositoryVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -32636,7 +32636,7 @@ export const useActionsSetAllowedActionsRepository = (
       ActionsSetAllowedActionsRepositoryVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -32683,7 +32683,7 @@ export type ActionsGetGithubActionsDefaultWorkflowPermissionsRepositoryVariables
 export const fetchActionsGetGithubActionsDefaultWorkflowPermissionsRepository =
   (
     variables: ActionsGetGithubActionsDefaultWorkflowPermissionsRepositoryVariables,
-    signal?: AbortSignal,
+    signal?: AbortSignal
   ) =>
     githubFetch<
       Schemas.ActionsGetDefaultWorkflowPermissions,
@@ -32708,7 +32708,7 @@ export const fetchActionsGetGithubActionsDefaultWorkflowPermissionsRepository =
  */
 export const actionsGetGithubActionsDefaultWorkflowPermissionsRepositoryQuery =
   (
-    variables: ActionsGetGithubActionsDefaultWorkflowPermissionsRepositoryVariables,
+    variables: ActionsGetGithubActionsDefaultWorkflowPermissionsRepositoryVariables
   ): {
     queryKey: reactQuery.QueryKey;
     queryFn: ({
@@ -32726,7 +32726,7 @@ export const actionsGetGithubActionsDefaultWorkflowPermissionsRepositoryQuery =
     queryFn: ({ signal }: { signal?: AbortSignal }) =>
       fetchActionsGetGithubActionsDefaultWorkflowPermissionsRepository(
         variables,
-        signal,
+        signal
       ),
   });
 
@@ -32747,7 +32747,7 @@ export const useSuspenseActionsGetGithubActionsDefaultWorkflowPermissionsReposit
         TData
       >,
       "queryKey" | "queryFn" | "initialData"
-    >,
+    >
   ) => {
     const { queryOptions } = useGithubContext(options);
     return reactQuery.useSuspenseQuery<
@@ -32756,7 +32756,7 @@ export const useSuspenseActionsGetGithubActionsDefaultWorkflowPermissionsReposit
       TData
     >({
       ...actionsGetGithubActionsDefaultWorkflowPermissionsRepositoryQuery(
-        variables,
+        variables
       ),
       ...options,
       ...queryOptions,
@@ -32781,7 +32781,7 @@ export const useActionsGetGithubActionsDefaultWorkflowPermissionsRepository = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -32790,7 +32790,7 @@ export const useActionsGetGithubActionsDefaultWorkflowPermissionsRepository = <
     TData
   >({
     ...actionsGetGithubActionsDefaultWorkflowPermissionsRepositoryQuery(
-      variables,
+      variables
     ),
     ...options,
     ...queryOptions,
@@ -32828,7 +32828,7 @@ export type ActionsSetGithubActionsDefaultWorkflowPermissionsRepositoryVariables
 export const fetchActionsSetGithubActionsDefaultWorkflowPermissionsRepository =
   (
     variables: ActionsSetGithubActionsDefaultWorkflowPermissionsRepositoryVariables,
-    signal?: AbortSignal,
+    signal?: AbortSignal
   ) =>
     githubFetch<
       undefined,
@@ -32859,7 +32859,7 @@ export const useActionsSetGithubActionsDefaultWorkflowPermissionsRepository = (
       ActionsSetGithubActionsDefaultWorkflowPermissionsRepositoryVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -32868,7 +32868,7 @@ export const useActionsSetGithubActionsDefaultWorkflowPermissionsRepository = (
     ActionsSetGithubActionsDefaultWorkflowPermissionsRepositoryVariables
   >({
     mutationFn: (
-      variables: ActionsSetGithubActionsDefaultWorkflowPermissionsRepositoryVariables,
+      variables: ActionsSetGithubActionsDefaultWorkflowPermissionsRepositoryVariables
     ) =>
       fetchActionsSetGithubActionsDefaultWorkflowPermissionsRepository({
         ...fetcherOptions,
@@ -32978,7 +32978,7 @@ export type ActionsListRequiredWorkflowRunsVariables = {
  */
 export const fetchActionsListRequiredWorkflowRuns = (
   variables: ActionsListRequiredWorkflowRunsVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ActionsListRequiredWorkflowRunsResponse,
@@ -33000,7 +33000,7 @@ export const fetchActionsListRequiredWorkflowRuns = (
  * Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. For more information, see "[Required Workflows](https://docs.github.com/actions/using-workflows/required-workflows)."
  */
 export const actionsListRequiredWorkflowRunsQuery = (
-  variables: ActionsListRequiredWorkflowRunsVariables,
+  variables: ActionsListRequiredWorkflowRunsVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -33034,7 +33034,7 @@ export const useSuspenseActionsListRequiredWorkflowRuns = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -33064,7 +33064,7 @@ export const useActionsListRequiredWorkflowRuns = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -33122,7 +33122,7 @@ export type ActionsListSelfHostedRunnersForRepoVariables = {
  */
 export const fetchActionsListSelfHostedRunnersForRepo = (
   variables: ActionsListSelfHostedRunnersForRepoVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ActionsListSelfHostedRunnersForRepoResponse,
@@ -33142,7 +33142,7 @@ export const fetchActionsListSelfHostedRunnersForRepo = (
  * Lists all self-hosted runners configured in a repository. You must authenticate using an access token with the `repo` scope to use this endpoint.
  */
 export const actionsListSelfHostedRunnersForRepoQuery = (
-  variables: ActionsListSelfHostedRunnersForRepoVariables,
+  variables: ActionsListSelfHostedRunnersForRepoVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -33174,7 +33174,7 @@ export const useSuspenseActionsListSelfHostedRunnersForRepo = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -33202,7 +33202,7 @@ export const useActionsListSelfHostedRunnersForRepo = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -33244,7 +33244,7 @@ export type ActionsListRunnerApplicationsForRepoVariables = {
  */
 export const fetchActionsListRunnerApplicationsForRepo = (
   variables: ActionsListRunnerApplicationsForRepoVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ActionsListRunnerApplicationsForRepoResponse,
@@ -33266,7 +33266,7 @@ export const fetchActionsListRunnerApplicationsForRepo = (
  * You must authenticate using an access token with the `repo` scope to use this endpoint.
  */
 export const actionsListRunnerApplicationsForRepoQuery = (
-  variables: ActionsListRunnerApplicationsForRepoVariables,
+  variables: ActionsListRunnerApplicationsForRepoVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -33300,7 +33300,7 @@ export const useSuspenseActionsListRunnerApplicationsForRepo = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -33330,7 +33330,7 @@ export const useActionsListRunnerApplicationsForRepo = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -33376,7 +33376,7 @@ export type ActionsCreateRegistrationTokenForRepoVariables = {
  */
 export const fetchActionsCreateRegistrationTokenForRepo = (
   variables: ActionsCreateRegistrationTokenForRepoVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.AuthenticationToken,
@@ -33412,7 +33412,7 @@ export const useActionsCreateRegistrationTokenForRepo = (
       ActionsCreateRegistrationTokenForRepoVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -33461,7 +33461,7 @@ export type ActionsCreateRemoveTokenForRepoVariables = {
  */
 export const fetchActionsCreateRemoveTokenForRepo = (
   variables: ActionsCreateRemoveTokenForRepoVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.AuthenticationToken,
@@ -33497,7 +33497,7 @@ export const useActionsCreateRemoveTokenForRepo = (
       ActionsCreateRemoveTokenForRepoVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -33541,7 +33541,7 @@ export type ActionsDeleteSelfHostedRunnerFromRepoVariables = {
  */
 export const fetchActionsDeleteSelfHostedRunnerFromRepo = (
   variables: ActionsDeleteSelfHostedRunnerFromRepoVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -33571,7 +33571,7 @@ export const useActionsDeleteSelfHostedRunnerFromRepo = (
       ActionsDeleteSelfHostedRunnerFromRepoVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -33618,7 +33618,7 @@ export type ActionsGetSelfHostedRunnerForRepoVariables = {
  */
 export const fetchActionsGetSelfHostedRunnerForRepo = (
   variables: ActionsGetSelfHostedRunnerForRepoVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.Runner,
@@ -33641,7 +33641,7 @@ export const fetchActionsGetSelfHostedRunnerForRepo = (
  * endpoint.
  */
 export const actionsGetSelfHostedRunnerForRepoQuery = (
-  variables: ActionsGetSelfHostedRunnerForRepoVariables,
+  variables: ActionsGetSelfHostedRunnerForRepoVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({ signal }: { signal?: AbortSignal }) => Promise<Schemas.Runner>;
@@ -33672,7 +33672,7 @@ export const useSuspenseActionsGetSelfHostedRunnerForRepo = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -33701,7 +33701,7 @@ export const useActionsGetSelfHostedRunnerForRepo = <TData = Schemas.Runner>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -33750,7 +33750,7 @@ export type ActionsRemoveAllCustomLabelsFromSelfHostedRunnerForRepoVariables = {
  */
 export const fetchActionsRemoveAllCustomLabelsFromSelfHostedRunnerForRepo = (
   variables: ActionsRemoveAllCustomLabelsFromSelfHostedRunnerForRepoVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Responses.ActionsRunnerLabelsReadonly,
@@ -33781,7 +33781,7 @@ export const useActionsRemoveAllCustomLabelsFromSelfHostedRunnerForRepo = (
       ActionsRemoveAllCustomLabelsFromSelfHostedRunnerForRepoVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -33790,7 +33790,7 @@ export const useActionsRemoveAllCustomLabelsFromSelfHostedRunnerForRepo = (
     ActionsRemoveAllCustomLabelsFromSelfHostedRunnerForRepoVariables
   >({
     mutationFn: (
-      variables: ActionsRemoveAllCustomLabelsFromSelfHostedRunnerForRepoVariables,
+      variables: ActionsRemoveAllCustomLabelsFromSelfHostedRunnerForRepoVariables
     ) =>
       fetchActionsRemoveAllCustomLabelsFromSelfHostedRunnerForRepo({
         ...fetcherOptions,
@@ -33833,7 +33833,7 @@ export type ActionsListLabelsForSelfHostedRunnerForRepoVariables = {
  */
 export const fetchActionsListLabelsForSelfHostedRunnerForRepo = (
   variables: ActionsListLabelsForSelfHostedRunnerForRepoVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Responses.ActionsRunnerLabels,
@@ -33856,7 +33856,7 @@ export const fetchActionsListLabelsForSelfHostedRunnerForRepo = (
  * endpoint.
  */
 export const actionsListLabelsForSelfHostedRunnerForRepoQuery = (
-  variables: ActionsListLabelsForSelfHostedRunnerForRepoVariables,
+  variables: ActionsListLabelsForSelfHostedRunnerForRepoVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -33891,7 +33891,7 @@ export const useSuspenseActionsListLabelsForSelfHostedRunnerForRepo = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -33922,7 +33922,7 @@ export const useActionsListLabelsForSelfHostedRunnerForRepo = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -33986,7 +33986,7 @@ export type ActionsAddCustomLabelsToSelfHostedRunnerForRepoVariables = {
  */
 export const fetchActionsAddCustomLabelsToSelfHostedRunnerForRepo = (
   variables: ActionsAddCustomLabelsToSelfHostedRunnerForRepoVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Responses.ActionsRunnerLabels,
@@ -34016,7 +34016,7 @@ export const useActionsAddCustomLabelsToSelfHostedRunnerForRepo = (
       ActionsAddCustomLabelsToSelfHostedRunnerForRepoVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -34025,7 +34025,7 @@ export const useActionsAddCustomLabelsToSelfHostedRunnerForRepo = (
     ActionsAddCustomLabelsToSelfHostedRunnerForRepoVariables
   >({
     mutationFn: (
-      variables: ActionsAddCustomLabelsToSelfHostedRunnerForRepoVariables,
+      variables: ActionsAddCustomLabelsToSelfHostedRunnerForRepoVariables
     ) =>
       fetchActionsAddCustomLabelsToSelfHostedRunnerForRepo({
         ...fetcherOptions,
@@ -34086,7 +34086,7 @@ export type ActionsSetCustomLabelsForSelfHostedRunnerForRepoVariables = {
  */
 export const fetchActionsSetCustomLabelsForSelfHostedRunnerForRepo = (
   variables: ActionsSetCustomLabelsForSelfHostedRunnerForRepoVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Responses.ActionsRunnerLabels,
@@ -34117,7 +34117,7 @@ export const useActionsSetCustomLabelsForSelfHostedRunnerForRepo = (
       ActionsSetCustomLabelsForSelfHostedRunnerForRepoVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -34126,7 +34126,7 @@ export const useActionsSetCustomLabelsForSelfHostedRunnerForRepo = (
     ActionsSetCustomLabelsForSelfHostedRunnerForRepoVariables
   >({
     mutationFn: (
-      variables: ActionsSetCustomLabelsForSelfHostedRunnerForRepoVariables,
+      variables: ActionsSetCustomLabelsForSelfHostedRunnerForRepoVariables
     ) =>
       fetchActionsSetCustomLabelsForSelfHostedRunnerForRepo({
         ...fetcherOptions,
@@ -34183,7 +34183,7 @@ export type ActionsRemoveCustomLabelFromSelfHostedRunnerForRepoVariables = {
  */
 export const fetchActionsRemoveCustomLabelFromSelfHostedRunnerForRepo = (
   variables: ActionsRemoveCustomLabelFromSelfHostedRunnerForRepoVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Responses.ActionsRunnerLabels,
@@ -34217,7 +34217,7 @@ export const useActionsRemoveCustomLabelFromSelfHostedRunnerForRepo = (
       ActionsRemoveCustomLabelFromSelfHostedRunnerForRepoVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -34226,7 +34226,7 @@ export const useActionsRemoveCustomLabelFromSelfHostedRunnerForRepo = (
     ActionsRemoveCustomLabelFromSelfHostedRunnerForRepoVariables
   >({
     mutationFn: (
-      variables: ActionsRemoveCustomLabelFromSelfHostedRunnerForRepoVariables,
+      variables: ActionsRemoveCustomLabelFromSelfHostedRunnerForRepoVariables
     ) =>
       fetchActionsRemoveCustomLabelFromSelfHostedRunnerForRepo({
         ...fetcherOptions,
@@ -34332,7 +34332,7 @@ export type ActionsListWorkflowRunsForRepoVariables = {
  */
 export const fetchActionsListWorkflowRunsForRepo = (
   variables: ActionsListWorkflowRunsForRepoVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ActionsListWorkflowRunsForRepoResponse,
@@ -34354,7 +34354,7 @@ export const fetchActionsListWorkflowRunsForRepo = (
  * Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
  */
 export const actionsListWorkflowRunsForRepoQuery = (
-  variables: ActionsListWorkflowRunsForRepoVariables,
+  variables: ActionsListWorkflowRunsForRepoVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -34388,7 +34388,7 @@ export const useSuspenseActionsListWorkflowRunsForRepo = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -34418,7 +34418,7 @@ export const useActionsListWorkflowRunsForRepo = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -34460,7 +34460,7 @@ export type ActionsDeleteWorkflowRunVariables = {
  */
 export const fetchActionsDeleteWorkflowRun = (
   variables: ActionsDeleteWorkflowRunVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -34489,7 +34489,7 @@ export const useActionsDeleteWorkflowRun = (
       ActionsDeleteWorkflowRunVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -34539,7 +34539,7 @@ export type ActionsGetWorkflowRunVariables = {
  */
 export const fetchActionsGetWorkflowRun = (
   variables: ActionsGetWorkflowRunVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.WorkflowRun,
@@ -34559,7 +34559,7 @@ export const fetchActionsGetWorkflowRun = (
  * Gets a specific workflow run. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
  */
 export const actionsGetWorkflowRunQuery = (
-  variables: ActionsGetWorkflowRunVariables,
+  variables: ActionsGetWorkflowRunVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -34589,7 +34589,7 @@ export const useSuspenseActionsGetWorkflowRun = <TData = Schemas.WorkflowRun>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -34615,7 +34615,7 @@ export const useActionsGetWorkflowRun = <TData = Schemas.WorkflowRun>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -34657,7 +34657,7 @@ export type ActionsGetReviewsForRunVariables = {
  */
 export const fetchActionsGetReviewsForRun = (
   variables: ActionsGetReviewsForRunVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ActionsGetReviewsForRunResponse,
@@ -34677,7 +34677,7 @@ export const fetchActionsGetReviewsForRun = (
  * Anyone with read access to the repository can use this endpoint. If the repository is private, you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
  */
 export const actionsGetReviewsForRunQuery = (
-  variables: ActionsGetReviewsForRunVariables,
+  variables: ActionsGetReviewsForRunVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -34709,7 +34709,7 @@ export const useSuspenseActionsGetReviewsForRun = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -34737,7 +34737,7 @@ export const useActionsGetReviewsForRun = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -34788,7 +34788,7 @@ export type ActionsApproveWorkflowRunVariables = {
  */
 export const fetchActionsApproveWorkflowRun = (
   variables: ActionsApproveWorkflowRunVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.EmptyObject,
@@ -34817,7 +34817,7 @@ export const useActionsApproveWorkflowRun = (
       ActionsApproveWorkflowRunVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -34879,7 +34879,7 @@ export type ActionsListWorkflowRunArtifactsVariables = {
  */
 export const fetchActionsListWorkflowRunArtifacts = (
   variables: ActionsListWorkflowRunArtifactsVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ActionsListWorkflowRunArtifactsResponse,
@@ -34899,7 +34899,7 @@ export const fetchActionsListWorkflowRunArtifacts = (
  * Lists artifacts for a workflow run. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
  */
 export const actionsListWorkflowRunArtifactsQuery = (
-  variables: ActionsListWorkflowRunArtifactsVariables,
+  variables: ActionsListWorkflowRunArtifactsVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -34931,7 +34931,7 @@ export const useSuspenseActionsListWorkflowRunArtifacts = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -34959,7 +34959,7 @@ export const useActionsListWorkflowRunArtifacts = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -35016,7 +35016,7 @@ export type ActionsGetWorkflowRunAttemptVariables = {
  */
 export const fetchActionsGetWorkflowRunAttempt = (
   variables: ActionsGetWorkflowRunAttemptVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.WorkflowRun,
@@ -35039,7 +35039,7 @@ export const fetchActionsGetWorkflowRunAttempt = (
  * use this endpoint.
  */
 export const actionsGetWorkflowRunAttemptQuery = (
-  variables: ActionsGetWorkflowRunAttemptVariables,
+  variables: ActionsGetWorkflowRunAttemptVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -35074,7 +35074,7 @@ export const useSuspenseActionsGetWorkflowRunAttempt = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -35103,7 +35103,7 @@ export const useActionsGetWorkflowRunAttempt = <TData = Schemas.WorkflowRun>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -35171,7 +35171,7 @@ export type ActionsListJobsForWorkflowRunAttemptVariables = {
  */
 export const fetchActionsListJobsForWorkflowRunAttempt = (
   variables: ActionsListJobsForWorkflowRunAttemptVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ActionsListJobsForWorkflowRunAttemptResponse,
@@ -35191,7 +35191,7 @@ export const fetchActionsListJobsForWorkflowRunAttempt = (
  * Lists jobs for a specific workflow run attempt. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint. You can use parameters to narrow the list of results. For more information about using parameters, see [Parameters](https://docs.github.com/rest/overview/resources-in-the-rest-api#parameters).
  */
 export const actionsListJobsForWorkflowRunAttemptQuery = (
-  variables: ActionsListJobsForWorkflowRunAttemptVariables,
+  variables: ActionsListJobsForWorkflowRunAttemptVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -35223,7 +35223,7 @@ export const useSuspenseActionsListJobsForWorkflowRunAttempt = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -35251,7 +35251,7 @@ export const useActionsListJobsForWorkflowRunAttempt = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -35299,7 +35299,7 @@ export type ActionsDownloadWorkflowRunAttemptLogsVariables = {
  */
 export const fetchActionsDownloadWorkflowRunAttemptLogs = (
   variables: ActionsDownloadWorkflowRunAttemptLogsVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -35322,7 +35322,7 @@ export const fetchActionsDownloadWorkflowRunAttemptLogs = (
  * GitHub Apps must have the `actions:read` permission to use this endpoint.
  */
 export const actionsDownloadWorkflowRunAttemptLogsQuery = (
-  variables: ActionsDownloadWorkflowRunAttemptLogsVariables,
+  variables: ActionsDownloadWorkflowRunAttemptLogsVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({ signal }: { signal?: AbortSignal }) => Promise<undefined>;
@@ -35353,7 +35353,7 @@ export const useSuspenseActionsDownloadWorkflowRunAttemptLogs = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -35382,7 +35382,7 @@ export const useActionsDownloadWorkflowRunAttemptLogs = <TData = undefined>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -35425,7 +35425,7 @@ export type ActionsCancelWorkflowRunVariables = {
  */
 export const fetchActionsCancelWorkflowRun = (
   variables: ActionsCancelWorkflowRunVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.EmptyObject,
@@ -35452,7 +35452,7 @@ export const useActionsCancelWorkflowRun = (
       ActionsCancelWorkflowRunVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -35520,7 +35520,7 @@ export type ActionsListJobsForWorkflowRunVariables = {
  */
 export const fetchActionsListJobsForWorkflowRun = (
   variables: ActionsListJobsForWorkflowRunVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ActionsListJobsForWorkflowRunResponse,
@@ -35540,7 +35540,7 @@ export const fetchActionsListJobsForWorkflowRun = (
  * Lists jobs for a workflow run. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint. You can use parameters to narrow the list of results. For more information about using parameters, see [Parameters](https://docs.github.com/rest/overview/resources-in-the-rest-api#parameters).
  */
 export const actionsListJobsForWorkflowRunQuery = (
-  variables: ActionsListJobsForWorkflowRunVariables,
+  variables: ActionsListJobsForWorkflowRunVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -35572,7 +35572,7 @@ export const useSuspenseActionsListJobsForWorkflowRun = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -35600,7 +35600,7 @@ export const useActionsListJobsForWorkflowRun = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -35649,7 +35649,7 @@ export type ActionsDeleteWorkflowRunLogsVariables = {
  */
 export const fetchActionsDeleteWorkflowRunLogs = (
   variables: ActionsDeleteWorkflowRunLogsVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -35676,7 +35676,7 @@ export const useActionsDeleteWorkflowRunLogs = (
       ActionsDeleteWorkflowRunLogsVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -35720,7 +35720,7 @@ export type ActionsDownloadWorkflowRunLogsVariables = {
  */
 export const fetchActionsDownloadWorkflowRunLogs = (
   variables: ActionsDownloadWorkflowRunLogsVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -35743,7 +35743,7 @@ export const fetchActionsDownloadWorkflowRunLogs = (
  * the `actions:read` permission to use this endpoint.
  */
 export const actionsDownloadWorkflowRunLogsQuery = (
-  variables: ActionsDownloadWorkflowRunLogsVariables,
+  variables: ActionsDownloadWorkflowRunLogsVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({ signal }: { signal?: AbortSignal }) => Promise<undefined>;
@@ -35772,7 +35772,7 @@ export const useSuspenseActionsDownloadWorkflowRunLogs = <TData = undefined>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -35801,7 +35801,7 @@ export const useActionsDownloadWorkflowRunLogs = <TData = undefined>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -35847,7 +35847,7 @@ export type ActionsGetPendingDeploymentsForRunVariables = {
  */
 export const fetchActionsGetPendingDeploymentsForRun = (
   variables: ActionsGetPendingDeploymentsForRunVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ActionsGetPendingDeploymentsForRunResponse,
@@ -35869,7 +35869,7 @@ export const fetchActionsGetPendingDeploymentsForRun = (
  * Anyone with read access to the repository can use this endpoint. If the repository is private, you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
  */
 export const actionsGetPendingDeploymentsForRunQuery = (
-  variables: ActionsGetPendingDeploymentsForRunVariables,
+  variables: ActionsGetPendingDeploymentsForRunVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -35903,7 +35903,7 @@ export const useSuspenseActionsGetPendingDeploymentsForRun = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -35933,7 +35933,7 @@ export const useActionsGetPendingDeploymentsForRun = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -36002,7 +36002,7 @@ export type ActionsReviewPendingDeploymentsForRunVariables = {
  */
 export const fetchActionsReviewPendingDeploymentsForRun = (
   variables: ActionsReviewPendingDeploymentsForRunVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ActionsReviewPendingDeploymentsForRunResponse,
@@ -36031,7 +36031,7 @@ export const useActionsReviewPendingDeploymentsForRun = (
       ActionsReviewPendingDeploymentsForRunVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -36082,7 +36082,7 @@ export type ActionsReRunWorkflowVariables = {
  */
 export const fetchActionsReRunWorkflow = (
   variables: ActionsReRunWorkflowVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.EmptyObject,
@@ -36116,7 +36116,7 @@ export const useActionsReRunWorkflow = (
       ActionsReRunWorkflowVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -36165,7 +36165,7 @@ export type ActionsReRunWorkflowFailedJobsVariables = {
  */
 export const fetchActionsReRunWorkflowFailedJobs = (
   variables: ActionsReRunWorkflowFailedJobsVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.EmptyObject,
@@ -36199,7 +36199,7 @@ export const useActionsReRunWorkflowFailedJobs = (
       ActionsReRunWorkflowFailedJobsVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -36241,7 +36241,7 @@ export type ActionsGetWorkflowRunUsageVariables = {
  */
 export const fetchActionsGetWorkflowRunUsage = (
   variables: ActionsGetWorkflowRunUsageVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.WorkflowRunUsage,
@@ -36263,7 +36263,7 @@ export const fetchActionsGetWorkflowRunUsage = (
  * Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
  */
 export const actionsGetWorkflowRunUsageQuery = (
-  variables: ActionsGetWorkflowRunUsageVariables,
+  variables: ActionsGetWorkflowRunUsageVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -36297,7 +36297,7 @@ export const useSuspenseActionsGetWorkflowRunUsage = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -36325,7 +36325,7 @@ export const useActionsGetWorkflowRunUsage = <TData = Schemas.WorkflowRunUsage>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -36382,7 +36382,7 @@ export type ActionsListRepoSecretsVariables = {
  */
 export const fetchActionsListRepoSecrets = (
   variables: ActionsListRepoSecretsVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ActionsListRepoSecretsResponse,
@@ -36402,7 +36402,7 @@ export const fetchActionsListRepoSecrets = (
  * Lists all secrets available in a repository without revealing their encrypted values. You must authenticate using an access token with the `repo` scope to use this endpoint. GitHub Apps must have the `secrets` repository permission to use this endpoint.
  */
 export const actionsListRepoSecretsQuery = (
-  variables: ActionsListRepoSecretsVariables,
+  variables: ActionsListRepoSecretsVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -36434,7 +36434,7 @@ export const useSuspenseActionsListRepoSecrets = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -36462,7 +36462,7 @@ export const useActionsListRepoSecrets = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -36498,7 +36498,7 @@ export type ActionsGetRepoPublicKeyVariables = {
  */
 export const fetchActionsGetRepoPublicKey = (
   variables: ActionsGetRepoPublicKeyVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.ActionsPublicKey,
@@ -36518,7 +36518,7 @@ export const fetchActionsGetRepoPublicKey = (
  * Gets your public key, which you need to encrypt secrets. You need to encrypt a secret before you can create or update secrets. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `secrets` repository permission to use this endpoint.
  */
 export const actionsGetRepoPublicKeyQuery = (
-  variables: ActionsGetRepoPublicKeyVariables,
+  variables: ActionsGetRepoPublicKeyVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -36550,7 +36550,7 @@ export const useSuspenseActionsGetRepoPublicKey = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -36576,7 +36576,7 @@ export const useActionsGetRepoPublicKey = <TData = Schemas.ActionsPublicKey>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -36616,7 +36616,7 @@ export type ActionsDeleteRepoSecretVariables = {
  */
 export const fetchActionsDeleteRepoSecret = (
   variables: ActionsDeleteRepoSecretVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -36643,7 +36643,7 @@ export const useActionsDeleteRepoSecret = (
       ActionsDeleteRepoSecretVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -36683,7 +36683,7 @@ export type ActionsGetRepoSecretVariables = {
  */
 export const fetchActionsGetRepoSecret = (
   variables: ActionsGetRepoSecretVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.ActionsSecret,
@@ -36703,7 +36703,7 @@ export const fetchActionsGetRepoSecret = (
  * Gets a single repository secret without revealing its encrypted value. You must authenticate using an access token with the `repo` scope to use this endpoint. GitHub Apps must have the `secrets` repository permission to use this endpoint.
  */
 export const actionsGetRepoSecretQuery = (
-  variables: ActionsGetRepoSecretVariables,
+  variables: ActionsGetRepoSecretVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -36733,7 +36733,7 @@ export const useSuspenseActionsGetRepoSecret = <TData = Schemas.ActionsSecret>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -36759,7 +36759,7 @@ export const useActionsGetRepoSecret = <TData = Schemas.ActionsSecret>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -36889,7 +36889,7 @@ export type ActionsCreateOrUpdateRepoSecretVariables = {
  */
 export const fetchActionsCreateOrUpdateRepoSecret = (
   variables: ActionsCreateOrUpdateRepoSecretVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.EmptyObject,
@@ -36991,7 +36991,7 @@ export const useActionsCreateOrUpdateRepoSecret = (
       ActionsCreateOrUpdateRepoSecretVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -37048,7 +37048,7 @@ export type ActionsListRepoVariablesVariables = {
  */
 export const fetchActionsListRepoVariables = (
   variables: ActionsListRepoVariablesVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ActionsListRepoVariablesResponse,
@@ -37068,7 +37068,7 @@ export const fetchActionsListRepoVariables = (
  * Lists all repository variables. You must authenticate using an access token with the `repo` scope to use this endpoint. GitHub Apps must have the `actions_variables:read` repository permission to use this endpoint.
  */
 export const actionsListRepoVariablesQuery = (
-  variables: ActionsListRepoVariablesVariables,
+  variables: ActionsListRepoVariablesVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -37100,7 +37100,7 @@ export const useSuspenseActionsListRepoVariables = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -37128,7 +37128,7 @@ export const useActionsListRepoVariables = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -37178,7 +37178,7 @@ export type ActionsCreateRepoVariableVariables = {
  */
 export const fetchActionsCreateRepoVariable = (
   variables: ActionsCreateRepoVariableVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.EmptyObject,
@@ -37207,7 +37207,7 @@ export const useActionsCreateRepoVariable = (
       ActionsCreateRepoVariableVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -37249,7 +37249,7 @@ export type ActionsDeleteRepoVariableVariables = {
  */
 export const fetchActionsDeleteRepoVariable = (
   variables: ActionsDeleteRepoVariableVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -37278,7 +37278,7 @@ export const useActionsDeleteRepoVariable = (
       ActionsDeleteRepoVariableVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -37318,7 +37318,7 @@ export type ActionsGetRepoVariableVariables = {
  */
 export const fetchActionsGetRepoVariable = (
   variables: ActionsGetRepoVariableVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.ActionsVariable,
@@ -37338,7 +37338,7 @@ export const fetchActionsGetRepoVariable = (
  * Gets a specific variable in a repository. You must authenticate using an access token with the `repo` scope to use this endpoint. GitHub Apps must have the `actions_variables:read` repository permission to use this endpoint.
  */
 export const actionsGetRepoVariableQuery = (
-  variables: ActionsGetRepoVariableVariables,
+  variables: ActionsGetRepoVariableVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -37370,7 +37370,7 @@ export const useSuspenseActionsGetRepoVariable = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -37396,7 +37396,7 @@ export const useActionsGetRepoVariable = <TData = Schemas.ActionsVariable>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -37450,7 +37450,7 @@ export type ActionsUpdateRepoVariableVariables = {
  */
 export const fetchActionsUpdateRepoVariable = (
   variables: ActionsUpdateRepoVariableVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -37479,7 +37479,7 @@ export const useActionsUpdateRepoVariable = (
       ActionsUpdateRepoVariableVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -37536,7 +37536,7 @@ export type ActionsListRepoWorkflowsVariables = {
  */
 export const fetchActionsListRepoWorkflows = (
   variables: ActionsListRepoWorkflowsVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ActionsListRepoWorkflowsResponse,
@@ -37556,7 +37556,7 @@ export const fetchActionsListRepoWorkflows = (
  * Lists the workflows in a repository. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
  */
 export const actionsListRepoWorkflowsQuery = (
-  variables: ActionsListRepoWorkflowsVariables,
+  variables: ActionsListRepoWorkflowsVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -37588,7 +37588,7 @@ export const useSuspenseActionsListRepoWorkflows = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -37616,7 +37616,7 @@ export const useActionsListRepoWorkflows = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -37656,7 +37656,7 @@ export type ActionsGetWorkflowVariables = {
  */
 export const fetchActionsGetWorkflow = (
   variables: ActionsGetWorkflowVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.Workflow,
@@ -37676,7 +37676,7 @@ export const fetchActionsGetWorkflow = (
  * Gets a specific workflow. You can replace `workflow_id` with the workflow file name. For example, you could use `main.yaml`. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
  */
 export const actionsGetWorkflowQuery = (
-  variables: ActionsGetWorkflowVariables,
+  variables: ActionsGetWorkflowVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({ signal }: { signal?: AbortSignal }) => Promise<Schemas.Workflow>;
@@ -37702,7 +37702,7 @@ export const useSuspenseActionsGetWorkflow = <TData = Schemas.Workflow>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -37728,7 +37728,7 @@ export const useActionsGetWorkflow = <TData = Schemas.Workflow>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.Workflow, ActionsGetWorkflowError, TData>({
@@ -37766,7 +37766,7 @@ export type ActionsDisableWorkflowVariables = {
  */
 export const fetchActionsDisableWorkflow = (
   variables: ActionsDisableWorkflowVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -37795,7 +37795,7 @@ export const useActionsDisableWorkflow = (
       ActionsDisableWorkflowVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -37856,7 +37856,7 @@ export type ActionsCreateWorkflowDispatchVariables = {
  */
 export const fetchActionsCreateWorkflowDispatch = (
   variables: ActionsCreateWorkflowDispatchVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -37887,7 +37887,7 @@ export const useActionsCreateWorkflowDispatch = (
       ActionsCreateWorkflowDispatchVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -37929,7 +37929,7 @@ export type ActionsEnableWorkflowVariables = {
  */
 export const fetchActionsEnableWorkflow = (
   variables: ActionsEnableWorkflowVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -37958,7 +37958,7 @@ export const useActionsEnableWorkflow = (
       ActionsEnableWorkflowVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -38071,7 +38071,7 @@ export type ActionsListWorkflowRunsVariables = {
  */
 export const fetchActionsListWorkflowRuns = (
   variables: ActionsListWorkflowRunsVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ActionsListWorkflowRunsResponse,
@@ -38093,7 +38093,7 @@ export const fetchActionsListWorkflowRuns = (
  * Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope.
  */
 export const actionsListWorkflowRunsQuery = (
-  variables: ActionsListWorkflowRunsVariables,
+  variables: ActionsListWorkflowRunsVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -38127,7 +38127,7 @@ export const useSuspenseActionsListWorkflowRuns = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -38157,7 +38157,7 @@ export const useActionsListWorkflowRuns = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -38199,7 +38199,7 @@ export type ActionsGetWorkflowUsageVariables = {
  */
 export const fetchActionsGetWorkflowUsage = (
   variables: ActionsGetWorkflowUsageVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.WorkflowUsage,
@@ -38221,7 +38221,7 @@ export const fetchActionsGetWorkflowUsage = (
  * You can replace `workflow_id` with the workflow file name. For example, you could use `main.yaml`. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
  */
 export const actionsGetWorkflowUsageQuery = (
-  variables: ActionsGetWorkflowUsageVariables,
+  variables: ActionsGetWorkflowUsageVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -38255,7 +38255,7 @@ export const useSuspenseActionsGetWorkflowUsage = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -38283,7 +38283,7 @@ export const useActionsGetWorkflowUsage = <TData = Schemas.WorkflowUsage>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -38340,7 +38340,7 @@ export type IssuesListAssigneesVariables = {
  */
 export const fetchIssuesListAssignees = (
   variables: IssuesListAssigneesVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     IssuesListAssigneesResponse,
@@ -38360,7 +38360,7 @@ export const fetchIssuesListAssignees = (
  * Lists the [available assignees](https://docs.github.com/articles/assigning-issues-and-pull-requests-to-other-github-users/) for issues in a repository.
  */
 export const issuesListAssigneesQuery = (
-  variables: IssuesListAssigneesVariables,
+  variables: IssuesListAssigneesVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -38392,7 +38392,7 @@ export const useSuspenseIssuesListAssignees = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -38418,7 +38418,7 @@ export const useIssuesListAssignees = <TData = IssuesListAssigneesResponse>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -38462,7 +38462,7 @@ export type IssuesCheckUserCanBeAssignedVariables = {
  */
 export const fetchIssuesCheckUserCanBeAssigned = (
   variables: IssuesCheckUserCanBeAssignedVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -38486,7 +38486,7 @@ export const fetchIssuesCheckUserCanBeAssigned = (
  * Otherwise a `404` status code is returned.
  */
 export const issuesCheckUserCanBeAssignedQuery = (
-  variables: IssuesCheckUserCanBeAssignedVariables,
+  variables: IssuesCheckUserCanBeAssignedVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({ signal }: { signal?: AbortSignal }) => Promise<undefined>;
@@ -38516,7 +38516,7 @@ export const useSuspenseIssuesCheckUserCanBeAssigned = <TData = undefined>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -38546,7 +38546,7 @@ export const useIssuesCheckUserCanBeAssigned = <TData = undefined>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -38596,7 +38596,7 @@ export type ReposListAutolinksVariables = {
  */
 export const fetchReposListAutolinks = (
   variables: ReposListAutolinksVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ReposListAutolinksResponse,
@@ -38618,7 +38618,7 @@ export const fetchReposListAutolinks = (
  * Information about autolinks are only available to repository administrators.
  */
 export const reposListAutolinksQuery = (
-  variables: ReposListAutolinksVariables,
+  variables: ReposListAutolinksVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -38652,7 +38652,7 @@ export const useSuspenseReposListAutolinks = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -38680,7 +38680,7 @@ export const useReposListAutolinks = <TData = ReposListAutolinksResponse>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -38737,7 +38737,7 @@ export type ReposCreateAutolinkVariables = {
  */
 export const fetchReposCreateAutolink = (
   variables: ReposCreateAutolinkVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.Autolink,
@@ -38764,7 +38764,7 @@ export const useReposCreateAutolink = (
       ReposCreateAutolinkVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -38809,7 +38809,7 @@ export type ReposDeleteAutolinkVariables = {
  */
 export const fetchReposDeleteAutolink = (
   variables: ReposDeleteAutolinkVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -38838,7 +38838,7 @@ export const useReposDeleteAutolink = (
       ReposDeleteAutolinkVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -38883,7 +38883,7 @@ export type ReposGetAutolinkVariables = {
  */
 export const fetchReposGetAutolink = (
   variables: ReposGetAutolinkVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.Autolink,
@@ -38905,7 +38905,7 @@ export const fetchReposGetAutolink = (
  * Information about autolinks are only available to repository administrators.
  */
 export const reposGetAutolinkQuery = (
-  variables: ReposGetAutolinkVariables,
+  variables: ReposGetAutolinkVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({ signal }: { signal?: AbortSignal }) => Promise<Schemas.Autolink>;
@@ -38929,7 +38929,7 @@ export const useSuspenseReposGetAutolink = <TData = Schemas.Autolink>(
   options?: Omit<
     reactQuery.UseQueryOptions<Schemas.Autolink, ReposGetAutolinkError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -38953,7 +38953,7 @@ export const useReposGetAutolink = <TData = Schemas.Autolink>(
   options?: Omit<
     reactQuery.UseQueryOptions<Schemas.Autolink, ReposGetAutolinkError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.Autolink, ReposGetAutolinkError, TData>({
@@ -38986,7 +38986,7 @@ export type ReposDisableAutomatedSecurityFixesVariables = {
  */
 export const fetchReposDisableAutomatedSecurityFixes = (
   variables: ReposDisableAutomatedSecurityFixesVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -39013,7 +39013,7 @@ export const useReposDisableAutomatedSecurityFixes = (
       ReposDisableAutomatedSecurityFixesVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -39053,7 +39053,7 @@ export type ReposEnableAutomatedSecurityFixesVariables = {
  */
 export const fetchReposEnableAutomatedSecurityFixes = (
   variables: ReposEnableAutomatedSecurityFixesVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -39080,7 +39080,7 @@ export const useReposEnableAutomatedSecurityFixes = (
       ReposEnableAutomatedSecurityFixesVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -39141,7 +39141,7 @@ export type ReposListBranchesVariables = {
 
 export const fetchReposListBranches = (
   variables: ReposListBranchesVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ReposListBranchesResponse,
@@ -39158,7 +39158,7 @@ export const fetchReposListBranches = (
   });
 
 export const reposListBranchesQuery = (
-  variables: ReposListBranchesVariables,
+  variables: ReposListBranchesVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -39185,7 +39185,7 @@ export const useSuspenseReposListBranches = <TData = ReposListBranchesResponse>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -39208,7 +39208,7 @@ export const useReposListBranches = <TData = ReposListBranchesResponse>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -39254,7 +39254,7 @@ export type ReposGetBranchVariables = {
 
 export const fetchReposGetBranch = (
   variables: ReposGetBranchVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.BranchWithProtection,
@@ -39271,7 +39271,7 @@ export const fetchReposGetBranch = (
   });
 
 export const reposGetBranchQuery = (
-  variables: ReposGetBranchVariables,
+  variables: ReposGetBranchVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -39298,7 +39298,7 @@ export const useSuspenseReposGetBranch = <TData = Schemas.BranchWithProtection>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -39321,7 +39321,7 @@ export const useReposGetBranch = <TData = Schemas.BranchWithProtection>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -39364,7 +39364,7 @@ export type ReposDeleteBranchProtectionVariables = {
  */
 export const fetchReposDeleteBranchProtection = (
   variables: ReposDeleteBranchProtectionVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -39391,7 +39391,7 @@ export const useReposDeleteBranchProtection = (
       ReposDeleteBranchProtectionVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -39434,7 +39434,7 @@ export type ReposGetBranchProtectionVariables = {
  */
 export const fetchReposGetBranchProtection = (
   variables: ReposGetBranchProtectionVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.BranchProtection,
@@ -39454,7 +39454,7 @@ export const fetchReposGetBranchProtection = (
  * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
  */
 export const reposGetBranchProtectionQuery = (
-  variables: ReposGetBranchProtectionVariables,
+  variables: ReposGetBranchProtectionVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -39486,7 +39486,7 @@ export const useSuspenseReposGetBranchProtection = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -39512,7 +39512,7 @@ export const useReposGetBranchProtection = <TData = Schemas.BranchProtection>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -39713,7 +39713,7 @@ export type ReposUpdateBranchProtectionVariables = {
  */
 export const fetchReposUpdateBranchProtection = (
   variables: ReposUpdateBranchProtectionVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.ProtectedBranch,
@@ -39746,7 +39746,7 @@ export const useReposUpdateBranchProtection = (
       ReposUpdateBranchProtectionVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -39791,7 +39791,7 @@ export type ReposDeleteAdminBranchProtectionVariables = {
  */
 export const fetchReposDeleteAdminBranchProtection = (
   variables: ReposDeleteAdminBranchProtectionVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -39820,7 +39820,7 @@ export const useReposDeleteAdminBranchProtection = (
       ReposDeleteAdminBranchProtectionVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -39864,7 +39864,7 @@ export type ReposGetAdminBranchProtectionVariables = {
  */
 export const fetchReposGetAdminBranchProtection = (
   variables: ReposGetAdminBranchProtectionVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.ProtectedBranchAdminEnforced,
@@ -39884,7 +39884,7 @@ export const fetchReposGetAdminBranchProtection = (
  * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
  */
 export const reposGetAdminBranchProtectionQuery = (
-  variables: ReposGetAdminBranchProtectionVariables,
+  variables: ReposGetAdminBranchProtectionVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -39916,7 +39916,7 @@ export const useSuspenseReposGetAdminBranchProtection = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -39944,7 +39944,7 @@ export const useReposGetAdminBranchProtection = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -39987,7 +39987,7 @@ export type ReposSetAdminBranchProtectionVariables = {
  */
 export const fetchReposSetAdminBranchProtection = (
   variables: ReposSetAdminBranchProtectionVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.ProtectedBranchAdminEnforced,
@@ -40016,7 +40016,7 @@ export const useReposSetAdminBranchProtection = (
       ReposSetAdminBranchProtectionVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -40059,7 +40059,7 @@ export type ReposDeletePullRequestReviewProtectionVariables = {
  */
 export const fetchReposDeletePullRequestReviewProtection = (
   variables: ReposDeletePullRequestReviewProtectionVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -40086,7 +40086,7 @@ export const useReposDeletePullRequestReviewProtection = (
       ReposDeletePullRequestReviewProtectionVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -40130,7 +40130,7 @@ export type ReposGetPullRequestReviewProtectionVariables = {
  */
 export const fetchReposGetPullRequestReviewProtection = (
   variables: ReposGetPullRequestReviewProtectionVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.ProtectedBranchPullRequestReview,
@@ -40150,7 +40150,7 @@ export const fetchReposGetPullRequestReviewProtection = (
  * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
  */
 export const reposGetPullRequestReviewProtectionQuery = (
-  variables: ReposGetPullRequestReviewProtectionVariables,
+  variables: ReposGetPullRequestReviewProtectionVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -40182,7 +40182,7 @@ export const useSuspenseReposGetPullRequestReviewProtection = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -40210,7 +40210,7 @@ export const useReposGetPullRequestReviewProtection = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -40313,7 +40313,7 @@ export type ReposUpdatePullRequestReviewProtectionVariables = {
  */
 export const fetchReposUpdatePullRequestReviewProtection = (
   variables: ReposUpdatePullRequestReviewProtectionVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.ProtectedBranchPullRequestReview,
@@ -40344,7 +40344,7 @@ export const useReposUpdatePullRequestReviewProtection = (
       ReposUpdatePullRequestReviewProtectionVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -40392,7 +40392,7 @@ export type ReposDeleteCommitSignatureProtectionVariables = {
  */
 export const fetchReposDeleteCommitSignatureProtection = (
   variables: ReposDeleteCommitSignatureProtectionVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -40421,7 +40421,7 @@ export const useReposDeleteCommitSignatureProtection = (
       ReposDeleteCommitSignatureProtectionVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -40471,7 +40471,7 @@ export type ReposGetCommitSignatureProtectionVariables = {
  */
 export const fetchReposGetCommitSignatureProtection = (
   variables: ReposGetCommitSignatureProtectionVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.ProtectedBranchAdminEnforced,
@@ -40495,7 +40495,7 @@ export const fetchReposGetCommitSignatureProtection = (
  * **Note**: You must enable branch protection to require signed commits.
  */
 export const reposGetCommitSignatureProtectionQuery = (
-  variables: ReposGetCommitSignatureProtectionVariables,
+  variables: ReposGetCommitSignatureProtectionVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -40531,7 +40531,7 @@ export const useSuspenseReposGetCommitSignatureProtection = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -40563,7 +40563,7 @@ export const useReposGetCommitSignatureProtection = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -40608,7 +40608,7 @@ export type ReposCreateCommitSignatureProtectionVariables = {
  */
 export const fetchReposCreateCommitSignatureProtection = (
   variables: ReposCreateCommitSignatureProtectionVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.ProtectedBranchAdminEnforced,
@@ -40637,7 +40637,7 @@ export const useReposCreateCommitSignatureProtection = (
       ReposCreateCommitSignatureProtectionVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -40681,7 +40681,7 @@ export type ReposRemoveStatusCheckProtectionVariables = {
  */
 export const fetchReposRemoveStatusCheckProtection = (
   variables: ReposRemoveStatusCheckProtectionVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -40708,7 +40708,7 @@ export const useReposRemoveStatusCheckProtection = (
       ReposRemoveStatusCheckProtectionVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -40754,7 +40754,7 @@ export type ReposGetStatusChecksProtectionVariables = {
  */
 export const fetchReposGetStatusChecksProtection = (
   variables: ReposGetStatusChecksProtectionVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.StatusCheckPolicy,
@@ -40774,7 +40774,7 @@ export const fetchReposGetStatusChecksProtection = (
  * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
  */
 export const reposGetStatusChecksProtectionQuery = (
-  variables: ReposGetStatusChecksProtectionVariables,
+  variables: ReposGetStatusChecksProtectionVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -40806,7 +40806,7 @@ export const useSuspenseReposGetStatusChecksProtection = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -40834,7 +40834,7 @@ export const useReposGetStatusChecksProtection = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -40912,7 +40912,7 @@ export type ReposUpdateStatusCheckProtectionVariables = {
  */
 export const fetchReposUpdateStatusCheckProtection = (
   variables: ReposUpdateStatusCheckProtectionVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.StatusCheckPolicy,
@@ -40941,7 +40941,7 @@ export const useReposUpdateStatusCheckProtection = (
       ReposUpdateStatusCheckProtectionVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -41003,7 +41003,7 @@ export type ReposRemoveStatusCheckContextsVariables = {
  */
 export const fetchReposRemoveStatusCheckContexts = (
   variables: ReposRemoveStatusCheckContextsVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ReposRemoveStatusCheckContextsResponse,
@@ -41036,7 +41036,7 @@ export const useReposRemoveStatusCheckContexts = (
       ReposRemoveStatusCheckContextsVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -41081,7 +41081,7 @@ export type ReposGetAllStatusCheckContextsVariables = {
  */
 export const fetchReposGetAllStatusCheckContexts = (
   variables: ReposGetAllStatusCheckContextsVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ReposGetAllStatusCheckContextsResponse,
@@ -41101,7 +41101,7 @@ export const fetchReposGetAllStatusCheckContexts = (
  * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
  */
 export const reposGetAllStatusCheckContextsQuery = (
-  variables: ReposGetAllStatusCheckContextsVariables,
+  variables: ReposGetAllStatusCheckContextsVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -41133,7 +41133,7 @@ export const useSuspenseReposGetAllStatusCheckContexts = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -41161,7 +41161,7 @@ export const useReposGetAllStatusCheckContexts = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -41224,7 +41224,7 @@ export type ReposAddStatusCheckContextsVariables = {
  */
 export const fetchReposAddStatusCheckContexts = (
   variables: ReposAddStatusCheckContextsVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ReposAddStatusCheckContextsResponse,
@@ -41257,7 +41257,7 @@ export const useReposAddStatusCheckContexts = (
       ReposAddStatusCheckContextsVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -41316,7 +41316,7 @@ export type ReposSetStatusCheckContextsVariables = {
  */
 export const fetchReposSetStatusCheckContexts = (
   variables: ReposSetStatusCheckContextsVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ReposSetStatusCheckContextsResponse,
@@ -41349,7 +41349,7 @@ export const useReposSetStatusCheckContexts = (
       ReposSetStatusCheckContextsVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -41392,7 +41392,7 @@ export type ReposDeleteAccessRestrictionsVariables = {
  */
 export const fetchReposDeleteAccessRestrictions = (
   variables: ReposDeleteAccessRestrictionsVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -41421,7 +41421,7 @@ export const useReposDeleteAccessRestrictions = (
       ReposDeleteAccessRestrictionsVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -41468,7 +41468,7 @@ export type ReposGetAccessRestrictionsVariables = {
  */
 export const fetchReposGetAccessRestrictions = (
   variables: ReposGetAccessRestrictionsVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.BranchRestrictionPolicy,
@@ -41492,7 +41492,7 @@ export const fetchReposGetAccessRestrictions = (
  * **Note**: Users, apps, and teams `restrictions` are only available for organization-owned repositories.
  */
 export const reposGetAccessRestrictionsQuery = (
-  variables: ReposGetAccessRestrictionsVariables,
+  variables: ReposGetAccessRestrictionsVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -41528,7 +41528,7 @@ export const useSuspenseReposGetAccessRestrictions = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -41560,7 +41560,7 @@ export const useReposGetAccessRestrictions = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -41615,7 +41615,7 @@ export type ReposRemoveAppAccessRestrictionsVariables = {
  */
 export const fetchReposRemoveAppAccessRestrictions = (
   variables: ReposRemoveAppAccessRestrictionsVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ReposRemoveAppAccessRestrictionsResponse,
@@ -41650,7 +41650,7 @@ export const useReposRemoveAppAccessRestrictions = (
       ReposRemoveAppAccessRestrictionsVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -41702,7 +41702,7 @@ export type ReposGetAppsWithAccessToProtectedBranchVariables = {
  */
 export const fetchReposGetAppsWithAccessToProtectedBranch = (
   variables: ReposGetAppsWithAccessToProtectedBranchVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ReposGetAppsWithAccessToProtectedBranchResponse,
@@ -41724,7 +41724,7 @@ export const fetchReposGetAppsWithAccessToProtectedBranch = (
  * Lists the GitHub Apps that have push access to this branch. Only installed GitHub Apps with `write` access to the `contents` permission can be added as authorized actors on a protected branch.
  */
 export const reposGetAppsWithAccessToProtectedBranchQuery = (
-  variables: ReposGetAppsWithAccessToProtectedBranchVariables,
+  variables: ReposGetAppsWithAccessToProtectedBranchVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -41758,7 +41758,7 @@ export const useSuspenseReposGetAppsWithAccessToProtectedBranch = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -41788,7 +41788,7 @@ export const useReposGetAppsWithAccessToProtectedBranch = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -41843,7 +41843,7 @@ export type ReposAddAppAccessRestrictionsVariables = {
  */
 export const fetchReposAddAppAccessRestrictions = (
   variables: ReposAddAppAccessRestrictionsVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ReposAddAppAccessRestrictionsResponse,
@@ -41878,7 +41878,7 @@ export const useReposAddAppAccessRestrictions = (
       ReposAddAppAccessRestrictionsVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -41933,7 +41933,7 @@ export type ReposSetAppAccessRestrictionsVariables = {
  */
 export const fetchReposSetAppAccessRestrictions = (
   variables: ReposSetAppAccessRestrictionsVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ReposSetAppAccessRestrictionsResponse,
@@ -41968,7 +41968,7 @@ export const useReposSetAppAccessRestrictions = (
       ReposSetAppAccessRestrictionsVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -42023,7 +42023,7 @@ export type ReposRemoveTeamAccessRestrictionsVariables = {
  */
 export const fetchReposRemoveTeamAccessRestrictions = (
   variables: ReposRemoveTeamAccessRestrictionsVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ReposRemoveTeamAccessRestrictionsResponse,
@@ -42058,7 +42058,7 @@ export const useReposRemoveTeamAccessRestrictions = (
       ReposRemoveTeamAccessRestrictionsVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -42109,7 +42109,7 @@ export type ReposGetTeamsWithAccessToProtectedBranchVariables = {
  */
 export const fetchReposGetTeamsWithAccessToProtectedBranch = (
   variables: ReposGetTeamsWithAccessToProtectedBranchVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ReposGetTeamsWithAccessToProtectedBranchResponse,
@@ -42131,7 +42131,7 @@ export const fetchReposGetTeamsWithAccessToProtectedBranch = (
  * Lists the teams who have push access to this branch. The list includes child teams.
  */
 export const reposGetTeamsWithAccessToProtectedBranchQuery = (
-  variables: ReposGetTeamsWithAccessToProtectedBranchVariables,
+  variables: ReposGetTeamsWithAccessToProtectedBranchVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -42165,7 +42165,7 @@ export const useSuspenseReposGetTeamsWithAccessToProtectedBranch = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -42195,7 +42195,7 @@ export const useReposGetTeamsWithAccessToProtectedBranch = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -42250,7 +42250,7 @@ export type ReposAddTeamAccessRestrictionsVariables = {
  */
 export const fetchReposAddTeamAccessRestrictions = (
   variables: ReposAddTeamAccessRestrictionsVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ReposAddTeamAccessRestrictionsResponse,
@@ -42285,7 +42285,7 @@ export const useReposAddTeamAccessRestrictions = (
       ReposAddTeamAccessRestrictionsVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -42340,7 +42340,7 @@ export type ReposSetTeamAccessRestrictionsVariables = {
  */
 export const fetchReposSetTeamAccessRestrictions = (
   variables: ReposSetTeamAccessRestrictionsVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ReposSetTeamAccessRestrictionsResponse,
@@ -42375,7 +42375,7 @@ export const useReposSetTeamAccessRestrictions = (
       ReposSetTeamAccessRestrictionsVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -42434,7 +42434,7 @@ export type ReposRemoveUserAccessRestrictionsVariables = {
  */
 export const fetchReposRemoveUserAccessRestrictions = (
   variables: ReposRemoveUserAccessRestrictionsVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ReposRemoveUserAccessRestrictionsResponse,
@@ -42473,7 +42473,7 @@ export const useReposRemoveUserAccessRestrictions = (
       ReposRemoveUserAccessRestrictionsVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -42525,7 +42525,7 @@ export type ReposGetUsersWithAccessToProtectedBranchVariables = {
  */
 export const fetchReposGetUsersWithAccessToProtectedBranch = (
   variables: ReposGetUsersWithAccessToProtectedBranchVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ReposGetUsersWithAccessToProtectedBranchResponse,
@@ -42547,7 +42547,7 @@ export const fetchReposGetUsersWithAccessToProtectedBranch = (
  * Lists the people who have push access to this branch.
  */
 export const reposGetUsersWithAccessToProtectedBranchQuery = (
-  variables: ReposGetUsersWithAccessToProtectedBranchVariables,
+  variables: ReposGetUsersWithAccessToProtectedBranchVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -42581,7 +42581,7 @@ export const useSuspenseReposGetUsersWithAccessToProtectedBranch = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -42611,7 +42611,7 @@ export const useReposGetUsersWithAccessToProtectedBranch = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -42670,7 +42670,7 @@ export type ReposAddUserAccessRestrictionsVariables = {
  */
 export const fetchReposAddUserAccessRestrictions = (
   variables: ReposAddUserAccessRestrictionsVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ReposAddUserAccessRestrictionsResponse,
@@ -42709,7 +42709,7 @@ export const useReposAddUserAccessRestrictions = (
       ReposAddUserAccessRestrictionsVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -42768,7 +42768,7 @@ export type ReposSetUserAccessRestrictionsVariables = {
  */
 export const fetchReposSetUserAccessRestrictions = (
   variables: ReposSetUserAccessRestrictionsVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ReposSetUserAccessRestrictionsResponse,
@@ -42807,7 +42807,7 @@ export const useReposSetUserAccessRestrictions = (
       ReposSetUserAccessRestrictionsVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -42882,7 +42882,7 @@ export type ReposRenameBranchVariables = {
  */
 export const fetchReposRenameBranch = (
   variables: ReposRenameBranchVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.BranchWithProtection,
@@ -42923,7 +42923,7 @@ export const useReposRenameBranch = (
       ReposRenameBranchVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -42974,7 +42974,7 @@ export type ChecksCreateVariables = {
  */
 export const fetchChecksCreate = (
   variables: ChecksCreateVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.CheckRun,
@@ -43014,7 +43014,7 @@ export const useChecksCreate = (
       ChecksCreateVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -43056,7 +43056,7 @@ export type ChecksGetVariables = {
  */
 export const fetchChecksGet = (
   variables: ChecksGetVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.CheckRun,
@@ -43078,7 +43078,7 @@ export const fetchChecksGet = (
  * Gets a single check run using its `id`. GitHub Apps must have the `checks:read` permission on a private repository or pull access to a public repository to get check runs. OAuth Apps and authenticated users must have the `repo` scope to get check runs in a private repository.
  */
 export const checksGetQuery = (
-  variables: ChecksGetVariables,
+  variables: ChecksGetVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({ signal }: { signal?: AbortSignal }) => Promise<Schemas.CheckRun>;
@@ -43102,7 +43102,7 @@ export const useSuspenseChecksGet = <TData = Schemas.CheckRun>(
   options?: Omit<
     reactQuery.UseQueryOptions<Schemas.CheckRun, ChecksGetError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<Schemas.CheckRun, ChecksGetError, TData>({
@@ -43122,7 +43122,7 @@ export const useChecksGet = <TData = Schemas.CheckRun>(
   options?: Omit<
     reactQuery.UseQueryOptions<Schemas.CheckRun, ChecksGetError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.CheckRun, ChecksGetError, TData>({
@@ -43171,7 +43171,7 @@ export type ChecksUpdateVariables = {
  */
 export const fetchChecksUpdate = (
   variables: ChecksUpdateVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.CheckRun,
@@ -43209,7 +43209,7 @@ export const useChecksUpdate = (
       ChecksUpdateVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -43267,7 +43267,7 @@ export type ChecksListAnnotationsVariables = {
  */
 export const fetchChecksListAnnotations = (
   variables: ChecksListAnnotationsVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ChecksListAnnotationsResponse,
@@ -43287,7 +43287,7 @@ export const fetchChecksListAnnotations = (
  * Lists annotations for a check run using the annotation `id`. GitHub Apps must have the `checks:read` permission on a private repository or pull access to a public repository to get annotations for a check run. OAuth Apps and authenticated users must have the `repo` scope to get annotations for a check run in a private repository.
  */
 export const checksListAnnotationsQuery = (
-  variables: ChecksListAnnotationsVariables,
+  variables: ChecksListAnnotationsVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -43319,7 +43319,7 @@ export const useSuspenseChecksListAnnotations = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -43345,7 +43345,7 @@ export const useChecksListAnnotations = <TData = ChecksListAnnotationsResponse>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -43400,7 +43400,7 @@ export type ChecksRerequestRunVariables = {
  */
 export const fetchChecksRerequestRun = (
   variables: ChecksRerequestRunVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.EmptyObject,
@@ -43429,7 +43429,7 @@ export const useChecksRerequestRun = (
       ChecksRerequestRunVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -43475,7 +43475,7 @@ export type ChecksCreateSuiteVariables = {
  */
 export const fetchChecksCreateSuite = (
   variables: ChecksCreateSuiteVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.CheckSuite,
@@ -43504,7 +43504,7 @@ export const useChecksCreateSuite = (
       ChecksCreateSuiteVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -43559,7 +43559,7 @@ export type ChecksSetSuitesPreferencesVariables = {
  */
 export const fetchChecksSetSuitesPreferences = (
   variables: ChecksSetSuitesPreferencesVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.CheckSuitePreference,
@@ -43586,7 +43586,7 @@ export const useChecksSetSuitesPreferences = (
       ChecksSetSuitesPreferencesVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -43628,7 +43628,7 @@ export type ChecksGetSuiteVariables = {
  */
 export const fetchChecksGetSuite = (
   variables: ChecksGetSuiteVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.CheckSuite,
@@ -43650,7 +43650,7 @@ export const fetchChecksGetSuite = (
  * Gets a single check suite using its `id`. GitHub Apps must have the `checks:read` permission on a private repository or pull access to a public repository to get check suites. OAuth Apps and authenticated users must have the `repo` scope to get check suites in a private repository.
  */
 export const checksGetSuiteQuery = (
-  variables: ChecksGetSuiteVariables,
+  variables: ChecksGetSuiteVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -43678,7 +43678,7 @@ export const useSuspenseChecksGetSuite = <TData = Schemas.CheckSuite>(
   options?: Omit<
     reactQuery.UseQueryOptions<Schemas.CheckSuite, ChecksGetSuiteError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -43702,7 +43702,7 @@ export const useChecksGetSuite = <TData = Schemas.CheckSuite>(
   options?: Omit<
     reactQuery.UseQueryOptions<Schemas.CheckSuite, ChecksGetSuiteError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.CheckSuite, ChecksGetSuiteError, TData>({
@@ -43775,7 +43775,7 @@ export type ChecksListForSuiteVariables = {
  */
 export const fetchChecksListForSuite = (
   variables: ChecksListForSuiteVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ChecksListForSuiteResponse,
@@ -43797,7 +43797,7 @@ export const fetchChecksListForSuite = (
  * Lists check runs for a check suite using its `id`. GitHub Apps must have the `checks:read` permission on a private repository or pull access to a public repository to get check runs. OAuth Apps and authenticated users must have the `repo` scope to get check runs in a private repository.
  */
 export const checksListForSuiteQuery = (
-  variables: ChecksListForSuiteVariables,
+  variables: ChecksListForSuiteVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -43831,7 +43831,7 @@ export const useSuspenseChecksListForSuite = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -43859,7 +43859,7 @@ export const useChecksListForSuite = <TData = ChecksListForSuiteResponse>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -43901,7 +43901,7 @@ export type ChecksRerequestSuiteVariables = {
  */
 export const fetchChecksRerequestSuite = (
   variables: ChecksRerequestSuiteVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.EmptyObject,
@@ -43930,7 +43930,7 @@ export const useChecksRerequestSuite = (
       ChecksRerequestSuiteVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -44043,7 +44043,7 @@ export type CodeScanningListAlertsForRepoVariables = {
  */
 export const fetchCodeScanningListAlertsForRepo = (
   variables: CodeScanningListAlertsForRepoVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     CodeScanningListAlertsForRepoResponse,
@@ -44072,7 +44072,7 @@ export const fetchCodeScanningListAlertsForRepo = (
  * for the default branch (or for the specified Git reference if you used `ref` in the request).
  */
 export const codeScanningListAlertsForRepoQuery = (
-  variables: CodeScanningListAlertsForRepoVariables,
+  variables: CodeScanningListAlertsForRepoVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -44113,7 +44113,7 @@ export const useSuspenseCodeScanningListAlertsForRepo = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -44150,7 +44150,7 @@ export const useCodeScanningListAlertsForRepo = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -44207,7 +44207,7 @@ export type CodeScanningGetAlertVariables = {
  */
 export const fetchCodeScanningGetAlert = (
   variables: CodeScanningGetAlertVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.CodeScanningAlert,
@@ -44227,7 +44227,7 @@ export const fetchCodeScanningGetAlert = (
  * Gets a single code scanning alert. You must use an access token with the `security_events` scope to use this endpoint with private repos, the `public_repo` scope also grants permission to read security events on public repos only. GitHub Apps must have the `security_events` read permission to use this endpoint.
  */
 export const codeScanningGetAlertQuery = (
-  variables: CodeScanningGetAlertVariables,
+  variables: CodeScanningGetAlertVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -44259,7 +44259,7 @@ export const useSuspenseCodeScanningGetAlert = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -44285,7 +44285,7 @@ export const useCodeScanningGetAlert = <TData = Schemas.CodeScanningAlert>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -44345,7 +44345,7 @@ export type CodeScanningUpdateAlertVariables = {
  */
 export const fetchCodeScanningUpdateAlert = (
   variables: CodeScanningUpdateAlertVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.CodeScanningAlert,
@@ -44372,7 +44372,7 @@ export const useCodeScanningUpdateAlert = (
       CodeScanningUpdateAlertVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -44451,7 +44451,7 @@ export type CodeScanningListAlertInstancesVariables = {
  */
 export const fetchCodeScanningListAlertInstances = (
   variables: CodeScanningListAlertInstancesVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     CodeScanningListAlertInstancesResponse,
@@ -44474,7 +44474,7 @@ export const fetchCodeScanningListAlertInstances = (
  * GitHub Apps must have the `security_events` read permission to use this endpoint.
  */
 export const codeScanningListAlertInstancesQuery = (
-  variables: CodeScanningListAlertInstancesVariables,
+  variables: CodeScanningListAlertInstancesVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -44509,7 +44509,7 @@ export const useSuspenseCodeScanningListAlertInstances = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -44540,7 +44540,7 @@ export const useCodeScanningListAlertInstances = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -44652,7 +44652,7 @@ export type CodeScanningListRecentAnalysesVariables = {
  */
 export const fetchCodeScanningListRecentAnalyses = (
   variables: CodeScanningListRecentAnalysesVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     CodeScanningListRecentAnalysesResponse,
@@ -44688,7 +44688,7 @@ export const fetchCodeScanningListRecentAnalyses = (
  * The `tool_name` field is deprecated and will, in future, not be included in the response for this endpoint. The example response reflects this change. The tool name can now be found inside the `tool` field.
  */
 export const codeScanningListRecentAnalysesQuery = (
-  variables: CodeScanningListRecentAnalysesVariables,
+  variables: CodeScanningListRecentAnalysesVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -44736,7 +44736,7 @@ export const useSuspenseCodeScanningListRecentAnalyses = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -44780,7 +44780,7 @@ export const useCodeScanningListRecentAnalyses = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -44909,7 +44909,7 @@ export type CodeScanningDeleteAnalysisVariables = {
  */
 export const fetchCodeScanningDeleteAnalysis = (
   variables: CodeScanningDeleteAnalysisVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.CodeScanningAnalysisDeletion,
@@ -45000,7 +45000,7 @@ export const useCodeScanningDeleteAnalysis = (
       CodeScanningDeleteAnalysisVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -45071,7 +45071,7 @@ export type CodeScanningGetAnalysisVariables = {
  */
 export const fetchCodeScanningGetAnalysis = (
   variables: CodeScanningGetAnalysisVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.CodeScanningAnalysis,
@@ -45109,7 +45109,7 @@ export const fetchCodeScanningGetAnalysis = (
  * [SARIF version 2.1.0](https://docs.oasis-open.org/sarif/sarif/v2.1.0/cs01/sarif-v2.1.0-cs01.html).
  */
 export const codeScanningGetAnalysisQuery = (
-  variables: CodeScanningGetAnalysisVariables,
+  variables: CodeScanningGetAnalysisVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -45159,7 +45159,7 @@ export const useSuspenseCodeScanningGetAnalysis = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -45205,7 +45205,7 @@ export const useCodeScanningGetAnalysis = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -45261,7 +45261,7 @@ export type CodeScanningListCodeqlDatabasesVariables = {
  */
 export const fetchCodeScanningListCodeqlDatabases = (
   variables: CodeScanningListCodeqlDatabasesVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     CodeScanningListCodeqlDatabasesResponse,
@@ -45285,7 +45285,7 @@ export const fetchCodeScanningListCodeqlDatabases = (
  * GitHub Apps must have the `contents` read permission to use this endpoint.
  */
 export const codeScanningListCodeqlDatabasesQuery = (
-  variables: CodeScanningListCodeqlDatabasesVariables,
+  variables: CodeScanningListCodeqlDatabasesVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -45321,7 +45321,7 @@ export const useSuspenseCodeScanningListCodeqlDatabases = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -45353,7 +45353,7 @@ export const useCodeScanningListCodeqlDatabases = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -45420,7 +45420,7 @@ export type CodeScanningGetCodeqlDatabaseVariables = {
  */
 export const fetchCodeScanningGetCodeqlDatabase = (
   variables: CodeScanningGetCodeqlDatabaseVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.CodeScanningCodeqlDatabase,
@@ -45450,7 +45450,7 @@ export const fetchCodeScanningGetCodeqlDatabase = (
  * GitHub Apps must have the `contents` read permission to use this endpoint.
  */
 export const codeScanningGetCodeqlDatabaseQuery = (
-  variables: CodeScanningGetCodeqlDatabaseVariables,
+  variables: CodeScanningGetCodeqlDatabaseVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -45492,7 +45492,7 @@ export const useSuspenseCodeScanningGetCodeqlDatabase = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -45530,7 +45530,7 @@ export const useCodeScanningGetCodeqlDatabase = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -45638,7 +45638,7 @@ export type CodeScanningUploadSarifVariables = {
  */
 export const fetchCodeScanningUploadSarif = (
   variables: CodeScanningUploadSarifVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.CodeScanningSarifsReceipt,
@@ -45694,7 +45694,7 @@ export const useCodeScanningUploadSarif = (
       CodeScanningUploadSarifVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -45743,7 +45743,7 @@ export type CodeScanningGetSarifVariables = {
  */
 export const fetchCodeScanningGetSarif = (
   variables: CodeScanningGetSarifVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.CodeScanningSarifsStatus,
@@ -45763,7 +45763,7 @@ export const fetchCodeScanningGetSarif = (
  * Gets information about a SARIF upload, including the status and the URL of the analysis that was uploaded so that you can retrieve details of the analysis. For more information, see "[Get a code scanning analysis for a repository](/rest/reference/code-scanning#get-a-code-scanning-analysis-for-a-repository)." You must use an access token with the `security_events` scope to use this endpoint with private repos, the `public_repo` scope also grants permission to read security events on public repos only. GitHub Apps must have the `security_events` read permission to use this endpoint.
  */
 export const codeScanningGetSarifQuery = (
-  variables: CodeScanningGetSarifVariables,
+  variables: CodeScanningGetSarifVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -45795,7 +45795,7 @@ export const useSuspenseCodeScanningGetSarif = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -45823,7 +45823,7 @@ export const useCodeScanningGetSarif = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -45871,7 +45871,7 @@ export type ReposCodeownersErrorsVariables = {
  */
 export const fetchReposCodeownersErrors = (
   variables: ReposCodeownersErrorsVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.CodeownersErrors,
@@ -45895,7 +45895,7 @@ export const fetchReposCodeownersErrors = (
  * see "[About code owners](https://docs.github.com/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners)."
  */
 export const reposCodeownersErrorsQuery = (
-  variables: ReposCodeownersErrorsVariables,
+  variables: ReposCodeownersErrorsVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -45931,7 +45931,7 @@ export const useSuspenseReposCodeownersErrors = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -45961,7 +45961,7 @@ export const useReposCodeownersErrors = <TData = Schemas.CodeownersErrors>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -46040,7 +46040,7 @@ export type CodespacesListInRepositoryForAuthenticatedUserVariables = {
  */
 export const fetchCodespacesListInRepositoryForAuthenticatedUser = (
   variables: CodespacesListInRepositoryForAuthenticatedUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     CodespacesListInRepositoryForAuthenticatedUserResponse,
@@ -46064,7 +46064,7 @@ export const fetchCodespacesListInRepositoryForAuthenticatedUser = (
  * GitHub Apps must have read access to the `codespaces` repository permission to use this endpoint.
  */
 export const codespacesListInRepositoryForAuthenticatedUserQuery = (
-  variables: CodespacesListInRepositoryForAuthenticatedUserVariables,
+  variables: CodespacesListInRepositoryForAuthenticatedUserVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -46100,7 +46100,7 @@ export const useSuspenseCodespacesListInRepositoryForAuthenticatedUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -46132,7 +46132,7 @@ export const useCodespacesListInRepositoryForAuthenticatedUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -46236,7 +46236,7 @@ export type CodespacesCreateWithRepoForAuthenticatedUserVariables = {
  */
 export const fetchCodespacesCreateWithRepoForAuthenticatedUser = (
   variables: CodespacesCreateWithRepoForAuthenticatedUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.Codespace,
@@ -46308,7 +46308,7 @@ export const useCodespacesCreateWithRepoForAuthenticatedUser = (
       CodespacesCreateWithRepoForAuthenticatedUserVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -46317,7 +46317,7 @@ export const useCodespacesCreateWithRepoForAuthenticatedUser = (
     CodespacesCreateWithRepoForAuthenticatedUserVariables
   >({
     mutationFn: (
-      variables: CodespacesCreateWithRepoForAuthenticatedUserVariables,
+      variables: CodespacesCreateWithRepoForAuthenticatedUserVariables
     ) =>
       fetchCodespacesCreateWithRepoForAuthenticatedUser({
         ...fetcherOptions,
@@ -46405,7 +46405,7 @@ export type CodespacesListDevcontainersInRepositoryForAuthenticatedUserVariables
 export const fetchCodespacesListDevcontainersInRepositoryForAuthenticatedUser =
   (
     variables: CodespacesListDevcontainersInRepositoryForAuthenticatedUserVariables,
-    signal?: AbortSignal,
+    signal?: AbortSignal
   ) =>
     githubFetch<
       CodespacesListDevcontainersInRepositoryForAuthenticatedUserResponse,
@@ -46431,7 +46431,7 @@ export const fetchCodespacesListDevcontainersInRepositoryForAuthenticatedUser =
  */
 export const codespacesListDevcontainersInRepositoryForAuthenticatedUserQuery =
   (
-    variables: CodespacesListDevcontainersInRepositoryForAuthenticatedUserVariables,
+    variables: CodespacesListDevcontainersInRepositoryForAuthenticatedUserVariables
   ): {
     queryKey: reactQuery.QueryKey;
     queryFn: ({
@@ -46449,7 +46449,7 @@ export const codespacesListDevcontainersInRepositoryForAuthenticatedUserQuery =
     queryFn: ({ signal }: { signal?: AbortSignal }) =>
       fetchCodespacesListDevcontainersInRepositoryForAuthenticatedUser(
         variables,
-        signal,
+        signal
       ),
   });
 
@@ -46471,7 +46471,7 @@ export const useSuspenseCodespacesListDevcontainersInRepositoryForAuthenticatedU
         TData
       >,
       "queryKey" | "queryFn" | "initialData"
-    >,
+    >
   ) => {
     const { queryOptions } = useGithubContext(options);
     return reactQuery.useSuspenseQuery<
@@ -46480,7 +46480,7 @@ export const useSuspenseCodespacesListDevcontainersInRepositoryForAuthenticatedU
       TData
     >({
       ...codespacesListDevcontainersInRepositoryForAuthenticatedUserQuery(
-        variables,
+        variables
       ),
       ...options,
       ...queryOptions,
@@ -46506,7 +46506,7 @@ export const useCodespacesListDevcontainersInRepositoryForAuthenticatedUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -46515,7 +46515,7 @@ export const useCodespacesListDevcontainersInRepositoryForAuthenticatedUser = <
     TData
   >({
     ...codespacesListDevcontainersInRepositoryForAuthenticatedUserQuery(
-      variables,
+      variables
     ),
     ...options,
     ...queryOptions,
@@ -46589,7 +46589,7 @@ export type CodespacesRepoMachinesForAuthenticatedUserVariables = {
  */
 export const fetchCodespacesRepoMachinesForAuthenticatedUser = (
   variables: CodespacesRepoMachinesForAuthenticatedUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     CodespacesRepoMachinesForAuthenticatedUserResponse,
@@ -46613,7 +46613,7 @@ export const fetchCodespacesRepoMachinesForAuthenticatedUser = (
  * GitHub Apps must have write access to the `codespaces_metadata` repository permission to use this endpoint.
  */
 export const codespacesRepoMachinesForAuthenticatedUserQuery = (
-  variables: CodespacesRepoMachinesForAuthenticatedUserVariables,
+  variables: CodespacesRepoMachinesForAuthenticatedUserVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -46649,7 +46649,7 @@ export const useSuspenseCodespacesRepoMachinesForAuthenticatedUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -46681,7 +46681,7 @@ export const useCodespacesRepoMachinesForAuthenticatedUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -46759,7 +46759,7 @@ export type CodespacesPreFlightWithRepoForAuthenticatedUserVariables = {
  */
 export const fetchCodespacesPreFlightWithRepoForAuthenticatedUser = (
   variables: CodespacesPreFlightWithRepoForAuthenticatedUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     CodespacesPreFlightWithRepoForAuthenticatedUserResponse,
@@ -46783,7 +46783,7 @@ export const fetchCodespacesPreFlightWithRepoForAuthenticatedUser = (
  * GitHub Apps must have write access to the `codespaces` repository permission to use this endpoint.
  */
 export const codespacesPreFlightWithRepoForAuthenticatedUserQuery = (
-  variables: CodespacesPreFlightWithRepoForAuthenticatedUserVariables,
+  variables: CodespacesPreFlightWithRepoForAuthenticatedUserVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -46819,7 +46819,7 @@ export const useSuspenseCodespacesPreFlightWithRepoForAuthenticatedUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -46851,7 +46851,7 @@ export const useCodespacesPreFlightWithRepoForAuthenticatedUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -46908,7 +46908,7 @@ export type CodespacesListRepoSecretsVariables = {
  */
 export const fetchCodespacesListRepoSecrets = (
   variables: CodespacesListRepoSecretsVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     CodespacesListRepoSecretsResponse,
@@ -46928,7 +46928,7 @@ export const fetchCodespacesListRepoSecrets = (
  * Lists all secrets available in a repository without revealing their encrypted values. You must authenticate using an access token with the `repo` scope to use this endpoint. GitHub Apps must have write access to the `codespaces_secrets` repository permission to use this endpoint.
  */
 export const codespacesListRepoSecretsQuery = (
-  variables: CodespacesListRepoSecretsVariables,
+  variables: CodespacesListRepoSecretsVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -46960,7 +46960,7 @@ export const useSuspenseCodespacesListRepoSecrets = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -46988,7 +46988,7 @@ export const useCodespacesListRepoSecrets = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -47024,7 +47024,7 @@ export type CodespacesGetRepoPublicKeyVariables = {
  */
 export const fetchCodespacesGetRepoPublicKey = (
   variables: CodespacesGetRepoPublicKeyVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.CodespacesPublicKey,
@@ -47044,7 +47044,7 @@ export const fetchCodespacesGetRepoPublicKey = (
  * Gets your public key, which you need to encrypt secrets. You need to encrypt a secret before you can create or update secrets. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have write access to the `codespaces_secrets` repository permission to use this endpoint.
  */
 export const codespacesGetRepoPublicKeyQuery = (
-  variables: CodespacesGetRepoPublicKeyVariables,
+  variables: CodespacesGetRepoPublicKeyVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -47076,7 +47076,7 @@ export const useSuspenseCodespacesGetRepoPublicKey = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -47104,7 +47104,7 @@ export const useCodespacesGetRepoPublicKey = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -47144,7 +47144,7 @@ export type CodespacesDeleteRepoSecretVariables = {
  */
 export const fetchCodespacesDeleteRepoSecret = (
   variables: CodespacesDeleteRepoSecretVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -47171,7 +47171,7 @@ export const useCodespacesDeleteRepoSecret = (
       CodespacesDeleteRepoSecretVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -47211,7 +47211,7 @@ export type CodespacesGetRepoSecretVariables = {
  */
 export const fetchCodespacesGetRepoSecret = (
   variables: CodespacesGetRepoSecretVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.RepoCodespacesSecret,
@@ -47231,7 +47231,7 @@ export const fetchCodespacesGetRepoSecret = (
  * Gets a single repository secret without revealing its encrypted value. You must authenticate using an access token with the `repo` scope to use this endpoint. GitHub Apps must have write access to the `codespaces_secrets` repository permission to use this endpoint.
  */
 export const codespacesGetRepoSecretQuery = (
-  variables: CodespacesGetRepoSecretVariables,
+  variables: CodespacesGetRepoSecretVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -47263,7 +47263,7 @@ export const useSuspenseCodespacesGetRepoSecret = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -47291,7 +47291,7 @@ export const useCodespacesGetRepoSecret = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -47421,7 +47421,7 @@ export type CodespacesCreateOrUpdateRepoSecretVariables = {
  */
 export const fetchCodespacesCreateOrUpdateRepoSecret = (
   variables: CodespacesCreateOrUpdateRepoSecretVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.EmptyObject,
@@ -47523,7 +47523,7 @@ export const useCodespacesCreateOrUpdateRepoSecret = (
       CodespacesCreateOrUpdateRepoSecretVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -47600,7 +47600,7 @@ export type ReposListCollaboratorsVariables = {
  */
 export const fetchReposListCollaborators = (
   variables: ReposListCollaboratorsVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ReposListCollaboratorsResponse,
@@ -47627,7 +47627,7 @@ export const fetchReposListCollaborators = (
  * endpoint.
  */
 export const reposListCollaboratorsQuery = (
-  variables: ReposListCollaboratorsVariables,
+  variables: ReposListCollaboratorsVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -47666,7 +47666,7 @@ export const useSuspenseReposListCollaborators = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -47701,7 +47701,7 @@ export const useReposListCollaborators = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -47738,7 +47738,7 @@ export type ReposRemoveCollaboratorVariables = {
 
 export const fetchReposRemoveCollaborator = (
   variables: ReposRemoveCollaboratorVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -47762,7 +47762,7 @@ export const useReposRemoveCollaborator = (
       ReposRemoveCollaboratorVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -47808,7 +47808,7 @@ export type ReposCheckCollaboratorVariables = {
  */
 export const fetchReposCheckCollaborator = (
   variables: ReposCheckCollaboratorVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -47834,7 +47834,7 @@ export const fetchReposCheckCollaborator = (
  * endpoint.
  */
 export const reposCheckCollaboratorQuery = (
-  variables: ReposCheckCollaboratorVariables,
+  variables: ReposCheckCollaboratorVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({ signal }: { signal?: AbortSignal }) => Promise<undefined>;
@@ -47862,7 +47862,7 @@ export const useSuspenseReposCheckCollaborator = <TData = undefined>(
   options?: Omit<
     reactQuery.UseQueryOptions<undefined, ReposCheckCollaboratorError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -47890,7 +47890,7 @@ export const useReposCheckCollaborator = <TData = undefined>(
   options?: Omit<
     reactQuery.UseQueryOptions<undefined, ReposCheckCollaboratorError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<undefined, ReposCheckCollaboratorError, TData>({
@@ -47965,7 +47965,7 @@ export type ReposAddCollaboratorVariables = {
  */
 export const fetchReposAddCollaborator = (
   variables: ReposAddCollaboratorVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.RepositoryInvitation,
@@ -48012,7 +48012,7 @@ export const useReposAddCollaborator = (
       ReposAddCollaboratorVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -48055,7 +48055,7 @@ export type ReposGetCollaboratorPermissionLevelVariables = {
  */
 export const fetchReposGetCollaboratorPermissionLevel = (
   variables: ReposGetCollaboratorPermissionLevelVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.RepositoryCollaboratorPermission,
@@ -48075,7 +48075,7 @@ export const fetchReposGetCollaboratorPermissionLevel = (
  * Checks the repository permission of a collaborator. The possible repository permissions are `admin`, `write`, `read`, and `none`.
  */
 export const reposGetCollaboratorPermissionLevelQuery = (
-  variables: ReposGetCollaboratorPermissionLevelVariables,
+  variables: ReposGetCollaboratorPermissionLevelVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -48107,7 +48107,7 @@ export const useSuspenseReposGetCollaboratorPermissionLevel = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -48135,7 +48135,7 @@ export const useReposGetCollaboratorPermissionLevel = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -48192,7 +48192,7 @@ export type ReposListCommitCommentsForRepoVariables = {
  */
 export const fetchReposListCommitCommentsForRepo = (
   variables: ReposListCommitCommentsForRepoVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ReposListCommitCommentsForRepoResponse,
@@ -48214,7 +48214,7 @@ export const fetchReposListCommitCommentsForRepo = (
  * Comments are ordered by ascending ID.
  */
 export const reposListCommitCommentsForRepoQuery = (
-  variables: ReposListCommitCommentsForRepoVariables,
+  variables: ReposListCommitCommentsForRepoVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -48248,7 +48248,7 @@ export const useSuspenseReposListCommitCommentsForRepo = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -48278,7 +48278,7 @@ export const useReposListCommitCommentsForRepo = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -48318,7 +48318,7 @@ export type ReposDeleteCommitCommentVariables = {
 
 export const fetchReposDeleteCommitComment = (
   variables: ReposDeleteCommitCommentVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -48342,7 +48342,7 @@ export const useReposDeleteCommitComment = (
       ReposDeleteCommitCommentVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -48382,7 +48382,7 @@ export type ReposGetCommitCommentVariables = {
 
 export const fetchReposGetCommitComment = (
   variables: ReposGetCommitCommentVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.CommitComment,
@@ -48399,7 +48399,7 @@ export const fetchReposGetCommitComment = (
   });
 
 export const reposGetCommitCommentQuery = (
-  variables: ReposGetCommitCommentVariables,
+  variables: ReposGetCommitCommentVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -48426,7 +48426,7 @@ export const useSuspenseReposGetCommitComment = <TData = Schemas.CommitComment>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -48449,7 +48449,7 @@ export const useReposGetCommitComment = <TData = Schemas.CommitComment>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -48497,7 +48497,7 @@ export type ReposUpdateCommitCommentVariables = {
 
 export const fetchReposUpdateCommitComment = (
   variables: ReposUpdateCommitCommentVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.CommitComment,
@@ -48521,7 +48521,7 @@ export const useReposUpdateCommitComment = (
       ReposUpdateCommitCommentVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -48594,7 +48594,7 @@ export type ReactionsListForCommitCommentVariables = {
  */
 export const fetchReactionsListForCommitComment = (
   variables: ReactionsListForCommitCommentVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ReactionsListForCommitCommentResponse,
@@ -48614,7 +48614,7 @@ export const fetchReactionsListForCommitComment = (
  * List the reactions to a [commit comment](https://docs.github.com/rest/reference/repos#comments).
  */
 export const reactionsListForCommitCommentQuery = (
-  variables: ReactionsListForCommitCommentVariables,
+  variables: ReactionsListForCommitCommentVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -48646,7 +48646,7 @@ export const useSuspenseReactionsListForCommitComment = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -48674,7 +48674,7 @@ export const useReactionsListForCommitComment = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -48733,7 +48733,7 @@ export type ReactionsCreateForCommitCommentVariables = {
  */
 export const fetchReactionsCreateForCommitComment = (
   variables: ReactionsCreateForCommitCommentVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.Reaction,
@@ -48760,7 +48760,7 @@ export const useReactionsCreateForCommitComment = (
       ReactionsCreateForCommitCommentVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -48807,7 +48807,7 @@ export type ReactionsDeleteForCommitCommentVariables = {
  */
 export const fetchReactionsDeleteForCommitComment = (
   variables: ReactionsDeleteForCommitCommentVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -48836,7 +48836,7 @@ export const useReactionsDeleteForCommitComment = (
       ReactionsDeleteForCommitCommentVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -48958,7 +48958,7 @@ export type ReposListCommitsVariables = {
  */
 export const fetchReposListCommits = (
   variables: ReposListCommitsVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ReposListCommitsResponse,
@@ -49005,7 +49005,7 @@ export const fetchReposListCommits = (
  * | `valid` | None of the above errors applied, so the signature is considered to be verified. |
  */
 export const reposListCommitsQuery = (
-  variables: ReposListCommitsVariables,
+  variables: ReposListCommitsVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -49062,7 +49062,7 @@ export const useSuspenseReposListCommits = <TData = ReposListCommitsResponse>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -49115,7 +49115,7 @@ export const useReposListCommits = <TData = ReposListCommitsResponse>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -49162,7 +49162,7 @@ export type ReposListBranchesForHeadCommitVariables = {
  */
 export const fetchReposListBranchesForHeadCommit = (
   variables: ReposListBranchesForHeadCommitVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ReposListBranchesForHeadCommitResponse,
@@ -49184,7 +49184,7 @@ export const fetchReposListBranchesForHeadCommit = (
  * Returns all branches where the given commit SHA is the HEAD, or latest commit for the branch.
  */
 export const reposListBranchesForHeadCommitQuery = (
-  variables: ReposListBranchesForHeadCommitVariables,
+  variables: ReposListBranchesForHeadCommitVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -49218,7 +49218,7 @@ export const useSuspenseReposListBranchesForHeadCommit = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -49248,7 +49248,7 @@ export const useReposListBranchesForHeadCommit = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -49306,7 +49306,7 @@ export type ReposListCommentsForCommitVariables = {
  */
 export const fetchReposListCommentsForCommit = (
   variables: ReposListCommentsForCommitVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ReposListCommentsForCommitResponse,
@@ -49326,7 +49326,7 @@ export const fetchReposListCommentsForCommit = (
  * Use the `:commit_sha` to specify the commit that will have its comments listed.
  */
 export const reposListCommentsForCommitQuery = (
-  variables: ReposListCommentsForCommitVariables,
+  variables: ReposListCommentsForCommitVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -49358,7 +49358,7 @@ export const useSuspenseReposListCommentsForCommit = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -49386,7 +49386,7 @@ export const useReposListCommentsForCommit = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -49457,7 +49457,7 @@ export type ReposCreateCommitCommentVariables = {
  */
 export const fetchReposCreateCommitComment = (
   variables: ReposCreateCommitCommentVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.CommitComment,
@@ -49486,7 +49486,7 @@ export const useReposCreateCommitComment = (
       ReposCreateCommitCommentVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -49546,7 +49546,7 @@ export type ReposListPullRequestsAssociatedWithCommitVariables = {
  */
 export const fetchReposListPullRequestsAssociatedWithCommit = (
   variables: ReposListPullRequestsAssociatedWithCommitVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ReposListPullRequestsAssociatedWithCommitResponse,
@@ -49566,7 +49566,7 @@ export const fetchReposListPullRequestsAssociatedWithCommit = (
  * Lists the merged pull request that introduced the commit to the repository. If the commit is not present in the default branch, will only return open pull requests associated with the commit.
  */
 export const reposListPullRequestsAssociatedWithCommitQuery = (
-  variables: ReposListPullRequestsAssociatedWithCommitVariables,
+  variables: ReposListPullRequestsAssociatedWithCommitVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -49598,7 +49598,7 @@ export const useSuspenseReposListPullRequestsAssociatedWithCommit = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -49626,7 +49626,7 @@ export const useReposListPullRequestsAssociatedWithCommit = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -49734,7 +49734,7 @@ export type ReposGetCommitVariables = {
  */
 export const fetchReposGetCommit = (
   variables: ReposGetCommitVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.Commit,
@@ -49789,7 +49789,7 @@ export const fetchReposGetCommit = (
  * | `valid` | None of the above errors applied, so the signature is considered to be verified. |
  */
 export const reposGetCommitQuery = (
-  variables: ReposGetCommitVariables,
+  variables: ReposGetCommitVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({ signal }: { signal?: AbortSignal }) => Promise<Schemas.Commit>;
@@ -49846,7 +49846,7 @@ export const useSuspenseReposGetCommit = <TData = Schemas.Commit>(
   options?: Omit<
     reactQuery.UseQueryOptions<Schemas.Commit, ReposGetCommitError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -49903,7 +49903,7 @@ export const useReposGetCommit = <TData = Schemas.Commit>(
   options?: Omit<
     reactQuery.UseQueryOptions<Schemas.Commit, ReposGetCommitError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.Commit, ReposGetCommitError, TData>({
@@ -49977,7 +49977,7 @@ export type ChecksListForRefVariables = {
  */
 export const fetchChecksListForRef = (
   variables: ChecksListForRefVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ChecksListForRefResponse,
@@ -49999,7 +49999,7 @@ export const fetchChecksListForRef = (
  * Lists check runs for a commit ref. The `ref` can be a SHA, branch name, or a tag name. GitHub Apps must have the `checks:read` permission on a private repository or pull access to a public repository to get check runs. OAuth Apps and authenticated users must have the `repo` scope to get check runs in a private repository.
  */
 export const checksListForRefQuery = (
-  variables: ChecksListForRefVariables,
+  variables: ChecksListForRefVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -50031,7 +50031,7 @@ export const useSuspenseChecksListForRef = <TData = ChecksListForRefResponse>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -50059,7 +50059,7 @@ export const useChecksListForRef = <TData = ChecksListForRefResponse>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -50130,7 +50130,7 @@ export type ChecksListSuitesForRefVariables = {
  */
 export const fetchChecksListSuitesForRef = (
   variables: ChecksListSuitesForRefVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ChecksListSuitesForRefResponse,
@@ -50152,7 +50152,7 @@ export const fetchChecksListSuitesForRef = (
  * Lists check suites for a commit `ref`. The `ref` can be a SHA, branch name, or a tag name. GitHub Apps must have the `checks:read` permission on a private repository or pull access to a public repository to list check suites. OAuth Apps and authenticated users must have the `repo` scope to get check suites in a private repository.
  */
 export const checksListSuitesForRefQuery = (
-  variables: ChecksListSuitesForRefVariables,
+  variables: ChecksListSuitesForRefVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -50186,7 +50186,7 @@ export const useSuspenseChecksListSuitesForRef = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -50216,7 +50216,7 @@ export const useChecksListSuitesForRef = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -50282,7 +50282,7 @@ export type ReposGetCombinedStatusForRefVariables = {
  */
 export const fetchReposGetCombinedStatusForRef = (
   variables: ReposGetCombinedStatusForRefVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.CombinedCommitStatus,
@@ -50309,7 +50309,7 @@ export const fetchReposGetCombinedStatusForRef = (
  * *   **success** if the latest status for all contexts is `success`
  */
 export const reposGetCombinedStatusForRefQuery = (
-  variables: ReposGetCombinedStatusForRefVariables,
+  variables: ReposGetCombinedStatusForRefVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -50348,7 +50348,7 @@ export const useSuspenseReposGetCombinedStatusForRef = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -50383,7 +50383,7 @@ export const useReposGetCombinedStatusForRef = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -50446,7 +50446,7 @@ export type ReposListCommitStatusesForRefVariables = {
  */
 export const fetchReposListCommitStatusesForRef = (
   variables: ReposListCommitStatusesForRefVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ReposListCommitStatusesForRefResponse,
@@ -50468,7 +50468,7 @@ export const fetchReposListCommitStatusesForRef = (
  * This resource is also available via a legacy route: `GET /repos/:owner/:repo/statuses/:ref`.
  */
 export const reposListCommitStatusesForRefQuery = (
-  variables: ReposListCommitStatusesForRefVariables,
+  variables: ReposListCommitStatusesForRefVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -50502,7 +50502,7 @@ export const useSuspenseReposListCommitStatusesForRef = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -50532,7 +50532,7 @@ export const useReposListCommitStatusesForRef = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -50581,7 +50581,7 @@ export type ReposGetCommunityProfileMetricsVariables = {
  */
 export const fetchReposGetCommunityProfileMetrics = (
   variables: ReposGetCommunityProfileMetricsVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.CommunityProfile,
@@ -50613,7 +50613,7 @@ export const fetchReposGetCommunityProfileMetrics = (
  * `content_reports_enabled` is only returned for organization-owned repositories.
  */
 export const reposGetCommunityProfileMetricsQuery = (
-  variables: ReposGetCommunityProfileMetricsVariables,
+  variables: ReposGetCommunityProfileMetricsVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -50657,7 +50657,7 @@ export const useSuspenseReposGetCommunityProfileMetrics = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -50697,7 +50697,7 @@ export const useReposGetCommunityProfileMetrics = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -50810,7 +50810,7 @@ export type ReposCompareCommitsVariables = {
  */
 export const fetchReposCompareCommits = (
   variables: ReposCompareCommitsVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.CommitComparison,
@@ -50874,7 +50874,7 @@ export const fetchReposCompareCommits = (
  * | `valid` | None of the above errors applied, so the signature is considered to be verified. |
  */
 export const reposCompareCommitsQuery = (
-  variables: ReposCompareCommitsVariables,
+  variables: ReposCompareCommitsVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -50950,7 +50950,7 @@ export const useSuspenseReposCompareCommits = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -51020,7 +51020,7 @@ export const useReposCompareCommits = <TData = Schemas.CommitComparison>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -51127,7 +51127,7 @@ export type ReposDeleteFileVariables = {
  */
 export const fetchReposDeleteFile = (
   variables: ReposDeleteFileVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.FileCommit,
@@ -51162,7 +51162,7 @@ export const useReposDeleteFile = (
       ReposDeleteFileVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -51259,7 +51259,7 @@ export type ReposGetContentVariables = {
  */
 export const fetchReposGetContent = (
   variables: ReposGetContentVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     | Schemas.ContentDirectory
@@ -51318,7 +51318,7 @@ export const fetchReposGetContent = (
  * github.com URLs (`html_url` and `_links["html"]`) will have null values.
  */
 export const reposGetContentQuery = (
-  variables: ReposGetContentVariables,
+  variables: ReposGetContentVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -51398,7 +51398,7 @@ export const useSuspenseReposGetContent = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -51472,7 +51472,7 @@ export const useReposGetContent = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -51584,7 +51584,7 @@ export type ReposCreateOrUpdateFileContentsVariables = {
  */
 export const fetchReposCreateOrUpdateFileContents = (
   variables: ReposCreateOrUpdateFileContentsVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.FileCommit,
@@ -51613,7 +51613,7 @@ export const useReposCreateOrUpdateFileContents = (
       ReposCreateOrUpdateFileContentsVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -51682,7 +51682,7 @@ export type ReposListContributorsVariables = {
  */
 export const fetchReposListContributors = (
   variables: ReposListContributorsVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ReposListContributorsResponse,
@@ -51704,7 +51704,7 @@ export const fetchReposListContributors = (
  * GitHub identifies contributors by author email address. This endpoint groups contribution counts by GitHub user, which includes all associated email addresses. To improve performance, only the first 500 author email addresses in the repository link to GitHub users. The rest will appear as anonymous contributors without associated GitHub user information.
  */
 export const reposListContributorsQuery = (
-  variables: ReposListContributorsVariables,
+  variables: ReposListContributorsVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -51738,7 +51738,7 @@ export const useSuspenseReposListContributors = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -51766,7 +51766,7 @@ export const useReposListContributors = <TData = ReposListContributorsResponse>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -51914,7 +51914,7 @@ export type DependabotListAlertsForRepoVariables = {
  */
 export const fetchDependabotListAlertsForRepo = (
   variables: DependabotListAlertsForRepoVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     DependabotListAlertsForRepoResponse,
@@ -51936,7 +51936,7 @@ export const fetchDependabotListAlertsForRepo = (
  * GitHub Apps must have **Dependabot alerts** read permission to use this endpoint.
  */
 export const dependabotListAlertsForRepoQuery = (
-  variables: DependabotListAlertsForRepoVariables,
+  variables: DependabotListAlertsForRepoVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -51970,7 +51970,7 @@ export const useSuspenseDependabotListAlertsForRepo = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -52000,7 +52000,7 @@ export const useDependabotListAlertsForRepo = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -52058,7 +52058,7 @@ export type DependabotGetAlertVariables = {
  */
 export const fetchDependabotGetAlert = (
   variables: DependabotGetAlertVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.DependabotAlert,
@@ -52080,7 +52080,7 @@ export const fetchDependabotGetAlert = (
  * GitHub Apps must have **Dependabot alerts** read permission to use this endpoint.
  */
 export const dependabotGetAlertQuery = (
-  variables: DependabotGetAlertVariables,
+  variables: DependabotGetAlertVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -52112,7 +52112,7 @@ export const useSuspenseDependabotGetAlert = <TData = Schemas.DependabotAlert>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -52140,7 +52140,7 @@ export const useDependabotGetAlert = <TData = Schemas.DependabotAlert>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -52230,7 +52230,7 @@ export type DependabotUpdateAlertVariables = {
  */
 export const fetchDependabotUpdateAlert = (
   variables: DependabotUpdateAlertVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.DependabotAlert,
@@ -52259,7 +52259,7 @@ export const useDependabotUpdateAlert = (
       DependabotUpdateAlertVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -52316,7 +52316,7 @@ export type DependabotListRepoSecretsVariables = {
  */
 export const fetchDependabotListRepoSecrets = (
   variables: DependabotListRepoSecretsVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     DependabotListRepoSecretsResponse,
@@ -52336,7 +52336,7 @@ export const fetchDependabotListRepoSecrets = (
  * Lists all secrets available in a repository without revealing their encrypted values. You must authenticate using an access token with the `repo` scope to use this endpoint. GitHub Apps must have the `dependabot_secrets` repository permission to use this endpoint.
  */
 export const dependabotListRepoSecretsQuery = (
-  variables: DependabotListRepoSecretsVariables,
+  variables: DependabotListRepoSecretsVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -52368,7 +52368,7 @@ export const useSuspenseDependabotListRepoSecrets = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -52396,7 +52396,7 @@ export const useDependabotListRepoSecrets = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -52432,7 +52432,7 @@ export type DependabotGetRepoPublicKeyVariables = {
  */
 export const fetchDependabotGetRepoPublicKey = (
   variables: DependabotGetRepoPublicKeyVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.DependabotPublicKey,
@@ -52452,7 +52452,7 @@ export const fetchDependabotGetRepoPublicKey = (
  * Gets your public key, which you need to encrypt secrets. You need to encrypt a secret before you can create or update secrets. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `dependabot_secrets` repository permission to use this endpoint.
  */
 export const dependabotGetRepoPublicKeyQuery = (
-  variables: DependabotGetRepoPublicKeyVariables,
+  variables: DependabotGetRepoPublicKeyVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -52484,7 +52484,7 @@ export const useSuspenseDependabotGetRepoPublicKey = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -52512,7 +52512,7 @@ export const useDependabotGetRepoPublicKey = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -52552,7 +52552,7 @@ export type DependabotDeleteRepoSecretVariables = {
  */
 export const fetchDependabotDeleteRepoSecret = (
   variables: DependabotDeleteRepoSecretVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -52579,7 +52579,7 @@ export const useDependabotDeleteRepoSecret = (
       DependabotDeleteRepoSecretVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -52619,7 +52619,7 @@ export type DependabotGetRepoSecretVariables = {
  */
 export const fetchDependabotGetRepoSecret = (
   variables: DependabotGetRepoSecretVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.DependabotSecret,
@@ -52639,7 +52639,7 @@ export const fetchDependabotGetRepoSecret = (
  * Gets a single repository secret without revealing its encrypted value. You must authenticate using an access token with the `repo` scope to use this endpoint. GitHub Apps must have the `dependabot_secrets` repository permission to use this endpoint.
  */
 export const dependabotGetRepoSecretQuery = (
-  variables: DependabotGetRepoSecretVariables,
+  variables: DependabotGetRepoSecretVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -52671,7 +52671,7 @@ export const useSuspenseDependabotGetRepoSecret = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -52697,7 +52697,7 @@ export const useDependabotGetRepoSecret = <TData = Schemas.DependabotSecret>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -52827,7 +52827,7 @@ export type DependabotCreateOrUpdateRepoSecretVariables = {
  */
 export const fetchDependabotCreateOrUpdateRepoSecret = (
   variables: DependabotCreateOrUpdateRepoSecretVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.EmptyObject,
@@ -52929,7 +52929,7 @@ export const useDependabotCreateOrUpdateRepoSecret = (
       DependabotCreateOrUpdateRepoSecretVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -52989,7 +52989,7 @@ export type DependencyGraphDiffRangeVariables = {
  */
 export const fetchDependencyGraphDiffRange = (
   variables: DependencyGraphDiffRangeVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.DependencyGraphDiff,
@@ -53009,7 +53009,7 @@ export const fetchDependencyGraphDiffRange = (
  * Gets the diff of the dependency changes between two commits of a repository, based on the changes to the dependency manifests made in those commits.
  */
 export const dependencyGraphDiffRangeQuery = (
-  variables: DependencyGraphDiffRangeVariables,
+  variables: DependencyGraphDiffRangeVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -53041,7 +53041,7 @@ export const useSuspenseDependencyGraphDiffRange = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -53069,7 +53069,7 @@ export const useDependencyGraphDiffRange = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -53126,7 +53126,7 @@ export type DependencyGraphCreateRepositorySnapshotVariables = {
  */
 export const fetchDependencyGraphCreateRepositorySnapshot = (
   variables: DependencyGraphCreateRepositorySnapshotVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     DependencyGraphCreateRepositorySnapshotResponse,
@@ -53153,7 +53153,7 @@ export const useDependencyGraphCreateRepositorySnapshot = (
       DependencyGraphCreateRepositorySnapshotVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -53234,7 +53234,7 @@ export type ReposListDeploymentsVariables = {
  */
 export const fetchReposListDeployments = (
   variables: ReposListDeploymentsVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ReposListDeploymentsResponse,
@@ -53254,7 +53254,7 @@ export const fetchReposListDeployments = (
  * Simple filtering of deployments is available via query parameters:
  */
 export const reposListDeploymentsQuery = (
-  variables: ReposListDeploymentsVariables,
+  variables: ReposListDeploymentsVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -53286,7 +53286,7 @@ export const useSuspenseReposListDeployments = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -53312,7 +53312,7 @@ export const useReposListDeployments = <TData = ReposListDeploymentsResponse>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -53446,7 +53446,7 @@ export type ReposCreateDeploymentVariables = {
  */
 export const fetchReposCreateDeployment = (
   variables: ReposCreateDeploymentVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     | Schemas.Deployment
@@ -53523,7 +53523,7 @@ export const useReposCreateDeployment = (
       ReposCreateDeploymentVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -53582,7 +53582,7 @@ export type ReposDeleteDeploymentVariables = {
  */
 export const fetchReposDeleteDeployment = (
   variables: ReposDeleteDeploymentVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -53616,7 +53616,7 @@ export const useReposDeleteDeployment = (
       ReposDeleteDeploymentVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -53656,7 +53656,7 @@ export type ReposGetDeploymentVariables = {
 
 export const fetchReposGetDeployment = (
   variables: ReposGetDeploymentVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.Deployment,
@@ -53673,7 +53673,7 @@ export const fetchReposGetDeployment = (
   });
 
 export const reposGetDeploymentQuery = (
-  variables: ReposGetDeploymentVariables,
+  variables: ReposGetDeploymentVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -53700,7 +53700,7 @@ export const useSuspenseReposGetDeployment = <TData = Schemas.Deployment>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -53723,7 +53723,7 @@ export const useReposGetDeployment = <TData = Schemas.Deployment>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -53784,7 +53784,7 @@ export type ReposListDeploymentStatusesVariables = {
  */
 export const fetchReposListDeploymentStatuses = (
   variables: ReposListDeploymentStatusesVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ReposListDeploymentStatusesResponse,
@@ -53804,7 +53804,7 @@ export const fetchReposListDeploymentStatuses = (
  * Users with pull access can view deployment statuses for a deployment:
  */
 export const reposListDeploymentStatusesQuery = (
-  variables: ReposListDeploymentStatusesVariables,
+  variables: ReposListDeploymentStatusesVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -53836,7 +53836,7 @@ export const useSuspenseReposListDeploymentStatuses = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -53864,7 +53864,7 @@ export const useReposListDeploymentStatuses = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -53956,7 +53956,7 @@ export type ReposCreateDeploymentStatusVariables = {
  */
 export const fetchReposCreateDeploymentStatus = (
   variables: ReposCreateDeploymentStatusVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.DeploymentStatus,
@@ -53985,7 +53985,7 @@ export const useReposCreateDeploymentStatus = (
       ReposCreateDeploymentStatusVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -54029,7 +54029,7 @@ export type ReposGetDeploymentStatusVariables = {
  */
 export const fetchReposGetDeploymentStatus = (
   variables: ReposGetDeploymentStatusVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.DeploymentStatus,
@@ -54049,7 +54049,7 @@ export const fetchReposGetDeploymentStatus = (
  * Users with pull access can view a deployment status for a deployment:
  */
 export const reposGetDeploymentStatusQuery = (
-  variables: ReposGetDeploymentStatusVariables,
+  variables: ReposGetDeploymentStatusVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -54081,7 +54081,7 @@ export const useSuspenseReposGetDeploymentStatus = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -54107,7 +54107,7 @@ export const useReposGetDeploymentStatus = <TData = Schemas.DeploymentStatus>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -54174,7 +54174,7 @@ export type ReposCreateDispatchEventVariables = {
  */
 export const fetchReposCreateDispatchEvent = (
   variables: ReposCreateDispatchEventVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -54210,7 +54210,7 @@ export const useReposCreateDispatchEvent = (
       ReposCreateDispatchEventVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -54274,7 +54274,7 @@ export type ReposGetAllEnvironmentsVariables = {
  */
 export const fetchReposGetAllEnvironments = (
   variables: ReposGetAllEnvironmentsVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ReposGetAllEnvironmentsResponse,
@@ -54296,7 +54296,7 @@ export const fetchReposGetAllEnvironments = (
  * Anyone with read access to the repository can use this endpoint. If the repository is private, you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
  */
 export const reposGetAllEnvironmentsQuery = (
-  variables: ReposGetAllEnvironmentsVariables,
+  variables: ReposGetAllEnvironmentsVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -54330,7 +54330,7 @@ export const useSuspenseReposGetAllEnvironments = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -54360,7 +54360,7 @@ export const useReposGetAllEnvironments = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -54400,7 +54400,7 @@ export type ReposDeleteAnEnvironmentVariables = {
  */
 export const fetchReposDeleteAnEnvironment = (
   variables: ReposDeleteAnEnvironmentVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -54427,7 +54427,7 @@ export const useReposDeleteAnEnvironment = (
       ReposDeleteAnEnvironmentVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -54471,7 +54471,7 @@ export type ReposGetEnvironmentVariables = {
  */
 export const fetchReposGetEnvironment = (
   variables: ReposGetEnvironmentVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.Environment,
@@ -54495,7 +54495,7 @@ export const fetchReposGetEnvironment = (
  * Apps must have the `actions:read` permission to use this endpoint.
  */
 export const reposGetEnvironmentQuery = (
-  variables: ReposGetEnvironmentVariables,
+  variables: ReposGetEnvironmentVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -54529,7 +54529,7 @@ export const useSuspenseReposGetEnvironment = <TData = Schemas.Environment>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -54559,7 +54559,7 @@ export const useReposGetEnvironment = <TData = Schemas.Environment>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -54626,7 +54626,7 @@ export type ReposCreateOrUpdateEnvironmentVariables = {
  */
 export const fetchReposCreateOrUpdateEnvironment = (
   variables: ReposCreateOrUpdateEnvironmentVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.Environment,
@@ -54676,7 +54676,7 @@ export const useReposCreateOrUpdateEnvironment = (
       ReposCreateOrUpdateEnvironmentVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -54745,7 +54745,7 @@ export type ReposListDeploymentBranchPoliciesVariables = {
  */
 export const fetchReposListDeploymentBranchPolicies = (
   variables: ReposListDeploymentBranchPoliciesVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ReposListDeploymentBranchPoliciesResponse,
@@ -54767,7 +54767,7 @@ export const fetchReposListDeploymentBranchPolicies = (
  * Anyone with read access to the repository can use this endpoint. If the repository is private, you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
  */
 export const reposListDeploymentBranchPoliciesQuery = (
-  variables: ReposListDeploymentBranchPoliciesVariables,
+  variables: ReposListDeploymentBranchPoliciesVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -54801,7 +54801,7 @@ export const useSuspenseReposListDeploymentBranchPolicies = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -54831,7 +54831,7 @@ export const useReposListDeploymentBranchPolicies = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -54875,7 +54875,7 @@ export type ReposCreateDeploymentBranchPolicyVariables = {
  */
 export const fetchReposCreateDeploymentBranchPolicy = (
   variables: ReposCreateDeploymentBranchPolicyVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.DeploymentBranchPolicy,
@@ -54904,7 +54904,7 @@ export const useReposCreateDeploymentBranchPolicy = (
       ReposCreateDeploymentBranchPolicyVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -54954,7 +54954,7 @@ export type ReposDeleteDeploymentBranchPolicyVariables = {
  */
 export const fetchReposDeleteDeploymentBranchPolicy = (
   variables: ReposDeleteDeploymentBranchPolicyVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -54983,7 +54983,7 @@ export const useReposDeleteDeploymentBranchPolicy = (
       ReposDeleteDeploymentBranchPolicyVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -55033,7 +55033,7 @@ export type ReposGetDeploymentBranchPolicyVariables = {
  */
 export const fetchReposGetDeploymentBranchPolicy = (
   variables: ReposGetDeploymentBranchPolicyVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.DeploymentBranchPolicy,
@@ -55055,7 +55055,7 @@ export const fetchReposGetDeploymentBranchPolicy = (
  * Anyone with read access to the repository can use this endpoint. If the repository is private, you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
  */
 export const reposGetDeploymentBranchPolicyQuery = (
-  variables: ReposGetDeploymentBranchPolicyVariables,
+  variables: ReposGetDeploymentBranchPolicyVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -55089,7 +55089,7 @@ export const useSuspenseReposGetDeploymentBranchPolicy = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -55119,7 +55119,7 @@ export const useReposGetDeploymentBranchPolicy = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -55167,7 +55167,7 @@ export type ReposUpdateDeploymentBranchPolicyVariables = {
  */
 export const fetchReposUpdateDeploymentBranchPolicy = (
   variables: ReposUpdateDeploymentBranchPolicyVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.DeploymentBranchPolicy,
@@ -55196,7 +55196,7 @@ export const useReposUpdateDeploymentBranchPolicy = (
       ReposUpdateDeploymentBranchPolicyVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -55250,7 +55250,7 @@ export type ActivityListRepoEventsVariables = {
 
 export const fetchActivityListRepoEvents = (
   variables: ActivityListRepoEventsVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ActivityListRepoEventsResponse,
@@ -55267,7 +55267,7 @@ export const fetchActivityListRepoEvents = (
   });
 
 export const activityListRepoEventsQuery = (
-  variables: ActivityListRepoEventsVariables,
+  variables: ActivityListRepoEventsVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -55296,7 +55296,7 @@ export const useSuspenseActivityListRepoEvents = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -55321,7 +55321,7 @@ export const useActivityListRepoEvents = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -55381,7 +55381,7 @@ export type ReposListForksVariables = {
 
 export const fetchReposListForks = (
   variables: ReposListForksVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ReposListForksResponse,
@@ -55398,7 +55398,7 @@ export const fetchReposListForks = (
   });
 
 export const reposListForksQuery = (
-  variables: ReposListForksVariables,
+  variables: ReposListForksVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -55425,7 +55425,7 @@ export const useSuspenseReposListForks = <TData = ReposListForksResponse>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -55448,7 +55448,7 @@ export const useReposListForks = <TData = ReposListForksResponse>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -55517,7 +55517,7 @@ export type ReposCreateForkVariables = {
  */
 export const fetchReposCreateFork = (
   variables: ReposCreateForkVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.FullRepository,
@@ -55559,7 +55559,7 @@ export const useReposCreateFork = (
       ReposCreateForkVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -55623,7 +55623,7 @@ export type GitCreateBlobVariables = {
 
 export const fetchGitCreateBlob = (
   variables: GitCreateBlobVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.ShortBlob,
@@ -55647,7 +55647,7 @@ export const useGitCreateBlob = (
       GitCreateBlobVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -55699,7 +55699,7 @@ export type GitGetBlobVariables = {
  */
 export const fetchGitGetBlob = (
   variables: GitGetBlobVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.Blob,
@@ -55721,7 +55721,7 @@ export const fetchGitGetBlob = (
  * _Note_: This API supports blobs up to 100 megabytes in size.
  */
 export const gitGetBlobQuery = (
-  variables: GitGetBlobVariables,
+  variables: GitGetBlobVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({ signal }: { signal?: AbortSignal }) => Promise<Schemas.Blob>;
@@ -55745,7 +55745,7 @@ export const useSuspenseGitGetBlob = <TData = Schemas.Blob>(
   options?: Omit<
     reactQuery.UseQueryOptions<Schemas.Blob, GitGetBlobError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<Schemas.Blob, GitGetBlobError, TData>({
@@ -55765,7 +55765,7 @@ export const useGitGetBlob = <TData = Schemas.Blob>(
   options?: Omit<
     reactQuery.UseQueryOptions<Schemas.Blob, GitGetBlobError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.Blob, GitGetBlobError, TData>({
@@ -55893,7 +55893,7 @@ export type GitCreateCommitVariables = {
  */
 export const fetchGitCreateCommit = (
   variables: GitCreateCommitVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.GitCommit,
@@ -55949,7 +55949,7 @@ export const useGitCreateCommit = (
       GitCreateCommitVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -56021,7 +56021,7 @@ export type GitGetCommitVariables = {
  */
 export const fetchGitGetCommit = (
   variables: GitGetCommitVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.GitCommit,
@@ -56070,7 +56070,7 @@ export const fetchGitGetCommit = (
  * | `valid` | None of the above errors applied, so the signature is considered to be verified. |
  */
 export const gitGetCommitQuery = (
-  variables: GitGetCommitVariables,
+  variables: GitGetCommitVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({ signal }: { signal?: AbortSignal }) => Promise<Schemas.GitCommit>;
@@ -56121,7 +56121,7 @@ export const useSuspenseGitGetCommit = <TData = Schemas.GitCommit>(
   options?: Omit<
     reactQuery.UseQueryOptions<Schemas.GitCommit, GitGetCommitError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -56172,7 +56172,7 @@ export const useGitGetCommit = <TData = Schemas.GitCommit>(
   options?: Omit<
     reactQuery.UseQueryOptions<Schemas.GitCommit, GitGetCommitError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.GitCommit, GitGetCommitError, TData>({
@@ -56216,7 +56216,7 @@ export type GitListMatchingRefsVariables = {
  */
 export const fetchGitListMatchingRefs = (
   variables: GitListMatchingRefsVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     GitListMatchingRefsResponse,
@@ -56242,7 +56242,7 @@ export const fetchGitListMatchingRefs = (
  * If you request matching references for a branch named `feature` but the branch `feature` doesn't exist, the response can still include other matching head refs that start with the word `feature`, such as `featureA` and `featureB`.
  */
 export const gitListMatchingRefsQuery = (
-  variables: GitListMatchingRefsVariables,
+  variables: GitListMatchingRefsVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -56280,7 +56280,7 @@ export const useSuspenseGitListMatchingRefs = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -56312,7 +56312,7 @@ export const useGitListMatchingRefs = <TData = GitListMatchingRefsResponse>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -56357,7 +56357,7 @@ export type GitGetRefVariables = {
  */
 export const fetchGitGetRef = (
   variables: GitGetRefVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.GitRef,
@@ -56379,7 +56379,7 @@ export const fetchGitGetRef = (
  * **Note:** You need to explicitly [request a pull request](https://docs.github.com/rest/reference/pulls#get-a-pull-request) to trigger a test merge commit, which checks the mergeability of pull requests. For more information, see "[Checking mergeability of pull requests](https://docs.github.com/rest/guides/getting-started-with-the-git-database-api#checking-mergeability-of-pull-requests)".
  */
 export const gitGetRefQuery = (
-  variables: GitGetRefVariables,
+  variables: GitGetRefVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({ signal }: { signal?: AbortSignal }) => Promise<Schemas.GitRef>;
@@ -56403,7 +56403,7 @@ export const useSuspenseGitGetRef = <TData = Schemas.GitRef>(
   options?: Omit<
     reactQuery.UseQueryOptions<Schemas.GitRef, GitGetRefError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<Schemas.GitRef, GitGetRefError, TData>({
@@ -56423,7 +56423,7 @@ export const useGitGetRef = <TData = Schemas.GitRef>(
   options?: Omit<
     reactQuery.UseQueryOptions<Schemas.GitRef, GitGetRefError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.GitRef, GitGetRefError, TData>({
@@ -56474,7 +56474,7 @@ export type GitCreateRefVariables = {
  */
 export const fetchGitCreateRef = (
   variables: GitCreateRefVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.GitRef,
@@ -56501,7 +56501,7 @@ export const useGitCreateRef = (
       GitCreateRefVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -56541,7 +56541,7 @@ export type GitDeleteRefVariables = {
 
 export const fetchGitDeleteRef = (
   variables: GitDeleteRefVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -56565,7 +56565,7 @@ export const useGitDeleteRef = (
       GitDeleteRefVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -56619,7 +56619,7 @@ export type GitUpdateRefVariables = {
 
 export const fetchGitUpdateRef = (
   variables: GitUpdateRefVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.GitRef,
@@ -56643,7 +56643,7 @@ export const useGitUpdateRef = (
       GitUpdateRefVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -56750,7 +56750,7 @@ export type GitCreateTagVariables = {
  */
 export const fetchGitCreateTag = (
   variables: GitCreateTagVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.GitTag,
@@ -56806,7 +56806,7 @@ export const useGitCreateTag = (
       GitCreateTagVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -56873,7 +56873,7 @@ export type GitGetTagVariables = {
  */
 export const fetchGitGetTag = (
   variables: GitGetTagVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.GitTag,
@@ -56920,7 +56920,7 @@ export const fetchGitGetTag = (
  * | `valid` | None of the above errors applied, so the signature is considered to be verified. |
  */
 export const gitGetTagQuery = (
-  variables: GitGetTagVariables,
+  variables: GitGetTagVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({ signal }: { signal?: AbortSignal }) => Promise<Schemas.GitTag>;
@@ -56969,7 +56969,7 @@ export const useSuspenseGitGetTag = <TData = Schemas.GitTag>(
   options?: Omit<
     reactQuery.UseQueryOptions<Schemas.GitTag, GitGetTagError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<Schemas.GitTag, GitGetTagError, TData>({
@@ -57014,7 +57014,7 @@ export const useGitGetTag = <TData = Schemas.GitTag>(
   options?: Omit<
     reactQuery.UseQueryOptions<Schemas.GitTag, GitGetTagError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.GitTag, GitGetTagError, TData>({
@@ -57101,7 +57101,7 @@ export type GitCreateTreeVariables = {
  */
 export const fetchGitCreateTree = (
   variables: GitCreateTreeVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.GitTree,
@@ -57132,7 +57132,7 @@ export const useGitCreateTree = (
       GitCreateTreeVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -57191,7 +57191,7 @@ export type GitGetTreeVariables = {
  */
 export const fetchGitGetTree = (
   variables: GitGetTreeVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.GitTree,
@@ -57216,7 +57216,7 @@ export const fetchGitGetTree = (
  * **Note**: The limit for the `tree` array is 100,000 entries with a maximum size of 7 MB when using the `recursive` parameter.
  */
 export const gitGetTreeQuery = (
-  variables: GitGetTreeVariables,
+  variables: GitGetTreeVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({ signal }: { signal?: AbortSignal }) => Promise<Schemas.GitTree>;
@@ -57243,7 +57243,7 @@ export const useSuspenseGitGetTree = <TData = Schemas.GitTree>(
   options?: Omit<
     reactQuery.UseQueryOptions<Schemas.GitTree, GitGetTreeError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<Schemas.GitTree, GitGetTreeError, TData>({
@@ -57266,7 +57266,7 @@ export const useGitGetTree = <TData = Schemas.GitTree>(
   options?: Omit<
     reactQuery.UseQueryOptions<Schemas.GitTree, GitGetTreeError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.GitTree, GitGetTreeError, TData>({
@@ -57319,7 +57319,7 @@ export type ReposListWebhooksVariables = {
  */
 export const fetchReposListWebhooks = (
   variables: ReposListWebhooksVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ReposListWebhooksResponse,
@@ -57339,7 +57339,7 @@ export const fetchReposListWebhooks = (
  * Lists webhooks for a repository. `last response` may return null if there have not been any deliveries within 30 days.
  */
 export const reposListWebhooksQuery = (
-  variables: ReposListWebhooksVariables,
+  variables: ReposListWebhooksVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -57369,7 +57369,7 @@ export const useSuspenseReposListWebhooks = <TData = ReposListWebhooksResponse>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -57395,7 +57395,7 @@ export const useReposListWebhooks = <TData = ReposListWebhooksResponse>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -57480,7 +57480,7 @@ export type ReposCreateWebhookVariables = {
  */
 export const fetchReposCreateWebhook = (
   variables: ReposCreateWebhookVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.Hook,
@@ -57542,7 +57542,7 @@ export const useReposCreateWebhook = (
       ReposCreateWebhookVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -57582,7 +57582,7 @@ export type ReposDeleteWebhookVariables = {
 
 export const fetchReposDeleteWebhook = (
   variables: ReposDeleteWebhookVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -57606,7 +57606,7 @@ export const useReposDeleteWebhook = (
       ReposDeleteWebhookVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -57649,7 +57649,7 @@ export type ReposGetWebhookVariables = {
  */
 export const fetchReposGetWebhook = (
   variables: ReposGetWebhookVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.Hook,
@@ -57669,7 +57669,7 @@ export const fetchReposGetWebhook = (
  * Returns a webhook configured in a repository. To get only the webhook `config` properties, see "[Get a webhook configuration for a repository](/rest/reference/repos#get-a-webhook-configuration-for-a-repository)."
  */
 export const reposGetWebhookQuery = (
-  variables: ReposGetWebhookVariables,
+  variables: ReposGetWebhookVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({ signal }: { signal?: AbortSignal }) => Promise<Schemas.Hook>;
@@ -57691,7 +57691,7 @@ export const useSuspenseReposGetWebhook = <TData = Schemas.Hook>(
   options?: Omit<
     reactQuery.UseQueryOptions<Schemas.Hook, ReposGetWebhookError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<Schemas.Hook, ReposGetWebhookError, TData>(
@@ -57699,7 +57699,7 @@ export const useSuspenseReposGetWebhook = <TData = Schemas.Hook>(
       ...reposGetWebhookQuery(variables),
       ...options,
       ...queryOptions,
-    },
+    }
   );
 };
 
@@ -57711,7 +57711,7 @@ export const useReposGetWebhook = <TData = Schemas.Hook>(
   options?: Omit<
     reactQuery.UseQueryOptions<Schemas.Hook, ReposGetWebhookError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.Hook, ReposGetWebhookError, TData>({
@@ -57797,7 +57797,7 @@ export type ReposUpdateWebhookVariables = {
  */
 export const fetchReposUpdateWebhook = (
   variables: ReposUpdateWebhookVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.Hook,
@@ -57824,7 +57824,7 @@ export const useReposUpdateWebhook = (
       ReposUpdateWebhookVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -57866,7 +57866,7 @@ export type ReposGetWebhookConfigForRepoVariables = {
  */
 export const fetchReposGetWebhookConfigForRepo = (
   variables: ReposGetWebhookConfigForRepoVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.WebhookConfig,
@@ -57888,7 +57888,7 @@ export const fetchReposGetWebhookConfigForRepo = (
  * Access tokens must have the `read:repo_hook` or `repo` scope, and GitHub Apps must have the `repository_hooks:read` permission.
  */
 export const reposGetWebhookConfigForRepoQuery = (
-  variables: ReposGetWebhookConfigForRepoVariables,
+  variables: ReposGetWebhookConfigForRepoVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -57922,7 +57922,7 @@ export const useSuspenseReposGetWebhookConfigForRepo = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -57950,7 +57950,7 @@ export const useReposGetWebhookConfigForRepo = <TData = Schemas.WebhookConfig>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -58001,7 +58001,7 @@ export type ReposUpdateWebhookConfigForRepoVariables = {
  */
 export const fetchReposUpdateWebhookConfigForRepo = (
   variables: ReposUpdateWebhookConfigForRepoVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.WebhookConfig,
@@ -58030,7 +58030,7 @@ export const useReposUpdateWebhookConfigForRepo = (
       ReposUpdateWebhookConfigForRepoVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -58096,7 +58096,7 @@ export type ReposListWebhookDeliveriesVariables = {
  */
 export const fetchReposListWebhookDeliveries = (
   variables: ReposListWebhookDeliveriesVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ReposListWebhookDeliveriesResponse,
@@ -58116,7 +58116,7 @@ export const fetchReposListWebhookDeliveries = (
  * Returns a list of webhook deliveries for a webhook configured in a repository.
  */
 export const reposListWebhookDeliveriesQuery = (
-  variables: ReposListWebhookDeliveriesVariables,
+  variables: ReposListWebhookDeliveriesVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -58148,7 +58148,7 @@ export const useSuspenseReposListWebhookDeliveries = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -58176,7 +58176,7 @@ export const useReposListWebhookDeliveries = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -58226,7 +58226,7 @@ export type ReposGetWebhookDeliveryVariables = {
  */
 export const fetchReposGetWebhookDelivery = (
   variables: ReposGetWebhookDeliveryVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.HookDelivery,
@@ -58246,7 +58246,7 @@ export const fetchReposGetWebhookDelivery = (
  * Returns a delivery for a webhook configured in a repository.
  */
 export const reposGetWebhookDeliveryQuery = (
-  variables: ReposGetWebhookDeliveryVariables,
+  variables: ReposGetWebhookDeliveryVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -58278,7 +58278,7 @@ export const useSuspenseReposGetWebhookDelivery = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -58304,7 +58304,7 @@ export const useReposGetWebhookDelivery = <TData = Schemas.HookDelivery>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -58354,7 +58354,7 @@ export type ReposRedeliverWebhookDeliveryVariables = {
  */
 export const fetchReposRedeliverWebhookDelivery = (
   variables: ReposRedeliverWebhookDeliveryVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Responses.Accepted,
@@ -58381,7 +58381,7 @@ export const useReposRedeliverWebhookDelivery = (
       ReposRedeliverWebhookDeliveryVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -58424,7 +58424,7 @@ export type ReposPingWebhookVariables = {
  */
 export const fetchReposPingWebhook = (
   variables: ReposPingWebhookVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -58451,7 +58451,7 @@ export const useReposPingWebhook = (
       ReposPingWebhookVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -58496,7 +58496,7 @@ export type ReposTestPushWebhookVariables = {
  */
 export const fetchReposTestPushWebhook = (
   variables: ReposTestPushWebhookVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -58525,7 +58525,7 @@ export const useReposTestPushWebhook = (
       ReposTestPushWebhookVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -58564,7 +58564,7 @@ export type MigrationsCancelImportVariables = {
  */
 export const fetchMigrationsCancelImport = (
   variables: MigrationsCancelImportVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -58591,7 +58591,7 @@ export const useMigrationsCancelImport = (
       MigrationsCancelImportVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -58669,7 +58669,7 @@ export type MigrationsGetImportStatusVariables = {
  */
 export const fetchMigrationsGetImportStatus = (
   variables: MigrationsGetImportStatusVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.Import,
@@ -58722,7 +58722,7 @@ export const fetchMigrationsGetImportStatus = (
  * *   `large_files_count` - the total number of files larger than 100MB found in the originating repository. To see a list of these files, make a "Get Large Files" request.
  */
 export const migrationsGetImportStatusQuery = (
-  variables: MigrationsGetImportStatusVariables,
+  variables: MigrationsGetImportStatusVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({ signal }: { signal?: AbortSignal }) => Promise<Schemas.Import>;
@@ -58781,7 +58781,7 @@ export const useSuspenseMigrationsGetImportStatus = <TData = Schemas.Import>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -58840,7 +58840,7 @@ export const useMigrationsGetImportStatus = <TData = Schemas.Import>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -58906,7 +58906,7 @@ export type MigrationsUpdateImportVariables = {
  */
 export const fetchMigrationsUpdateImport = (
   variables: MigrationsUpdateImportVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.Import,
@@ -58959,7 +58959,7 @@ export const useMigrationsUpdateImport = (
       MigrationsUpdateImportVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -59032,7 +59032,7 @@ export type MigrationsStartImportVariables = {
  */
 export const fetchMigrationsStartImport = (
   variables: MigrationsStartImportVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.Import,
@@ -59059,7 +59059,7 @@ export const useMigrationsStartImport = (
       MigrationsStartImportVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -59116,7 +59116,7 @@ export type MigrationsGetCommitAuthorsVariables = {
  */
 export const fetchMigrationsGetCommitAuthors = (
   variables: MigrationsGetCommitAuthorsVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     MigrationsGetCommitAuthorsResponse,
@@ -59138,7 +59138,7 @@ export const fetchMigrationsGetCommitAuthors = (
  * This endpoint and the [Map a commit author](https://docs.github.com/rest/migrations/source-imports#map-a-commit-author) endpoint allow you to provide correct Git author information.
  */
 export const migrationsGetCommitAuthorsQuery = (
-  variables: MigrationsGetCommitAuthorsVariables,
+  variables: MigrationsGetCommitAuthorsVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -59172,7 +59172,7 @@ export const useSuspenseMigrationsGetCommitAuthors = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -59202,7 +59202,7 @@ export const useMigrationsGetCommitAuthors = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -59264,7 +59264,7 @@ export type MigrationsMapCommitAuthorVariables = {
  */
 export const fetchMigrationsMapCommitAuthor = (
   variables: MigrationsMapCommitAuthorVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.PorterAuthor,
@@ -59291,7 +59291,7 @@ export const useMigrationsMapCommitAuthor = (
       MigrationsMapCommitAuthorVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -59332,7 +59332,7 @@ export type MigrationsGetLargeFilesVariables = {
  */
 export const fetchMigrationsGetLargeFiles = (
   variables: MigrationsGetLargeFilesVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     MigrationsGetLargeFilesResponse,
@@ -59352,7 +59352,7 @@ export const fetchMigrationsGetLargeFiles = (
  * List files larger than 100MB found during the import
  */
 export const migrationsGetLargeFilesQuery = (
-  variables: MigrationsGetLargeFilesVariables,
+  variables: MigrationsGetLargeFilesVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -59384,7 +59384,7 @@ export const useSuspenseMigrationsGetLargeFiles = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -59412,7 +59412,7 @@ export const useMigrationsGetLargeFiles = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -59465,7 +59465,7 @@ export type MigrationsSetLfsPreferenceVariables = {
  */
 export const fetchMigrationsSetLfsPreference = (
   variables: MigrationsSetLfsPreferenceVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.Import,
@@ -59492,7 +59492,7 @@ export const useMigrationsSetLfsPreference = (
       MigrationsSetLfsPreferenceVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -59539,7 +59539,7 @@ export type AppsGetRepoInstallationVariables = {
  */
 export const fetchAppsGetRepoInstallation = (
   variables: AppsGetRepoInstallationVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.Installation,
@@ -59561,7 +59561,7 @@ export const fetchAppsGetRepoInstallation = (
  * You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint.
  */
 export const appsGetRepoInstallationQuery = (
-  variables: AppsGetRepoInstallationVariables,
+  variables: AppsGetRepoInstallationVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -59595,7 +59595,7 @@ export const useSuspenseAppsGetRepoInstallation = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -59623,7 +59623,7 @@ export const useAppsGetRepoInstallation = <TData = Schemas.Installation>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -59660,7 +59660,7 @@ export type InteractionsRemoveRestrictionsForRepoVariables = {
  */
 export const fetchInteractionsRemoveRestrictionsForRepo = (
   variables: InteractionsRemoveRestrictionsForRepoVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -59687,7 +59687,7 @@ export const useInteractionsRemoveRestrictionsForRepo = (
       InteractionsRemoveRestrictionsForRepoVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -59727,7 +59727,7 @@ export type InteractionsGetRestrictionsForRepoVariables = {
  */
 export const fetchInteractionsGetRestrictionsForRepo = (
   variables: InteractionsGetRestrictionsForRepoVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.InteractionLimitResponse | {},
@@ -59747,7 +59747,7 @@ export const fetchInteractionsGetRestrictionsForRepo = (
  * Shows which type of GitHub user can interact with this repository and when the restriction expires. If there are no restrictions, you will see an empty response.
  */
 export const interactionsGetRestrictionsForRepoQuery = (
-  variables: InteractionsGetRestrictionsForRepoVariables,
+  variables: InteractionsGetRestrictionsForRepoVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -59779,7 +59779,7 @@ export const useSuspenseInteractionsGetRestrictionsForRepo = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -59807,7 +59807,7 @@ export const useInteractionsGetRestrictionsForRepo = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -59845,7 +59845,7 @@ export type InteractionsSetRestrictionsForRepoVariables = {
  */
 export const fetchInteractionsSetRestrictionsForRepo = (
   variables: InteractionsSetRestrictionsForRepoVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.InteractionLimitResponse,
@@ -59872,7 +59872,7 @@ export const useInteractionsSetRestrictionsForRepo = (
       InteractionsSetRestrictionsForRepoVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -59929,7 +59929,7 @@ export type ReposListInvitationsVariables = {
  */
 export const fetchReposListInvitations = (
   variables: ReposListInvitationsVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ReposListInvitationsResponse,
@@ -59949,7 +59949,7 @@ export const fetchReposListInvitations = (
  * When authenticating as a user with admin rights to a repository, this endpoint will list all currently open repository invitations.
  */
 export const reposListInvitationsQuery = (
-  variables: ReposListInvitationsVariables,
+  variables: ReposListInvitationsVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -59981,7 +59981,7 @@ export const useSuspenseReposListInvitations = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -60007,7 +60007,7 @@ export const useReposListInvitations = <TData = ReposListInvitationsResponse>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -60044,7 +60044,7 @@ export type ReposDeleteInvitationVariables = {
 
 export const fetchReposDeleteInvitation = (
   variables: ReposDeleteInvitationVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -60068,7 +60068,7 @@ export const useReposDeleteInvitation = (
       ReposDeleteInvitationVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -60113,7 +60113,7 @@ export type ReposUpdateInvitationVariables = {
 
 export const fetchReposUpdateInvitation = (
   variables: ReposUpdateInvitationVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.RepositoryInvitation,
@@ -60137,7 +60137,7 @@ export const useReposUpdateInvitation = (
       ReposUpdateInvitationVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -60253,7 +60253,7 @@ export type IssuesListForRepoVariables = {
  */
 export const fetchIssuesListForRepo = (
   variables: IssuesListForRepoVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     IssuesListForRepoResponse,
@@ -60278,7 +60278,7 @@ export const fetchIssuesListForRepo = (
  * request id, use the "[List pull requests](https://docs.github.com/rest/reference/pulls#list-pull-requests)" endpoint.
  */
 export const issuesListForRepoQuery = (
-  variables: IssuesListForRepoVariables,
+  variables: IssuesListForRepoVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -60313,7 +60313,7 @@ export const useSuspenseIssuesListForRepo = <TData = IssuesListForRepoResponse>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -60344,7 +60344,7 @@ export const useIssuesListForRepo = <TData = IssuesListForRepoResponse>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -60436,7 +60436,7 @@ export type IssuesCreateVariables = {
  */
 export const fetchIssuesCreate = (
   variables: IssuesCreateVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.Issue,
@@ -60465,7 +60465,7 @@ export const useIssuesCreate = (
       IssuesCreateVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -60544,7 +60544,7 @@ export type IssuesListCommentsForRepoVariables = {
  */
 export const fetchIssuesListCommentsForRepo = (
   variables: IssuesListCommentsForRepoVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     IssuesListCommentsForRepoResponse,
@@ -60564,7 +60564,7 @@ export const fetchIssuesListCommentsForRepo = (
  * By default, Issue Comments are ordered by ascending ID.
  */
 export const issuesListCommentsForRepoQuery = (
-  variables: IssuesListCommentsForRepoVariables,
+  variables: IssuesListCommentsForRepoVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -60596,7 +60596,7 @@ export const useSuspenseIssuesListCommentsForRepo = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -60624,7 +60624,7 @@ export const useIssuesListCommentsForRepo = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -60661,7 +60661,7 @@ export type IssuesDeleteCommentVariables = {
 
 export const fetchIssuesDeleteComment = (
   variables: IssuesDeleteCommentVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -60685,7 +60685,7 @@ export const useIssuesDeleteComment = (
       IssuesDeleteCommentVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -60725,7 +60725,7 @@ export type IssuesGetCommentVariables = {
 
 export const fetchIssuesGetComment = (
   variables: IssuesGetCommentVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.IssueComment,
@@ -60742,7 +60742,7 @@ export const fetchIssuesGetComment = (
   });
 
 export const issuesGetCommentQuery = (
-  variables: IssuesGetCommentVariables,
+  variables: IssuesGetCommentVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -60769,7 +60769,7 @@ export const useSuspenseIssuesGetComment = <TData = Schemas.IssueComment>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -60792,7 +60792,7 @@ export const useIssuesGetComment = <TData = Schemas.IssueComment>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -60840,7 +60840,7 @@ export type IssuesUpdateCommentVariables = {
 
 export const fetchIssuesUpdateComment = (
   variables: IssuesUpdateCommentVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.IssueComment,
@@ -60864,7 +60864,7 @@ export const useIssuesUpdateComment = (
       IssuesUpdateCommentVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -60937,7 +60937,7 @@ export type ReactionsListForIssueCommentVariables = {
  */
 export const fetchReactionsListForIssueComment = (
   variables: ReactionsListForIssueCommentVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ReactionsListForIssueCommentResponse,
@@ -60957,7 +60957,7 @@ export const fetchReactionsListForIssueComment = (
  * List the reactions to an [issue comment](https://docs.github.com/rest/reference/issues#comments).
  */
 export const reactionsListForIssueCommentQuery = (
-  variables: ReactionsListForIssueCommentVariables,
+  variables: ReactionsListForIssueCommentVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -60989,7 +60989,7 @@ export const useSuspenseReactionsListForIssueComment = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -61017,7 +61017,7 @@ export const useReactionsListForIssueComment = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -61076,7 +61076,7 @@ export type ReactionsCreateForIssueCommentVariables = {
  */
 export const fetchReactionsCreateForIssueComment = (
   variables: ReactionsCreateForIssueCommentVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.Reaction,
@@ -61103,7 +61103,7 @@ export const useReactionsCreateForIssueComment = (
       ReactionsCreateForIssueCommentVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -61150,7 +61150,7 @@ export type ReactionsDeleteForIssueCommentVariables = {
  */
 export const fetchReactionsDeleteForIssueComment = (
   variables: ReactionsDeleteForIssueCommentVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -61179,7 +61179,7 @@ export const useReactionsDeleteForIssueComment = (
       ReactionsDeleteForIssueCommentVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -61233,7 +61233,7 @@ export type IssuesListEventsForRepoVariables = {
 
 export const fetchIssuesListEventsForRepo = (
   variables: IssuesListEventsForRepoVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     IssuesListEventsForRepoResponse,
@@ -61250,7 +61250,7 @@ export const fetchIssuesListEventsForRepo = (
   });
 
 export const issuesListEventsForRepoQuery = (
-  variables: IssuesListEventsForRepoVariables,
+  variables: IssuesListEventsForRepoVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -61279,7 +61279,7 @@ export const useSuspenseIssuesListEventsForRepo = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -61304,7 +61304,7 @@ export const useIssuesListEventsForRepo = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -61351,7 +61351,7 @@ export type IssuesGetEventVariables = {
 
 export const fetchIssuesGetEvent = (
   variables: IssuesGetEventVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.IssueEvent,
@@ -61368,7 +61368,7 @@ export const fetchIssuesGetEvent = (
   });
 
 export const issuesGetEventQuery = (
-  variables: IssuesGetEventVariables,
+  variables: IssuesGetEventVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -61391,7 +61391,7 @@ export const useSuspenseIssuesGetEvent = <TData = Schemas.IssueEvent>(
   options?: Omit<
     reactQuery.UseQueryOptions<Schemas.IssueEvent, IssuesGetEventError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -61410,7 +61410,7 @@ export const useIssuesGetEvent = <TData = Schemas.IssueEvent>(
   options?: Omit<
     reactQuery.UseQueryOptions<Schemas.IssueEvent, IssuesGetEventError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.IssueEvent, IssuesGetEventError, TData>({
@@ -61473,7 +61473,7 @@ export type IssuesGetVariables = {
  */
 export const fetchIssuesGet = (
   variables: IssuesGetVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.Issue,
@@ -61503,7 +61503,7 @@ export const fetchIssuesGet = (
  * request id, use the "[List pull requests](https://docs.github.com/rest/reference/pulls#list-pull-requests)" endpoint.
  */
 export const issuesGetQuery = (
-  variables: IssuesGetVariables,
+  variables: IssuesGetVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({ signal }: { signal?: AbortSignal }) => Promise<Schemas.Issue>;
@@ -61535,7 +61535,7 @@ export const useSuspenseIssuesGet = <TData = Schemas.Issue>(
   options?: Omit<
     reactQuery.UseQueryOptions<Schemas.Issue, IssuesGetError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<Schemas.Issue, IssuesGetError, TData>({
@@ -61563,7 +61563,7 @@ export const useIssuesGet = <TData = Schemas.Issue>(
   options?: Omit<
     reactQuery.UseQueryOptions<Schemas.Issue, IssuesGetError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.Issue, IssuesGetError, TData>({
@@ -61667,7 +61667,7 @@ export type IssuesUpdateVariables = {
  */
 export const fetchIssuesUpdate = (
   variables: IssuesUpdateVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.Issue,
@@ -61694,7 +61694,7 @@ export const useIssuesUpdate = (
       IssuesUpdateVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -61742,7 +61742,7 @@ export type IssuesRemoveAssigneesVariables = {
  */
 export const fetchIssuesRemoveAssignees = (
   variables: IssuesRemoveAssigneesVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.Issue,
@@ -61769,7 +61769,7 @@ export const useIssuesRemoveAssignees = (
       IssuesRemoveAssigneesVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -61817,7 +61817,7 @@ export type IssuesAddAssigneesVariables = {
  */
 export const fetchIssuesAddAssignees = (
   variables: IssuesAddAssigneesVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.Issue,
@@ -61844,7 +61844,7 @@ export const useIssuesAddAssignees = (
       IssuesAddAssigneesVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -61892,7 +61892,7 @@ export type IssuesCheckUserCanBeAssignedToIssueVariables = {
  */
 export const fetchIssuesCheckUserCanBeAssignedToIssue = (
   variables: IssuesCheckUserCanBeAssignedToIssueVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -61916,7 +61916,7 @@ export const fetchIssuesCheckUserCanBeAssignedToIssue = (
  * Otherwise a `404` status code is returned.
  */
 export const issuesCheckUserCanBeAssignedToIssueQuery = (
-  variables: IssuesCheckUserCanBeAssignedToIssueVariables,
+  variables: IssuesCheckUserCanBeAssignedToIssueVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({ signal }: { signal?: AbortSignal }) => Promise<undefined>;
@@ -61948,7 +61948,7 @@ export const useSuspenseIssuesCheckUserCanBeAssignedToIssue = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -61978,7 +61978,7 @@ export const useIssuesCheckUserCanBeAssignedToIssue = <TData = undefined>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -62051,7 +62051,7 @@ export type IssuesListCommentsVariables = {
  */
 export const fetchIssuesListComments = (
   variables: IssuesListCommentsVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     IssuesListCommentsResponse,
@@ -62071,7 +62071,7 @@ export const fetchIssuesListComments = (
  * Issue Comments are ordered by ascending ID.
  */
 export const issuesListCommentsQuery = (
-  variables: IssuesListCommentsVariables,
+  variables: IssuesListCommentsVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -62103,7 +62103,7 @@ export const useSuspenseIssuesListComments = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -62129,7 +62129,7 @@ export const useIssuesListComments = <TData = IssuesListCommentsResponse>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -62194,7 +62194,7 @@ export type IssuesCreateCommentVariables = {
  */
 export const fetchIssuesCreateComment = (
   variables: IssuesCreateCommentVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.IssueComment,
@@ -62221,7 +62221,7 @@ export const useIssuesCreateComment = (
       IssuesCreateCommentVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -62279,7 +62279,7 @@ export type IssuesListEventsVariables = {
 
 export const fetchIssuesListEvents = (
   variables: IssuesListEventsVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     IssuesListEventsResponse,
@@ -62296,7 +62296,7 @@ export const fetchIssuesListEvents = (
   });
 
 export const issuesListEventsQuery = (
-  variables: IssuesListEventsVariables,
+  variables: IssuesListEventsVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -62323,7 +62323,7 @@ export const useSuspenseIssuesListEvents = <TData = IssuesListEventsResponse>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -62346,7 +62346,7 @@ export const useIssuesListEvents = <TData = IssuesListEventsResponse>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -62396,7 +62396,7 @@ export type IssuesRemoveAllLabelsVariables = {
 
 export const fetchIssuesRemoveAllLabels = (
   variables: IssuesRemoveAllLabelsVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -62420,7 +62420,7 @@ export const useIssuesRemoveAllLabels = (
       IssuesRemoveAllLabelsVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -62488,7 +62488,7 @@ export type IssuesListLabelsOnIssueVariables = {
 
 export const fetchIssuesListLabelsOnIssue = (
   variables: IssuesListLabelsOnIssueVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     IssuesListLabelsOnIssueResponse,
@@ -62505,7 +62505,7 @@ export const fetchIssuesListLabelsOnIssue = (
   });
 
 export const issuesListLabelsOnIssueQuery = (
-  variables: IssuesListLabelsOnIssueVariables,
+  variables: IssuesListLabelsOnIssueVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -62534,7 +62534,7 @@ export const useSuspenseIssuesListLabelsOnIssue = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -62559,7 +62559,7 @@ export const useIssuesListLabelsOnIssue = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -62637,7 +62637,7 @@ export type IssuesAddLabelsVariables = {
 
 export const fetchIssuesAddLabels = (
   variables: IssuesAddLabelsVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     IssuesAddLabelsResponse,
@@ -62681,7 +62681,7 @@ export const useIssuesAddLabels = (
       IssuesAddLabelsVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -62762,7 +62762,7 @@ export type IssuesSetLabelsVariables = {
  */
 export const fetchIssuesSetLabels = (
   variables: IssuesSetLabelsVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     IssuesSetLabelsResponse,
@@ -62809,7 +62809,7 @@ export const useIssuesSetLabels = (
       IssuesSetLabelsVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -62865,7 +62865,7 @@ export type IssuesRemoveLabelVariables = {
  */
 export const fetchIssuesRemoveLabel = (
   variables: IssuesRemoveLabelVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     IssuesRemoveLabelResponse,
@@ -62892,7 +62892,7 @@ export const useIssuesRemoveLabel = (
       IssuesRemoveLabelVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -62941,7 +62941,7 @@ export type IssuesUnlockVariables = {
  */
 export const fetchIssuesUnlock = (
   variables: IssuesUnlockVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -62968,7 +62968,7 @@ export const useIssuesUnlock = (
       IssuesUnlockVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -63037,7 +63037,7 @@ export type IssuesLockVariables = {
  */
 export const fetchIssuesLock = (
   variables: IssuesLockVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -63075,7 +63075,7 @@ export const useIssuesLock = (
       IssuesLockVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -63154,7 +63154,7 @@ export type ReactionsListForIssueVariables = {
  */
 export const fetchReactionsListForIssue = (
   variables: ReactionsListForIssueVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ReactionsListForIssueResponse,
@@ -63174,7 +63174,7 @@ export const fetchReactionsListForIssue = (
  * List the reactions to an [issue](https://docs.github.com/rest/reference/issues).
  */
 export const reactionsListForIssueQuery = (
-  variables: ReactionsListForIssueVariables,
+  variables: ReactionsListForIssueVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -63206,7 +63206,7 @@ export const useSuspenseReactionsListForIssue = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -63232,7 +63232,7 @@ export const useReactionsListForIssue = <TData = ReactionsListForIssueResponse>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -63291,7 +63291,7 @@ export type ReactionsCreateForIssueVariables = {
  */
 export const fetchReactionsCreateForIssue = (
   variables: ReactionsCreateForIssueVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.Reaction,
@@ -63318,7 +63318,7 @@ export const useReactionsCreateForIssue = (
       ReactionsCreateForIssueVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -63364,7 +63364,7 @@ export type ReactionsDeleteForIssueVariables = {
  */
 export const fetchReactionsDeleteForIssue = (
   variables: ReactionsDeleteForIssueVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -63393,7 +63393,7 @@ export const useReactionsDeleteForIssue = (
       ReactionsDeleteForIssueVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -63457,7 +63457,7 @@ export type IssuesListEventsForTimelineVariables = {
 
 export const fetchIssuesListEventsForTimeline = (
   variables: IssuesListEventsForTimelineVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     IssuesListEventsForTimelineResponse,
@@ -63474,7 +63474,7 @@ export const fetchIssuesListEventsForTimeline = (
   });
 
 export const issuesListEventsForTimelineQuery = (
-  variables: IssuesListEventsForTimelineVariables,
+  variables: IssuesListEventsForTimelineVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -63503,7 +63503,7 @@ export const useSuspenseIssuesListEventsForTimeline = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -63528,7 +63528,7 @@ export const useIssuesListEventsForTimeline = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -63579,7 +63579,7 @@ export type ReposListDeployKeysVariables = {
 
 export const fetchReposListDeployKeys = (
   variables: ReposListDeployKeysVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ReposListDeployKeysResponse,
@@ -63591,7 +63591,7 @@ export const fetchReposListDeployKeys = (
   >({ url: "/repos/{owner}/{repo}/keys", method: "get", ...variables, signal });
 
 export const reposListDeployKeysQuery = (
-  variables: ReposListDeployKeysVariables,
+  variables: ReposListDeployKeysVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -63620,7 +63620,7 @@ export const useSuspenseReposListDeployKeys = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -63643,7 +63643,7 @@ export const useReposListDeployKeys = <TData = ReposListDeployKeysResponse>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -63700,7 +63700,7 @@ export type ReposCreateDeployKeyVariables = {
  */
 export const fetchReposCreateDeployKey = (
   variables: ReposCreateDeployKeyVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.DeployKey,
@@ -63727,7 +63727,7 @@ export const useReposCreateDeployKey = (
       ReposCreateDeployKeyVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -63767,7 +63767,7 @@ export type ReposDeleteDeployKeyVariables = {
  */
 export const fetchReposDeleteDeployKey = (
   variables: ReposDeleteDeployKeyVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -63794,7 +63794,7 @@ export const useReposDeleteDeployKey = (
       ReposDeleteDeployKeyVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -63834,7 +63834,7 @@ export type ReposGetDeployKeyVariables = {
 
 export const fetchReposGetDeployKey = (
   variables: ReposGetDeployKeyVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.DeployKey,
@@ -63851,7 +63851,7 @@ export const fetchReposGetDeployKey = (
   });
 
 export const reposGetDeployKeyQuery = (
-  variables: ReposGetDeployKeyVariables,
+  variables: ReposGetDeployKeyVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({ signal }: { signal?: AbortSignal }) => Promise<Schemas.DeployKey>;
@@ -63874,7 +63874,7 @@ export const useSuspenseReposGetDeployKey = <TData = Schemas.DeployKey>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -63897,7 +63897,7 @@ export const useReposGetDeployKey = <TData = Schemas.DeployKey>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.DeployKey, ReposGetDeployKeyError, TData>({
@@ -63947,7 +63947,7 @@ export type IssuesListLabelsForRepoVariables = {
 
 export const fetchIssuesListLabelsForRepo = (
   variables: IssuesListLabelsForRepoVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     IssuesListLabelsForRepoResponse,
@@ -63964,7 +63964,7 @@ export const fetchIssuesListLabelsForRepo = (
   });
 
 export const issuesListLabelsForRepoQuery = (
-  variables: IssuesListLabelsForRepoVariables,
+  variables: IssuesListLabelsForRepoVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -63993,7 +63993,7 @@ export const useSuspenseIssuesListLabelsForRepo = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -64018,7 +64018,7 @@ export const useIssuesListLabelsForRepo = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -64076,7 +64076,7 @@ export type IssuesCreateLabelVariables = {
 
 export const fetchIssuesCreateLabel = (
   variables: IssuesCreateLabelVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.Label,
@@ -64100,7 +64100,7 @@ export const useIssuesCreateLabel = (
       IssuesCreateLabelVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -64134,7 +64134,7 @@ export type IssuesDeleteLabelVariables = {
 
 export const fetchIssuesDeleteLabel = (
   variables: IssuesDeleteLabelVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -64158,7 +64158,7 @@ export const useIssuesDeleteLabel = (
       IssuesDeleteLabelVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -64195,7 +64195,7 @@ export type IssuesGetLabelVariables = {
 
 export const fetchIssuesGetLabel = (
   variables: IssuesGetLabelVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.Label,
@@ -64212,7 +64212,7 @@ export const fetchIssuesGetLabel = (
   });
 
 export const issuesGetLabelQuery = (
-  variables: IssuesGetLabelVariables,
+  variables: IssuesGetLabelVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({ signal }: { signal?: AbortSignal }) => Promise<Schemas.Label>;
@@ -64231,7 +64231,7 @@ export const useSuspenseIssuesGetLabel = <TData = Schemas.Label>(
   options?: Omit<
     reactQuery.UseQueryOptions<Schemas.Label, IssuesGetLabelError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<Schemas.Label, IssuesGetLabelError, TData>(
@@ -64239,7 +64239,7 @@ export const useSuspenseIssuesGetLabel = <TData = Schemas.Label>(
       ...issuesGetLabelQuery(variables),
       ...options,
       ...queryOptions,
-    },
+    }
   );
 };
 
@@ -64248,7 +64248,7 @@ export const useIssuesGetLabel = <TData = Schemas.Label>(
   options?: Omit<
     reactQuery.UseQueryOptions<Schemas.Label, IssuesGetLabelError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.Label, IssuesGetLabelError, TData>({
@@ -64294,7 +64294,7 @@ export type IssuesUpdateLabelVariables = {
 
 export const fetchIssuesUpdateLabel = (
   variables: IssuesUpdateLabelVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.Label,
@@ -64318,7 +64318,7 @@ export const useIssuesUpdateLabel = (
       IssuesUpdateLabelVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -64354,7 +64354,7 @@ export type ReposListLanguagesVariables = {
  */
 export const fetchReposListLanguages = (
   variables: ReposListLanguagesVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.Language,
@@ -64374,7 +64374,7 @@ export const fetchReposListLanguages = (
  * Lists languages for the specified repository. The value shown for each language is the number of bytes of code written in that language.
  */
 export const reposListLanguagesQuery = (
-  variables: ReposListLanguagesVariables,
+  variables: ReposListLanguagesVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({ signal }: { signal?: AbortSignal }) => Promise<Schemas.Language>;
@@ -64400,7 +64400,7 @@ export const useSuspenseReposListLanguages = <TData = Schemas.Language>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -64426,7 +64426,7 @@ export const useReposListLanguages = <TData = Schemas.Language>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.Language, ReposListLanguagesError, TData>({
@@ -64458,7 +64458,7 @@ export type ReposDisableLfsForRepoVariables = {
  */
 export const fetchReposDisableLfsForRepo = (
   variables: ReposDisableLfsForRepoVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -64485,7 +64485,7 @@ export const useReposDisableLfsForRepo = (
       ReposDisableLfsForRepoVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -64521,7 +64521,7 @@ export type ReposEnableLfsForRepoVariables = {
  */
 export const fetchReposEnableLfsForRepo = (
   variables: ReposEnableLfsForRepoVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Responses.Accepted,
@@ -64543,7 +64543,7 @@ export const useReposEnableLfsForRepo = (
       ReposEnableLfsForRepoVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -64581,7 +64581,7 @@ export type LicensesGetForRepoVariables = {
  */
 export const fetchLicensesGetForRepo = (
   variables: LicensesGetForRepoVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.LicenseContent,
@@ -64603,7 +64603,7 @@ export const fetchLicensesGetForRepo = (
  * Similar to [Get repository content](https://docs.github.com/rest/reference/repos#get-repository-content), this method also supports [custom media types](https://docs.github.com/rest/overview/media-types) for retrieving the raw license content or rendered license HTML.
  */
 export const licensesGetForRepoQuery = (
-  variables: LicensesGetForRepoVariables,
+  variables: LicensesGetForRepoVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -64635,7 +64635,7 @@ export const useSuspenseLicensesGetForRepo = <TData = Schemas.LicenseContent>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -64663,7 +64663,7 @@ export const useLicensesGetForRepo = <TData = Schemas.LicenseContent>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -64707,7 +64707,7 @@ export type ReposMergeUpstreamVariables = {
  */
 export const fetchReposMergeUpstream = (
   variables: ReposMergeUpstreamVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.MergedUpstream,
@@ -64734,7 +64734,7 @@ export const useReposMergeUpstream = (
       ReposMergeUpstreamVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -64792,7 +64792,7 @@ export type ReposMergeVariables = {
 
 export const fetchReposMerge = (
   variables: ReposMergeVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.Commit,
@@ -64816,7 +64816,7 @@ export const useReposMerge = (
       ReposMergeVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -64888,7 +64888,7 @@ export type IssuesListMilestonesVariables = {
 
 export const fetchIssuesListMilestones = (
   variables: IssuesListMilestonesVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     IssuesListMilestonesResponse,
@@ -64905,7 +64905,7 @@ export const fetchIssuesListMilestones = (
   });
 
 export const issuesListMilestonesQuery = (
-  variables: IssuesListMilestonesVariables,
+  variables: IssuesListMilestonesVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -64934,7 +64934,7 @@ export const useSuspenseIssuesListMilestones = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -64957,7 +64957,7 @@ export const useIssuesListMilestones = <TData = IssuesListMilestonesResponse>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -65023,7 +65023,7 @@ export type IssuesCreateMilestoneVariables = {
 
 export const fetchIssuesCreateMilestone = (
   variables: IssuesCreateMilestoneVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.Milestone,
@@ -65047,7 +65047,7 @@ export const useIssuesCreateMilestone = (
       IssuesCreateMilestoneVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -65087,7 +65087,7 @@ export type IssuesDeleteMilestoneVariables = {
 
 export const fetchIssuesDeleteMilestone = (
   variables: IssuesDeleteMilestoneVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -65111,7 +65111,7 @@ export const useIssuesDeleteMilestone = (
       IssuesDeleteMilestoneVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -65151,7 +65151,7 @@ export type IssuesGetMilestoneVariables = {
 
 export const fetchIssuesGetMilestone = (
   variables: IssuesGetMilestoneVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.Milestone,
@@ -65168,7 +65168,7 @@ export const fetchIssuesGetMilestone = (
   });
 
 export const issuesGetMilestoneQuery = (
-  variables: IssuesGetMilestoneVariables,
+  variables: IssuesGetMilestoneVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({ signal }: { signal?: AbortSignal }) => Promise<Schemas.Milestone>;
@@ -65191,7 +65191,7 @@ export const useSuspenseIssuesGetMilestone = <TData = Schemas.Milestone>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -65214,7 +65214,7 @@ export const useIssuesGetMilestone = <TData = Schemas.Milestone>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.Milestone, IssuesGetMilestoneError, TData>(
@@ -65222,7 +65222,7 @@ export const useIssuesGetMilestone = <TData = Schemas.Milestone>(
       ...issuesGetMilestoneQuery(variables),
       ...options,
       ...queryOptions,
-    },
+    }
   );
 };
 
@@ -65273,7 +65273,7 @@ export type IssuesUpdateMilestoneVariables = {
 
 export const fetchIssuesUpdateMilestone = (
   variables: IssuesUpdateMilestoneVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.Milestone,
@@ -65297,7 +65297,7 @@ export const useIssuesUpdateMilestone = (
       IssuesUpdateMilestoneVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -65352,7 +65352,7 @@ export type IssuesListLabelsForMilestoneVariables = {
 
 export const fetchIssuesListLabelsForMilestone = (
   variables: IssuesListLabelsForMilestoneVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     IssuesListLabelsForMilestoneResponse,
@@ -65369,7 +65369,7 @@ export const fetchIssuesListLabelsForMilestone = (
   });
 
 export const issuesListLabelsForMilestoneQuery = (
-  variables: IssuesListLabelsForMilestoneVariables,
+  variables: IssuesListLabelsForMilestoneVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -65398,7 +65398,7 @@ export const useSuspenseIssuesListLabelsForMilestone = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -65423,7 +65423,7 @@ export const useIssuesListLabelsForMilestone = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -65503,7 +65503,7 @@ export type ActivityListRepoNotificationsForAuthenticatedUserVariables = {
  */
 export const fetchActivityListRepoNotificationsForAuthenticatedUser = (
   variables: ActivityListRepoNotificationsForAuthenticatedUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ActivityListRepoNotificationsForAuthenticatedUserResponse,
@@ -65523,7 +65523,7 @@ export const fetchActivityListRepoNotificationsForAuthenticatedUser = (
  * Lists all notifications for the current user in the specified repository.
  */
 export const activityListRepoNotificationsForAuthenticatedUserQuery = (
-  variables: ActivityListRepoNotificationsForAuthenticatedUserVariables,
+  variables: ActivityListRepoNotificationsForAuthenticatedUserVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -65555,7 +65555,7 @@ export const useSuspenseActivityListRepoNotificationsForAuthenticatedUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -65583,7 +65583,7 @@ export const useActivityListRepoNotificationsForAuthenticatedUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -65635,7 +65635,7 @@ export type ActivityMarkRepoNotificationsAsReadVariables = {
  */
 export const fetchActivityMarkRepoNotificationsAsRead = (
   variables: ActivityMarkRepoNotificationsAsReadVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ActivityMarkRepoNotificationsAsReadResponse,
@@ -65662,7 +65662,7 @@ export const useActivityMarkRepoNotificationsAsRead = (
       ActivityMarkRepoNotificationsAsReadVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -65716,7 +65716,7 @@ export type ReposDeletePagesSiteVariables = {
  */
 export const fetchReposDeletePagesSite = (
   variables: ReposDeletePagesSiteVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -65745,7 +65745,7 @@ export const useReposDeletePagesSite = (
       ReposDeletePagesSiteVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -65781,7 +65781,7 @@ export type ReposGetPagesVariables = {
 
 export const fetchReposGetPages = (
   variables: ReposGetPagesVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.Page,
@@ -65798,7 +65798,7 @@ export const fetchReposGetPages = (
   });
 
 export const reposGetPagesQuery = (
-  variables: ReposGetPagesVariables,
+  variables: ReposGetPagesVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({ signal }: { signal?: AbortSignal }) => Promise<Schemas.Page>;
@@ -65817,7 +65817,7 @@ export const useSuspenseReposGetPages = <TData = Schemas.Page>(
   options?: Omit<
     reactQuery.UseQueryOptions<Schemas.Page, ReposGetPagesError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<Schemas.Page, ReposGetPagesError, TData>({
@@ -65832,7 +65832,7 @@ export const useReposGetPages = <TData = Schemas.Page>(
   options?: Omit<
     reactQuery.UseQueryOptions<Schemas.Page, ReposGetPagesError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.Page, ReposGetPagesError, TData>({
@@ -65919,7 +65919,7 @@ export type ReposCreatePagesSiteVariables = {
  */
 export const fetchReposCreatePagesSite = (
   variables: ReposCreatePagesSiteVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.Page,
@@ -65990,7 +65990,7 @@ export const useReposCreatePagesSite = (
       ReposCreatePagesSiteVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -66172,7 +66172,7 @@ export type ReposUpdateInformationAboutPagesSiteVariables = {
  */
 export const fetchReposUpdateInformationAboutPagesSite = (
   variables: ReposUpdateInformationAboutPagesSiteVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -66330,7 +66330,7 @@ export const useReposUpdateInformationAboutPagesSite = (
       ReposUpdateInformationAboutPagesSiteVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -66384,7 +66384,7 @@ export type ReposListPagesBuildsVariables = {
 
 export const fetchReposListPagesBuilds = (
   variables: ReposListPagesBuildsVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ReposListPagesBuildsResponse,
@@ -66401,7 +66401,7 @@ export const fetchReposListPagesBuilds = (
   });
 
 export const reposListPagesBuildsQuery = (
-  variables: ReposListPagesBuildsVariables,
+  variables: ReposListPagesBuildsVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -66430,7 +66430,7 @@ export const useSuspenseReposListPagesBuilds = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -66453,7 +66453,7 @@ export const useReposListPagesBuilds = <TData = ReposListPagesBuildsResponse>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -66491,7 +66491,7 @@ export type ReposRequestPagesBuildVariables = {
  */
 export const fetchReposRequestPagesBuild = (
   variables: ReposRequestPagesBuildVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.PageBuildStatus,
@@ -66520,7 +66520,7 @@ export const useReposRequestPagesBuild = (
       ReposRequestPagesBuildVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -66553,7 +66553,7 @@ export type ReposGetLatestPagesBuildVariables = {
 
 export const fetchReposGetLatestPagesBuild = (
   variables: ReposGetLatestPagesBuildVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.PageBuild,
@@ -66570,7 +66570,7 @@ export const fetchReposGetLatestPagesBuild = (
   });
 
 export const reposGetLatestPagesBuildQuery = (
-  variables: ReposGetLatestPagesBuildVariables,
+  variables: ReposGetLatestPagesBuildVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({ signal }: { signal?: AbortSignal }) => Promise<Schemas.PageBuild>;
@@ -66593,7 +66593,7 @@ export const useSuspenseReposGetLatestPagesBuild = <TData = Schemas.PageBuild>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -66616,7 +66616,7 @@ export const useReposGetLatestPagesBuild = <TData = Schemas.PageBuild>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -66650,7 +66650,7 @@ export type ReposGetPagesBuildVariables = {
 
 export const fetchReposGetPagesBuild = (
   variables: ReposGetPagesBuildVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.PageBuild,
@@ -66667,7 +66667,7 @@ export const fetchReposGetPagesBuild = (
   });
 
 export const reposGetPagesBuildQuery = (
-  variables: ReposGetPagesBuildVariables,
+  variables: ReposGetPagesBuildVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({ signal }: { signal?: AbortSignal }) => Promise<Schemas.PageBuild>;
@@ -66690,7 +66690,7 @@ export const useSuspenseReposGetPagesBuild = <TData = Schemas.PageBuild>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -66713,7 +66713,7 @@ export const useReposGetPagesBuild = <TData = Schemas.PageBuild>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.PageBuild, ReposGetPagesBuildError, TData>(
@@ -66721,7 +66721,7 @@ export const useReposGetPagesBuild = <TData = Schemas.PageBuild>(
       ...reposGetPagesBuildQuery(variables),
       ...options,
       ...queryOptions,
-    },
+    }
   );
 };
 
@@ -66786,7 +66786,7 @@ export type ReposCreatePagesDeploymentVariables = {
  */
 export const fetchReposCreatePagesDeployment = (
   variables: ReposCreatePagesDeploymentVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.PageDeployment,
@@ -66815,7 +66815,7 @@ export const useReposCreatePagesDeployment = (
       ReposCreatePagesDeploymentVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -66858,7 +66858,7 @@ export type ReposGetPagesHealthCheckVariables = {
  */
 export const fetchReposGetPagesHealthCheck = (
   variables: ReposGetPagesHealthCheckVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.PagesHealthCheck | Schemas.EmptyObject,
@@ -66882,7 +66882,7 @@ export const fetchReposGetPagesHealthCheck = (
  * To use this endpoint, you must be a repository administrator, maintainer, or have the 'manage GitHub Pages settings' permission. A token with the `repo` scope or Pages write permission is required. GitHub Apps must have the `administrative:write` and `pages:write` permissions.
  */
 export const reposGetPagesHealthCheckQuery = (
-  variables: ReposGetPagesHealthCheckVariables,
+  variables: ReposGetPagesHealthCheckVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -66918,7 +66918,7 @@ export const useSuspenseReposGetPagesHealthCheck = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -66950,7 +66950,7 @@ export const useReposGetPagesHealthCheck = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -67031,7 +67031,7 @@ export type ProjectsListForRepoVariables = {
  */
 export const fetchProjectsListForRepo = (
   variables: ProjectsListForRepoVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ProjectsListForRepoResponse,
@@ -67051,7 +67051,7 @@ export const fetchProjectsListForRepo = (
  * Lists the projects in a repository. Returns a `404 Not Found` status if projects are disabled in the repository. If you do not have sufficient privileges to perform this action, a `401 Unauthorized` or `410 Gone` status is returned.
  */
 export const projectsListForRepoQuery = (
-  variables: ProjectsListForRepoVariables,
+  variables: ProjectsListForRepoVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -67083,7 +67083,7 @@ export const useSuspenseProjectsListForRepo = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -67109,7 +67109,7 @@ export const useProjectsListForRepo = <TData = ProjectsListForRepoResponse>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -67178,7 +67178,7 @@ export type ProjectsCreateForRepoVariables = {
  */
 export const fetchProjectsCreateForRepo = (
   variables: ProjectsCreateForRepoVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.Project,
@@ -67205,7 +67205,7 @@ export const useProjectsCreateForRepo = (
       ProjectsCreateForRepoVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -67292,7 +67292,7 @@ export type PullsListVariables = {
  */
 export const fetchPullsList = (
   variables: PullsListVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     PullsListResponse,
@@ -67312,7 +67312,7 @@ export const fetchPullsList = (
  * Draft pull requests are available in public repositories with GitHub Free and GitHub Free for organizations, GitHub Pro, and legacy per-repository billing plans, and in public and private repositories with GitHub Team and GitHub Enterprise Cloud. For more information, see [GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
  */
 export const pullsListQuery = (
-  variables: PullsListVariables,
+  variables: PullsListVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({ signal }: { signal?: AbortSignal }) => Promise<PullsListResponse>;
@@ -67334,7 +67334,7 @@ export const useSuspensePullsList = <TData = PullsListResponse>(
   options?: Omit<
     reactQuery.UseQueryOptions<PullsListResponse, PullsListError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<PullsListResponse, PullsListError, TData>({
@@ -67352,7 +67352,7 @@ export const usePullsList = <TData = PullsListResponse>(
   options?: Omit<
     reactQuery.UseQueryOptions<PullsListResponse, PullsListError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<PullsListResponse, PullsListError, TData>({
@@ -67438,7 +67438,7 @@ export type PullsCreateVariables = {
  */
 export const fetchPullsCreate = (
   variables: PullsCreateVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.PullRequest,
@@ -67469,7 +67469,7 @@ export const usePullsCreate = (
       PullsCreateVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -67536,7 +67536,7 @@ export type PullsListReviewCommentsForRepoVariables = {
  */
 export const fetchPullsListReviewCommentsForRepo = (
   variables: PullsListReviewCommentsForRepoVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     PullsListReviewCommentsForRepoResponse,
@@ -67556,7 +67556,7 @@ export const fetchPullsListReviewCommentsForRepo = (
  * Lists review comments for all pull requests in a repository. By default, review comments are in ascending order by ID.
  */
 export const pullsListReviewCommentsForRepoQuery = (
-  variables: PullsListReviewCommentsForRepoVariables,
+  variables: PullsListReviewCommentsForRepoVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -67588,7 +67588,7 @@ export const useSuspensePullsListReviewCommentsForRepo = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -67616,7 +67616,7 @@ export const usePullsListReviewCommentsForRepo = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -67659,7 +67659,7 @@ export type PullsDeleteReviewCommentVariables = {
  */
 export const fetchPullsDeleteReviewComment = (
   variables: PullsDeleteReviewCommentVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -67686,7 +67686,7 @@ export const usePullsDeleteReviewComment = (
       PullsDeleteReviewCommentVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -67729,7 +67729,7 @@ export type PullsGetReviewCommentVariables = {
  */
 export const fetchPullsGetReviewComment = (
   variables: PullsGetReviewCommentVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.PullRequestReviewComment,
@@ -67749,7 +67749,7 @@ export const fetchPullsGetReviewComment = (
  * Provides details for a review comment.
  */
 export const pullsGetReviewCommentQuery = (
-  variables: PullsGetReviewCommentVariables,
+  variables: PullsGetReviewCommentVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -67781,7 +67781,7 @@ export const useSuspensePullsGetReviewComment = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -67809,7 +67809,7 @@ export const usePullsGetReviewComment = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -67857,7 +67857,7 @@ export type PullsUpdateReviewCommentVariables = {
  */
 export const fetchPullsUpdateReviewComment = (
   variables: PullsUpdateReviewCommentVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.PullRequestReviewComment,
@@ -67884,7 +67884,7 @@ export const usePullsUpdateReviewComment = (
       PullsUpdateReviewCommentVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -67959,7 +67959,7 @@ export type ReactionsListForPullRequestReviewCommentVariables = {
  */
 export const fetchReactionsListForPullRequestReviewComment = (
   variables: ReactionsListForPullRequestReviewCommentVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ReactionsListForPullRequestReviewCommentResponse,
@@ -67979,7 +67979,7 @@ export const fetchReactionsListForPullRequestReviewComment = (
  * List the reactions to a [pull request review comment](https://docs.github.com/rest/reference/pulls#review-comments).
  */
 export const reactionsListForPullRequestReviewCommentQuery = (
-  variables: ReactionsListForPullRequestReviewCommentVariables,
+  variables: ReactionsListForPullRequestReviewCommentVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -68011,7 +68011,7 @@ export const useSuspenseReactionsListForPullRequestReviewComment = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -68039,7 +68039,7 @@ export const useReactionsListForPullRequestReviewComment = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -68099,7 +68099,7 @@ export type ReactionsCreateForPullRequestReviewCommentVariables = {
  */
 export const fetchReactionsCreateForPullRequestReviewComment = (
   variables: ReactionsCreateForPullRequestReviewCommentVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.Reaction,
@@ -68126,7 +68126,7 @@ export const useReactionsCreateForPullRequestReviewComment = (
       ReactionsCreateForPullRequestReviewCommentVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -68135,7 +68135,7 @@ export const useReactionsCreateForPullRequestReviewComment = (
     ReactionsCreateForPullRequestReviewCommentVariables
   >({
     mutationFn: (
-      variables: ReactionsCreateForPullRequestReviewCommentVariables,
+      variables: ReactionsCreateForPullRequestReviewCommentVariables
     ) =>
       fetchReactionsCreateForPullRequestReviewComment({
         ...fetcherOptions,
@@ -68178,7 +68178,7 @@ export type ReactionsDeleteForPullRequestCommentVariables = {
  */
 export const fetchReactionsDeleteForPullRequestComment = (
   variables: ReactionsDeleteForPullRequestCommentVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -68207,7 +68207,7 @@ export const useReactionsDeleteForPullRequestComment = (
       ReactionsDeleteForPullRequestCommentVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -68281,7 +68281,7 @@ export type PullsGetVariables = {
  */
 export const fetchPullsGet = (
   variables: PullsGetVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.PullRequest,
@@ -68315,7 +68315,7 @@ export const fetchPullsGet = (
  * Pass the appropriate [media type](https://docs.github.com/rest/overview/media-types/#commits-commit-comparison-and-pull-requests) to fetch diff and patch formats.
  */
 export const pullsGetQuery = (
-  variables: PullsGetVariables,
+  variables: PullsGetVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -68355,7 +68355,7 @@ export const useSuspensePullsGet = <TData = Schemas.PullRequest>(
   options?: Omit<
     reactQuery.UseQueryOptions<Schemas.PullRequest, PullsGetError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<Schemas.PullRequest, PullsGetError, TData>(
@@ -68363,7 +68363,7 @@ export const useSuspensePullsGet = <TData = Schemas.PullRequest>(
       ...pullsGetQuery(variables),
       ...options,
       ...queryOptions,
-    },
+    }
   );
 };
 
@@ -68389,7 +68389,7 @@ export const usePullsGet = <TData = Schemas.PullRequest>(
   options?: Omit<
     reactQuery.UseQueryOptions<Schemas.PullRequest, PullsGetError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.PullRequest, PullsGetError, TData>({
@@ -68460,7 +68460,7 @@ export type PullsUpdateVariables = {
  */
 export const fetchPullsUpdate = (
   variables: PullsUpdateVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.PullRequest,
@@ -68489,7 +68489,7 @@ export const usePullsUpdate = (
       PullsUpdateVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -68589,7 +68589,7 @@ export type CodespacesCreateWithPrForAuthenticatedUserVariables = {
  */
 export const fetchCodespacesCreateWithPrForAuthenticatedUser = (
   variables: CodespacesCreateWithPrForAuthenticatedUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.Codespace,
@@ -68657,7 +68657,7 @@ export const useCodespacesCreateWithPrForAuthenticatedUser = (
       CodespacesCreateWithPrForAuthenticatedUserVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -68666,7 +68666,7 @@ export const useCodespacesCreateWithPrForAuthenticatedUser = (
     CodespacesCreateWithPrForAuthenticatedUserVariables
   >({
     mutationFn: (
-      variables: CodespacesCreateWithPrForAuthenticatedUserVariables,
+      variables: CodespacesCreateWithPrForAuthenticatedUserVariables
     ) =>
       fetchCodespacesCreateWithPrForAuthenticatedUser({
         ...fetcherOptions,
@@ -68737,7 +68737,7 @@ export type PullsListReviewCommentsVariables = {
  */
 export const fetchPullsListReviewComments = (
   variables: PullsListReviewCommentsVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     PullsListReviewCommentsResponse,
@@ -68757,7 +68757,7 @@ export const fetchPullsListReviewComments = (
  * Lists all review comments for a pull request. By default, review comments are in ascending order by ID.
  */
 export const pullsListReviewCommentsQuery = (
-  variables: PullsListReviewCommentsVariables,
+  variables: PullsListReviewCommentsVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -68789,7 +68789,7 @@ export const useSuspensePullsListReviewComments = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -68817,7 +68817,7 @@ export const usePullsListReviewComments = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -68916,7 +68916,7 @@ export type PullsCreateReviewCommentVariables = {
  */
 export const fetchPullsCreateReviewComment = (
   variables: PullsCreateReviewCommentVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.PullRequestReviewComment,
@@ -68949,7 +68949,7 @@ export const usePullsCreateReviewComment = (
       PullsCreateReviewCommentVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -69006,7 +69006,7 @@ export type PullsCreateReplyForReviewCommentVariables = {
  */
 export const fetchPullsCreateReplyForReviewComment = (
   variables: PullsCreateReplyForReviewCommentVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.PullRequestReviewComment,
@@ -69035,7 +69035,7 @@ export const usePullsCreateReplyForReviewComment = (
       PullsCreateReplyForReviewCommentVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -69096,7 +69096,7 @@ export type PullsListCommitsVariables = {
  */
 export const fetchPullsListCommits = (
   variables: PullsListCommitsVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     PullsListCommitsResponse,
@@ -69116,7 +69116,7 @@ export const fetchPullsListCommits = (
  * Lists a maximum of 250 commits for a pull request. To receive a complete commit list for pull requests with more than 250 commits, use the [List commits](https://docs.github.com/rest/reference/repos#list-commits) endpoint.
  */
 export const pullsListCommitsQuery = (
-  variables: PullsListCommitsVariables,
+  variables: PullsListCommitsVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -69146,7 +69146,7 @@ export const useSuspensePullsListCommits = <TData = PullsListCommitsResponse>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -69172,7 +69172,7 @@ export const usePullsListCommits = <TData = PullsListCommitsResponse>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -69243,7 +69243,7 @@ export type PullsListFilesVariables = {
  */
 export const fetchPullsListFiles = (
   variables: PullsListFilesVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     PullsListFilesResponse,
@@ -69263,7 +69263,7 @@ export const fetchPullsListFiles = (
  * **Note:** Responses include a maximum of 3000 files. The paginated response returns 30 files per page by default.
  */
 export const pullsListFilesQuery = (
-  variables: PullsListFilesVariables,
+  variables: PullsListFilesVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -69293,7 +69293,7 @@ export const useSuspensePullsListFiles = <TData = PullsListFilesResponse>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -69319,7 +69319,7 @@ export const usePullsListFiles = <TData = PullsListFilesResponse>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -69356,7 +69356,7 @@ export type PullsCheckIfMergedVariables = {
 
 export const fetchPullsCheckIfMerged = (
   variables: PullsCheckIfMergedVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -69373,7 +69373,7 @@ export const fetchPullsCheckIfMerged = (
   });
 
 export const pullsCheckIfMergedQuery = (
-  variables: PullsCheckIfMergedVariables,
+  variables: PullsCheckIfMergedVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({ signal }: { signal?: AbortSignal }) => Promise<undefined>;
@@ -69392,7 +69392,7 @@ export const useSuspensePullsCheckIfMerged = <TData = undefined>(
   options?: Omit<
     reactQuery.UseQueryOptions<undefined, PullsCheckIfMergedError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<undefined, PullsCheckIfMergedError, TData>(
@@ -69400,7 +69400,7 @@ export const useSuspensePullsCheckIfMerged = <TData = undefined>(
       ...pullsCheckIfMergedQuery(variables),
       ...options,
       ...queryOptions,
-    },
+    }
   );
 };
 
@@ -69409,7 +69409,7 @@ export const usePullsCheckIfMerged = <TData = undefined>(
   options?: Omit<
     reactQuery.UseQueryOptions<undefined, PullsCheckIfMergedError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<undefined, PullsCheckIfMergedError, TData>({
@@ -69490,7 +69490,7 @@ export type PullsMergeVariables = {
  */
 export const fetchPullsMerge = (
   variables: PullsMergeVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.PullRequestMergeResult,
@@ -69534,7 +69534,7 @@ export const usePullsMerge = (
       PullsMergeVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -69586,7 +69586,7 @@ export type PullsRemoveRequestedReviewersVariables = {
 
 export const fetchPullsRemoveRequestedReviewers = (
   variables: PullsRemoveRequestedReviewersVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.PullRequestSimple,
@@ -69610,7 +69610,7 @@ export const usePullsRemoveRequestedReviewers = (
       PullsRemoveRequestedReviewersVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -69650,7 +69650,7 @@ export type PullsListRequestedReviewersVariables = {
  */
 export const fetchPullsListRequestedReviewers = (
   variables: PullsListRequestedReviewersVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.PullRequestReviewRequest,
@@ -69670,7 +69670,7 @@ export const fetchPullsListRequestedReviewers = (
  * Gets the users or teams whose review is requested for a pull request. Once a requested reviewer submits a review, they are no longer considered a requested reviewer. Their review will instead be returned by the [List reviews for a pull request](https://docs.github.com/rest/pulls/reviews#list-reviews-for-a-pull-request) operation.
  */
 export const pullsListRequestedReviewersQuery = (
-  variables: PullsListRequestedReviewersVariables,
+  variables: PullsListRequestedReviewersVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -69702,7 +69702,7 @@ export const useSuspensePullsListRequestedReviewers = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -69730,7 +69730,7 @@ export const usePullsListRequestedReviewers = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -69794,7 +69794,7 @@ export type PullsRequestReviewersVariables = {
  */
 export const fetchPullsRequestReviewers = (
   variables: PullsRequestReviewersVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.PullRequestSimple,
@@ -69840,7 +69840,7 @@ export const usePullsRequestReviewers = (
       PullsRequestReviewersVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -69898,7 +69898,7 @@ export type PullsListReviewsVariables = {
  */
 export const fetchPullsListReviews = (
   variables: PullsListReviewsVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     PullsListReviewsResponse,
@@ -69918,7 +69918,7 @@ export const fetchPullsListReviews = (
  * The list of reviews returns in chronological order.
  */
 export const pullsListReviewsQuery = (
-  variables: PullsListReviewsVariables,
+  variables: PullsListReviewsVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -69948,7 +69948,7 @@ export const useSuspensePullsListReviews = <TData = PullsListReviewsResponse>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -69974,7 +69974,7 @@ export const usePullsListReviews = <TData = PullsListReviewsResponse>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -70078,7 +70078,7 @@ export type PullsCreateReviewVariables = {
  */
 export const fetchPullsCreateReview = (
   variables: PullsCreateReviewVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.PullRequestReview,
@@ -70111,7 +70111,7 @@ export const usePullsCreateReview = (
       PullsCreateReviewVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -70161,7 +70161,7 @@ export type PullsDeletePendingReviewVariables = {
 
 export const fetchPullsDeletePendingReview = (
   variables: PullsDeletePendingReviewVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.PullRequestReview,
@@ -70185,7 +70185,7 @@ export const usePullsDeletePendingReview = (
       PullsDeletePendingReviewVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -70229,7 +70229,7 @@ export type PullsGetReviewVariables = {
 
 export const fetchPullsGetReview = (
   variables: PullsGetReviewVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.PullRequestReview,
@@ -70246,7 +70246,7 @@ export const fetchPullsGetReview = (
   });
 
 export const pullsGetReviewQuery = (
-  variables: PullsGetReviewVariables,
+  variables: PullsGetReviewVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -70273,7 +70273,7 @@ export const useSuspensePullsGetReview = <TData = Schemas.PullRequestReview>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -70296,7 +70296,7 @@ export const usePullsGetReview = <TData = Schemas.PullRequestReview>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -70351,7 +70351,7 @@ export type PullsUpdateReviewVariables = {
  */
 export const fetchPullsUpdateReview = (
   variables: PullsUpdateReviewVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.PullRequestReview,
@@ -70378,7 +70378,7 @@ export const usePullsUpdateReview = (
       PullsUpdateReviewVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -70443,7 +70443,7 @@ export type PullsListCommentsForReviewVariables = {
  */
 export const fetchPullsListCommentsForReview = (
   variables: PullsListCommentsForReviewVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     PullsListCommentsForReviewResponse,
@@ -70463,7 +70463,7 @@ export const fetchPullsListCommentsForReview = (
  * List comments for a specific pull request review.
  */
 export const pullsListCommentsForReviewQuery = (
-  variables: PullsListCommentsForReviewVariables,
+  variables: PullsListCommentsForReviewVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -70495,7 +70495,7 @@ export const useSuspensePullsListCommentsForReview = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -70523,7 +70523,7 @@ export const usePullsListCommentsForReview = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -70588,7 +70588,7 @@ export type PullsDismissReviewVariables = {
  */
 export const fetchPullsDismissReview = (
   variables: PullsDismissReviewVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.PullRequestReview,
@@ -70615,7 +70615,7 @@ export const usePullsDismissReview = (
       PullsDismissReviewVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -70684,7 +70684,7 @@ export type PullsSubmitReviewVariables = {
  */
 export const fetchPullsSubmitReview = (
   variables: PullsSubmitReviewVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.PullRequestReview,
@@ -70711,7 +70711,7 @@ export const usePullsSubmitReview = (
       PullsSubmitReviewVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -70771,7 +70771,7 @@ export type PullsUpdateBranchVariables = {
  */
 export const fetchPullsUpdateBranch = (
   variables: PullsUpdateBranchVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     PullsUpdateBranchResponse,
@@ -70803,7 +70803,7 @@ export const usePullsUpdateBranch = (
       PullsUpdateBranchVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -70858,7 +70858,7 @@ export type ReposGetReadmeVariables = {
  */
 export const fetchReposGetReadme = (
   variables: ReposGetReadmeVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.ContentFile,
@@ -70880,7 +70880,7 @@ export const fetchReposGetReadme = (
  * READMEs support [custom media types](https://docs.github.com/rest/reference/repos#custom-media-types) for retrieving the raw content or rendered HTML.
  */
 export const reposGetReadmeQuery = (
-  variables: ReposGetReadmeVariables,
+  variables: ReposGetReadmeVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -70908,7 +70908,7 @@ export const useSuspenseReposGetReadme = <TData = Schemas.ContentFile>(
   options?: Omit<
     reactQuery.UseQueryOptions<Schemas.ContentFile, ReposGetReadmeError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -70932,7 +70932,7 @@ export const useReposGetReadme = <TData = Schemas.ContentFile>(
   options?: Omit<
     reactQuery.UseQueryOptions<Schemas.ContentFile, ReposGetReadmeError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.ContentFile, ReposGetReadmeError, TData>({
@@ -70987,7 +70987,7 @@ export type ReposGetReadmeInDirectoryVariables = {
  */
 export const fetchReposGetReadmeInDirectory = (
   variables: ReposGetReadmeInDirectoryVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.ContentFile,
@@ -71009,7 +71009,7 @@ export const fetchReposGetReadmeInDirectory = (
  * READMEs support [custom media types](https://docs.github.com/rest/reference/repos#custom-media-types) for retrieving the raw content or rendered HTML.
  */
 export const reposGetReadmeInDirectoryQuery = (
-  variables: ReposGetReadmeInDirectoryVariables,
+  variables: ReposGetReadmeInDirectoryVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -71043,7 +71043,7 @@ export const useSuspenseReposGetReadmeInDirectory = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -71071,7 +71071,7 @@ export const useReposGetReadmeInDirectory = <TData = Schemas.ContentFile>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -71130,7 +71130,7 @@ export type ReposListReleasesVariables = {
  */
 export const fetchReposListReleases = (
   variables: ReposListReleasesVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ReposListReleasesResponse,
@@ -71152,7 +71152,7 @@ export const fetchReposListReleases = (
  * Information about published releases are available to everyone. Only users with push access will receive listings for draft releases.
  */
 export const reposListReleasesQuery = (
-  variables: ReposListReleasesVariables,
+  variables: ReposListReleasesVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -71184,7 +71184,7 @@ export const useSuspenseReposListReleases = <TData = ReposListReleasesResponse>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -71212,7 +71212,7 @@ export const useReposListReleases = <TData = ReposListReleasesResponse>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -71307,7 +71307,7 @@ export type ReposCreateReleaseVariables = {
  */
 export const fetchReposCreateRelease = (
   variables: ReposCreateReleaseVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.Release,
@@ -71336,7 +71336,7 @@ export const useReposCreateRelease = (
       ReposCreateReleaseVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -71373,7 +71373,7 @@ export type ReposDeleteReleaseAssetVariables = {
 
 export const fetchReposDeleteReleaseAsset = (
   variables: ReposDeleteReleaseAssetVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -71397,7 +71397,7 @@ export const useReposDeleteReleaseAsset = (
       ReposDeleteReleaseAssetVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -71446,7 +71446,7 @@ export type ReposGetReleaseAssetVariables = {
  */
 export const fetchReposGetReleaseAsset = (
   variables: ReposGetReleaseAssetVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.ReleaseAsset,
@@ -71466,7 +71466,7 @@ export const fetchReposGetReleaseAsset = (
  * To download the asset's binary content, set the `Accept` header of the request to [`application/octet-stream`](https://docs.github.com/rest/overview/media-types). The API will either redirect the client to the location, or stream it directly if possible. API clients should handle both a `200` or `302` response.
  */
 export const reposGetReleaseAssetQuery = (
-  variables: ReposGetReleaseAssetVariables,
+  variables: ReposGetReleaseAssetVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -71496,7 +71496,7 @@ export const useSuspenseReposGetReleaseAsset = <TData = Schemas.ReleaseAsset>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -71522,7 +71522,7 @@ export const useReposGetReleaseAsset = <TData = Schemas.ReleaseAsset>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -71578,7 +71578,7 @@ export type ReposUpdateReleaseAssetVariables = {
  */
 export const fetchReposUpdateReleaseAsset = (
   variables: ReposUpdateReleaseAssetVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.ReleaseAsset,
@@ -71605,7 +71605,7 @@ export const useReposUpdateReleaseAsset = (
       ReposUpdateReleaseAssetVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -71664,7 +71664,7 @@ export type ReposGenerateReleaseNotesVariables = {
  */
 export const fetchReposGenerateReleaseNotes = (
   variables: ReposGenerateReleaseNotesVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.ReleaseNotesContent,
@@ -71691,7 +71691,7 @@ export const useReposGenerateReleaseNotes = (
       ReposGenerateReleaseNotesVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -71729,7 +71729,7 @@ export type ReposGetLatestReleaseVariables = {
  */
 export const fetchReposGetLatestRelease = (
   variables: ReposGetLatestReleaseVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.Release,
@@ -71751,7 +71751,7 @@ export const fetchReposGetLatestRelease = (
  * The latest release is the most recent non-prerelease, non-draft release, sorted by the `created_at` attribute. The `created_at` attribute is the date of the commit used for the release, and not the date when the release was drafted or published.
  */
 export const reposGetLatestReleaseQuery = (
-  variables: ReposGetLatestReleaseVariables,
+  variables: ReposGetLatestReleaseVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({ signal }: { signal?: AbortSignal }) => Promise<Schemas.Release>;
@@ -71779,7 +71779,7 @@ export const useSuspenseReposGetLatestRelease = <TData = Schemas.Release>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -71807,7 +71807,7 @@ export const useReposGetLatestRelease = <TData = Schemas.Release>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -71850,7 +71850,7 @@ export type ReposGetReleaseByTagVariables = {
  */
 export const fetchReposGetReleaseByTag = (
   variables: ReposGetReleaseByTagVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.Release,
@@ -71870,7 +71870,7 @@ export const fetchReposGetReleaseByTag = (
  * Get a published release with the specified tag.
  */
 export const reposGetReleaseByTagQuery = (
-  variables: ReposGetReleaseByTagVariables,
+  variables: ReposGetReleaseByTagVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({ signal }: { signal?: AbortSignal }) => Promise<Schemas.Release>;
@@ -71896,7 +71896,7 @@ export const useSuspenseReposGetReleaseByTag = <TData = Schemas.Release>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -71922,7 +71922,7 @@ export const useReposGetReleaseByTag = <TData = Schemas.Release>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.Release, ReposGetReleaseByTagError, TData>(
@@ -71930,7 +71930,7 @@ export const useReposGetReleaseByTag = <TData = Schemas.Release>(
       ...reposGetReleaseByTagQuery(variables),
       ...options,
       ...queryOptions,
-    },
+    }
   );
 };
 
@@ -71960,7 +71960,7 @@ export type ReposDeleteReleaseVariables = {
  */
 export const fetchReposDeleteRelease = (
   variables: ReposDeleteReleaseVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -71987,7 +71987,7 @@ export const useReposDeleteRelease = (
       ReposDeleteReleaseVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -72030,7 +72030,7 @@ export type ReposGetReleaseVariables = {
  */
 export const fetchReposGetRelease = (
   variables: ReposGetReleaseVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.Release,
@@ -72050,7 +72050,7 @@ export const fetchReposGetRelease = (
  * **Note:** This returns an `upload_url` key corresponding to the endpoint for uploading release assets. This key is a [hypermedia resource](https://docs.github.com/rest/overview/resources-in-the-rest-api#hypermedia).
  */
 export const reposGetReleaseQuery = (
-  variables: ReposGetReleaseVariables,
+  variables: ReposGetReleaseVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({ signal }: { signal?: AbortSignal }) => Promise<Schemas.Release>;
@@ -72072,7 +72072,7 @@ export const useSuspenseReposGetRelease = <TData = Schemas.Release>(
   options?: Omit<
     reactQuery.UseQueryOptions<Schemas.Release, ReposGetReleaseError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -72094,7 +72094,7 @@ export const useReposGetRelease = <TData = Schemas.Release>(
   options?: Omit<
     reactQuery.UseQueryOptions<Schemas.Release, ReposGetReleaseError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.Release, ReposGetReleaseError, TData>({
@@ -72171,7 +72171,7 @@ export type ReposUpdateReleaseVariables = {
  */
 export const fetchReposUpdateRelease = (
   variables: ReposUpdateReleaseVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.Release,
@@ -72198,7 +72198,7 @@ export const useReposUpdateRelease = (
       ReposUpdateReleaseVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -72253,7 +72253,7 @@ export type ReposListReleaseAssetsVariables = {
 
 export const fetchReposListReleaseAssets = (
   variables: ReposListReleaseAssetsVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ReposListReleaseAssetsResponse,
@@ -72270,7 +72270,7 @@ export const fetchReposListReleaseAssets = (
   });
 
 export const reposListReleaseAssetsQuery = (
-  variables: ReposListReleaseAssetsVariables,
+  variables: ReposListReleaseAssetsVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -72299,7 +72299,7 @@ export const useSuspenseReposListReleaseAssets = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -72324,7 +72324,7 @@ export const useReposListReleaseAssets = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -72389,7 +72389,7 @@ export type ReposUploadReleaseAssetVariables = {
  */
 export const fetchReposUploadReleaseAsset = (
   variables: ReposUploadReleaseAssetVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.ReleaseAsset,
@@ -72434,7 +72434,7 @@ export const useReposUploadReleaseAsset = (
       ReposUploadReleaseAssetVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -72499,7 +72499,7 @@ export type ReactionsListForReleaseVariables = {
  */
 export const fetchReactionsListForRelease = (
   variables: ReactionsListForReleaseVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ReactionsListForReleaseResponse,
@@ -72519,7 +72519,7 @@ export const fetchReactionsListForRelease = (
  * List the reactions to a [release](https://docs.github.com/rest/reference/repos#releases).
  */
 export const reactionsListForReleaseQuery = (
-  variables: ReactionsListForReleaseVariables,
+  variables: ReactionsListForReleaseVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -72551,7 +72551,7 @@ export const useSuspenseReactionsListForRelease = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -72579,7 +72579,7 @@ export const useReactionsListForRelease = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -72630,7 +72630,7 @@ export type ReactionsCreateForReleaseVariables = {
  */
 export const fetchReactionsCreateForRelease = (
   variables: ReactionsCreateForReleaseVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.Reaction,
@@ -72657,7 +72657,7 @@ export const useReactionsCreateForRelease = (
       ReactionsCreateForReleaseVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -72703,7 +72703,7 @@ export type ReactionsDeleteForReleaseVariables = {
  */
 export const fetchReactionsDeleteForRelease = (
   variables: ReactionsDeleteForReleaseVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -72732,7 +72732,7 @@ export const useReactionsDeleteForRelease = (
       ReactionsDeleteForReleaseVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -72828,7 +72828,7 @@ export type SecretScanningListAlertsForRepoVariables = {
  */
 export const fetchSecretScanningListAlertsForRepo = (
   variables: SecretScanningListAlertsForRepoVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     SecretScanningListAlertsForRepoResponse,
@@ -72852,7 +72852,7 @@ export const fetchSecretScanningListAlertsForRepo = (
  * GitHub Apps must have the `secret_scanning_alerts` read permission to use this endpoint.
  */
 export const secretScanningListAlertsForRepoQuery = (
-  variables: SecretScanningListAlertsForRepoVariables,
+  variables: SecretScanningListAlertsForRepoVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -72888,7 +72888,7 @@ export const useSuspenseSecretScanningListAlertsForRepo = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -72920,7 +72920,7 @@ export const useSecretScanningListAlertsForRepo = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -72973,7 +72973,7 @@ export type SecretScanningGetAlertVariables = {
  */
 export const fetchSecretScanningGetAlert = (
   variables: SecretScanningGetAlertVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.SecretScanningAlert,
@@ -72997,7 +72997,7 @@ export const fetchSecretScanningGetAlert = (
  * GitHub Apps must have the `secret_scanning_alerts` read permission to use this endpoint.
  */
 export const secretScanningGetAlertQuery = (
-  variables: SecretScanningGetAlertVariables,
+  variables: SecretScanningGetAlertVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -73033,7 +73033,7 @@ export const useSuspenseSecretScanningGetAlert = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -73063,7 +73063,7 @@ export const useSecretScanningGetAlert = <TData = Schemas.SecretScanningAlert>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -73117,7 +73117,7 @@ export type SecretScanningUpdateAlertVariables = {
  */
 export const fetchSecretScanningUpdateAlert = (
   variables: SecretScanningUpdateAlertVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.SecretScanningAlert,
@@ -73148,7 +73148,7 @@ export const useSecretScanningUpdateAlert = (
       SecretScanningUpdateAlertVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -73214,7 +73214,7 @@ export type SecretScanningListLocationsForAlertVariables = {
  */
 export const fetchSecretScanningListLocationsForAlert = (
   variables: SecretScanningListLocationsForAlertVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     SecretScanningListLocationsForAlertResponse,
@@ -73238,7 +73238,7 @@ export const fetchSecretScanningListLocationsForAlert = (
  * GitHub Apps must have the `secret_scanning_alerts` read permission to use this endpoint.
  */
 export const secretScanningListLocationsForAlertQuery = (
-  variables: SecretScanningListLocationsForAlertVariables,
+  variables: SecretScanningListLocationsForAlertVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -73274,7 +73274,7 @@ export const useSuspenseSecretScanningListLocationsForAlert = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -73306,7 +73306,7 @@ export const useSecretScanningListLocationsForAlert = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -73363,7 +73363,7 @@ export type ActivityListStargazersForRepoVariables = {
  */
 export const fetchActivityListStargazersForRepo = (
   variables: ActivityListStargazersForRepoVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.SimpleUser[] | Schemas.Stargazer[],
@@ -73385,7 +73385,7 @@ export const fetchActivityListStargazersForRepo = (
  * You can also find out _when_ stars were created by passing the following custom [media type](https://docs.github.com/rest/overview/media-types/) via the `Accept` header: `application/vnd.github.star+json`.
  */
 export const activityListStargazersForRepoQuery = (
-  variables: ActivityListStargazersForRepoVariables,
+  variables: ActivityListStargazersForRepoVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -73419,7 +73419,7 @@ export const useSuspenseActivityListStargazersForRepo = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -73449,7 +73449,7 @@ export const useActivityListStargazersForRepo = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -73485,7 +73485,7 @@ export type ReposGetCodeFrequencyStatsVariables = {
  */
 export const fetchReposGetCodeFrequencyStats = (
   variables: ReposGetCodeFrequencyStatsVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.CodeFrequencyStat[] | Responses.Accepted | Responses.NoContent,
@@ -73505,7 +73505,7 @@ export const fetchReposGetCodeFrequencyStats = (
  * Returns a weekly aggregate of the number of additions and deletions pushed to a repository.
  */
 export const reposGetCodeFrequencyStatsQuery = (
-  variables: ReposGetCodeFrequencyStatsVariables,
+  variables: ReposGetCodeFrequencyStatsVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -73542,7 +73542,7 @@ export const useSuspenseReposGetCodeFrequencyStats = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -73573,7 +73573,7 @@ export const useReposGetCodeFrequencyStats = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -73609,7 +73609,7 @@ export type ReposGetCommitActivityStatsVariables = {
  */
 export const fetchReposGetCommitActivityStats = (
   variables: ReposGetCommitActivityStatsVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.CommitActivity[] | Responses.Accepted | Responses.NoContent,
@@ -73629,7 +73629,7 @@ export const fetchReposGetCommitActivityStats = (
  * Returns the last year of commit activity grouped by week. The `days` array is a group of commits per day, starting on `Sunday`.
  */
 export const reposGetCommitActivityStatsQuery = (
-  variables: ReposGetCommitActivityStatsVariables,
+  variables: ReposGetCommitActivityStatsVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -73663,7 +73663,7 @@ export const useSuspenseReposGetCommitActivityStats = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -73691,7 +73691,7 @@ export const useReposGetCommitActivityStats = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -73732,7 +73732,7 @@ export type ReposGetContributorsStatsVariables = {
  */
 export const fetchReposGetContributorsStats = (
   variables: ReposGetContributorsStatsVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.ContributorActivity[] | Responses.Accepted | Responses.NoContent,
@@ -73757,7 +73757,7 @@ export const fetchReposGetContributorsStats = (
  * *   `c` - Number of commits
  */
 export const reposGetContributorsStatsQuery = (
-  variables: ReposGetContributorsStatsVariables,
+  variables: ReposGetContributorsStatsVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -73799,7 +73799,7 @@ export const useSuspenseReposGetContributorsStats = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -73835,7 +73835,7 @@ export const useReposGetContributorsStats = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -73876,7 +73876,7 @@ export type ReposGetParticipationStatsVariables = {
  */
 export const fetchReposGetParticipationStats = (
   variables: ReposGetParticipationStatsVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.ParticipationStats,
@@ -73898,7 +73898,7 @@ export const fetchReposGetParticipationStats = (
  * The array order is oldest week (index 0) to most recent week.
  */
 export const reposGetParticipationStatsQuery = (
-  variables: ReposGetParticipationStatsVariables,
+  variables: ReposGetParticipationStatsVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -73932,7 +73932,7 @@ export const useSuspenseReposGetParticipationStats = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -73962,7 +73962,7 @@ export const useReposGetParticipationStats = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -74004,7 +74004,7 @@ export type ReposGetPunchCardStatsVariables = {
  */
 export const fetchReposGetPunchCardStats = (
   variables: ReposGetPunchCardStatsVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.CodeFrequencyStat[] | Responses.NoContent,
@@ -74030,7 +74030,7 @@ export const fetchReposGetPunchCardStats = (
  * For example, `[2, 14, 25]` indicates that there were 25 total commits, during the 2:00pm hour on Tuesdays. All times are based on the time zone of individual commits.
  */
 export const reposGetPunchCardStatsQuery = (
-  variables: ReposGetPunchCardStatsVariables,
+  variables: ReposGetPunchCardStatsVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -74068,7 +74068,7 @@ export const useSuspenseReposGetPunchCardStats = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -74102,7 +74102,7 @@ export const useReposGetPunchCardStats = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -74165,7 +74165,7 @@ export type ReposCreateCommitStatusVariables = {
  */
 export const fetchReposCreateCommitStatus = (
   variables: ReposCreateCommitStatusVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.Status,
@@ -74194,7 +74194,7 @@ export const useReposCreateCommitStatus = (
       ReposCreateCommitStatusVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -74248,7 +74248,7 @@ export type ActivityListWatchersForRepoVariables = {
  */
 export const fetchActivityListWatchersForRepo = (
   variables: ActivityListWatchersForRepoVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ActivityListWatchersForRepoResponse,
@@ -74268,7 +74268,7 @@ export const fetchActivityListWatchersForRepo = (
  * Lists the people watching the specified repository.
  */
 export const activityListWatchersForRepoQuery = (
-  variables: ActivityListWatchersForRepoVariables,
+  variables: ActivityListWatchersForRepoVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -74300,7 +74300,7 @@ export const useSuspenseActivityListWatchersForRepo = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -74328,7 +74328,7 @@ export const useActivityListWatchersForRepo = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -74365,7 +74365,7 @@ export type ActivityDeleteRepoSubscriptionVariables = {
  */
 export const fetchActivityDeleteRepoSubscription = (
   variables: ActivityDeleteRepoSubscriptionVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -74392,7 +74392,7 @@ export const useActivityDeleteRepoSubscription = (
       ActivityDeleteRepoSubscriptionVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -74428,7 +74428,7 @@ export type ActivityGetRepoSubscriptionVariables = {
 
 export const fetchActivityGetRepoSubscription = (
   variables: ActivityGetRepoSubscriptionVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.RepositorySubscription,
@@ -74445,7 +74445,7 @@ export const fetchActivityGetRepoSubscription = (
   });
 
 export const activityGetRepoSubscriptionQuery = (
-  variables: ActivityGetRepoSubscriptionVariables,
+  variables: ActivityGetRepoSubscriptionVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -74474,7 +74474,7 @@ export const useSuspenseActivityGetRepoSubscription = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -74499,7 +74499,7 @@ export const useActivityGetRepoSubscription = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -74547,7 +74547,7 @@ export type ActivitySetRepoSubscriptionVariables = {
  */
 export const fetchActivitySetRepoSubscription = (
   variables: ActivitySetRepoSubscriptionVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.RepositorySubscription,
@@ -74574,7 +74574,7 @@ export const useActivitySetRepoSubscription = (
       ActivitySetRepoSubscriptionVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -74625,7 +74625,7 @@ export type ReposListTagsVariables = {
 
 export const fetchReposListTags = (
   variables: ReposListTagsVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ReposListTagsResponse,
@@ -74637,7 +74637,7 @@ export const fetchReposListTags = (
   >({ url: "/repos/{owner}/{repo}/tags", method: "get", ...variables, signal });
 
 export const reposListTagsQuery = (
-  variables: ReposListTagsVariables,
+  variables: ReposListTagsVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -74664,7 +74664,7 @@ export const useSuspenseReposListTags = <TData = ReposListTagsResponse>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -74687,7 +74687,7 @@ export const useReposListTags = <TData = ReposListTagsResponse>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<ReposListTagsResponse, ReposListTagsError, TData>({
@@ -74732,7 +74732,7 @@ export type ReposListTagProtectionVariables = {
  */
 export const fetchReposListTagProtection = (
   variables: ReposListTagProtectionVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ReposListTagProtectionResponse,
@@ -74754,7 +74754,7 @@ export const fetchReposListTagProtection = (
  * This information is only available to repository administrators.
  */
 export const reposListTagProtectionQuery = (
-  variables: ReposListTagProtectionVariables,
+  variables: ReposListTagProtectionVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -74788,7 +74788,7 @@ export const useSuspenseReposListTagProtection = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -74818,7 +74818,7 @@ export const useReposListTagProtection = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -74872,7 +74872,7 @@ export type ReposCreateTagProtectionVariables = {
  */
 export const fetchReposCreateTagProtection = (
   variables: ReposCreateTagProtectionVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.TagProtection,
@@ -74900,7 +74900,7 @@ export const useReposCreateTagProtection = (
       ReposCreateTagProtectionVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -74950,7 +74950,7 @@ export type ReposDeleteTagProtectionVariables = {
  */
 export const fetchReposDeleteTagProtection = (
   variables: ReposDeleteTagProtectionVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -74978,7 +74978,7 @@ export const useReposDeleteTagProtection = (
       ReposDeleteTagProtectionVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -75018,7 +75018,7 @@ export type ReposDownloadTarballArchiveVariables = {
  */
 export const fetchReposDownloadTarballArchive = (
   variables: ReposDownloadTarballArchiveVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -75041,7 +75041,7 @@ export const fetchReposDownloadTarballArchive = (
  * **Note**: For private repositories, these links are temporary and expire after five minutes.
  */
 export const reposDownloadTarballArchiveQuery = (
-  variables: ReposDownloadTarballArchiveVariables,
+  variables: ReposDownloadTarballArchiveVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({ signal }: { signal?: AbortSignal }) => Promise<undefined>;
@@ -75070,7 +75070,7 @@ export const useSuspenseReposDownloadTarballArchive = <TData = undefined>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -75099,7 +75099,7 @@ export const useReposDownloadTarballArchive = <TData = undefined>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -75150,7 +75150,7 @@ export type ReposListTeamsVariables = {
 
 export const fetchReposListTeams = (
   variables: ReposListTeamsVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ReposListTeamsResponse,
@@ -75167,7 +75167,7 @@ export const fetchReposListTeams = (
   });
 
 export const reposListTeamsQuery = (
-  variables: ReposListTeamsVariables,
+  variables: ReposListTeamsVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -75194,7 +75194,7 @@ export const useSuspenseReposListTeams = <TData = ReposListTeamsResponse>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -75217,7 +75217,7 @@ export const useReposListTeams = <TData = ReposListTeamsResponse>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -75269,7 +75269,7 @@ export type ReposGetAllTopicsVariables = {
 
 export const fetchReposGetAllTopics = (
   variables: ReposGetAllTopicsVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.Topic,
@@ -75286,7 +75286,7 @@ export const fetchReposGetAllTopics = (
   });
 
 export const reposGetAllTopicsQuery = (
-  variables: ReposGetAllTopicsVariables,
+  variables: ReposGetAllTopicsVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({ signal }: { signal?: AbortSignal }) => Promise<Schemas.Topic>;
@@ -75305,7 +75305,7 @@ export const useSuspenseReposGetAllTopics = <TData = Schemas.Topic>(
   options?: Omit<
     reactQuery.UseQueryOptions<Schemas.Topic, ReposGetAllTopicsError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -75324,7 +75324,7 @@ export const useReposGetAllTopics = <TData = Schemas.Topic>(
   options?: Omit<
     reactQuery.UseQueryOptions<Schemas.Topic, ReposGetAllTopicsError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.Topic, ReposGetAllTopicsError, TData>({
@@ -75370,7 +75370,7 @@ export type ReposReplaceAllTopicsVariables = {
 
 export const fetchReposReplaceAllTopics = (
   variables: ReposReplaceAllTopicsVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.Topic,
@@ -75394,7 +75394,7 @@ export const useReposReplaceAllTopics = (
       ReposReplaceAllTopicsVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -75443,7 +75443,7 @@ export type ReposGetClonesVariables = {
  */
 export const fetchReposGetClones = (
   variables: ReposGetClonesVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.CloneTraffic,
@@ -75463,7 +75463,7 @@ export const fetchReposGetClones = (
  * Get the total number of clones and breakdown per day or week for the last 14 days. Timestamps are aligned to UTC midnight of the beginning of the day or week. Week begins on Monday.
  */
 export const reposGetClonesQuery = (
-  variables: ReposGetClonesVariables,
+  variables: ReposGetClonesVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -75493,7 +75493,7 @@ export const useSuspenseReposGetClones = <TData = Schemas.CloneTraffic>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -75519,7 +75519,7 @@ export const useReposGetClones = <TData = Schemas.CloneTraffic>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.CloneTraffic, ReposGetClonesError, TData>({
@@ -75556,7 +75556,7 @@ export type ReposGetTopPathsVariables = {
  */
 export const fetchReposGetTopPaths = (
   variables: ReposGetTopPathsVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ReposGetTopPathsResponse,
@@ -75576,7 +75576,7 @@ export const fetchReposGetTopPaths = (
  * Get the top 10 popular contents over the last 14 days.
  */
 export const reposGetTopPathsQuery = (
-  variables: ReposGetTopPathsVariables,
+  variables: ReposGetTopPathsVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -75606,7 +75606,7 @@ export const useSuspenseReposGetTopPaths = <TData = ReposGetTopPathsResponse>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -75632,7 +75632,7 @@ export const useReposGetTopPaths = <TData = ReposGetTopPathsResponse>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -75673,7 +75673,7 @@ export type ReposGetTopReferrersVariables = {
  */
 export const fetchReposGetTopReferrers = (
   variables: ReposGetTopReferrersVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ReposGetTopReferrersResponse,
@@ -75693,7 +75693,7 @@ export const fetchReposGetTopReferrers = (
  * Get the top 10 referrers over the last 14 days.
  */
 export const reposGetTopReferrersQuery = (
-  variables: ReposGetTopReferrersVariables,
+  variables: ReposGetTopReferrersVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -75725,7 +75725,7 @@ export const useSuspenseReposGetTopReferrers = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -75751,7 +75751,7 @@ export const useReposGetTopReferrers = <TData = ReposGetTopReferrersResponse>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -75800,7 +75800,7 @@ export type ReposGetViewsVariables = {
  */
 export const fetchReposGetViews = (
   variables: ReposGetViewsVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.ViewTraffic,
@@ -75820,7 +75820,7 @@ export const fetchReposGetViews = (
  * Get the total number of views and breakdown per day or week for the last 14 days. Timestamps are aligned to UTC midnight of the beginning of the day or week. Week begins on Monday.
  */
 export const reposGetViewsQuery = (
-  variables: ReposGetViewsVariables,
+  variables: ReposGetViewsVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -75846,7 +75846,7 @@ export const useSuspenseReposGetViews = <TData = Schemas.ViewTraffic>(
   options?: Omit<
     reactQuery.UseQueryOptions<Schemas.ViewTraffic, ReposGetViewsError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -75868,7 +75868,7 @@ export const useReposGetViews = <TData = Schemas.ViewTraffic>(
   options?: Omit<
     reactQuery.UseQueryOptions<Schemas.ViewTraffic, ReposGetViewsError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.ViewTraffic, ReposGetViewsError, TData>({
@@ -75916,7 +75916,7 @@ export type ReposTransferVariables = {
  */
 export const fetchReposTransfer = (
   variables: ReposTransferVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.MinimalRepository,
@@ -75943,7 +75943,7 @@ export const useReposTransfer = (
       ReposTransferVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -75982,7 +75982,7 @@ export type ReposDisableVulnerabilityAlertsVariables = {
  */
 export const fetchReposDisableVulnerabilityAlerts = (
   variables: ReposDisableVulnerabilityAlertsVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -76011,7 +76011,7 @@ export const useReposDisableVulnerabilityAlerts = (
       ReposDisableVulnerabilityAlertsVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -76048,7 +76048,7 @@ export type ReposCheckVulnerabilityAlertsVariables = {
  */
 export const fetchReposCheckVulnerabilityAlerts = (
   variables: ReposCheckVulnerabilityAlertsVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -76068,7 +76068,7 @@ export const fetchReposCheckVulnerabilityAlerts = (
  * Shows whether dependency alerts are enabled or disabled for a repository. The authenticated user must have admin read access to the repository. For more information, see "[About security alerts for vulnerable dependencies](https://docs.github.com/articles/about-security-alerts-for-vulnerable-dependencies)".
  */
 export const reposCheckVulnerabilityAlertsQuery = (
-  variables: ReposCheckVulnerabilityAlertsVariables,
+  variables: ReposCheckVulnerabilityAlertsVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({ signal }: { signal?: AbortSignal }) => Promise<undefined>;
@@ -76094,7 +76094,7 @@ export const useSuspenseReposCheckVulnerabilityAlerts = <TData = undefined>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -76120,7 +76120,7 @@ export const useReposCheckVulnerabilityAlerts = <TData = undefined>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -76157,7 +76157,7 @@ export type ReposEnableVulnerabilityAlertsVariables = {
  */
 export const fetchReposEnableVulnerabilityAlerts = (
   variables: ReposEnableVulnerabilityAlertsVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -76184,7 +76184,7 @@ export const useReposEnableVulnerabilityAlerts = (
       ReposEnableVulnerabilityAlertsVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -76225,7 +76225,7 @@ export type ReposDownloadZipballArchiveVariables = {
  */
 export const fetchReposDownloadZipballArchive = (
   variables: ReposDownloadZipballArchiveVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -76249,7 +76249,7 @@ export const fetchReposDownloadZipballArchive = (
  * **Note**: For private repositories, these links are temporary and expire after five minutes. If the repository is empty, you will receive a 404 when you follow the redirect.
  */
 export const reposDownloadZipballArchiveQuery = (
-  variables: ReposDownloadZipballArchiveVariables,
+  variables: ReposDownloadZipballArchiveVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({ signal }: { signal?: AbortSignal }) => Promise<undefined>;
@@ -76279,7 +76279,7 @@ export const useSuspenseReposDownloadZipballArchive = <TData = undefined>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -76309,7 +76309,7 @@ export const useReposDownloadZipballArchive = <TData = undefined>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -76374,7 +76374,7 @@ export type ReposCreateUsingTemplateVariables = {
  */
 export const fetchReposCreateUsingTemplate = (
   variables: ReposCreateUsingTemplateVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.Repository,
@@ -76408,7 +76408,7 @@ export const useReposCreateUsingTemplate = (
       ReposCreateUsingTemplateVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -76455,7 +76455,7 @@ export type ReposListPublicVariables = {
  */
 export const fetchReposListPublic = (
   variables: ReposListPublicVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ReposListPublicResponse,
@@ -76474,7 +76474,7 @@ export const fetchReposListPublic = (
  * - Pagination is powered exclusively by the `since` parameter. Use the [Link header](https://docs.github.com/rest/overview/resources-in-the-rest-api#link-header) to get the URL for the next page of repositories.
  */
 export const reposListPublicQuery = (
-  variables: ReposListPublicVariables,
+  variables: ReposListPublicVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -76508,7 +76508,7 @@ export const useSuspenseReposListPublic = <TData = ReposListPublicResponse>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -76538,7 +76538,7 @@ export const useReposListPublic = <TData = ReposListPublicResponse>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -76596,7 +76596,7 @@ export type ActionsListEnvironmentSecretsVariables = {
  */
 export const fetchActionsListEnvironmentSecrets = (
   variables: ActionsListEnvironmentSecretsVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ActionsListEnvironmentSecretsResponse,
@@ -76616,7 +76616,7 @@ export const fetchActionsListEnvironmentSecrets = (
  * Lists all secrets available in an environment without revealing their encrypted values. You must authenticate using an access token with the `repo` scope to use this endpoint. GitHub Apps must have the `secrets` repository permission to use this endpoint.
  */
 export const actionsListEnvironmentSecretsQuery = (
-  variables: ActionsListEnvironmentSecretsVariables,
+  variables: ActionsListEnvironmentSecretsVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -76648,7 +76648,7 @@ export const useSuspenseActionsListEnvironmentSecrets = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -76676,7 +76676,7 @@ export const useActionsListEnvironmentSecrets = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -76713,7 +76713,7 @@ export type ActionsGetEnvironmentPublicKeyVariables = {
  */
 export const fetchActionsGetEnvironmentPublicKey = (
   variables: ActionsGetEnvironmentPublicKeyVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.ActionsPublicKey,
@@ -76733,7 +76733,7 @@ export const fetchActionsGetEnvironmentPublicKey = (
  * Get the public key for an environment, which you need to encrypt environment secrets. You need to encrypt a secret before you can create or update secrets. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `secrets` repository permission to use this endpoint.
  */
 export const actionsGetEnvironmentPublicKeyQuery = (
-  variables: ActionsGetEnvironmentPublicKeyVariables,
+  variables: ActionsGetEnvironmentPublicKeyVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -76765,7 +76765,7 @@ export const useSuspenseActionsGetEnvironmentPublicKey = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -76793,7 +76793,7 @@ export const useActionsGetEnvironmentPublicKey = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -76834,7 +76834,7 @@ export type ActionsDeleteEnvironmentSecretVariables = {
  */
 export const fetchActionsDeleteEnvironmentSecret = (
   variables: ActionsDeleteEnvironmentSecretVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -76861,7 +76861,7 @@ export const useActionsDeleteEnvironmentSecret = (
       ActionsDeleteEnvironmentSecretVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -76901,7 +76901,7 @@ export type ActionsGetEnvironmentSecretVariables = {
  */
 export const fetchActionsGetEnvironmentSecret = (
   variables: ActionsGetEnvironmentSecretVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.ActionsSecret,
@@ -76921,7 +76921,7 @@ export const fetchActionsGetEnvironmentSecret = (
  * Gets a single environment secret without revealing its encrypted value. You must authenticate using an access token with the `repo` scope to use this endpoint. GitHub Apps must have the `secrets` repository permission to use this endpoint.
  */
 export const actionsGetEnvironmentSecretQuery = (
-  variables: ActionsGetEnvironmentSecretVariables,
+  variables: ActionsGetEnvironmentSecretVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -76953,7 +76953,7 @@ export const useSuspenseActionsGetEnvironmentSecret = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -76979,7 +76979,7 @@ export const useActionsGetEnvironmentSecret = <TData = Schemas.ActionsSecret>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -77109,7 +77109,7 @@ export type ActionsCreateOrUpdateEnvironmentSecretVariables = {
  */
 export const fetchActionsCreateOrUpdateEnvironmentSecret = (
   variables: ActionsCreateOrUpdateEnvironmentSecretVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.EmptyObject,
@@ -77211,7 +77211,7 @@ export const useActionsCreateOrUpdateEnvironmentSecret = (
       ActionsCreateOrUpdateEnvironmentSecretVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -77272,7 +77272,7 @@ export type ActionsListEnvironmentVariablesVariables = {
  */
 export const fetchActionsListEnvironmentVariables = (
   variables: ActionsListEnvironmentVariablesVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ActionsListEnvironmentVariablesResponse,
@@ -77292,7 +77292,7 @@ export const fetchActionsListEnvironmentVariables = (
  * Lists all environment variables. You must authenticate using an access token with the `repo` scope to use this endpoint. GitHub Apps must have the `environments:read` repository permission to use this endpoint.
  */
 export const actionsListEnvironmentVariablesQuery = (
-  variables: ActionsListEnvironmentVariablesVariables,
+  variables: ActionsListEnvironmentVariablesVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -77324,7 +77324,7 @@ export const useSuspenseActionsListEnvironmentVariables = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -77352,7 +77352,7 @@ export const useActionsListEnvironmentVariables = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -77403,7 +77403,7 @@ export type ActionsCreateEnvironmentVariableVariables = {
  */
 export const fetchActionsCreateEnvironmentVariable = (
   variables: ActionsCreateEnvironmentVariableVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.EmptyObject,
@@ -77432,7 +77432,7 @@ export const useActionsCreateEnvironmentVariable = (
       ActionsCreateEnvironmentVariableVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -77478,7 +77478,7 @@ export type ActionsDeleteEnvironmentVariableVariables = {
  */
 export const fetchActionsDeleteEnvironmentVariable = (
   variables: ActionsDeleteEnvironmentVariableVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -77507,7 +77507,7 @@ export const useActionsDeleteEnvironmentVariable = (
       ActionsDeleteEnvironmentVariableVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -77551,7 +77551,7 @@ export type ActionsGetEnvironmentVariableVariables = {
  */
 export const fetchActionsGetEnvironmentVariable = (
   variables: ActionsGetEnvironmentVariableVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.ActionsVariable,
@@ -77571,7 +77571,7 @@ export const fetchActionsGetEnvironmentVariable = (
  * Gets a specific variable in an environment. You must authenticate using an access token with the `repo` scope to use this endpoint. GitHub Apps must have the `environments:read` repository permission to use this endpoint.
  */
 export const actionsGetEnvironmentVariableQuery = (
-  variables: ActionsGetEnvironmentVariableVariables,
+  variables: ActionsGetEnvironmentVariableVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -77603,7 +77603,7 @@ export const useSuspenseActionsGetEnvironmentVariable = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -77631,7 +77631,7 @@ export const useActionsGetEnvironmentVariable = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -77686,7 +77686,7 @@ export type ActionsUpdateEnvironmentVariableVariables = {
  */
 export const fetchActionsUpdateEnvironmentVariable = (
   variables: ActionsUpdateEnvironmentVariableVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -77715,7 +77715,7 @@ export const useActionsUpdateEnvironmentVariable = (
       ActionsUpdateEnvironmentVariableVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -77812,7 +77812,7 @@ export type SearchCodeVariables = {
  */
 export const fetchSearchCode = (
   variables: SearchCodeVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     SearchCodeResponse,
@@ -77844,7 +77844,7 @@ export const fetchSearchCode = (
  * language:go`](https://github.com/search?utf8=%E2%9C%93&q=amazing+language%3Ago&type=Code) is.
  */
 export const searchCodeQuery = (
-  variables: SearchCodeVariables,
+  variables: SearchCodeVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -77887,7 +77887,7 @@ export const useSuspenseSearchCode = <TData = SearchCodeResponse>(
   options?: Omit<
     reactQuery.UseQueryOptions<SearchCodeResponse, SearchCodeError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -77926,7 +77926,7 @@ export const useSearchCode = <TData = SearchCodeResponse>(
   options?: Omit<
     reactQuery.UseQueryOptions<SearchCodeResponse, SearchCodeError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<SearchCodeResponse, SearchCodeError, TData>({
@@ -77992,7 +77992,7 @@ export type SearchCommitsVariables = {
  */
 export const fetchSearchCommits = (
   variables: SearchCommitsVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     SearchCommitsResponse,
@@ -78014,7 +78014,7 @@ export const fetchSearchCommits = (
  * `q=repo:octocat/Spoon-Knife+css`
  */
 export const searchCommitsQuery = (
-  variables: SearchCommitsVariables,
+  variables: SearchCommitsVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -78051,7 +78051,7 @@ export const useSuspenseSearchCommits = <TData = SearchCommitsResponse>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -78084,7 +78084,7 @@ export const useSearchCommits = <TData = SearchCommitsResponse>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<SearchCommitsResponse, SearchCommitsError, TData>({
@@ -78179,7 +78179,7 @@ export type SearchIssuesAndPullRequestsVariables = {
  */
 export const fetchSearchIssuesAndPullRequests = (
   variables: SearchIssuesAndPullRequestsVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     SearchIssuesAndPullRequestsResponse,
@@ -78205,7 +78205,7 @@ export const fetchSearchIssuesAndPullRequests = (
  * **Note:** For [user-to-server](https://docs.github.com/developers/apps/identifying-and-authorizing-users-for-github-apps#user-to-server-requests) GitHub App requests, you can't retrieve a combination of issues and pull requests in a single query. Requests that don't include the `is:issue` or `is:pull-request` qualifier will receive an HTTP `422 Unprocessable Entity` response. To get results for both issues and pull requests, you must send separate queries for issues and pull requests. For more information about the `is` qualifier, see "[Searching only issues or pull requests](https://docs.github.com/github/searching-for-information-on-github/searching-issues-and-pull-requests#search-only-issues-or-pull-requests)."
  */
 export const searchIssuesAndPullRequestsQuery = (
-  variables: SearchIssuesAndPullRequestsVariables,
+  variables: SearchIssuesAndPullRequestsVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -78248,7 +78248,7 @@ export const useSuspenseSearchIssuesAndPullRequests = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -78287,7 +78287,7 @@ export const useSearchIssuesAndPullRequests = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -78376,7 +78376,7 @@ export type SearchLabelsVariables = {
  */
 export const fetchSearchLabels = (
   variables: SearchLabelsVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     SearchLabelsResponse,
@@ -78399,7 +78399,7 @@ export const fetchSearchLabels = (
  * The labels that best match the query appear first in the search results.
  */
 export const searchLabelsQuery = (
-  variables: SearchLabelsVariables,
+  variables: SearchLabelsVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -78433,7 +78433,7 @@ export const useSuspenseSearchLabels = <TData = SearchLabelsResponse>(
   options?: Omit<
     reactQuery.UseQueryOptions<SearchLabelsResponse, SearchLabelsError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -78463,7 +78463,7 @@ export const useSearchLabels = <TData = SearchLabelsResponse>(
   options?: Omit<
     reactQuery.UseQueryOptions<SearchLabelsResponse, SearchLabelsError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<SearchLabelsResponse, SearchLabelsError, TData>({
@@ -78540,7 +78540,7 @@ export type SearchReposVariables = {
  */
 export const fetchSearchRepos = (
   variables: SearchReposVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     SearchReposResponse,
@@ -78563,7 +78563,7 @@ export const fetchSearchRepos = (
  * This query searches for repositories with the word `tetris` in the name, the description, or the README. The results are limited to repositories where the primary language is assembly. The results are sorted by stars in descending order, so that the most popular repositories appear first in the search results.
  */
 export const searchReposQuery = (
-  variables: SearchReposVariables,
+  variables: SearchReposVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -78597,7 +78597,7 @@ export const useSuspenseSearchRepos = <TData = SearchReposResponse>(
   options?: Omit<
     reactQuery.UseQueryOptions<SearchReposResponse, SearchReposError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -78627,7 +78627,7 @@ export const useSearchRepos = <TData = SearchReposResponse>(
   options?: Omit<
     reactQuery.UseQueryOptions<SearchReposResponse, SearchReposError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<SearchReposResponse, SearchReposError, TData>({
@@ -78684,7 +78684,7 @@ export type SearchTopicsVariables = {
  */
 export const fetchSearchTopics = (
   variables: SearchTopicsVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     SearchTopicsResponse,
@@ -78707,7 +78707,7 @@ export const fetchSearchTopics = (
  * This query searches for topics with the keyword `ruby` and limits the results to find only topics that are featured. The topics that are the best match for the query appear first in the search results.
  */
 export const searchTopicsQuery = (
-  variables: SearchTopicsVariables,
+  variables: SearchTopicsVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -78741,7 +78741,7 @@ export const useSuspenseSearchTopics = <TData = SearchTopicsResponse>(
   options?: Omit<
     reactQuery.UseQueryOptions<SearchTopicsResponse, SearchTopicsError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -78771,7 +78771,7 @@ export const useSearchTopics = <TData = SearchTopicsResponse>(
   options?: Omit<
     reactQuery.UseQueryOptions<SearchTopicsResponse, SearchTopicsError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<SearchTopicsResponse, SearchTopicsError, TData>({
@@ -78848,7 +78848,7 @@ export type SearchUsersVariables = {
  */
 export const fetchSearchUsers = (
   variables: SearchUsersVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     SearchUsersResponse,
@@ -78871,7 +78871,7 @@ export const fetchSearchUsers = (
  * This query searches for users with the name `tom`. The results are restricted to users with more than 42 repositories and over 1,000 followers.
  */
 export const searchUsersQuery = (
-  variables: SearchUsersVariables,
+  variables: SearchUsersVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -78905,7 +78905,7 @@ export const useSuspenseSearchUsers = <TData = SearchUsersResponse>(
   options?: Omit<
     reactQuery.UseQueryOptions<SearchUsersResponse, SearchUsersError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -78935,7 +78935,7 @@ export const useSearchUsers = <TData = SearchUsersResponse>(
   options?: Omit<
     reactQuery.UseQueryOptions<SearchUsersResponse, SearchUsersError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<SearchUsersResponse, SearchUsersError, TData>({
@@ -78976,7 +78976,7 @@ export type TeamsDeleteLegacyVariables = {
  */
 export const fetchTeamsDeleteLegacy = (
   variables: TeamsDeleteLegacyVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -79002,7 +79002,7 @@ export const useTeamsDeleteLegacy = (
       TeamsDeleteLegacyVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -79037,7 +79037,7 @@ export type TeamsGetLegacyVariables = {
  */
 export const fetchTeamsGetLegacy = (
   variables: TeamsGetLegacyVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.TeamFull,
@@ -79052,7 +79052,7 @@ export const fetchTeamsGetLegacy = (
  * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the [Get a team by name](https://docs.github.com/rest/reference/teams#get-a-team-by-name) endpoint.
  */
 export const teamsGetLegacyQuery = (
-  variables: TeamsGetLegacyVariables,
+  variables: TeamsGetLegacyVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({ signal }: { signal?: AbortSignal }) => Promise<Schemas.TeamFull>;
@@ -79074,7 +79074,7 @@ export const useSuspenseTeamsGetLegacy = <TData = Schemas.TeamFull>(
   options?: Omit<
     reactQuery.UseQueryOptions<Schemas.TeamFull, TeamsGetLegacyError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -79096,7 +79096,7 @@ export const useTeamsGetLegacy = <TData = Schemas.TeamFull>(
   options?: Omit<
     reactQuery.UseQueryOptions<Schemas.TeamFull, TeamsGetLegacyError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.TeamFull, TeamsGetLegacyError, TData>({
@@ -79172,7 +79172,7 @@ export type TeamsUpdateLegacyVariables = {
  */
 export const fetchTeamsUpdateLegacy = (
   variables: TeamsUpdateLegacyVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.TeamFull,
@@ -79198,7 +79198,7 @@ export const useTeamsUpdateLegacy = (
       TeamsUpdateLegacyVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -79256,7 +79256,7 @@ export type TeamsListDiscussionsLegacyVariables = {
  */
 export const fetchTeamsListDiscussionsLegacy = (
   variables: TeamsListDiscussionsLegacyVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     TeamsListDiscussionsLegacyResponse,
@@ -79278,7 +79278,7 @@ export const fetchTeamsListDiscussionsLegacy = (
  * List all discussions on a team's page. OAuth access tokens require the `read:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
  */
 export const teamsListDiscussionsLegacyQuery = (
-  variables: TeamsListDiscussionsLegacyVariables,
+  variables: TeamsListDiscussionsLegacyVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -79312,7 +79312,7 @@ export const useSuspenseTeamsListDiscussionsLegacy = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -79342,7 +79342,7 @@ export const useTeamsListDiscussionsLegacy = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -79396,7 +79396,7 @@ export type TeamsCreateDiscussionLegacyVariables = {
  */
 export const fetchTeamsCreateDiscussionLegacy = (
   variables: TeamsCreateDiscussionLegacyVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.TeamDiscussion,
@@ -79427,7 +79427,7 @@ export const useTeamsCreateDiscussionLegacy = (
       TeamsCreateDiscussionLegacyVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -79465,7 +79465,7 @@ export type TeamsDeleteDiscussionLegacyVariables = {
  */
 export const fetchTeamsDeleteDiscussionLegacy = (
   variables: TeamsDeleteDiscussionLegacyVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -79494,7 +79494,7 @@ export const useTeamsDeleteDiscussionLegacy = (
       TeamsDeleteDiscussionLegacyVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -79532,7 +79532,7 @@ export type TeamsGetDiscussionLegacyVariables = {
  */
 export const fetchTeamsGetDiscussionLegacy = (
   variables: TeamsGetDiscussionLegacyVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.TeamDiscussion,
@@ -79554,7 +79554,7 @@ export const fetchTeamsGetDiscussionLegacy = (
  * Get a specific discussion on a team's page. OAuth access tokens require the `read:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
  */
 export const teamsGetDiscussionLegacyQuery = (
-  variables: TeamsGetDiscussionLegacyVariables,
+  variables: TeamsGetDiscussionLegacyVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -79588,7 +79588,7 @@ export const useSuspenseTeamsGetDiscussionLegacy = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -79616,7 +79616,7 @@ export const useTeamsGetDiscussionLegacy = <TData = Schemas.TeamDiscussion>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -79666,7 +79666,7 @@ export type TeamsUpdateDiscussionLegacyVariables = {
  */
 export const fetchTeamsUpdateDiscussionLegacy = (
   variables: TeamsUpdateDiscussionLegacyVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.TeamDiscussion,
@@ -79695,7 +79695,7 @@ export const useTeamsUpdateDiscussionLegacy = (
       TeamsUpdateDiscussionLegacyVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -79759,7 +79759,7 @@ export type TeamsListDiscussionCommentsLegacyVariables = {
  */
 export const fetchTeamsListDiscussionCommentsLegacy = (
   variables: TeamsListDiscussionCommentsLegacyVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     TeamsListDiscussionCommentsLegacyResponse,
@@ -79781,7 +79781,7 @@ export const fetchTeamsListDiscussionCommentsLegacy = (
  * List all comments on a team discussion. OAuth access tokens require the `read:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
  */
 export const teamsListDiscussionCommentsLegacyQuery = (
-  variables: TeamsListDiscussionCommentsLegacyVariables,
+  variables: TeamsListDiscussionCommentsLegacyVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -79815,7 +79815,7 @@ export const useSuspenseTeamsListDiscussionCommentsLegacy = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -79845,7 +79845,7 @@ export const useTeamsListDiscussionCommentsLegacy = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -79894,7 +79894,7 @@ export type TeamsCreateDiscussionCommentLegacyVariables = {
  */
 export const fetchTeamsCreateDiscussionCommentLegacy = (
   variables: TeamsCreateDiscussionCommentLegacyVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.TeamDiscussionComment,
@@ -79925,7 +79925,7 @@ export const useTeamsCreateDiscussionCommentLegacy = (
       TeamsCreateDiscussionCommentLegacyVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -79971,7 +79971,7 @@ export type TeamsDeleteDiscussionCommentLegacyVariables = {
  */
 export const fetchTeamsDeleteDiscussionCommentLegacy = (
   variables: TeamsDeleteDiscussionCommentLegacyVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -80000,7 +80000,7 @@ export const useTeamsDeleteDiscussionCommentLegacy = (
       TeamsDeleteDiscussionCommentLegacyVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -80046,7 +80046,7 @@ export type TeamsGetDiscussionCommentLegacyVariables = {
  */
 export const fetchTeamsGetDiscussionCommentLegacy = (
   variables: TeamsGetDiscussionCommentLegacyVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.TeamDiscussionComment,
@@ -80068,7 +80068,7 @@ export const fetchTeamsGetDiscussionCommentLegacy = (
  * Get a specific comment on a team discussion. OAuth access tokens require the `read:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
  */
 export const teamsGetDiscussionCommentLegacyQuery = (
-  variables: TeamsGetDiscussionCommentLegacyVariables,
+  variables: TeamsGetDiscussionCommentLegacyVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -80102,7 +80102,7 @@ export const useSuspenseTeamsGetDiscussionCommentLegacy = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -80132,7 +80132,7 @@ export const useTeamsGetDiscussionCommentLegacy = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -80183,7 +80183,7 @@ export type TeamsUpdateDiscussionCommentLegacyVariables = {
  */
 export const fetchTeamsUpdateDiscussionCommentLegacy = (
   variables: TeamsUpdateDiscussionCommentLegacyVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.TeamDiscussionComment,
@@ -80212,7 +80212,7 @@ export const useTeamsUpdateDiscussionCommentLegacy = (
       TeamsUpdateDiscussionCommentLegacyVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -80289,7 +80289,7 @@ export type ReactionsListForTeamDiscussionCommentLegacyVariables = {
  */
 export const fetchReactionsListForTeamDiscussionCommentLegacy = (
   variables: ReactionsListForTeamDiscussionCommentLegacyVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ReactionsListForTeamDiscussionCommentLegacyResponse,
@@ -80311,7 +80311,7 @@ export const fetchReactionsListForTeamDiscussionCommentLegacy = (
  * List the reactions to a [team discussion comment](https://docs.github.com/rest/reference/teams#discussion-comments). OAuth access tokens require the `read:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
  */
 export const reactionsListForTeamDiscussionCommentLegacyQuery = (
-  variables: ReactionsListForTeamDiscussionCommentLegacyVariables,
+  variables: ReactionsListForTeamDiscussionCommentLegacyVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -80345,7 +80345,7 @@ export const useSuspenseReactionsListForTeamDiscussionCommentLegacy = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -80375,7 +80375,7 @@ export const useReactionsListForTeamDiscussionCommentLegacy = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -80434,7 +80434,7 @@ export type ReactionsCreateForTeamDiscussionCommentLegacyVariables = {
  */
 export const fetchReactionsCreateForTeamDiscussionCommentLegacy = (
   variables: ReactionsCreateForTeamDiscussionCommentLegacyVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.Reaction,
@@ -80463,7 +80463,7 @@ export const useReactionsCreateForTeamDiscussionCommentLegacy = (
       ReactionsCreateForTeamDiscussionCommentLegacyVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -80472,7 +80472,7 @@ export const useReactionsCreateForTeamDiscussionCommentLegacy = (
     ReactionsCreateForTeamDiscussionCommentLegacyVariables
   >({
     mutationFn: (
-      variables: ReactionsCreateForTeamDiscussionCommentLegacyVariables,
+      variables: ReactionsCreateForTeamDiscussionCommentLegacyVariables
     ) =>
       fetchReactionsCreateForTeamDiscussionCommentLegacy({
         ...fetcherOptions,
@@ -80537,7 +80537,7 @@ export type ReactionsListForTeamDiscussionLegacyVariables = {
  */
 export const fetchReactionsListForTeamDiscussionLegacy = (
   variables: ReactionsListForTeamDiscussionLegacyVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ReactionsListForTeamDiscussionLegacyResponse,
@@ -80559,7 +80559,7 @@ export const fetchReactionsListForTeamDiscussionLegacy = (
  * List the reactions to a [team discussion](https://docs.github.com/rest/reference/teams#discussions). OAuth access tokens require the `read:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
  */
 export const reactionsListForTeamDiscussionLegacyQuery = (
-  variables: ReactionsListForTeamDiscussionLegacyVariables,
+  variables: ReactionsListForTeamDiscussionLegacyVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -80593,7 +80593,7 @@ export const useSuspenseReactionsListForTeamDiscussionLegacy = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -80623,7 +80623,7 @@ export const useReactionsListForTeamDiscussionLegacy = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -80678,7 +80678,7 @@ export type ReactionsCreateForTeamDiscussionLegacyVariables = {
  */
 export const fetchReactionsCreateForTeamDiscussionLegacy = (
   variables: ReactionsCreateForTeamDiscussionLegacyVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.Reaction,
@@ -80707,7 +80707,7 @@ export const useReactionsCreateForTeamDiscussionLegacy = (
       ReactionsCreateForTeamDiscussionLegacyVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -80764,7 +80764,7 @@ export type TeamsListPendingInvitationsLegacyVariables = {
  */
 export const fetchTeamsListPendingInvitationsLegacy = (
   variables: TeamsListPendingInvitationsLegacyVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     TeamsListPendingInvitationsLegacyResponse,
@@ -80786,7 +80786,7 @@ export const fetchTeamsListPendingInvitationsLegacy = (
  * The return hash contains a `role` field which refers to the Organization Invitation role and will be one of the following values: `direct_member`, `admin`, `billing_manager`, `hiring_manager`, or `reinstate`. If the invitee is not a GitHub member, the `login` field in the return hash will be `null`.
  */
 export const teamsListPendingInvitationsLegacyQuery = (
-  variables: TeamsListPendingInvitationsLegacyVariables,
+  variables: TeamsListPendingInvitationsLegacyVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -80820,7 +80820,7 @@ export const useSuspenseTeamsListPendingInvitationsLegacy = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -80850,7 +80850,7 @@ export const useTeamsListPendingInvitationsLegacy = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -80911,7 +80911,7 @@ export type TeamsListMembersLegacyVariables = {
  */
 export const fetchTeamsListMembersLegacy = (
   variables: TeamsListMembersLegacyVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     TeamsListMembersLegacyResponse,
@@ -80928,7 +80928,7 @@ export const fetchTeamsListMembersLegacy = (
  * Team members will include the members of child teams.
  */
 export const teamsListMembersLegacyQuery = (
-  variables: TeamsListMembersLegacyVariables,
+  variables: TeamsListMembersLegacyVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -80962,7 +80962,7 @@ export const useSuspenseTeamsListMembersLegacy = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -80992,7 +80992,7 @@ export const useTeamsListMembersLegacy = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -81036,7 +81036,7 @@ export type TeamsRemoveMemberLegacyVariables = {
  */
 export const fetchTeamsRemoveMemberLegacy = (
   variables: TeamsRemoveMemberLegacyVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -81071,7 +81071,7 @@ export const useTeamsRemoveMemberLegacy = (
       TeamsRemoveMemberLegacyVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -81111,7 +81111,7 @@ export type TeamsGetMemberLegacyVariables = {
  */
 export const fetchTeamsGetMemberLegacy = (
   variables: TeamsGetMemberLegacyVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -81135,7 +81135,7 @@ export const fetchTeamsGetMemberLegacy = (
  * To list members in a team, the team must be visible to the authenticated user.
  */
 export const teamsGetMemberLegacyQuery = (
-  variables: TeamsGetMemberLegacyVariables,
+  variables: TeamsGetMemberLegacyVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({ signal }: { signal?: AbortSignal }) => Promise<undefined>;
@@ -81161,7 +81161,7 @@ export const useSuspenseTeamsGetMemberLegacy = <TData = undefined>(
   options?: Omit<
     reactQuery.UseQueryOptions<undefined, TeamsGetMemberLegacyError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -81187,7 +81187,7 @@ export const useTeamsGetMemberLegacy = <TData = undefined>(
   options?: Omit<
     reactQuery.UseQueryOptions<undefined, TeamsGetMemberLegacyError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<undefined, TeamsGetMemberLegacyError, TData>({
@@ -81232,7 +81232,7 @@ export type TeamsAddMemberLegacyVariables = {
  */
 export const fetchTeamsAddMemberLegacy = (
   variables: TeamsAddMemberLegacyVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -81269,7 +81269,7 @@ export const useTeamsAddMemberLegacy = (
       TeamsAddMemberLegacyVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -81312,7 +81312,7 @@ export type TeamsRemoveMembershipForUserLegacyVariables = {
  */
 export const fetchTeamsRemoveMembershipForUserLegacy = (
   variables: TeamsRemoveMembershipForUserLegacyVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -81345,7 +81345,7 @@ export const useTeamsRemoveMembershipForUserLegacy = (
       TeamsRemoveMembershipForUserLegacyVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -81396,7 +81396,7 @@ export type TeamsGetMembershipForUserLegacyVariables = {
  */
 export const fetchTeamsGetMembershipForUserLegacy = (
   variables: TeamsGetMembershipForUserLegacyVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.TeamMembership,
@@ -81425,7 +81425,7 @@ export const fetchTeamsGetMembershipForUserLegacy = (
  * The `role` for organization owners is set to `maintainer`. For more information about `maintainer` roles, see [Create a team](https://docs.github.com/rest/reference/teams#create-a-team).
  */
 export const teamsGetMembershipForUserLegacyQuery = (
-  variables: TeamsGetMembershipForUserLegacyVariables,
+  variables: TeamsGetMembershipForUserLegacyVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -81466,7 +81466,7 @@ export const useSuspenseTeamsGetMembershipForUserLegacy = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -81503,7 +81503,7 @@ export const useTeamsGetMembershipForUserLegacy = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -81563,7 +81563,7 @@ export type TeamsAddOrUpdateMembershipForUserLegacyVariables = {
  */
 export const fetchTeamsAddOrUpdateMembershipForUserLegacy = (
   variables: TeamsAddOrUpdateMembershipForUserLegacyVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.TeamMembership,
@@ -81600,7 +81600,7 @@ export const useTeamsAddOrUpdateMembershipForUserLegacy = (
       TeamsAddOrUpdateMembershipForUserLegacyVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -81658,7 +81658,7 @@ export type TeamsListProjectsLegacyVariables = {
  */
 export const fetchTeamsListProjectsLegacy = (
   variables: TeamsListProjectsLegacyVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     TeamsListProjectsLegacyResponse,
@@ -81675,7 +81675,7 @@ export const fetchTeamsListProjectsLegacy = (
  * Lists the organization projects for a team.
  */
 export const teamsListProjectsLegacyQuery = (
-  variables: TeamsListProjectsLegacyVariables,
+  variables: TeamsListProjectsLegacyVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -81709,7 +81709,7 @@ export const useSuspenseTeamsListProjectsLegacy = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -81739,7 +81739,7 @@ export const useTeamsListProjectsLegacy = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -81786,7 +81786,7 @@ export type TeamsRemoveProjectLegacyVariables = {
  */
 export const fetchTeamsRemoveProjectLegacy = (
   variables: TeamsRemoveProjectLegacyVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -81815,7 +81815,7 @@ export const useTeamsRemoveProjectLegacy = (
       TeamsRemoveProjectLegacyVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -81854,7 +81854,7 @@ export type TeamsCheckPermissionsForProjectLegacyVariables = {
  */
 export const fetchTeamsCheckPermissionsForProjectLegacy = (
   variables: TeamsCheckPermissionsForProjectLegacyVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.TeamProject,
@@ -81876,7 +81876,7 @@ export const fetchTeamsCheckPermissionsForProjectLegacy = (
  * Checks whether a team has `read`, `write`, or `admin` permissions for an organization project. The response includes projects inherited from a parent team.
  */
 export const teamsCheckPermissionsForProjectLegacyQuery = (
-  variables: TeamsCheckPermissionsForProjectLegacyVariables,
+  variables: TeamsCheckPermissionsForProjectLegacyVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -81910,7 +81910,7 @@ export const useSuspenseTeamsCheckPermissionsForProjectLegacy = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -81940,7 +81940,7 @@ export const useTeamsCheckPermissionsForProjectLegacy = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -82003,7 +82003,7 @@ export type TeamsAddOrUpdateProjectPermissionsLegacyVariables = {
  */
 export const fetchTeamsAddOrUpdateProjectPermissionsLegacy = (
   variables: TeamsAddOrUpdateProjectPermissionsLegacyVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -82032,7 +82032,7 @@ export const useTeamsAddOrUpdateProjectPermissionsLegacy = (
       TeamsAddOrUpdateProjectPermissionsLegacyVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -82041,7 +82041,7 @@ export const useTeamsAddOrUpdateProjectPermissionsLegacy = (
     TeamsAddOrUpdateProjectPermissionsLegacyVariables
   >({
     mutationFn: (
-      variables: TeamsAddOrUpdateProjectPermissionsLegacyVariables,
+      variables: TeamsAddOrUpdateProjectPermissionsLegacyVariables
     ) =>
       fetchTeamsAddOrUpdateProjectPermissionsLegacy({
         ...fetcherOptions,
@@ -82090,7 +82090,7 @@ export type TeamsListReposLegacyVariables = {
  */
 export const fetchTeamsListReposLegacy = (
   variables: TeamsListReposLegacyVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     TeamsListReposLegacyResponse,
@@ -82105,7 +82105,7 @@ export const fetchTeamsListReposLegacy = (
  * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [List team repositories](https://docs.github.com/rest/reference/teams#list-team-repositories) endpoint.
  */
 export const teamsListReposLegacyQuery = (
-  variables: TeamsListReposLegacyVariables,
+  variables: TeamsListReposLegacyVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -82137,7 +82137,7 @@ export const useSuspenseTeamsListReposLegacy = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -82163,7 +82163,7 @@ export const useTeamsListReposLegacy = <TData = TeamsListReposLegacyResponse>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -82205,7 +82205,7 @@ export type TeamsRemoveRepoLegacyVariables = {
  */
 export const fetchTeamsRemoveRepoLegacy = (
   variables: TeamsRemoveRepoLegacyVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -82234,7 +82234,7 @@ export const useTeamsRemoveRepoLegacy = (
       TeamsRemoveRepoLegacyVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -82279,7 +82279,7 @@ export type TeamsCheckPermissionsForRepoLegacyVariables = {
  */
 export const fetchTeamsCheckPermissionsForRepoLegacy = (
   variables: TeamsCheckPermissionsForRepoLegacyVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.TeamRepository,
@@ -82303,7 +82303,7 @@ export const fetchTeamsCheckPermissionsForRepoLegacy = (
  * You can also get information about the specified repository, including what permissions the team grants on it, by passing the following custom [media type](https://docs.github.com/rest/overview/media-types/) via the `Accept` header:
  */
 export const teamsCheckPermissionsForRepoLegacyQuery = (
-  variables: TeamsCheckPermissionsForRepoLegacyVariables,
+  variables: TeamsCheckPermissionsForRepoLegacyVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -82339,7 +82339,7 @@ export const useSuspenseTeamsCheckPermissionsForRepoLegacy = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -82371,7 +82371,7 @@ export const useTeamsCheckPermissionsForRepoLegacy = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -82432,7 +82432,7 @@ export type TeamsAddOrUpdateRepoPermissionsLegacyVariables = {
  */
 export const fetchTeamsAddOrUpdateRepoPermissionsLegacy = (
   variables: TeamsAddOrUpdateRepoPermissionsLegacyVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -82463,7 +82463,7 @@ export const useTeamsAddOrUpdateRepoPermissionsLegacy = (
       TeamsAddOrUpdateRepoPermissionsLegacyVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -82529,7 +82529,7 @@ export type TeamsListChildLegacyVariables = {
  */
 export const fetchTeamsListChildLegacy = (
   variables: TeamsListChildLegacyVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     TeamsListChildLegacyResponse,
@@ -82544,7 +82544,7 @@ export const fetchTeamsListChildLegacy = (
  * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [`List child teams`](https://docs.github.com/rest/reference/teams#list-child-teams) endpoint.
  */
 export const teamsListChildLegacyQuery = (
-  variables: TeamsListChildLegacyVariables,
+  variables: TeamsListChildLegacyVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -82576,7 +82576,7 @@ export const useSuspenseTeamsListChildLegacy = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -82602,7 +82602,7 @@ export const useTeamsListChildLegacy = <TData = TeamsListChildLegacyResponse>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -82640,7 +82640,7 @@ export type UsersGetAuthenticatedVariables = GithubContext["fetcherOptions"];
  */
 export const fetchUsersGetAuthenticated = (
   variables: UsersGetAuthenticatedVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.PrivateUser | Schemas.PublicUser,
@@ -82657,7 +82657,7 @@ export const fetchUsersGetAuthenticated = (
  * If the authenticated user is authenticated through OAuth without the `user` scope, then the response lists only public profile information.
  */
 export const usersGetAuthenticatedQuery = (
-  variables: UsersGetAuthenticatedVariables,
+  variables: UsersGetAuthenticatedVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -82691,7 +82691,7 @@ export const useSuspenseUsersGetAuthenticated = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -82721,7 +82721,7 @@ export const useUsersGetAuthenticated = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -82814,7 +82814,7 @@ export type UsersUpdateAuthenticatedVariables = {
  */
 export const fetchUsersUpdateAuthenticated = (
   variables: UsersUpdateAuthenticatedVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.PrivateUser,
@@ -82836,7 +82836,7 @@ export const useUsersUpdateAuthenticated = (
       UsersUpdateAuthenticatedVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -82895,7 +82895,7 @@ export type UsersListBlockedByAuthenticatedUserVariables = {
  */
 export const fetchUsersListBlockedByAuthenticatedUser = (
   variables: UsersListBlockedByAuthenticatedUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     UsersListBlockedByAuthenticatedUserResponse,
@@ -82910,7 +82910,7 @@ export const fetchUsersListBlockedByAuthenticatedUser = (
  * List the users you've blocked on your personal account.
  */
 export const usersListBlockedByAuthenticatedUserQuery = (
-  variables: UsersListBlockedByAuthenticatedUserVariables,
+  variables: UsersListBlockedByAuthenticatedUserVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -82942,7 +82942,7 @@ export const useSuspenseUsersListBlockedByAuthenticatedUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -82970,7 +82970,7 @@ export const useUsersListBlockedByAuthenticatedUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -83016,7 +83016,7 @@ export type UsersUnblockVariables = {
 
 export const fetchUsersUnblock = (
   variables: UsersUnblockVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -83035,7 +83035,7 @@ export const useUsersUnblock = (
       UsersUnblockVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -83081,7 +83081,7 @@ export type UsersCheckBlockedVariables = {
 
 export const fetchUsersCheckBlocked = (
   variables: UsersCheckBlockedVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -83093,7 +83093,7 @@ export const fetchUsersCheckBlocked = (
   >({ url: "/user/blocks/{username}", method: "get", ...variables, signal });
 
 export const usersCheckBlockedQuery = (
-  variables: UsersCheckBlockedVariables,
+  variables: UsersCheckBlockedVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({ signal }: { signal?: AbortSignal }) => Promise<undefined>;
@@ -83112,7 +83112,7 @@ export const useSuspenseUsersCheckBlocked = <TData = undefined>(
   options?: Omit<
     reactQuery.UseQueryOptions<undefined, UsersCheckBlockedError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<undefined, UsersCheckBlockedError, TData>({
@@ -83127,7 +83127,7 @@ export const useUsersCheckBlocked = <TData = undefined>(
   options?: Omit<
     reactQuery.UseQueryOptions<undefined, UsersCheckBlockedError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<undefined, UsersCheckBlockedError, TData>({
@@ -83173,7 +83173,7 @@ export type UsersBlockVariables = {
 
 export const fetchUsersBlock = (
   variables: UsersBlockVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -83192,7 +83192,7 @@ export const useUsersBlock = (
       UsersBlockVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -83266,7 +83266,7 @@ export type CodespacesListForAuthenticatedUserVariables = {
  */
 export const fetchCodespacesListForAuthenticatedUser = (
   variables: CodespacesListForAuthenticatedUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     CodespacesListForAuthenticatedUserResponse,
@@ -83285,7 +83285,7 @@ export const fetchCodespacesListForAuthenticatedUser = (
  * GitHub Apps must have read access to the `codespaces` repository permission to use this endpoint.
  */
 export const codespacesListForAuthenticatedUserQuery = (
-  variables: CodespacesListForAuthenticatedUserVariables,
+  variables: CodespacesListForAuthenticatedUserVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -83321,7 +83321,7 @@ export const useSuspenseCodespacesListForAuthenticatedUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -83353,7 +83353,7 @@ export const useCodespacesListForAuthenticatedUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -83482,7 +83482,7 @@ export type CodespacesCreateForAuthenticatedUserVariables = {
  */
 export const fetchCodespacesCreateForAuthenticatedUser = (
   variables: CodespacesCreateForAuthenticatedUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.Codespace,
@@ -83590,7 +83590,7 @@ export const useCodespacesCreateForAuthenticatedUser = (
       CodespacesCreateForAuthenticatedUserVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -83644,7 +83644,7 @@ export type CodespacesListSecretsForAuthenticatedUserVariables = {
  */
 export const fetchCodespacesListSecretsForAuthenticatedUser = (
   variables: CodespacesListSecretsForAuthenticatedUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     CodespacesListSecretsForAuthenticatedUserResponse,
@@ -83664,7 +83664,7 @@ export const fetchCodespacesListSecretsForAuthenticatedUser = (
  * GitHub Apps must have read access to the `codespaces_user_secrets` user permission to use this endpoint.
  */
 export const codespacesListSecretsForAuthenticatedUserQuery = (
-  variables: CodespacesListSecretsForAuthenticatedUserVariables,
+  variables: CodespacesListSecretsForAuthenticatedUserVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -83701,7 +83701,7 @@ export const useSuspenseCodespacesListSecretsForAuthenticatedUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -83734,7 +83734,7 @@ export const useCodespacesListSecretsForAuthenticatedUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -83763,7 +83763,7 @@ export type CodespacesGetPublicKeyForAuthenticatedUserVariables =
  */
 export const fetchCodespacesGetPublicKeyForAuthenticatedUser = (
   variables: CodespacesGetPublicKeyForAuthenticatedUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.CodespacesUserPublicKey,
@@ -83787,7 +83787,7 @@ export const fetchCodespacesGetPublicKeyForAuthenticatedUser = (
  * GitHub Apps must have read access to the `codespaces_user_secrets` user permission to use this endpoint.
  */
 export const codespacesGetPublicKeyForAuthenticatedUserQuery = (
-  variables: CodespacesGetPublicKeyForAuthenticatedUserVariables,
+  variables: CodespacesGetPublicKeyForAuthenticatedUserVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -83823,7 +83823,7 @@ export const useSuspenseCodespacesGetPublicKeyForAuthenticatedUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -83855,7 +83855,7 @@ export const useCodespacesGetPublicKeyForAuthenticatedUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -83892,7 +83892,7 @@ export type CodespacesDeleteSecretForAuthenticatedUserVariables = {
  */
 export const fetchCodespacesDeleteSecretForAuthenticatedUser = (
   variables: CodespacesDeleteSecretForAuthenticatedUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -83923,7 +83923,7 @@ export const useCodespacesDeleteSecretForAuthenticatedUser = (
       CodespacesDeleteSecretForAuthenticatedUserVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -83932,7 +83932,7 @@ export const useCodespacesDeleteSecretForAuthenticatedUser = (
     CodespacesDeleteSecretForAuthenticatedUserVariables
   >({
     mutationFn: (
-      variables: CodespacesDeleteSecretForAuthenticatedUserVariables,
+      variables: CodespacesDeleteSecretForAuthenticatedUserVariables
     ) =>
       fetchCodespacesDeleteSecretForAuthenticatedUser({
         ...fetcherOptions,
@@ -83965,7 +83965,7 @@ export type CodespacesGetSecretForAuthenticatedUserVariables = {
  */
 export const fetchCodespacesGetSecretForAuthenticatedUser = (
   variables: CodespacesGetSecretForAuthenticatedUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.CodespacesSecret,
@@ -83989,7 +83989,7 @@ export const fetchCodespacesGetSecretForAuthenticatedUser = (
  * GitHub Apps must have read access to the `codespaces_user_secrets` user permission to use this endpoint.
  */
 export const codespacesGetSecretForAuthenticatedUserQuery = (
-  variables: CodespacesGetSecretForAuthenticatedUserVariables,
+  variables: CodespacesGetSecretForAuthenticatedUserVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -84025,7 +84025,7 @@ export const useSuspenseCodespacesGetSecretForAuthenticatedUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -84057,7 +84057,7 @@ export const useCodespacesGetSecretForAuthenticatedUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -84194,7 +84194,7 @@ export type CodespacesCreateOrUpdateSecretForAuthenticatedUserVariables = {
  */
 export const fetchCodespacesCreateOrUpdateSecretForAuthenticatedUser = (
   variables: CodespacesCreateOrUpdateSecretForAuthenticatedUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.EmptyObject,
@@ -84298,7 +84298,7 @@ export const useCodespacesCreateOrUpdateSecretForAuthenticatedUser = (
       CodespacesCreateOrUpdateSecretForAuthenticatedUserVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -84307,7 +84307,7 @@ export const useCodespacesCreateOrUpdateSecretForAuthenticatedUser = (
     CodespacesCreateOrUpdateSecretForAuthenticatedUserVariables
   >({
     mutationFn: (
-      variables: CodespacesCreateOrUpdateSecretForAuthenticatedUserVariables,
+      variables: CodespacesCreateOrUpdateSecretForAuthenticatedUserVariables
     ) =>
       fetchCodespacesCreateOrUpdateSecretForAuthenticatedUser({
         ...fetcherOptions,
@@ -84363,7 +84363,7 @@ export type CodespacesListRepositoriesForSecretForAuthenticatedUserVariables = {
  */
 export const fetchCodespacesListRepositoriesForSecretForAuthenticatedUser = (
   variables: CodespacesListRepositoriesForSecretForAuthenticatedUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     CodespacesListRepositoriesForSecretForAuthenticatedUserResponse,
@@ -84387,7 +84387,7 @@ export const fetchCodespacesListRepositoriesForSecretForAuthenticatedUser = (
  * GitHub Apps must have read access to the `codespaces_user_secrets` user permission and write access to the `codespaces_secrets` repository permission on all referenced repositories to use this endpoint.
  */
 export const codespacesListRepositoriesForSecretForAuthenticatedUserQuery = (
-  variables: CodespacesListRepositoriesForSecretForAuthenticatedUserVariables,
+  variables: CodespacesListRepositoriesForSecretForAuthenticatedUserVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -84404,7 +84404,7 @@ export const codespacesListRepositoriesForSecretForAuthenticatedUserQuery = (
   queryFn: ({ signal }: { signal?: AbortSignal }) =>
     fetchCodespacesListRepositoriesForSecretForAuthenticatedUser(
       variables,
-      signal,
+      signal
     ),
 });
 
@@ -84425,7 +84425,7 @@ export const useSuspenseCodespacesListRepositoriesForSecretForAuthenticatedUser 
         TData
       >,
       "queryKey" | "queryFn" | "initialData"
-    >,
+    >
   ) => {
     const { queryOptions } = useGithubContext(options);
     return reactQuery.useSuspenseQuery<
@@ -84434,7 +84434,7 @@ export const useSuspenseCodespacesListRepositoriesForSecretForAuthenticatedUser 
       TData
     >({
       ...codespacesListRepositoriesForSecretForAuthenticatedUserQuery(
-        variables,
+        variables
       ),
       ...options,
       ...queryOptions,
@@ -84459,7 +84459,7 @@ export const useCodespacesListRepositoriesForSecretForAuthenticatedUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -84522,7 +84522,7 @@ export type CodespacesSetRepositoriesForSecretForAuthenticatedUserVariables = {
  */
 export const fetchCodespacesSetRepositoriesForSecretForAuthenticatedUser = (
   variables: CodespacesSetRepositoriesForSecretForAuthenticatedUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -84553,7 +84553,7 @@ export const useCodespacesSetRepositoriesForSecretForAuthenticatedUser = (
       CodespacesSetRepositoriesForSecretForAuthenticatedUserVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -84562,7 +84562,7 @@ export const useCodespacesSetRepositoriesForSecretForAuthenticatedUser = (
     CodespacesSetRepositoriesForSecretForAuthenticatedUserVariables
   >({
     mutationFn: (
-      variables: CodespacesSetRepositoriesForSecretForAuthenticatedUserVariables,
+      variables: CodespacesSetRepositoriesForSecretForAuthenticatedUserVariables
     ) =>
       fetchCodespacesSetRepositoriesForSecretForAuthenticatedUser({
         ...fetcherOptions,
@@ -84612,7 +84612,7 @@ export type CodespacesRemoveRepositoryForSecretForAuthenticatedUserVariables = {
  */
 export const fetchCodespacesRemoveRepositoryForSecretForAuthenticatedUser = (
   variables: CodespacesRemoveRepositoryForSecretForAuthenticatedUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -84641,7 +84641,7 @@ export const useCodespacesRemoveRepositoryForSecretForAuthenticatedUser = (
       CodespacesRemoveRepositoryForSecretForAuthenticatedUserVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -84650,7 +84650,7 @@ export const useCodespacesRemoveRepositoryForSecretForAuthenticatedUser = (
     CodespacesRemoveRepositoryForSecretForAuthenticatedUserVariables
   >({
     mutationFn: (
-      variables: CodespacesRemoveRepositoryForSecretForAuthenticatedUserVariables,
+      variables: CodespacesRemoveRepositoryForSecretForAuthenticatedUserVariables
     ) =>
       fetchCodespacesRemoveRepositoryForSecretForAuthenticatedUser({
         ...fetcherOptions,
@@ -84699,7 +84699,7 @@ export type CodespacesAddRepositoryForSecretForAuthenticatedUserVariables = {
  */
 export const fetchCodespacesAddRepositoryForSecretForAuthenticatedUser = (
   variables: CodespacesAddRepositoryForSecretForAuthenticatedUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -84728,7 +84728,7 @@ export const useCodespacesAddRepositoryForSecretForAuthenticatedUser = (
       CodespacesAddRepositoryForSecretForAuthenticatedUserVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -84737,7 +84737,7 @@ export const useCodespacesAddRepositoryForSecretForAuthenticatedUser = (
     CodespacesAddRepositoryForSecretForAuthenticatedUserVariables
   >({
     mutationFn: (
-      variables: CodespacesAddRepositoryForSecretForAuthenticatedUserVariables,
+      variables: CodespacesAddRepositoryForSecretForAuthenticatedUserVariables
     ) =>
       fetchCodespacesAddRepositoryForSecretForAuthenticatedUser({
         ...fetcherOptions,
@@ -84790,7 +84790,7 @@ export type CodespacesDeleteForAuthenticatedUserVariables = {
  */
 export const fetchCodespacesDeleteForAuthenticatedUser = (
   variables: CodespacesDeleteForAuthenticatedUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Responses.Accepted,
@@ -84821,7 +84821,7 @@ export const useCodespacesDeleteForAuthenticatedUser = (
       CodespacesDeleteForAuthenticatedUserVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -84881,7 +84881,7 @@ export type CodespacesGetForAuthenticatedUserVariables = {
  */
 export const fetchCodespacesGetForAuthenticatedUser = (
   variables: CodespacesGetForAuthenticatedUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.Codespace,
@@ -84905,7 +84905,7 @@ export const fetchCodespacesGetForAuthenticatedUser = (
  * GitHub Apps must have read access to the `codespaces` repository permission to use this endpoint.
  */
 export const codespacesGetForAuthenticatedUserQuery = (
-  variables: CodespacesGetForAuthenticatedUserVariables,
+  variables: CodespacesGetForAuthenticatedUserVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({ signal }: { signal?: AbortSignal }) => Promise<Schemas.Codespace>;
@@ -84937,7 +84937,7 @@ export const useSuspenseCodespacesGetForAuthenticatedUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -84967,7 +84967,7 @@ export const useCodespacesGetForAuthenticatedUser = <TData = Schemas.Codespace>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -85034,7 +85034,7 @@ export type CodespacesUpdateForAuthenticatedUserVariables = {
  */
 export const fetchCodespacesUpdateForAuthenticatedUser = (
   variables: CodespacesUpdateForAuthenticatedUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.Codespace,
@@ -85067,7 +85067,7 @@ export const useCodespacesUpdateForAuthenticatedUser = (
       CodespacesUpdateForAuthenticatedUserVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -85129,7 +85129,7 @@ export type CodespacesExportForAuthenticatedUserVariables = {
  */
 export const fetchCodespacesExportForAuthenticatedUser = (
   variables: CodespacesExportForAuthenticatedUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.CodespaceExportDetails,
@@ -85162,7 +85162,7 @@ export const useCodespacesExportForAuthenticatedUser = (
       CodespacesExportForAuthenticatedUserVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -85209,7 +85209,7 @@ export type CodespacesGetExportDetailsForAuthenticatedUserVariables = {
  */
 export const fetchCodespacesGetExportDetailsForAuthenticatedUser = (
   variables: CodespacesGetExportDetailsForAuthenticatedUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.CodespaceExportDetails,
@@ -85233,7 +85233,7 @@ export const fetchCodespacesGetExportDetailsForAuthenticatedUser = (
  * GitHub Apps must have read access to the `codespaces_lifecycle_admin` repository permission to use this endpoint.
  */
 export const codespacesGetExportDetailsForAuthenticatedUserQuery = (
-  variables: CodespacesGetExportDetailsForAuthenticatedUserVariables,
+  variables: CodespacesGetExportDetailsForAuthenticatedUserVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -85269,7 +85269,7 @@ export const useSuspenseCodespacesGetExportDetailsForAuthenticatedUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -85301,7 +85301,7 @@ export const useCodespacesGetExportDetailsForAuthenticatedUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -85364,7 +85364,7 @@ export type CodespacesCodespaceMachinesForAuthenticatedUserVariables = {
  */
 export const fetchCodespacesCodespaceMachinesForAuthenticatedUser = (
   variables: CodespacesCodespaceMachinesForAuthenticatedUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     CodespacesCodespaceMachinesForAuthenticatedUserResponse,
@@ -85388,7 +85388,7 @@ export const fetchCodespacesCodespaceMachinesForAuthenticatedUser = (
  * GitHub Apps must have read access to the `codespaces_metadata` repository permission to use this endpoint.
  */
 export const codespacesCodespaceMachinesForAuthenticatedUserQuery = (
-  variables: CodespacesCodespaceMachinesForAuthenticatedUserVariables,
+  variables: CodespacesCodespaceMachinesForAuthenticatedUserVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -85424,7 +85424,7 @@ export const useSuspenseCodespacesCodespaceMachinesForAuthenticatedUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -85456,7 +85456,7 @@ export const useCodespacesCodespaceMachinesForAuthenticatedUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -85527,7 +85527,7 @@ export type CodespacesPublishForAuthenticatedUserVariables = {
  */
 export const fetchCodespacesPublishForAuthenticatedUser = (
   variables: CodespacesPublishForAuthenticatedUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.CodespaceWithFullRepository,
@@ -85562,7 +85562,7 @@ export const useCodespacesPublishForAuthenticatedUser = (
       CodespacesPublishForAuthenticatedUserVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -85634,7 +85634,7 @@ export type CodespacesStartForAuthenticatedUserVariables = {
  */
 export const fetchCodespacesStartForAuthenticatedUser = (
   variables: CodespacesStartForAuthenticatedUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.Codespace,
@@ -85665,7 +85665,7 @@ export const useCodespacesStartForAuthenticatedUser = (
       CodespacesStartForAuthenticatedUserVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -85721,7 +85721,7 @@ export type CodespacesStopForAuthenticatedUserVariables = {
  */
 export const fetchCodespacesStopForAuthenticatedUser = (
   variables: CodespacesStopForAuthenticatedUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.Codespace,
@@ -85752,7 +85752,7 @@ export const useCodespacesStopForAuthenticatedUser = (
       CodespacesStopForAuthenticatedUserVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -85812,7 +85812,7 @@ export type UsersSetPrimaryEmailVisibilityForAuthenticatedUserVariables = {
  */
 export const fetchUsersSetPrimaryEmailVisibilityForAuthenticatedUser = (
   variables: UsersSetPrimaryEmailVisibilityForAuthenticatedUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     UsersSetPrimaryEmailVisibilityForAuthenticatedUserResponse,
@@ -85834,7 +85834,7 @@ export const useUsersSetPrimaryEmailVisibilityForAuthenticatedUser = (
       UsersSetPrimaryEmailVisibilityForAuthenticatedUserVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -85843,7 +85843,7 @@ export const useUsersSetPrimaryEmailVisibilityForAuthenticatedUser = (
     UsersSetPrimaryEmailVisibilityForAuthenticatedUserVariables
   >({
     mutationFn: (
-      variables: UsersSetPrimaryEmailVisibilityForAuthenticatedUserVariables,
+      variables: UsersSetPrimaryEmailVisibilityForAuthenticatedUserVariables
     ) =>
       fetchUsersSetPrimaryEmailVisibilityForAuthenticatedUser({
         ...fetcherOptions,
@@ -85893,7 +85893,7 @@ export type UsersDeleteEmailForAuthenticatedUserVariables = {
  */
 export const fetchUsersDeleteEmailForAuthenticatedUser = (
   variables: UsersDeleteEmailForAuthenticatedUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -85922,7 +85922,7 @@ export const useUsersDeleteEmailForAuthenticatedUser = (
       UsersDeleteEmailForAuthenticatedUserVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -85984,7 +85984,7 @@ export type UsersListEmailsForAuthenticatedUserVariables = {
  */
 export const fetchUsersListEmailsForAuthenticatedUser = (
   variables: UsersListEmailsForAuthenticatedUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     UsersListEmailsForAuthenticatedUserResponse,
@@ -85999,7 +85999,7 @@ export const fetchUsersListEmailsForAuthenticatedUser = (
  * Lists all of your email addresses, and specifies which one is visible to the public. This endpoint is accessible with the `user:email` scope.
  */
 export const usersListEmailsForAuthenticatedUserQuery = (
-  variables: UsersListEmailsForAuthenticatedUserVariables,
+  variables: UsersListEmailsForAuthenticatedUserVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -86031,7 +86031,7 @@ export const useSuspenseUsersListEmailsForAuthenticatedUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -86059,7 +86059,7 @@ export const useUsersListEmailsForAuthenticatedUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -86115,7 +86115,7 @@ export type UsersAddEmailForAuthenticatedUserVariables = {
  */
 export const fetchUsersAddEmailForAuthenticatedUser = (
   variables: UsersAddEmailForAuthenticatedUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     UsersAddEmailForAuthenticatedUserResponse,
@@ -86144,7 +86144,7 @@ export const useUsersAddEmailForAuthenticatedUser = (
       UsersAddEmailForAuthenticatedUserVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -86203,7 +86203,7 @@ export type UsersListFollowersForAuthenticatedUserVariables = {
  */
 export const fetchUsersListFollowersForAuthenticatedUser = (
   variables: UsersListFollowersForAuthenticatedUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     UsersListFollowersForAuthenticatedUserResponse,
@@ -86218,7 +86218,7 @@ export const fetchUsersListFollowersForAuthenticatedUser = (
  * Lists the people following the authenticated user.
  */
 export const usersListFollowersForAuthenticatedUserQuery = (
-  variables: UsersListFollowersForAuthenticatedUserVariables,
+  variables: UsersListFollowersForAuthenticatedUserVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -86250,7 +86250,7 @@ export const useSuspenseUsersListFollowersForAuthenticatedUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -86278,7 +86278,7 @@ export const useUsersListFollowersForAuthenticatedUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -86333,7 +86333,7 @@ export type UsersListFollowedByAuthenticatedUserVariables = {
  */
 export const fetchUsersListFollowedByAuthenticatedUser = (
   variables: UsersListFollowedByAuthenticatedUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     UsersListFollowedByAuthenticatedUserResponse,
@@ -86348,7 +86348,7 @@ export const fetchUsersListFollowedByAuthenticatedUser = (
  * Lists the people who the authenticated user follows.
  */
 export const usersListFollowedByAuthenticatedUserQuery = (
-  variables: UsersListFollowedByAuthenticatedUserVariables,
+  variables: UsersListFollowedByAuthenticatedUserVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -86380,7 +86380,7 @@ export const useSuspenseUsersListFollowedByAuthenticatedUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -86408,7 +86408,7 @@ export const useUsersListFollowedByAuthenticatedUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -86457,7 +86457,7 @@ export type UsersUnfollowVariables = {
  */
 export const fetchUsersUnfollow = (
   variables: UsersUnfollowVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -86484,7 +86484,7 @@ export const useUsersUnfollow = (
       UsersUnfollowVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -86531,7 +86531,7 @@ export type UsersCheckPersonIsFollowedByAuthenticatedVariables = {
 
 export const fetchUsersCheckPersonIsFollowedByAuthenticated = (
   variables: UsersCheckPersonIsFollowedByAuthenticatedVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -86543,7 +86543,7 @@ export const fetchUsersCheckPersonIsFollowedByAuthenticated = (
   >({ url: "/user/following/{username}", method: "get", ...variables, signal });
 
 export const usersCheckPersonIsFollowedByAuthenticatedQuery = (
-  variables: UsersCheckPersonIsFollowedByAuthenticatedVariables,
+  variables: UsersCheckPersonIsFollowedByAuthenticatedVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({ signal }: { signal?: AbortSignal }) => Promise<undefined>;
@@ -86568,7 +86568,7 @@ export const useSuspenseUsersCheckPersonIsFollowedByAuthenticated = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -86591,7 +86591,7 @@ export const useUsersCheckPersonIsFollowedByAuthenticated = <TData = undefined>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -86642,7 +86642,7 @@ export type UsersFollowVariables = {
  */
 export const fetchUsersFollow = (
   variables: UsersFollowVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -86666,7 +86666,7 @@ export const useUsersFollow = (
       UsersFollowVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -86725,7 +86725,7 @@ export type UsersListGpgKeysForAuthenticatedUserVariables = {
  */
 export const fetchUsersListGpgKeysForAuthenticatedUser = (
   variables: UsersListGpgKeysForAuthenticatedUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     UsersListGpgKeysForAuthenticatedUserResponse,
@@ -86740,7 +86740,7 @@ export const fetchUsersListGpgKeysForAuthenticatedUser = (
  * Lists the current user's GPG keys. Requires that you are authenticated via Basic Auth or via OAuth with at least `read:gpg_key` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
  */
 export const usersListGpgKeysForAuthenticatedUserQuery = (
-  variables: UsersListGpgKeysForAuthenticatedUserVariables,
+  variables: UsersListGpgKeysForAuthenticatedUserVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -86772,7 +86772,7 @@ export const useSuspenseUsersListGpgKeysForAuthenticatedUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -86800,7 +86800,7 @@ export const useUsersListGpgKeysForAuthenticatedUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -86857,7 +86857,7 @@ export type UsersCreateGpgKeyForAuthenticatedUserVariables = {
  */
 export const fetchUsersCreateGpgKeyForAuthenticatedUser = (
   variables: UsersCreateGpgKeyForAuthenticatedUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.GpgKey,
@@ -86879,7 +86879,7 @@ export const useUsersCreateGpgKeyForAuthenticatedUser = (
       UsersCreateGpgKeyForAuthenticatedUserVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -86935,7 +86935,7 @@ export type UsersDeleteGpgKeyForAuthenticatedUserVariables = {
  */
 export const fetchUsersDeleteGpgKeyForAuthenticatedUser = (
   variables: UsersDeleteGpgKeyForAuthenticatedUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -86962,7 +86962,7 @@ export const useUsersDeleteGpgKeyForAuthenticatedUser = (
       UsersDeleteGpgKeyForAuthenticatedUserVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -87014,7 +87014,7 @@ export type UsersGetGpgKeyForAuthenticatedUserVariables = {
  */
 export const fetchUsersGetGpgKeyForAuthenticatedUser = (
   variables: UsersGetGpgKeyForAuthenticatedUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.GpgKey,
@@ -87029,7 +87029,7 @@ export const fetchUsersGetGpgKeyForAuthenticatedUser = (
  * View extended details for a single GPG key. Requires that you are authenticated via Basic Auth or via OAuth with at least `read:gpg_key` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
  */
 export const usersGetGpgKeyForAuthenticatedUserQuery = (
-  variables: UsersGetGpgKeyForAuthenticatedUserVariables,
+  variables: UsersGetGpgKeyForAuthenticatedUserVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({ signal }: { signal?: AbortSignal }) => Promise<Schemas.GpgKey>;
@@ -87057,7 +87057,7 @@ export const useSuspenseUsersGetGpgKeyForAuthenticatedUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -87083,7 +87083,7 @@ export const useUsersGetGpgKeyForAuthenticatedUser = <TData = Schemas.GpgKey>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -87148,7 +87148,7 @@ export type AppsListInstallationsForAuthenticatedUserVariables = {
  */
 export const fetchAppsListInstallationsForAuthenticatedUser = (
   variables: AppsListInstallationsForAuthenticatedUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     AppsListInstallationsForAuthenticatedUserResponse,
@@ -87169,7 +87169,7 @@ export const fetchAppsListInstallationsForAuthenticatedUser = (
  * You can find the permissions for the installation under the `permissions` key.
  */
 export const appsListInstallationsForAuthenticatedUserQuery = (
-  variables: AppsListInstallationsForAuthenticatedUserVariables,
+  variables: AppsListInstallationsForAuthenticatedUserVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -87207,7 +87207,7 @@ export const useSuspenseAppsListInstallationsForAuthenticatedUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -87241,7 +87241,7 @@ export const useAppsListInstallationsForAuthenticatedUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -87315,7 +87315,7 @@ export type AppsListInstallationReposForAuthenticatedUserVariables = {
  */
 export const fetchAppsListInstallationReposForAuthenticatedUser = (
   variables: AppsListInstallationReposForAuthenticatedUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     AppsListInstallationReposForAuthenticatedUserResponse,
@@ -87341,7 +87341,7 @@ export const fetchAppsListInstallationReposForAuthenticatedUser = (
  * The access the user has to each repository is included in the hash under the `permissions` key.
  */
 export const appsListInstallationReposForAuthenticatedUserQuery = (
-  variables: AppsListInstallationReposForAuthenticatedUserVariables,
+  variables: AppsListInstallationReposForAuthenticatedUserVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -87379,7 +87379,7 @@ export const useSuspenseAppsListInstallationReposForAuthenticatedUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -87413,7 +87413,7 @@ export const useAppsListInstallationReposForAuthenticatedUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -87465,7 +87465,7 @@ export type AppsRemoveRepoFromInstallationForAuthenticatedUserVariables = {
  */
 export const fetchAppsRemoveRepoFromInstallationForAuthenticatedUser = (
   variables: AppsRemoveRepoFromInstallationForAuthenticatedUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -87494,7 +87494,7 @@ export const useAppsRemoveRepoFromInstallationForAuthenticatedUser = (
       AppsRemoveRepoFromInstallationForAuthenticatedUserVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -87503,7 +87503,7 @@ export const useAppsRemoveRepoFromInstallationForAuthenticatedUser = (
     AppsRemoveRepoFromInstallationForAuthenticatedUserVariables
   >({
     mutationFn: (
-      variables: AppsRemoveRepoFromInstallationForAuthenticatedUserVariables,
+      variables: AppsRemoveRepoFromInstallationForAuthenticatedUserVariables
     ) =>
       fetchAppsRemoveRepoFromInstallationForAuthenticatedUser({
         ...fetcherOptions,
@@ -87551,7 +87551,7 @@ export type AppsAddRepoToInstallationForAuthenticatedUserVariables = {
  */
 export const fetchAppsAddRepoToInstallationForAuthenticatedUser = (
   variables: AppsAddRepoToInstallationForAuthenticatedUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -87580,7 +87580,7 @@ export const useAppsAddRepoToInstallationForAuthenticatedUser = (
       AppsAddRepoToInstallationForAuthenticatedUserVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -87589,7 +87589,7 @@ export const useAppsAddRepoToInstallationForAuthenticatedUser = (
     AppsAddRepoToInstallationForAuthenticatedUserVariables
   >({
     mutationFn: (
-      variables: AppsAddRepoToInstallationForAuthenticatedUserVariables,
+      variables: AppsAddRepoToInstallationForAuthenticatedUserVariables
     ) =>
       fetchAppsAddRepoToInstallationForAuthenticatedUser({
         ...fetcherOptions,
@@ -87610,7 +87610,7 @@ export type InteractionsRemoveRestrictionsForAuthenticatedUserVariables =
  */
 export const fetchInteractionsRemoveRestrictionsForAuthenticatedUser = (
   variables: InteractionsRemoveRestrictionsForAuthenticatedUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -87637,7 +87637,7 @@ export const useInteractionsRemoveRestrictionsForAuthenticatedUser = (
       InteractionsRemoveRestrictionsForAuthenticatedUserVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -87646,7 +87646,7 @@ export const useInteractionsRemoveRestrictionsForAuthenticatedUser = (
     InteractionsRemoveRestrictionsForAuthenticatedUserVariables
   >({
     mutationFn: (
-      variables: InteractionsRemoveRestrictionsForAuthenticatedUserVariables,
+      variables: InteractionsRemoveRestrictionsForAuthenticatedUserVariables
     ) =>
       fetchInteractionsRemoveRestrictionsForAuthenticatedUser({
         ...fetcherOptions,
@@ -87667,7 +87667,7 @@ export type InteractionsGetRestrictionsForAuthenticatedUserVariables =
  */
 export const fetchInteractionsGetRestrictionsForAuthenticatedUser = (
   variables: InteractionsGetRestrictionsForAuthenticatedUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.InteractionLimitResponse | {},
@@ -87682,7 +87682,7 @@ export const fetchInteractionsGetRestrictionsForAuthenticatedUser = (
  * Shows which type of GitHub user can interact with your public repositories and when the restriction expires.
  */
 export const interactionsGetRestrictionsForAuthenticatedUserQuery = (
-  variables: InteractionsGetRestrictionsForAuthenticatedUserVariables,
+  variables: InteractionsGetRestrictionsForAuthenticatedUserVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -87714,7 +87714,7 @@ export const useSuspenseInteractionsGetRestrictionsForAuthenticatedUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -87742,7 +87742,7 @@ export const useInteractionsGetRestrictionsForAuthenticatedUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -87771,7 +87771,7 @@ export type InteractionsSetRestrictionsForAuthenticatedUserVariables = {
  */
 export const fetchInteractionsSetRestrictionsForAuthenticatedUser = (
   variables: InteractionsSetRestrictionsForAuthenticatedUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.InteractionLimitResponse,
@@ -87793,7 +87793,7 @@ export const useInteractionsSetRestrictionsForAuthenticatedUser = (
       InteractionsSetRestrictionsForAuthenticatedUserVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -87802,7 +87802,7 @@ export const useInteractionsSetRestrictionsForAuthenticatedUser = (
     InteractionsSetRestrictionsForAuthenticatedUserVariables
   >({
     mutationFn: (
-      variables: InteractionsSetRestrictionsForAuthenticatedUserVariables,
+      variables: InteractionsSetRestrictionsForAuthenticatedUserVariables
     ) =>
       fetchInteractionsSetRestrictionsForAuthenticatedUser({
         ...fetcherOptions,
@@ -87894,7 +87894,7 @@ export type IssuesListForAuthenticatedUserVariables = {
  */
 export const fetchIssuesListForAuthenticatedUser = (
   variables: IssuesListForAuthenticatedUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     IssuesListForAuthenticatedUserResponse,
@@ -87914,7 +87914,7 @@ export const fetchIssuesListForAuthenticatedUser = (
  * request id, use the "[List pull requests](https://docs.github.com/rest/reference/pulls#list-pull-requests)" endpoint.
  */
 export const issuesListForAuthenticatedUserQuery = (
-  variables: IssuesListForAuthenticatedUserVariables,
+  variables: IssuesListForAuthenticatedUserVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -87951,7 +87951,7 @@ export const useSuspenseIssuesListForAuthenticatedUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -87984,7 +87984,7 @@ export const useIssuesListForAuthenticatedUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -88044,7 +88044,7 @@ export type UsersListPublicSshKeysForAuthenticatedUserVariables = {
  */
 export const fetchUsersListPublicSshKeysForAuthenticatedUser = (
   variables: UsersListPublicSshKeysForAuthenticatedUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     UsersListPublicSshKeysForAuthenticatedUserResponse,
@@ -88059,7 +88059,7 @@ export const fetchUsersListPublicSshKeysForAuthenticatedUser = (
  * Lists the public SSH keys for the authenticated user's GitHub account. Requires that you are authenticated via Basic Auth or via OAuth with at least `read:public_key` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
  */
 export const usersListPublicSshKeysForAuthenticatedUserQuery = (
-  variables: UsersListPublicSshKeysForAuthenticatedUserVariables,
+  variables: UsersListPublicSshKeysForAuthenticatedUserVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -88091,7 +88091,7 @@ export const useSuspenseUsersListPublicSshKeysForAuthenticatedUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -88119,7 +88119,7 @@ export const useUsersListPublicSshKeysForAuthenticatedUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -88181,7 +88181,7 @@ export type UsersCreatePublicSshKeyForAuthenticatedUserVariables = {
  */
 export const fetchUsersCreatePublicSshKeyForAuthenticatedUser = (
   variables: UsersCreatePublicSshKeyForAuthenticatedUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.Key,
@@ -88203,7 +88203,7 @@ export const useUsersCreatePublicSshKeyForAuthenticatedUser = (
       UsersCreatePublicSshKeyForAuthenticatedUserVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -88212,7 +88212,7 @@ export const useUsersCreatePublicSshKeyForAuthenticatedUser = (
     UsersCreatePublicSshKeyForAuthenticatedUserVariables
   >({
     mutationFn: (
-      variables: UsersCreatePublicSshKeyForAuthenticatedUserVariables,
+      variables: UsersCreatePublicSshKeyForAuthenticatedUserVariables
     ) =>
       fetchUsersCreatePublicSshKeyForAuthenticatedUser({
         ...fetcherOptions,
@@ -88258,7 +88258,7 @@ export type UsersDeletePublicSshKeyForAuthenticatedUserVariables = {
  */
 export const fetchUsersDeletePublicSshKeyForAuthenticatedUser = (
   variables: UsersDeletePublicSshKeyForAuthenticatedUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -88280,7 +88280,7 @@ export const useUsersDeletePublicSshKeyForAuthenticatedUser = (
       UsersDeletePublicSshKeyForAuthenticatedUserVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -88289,7 +88289,7 @@ export const useUsersDeletePublicSshKeyForAuthenticatedUser = (
     UsersDeletePublicSshKeyForAuthenticatedUserVariables
   >({
     mutationFn: (
-      variables: UsersDeletePublicSshKeyForAuthenticatedUserVariables,
+      variables: UsersDeletePublicSshKeyForAuthenticatedUserVariables
     ) =>
       fetchUsersDeletePublicSshKeyForAuthenticatedUser({
         ...fetcherOptions,
@@ -88335,7 +88335,7 @@ export type UsersGetPublicSshKeyForAuthenticatedUserVariables = {
  */
 export const fetchUsersGetPublicSshKeyForAuthenticatedUser = (
   variables: UsersGetPublicSshKeyForAuthenticatedUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.Key,
@@ -88350,7 +88350,7 @@ export const fetchUsersGetPublicSshKeyForAuthenticatedUser = (
  * View extended details for a single public SSH key. Requires that you are authenticated via Basic Auth or via OAuth with at least `read:public_key` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
  */
 export const usersGetPublicSshKeyForAuthenticatedUserQuery = (
-  variables: UsersGetPublicSshKeyForAuthenticatedUserVariables,
+  variables: UsersGetPublicSshKeyForAuthenticatedUserVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({ signal }: { signal?: AbortSignal }) => Promise<Schemas.Key>;
@@ -88378,7 +88378,7 @@ export const useSuspenseUsersGetPublicSshKeyForAuthenticatedUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -88406,7 +88406,7 @@ export const useUsersGetPublicSshKeyForAuthenticatedUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -88463,7 +88463,7 @@ export type AppsListSubscriptionsForAuthenticatedUserVariables = {
  */
 export const fetchAppsListSubscriptionsForAuthenticatedUser = (
   variables: AppsListSubscriptionsForAuthenticatedUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     AppsListSubscriptionsForAuthenticatedUserResponse,
@@ -88483,7 +88483,7 @@ export const fetchAppsListSubscriptionsForAuthenticatedUser = (
  * Lists the active subscriptions for the authenticated user. You must use a [user-to-server OAuth access token](https://docs.github.com/apps/building-github-apps/identifying-and-authorizing-users-for-github-apps/#identifying-users-on-your-site), created for a user who has authorized your GitHub App, to access this endpoint. . OAuth Apps must authenticate using an [OAuth token](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/).
  */
 export const appsListSubscriptionsForAuthenticatedUserQuery = (
-  variables: AppsListSubscriptionsForAuthenticatedUserVariables,
+  variables: AppsListSubscriptionsForAuthenticatedUserVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -88515,7 +88515,7 @@ export const useSuspenseAppsListSubscriptionsForAuthenticatedUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -88543,7 +88543,7 @@ export const useAppsListSubscriptionsForAuthenticatedUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -88596,7 +88596,7 @@ export type AppsListSubscriptionsForAuthenticatedUserStubbedVariables = {
  */
 export const fetchAppsListSubscriptionsForAuthenticatedUserStubbed = (
   variables: AppsListSubscriptionsForAuthenticatedUserStubbedVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     AppsListSubscriptionsForAuthenticatedUserStubbedResponse,
@@ -88616,7 +88616,7 @@ export const fetchAppsListSubscriptionsForAuthenticatedUserStubbed = (
  * Lists the active subscriptions for the authenticated user. You must use a [user-to-server OAuth access token](https://docs.github.com/apps/building-github-apps/identifying-and-authorizing-users-for-github-apps/#identifying-users-on-your-site), created for a user who has authorized your GitHub App, to access this endpoint. . OAuth Apps must authenticate using an [OAuth token](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/).
  */
 export const appsListSubscriptionsForAuthenticatedUserStubbedQuery = (
-  variables: AppsListSubscriptionsForAuthenticatedUserStubbedVariables,
+  variables: AppsListSubscriptionsForAuthenticatedUserStubbedVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -88648,7 +88648,7 @@ export const useSuspenseAppsListSubscriptionsForAuthenticatedUserStubbed = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -88676,7 +88676,7 @@ export const useAppsListSubscriptionsForAuthenticatedUserStubbed = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -88737,7 +88737,7 @@ export type OrgsListMembershipsForAuthenticatedUserVariables = {
 
 export const fetchOrgsListMembershipsForAuthenticatedUser = (
   variables: OrgsListMembershipsForAuthenticatedUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     OrgsListMembershipsForAuthenticatedUserResponse,
@@ -88749,7 +88749,7 @@ export const fetchOrgsListMembershipsForAuthenticatedUser = (
   >({ url: "/user/memberships/orgs", method: "get", ...variables, signal });
 
 export const orgsListMembershipsForAuthenticatedUserQuery = (
-  variables: OrgsListMembershipsForAuthenticatedUserVariables,
+  variables: OrgsListMembershipsForAuthenticatedUserVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -88778,7 +88778,7 @@ export const useSuspenseOrgsListMembershipsForAuthenticatedUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -88803,7 +88803,7 @@ export const useOrgsListMembershipsForAuthenticatedUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -88841,7 +88841,7 @@ export type OrgsGetMembershipForAuthenticatedUserVariables = {
 
 export const fetchOrgsGetMembershipForAuthenticatedUser = (
   variables: OrgsGetMembershipForAuthenticatedUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.OrgMembership,
@@ -88858,7 +88858,7 @@ export const fetchOrgsGetMembershipForAuthenticatedUser = (
   });
 
 export const orgsGetMembershipForAuthenticatedUserQuery = (
-  variables: OrgsGetMembershipForAuthenticatedUserVariables,
+  variables: OrgsGetMembershipForAuthenticatedUserVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -88887,7 +88887,7 @@ export const useSuspenseOrgsGetMembershipForAuthenticatedUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -88912,7 +88912,7 @@ export const useOrgsGetMembershipForAuthenticatedUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -88963,7 +88963,7 @@ export type OrgsUpdateMembershipForAuthenticatedUserVariables = {
 
 export const fetchOrgsUpdateMembershipForAuthenticatedUser = (
   variables: OrgsUpdateMembershipForAuthenticatedUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.OrgMembership,
@@ -88987,7 +88987,7 @@ export const useOrgsUpdateMembershipForAuthenticatedUser = (
       OrgsUpdateMembershipForAuthenticatedUserVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -88996,7 +88996,7 @@ export const useOrgsUpdateMembershipForAuthenticatedUser = (
     OrgsUpdateMembershipForAuthenticatedUserVariables
   >({
     mutationFn: (
-      variables: OrgsUpdateMembershipForAuthenticatedUserVariables,
+      variables: OrgsUpdateMembershipForAuthenticatedUserVariables
     ) =>
       fetchOrgsUpdateMembershipForAuthenticatedUser({
         ...fetcherOptions,
@@ -89047,7 +89047,7 @@ export type MigrationsListForAuthenticatedUserVariables = {
  */
 export const fetchMigrationsListForAuthenticatedUser = (
   variables: MigrationsListForAuthenticatedUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     MigrationsListForAuthenticatedUserResponse,
@@ -89062,7 +89062,7 @@ export const fetchMigrationsListForAuthenticatedUser = (
  * Lists all migrations a user has started.
  */
 export const migrationsListForAuthenticatedUserQuery = (
-  variables: MigrationsListForAuthenticatedUserVariables,
+  variables: MigrationsListForAuthenticatedUserVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -89094,7 +89094,7 @@ export const useSuspenseMigrationsListForAuthenticatedUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -89122,7 +89122,7 @@ export const useMigrationsListForAuthenticatedUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -89217,7 +89217,7 @@ export type MigrationsStartForAuthenticatedUserVariables = {
  */
 export const fetchMigrationsStartForAuthenticatedUser = (
   variables: MigrationsStartForAuthenticatedUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.Migration,
@@ -89239,7 +89239,7 @@ export const useMigrationsStartForAuthenticatedUser = (
       MigrationsStartForAuthenticatedUserVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -89303,7 +89303,7 @@ export type MigrationsGetStatusForAuthenticatedUserVariables = {
  */
 export const fetchMigrationsGetStatusForAuthenticatedUser = (
   variables: MigrationsGetStatusForAuthenticatedUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.Migration,
@@ -89330,7 +89330,7 @@ export const fetchMigrationsGetStatusForAuthenticatedUser = (
  * Once the migration has been `exported` you can [download the migration archive](https://docs.github.com/rest/migrations/users#download-a-user-migration-archive).
  */
 export const migrationsGetStatusForAuthenticatedUserQuery = (
-  variables: MigrationsGetStatusForAuthenticatedUserVariables,
+  variables: MigrationsGetStatusForAuthenticatedUserVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({ signal }: { signal?: AbortSignal }) => Promise<Schemas.Migration>;
@@ -89365,7 +89365,7 @@ export const useSuspenseMigrationsGetStatusForAuthenticatedUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -89400,7 +89400,7 @@ export const useMigrationsGetStatusForAuthenticatedUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -89450,7 +89450,7 @@ export type MigrationsDeleteArchiveForAuthenticatedUserVariables = {
  */
 export const fetchMigrationsDeleteArchiveForAuthenticatedUser = (
   variables: MigrationsDeleteArchiveForAuthenticatedUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -89477,7 +89477,7 @@ export const useMigrationsDeleteArchiveForAuthenticatedUser = (
       MigrationsDeleteArchiveForAuthenticatedUserVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -89486,7 +89486,7 @@ export const useMigrationsDeleteArchiveForAuthenticatedUser = (
     MigrationsDeleteArchiveForAuthenticatedUserVariables
   >({
     mutationFn: (
-      variables: MigrationsDeleteArchiveForAuthenticatedUserVariables,
+      variables: MigrationsDeleteArchiveForAuthenticatedUserVariables
     ) =>
       fetchMigrationsDeleteArchiveForAuthenticatedUser({
         ...fetcherOptions,
@@ -89548,7 +89548,7 @@ export type MigrationsGetArchiveForAuthenticatedUserVariables = {
  */
 export const fetchMigrationsGetArchiveForAuthenticatedUser = (
   variables: MigrationsGetArchiveForAuthenticatedUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -89588,7 +89588,7 @@ export const fetchMigrationsGetArchiveForAuthenticatedUser = (
  * The archive will also contain an `attachments` directory that includes all attachment files uploaded to GitHub.com and a `repositories` directory that contains the repository's Git data.
  */
 export const migrationsGetArchiveForAuthenticatedUserQuery = (
-  variables: MigrationsGetArchiveForAuthenticatedUserVariables,
+  variables: MigrationsGetArchiveForAuthenticatedUserVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({ signal }: { signal?: AbortSignal }) => Promise<undefined>;
@@ -89636,7 +89636,7 @@ export const useSuspenseMigrationsGetArchiveForAuthenticatedUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -89682,7 +89682,7 @@ export const useMigrationsGetArchiveForAuthenticatedUser = <TData = undefined>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -89736,7 +89736,7 @@ export type MigrationsUnlockRepoForAuthenticatedUserVariables = {
  */
 export const fetchMigrationsUnlockRepoForAuthenticatedUser = (
   variables: MigrationsUnlockRepoForAuthenticatedUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -89763,7 +89763,7 @@ export const useMigrationsUnlockRepoForAuthenticatedUser = (
       MigrationsUnlockRepoForAuthenticatedUserVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -89772,7 +89772,7 @@ export const useMigrationsUnlockRepoForAuthenticatedUser = (
     MigrationsUnlockRepoForAuthenticatedUserVariables
   >({
     mutationFn: (
-      variables: MigrationsUnlockRepoForAuthenticatedUserVariables,
+      variables: MigrationsUnlockRepoForAuthenticatedUserVariables
     ) =>
       fetchMigrationsUnlockRepoForAuthenticatedUser({
         ...fetcherOptions,
@@ -89823,7 +89823,7 @@ export type MigrationsListReposForAuthenticatedUserVariables = {
  */
 export const fetchMigrationsListReposForAuthenticatedUser = (
   variables: MigrationsListReposForAuthenticatedUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     MigrationsListReposForAuthenticatedUserResponse,
@@ -89843,7 +89843,7 @@ export const fetchMigrationsListReposForAuthenticatedUser = (
  * Lists all the repositories for this user migration.
  */
 export const migrationsListReposForAuthenticatedUserQuery = (
-  variables: MigrationsListReposForAuthenticatedUserVariables,
+  variables: MigrationsListReposForAuthenticatedUserVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -89875,7 +89875,7 @@ export const useSuspenseMigrationsListReposForAuthenticatedUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -89903,7 +89903,7 @@ export const useMigrationsListReposForAuthenticatedUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -89962,7 +89962,7 @@ export type OrgsListForAuthenticatedUserVariables = {
  */
 export const fetchOrgsListForAuthenticatedUser = (
   variables: OrgsListForAuthenticatedUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     OrgsListForAuthenticatedUserResponse,
@@ -89981,7 +89981,7 @@ export const fetchOrgsListForAuthenticatedUser = (
  * This only lists organizations that your authorization allows you to operate on in some way (e.g., you can list teams with `read:org` scope, you can publicize your organization membership with `user` scope, etc.). Therefore, this API requires at least `user` or `read:org` scope. OAuth requests with insufficient scope receive a `403 Forbidden` response.
  */
 export const orgsListForAuthenticatedUserQuery = (
-  variables: OrgsListForAuthenticatedUserVariables,
+  variables: OrgsListForAuthenticatedUserVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -90017,7 +90017,7 @@ export const useSuspenseOrgsListForAuthenticatedUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -90049,7 +90049,7 @@ export const useOrgsListForAuthenticatedUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -90094,7 +90094,7 @@ export type PackagesListPackagesForAuthenticatedUserVariables = {
  */
 export const fetchPackagesListPackagesForAuthenticatedUser = (
   variables: PackagesListPackagesForAuthenticatedUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     PackagesListPackagesForAuthenticatedUserResponse,
@@ -90111,7 +90111,7 @@ export const fetchPackagesListPackagesForAuthenticatedUser = (
  * To use this endpoint, you must authenticate using an access token with the `read:packages` scope. If the `package_type` belongs to a GitHub Packages registry that only supports repository-scoped permissions, your token must also include the `repo` scope. For the list of GitHub Packages registries that only support repository-scoped permissions, see "[About permissions for GitHub Packages](https://docs.github.com/packages/learn-github-packages/about-permissions-for-github-packages#permissions-for-repository-scoped-packages)."
  */
 export const packagesListPackagesForAuthenticatedUserQuery = (
-  variables: PackagesListPackagesForAuthenticatedUserVariables,
+  variables: PackagesListPackagesForAuthenticatedUserVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -90145,7 +90145,7 @@ export const useSuspensePackagesListPackagesForAuthenticatedUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -90175,7 +90175,7 @@ export const usePackagesListPackagesForAuthenticatedUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -90228,7 +90228,7 @@ export type PackagesDeletePackageForAuthenticatedUserVariables = {
  */
 export const fetchPackagesDeletePackageForAuthenticatedUser = (
   variables: PackagesDeletePackageForAuthenticatedUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -90258,7 +90258,7 @@ export const usePackagesDeletePackageForAuthenticatedUser = (
       PackagesDeletePackageForAuthenticatedUserVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -90267,7 +90267,7 @@ export const usePackagesDeletePackageForAuthenticatedUser = (
     PackagesDeletePackageForAuthenticatedUserVariables
   >({
     mutationFn: (
-      variables: PackagesDeletePackageForAuthenticatedUserVariables,
+      variables: PackagesDeletePackageForAuthenticatedUserVariables
     ) =>
       fetchPackagesDeletePackageForAuthenticatedUser({
         ...fetcherOptions,
@@ -90302,7 +90302,7 @@ export type PackagesGetPackageForAuthenticatedUserVariables = {
  */
 export const fetchPackagesGetPackageForAuthenticatedUser = (
   variables: PackagesGetPackageForAuthenticatedUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.Package,
@@ -90324,7 +90324,7 @@ export const fetchPackagesGetPackageForAuthenticatedUser = (
  * To use this endpoint, you must authenticate using an access token with the `read:packages` scope. If the `package_type` belongs to a GitHub Packages registry that only supports repository-scoped permissions, your token must also include the `repo` scope. For the list of GitHub Packages registries that only support repository-scoped permissions, see "[About permissions for GitHub Packages](https://docs.github.com/packages/learn-github-packages/about-permissions-for-github-packages#permissions-for-repository-scoped-packages)."
  */
 export const packagesGetPackageForAuthenticatedUserQuery = (
-  variables: PackagesGetPackageForAuthenticatedUserVariables,
+  variables: PackagesGetPackageForAuthenticatedUserVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({ signal }: { signal?: AbortSignal }) => Promise<Schemas.Package>;
@@ -90354,7 +90354,7 @@ export const useSuspensePackagesGetPackageForAuthenticatedUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -90384,7 +90384,7 @@ export const usePackagesGetPackageForAuthenticatedUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -90448,7 +90448,7 @@ export type PackagesRestorePackageForAuthenticatedUserVariables = {
  */
 export const fetchPackagesRestorePackageForAuthenticatedUser = (
   variables: PackagesRestorePackageForAuthenticatedUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -90481,7 +90481,7 @@ export const usePackagesRestorePackageForAuthenticatedUser = (
       PackagesRestorePackageForAuthenticatedUserVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -90490,7 +90490,7 @@ export const usePackagesRestorePackageForAuthenticatedUser = (
     PackagesRestorePackageForAuthenticatedUserVariables
   >({
     mutationFn: (
-      variables: PackagesRestorePackageForAuthenticatedUserVariables,
+      variables: PackagesRestorePackageForAuthenticatedUserVariables
     ) =>
       fetchPackagesRestorePackageForAuthenticatedUser({
         ...fetcherOptions,
@@ -90573,7 +90573,7 @@ export type PackagesGetAllPackageVersionsForPackageOwnedByAuthenticatedUserVaria
 export const fetchPackagesGetAllPackageVersionsForPackageOwnedByAuthenticatedUser =
   (
     variables: PackagesGetAllPackageVersionsForPackageOwnedByAuthenticatedUserVariables,
-    signal?: AbortSignal,
+    signal?: AbortSignal
   ) =>
     githubFetch<
       PackagesGetAllPackageVersionsForPackageOwnedByAuthenticatedUserResponse,
@@ -90596,7 +90596,7 @@ export const fetchPackagesGetAllPackageVersionsForPackageOwnedByAuthenticatedUse
  */
 export const packagesGetAllPackageVersionsForPackageOwnedByAuthenticatedUserQuery =
   (
-    variables: PackagesGetAllPackageVersionsForPackageOwnedByAuthenticatedUserVariables,
+    variables: PackagesGetAllPackageVersionsForPackageOwnedByAuthenticatedUserVariables
   ): {
     queryKey: reactQuery.QueryKey;
     queryFn: ({
@@ -90614,7 +90614,7 @@ export const packagesGetAllPackageVersionsForPackageOwnedByAuthenticatedUserQuer
     queryFn: ({ signal }: { signal?: AbortSignal }) =>
       fetchPackagesGetAllPackageVersionsForPackageOwnedByAuthenticatedUser(
         variables,
-        signal,
+        signal
       ),
   });
 
@@ -90635,7 +90635,7 @@ export const useSuspensePackagesGetAllPackageVersionsForPackageOwnedByAuthentica
         TData
       >,
       "queryKey" | "queryFn" | "initialData"
-    >,
+    >
   ) => {
     const { queryOptions } = useGithubContext(options);
     return reactQuery.useSuspenseQuery<
@@ -90644,7 +90644,7 @@ export const useSuspensePackagesGetAllPackageVersionsForPackageOwnedByAuthentica
       TData
     >({
       ...packagesGetAllPackageVersionsForPackageOwnedByAuthenticatedUserQuery(
-        variables,
+        variables
       ),
       ...options,
       ...queryOptions,
@@ -90668,7 +90668,7 @@ export const usePackagesGetAllPackageVersionsForPackageOwnedByAuthenticatedUser 
         TData
       >,
       "queryKey" | "queryFn" | "initialData"
-    >,
+    >
   ) => {
     const { queryOptions } = useGithubContext(options);
     return reactQuery.useQuery<
@@ -90677,7 +90677,7 @@ export const usePackagesGetAllPackageVersionsForPackageOwnedByAuthenticatedUser 
       TData
     >({
       ...packagesGetAllPackageVersionsForPackageOwnedByAuthenticatedUserQuery(
-        variables,
+        variables
       ),
       ...options,
       ...queryOptions,
@@ -90727,7 +90727,7 @@ export type PackagesDeletePackageVersionForAuthenticatedUserVariables = {
  */
 export const fetchPackagesDeletePackageVersionForAuthenticatedUser = (
   variables: PackagesDeletePackageVersionForAuthenticatedUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -90757,7 +90757,7 @@ export const usePackagesDeletePackageVersionForAuthenticatedUser = (
       PackagesDeletePackageVersionForAuthenticatedUserVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -90766,7 +90766,7 @@ export const usePackagesDeletePackageVersionForAuthenticatedUser = (
     PackagesDeletePackageVersionForAuthenticatedUserVariables
   >({
     mutationFn: (
-      variables: PackagesDeletePackageVersionForAuthenticatedUserVariables,
+      variables: PackagesDeletePackageVersionForAuthenticatedUserVariables
     ) =>
       fetchPackagesDeletePackageVersionForAuthenticatedUser({
         ...fetcherOptions,
@@ -90805,7 +90805,7 @@ export type PackagesGetPackageVersionForAuthenticatedUserVariables = {
  */
 export const fetchPackagesGetPackageVersionForAuthenticatedUser = (
   variables: PackagesGetPackageVersionForAuthenticatedUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.PackageVersion,
@@ -90827,7 +90827,7 @@ export const fetchPackagesGetPackageVersionForAuthenticatedUser = (
  * To use this endpoint, you must authenticate using an access token with the `read:packages` scope. If the `package_type` belongs to a GitHub Packages registry that only supports repository-scoped permissions, your token must also include the `repo` scope. For the list of GitHub Packages registries that only support repository-scoped permissions, see "[About permissions for GitHub Packages](https://docs.github.com/packages/learn-github-packages/about-permissions-for-github-packages#permissions-for-repository-scoped-packages)."
  */
 export const packagesGetPackageVersionForAuthenticatedUserQuery = (
-  variables: PackagesGetPackageVersionForAuthenticatedUserVariables,
+  variables: PackagesGetPackageVersionForAuthenticatedUserVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -90861,7 +90861,7 @@ export const useSuspensePackagesGetPackageVersionForAuthenticatedUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -90891,7 +90891,7 @@ export const usePackagesGetPackageVersionForAuthenticatedUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -90951,7 +90951,7 @@ export type PackagesRestorePackageVersionForAuthenticatedUserVariables = {
  */
 export const fetchPackagesRestorePackageVersionForAuthenticatedUser = (
   variables: PackagesRestorePackageVersionForAuthenticatedUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -90984,7 +90984,7 @@ export const usePackagesRestorePackageVersionForAuthenticatedUser = (
       PackagesRestorePackageVersionForAuthenticatedUserVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -90993,7 +90993,7 @@ export const usePackagesRestorePackageVersionForAuthenticatedUser = (
     PackagesRestorePackageVersionForAuthenticatedUserVariables
   >({
     mutationFn: (
-      variables: PackagesRestorePackageVersionForAuthenticatedUserVariables,
+      variables: PackagesRestorePackageVersionForAuthenticatedUserVariables
     ) =>
       fetchPackagesRestorePackageVersionForAuthenticatedUser({
         ...fetcherOptions,
@@ -91046,7 +91046,7 @@ export type ProjectsCreateForAuthenticatedUserVariables = {
  */
 export const fetchProjectsCreateForAuthenticatedUser = (
   variables: ProjectsCreateForAuthenticatedUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.Project,
@@ -91068,7 +91068,7 @@ export const useProjectsCreateForAuthenticatedUser = (
       ProjectsCreateForAuthenticatedUserVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -91131,7 +91131,7 @@ export type UsersListPublicEmailsForAuthenticatedUserVariables = {
  */
 export const fetchUsersListPublicEmailsForAuthenticatedUser = (
   variables: UsersListPublicEmailsForAuthenticatedUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     UsersListPublicEmailsForAuthenticatedUserResponse,
@@ -91146,7 +91146,7 @@ export const fetchUsersListPublicEmailsForAuthenticatedUser = (
  * Lists your publicly visible email address, which you can set with the [Set primary email visibility for the authenticated user](https://docs.github.com/rest/reference/users#set-primary-email-visibility-for-the-authenticated-user) endpoint. This endpoint is accessible with the `user:email` scope.
  */
 export const usersListPublicEmailsForAuthenticatedUserQuery = (
-  variables: UsersListPublicEmailsForAuthenticatedUserVariables,
+  variables: UsersListPublicEmailsForAuthenticatedUserVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -91178,7 +91178,7 @@ export const useSuspenseUsersListPublicEmailsForAuthenticatedUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -91206,7 +91206,7 @@ export const useUsersListPublicEmailsForAuthenticatedUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -91310,7 +91310,7 @@ export type ReposListForAuthenticatedUserVariables = {
  */
 export const fetchReposListForAuthenticatedUser = (
   variables: ReposListForAuthenticatedUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ReposListForAuthenticatedUserResponse,
@@ -91327,7 +91327,7 @@ export const fetchReposListForAuthenticatedUser = (
  * The authenticated user has explicit permission to access repositories they own, repositories where they are a collaborator, and repositories that they can access through an organization membership.
  */
 export const reposListForAuthenticatedUserQuery = (
-  variables: ReposListForAuthenticatedUserVariables,
+  variables: ReposListForAuthenticatedUserVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -91361,7 +91361,7 @@ export const useSuspenseReposListForAuthenticatedUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -91391,7 +91391,7 @@ export const useReposListForAuthenticatedUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -91600,7 +91600,7 @@ export type ReposCreateForAuthenticatedUserVariables = {
  */
 export const fetchReposCreateForAuthenticatedUser = (
   variables: ReposCreateForAuthenticatedUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.Repository,
@@ -91629,7 +91629,7 @@ export const useReposCreateForAuthenticatedUser = (
       ReposCreateForAuthenticatedUserVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -91690,7 +91690,7 @@ export type ReposListInvitationsForAuthenticatedUserVariables = {
  */
 export const fetchReposListInvitationsForAuthenticatedUser = (
   variables: ReposListInvitationsForAuthenticatedUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ReposListInvitationsForAuthenticatedUserResponse,
@@ -91710,7 +91710,7 @@ export const fetchReposListInvitationsForAuthenticatedUser = (
  * When authenticating as a user, this endpoint will list all currently open repository invitations for that user.
  */
 export const reposListInvitationsForAuthenticatedUserQuery = (
-  variables: ReposListInvitationsForAuthenticatedUserVariables,
+  variables: ReposListInvitationsForAuthenticatedUserVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -91742,7 +91742,7 @@ export const useSuspenseReposListInvitationsForAuthenticatedUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -91770,7 +91770,7 @@ export const useReposListInvitationsForAuthenticatedUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -91817,7 +91817,7 @@ export type ReposDeclineInvitationForAuthenticatedUserVariables = {
 
 export const fetchReposDeclineInvitationForAuthenticatedUser = (
   variables: ReposDeclineInvitationForAuthenticatedUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -91841,7 +91841,7 @@ export const useReposDeclineInvitationForAuthenticatedUser = (
       ReposDeclineInvitationForAuthenticatedUserVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -91850,7 +91850,7 @@ export const useReposDeclineInvitationForAuthenticatedUser = (
     ReposDeclineInvitationForAuthenticatedUserVariables
   >({
     mutationFn: (
-      variables: ReposDeclineInvitationForAuthenticatedUserVariables,
+      variables: ReposDeclineInvitationForAuthenticatedUserVariables
     ) =>
       fetchReposDeclineInvitationForAuthenticatedUser({
         ...fetcherOptions,
@@ -91893,7 +91893,7 @@ export type ReposAcceptInvitationForAuthenticatedUserVariables = {
 
 export const fetchReposAcceptInvitationForAuthenticatedUser = (
   variables: ReposAcceptInvitationForAuthenticatedUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -91917,7 +91917,7 @@ export const useReposAcceptInvitationForAuthenticatedUser = (
       ReposAcceptInvitationForAuthenticatedUserVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -91926,7 +91926,7 @@ export const useReposAcceptInvitationForAuthenticatedUser = (
     ReposAcceptInvitationForAuthenticatedUserVariables
   >({
     mutationFn: (
-      variables: ReposAcceptInvitationForAuthenticatedUserVariables,
+      variables: ReposAcceptInvitationForAuthenticatedUserVariables
     ) =>
       fetchReposAcceptInvitationForAuthenticatedUser({
         ...fetcherOptions,
@@ -91983,7 +91983,7 @@ export type UsersListSshSigningKeysForAuthenticatedUserVariables = {
  */
 export const fetchUsersListSshSigningKeysForAuthenticatedUser = (
   variables: UsersListSshSigningKeysForAuthenticatedUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     UsersListSshSigningKeysForAuthenticatedUserResponse,
@@ -91998,7 +91998,7 @@ export const fetchUsersListSshSigningKeysForAuthenticatedUser = (
  * Lists the SSH signing keys for the authenticated user's GitHub account. You must authenticate with Basic Authentication, or you must authenticate with OAuth with at least `read:ssh_signing_key` scope. For more information, see "[Understanding scopes for OAuth apps](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/)."
  */
 export const usersListSshSigningKeysForAuthenticatedUserQuery = (
-  variables: UsersListSshSigningKeysForAuthenticatedUserVariables,
+  variables: UsersListSshSigningKeysForAuthenticatedUserVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -92030,7 +92030,7 @@ export const useSuspenseUsersListSshSigningKeysForAuthenticatedUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -92058,7 +92058,7 @@ export const useUsersListSshSigningKeysForAuthenticatedUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -92120,7 +92120,7 @@ export type UsersCreateSshSigningKeyForAuthenticatedUserVariables = {
  */
 export const fetchUsersCreateSshSigningKeyForAuthenticatedUser = (
   variables: UsersCreateSshSigningKeyForAuthenticatedUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.SshSigningKey,
@@ -92142,7 +92142,7 @@ export const useUsersCreateSshSigningKeyForAuthenticatedUser = (
       UsersCreateSshSigningKeyForAuthenticatedUserVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -92151,7 +92151,7 @@ export const useUsersCreateSshSigningKeyForAuthenticatedUser = (
     UsersCreateSshSigningKeyForAuthenticatedUserVariables
   >({
     mutationFn: (
-      variables: UsersCreateSshSigningKeyForAuthenticatedUserVariables,
+      variables: UsersCreateSshSigningKeyForAuthenticatedUserVariables
     ) =>
       fetchUsersCreateSshSigningKeyForAuthenticatedUser({
         ...fetcherOptions,
@@ -92197,7 +92197,7 @@ export type UsersDeleteSshSigningKeyForAuthenticatedUserVariables = {
  */
 export const fetchUsersDeleteSshSigningKeyForAuthenticatedUser = (
   variables: UsersDeleteSshSigningKeyForAuthenticatedUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -92224,7 +92224,7 @@ export const useUsersDeleteSshSigningKeyForAuthenticatedUser = (
       UsersDeleteSshSigningKeyForAuthenticatedUserVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -92233,7 +92233,7 @@ export const useUsersDeleteSshSigningKeyForAuthenticatedUser = (
     UsersDeleteSshSigningKeyForAuthenticatedUserVariables
   >({
     mutationFn: (
-      variables: UsersDeleteSshSigningKeyForAuthenticatedUserVariables,
+      variables: UsersDeleteSshSigningKeyForAuthenticatedUserVariables
     ) =>
       fetchUsersDeleteSshSigningKeyForAuthenticatedUser({
         ...fetcherOptions,
@@ -92279,7 +92279,7 @@ export type UsersGetSshSigningKeyForAuthenticatedUserVariables = {
  */
 export const fetchUsersGetSshSigningKeyForAuthenticatedUser = (
   variables: UsersGetSshSigningKeyForAuthenticatedUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.SshSigningKey,
@@ -92299,7 +92299,7 @@ export const fetchUsersGetSshSigningKeyForAuthenticatedUser = (
  * Gets extended details for an SSH signing key. You must authenticate with Basic Authentication, or you must authenticate with OAuth with at least `read:ssh_signing_key` scope. For more information, see "[Understanding scopes for OAuth apps](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/)."
  */
 export const usersGetSshSigningKeyForAuthenticatedUserQuery = (
-  variables: UsersGetSshSigningKeyForAuthenticatedUserVariables,
+  variables: UsersGetSshSigningKeyForAuthenticatedUserVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -92331,7 +92331,7 @@ export const useSuspenseUsersGetSshSigningKeyForAuthenticatedUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -92359,7 +92359,7 @@ export const useUsersGetSshSigningKeyForAuthenticatedUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -92430,7 +92430,7 @@ export type ActivityListReposStarredByAuthenticatedUserVariables = {
  */
 export const fetchActivityListReposStarredByAuthenticatedUser = (
   variables: ActivityListReposStarredByAuthenticatedUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ActivityListReposStarredByAuthenticatedUserResponse,
@@ -92447,7 +92447,7 @@ export const fetchActivityListReposStarredByAuthenticatedUser = (
  * You can also find out _when_ stars were created by passing the following custom [media type](https://docs.github.com/rest/overview/media-types/) via the `Accept` header: `application/vnd.github.star+json`.
  */
 export const activityListReposStarredByAuthenticatedUserQuery = (
-  variables: ActivityListReposStarredByAuthenticatedUserVariables,
+  variables: ActivityListReposStarredByAuthenticatedUserVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -92481,7 +92481,7 @@ export const useSuspenseActivityListReposStarredByAuthenticatedUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -92511,7 +92511,7 @@ export const useActivityListReposStarredByAuthenticatedUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -92561,7 +92561,7 @@ export type ActivityUnstarRepoForAuthenticatedUserVariables = {
 
 export const fetchActivityUnstarRepoForAuthenticatedUser = (
   variables: ActivityUnstarRepoForAuthenticatedUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -92585,7 +92585,7 @@ export const useActivityUnstarRepoForAuthenticatedUser = (
       ActivityUnstarRepoForAuthenticatedUserVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -92639,7 +92639,7 @@ export type ActivityCheckRepoIsStarredByAuthenticatedUserVariables = {
 
 export const fetchActivityCheckRepoIsStarredByAuthenticatedUser = (
   variables: ActivityCheckRepoIsStarredByAuthenticatedUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -92656,7 +92656,7 @@ export const fetchActivityCheckRepoIsStarredByAuthenticatedUser = (
   });
 
 export const activityCheckRepoIsStarredByAuthenticatedUserQuery = (
-  variables: ActivityCheckRepoIsStarredByAuthenticatedUserVariables,
+  variables: ActivityCheckRepoIsStarredByAuthenticatedUserVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({ signal }: { signal?: AbortSignal }) => Promise<undefined>;
@@ -92681,7 +92681,7 @@ export const useSuspenseActivityCheckRepoIsStarredByAuthenticatedUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -92706,7 +92706,7 @@ export const useActivityCheckRepoIsStarredByAuthenticatedUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -92759,7 +92759,7 @@ export type ActivityStarRepoForAuthenticatedUserVariables = {
  */
 export const fetchActivityStarRepoForAuthenticatedUser = (
   variables: ActivityStarRepoForAuthenticatedUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -92786,7 +92786,7 @@ export const useActivityStarRepoForAuthenticatedUser = (
       ActivityStarRepoForAuthenticatedUserVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -92846,7 +92846,7 @@ export type ActivityListWatchedReposForAuthenticatedUserVariables = {
  */
 export const fetchActivityListWatchedReposForAuthenticatedUser = (
   variables: ActivityListWatchedReposForAuthenticatedUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ActivityListWatchedReposForAuthenticatedUserResponse,
@@ -92861,7 +92861,7 @@ export const fetchActivityListWatchedReposForAuthenticatedUser = (
  * Lists repositories the authenticated user is watching.
  */
 export const activityListWatchedReposForAuthenticatedUserQuery = (
-  variables: ActivityListWatchedReposForAuthenticatedUserVariables,
+  variables: ActivityListWatchedReposForAuthenticatedUserVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -92893,7 +92893,7 @@ export const useSuspenseActivityListWatchedReposForAuthenticatedUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -92921,7 +92921,7 @@ export const useActivityListWatchedReposForAuthenticatedUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -92976,7 +92976,7 @@ export type TeamsListForAuthenticatedUserVariables = {
  */
 export const fetchTeamsListForAuthenticatedUser = (
   variables: TeamsListForAuthenticatedUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     TeamsListForAuthenticatedUserResponse,
@@ -92991,7 +92991,7 @@ export const fetchTeamsListForAuthenticatedUser = (
  * List all of the teams across all of the organizations to which the authenticated user belongs. This method requires `user`, `repo`, or `read:org` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/) when authenticating via [OAuth](https://docs.github.com/apps/building-oauth-apps/).
  */
 export const teamsListForAuthenticatedUserQuery = (
-  variables: TeamsListForAuthenticatedUserVariables,
+  variables: TeamsListForAuthenticatedUserVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -93023,7 +93023,7 @@ export const useSuspenseTeamsListForAuthenticatedUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -93051,7 +93051,7 @@ export const useTeamsListForAuthenticatedUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -93096,7 +93096,7 @@ export type UsersListVariables = {
  */
 export const fetchUsersList = (
   variables: UsersListVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     UsersListResponse,
@@ -93113,7 +93113,7 @@ export const fetchUsersList = (
  * Note: Pagination is powered exclusively by the `since` parameter. Use the [Link header](https://docs.github.com/rest/overview/resources-in-the-rest-api#link-header) to get the URL for the next page of users.
  */
 export const usersListQuery = (
-  variables: UsersListVariables,
+  variables: UsersListVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({ signal }: { signal?: AbortSignal }) => Promise<UsersListResponse>;
@@ -93137,7 +93137,7 @@ export const useSuspenseUsersList = <TData = UsersListResponse>(
   options?: Omit<
     reactQuery.UseQueryOptions<UsersListResponse, UsersListError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<UsersListResponse, UsersListError, TData>({
@@ -93157,7 +93157,7 @@ export const useUsersList = <TData = UsersListResponse>(
   options?: Omit<
     reactQuery.UseQueryOptions<UsersListResponse, UsersListError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<UsersListResponse, UsersListError, TData>({
@@ -93194,7 +93194,7 @@ export type UsersGetByUsernameVariables = {
  */
 export const fetchUsersGetByUsername = (
   variables: UsersGetByUsernameVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.PrivateUser | Schemas.PublicUser,
@@ -93215,7 +93215,7 @@ export const fetchUsersGetByUsername = (
  * The Emails API enables you to list all of your email addresses, and toggle a primary email to be visible publicly. For more information, see "[Emails API](https://docs.github.com/rest/reference/users#emails)".
  */
 export const usersGetByUsernameQuery = (
-  variables: UsersGetByUsernameVariables,
+  variables: UsersGetByUsernameVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -93253,7 +93253,7 @@ export const useSuspenseUsersGetByUsername = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -93287,7 +93287,7 @@ export const useUsersGetByUsername = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -93338,7 +93338,7 @@ export type ActivityListEventsForAuthenticatedUserVariables = {
  */
 export const fetchActivityListEventsForAuthenticatedUser = (
   variables: ActivityListEventsForAuthenticatedUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ActivityListEventsForAuthenticatedUserResponse,
@@ -93353,7 +93353,7 @@ export const fetchActivityListEventsForAuthenticatedUser = (
  * If you are authenticated as the given user, you will see your private events. Otherwise, you'll only see public events.
  */
 export const activityListEventsForAuthenticatedUserQuery = (
-  variables: ActivityListEventsForAuthenticatedUserVariables,
+  variables: ActivityListEventsForAuthenticatedUserVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -93385,7 +93385,7 @@ export const useSuspenseActivityListEventsForAuthenticatedUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -93413,7 +93413,7 @@ export const useActivityListEventsForAuthenticatedUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -93468,7 +93468,7 @@ export type ActivityListOrgEventsForAuthenticatedUserVariables = {
  */
 export const fetchActivityListOrgEventsForAuthenticatedUser = (
   variables: ActivityListOrgEventsForAuthenticatedUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ActivityListOrgEventsForAuthenticatedUserResponse,
@@ -93488,7 +93488,7 @@ export const fetchActivityListOrgEventsForAuthenticatedUser = (
  * This is the user's organization dashboard. You must be authenticated as the user to view this.
  */
 export const activityListOrgEventsForAuthenticatedUserQuery = (
-  variables: ActivityListOrgEventsForAuthenticatedUserVariables,
+  variables: ActivityListOrgEventsForAuthenticatedUserVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -93520,7 +93520,7 @@ export const useSuspenseActivityListOrgEventsForAuthenticatedUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -93548,7 +93548,7 @@ export const useActivityListOrgEventsForAuthenticatedUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -93596,7 +93596,7 @@ export type ActivityListPublicEventsForUserVariables = {
 
 export const fetchActivityListPublicEventsForUser = (
   variables: ActivityListPublicEventsForUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ActivityListPublicEventsForUserResponse,
@@ -93613,7 +93613,7 @@ export const fetchActivityListPublicEventsForUser = (
   });
 
 export const activityListPublicEventsForUserQuery = (
-  variables: ActivityListPublicEventsForUserVariables,
+  variables: ActivityListPublicEventsForUserVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -93642,7 +93642,7 @@ export const useSuspenseActivityListPublicEventsForUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -93667,7 +93667,7 @@ export const useActivityListPublicEventsForUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -93717,7 +93717,7 @@ export type UsersListFollowersForUserVariables = {
  */
 export const fetchUsersListFollowersForUser = (
   variables: UsersListFollowersForUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     UsersListFollowersForUserResponse,
@@ -93737,7 +93737,7 @@ export const fetchUsersListFollowersForUser = (
  * Lists the people following the specified user.
  */
 export const usersListFollowersForUserQuery = (
-  variables: UsersListFollowersForUserVariables,
+  variables: UsersListFollowersForUserVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -93769,7 +93769,7 @@ export const useSuspenseUsersListFollowersForUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -93797,7 +93797,7 @@ export const useUsersListFollowersForUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -93847,7 +93847,7 @@ export type UsersListFollowingForUserVariables = {
  */
 export const fetchUsersListFollowingForUser = (
   variables: UsersListFollowingForUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     UsersListFollowingForUserResponse,
@@ -93867,7 +93867,7 @@ export const fetchUsersListFollowingForUser = (
  * Lists the people who the specified user follows.
  */
 export const usersListFollowingForUserQuery = (
-  variables: UsersListFollowingForUserVariables,
+  variables: UsersListFollowingForUserVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -93899,7 +93899,7 @@ export const useSuspenseUsersListFollowingForUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -93927,7 +93927,7 @@ export const useUsersListFollowingForUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -93957,7 +93957,7 @@ export type UsersCheckFollowingForUserVariables = {
 
 export const fetchUsersCheckFollowingForUser = (
   variables: UsersCheckFollowingForUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -93974,7 +93974,7 @@ export const fetchUsersCheckFollowingForUser = (
   });
 
 export const usersCheckFollowingForUserQuery = (
-  variables: UsersCheckFollowingForUserVariables,
+  variables: UsersCheckFollowingForUserVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({ signal }: { signal?: AbortSignal }) => Promise<undefined>;
@@ -93997,7 +93997,7 @@ export const useSuspenseUsersCheckFollowingForUser = <TData = undefined>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -94020,7 +94020,7 @@ export const useUsersCheckFollowingForUser = <TData = undefined>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<undefined, UsersCheckFollowingForUserError, TData>(
@@ -94028,7 +94028,7 @@ export const useUsersCheckFollowingForUser = <TData = undefined>(
       ...usersCheckFollowingForUserQuery(variables),
       ...options,
       ...queryOptions,
-    },
+    }
   );
 };
 
@@ -94077,7 +94077,7 @@ export type GistsListForUserVariables = {
  */
 export const fetchGistsListForUser = (
   variables: GistsListForUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     GistsListForUserResponse,
@@ -94092,7 +94092,7 @@ export const fetchGistsListForUser = (
  * Lists public gists for the specified user:
  */
 export const gistsListForUserQuery = (
-  variables: GistsListForUserVariables,
+  variables: GistsListForUserVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -94122,7 +94122,7 @@ export const useSuspenseGistsListForUser = <TData = GistsListForUserResponse>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -94148,7 +94148,7 @@ export const useGistsListForUser = <TData = GistsListForUserResponse>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -94198,7 +94198,7 @@ export type UsersListGpgKeysForUserVariables = {
  */
 export const fetchUsersListGpgKeysForUser = (
   variables: UsersListGpgKeysForUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     UsersListGpgKeysForUserResponse,
@@ -94213,7 +94213,7 @@ export const fetchUsersListGpgKeysForUser = (
  * Lists the GPG keys for a user. This information is accessible by anyone.
  */
 export const usersListGpgKeysForUserQuery = (
-  variables: UsersListGpgKeysForUserVariables,
+  variables: UsersListGpgKeysForUserVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -94245,7 +94245,7 @@ export const useSuspenseUsersListGpgKeysForUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -94273,7 +94273,7 @@ export const useUsersListGpgKeysForUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -94333,7 +94333,7 @@ export type UsersGetContextForUserVariables = {
  */
 export const fetchUsersGetContextForUser = (
   variables: UsersGetContextForUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.Hovercard,
@@ -94360,7 +94360,7 @@ export const fetchUsersGetContextForUser = (
  * ```
  */
 export const usersGetContextForUserQuery = (
-  variables: UsersGetContextForUserVariables,
+  variables: UsersGetContextForUserVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({ signal }: { signal?: AbortSignal }) => Promise<Schemas.Hovercard>;
@@ -94393,7 +94393,7 @@ export const useSuspenseUsersGetContextForUser = <TData = Schemas.Hovercard>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -94426,7 +94426,7 @@ export const useUsersGetContextForUser = <TData = Schemas.Hovercard>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -94460,7 +94460,7 @@ export type AppsGetUserInstallationVariables = {
  */
 export const fetchAppsGetUserInstallation = (
   variables: AppsGetUserInstallationVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.Installation,
@@ -94482,7 +94482,7 @@ export const fetchAppsGetUserInstallation = (
  * You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint.
  */
 export const appsGetUserInstallationQuery = (
-  variables: AppsGetUserInstallationVariables,
+  variables: AppsGetUserInstallationVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -94516,7 +94516,7 @@ export const useSuspenseAppsGetUserInstallation = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -94544,7 +94544,7 @@ export const useAppsGetUserInstallation = <TData = Schemas.Installation>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -94594,7 +94594,7 @@ export type UsersListPublicKeysForUserVariables = {
  */
 export const fetchUsersListPublicKeysForUser = (
   variables: UsersListPublicKeysForUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     UsersListPublicKeysForUserResponse,
@@ -94609,7 +94609,7 @@ export const fetchUsersListPublicKeysForUser = (
  * Lists the _verified_ public SSH keys for a user. This is accessible by anyone.
  */
 export const usersListPublicKeysForUserQuery = (
-  variables: UsersListPublicKeysForUserVariables,
+  variables: UsersListPublicKeysForUserVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -94641,7 +94641,7 @@ export const useSuspenseUsersListPublicKeysForUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -94669,7 +94669,7 @@ export const useUsersListPublicKeysForUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -94721,7 +94721,7 @@ export type OrgsListForUserVariables = {
  */
 export const fetchOrgsListForUser = (
   variables: OrgsListForUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     OrgsListForUserResponse,
@@ -94738,7 +94738,7 @@ export const fetchOrgsListForUser = (
  * This method only lists _public_ memberships, regardless of authentication. If you need to fetch all of the organization memberships (public and private) for the authenticated user, use the [List organizations for the authenticated user](https://docs.github.com/rest/reference/orgs#list-organizations-for-the-authenticated-user) API instead.
  */
 export const orgsListForUserQuery = (
-  variables: OrgsListForUserVariables,
+  variables: OrgsListForUserVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -94770,7 +94770,7 @@ export const useSuspenseOrgsListForUser = <TData = OrgsListForUserResponse>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -94798,7 +94798,7 @@ export const useOrgsListForUser = <TData = OrgsListForUserResponse>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -94858,7 +94858,7 @@ export type PackagesListPackagesForUserVariables = {
  */
 export const fetchPackagesListPackagesForUser = (
   variables: PackagesListPackagesForUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     PackagesListPackagesForUserResponse,
@@ -94875,7 +94875,7 @@ export const fetchPackagesListPackagesForUser = (
  * To use this endpoint, you must authenticate using an access token with the `read:packages` scope. If the `package_type` belongs to a GitHub Packages registry that only supports repository-scoped permissions, your token must also include the `repo` scope. For the list of GitHub Packages registries that only support repository-scoped permissions, see "[About permissions for GitHub Packages](https://docs.github.com/packages/learn-github-packages/about-permissions-for-github-packages#permissions-for-repository-scoped-packages)."
  */
 export const packagesListPackagesForUserQuery = (
-  variables: PackagesListPackagesForUserVariables,
+  variables: PackagesListPackagesForUserVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -94909,7 +94909,7 @@ export const useSuspensePackagesListPackagesForUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -94939,7 +94939,7 @@ export const usePackagesListPackagesForUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -94996,7 +94996,7 @@ export type PackagesDeletePackageForUserVariables = {
  */
 export const fetchPackagesDeletePackageForUser = (
   variables: PackagesDeletePackageForUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -95027,7 +95027,7 @@ export const usePackagesDeletePackageForUser = (
       PackagesDeletePackageForUserVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -95069,7 +95069,7 @@ export type PackagesGetPackageForUserVariables = {
  */
 export const fetchPackagesGetPackageForUser = (
   variables: PackagesGetPackageForUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.Package,
@@ -95091,7 +95091,7 @@ export const fetchPackagesGetPackageForUser = (
  * To use this endpoint, you must authenticate using an access token with the `read:packages` scope. If the `package_type` belongs to a GitHub Packages registry that only supports repository-scoped permissions, your token must also include the `repo` scope. For the list of GitHub Packages registries that only support repository-scoped permissions, see "[About permissions for GitHub Packages](https://docs.github.com/packages/learn-github-packages/about-permissions-for-github-packages#permissions-for-repository-scoped-packages)."
  */
 export const packagesGetPackageForUserQuery = (
-  variables: PackagesGetPackageForUserVariables,
+  variables: PackagesGetPackageForUserVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({ signal }: { signal?: AbortSignal }) => Promise<Schemas.Package>;
@@ -95119,7 +95119,7 @@ export const useSuspensePackagesGetPackageForUser = <TData = Schemas.Package>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -95147,7 +95147,7 @@ export const usePackagesGetPackageForUser = <TData = Schemas.Package>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -95216,7 +95216,7 @@ export type PackagesRestorePackageForUserVariables = {
  */
 export const fetchPackagesRestorePackageForUser = (
   variables: PackagesRestorePackageForUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -95251,7 +95251,7 @@ export const usePackagesRestorePackageForUser = (
       PackagesRestorePackageForUserVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -95310,7 +95310,7 @@ export type PackagesGetAllPackageVersionsForPackageOwnedByUserVariables = {
  */
 export const fetchPackagesGetAllPackageVersionsForPackageOwnedByUser = (
   variables: PackagesGetAllPackageVersionsForPackageOwnedByUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     PackagesGetAllPackageVersionsForPackageOwnedByUserResponse,
@@ -95332,7 +95332,7 @@ export const fetchPackagesGetAllPackageVersionsForPackageOwnedByUser = (
  * To use this endpoint, you must authenticate using an access token with the `read:packages` scope. If the `package_type` belongs to a GitHub Packages registry that only supports repository-scoped permissions, your token must also include the `repo` scope. For the list of GitHub Packages registries that only support repository-scoped permissions, see "[About permissions for GitHub Packages](https://docs.github.com/packages/learn-github-packages/about-permissions-for-github-packages#permissions-for-repository-scoped-packages)."
  */
 export const packagesGetAllPackageVersionsForPackageOwnedByUserQuery = (
-  variables: PackagesGetAllPackageVersionsForPackageOwnedByUserVariables,
+  variables: PackagesGetAllPackageVersionsForPackageOwnedByUserVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -95366,7 +95366,7 @@ export const useSuspensePackagesGetAllPackageVersionsForPackageOwnedByUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -95396,7 +95396,7 @@ export const usePackagesGetAllPackageVersionsForPackageOwnedByUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -95457,7 +95457,7 @@ export type PackagesDeletePackageVersionForUserVariables = {
  */
 export const fetchPackagesDeletePackageVersionForUser = (
   variables: PackagesDeletePackageVersionForUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -95488,7 +95488,7 @@ export const usePackagesDeletePackageVersionForUser = (
       PackagesDeletePackageVersionForUserVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -95538,7 +95538,7 @@ export type PackagesGetPackageVersionForUserVariables = {
  */
 export const fetchPackagesGetPackageVersionForUser = (
   variables: PackagesGetPackageVersionForUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.PackageVersion,
@@ -95560,7 +95560,7 @@ export const fetchPackagesGetPackageVersionForUser = (
  * At this time, to use this endpoint, you must authenticate using an access token with the `read:packages` scope. If the `package_type` belongs to a GitHub Packages registry that only supports repository-scoped permissions, your token must also include the `repo` scope. For the list of GitHub Packages registries that only support repository-scoped permissions, see "[About permissions for GitHub Packages](https://docs.github.com/packages/learn-github-packages/about-permissions-for-github-packages#permissions-for-repository-scoped-packages)."
  */
 export const packagesGetPackageVersionForUserQuery = (
-  variables: PackagesGetPackageVersionForUserVariables,
+  variables: PackagesGetPackageVersionForUserVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -95594,7 +95594,7 @@ export const useSuspensePackagesGetPackageVersionForUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -95624,7 +95624,7 @@ export const usePackagesGetPackageVersionForUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -95689,7 +95689,7 @@ export type PackagesRestorePackageVersionForUserVariables = {
  */
 export const fetchPackagesRestorePackageVersionForUser = (
   variables: PackagesRestorePackageVersionForUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     undefined,
@@ -95724,7 +95724,7 @@ export const usePackagesRestorePackageVersionForUser = (
       PackagesRestorePackageVersionForUserVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<
@@ -95783,7 +95783,7 @@ export type ProjectsListForUserVariables = {
 
 export const fetchProjectsListForUser = (
   variables: ProjectsListForUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ProjectsListForUserResponse,
@@ -95795,7 +95795,7 @@ export const fetchProjectsListForUser = (
   >({ url: "/users/{username}/projects", method: "get", ...variables, signal });
 
 export const projectsListForUserQuery = (
-  variables: ProjectsListForUserVariables,
+  variables: ProjectsListForUserVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -95824,7 +95824,7 @@ export const useSuspenseProjectsListForUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -95847,7 +95847,7 @@ export const useProjectsListForUser = <TData = ProjectsListForUserResponse>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -95898,7 +95898,7 @@ export type ActivityListReceivedEventsForUserVariables = {
  */
 export const fetchActivityListReceivedEventsForUser = (
   variables: ActivityListReceivedEventsForUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ActivityListReceivedEventsForUserResponse,
@@ -95918,7 +95918,7 @@ export const fetchActivityListReceivedEventsForUser = (
  * These are events that you've received by watching repos and following users. If you are authenticated as the given user, you will see private events. Otherwise, you'll only see public events.
  */
 export const activityListReceivedEventsForUserQuery = (
-  variables: ActivityListReceivedEventsForUserVariables,
+  variables: ActivityListReceivedEventsForUserVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -95950,7 +95950,7 @@ export const useSuspenseActivityListReceivedEventsForUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -95978,7 +95978,7 @@ export const useActivityListReceivedEventsForUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -96026,7 +96026,7 @@ export type ActivityListReceivedPublicEventsForUserVariables = {
 
 export const fetchActivityListReceivedPublicEventsForUser = (
   variables: ActivityListReceivedPublicEventsForUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ActivityListReceivedPublicEventsForUserResponse,
@@ -96043,7 +96043,7 @@ export const fetchActivityListReceivedPublicEventsForUser = (
   });
 
 export const activityListReceivedPublicEventsForUserQuery = (
-  variables: ActivityListReceivedPublicEventsForUserVariables,
+  variables: ActivityListReceivedPublicEventsForUserVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -96072,7 +96072,7 @@ export const useSuspenseActivityListReceivedPublicEventsForUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -96097,7 +96097,7 @@ export const useActivityListReceivedPublicEventsForUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -96163,7 +96163,7 @@ export type ReposListForUserVariables = {
  */
 export const fetchReposListForUser = (
   variables: ReposListForUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ReposListForUserResponse,
@@ -96178,7 +96178,7 @@ export const fetchReposListForUser = (
  * Lists public repositories for the specified user. Note: For GitHub AE, this endpoint will list internal repositories for the specified user.
  */
 export const reposListForUserQuery = (
-  variables: ReposListForUserVariables,
+  variables: ReposListForUserVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -96208,7 +96208,7 @@ export const useSuspenseReposListForUser = <TData = ReposListForUserResponse>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -96234,7 +96234,7 @@ export const useReposListForUser = <TData = ReposListForUserResponse>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -96271,7 +96271,7 @@ export type BillingGetGithubActionsBillingUserVariables = {
  */
 export const fetchBillingGetGithubActionsBillingUser = (
   variables: BillingGetGithubActionsBillingUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.ActionsBillingUsage,
@@ -96295,7 +96295,7 @@ export const fetchBillingGetGithubActionsBillingUser = (
  * Access tokens must have the `user` scope.
  */
 export const billingGetGithubActionsBillingUserQuery = (
-  variables: BillingGetGithubActionsBillingUserVariables,
+  variables: BillingGetGithubActionsBillingUserVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -96331,7 +96331,7 @@ export const useSuspenseBillingGetGithubActionsBillingUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -96363,7 +96363,7 @@ export const useBillingGetGithubActionsBillingUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -96400,7 +96400,7 @@ export type BillingGetGithubPackagesBillingUserVariables = {
  */
 export const fetchBillingGetGithubPackagesBillingUser = (
   variables: BillingGetGithubPackagesBillingUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.PackagesBillingUsage,
@@ -96424,7 +96424,7 @@ export const fetchBillingGetGithubPackagesBillingUser = (
  * Access tokens must have the `user` scope.
  */
 export const billingGetGithubPackagesBillingUserQuery = (
-  variables: BillingGetGithubPackagesBillingUserVariables,
+  variables: BillingGetGithubPackagesBillingUserVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -96460,7 +96460,7 @@ export const useSuspenseBillingGetGithubPackagesBillingUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -96492,7 +96492,7 @@ export const useBillingGetGithubPackagesBillingUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -96529,7 +96529,7 @@ export type BillingGetSharedStorageBillingUserVariables = {
  */
 export const fetchBillingGetSharedStorageBillingUser = (
   variables: BillingGetSharedStorageBillingUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.CombinedBillingUsage,
@@ -96553,7 +96553,7 @@ export const fetchBillingGetSharedStorageBillingUser = (
  * Access tokens must have the `user` scope.
  */
 export const billingGetSharedStorageBillingUserQuery = (
-  variables: BillingGetSharedStorageBillingUserVariables,
+  variables: BillingGetSharedStorageBillingUserVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -96589,7 +96589,7 @@ export const useSuspenseBillingGetSharedStorageBillingUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -96621,7 +96621,7 @@ export const useBillingGetSharedStorageBillingUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -96672,7 +96672,7 @@ export type UsersListSshSigningKeysForUserVariables = {
  */
 export const fetchUsersListSshSigningKeysForUser = (
   variables: UsersListSshSigningKeysForUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     UsersListSshSigningKeysForUserResponse,
@@ -96692,7 +96692,7 @@ export const fetchUsersListSshSigningKeysForUser = (
  * Lists the SSH signing keys for a user. This operation is accessible by anyone.
  */
 export const usersListSshSigningKeysForUserQuery = (
-  variables: UsersListSshSigningKeysForUserVariables,
+  variables: UsersListSshSigningKeysForUserVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -96724,7 +96724,7 @@ export const useSuspenseUsersListSshSigningKeysForUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -96752,7 +96752,7 @@ export const useUsersListSshSigningKeysForUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -96815,7 +96815,7 @@ export type ActivityListReposStarredByUserVariables = {
  */
 export const fetchActivityListReposStarredByUser = (
   variables: ActivityListReposStarredByUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     Schemas.StarredRepository[] | Schemas.Repository[],
@@ -96832,7 +96832,7 @@ export const fetchActivityListReposStarredByUser = (
  * You can also find out _when_ stars were created by passing the following custom [media type](https://docs.github.com/rest/overview/media-types/) via the `Accept` header: `application/vnd.github.star+json`.
  */
 export const activityListReposStarredByUserQuery = (
-  variables: ActivityListReposStarredByUserVariables,
+  variables: ActivityListReposStarredByUserVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -96866,7 +96866,7 @@ export const useSuspenseActivityListReposStarredByUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -96896,7 +96896,7 @@ export const useActivityListReposStarredByUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -96948,7 +96948,7 @@ export type ActivityListReposWatchedByUserVariables = {
  */
 export const fetchActivityListReposWatchedByUser = (
   variables: ActivityListReposWatchedByUserVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     ActivityListReposWatchedByUserResponse,
@@ -96968,7 +96968,7 @@ export const fetchActivityListReposWatchedByUser = (
  * Lists repositories a user is watching.
  */
 export const activityListReposWatchedByUserQuery = (
-  variables: ActivityListReposWatchedByUserVariables,
+  variables: ActivityListReposWatchedByUserVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -97000,7 +97000,7 @@ export const useSuspenseActivityListReposWatchedByUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -97028,7 +97028,7 @@ export const useActivityListReposWatchedByUser = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -97056,7 +97056,7 @@ export type MetaGetAllVersionsVariables = GithubContext["fetcherOptions"];
  */
 export const fetchMetaGetAllVersions = (
   variables: MetaGetAllVersionsVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<
     MetaGetAllVersionsResponse,
@@ -97071,7 +97071,7 @@ export const fetchMetaGetAllVersions = (
  * Get all supported GitHub API versions.
  */
 export const metaGetAllVersionsQuery = (
-  variables: MetaGetAllVersionsVariables,
+  variables: MetaGetAllVersionsVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({
@@ -97103,7 +97103,7 @@ export const useSuspenseMetaGetAllVersions = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
@@ -97129,7 +97129,7 @@ export const useMetaGetAllVersions = <TData = MetaGetAllVersionsResponse>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<
@@ -97152,7 +97152,7 @@ export type MetaGetZenVariables = GithubContext["fetcherOptions"];
  */
 export const fetchMetaGetZen = (
   variables: MetaGetZenVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   githubFetch<undefined, MetaGetZenError, undefined, {}, {}, {}>({
     url: "/zen",
@@ -97165,7 +97165,7 @@ export const fetchMetaGetZen = (
  * Get a random sentence from the Zen of GitHub
  */
 export const metaGetZenQuery = (
-  variables: MetaGetZenVariables,
+  variables: MetaGetZenVariables
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn: ({ signal }: { signal?: AbortSignal }) => Promise<undefined>;
@@ -97187,7 +97187,7 @@ export const useSuspenseMetaGetZen = <TData = undefined>(
   options?: Omit<
     reactQuery.UseQueryOptions<undefined, MetaGetZenError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<undefined, MetaGetZenError, TData>({
@@ -97205,7 +97205,7 @@ export const useMetaGetZen = <TData = undefined>(
   options?: Omit<
     reactQuery.UseQueryOptions<undefined, MetaGetZenError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { queryOptions } = useGithubContext(options);
   return reactQuery.useQuery<undefined, MetaGetZenError, TData>({
