@@ -120,6 +120,17 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "rajzik",
+      "name": "Jan Šilhan",
+      "avatar_url": "https://avatars.githubusercontent.com/u/10364836?v=4",
+      "profile": "https://github.com/rajzik",
+      "contributions": [
+        "bug",
+        "code",
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7
