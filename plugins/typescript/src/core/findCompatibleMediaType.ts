@@ -14,7 +14,7 @@ export const findCompatibleMediaType = (
   requestBodyOrResponseObject: RequestBodyObject | ResponseObject
 ): MediaTypeObject | undefined => {
   if (!requestBodyOrResponseObject.content) return;
-  for (let contentType of Object.keys(requestBodyOrResponseObject.content)) {
+  for (const contentType of Object.keys(requestBodyOrResponseObject.content)) {
     if (
       contentType.startsWith("*/*") ||
       contentType.startsWith("application/json") ||

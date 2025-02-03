@@ -222,15 +222,9 @@ export const generateReactQueryComponents = async (
                 ...createOperationQueryFnNodes({
                   operationFetcherFnName,
                   dataType,
-                  errorType,
-                  requestBodyType,
-                  pathParamsType,
                   variablesType,
-                  queryParamsType,
-                  headersType,
                   operation,
                   operationId,
-                  fetcherFn,
                   url: route,
                   verb,
                   name: operationQueryFnName,
@@ -476,16 +470,13 @@ const createMutationHook = ({
 };
 
 const createQueryHook = ({
-  operationFetcherFnName,
   operationQueryFnName,
   contextHookName,
   dataType,
   errorType,
   variablesType,
   name,
-  operationId,
   operation,
-  url,
   useQueryIdentifier = "useQuery",
 }: {
   operationFetcherFnName: string;

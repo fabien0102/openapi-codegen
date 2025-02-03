@@ -1,3 +1,5 @@
+import { it, describe, expect } from "vitest";
+
 describe("queryKeyFn", () => {
   /* Playground to craft `queryKeyFn` & its helpers */
   const queryKeyFn = (operation: QueryOperation) => {
@@ -34,7 +36,7 @@ describe("queryKeyFn", () => {
   ): operation is QueryOperation & {
     variables: { pathParams: Record<string, string> };
   } => {
-    return Boolean((operation.variables as any).pathParams);
+    return "variables" in operation && "pathParams" in operation.variables;
   };
 
   const hasBody = (
@@ -42,7 +44,7 @@ describe("queryKeyFn", () => {
   ): operation is QueryOperation & {
     variables: { body: Record<string, unknown> };
   } => {
-    return Boolean((operation.variables as any).body);
+    return "variables" in operation && "body" in operation.variables;
   };
 
   const hasQueryParams = (
@@ -50,7 +52,7 @@ describe("queryKeyFn", () => {
   ): operation is QueryOperation & {
     variables: { queryParams: Record<string, unknown> };
   } => {
-    return Boolean((operation.variables as any).queryParams);
+    return "variables" in operation && "queryParams" in operation.variables;
   };
   /* End of playground */
 
@@ -124,17 +126,17 @@ type QueryOperation =
   | {
       path: "/gifs/trending";
       operationId: "trendingGifs";
-      variables: {};
+      variables: Record<string, never>;
     }
   | {
       path: "/gifs/translate";
       operationId: "translateGif";
-      variables: {};
+      variables: Record<string, never>;
     }
   | {
       path: "/gifs/random";
       operationId: "randomGif";
-      variables: {};
+      variables: Record<string, never>;
     }
   | {
       path: "/gifs/{gifId}";
@@ -144,7 +146,7 @@ type QueryOperation =
   | {
       path: "/gifs";
       operationId: "getGifsById";
-      variables: {};
+      variables: Record<string, never>;
     }
   | {
       path: "/stickers/search";
@@ -154,7 +156,7 @@ type QueryOperation =
   | {
       path: "/stickers/trending";
       operationId: "trendingStickers";
-      variables: {};
+      variables: Record<string, never>;
     }
   | {
       path: "/stickers/translate";

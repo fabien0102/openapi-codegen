@@ -36,6 +36,7 @@ export const getEnumProperties = (
 const processProperty = (
   enumProperties: [string, SchemaObject][],
   propertyName: string,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   propertySchema: any
 ) => {
   if (propertySchema.enum) {

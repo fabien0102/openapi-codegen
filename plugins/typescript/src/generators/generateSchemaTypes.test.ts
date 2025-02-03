@@ -1,11 +1,12 @@
+import { describe, expect, it, vi } from "vitest";
 import { petstore } from "../fixtures/petstore";
 import { generateSchemaTypes } from "./generateSchemaTypes";
 
 describe("generateSchemaTypes", () => {
   describe("filenameCase option", () => {
     it("should generate files in camel case", () => {
-      const writeFile = jest.fn();
-      const readFile = jest.fn(() => Promise.resolve(""));
+      const writeFile = vi.fn();
+      const readFile = vi.fn(() => Promise.resolve(""));
 
       generateSchemaTypes(
         {
@@ -16,14 +17,14 @@ describe("generateSchemaTypes", () => {
         },
         {
           filenameCase: "camel",
-        },
+        }
       );
       expect(writeFile.mock.calls[0][0]).toBe("swaggerPetstoreSchemas.ts");
     });
 
     it("should generate files in snake case", () => {
-      const writeFile = jest.fn();
-      const readFile = jest.fn(() => Promise.resolve(""));
+      const writeFile = vi.fn();
+      const readFile = vi.fn(() => Promise.resolve(""));
 
       generateSchemaTypes(
         {
@@ -34,14 +35,14 @@ describe("generateSchemaTypes", () => {
         },
         {
           filenameCase: "snake",
-        },
+        }
       );
       expect(writeFile.mock.calls[0][0]).toBe("swagger_petstore_schemas.ts");
     });
 
     it("should generate files in kebab case", () => {
-      const writeFile = jest.fn();
-      const readFile = jest.fn(() => Promise.resolve(""));
+      const writeFile = vi.fn();
+      const readFile = vi.fn(() => Promise.resolve(""));
 
       generateSchemaTypes(
         {
@@ -52,14 +53,14 @@ describe("generateSchemaTypes", () => {
         },
         {
           filenameCase: "kebab",
-        },
+        }
       );
       expect(writeFile.mock.calls[0][0]).toBe("swagger-petstore-schemas.ts");
     });
 
     it("should generate files in pascal case", () => {
-      const writeFile = jest.fn();
-      const readFile = jest.fn(() => Promise.resolve(""));
+      const writeFile = vi.fn();
+      const readFile = vi.fn(() => Promise.resolve(""));
 
       generateSchemaTypes(
         {
@@ -70,7 +71,7 @@ describe("generateSchemaTypes", () => {
         },
         {
           filenameCase: "pascal",
-        },
+        }
       );
       expect(writeFile.mock.calls[0][0]).toBe("SwaggerPetstoreSchemas.ts");
     });
@@ -78,8 +79,8 @@ describe("generateSchemaTypes", () => {
 
   describe("filenamePrefix option", () => {
     it("should take have the correct prefix", () => {
-      const writeFile = jest.fn();
-      const readFile = jest.fn(() => Promise.resolve(""));
+      const writeFile = vi.fn();
+      const readFile = vi.fn(() => Promise.resolve(""));
       generateSchemaTypes(
         {
           openAPIDocument: petstore,
@@ -90,7 +91,7 @@ describe("generateSchemaTypes", () => {
         {
           filenameCase: "camel",
           filenamePrefix: "petstore",
-        },
+        }
       );
       expect(writeFile.mock.calls[0][0]).toBe("petstoreSchemas.ts");
     });
@@ -98,8 +99,8 @@ describe("generateSchemaTypes", () => {
 
   describe("without filenamePrefix option", () => {
     it("should not have a prefix", () => {
-      const writeFile = jest.fn();
-      const readFile = jest.fn(() => Promise.resolve(""));
+      const writeFile = vi.fn();
+      const readFile = vi.fn(() => Promise.resolve(""));
       generateSchemaTypes(
         {
           openAPIDocument: petstore,
@@ -110,7 +111,7 @@ describe("generateSchemaTypes", () => {
         {
           filenameCase: "camel",
           filenamePrefix: "",
-        },
+        }
       );
       expect(writeFile.mock.calls[0][0]).toBe("schemas.ts");
     });
@@ -118,8 +119,8 @@ describe("generateSchemaTypes", () => {
 
   describe("schemas file generation", () => {
     it("should generate the schemas file", async () => {
-      const writeFile = jest.fn();
-      const readFile = jest.fn(() => Promise.resolve(""));
+      const writeFile = vi.fn();
+      const readFile = vi.fn(() => Promise.resolve(""));
       await generateSchemaTypes(
         {
           openAPIDocument: petstore,
@@ -129,7 +130,7 @@ describe("generateSchemaTypes", () => {
         },
         {
           filenameCase: "camel",
-        },
+        }
       );
       expect(writeFile.mock.calls[0][0]).toBe("swaggerPetstoreSchemas.ts");
       expect(writeFile.mock.calls[0][1]).toMatchInlineSnapshot(`
@@ -203,8 +204,8 @@ describe("generateSchemaTypes", () => {
     });
 
     it("should generate the schemas file with enums instead of string unions", async () => {
-      const writeFile = jest.fn();
-      const readFile = jest.fn(() => Promise.resolve(""));
+      const writeFile = vi.fn();
+      const readFile = vi.fn(() => Promise.resolve(""));
       await generateSchemaTypes(
         {
           openAPIDocument: petstore,
@@ -215,7 +216,7 @@ describe("generateSchemaTypes", () => {
         {
           filenameCase: "camel",
           useEnums: true,
-        },
+        }
       );
       expect(writeFile.mock.calls[0][0]).toBe("swaggerPetstoreSchemas.ts");
       expect(writeFile.mock.calls[0][1]).toMatchInlineSnapshot(`
@@ -301,8 +302,8 @@ describe("generateSchemaTypes", () => {
     });
 
     it("should generate the responses file", async () => {
-      const writeFile = jest.fn();
-      const readFile = jest.fn(() => Promise.resolve(""));
+      const writeFile = vi.fn();
+      const readFile = vi.fn(() => Promise.resolve(""));
       await generateSchemaTypes(
         {
           openAPIDocument: petstore,
@@ -312,7 +313,7 @@ describe("generateSchemaTypes", () => {
         },
         {
           filenameCase: "camel",
-        },
+        }
       );
       expect(writeFile.mock.calls[1][0]).toBe("swaggerPetstoreResponses.ts");
       expect(writeFile.mock.calls[1][1]).toMatchInlineSnapshot(`
@@ -333,8 +334,8 @@ describe("generateSchemaTypes", () => {
     });
 
     it("should generate the request bodies file", async () => {
-      const writeFile = jest.fn();
-      const readFile = jest.fn(() => Promise.resolve(""));
+      const writeFile = vi.fn();
+      const readFile = vi.fn(() => Promise.resolve(""));
       await generateSchemaTypes(
         {
           openAPIDocument: petstore,
@@ -344,10 +345,10 @@ describe("generateSchemaTypes", () => {
         },
         {
           filenameCase: "camel",
-        },
+        }
       );
       expect(writeFile.mock.calls[2][0]).toBe(
-        "swaggerPetstoreRequestBodies.ts",
+        "swaggerPetstoreRequestBodies.ts"
       );
       expect(writeFile.mock.calls[2][1]).toMatchInlineSnapshot(`
        "/**
@@ -365,8 +366,8 @@ describe("generateSchemaTypes", () => {
     });
 
     it("should generate the parameters file", async () => {
-      const writeFile = jest.fn();
-      const readFile = jest.fn(() => Promise.resolve(""));
+      const writeFile = vi.fn();
+      const readFile = vi.fn(() => Promise.resolve(""));
 
       await generateSchemaTypes(
         {
@@ -377,7 +378,7 @@ describe("generateSchemaTypes", () => {
         },
         {
           filenameCase: "camel",
-        },
+        }
       );
       expect(writeFile.mock.calls[3][0]).toBe("swaggerPetstoreParameters.ts");
       expect(writeFile.mock.calls[3][1]).toMatchInlineSnapshot(`
@@ -400,8 +401,8 @@ describe("generateSchemaTypes", () => {
     });
 
     it("should generate the responses file with enums instead of string unions", async () => {
-      const writeFile = jest.fn();
-      const readFile = jest.fn(() => Promise.resolve(""));
+      const writeFile = vi.fn();
+      const readFile = vi.fn(() => Promise.resolve(""));
       await generateSchemaTypes(
         {
           openAPIDocument: petstore,
@@ -412,7 +413,7 @@ describe("generateSchemaTypes", () => {
         {
           filenameCase: "camel",
           useEnums: true,
-        },
+        }
       );
       expect(writeFile.mock.calls[1][0]).toBe("swaggerPetstoreResponses.ts");
       expect(writeFile.mock.calls[1][1]).toMatchInlineSnapshot(`
@@ -436,8 +437,8 @@ describe("generateSchemaTypes", () => {
     });
 
     it("should generate the request bodies file with enums instead of string unions", async () => {
-      const writeFile = jest.fn();
-      const readFile = jest.fn(() => Promise.resolve(""));
+      const writeFile = vi.fn();
+      const readFile = vi.fn(() => Promise.resolve(""));
       await generateSchemaTypes(
         {
           openAPIDocument: petstore,
@@ -448,10 +449,10 @@ describe("generateSchemaTypes", () => {
         {
           filenameCase: "camel",
           useEnums: true,
-        },
+        }
       );
       expect(writeFile.mock.calls[2][0]).toBe(
-        "swaggerPetstoreRequestBodies.ts",
+        "swaggerPetstoreRequestBodies.ts"
       );
       expect(writeFile.mock.calls[2][1]).toMatchInlineSnapshot(`
         "/**
@@ -472,8 +473,8 @@ describe("generateSchemaTypes", () => {
     });
 
     it("should generate the parameters file with enums instead of string unions", async () => {
-      const writeFile = jest.fn();
-      const readFile = jest.fn(() => Promise.resolve(""));
+      const writeFile = vi.fn();
+      const readFile = vi.fn(() => Promise.resolve(""));
 
       await generateSchemaTypes(
         {
@@ -485,7 +486,7 @@ describe("generateSchemaTypes", () => {
         {
           filenameCase: "camel",
           useEnums: true,
-        },
+        }
       );
       expect(writeFile.mock.calls[3][0]).toBe("swaggerPetstoreParameters.ts");
       expect(writeFile.mock.calls[3][1]).toMatchInlineSnapshot(`

@@ -5,9 +5,19 @@
  */
 import type * as Schemas from "./githubSchemas";
 
-export type AccessToken = string;
-
 export type AccountId = number;
+
+export type ActionsCacheKey = string;
+
+export type ActionsCacheKeyRequired = string;
+
+/**
+ * @default last_accessed_at
+ */
+export type ActionsCacheListSort =
+  | "created_at"
+  | "last_accessed_at"
+  | "size_in_bytes";
 
 export type Actor = string;
 
@@ -24,21 +34,20 @@ export type ArtifactId = number;
 
 export type AssetId = number;
 
-export type AuditLogAfter = string;
+export type AttemptNumber = number;
 
-export type AuditLogBefore = string;
+export type AutolinkId = number;
 
-export type AuditLogInclude = "web" | "git" | "all";
-
-export type AuditLogOrder = "desc" | "asc";
-
-export type AuditLogPhrase = string;
-
-export type AuthorizationId = number;
-
+/**
+ * @format date-time
+ */
 export type Before = string;
 
 export type Branch = string;
+
+export type BranchPolicyId = number;
+
+export type CacheId = number;
 
 export type CardId = number;
 
@@ -50,15 +59,43 @@ export type CheckSuiteId = number;
 
 export type ClientId = string;
 
-export type ColumnId = number;
+export type CodespaceName = string;
 
-export type CommentNumber = number;
+export type ColumnId = number;
 
 export type CommentId = number;
 
+export type CommentNumber = number;
+
 export type CommitSha = string;
 
-export type Count = number;
+/**
+ * @format date-time
+ */
+export type Created = string;
+
+export type Cursor = string;
+
+export type DeliveryId = number;
+
+export type DependabotAlertCommaSeparatedEcosystems = string;
+
+export type DependabotAlertCommaSeparatedManifests = string;
+
+export type DependabotAlertCommaSeparatedPackages = string;
+
+export type DependabotAlertCommaSeparatedSeverities = string;
+
+export type DependabotAlertCommaSeparatedStates = string;
+
+export type DependabotAlertNumber = Schemas.AlertNumber;
+
+export type DependabotAlertScope = "development" | "runtime";
+
+/**
+ * @default created
+ */
+export type DependabotAlertSort = "created" | "updated";
 
 export type DeploymentId = number;
 
@@ -75,13 +112,18 @@ export type EnvironmentName = string;
 
 export type Event = string;
 
+/**
+ * @default false
+ */
+export type ExcludePullRequests = boolean;
+
+export type ExportId = string;
+
 export type GistId = string;
 
 export type GitRef = Schemas.CodeScanningRef;
 
 export type GpgKeyId = number;
-
-export type GrantId = number;
 
 export type HookId = number;
 
@@ -97,6 +139,8 @@ export type KeyId = number;
 
 export type Labels = string;
 
+export type ManifestPath = string;
+
 export type MigrationId = number;
 
 export type MilestoneNumber = number;
@@ -108,7 +152,7 @@ export type Order = "desc" | "asc";
 
 export type Org = string;
 
-export type OrgId = number;
+export type OrgSecurityProductEnablement = "enable_all" | "disable_all";
 
 export type Owner = string;
 
@@ -124,10 +168,29 @@ export type PackageType =
 
 export type PackageVersionId = number;
 
+export type PackageVisibility = "public" | "private" | "internal";
+
 /**
  * @default 1
  */
 export type Page = number;
+
+export type PaginationAfter = string;
+
+export type PaginationBefore = string;
+
+/**
+ * @default 30
+ * @maximum 100
+ * @minimum 1
+ */
+export type PaginationFirst = number;
+
+/**
+ * @maximum 100
+ * @minimum 1
+ */
+export type PaginationLast = number;
 
 /**
  * @default false
@@ -137,7 +200,7 @@ export type Participating = boolean;
 /**
  * @default day
  */
-export type Per = "" | "day" | "week";
+export type Per = "day" | "week";
 
 /**
  * @default 30
@@ -158,22 +221,50 @@ export type Repo = string;
 
 export type RepoName = string;
 
+export type RepoRequiredWorkflowId = number;
+
 export type RepositoryId = number;
+
+export type RepositoryIdInQuery = number;
+
+export type RequiredWorkflowId = number;
 
 export type ReviewId = number;
 
 export type RunId = number;
 
-export type RunnerGroupId = number;
-
 export type RunnerId = number;
 
-export type ScimGroupId = string;
-
-export type ScimUserId = string;
+export type RunnerLabelName = string;
 
 export type SecretName = string;
 
+export type SecretScanningAlertResolution = string;
+
+export type SecretScanningAlertSecretType = string;
+
+/**
+ * @default created
+ */
+export type SecretScanningAlertSort = "created" | "updated";
+
+export type SecretScanningAlertState = "open" | "resolved";
+
+export type SecretScanningPaginationAfterOrgRepo = string;
+
+export type SecretScanningPaginationBeforeOrgRepo = string;
+
+export type SecurityProduct =
+  | "dependency_graph"
+  | "dependabot_alerts"
+  | "dependabot_security_updates"
+  | "advanced_security"
+  | "secret_scanning"
+  | "secret_scanning_push_protection";
+
+/**
+ * @format date-time
+ */
 export type Since = string;
 
 export type SinceOrg = number;
@@ -187,9 +278,11 @@ export type SinceUser = number;
  */
 export type Sort = "created" | "updated";
 
-export type StartIndex = number;
+export type SshSigningKeyId = number;
 
 export type Status = "queued" | "in_progress" | "completed";
+
+export type TagProtectionId = number;
 
 export type TeamId = number;
 
@@ -203,9 +296,20 @@ export type ToolName = Schemas.CodeScanningAnalysisToolName;
 
 export type Username = string;
 
+export type VariableName = string;
+
+/**
+ * @default 10
+ */
+export type VariablesPerPage = number;
+
 export type WorkflowId = number | string;
 
 export type WorkflowRunBranch = string;
+
+export type WorkflowRunCheckSuiteId = number;
+
+export type WorkflowRunHeadSha = string;
 
 export type WorkflowRunStatus =
   | "completed"
@@ -220,4 +324,5 @@ export type WorkflowRunStatus =
   | "in_progress"
   | "queued"
   | "requested"
-  | "waiting";
+  | "waiting"
+  | "pending";

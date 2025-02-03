@@ -2,103 +2,90 @@
 
 ## [3.0.1](https://github.com/fabien0102/openapi-codegen/compare/cli-v3.0.0...cli-v3.0.1) (2025-01-18)
 
-
 ### Bug Fixes
 
-* fix url validation on the init command ([0184dd4](https://github.com/fabien0102/openapi-codegen/commit/0184dd4283a4f7f50161122e270d051b1d3b2243))
+- fix url validation on the init command ([0184dd4](https://github.com/fabien0102/openapi-codegen/commit/0184dd4283a4f7f50161122e270d051b1d3b2243))
 
 ## [3.0.0](https://github.com/fabien0102/openapi-codegen/compare/cli-v2.0.4...cli-v3.0.0) (2025-01-18)
 
-
 ### ⚠ BREAKING CHANGES
 
-* Refactor/Simplify cli ([#268](https://github.com/fabien0102/openapi-codegen/issues/268))
+- Refactor/Simplify cli ([#268](https://github.com/fabien0102/openapi-codegen/issues/268))
 
 ### Features
 
-* Refactor/Simplify cli ([#268](https://github.com/fabien0102/openapi-codegen/issues/268)) ([33b5a36](https://github.com/fabien0102/openapi-codegen/commit/33b5a36a9332f5d7fc9b7990e9f233ba9fc82e5a))
+- Refactor/Simplify cli ([#268](https://github.com/fabien0102/openapi-codegen/issues/268)) ([33b5a36](https://github.com/fabien0102/openapi-codegen/commit/33b5a36a9332f5d7fc9b7990e9f233ba9fc82e5a))
 
 ## [2.0.4](https://github.com/fabien0102/openapi-codegen/compare/cli-v2.0.3...cli-v2.0.4) (2025-01-17)
 
-
 ### Bug Fixes
 
-* **cli:** update rollup config ([#265](https://github.com/fabien0102/openapi-codegen/issues/265)) ([6c02ab3](https://github.com/fabien0102/openapi-codegen/commit/6c02ab3bdf93e3ae7a79d4ccc62321842152dc3c))
+- **cli:** update rollup config ([#265](https://github.com/fabien0102/openapi-codegen/issues/265)) ([6c02ab3](https://github.com/fabien0102/openapi-codegen/commit/6c02ab3bdf93e3ae7a79d4ccc62321842152dc3c))
 
 ## [2.0.3](https://github.com/fabien0102/openapi-codegen/compare/cli-v2.0.2...cli-v2.0.3) (2024-12-02)
 
-
 ### Bug Fixes
 
-* Changed Read API Method for Github from Graphql API to Rest API ([#253](https://github.com/fabien0102/openapi-codegen/issues/253)) ([a1abe62](https://github.com/fabien0102/openapi-codegen/commit/a1abe62f70910d1b418aa1a75cc317fac926b857))
+- Changed Read API Method for Github from Graphql API to Rest API ([#253](https://github.com/fabien0102/openapi-codegen/issues/253)) ([a1abe62](https://github.com/fabien0102/openapi-codegen/commit/a1abe62f70910d1b418aa1a75cc317fac926b857))
 
 ## [2.0.2](https://github.com/fabien0102/openapi-codegen/compare/cli-v2.0.1...cli-v2.0.2) (2024-04-29)
 
-
 ### Bug Fixes
 
-* camelCase query function operationId ([93b6669](https://github.com/fabien0102/openapi-codegen/commit/93b6669997da806a2f7b6046e09a2b96e401f1f9))
+- camelCase query function operationId ([93b6669](https://github.com/fabien0102/openapi-codegen/commit/93b6669997da806a2f7b6046e09a2b96e401f1f9))
 
 ## [2.0.1](https://github.com/fabien0102/openapi-codegen/compare/cli-v2.0.0...cli-v2.0.1) (2024-04-03)
 
-
 ### Bug Fixes
 
-* update prettier ([#205](https://github.com/fabien0102/openapi-codegen/issues/205)) ([c8152b9](https://github.com/fabien0102/openapi-codegen/commit/c8152b9b303902997f399690f0a4ac753af497aa))
-* Update prettier version to 3.2.5 ([#237](https://github.com/fabien0102/openapi-codegen/issues/237)) ([9c9af24](https://github.com/fabien0102/openapi-codegen/commit/9c9af24bb931b61e878c937b5608e7498d36778b))
+- update prettier ([#205](https://github.com/fabien0102/openapi-codegen/issues/205)) ([c8152b9](https://github.com/fabien0102/openapi-codegen/commit/c8152b9b303902997f399690f0a4ac753af497aa))
+- Update prettier version to 3.2.5 ([#237](https://github.com/fabien0102/openapi-codegen/issues/237)) ([9c9af24](https://github.com/fabien0102/openapi-codegen/commit/9c9af24bb931b61e878c937b5608e7498d36778b))
 
 ## [2.0.0](https://github.com/fabien0102/openapi-codegen/compare/cli-v1.6.0...cli-v2.0.0) (2022-09-21)
 
-
 ### ⚠ BREAKING CHANGES
 
-* Implement query cancellation in react-query generated components (#95)
+- Implement query cancellation in react-query generated components (#95)
 
 ### Features
 
-* Implement query cancellation in react-query generated components ([#95](https://github.com/fabien0102/openapi-codegen/issues/95)) ([450b069](https://github.com/fabien0102/openapi-codegen/commit/450b0696073746615d61ab66a7f09de337139a00))
+- Implement query cancellation in react-query generated components ([#95](https://github.com/fabien0102/openapi-codegen/issues/95)) ([450b069](https://github.com/fabien0102/openapi-codegen/commit/450b0696073746615d61ab66a7f09de337139a00))
 
 ## [1.6.0](https://github.com/fabien0102/openapi-codegen/compare/cli-v1.5.2...cli-v1.6.0) (2022-09-07)
 
-
 ### Features
 
-* bump typescript & lerna versions ([#89](https://github.com/fabien0102/openapi-codegen/issues/89)) ([cf22aa1](https://github.com/fabien0102/openapi-codegen/commit/cf22aa1b999b86934ec907aa37dc53477ed0a3e2))
+- bump typescript & lerna versions ([#89](https://github.com/fabien0102/openapi-codegen/issues/89)) ([cf22aa1](https://github.com/fabien0102/openapi-codegen/commit/cf22aa1b999b86934ec907aa37dc53477ed0a3e2))
 
 ### [1.5.2](https://github.com/fabien0102/openapi-codegen/compare/cli-v1.5.1...cli-v1.5.2) (2022-05-25)
 
-
 ### Bug Fixes
 
-* Fix `gen --pr` command ([#71](https://github.com/fabien0102/openapi-codegen/issues/71)) ([bc9bed4](https://github.com/fabien0102/openapi-codegen/commit/bc9bed4dfad6820556709736db43357d657dbda2))
+- Fix `gen --pr` command ([#71](https://github.com/fabien0102/openapi-codegen/issues/71)) ([bc9bed4](https://github.com/fabien0102/openapi-codegen/commit/bc9bed4dfad6820556709736db43357d657dbda2))
 
 ### [1.5.1](https://github.com/fabien0102/openapi-codegen/compare/cli-v1.5.0...cli-v1.5.1) (2022-05-18)
 
-
 ### Bug Fixes
 
-* Bundle cli with react ([#65](https://github.com/fabien0102/openapi-codegen/issues/65)) ([36b9a35](https://github.com/fabien0102/openapi-codegen/commit/36b9a35652b8adb95e70e8bffca0683ff11281d9))
+- Bundle cli with react ([#65](https://github.com/fabien0102/openapi-codegen/issues/65)) ([36b9a35](https://github.com/fabien0102/openapi-codegen/commit/36b9a35652b8adb95e70e8bffca0683ff11281d9))
 
 ## [1.5.0](https://github.com/fabien0102/openapi-codegen/compare/cli-v1.4.1...cli-v1.5.0) (2022-03-25)
 
-
 ### Features
 
-* github as openapi source ([#54](https://github.com/fabien0102/openapi-codegen/issues/54)) ([0d054f4](https://github.com/fabien0102/openapi-codegen/commit/0d054f488dfa660f647007002fd80b6ae242b784))
+- github as openapi source ([#54](https://github.com/fabien0102/openapi-codegen/issues/54)) ([0d054f4](https://github.com/fabien0102/openapi-codegen/commit/0d054f488dfa660f647007002fd80b6ae242b784))
 
 ### [1.4.1](https://github.com/fabien0102/openapi-codegen/compare/cli-v1.4.0...cli-v1.4.1) (2022-03-23)
 
-
 ### Bug Fixes
 
-* add typescript as dependency ([22bfb09](https://github.com/fabien0102/openapi-codegen/commit/22bfb091e1617318a38e206d5f88fe3594e0f571))
+- add typescript as dependency ([22bfb09](https://github.com/fabien0102/openapi-codegen/commit/22bfb091e1617318a38e206d5f88fe3594e0f571))
 
 ## [1.4.0](https://github.com/fabien0102/openapi-codegen/compare/cli-v1.3.1...cli-v1.4.0) (2022-03-17)
 
-
 ### Features
 
-* Add `init` command ([#44](https://github.com/fabien0102/openapi-codegen/issues/44)) ([2ccd5ec](https://github.com/fabien0102/openapi-codegen/commit/2ccd5ec45c4bc27908c45a16002afef04f92ed96))
+- Add `init` command ([#44](https://github.com/fabien0102/openapi-codegen/issues/44)) ([2ccd5ec](https://github.com/fabien0102/openapi-codegen/commit/2ccd5ec45c4bc27908c45a16002afef04f92ed96))
 
 ### [1.3.1](https://github.com/fabien0102/openapi-codegen/compare/cli-v1.3.0...cli-v1.3.1) (2022-02-22)
 

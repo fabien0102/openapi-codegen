@@ -19,7 +19,7 @@ export const getOpenAPISourceFile = async (
   options: FromOptions
 ): Promise<OpenAPISourceFile> => {
   switch (options.source) {
-    case "file":
+    case "file": {
       const text = readFileSync(
         join(process.cwd(), options.relativePath),
         "utf-8"
@@ -28,7 +28,7 @@ export const getOpenAPISourceFile = async (
       const format = getFormat(ext);
 
       return { text, format };
-
+    }
     case "url": {
       const { default: got } = await import("got");
       const { pathname } = new URL(options.url);

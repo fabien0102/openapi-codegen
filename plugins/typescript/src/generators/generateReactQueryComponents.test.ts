@@ -1,3 +1,4 @@
+import { describe, expect, it, vi } from "vitest";
 import { OpenAPIObject } from "openapi3-ts";
 import {
   Config,
@@ -16,7 +17,7 @@ const config: Config = {
 
 describe("generateReactQueryComponents", () => {
   it("should inject the customFetch import", async () => {
-    const writeFile = jest.fn();
+    const writeFile = vi.fn();
     const openAPIDocument: OpenAPIObject = {
       openapi: "3.0.0",
       info: {
@@ -33,14 +34,14 @@ describe("generateReactQueryComponents", () => {
         existsFile: () => false, // customFetcher is not there
         readFile: async () => "",
       },
-      config,
+      config
     );
 
     expect(writeFile.mock.calls[0][0]).toBe("petstoreFetcher.ts");
   });
 
   it("should generate a useQuery wrapper (no parameters)", async () => {
-    const writeFile = jest.fn();
+    const writeFile = vi.fn();
     const openAPIDocument: OpenAPIObject = {
       openapi: "3.0.0",
       info: {
@@ -79,7 +80,7 @@ describe("generateReactQueryComponents", () => {
         existsFile: () => true,
         readFile: async () => "",
       },
-      config,
+      config
     );
 
     expect(writeFile.mock.calls[0][0]).toBe("petstoreComponents.ts");
@@ -152,7 +153,7 @@ describe("generateReactQueryComponents", () => {
     `);
   });
   it("should generate a useSuspenseQuery wrapper (no parameters)", async () => {
-    const writeFile = jest.fn();
+    const writeFile = vi.fn();
     const openAPIDocument: OpenAPIObject = {
       openapi: "3.0.0",
       info: {
@@ -191,7 +192,7 @@ describe("generateReactQueryComponents", () => {
         existsFile: () => true,
         readFile: async () => "",
       },
-      { ...config },
+      { ...config }
     );
 
     expect(writeFile.mock.calls[0][0]).toBe("petstoreComponents.ts");
@@ -264,7 +265,7 @@ describe("generateReactQueryComponents", () => {
     `);
   });
   it("should generate a useQuery wrapper (with queryParams)", async () => {
-    const writeFile = jest.fn();
+    const writeFile = vi.fn();
     const openAPIDocument: OpenAPIObject = {
       openapi: "3.0.0",
       info: {
@@ -328,7 +329,7 @@ describe("generateReactQueryComponents", () => {
         existsFile: () => true,
         readFile: async () => "",
       },
-      config,
+      config
     );
 
     expect(writeFile.mock.calls[0][0]).toBe("petstoreComponents.ts");
@@ -414,7 +415,7 @@ describe("generateReactQueryComponents", () => {
     `);
   });
   it("should generate a useSuspenseQuery wrapper (with queryParams)", async () => {
-    const writeFile = jest.fn();
+    const writeFile = vi.fn();
     const openAPIDocument: OpenAPIObject = {
       openapi: "3.0.0",
       info: {
@@ -478,7 +479,7 @@ describe("generateReactQueryComponents", () => {
         existsFile: () => true,
         readFile: async () => "",
       },
-      { ...config },
+      { ...config }
     );
 
     expect(writeFile.mock.calls[0][0]).toBe("petstoreComponents.ts");
@@ -564,7 +565,7 @@ describe("generateReactQueryComponents", () => {
     `);
   });
   it("should generate a useQuery wrapper (with pathParams)", async () => {
-    const writeFile = jest.fn();
+    const writeFile = vi.fn();
     const openAPIDocument: OpenAPIObject = {
       openapi: "3.0.0",
       info: {
@@ -614,7 +615,7 @@ describe("generateReactQueryComponents", () => {
         existsFile: () => true,
         readFile: async () => "",
       },
-      config,
+      config
     );
 
     expect(writeFile.mock.calls[0][0]).toBe("petstoreComponents.ts");
@@ -697,7 +698,7 @@ describe("generateReactQueryComponents", () => {
   });
 
   it("should generate a useSuspenseQuery wrapper (with pathParams)", async () => {
-    const writeFile = jest.fn();
+    const writeFile = vi.fn();
     const openAPIDocument: OpenAPIObject = {
       openapi: "3.0.0",
       info: {
@@ -747,7 +748,7 @@ describe("generateReactQueryComponents", () => {
         existsFile: () => true,
         readFile: async () => "",
       },
-      { ...config },
+      { ...config }
     );
 
     expect(writeFile.mock.calls[0][0]).toBe("petstoreComponents.ts");
@@ -830,7 +831,7 @@ describe("generateReactQueryComponents", () => {
   });
 
   it("should deal with injected headers (marked them as optional)", async () => {
-    const writeFile = jest.fn();
+    const writeFile = vi.fn();
     const openAPIDocument: OpenAPIObject = {
       openapi: "3.0.0",
       info: {
@@ -894,7 +895,7 @@ describe("generateReactQueryComponents", () => {
         existsFile: () => true,
         readFile: async () => "",
       },
-      { ...config, injectedHeaders: ["breed"] },
+      { ...config, injectedHeaders: ["breed"] }
     );
 
     expect(writeFile.mock.calls[0][0]).toBe("petstoreComponents.ts");
@@ -985,7 +986,7 @@ describe("generateReactQueryComponents", () => {
   });
 
   it("should not generated duplicated types", async () => {
-    const writeFile = jest.fn();
+    const writeFile = vi.fn();
     const openAPIDocument: OpenAPIObject = {
       openapi: "3.0.0",
       info: {
@@ -1037,7 +1038,7 @@ describe("generateReactQueryComponents", () => {
         existsFile: () => true,
         readFile: async () => "",
       },
-      config,
+      config
     );
 
     expect(writeFile.mock.calls[0][0]).toBe("petstoreComponents.ts");
@@ -1111,7 +1112,7 @@ describe("generateReactQueryComponents", () => {
   });
 
   it("should generate useMutation for POST operation", async () => {
-    const writeFile = jest.fn();
+    const writeFile = vi.fn();
     const openAPIDocument: OpenAPIObject = {
       openapi: "3.0.0",
       info: {
@@ -1190,7 +1191,7 @@ describe("generateReactQueryComponents", () => {
         existsFile: () => true,
         readFile: async () => "",
       },
-      config,
+      config
     );
 
     expect(writeFile.mock.calls[0][0]).toBe("petstoreComponents.ts");
@@ -1244,7 +1245,7 @@ describe("generateReactQueryComponents", () => {
   });
 
   it("should generate useMutation if openapi-codegen-component is defined", async () => {
-    const writeFile = jest.fn();
+    const writeFile = vi.fn();
     const openAPIDocument: OpenAPIObject = {
       openapi: "3.0.0",
       info: {
@@ -1324,7 +1325,7 @@ describe("generateReactQueryComponents", () => {
         existsFile: () => true,
         readFile: async () => "",
       },
-      config,
+      config
     );
 
     expect(writeFile.mock.calls[0][0]).toBe("petstoreComponents.ts");
@@ -1378,7 +1379,7 @@ describe("generateReactQueryComponents", () => {
   });
 
   it("should resolve requestBody ref", async () => {
-    const writeFile = jest.fn();
+    const writeFile = vi.fn();
     const openAPIDocument: OpenAPIObject = {
       openapi: "3.0.0",
       info: {
@@ -1464,7 +1465,7 @@ describe("generateReactQueryComponents", () => {
         existsFile: () => true,
         readFile: async () => "",
       },
-      config,
+      config
     );
 
     expect(writeFile.mock.calls[0][0]).toBe("petstoreComponents.ts");
@@ -1512,7 +1513,7 @@ describe("generateReactQueryComponents", () => {
   });
 
   it("should deal with pathParams (snake case)", async () => {
-    const writeFile = jest.fn();
+    const writeFile = vi.fn();
     const openAPIDocument: OpenAPIObject = {
       openapi: "3.0.0",
       info: {
@@ -1577,7 +1578,7 @@ describe("generateReactQueryComponents", () => {
         existsFile: () => true,
         readFile: async () => "",
       },
-      config,
+      config
     );
 
     expect(writeFile.mock.calls[0][0]).toBe("petstoreComponents.ts");
@@ -1624,7 +1625,7 @@ describe("generateReactQueryComponents", () => {
   });
 
   it("should deal with pathParams (dash case)", async () => {
-    const writeFile = jest.fn();
+    const writeFile = vi.fn();
     const openAPIDocument: OpenAPIObject = {
       openapi: "3.0.0",
       info: {
@@ -1689,7 +1690,7 @@ describe("generateReactQueryComponents", () => {
         existsFile: () => true,
         readFile: async () => "",
       },
-      config,
+      config
     );
 
     expect(writeFile.mock.calls[0][0]).toBe("petstoreComponents.ts");
@@ -1736,7 +1737,7 @@ describe("generateReactQueryComponents", () => {
   });
 
   it("should deal with pathParams (dot case)", async () => {
-    const writeFile = jest.fn();
+    const writeFile = vi.fn();
     const openAPIDocument: OpenAPIObject = {
       openapi: "3.0.0",
       info: {
@@ -1801,7 +1802,7 @@ describe("generateReactQueryComponents", () => {
         existsFile: () => true,
         readFile: async () => "",
       },
-      config,
+      config
     );
 
     expect(writeFile.mock.calls[0][0]).toBe("petstoreComponents.ts");
@@ -1848,7 +1849,7 @@ describe("generateReactQueryComponents", () => {
   });
 
   it("should build components without prefix", async () => {
-    const writeFile = jest.fn();
+    const writeFile = vi.fn();
     const openAPIDocument: OpenAPIObject = {
       openapi: "3.0.0",
       info: {
@@ -1913,7 +1914,7 @@ describe("generateReactQueryComponents", () => {
         existsFile: () => true,
         readFile: async () => "",
       },
-      { ...config, filenamePrefix: "" },
+      { ...config, filenamePrefix: "" }
     );
 
     expect(writeFile.mock.calls[0][0]).toBe("components.ts");
@@ -1960,7 +1961,7 @@ describe("generateReactQueryComponents", () => {
   });
 
   it("should generate utils file if needed", async () => {
-    const writeFile = jest.fn();
+    const writeFile = vi.fn();
     const openAPIDocument: OpenAPIObject = {
       openapi: "3.0.0",
       info: {
@@ -2009,7 +2010,7 @@ describe("generateReactQueryComponents", () => {
         existsFile: () => true,
         readFile: async () => "",
       },
-      config,
+      config
     );
 
     expect(writeFile.mock.calls[0][0]).toBe("petstoreUtils.ts");

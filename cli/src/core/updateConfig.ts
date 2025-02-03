@@ -50,7 +50,7 @@ export function updateConfig({
   const addImportsAndConfigProperty: ts.TransformerFactory<ts.SourceFile> = (
     context
   ) => {
-    const visit: ts.Visitor = (node) => {
+    const visit = (node: ts.Node): ts.Node => {
       node = ts.visitEachChild(node, visit, context);
 
       if (
@@ -98,7 +98,6 @@ export function updateConfig({
 
         return f.updateExportAssignment(
           node,
-          node.decorators,
           node.modifiers,
           f.updateCallExpression(
             node.expression,
@@ -117,7 +116,7 @@ export function updateConfig({
       return node;
     };
 
-    return (node) => ts.visitNode(node, visit);
+    return (node) => ts.visitNode(node, visit, ts.isSourceFile);
   };
 
   const {
@@ -180,7 +179,7 @@ function createImportStatements(imports: Map<string, string[]>) {
 
 function getText(expression: ts.Expression) {
   try {
-    // @ts-expect-error
+    // @ts-expect-error private field
     return (expression.text as string) ?? "";
   } catch {
     return "";

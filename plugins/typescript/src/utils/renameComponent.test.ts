@@ -1,3 +1,4 @@
+import { describe, expect, it } from "vitest";
 import { OpenAPIObject } from "openapi3-ts";
 import { petstore } from "../fixtures/petstore";
 import { renameComponent } from "./renameComponent";
@@ -12,10 +13,10 @@ describe("renameComponent", () => {
     const updatedSpecsAsString = JSON.stringify(updatedSpecs);
 
     expect(updatedSpecsAsString.includes("#/components/schemas/Pet")).toBe(
-      false,
+      false
     );
     expect(updatedSpecsAsString.includes("#/components/schemas/APet")).toBe(
-      true,
+      true
     );
   });
 
@@ -28,7 +29,7 @@ describe("renameComponent", () => {
 
     expect(updatedSpecs.components?.schemas?.Pet).toEqual(undefined);
     expect(updatedSpecs.components?.schemas?.APet).toEqual(
-      petstore.components?.schemas?.Pet,
+      petstore.components?.schemas?.Pet
     );
   });
 
@@ -70,7 +71,7 @@ describe("renameComponent", () => {
         openAPIDocument,
         from: "#/components/schemas/Foo",
         to: "#/components/schemas/Baz",
-      }),
+      })
     ).toMatchInlineSnapshot(`
      {
        "components": {

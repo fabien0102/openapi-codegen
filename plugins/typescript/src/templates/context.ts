@@ -88,7 +88,7 @@ export const getContext = (prefix: string, componentsFile: string) =>
   ): operation is QueryOperation & {
     variables: { pathParams: Record<string, string> };
   } => {
-    return Boolean((operation.variables as any).pathParams);
+    return "variables" in operation && "pathParams" in operation.variables;
   };
 
   const hasBody = (
@@ -96,7 +96,7 @@ export const getContext = (prefix: string, componentsFile: string) =>
   ): operation is QueryOperation & {
     variables: { body: Record<string, unknown> };
   } => {
-    return Boolean((operation.variables as any).body);
+    return "variables" in operation && "body" in operation.variables;
   };
 
   const hasQueryParams = (
@@ -104,6 +104,6 @@ export const getContext = (prefix: string, componentsFile: string) =>
   ): operation is QueryOperation & {
     variables: { queryParams: Record<string, unknown> };
   } => {
-    return Boolean((operation.variables as any).queryParams);
+    return "variables" in operation && "queryParams" in operation.variables;
   };
   `;

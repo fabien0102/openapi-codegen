@@ -14,7 +14,8 @@
     "downlevelIteration": true,
     "noFallthroughCasesInSwitch": true,
     "sourceMap": true,
-    "declaration": true
+    "declaration": true,
+    "skipLibCheck": true
   },
   "include": ["cli/src/**/*", "plugins/*/src/**/*"]
 }

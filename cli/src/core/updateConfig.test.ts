@@ -1,10 +1,11 @@
+import { describe, expect, it } from "vitest";
 import ts from "typescript";
 import { updateConfig } from "./updateConfig";
 
 describe("updateConfig", () => {
   const configProperty = ts.factory.createPropertyAssignment(
     "test",
-    ts.factory.createObjectLiteralExpression([], false),
+    ts.factory.createObjectLiteralExpression([], false)
   );
 
   it("should add import statement if not already existing", () => {
@@ -15,7 +16,7 @@ describe("updateConfig", () => {
     const sourceFile = ts.createSourceFile(
       "openapi-codegen.config.ts",
       sourceText,
-      ts.ScriptTarget.Latest,
+      ts.ScriptTarget.Latest
     );
 
     const transformedSourceFile = updateConfig({
@@ -51,7 +52,7 @@ describe("updateConfig", () => {
     const sourceFile = ts.createSourceFile(
       "openapi-codegen.config.ts",
       sourceText,
-      ts.ScriptTarget.Latest,
+      ts.ScriptTarget.Latest
     );
 
     const transformedSourceFile = updateConfig({
@@ -85,7 +86,7 @@ describe("updateConfig", () => {
     const sourceFile = ts.createSourceFile(
       "openapi-codegen.config.ts",
       sourceText,
-      ts.ScriptTarget.Latest,
+      ts.ScriptTarget.Latest
     );
 
     const transformedSourceFile = updateConfig({

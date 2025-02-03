@@ -57,7 +57,6 @@ export const getOperationTypes = ({
   let errorType = getErrorResponseType({
     responses: operation.responses,
     components: openAPIDocument.components,
-    printNodes,
   });
 
   // Retrieve requestBodyType

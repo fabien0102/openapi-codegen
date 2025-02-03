@@ -16,7 +16,7 @@ import {
 import { getText } from "../utils/getText.js";
 import emptyConfig from "../templates/emptyConfig.js";
 import { updateConfig } from "../core/updateConfig.js";
-import { handlePromptCancel } from "src/utils/handlePromptCancel";
+import { handlePromptCancel } from "../utils/handlePromptCancel";
 
 export class InitCommand extends Command {
   static paths = [["init"]];
@@ -29,16 +29,18 @@ export class InitCommand extends Command {
     description: "Print the file in the stdout",
   });
 
-  private hasDependencyInstalled(name: string, packageJSON: any) {
-    if (typeof packageJSON !== "object") return false;
+  private hasDependencyInstalled(name: string, packageJSON: unknown) {
+    if (!isObject(packageJSON)) return false;
     if (
-      typeof packageJSON.dependencies === "object" &&
-      packageJSON.dependencies[name]
+      "dependencies" in packageJSON &&
+      isObject(packageJSON.dependencies) &&
+      name in packageJSON.dependencies
     )
       return true;
     if (
-      typeof packageJSON.devDependencies === "object" &&
-      packageJSON.devDependencies[name]
+      "devDependencies" in packageJSON &&
+      isObject(packageJSON.devDependencies) &&
+      name in packageJSON.devDependencies
     )
       return true;
 
@@ -269,4 +271,8 @@ export class InitCommand extends Command {
       );
     }
   }
+}
+
+function isObject(obj: unknown) {
+  return typeof obj === "object" && obj !== null;
 }

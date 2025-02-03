@@ -11,13 +11,7 @@ import { camelizedPathParams } from "./camelizedPathParams";
 export const createOperationQueryFnNodes = ({
   operationFetcherFnName,
   dataType,
-  errorType,
-  requestBodyType,
-  queryParamsType,
-  pathParamsType,
-  headersType,
   variablesType,
-  fetcherFn,
   operation,
   operationId,
   url,
@@ -26,15 +20,9 @@ export const createOperationQueryFnNodes = ({
 }: {
   operationFetcherFnName: string;
   dataType: ts.TypeNode;
-  errorType: ts.TypeNode;
-  requestBodyType: ts.TypeNode;
-  headersType: ts.TypeNode;
-  pathParamsType: ts.TypeNode;
-  queryParamsType: ts.TypeNode;
   variablesType: ts.TypeNode;
   operation: OperationObject;
   operationId: string;
-  fetcherFn: string;
   url: string;
   verb: string;
   name: string;

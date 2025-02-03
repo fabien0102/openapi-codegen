@@ -1,3 +1,4 @@
+import { describe, expect, it } from "vitest";
 import { ResponseObject } from "openapi3-ts";
 import { print } from "../testUtils";
 import { getErrorResponseType } from "./getErrorResponseType";
@@ -11,8 +12,6 @@ describe("getErrorResponseType", () => {
             "200": createResponse("Success"),
             "500": createResponse("SimpleError"),
           },
-
-          printNodes: (nodes) => nodes.map(print).join("\n"),
         })
       )
     ).toMatchInlineSnapshot(`
@@ -31,8 +30,6 @@ describe("getErrorResponseType", () => {
             "404": createResponse("NotFoundError"),
             "500": createResponse("SimpleError"),
           },
-
-          printNodes: (nodes) => nodes.map(print).join("\n"),
         })
       )
     ).toMatchInlineSnapshot(`
@@ -51,7 +48,6 @@ describe("getErrorResponseType", () => {
       print(
         getErrorResponseType({
           responses: {},
-          printNodes: (nodes) => nodes.map(print).join("\n"),
         })
       )
     ).toEqual("Fetcher.ErrorWrapper<undefined>");
@@ -64,8 +60,6 @@ describe("getErrorResponseType", () => {
           responses: {
             default: createResponse("SimpleError"),
           },
-
-          printNodes: (nodes) => nodes.map(print).join("\n"),
         })
       )
     ).toMatchInlineSnapshot(`
@@ -84,8 +78,6 @@ describe("getErrorResponseType", () => {
             "4xx": createResponse("ClientError"),
             default: createResponse("DefaultError"),
           },
-
-          printNodes: (nodes) => nodes.map(print).join("\n"),
         })
       )
     ).toMatchInlineSnapshot(`
@@ -107,8 +99,6 @@ describe("getErrorResponseType", () => {
             "5xx": createResponse("ServerError"),
             default: createResponse("DefaultError"),
           },
-
-          printNodes: (nodes) => nodes.map(print).join("\n"),
         })
       )
     ).toMatchInlineSnapshot(`
@@ -130,8 +120,6 @@ describe("getErrorResponseType", () => {
             422: createResponse("ValidationError"),
             "4xx": createResponse("ClientError"),
           },
-
-          printNodes: (nodes) => nodes.map(print).join("\n"),
         })
       )
     ).toMatchInlineSnapshot(`
@@ -154,8 +142,6 @@ describe("getErrorResponseType", () => {
             503: createResponse("NotAvailableError"),
             "5xx": createResponse("ServerError"),
           },
-
-          printNodes: (nodes) => nodes.map(print).join("\n"),
         })
       )
     ).toMatchInlineSnapshot(`
@@ -183,8 +169,6 @@ describe("getErrorResponseType", () => {
             "5xx": createResponse("ServerError"),
             default: createResponse("DefaultError"),
           },
-
-          printNodes: (nodes) => nodes.map(print).join("\n"),
         })
       )
     ).toMatchInlineSnapshot(`

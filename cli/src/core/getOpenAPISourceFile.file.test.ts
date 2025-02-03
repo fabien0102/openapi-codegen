@@ -1,3 +1,4 @@
+import { assert, describe, expect, it } from "vitest";
 import { getOpenAPISourceFile } from "./getOpenAPISourceFile";
 
 describe("getOpenAPISourceFile (source = file)", () => {
@@ -90,10 +91,10 @@ describe("getOpenAPISourceFile (source = file)", () => {
         source: "file",
         relativePath: "cli/src/fixtures/spec.yolo",
       });
-      fail("should throw an error");
+      assert.fail("Should throw an error");
     } catch (e) {
       expect(e).toMatchInlineSnapshot(
-        `[Error: "yolo" extension file is not supported!]`,
+        `[Error: "yolo" extension file is not supported!]`
       );
     }
   });

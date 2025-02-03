@@ -35,7 +35,7 @@
    ```bash
    npx @openapi-codegen/cli init
    ```
-   
+
    <img style="max-width: 400px" src="https://user-images.githubusercontent.com/271912/194000679-5a4501b8-5fc0-430c-9217-028bf91a5dcd.gif">
 
    If you wish to change any of the selections made, you can do so in the generated `openapi-codegen.config.ts` file later..
@@ -45,6 +45,7 @@
    ```bash
    npx openapi-codegen gen {namespace}
    ```
+
    After the code generation is done, you will notice the following files:
 
    - `{namespace}Fetcher.ts` - defines a function that will make requests to your API.
@@ -72,9 +73,9 @@
 
    - Install the library
 
-      ```bash
-      npm i @tanstack/react-query
-      ```
+     ```bash
+     npm i @tanstack/react-query
+     ```
 
    - Wire up the `QueryClient` as described [here](https://tanstack.com/query/v4/docs/adapters/react-query).
 
@@ -211,67 +212,67 @@ the `@openapi-codegen/cli` supports these generator plugins:
 
 #### **generateSchemaTypes** (frontend/backend)
 
-  generate all schema types for your specification:
-  
-  ```ts
-   const { schemasFiles } = await generateSchemaTypes(context, {
-        /* config */
-      });
-  ```
-  
+generate all schema types for your specification:
+
+```ts
+const { schemasFiles } = await generateSchemaTypes(context, {
+  /* config */
+});
+```
+
 output: `{namespace}Schemas.ts`
 
 #### **generateFetchers** (frontend)
 
-  generate all fetchers with types for your specification _needs schemafiles_
-  
-  ```ts
-     await generateFetchers(context, {
-        /* config */
-        schemasFiles,
-      });
-  ```
-  
+generate all fetchers with types for your specification _needs schemafiles_
+
+```ts
+await generateFetchers(context, {
+  /* config */
+  schemasFiles,
+});
+```
+
 output: `{namespace}Fetchers.ts`
 
 #### **generateReactQueryComponents** (frontend)
 
-  generate all React Query Components for useQuery() and useMutation()
-  
-  ```ts
-      await generateReactQueryComponents(context, {
-        /* config*/
-        schemasFiles,
-      });
-  ```
-  
-  output: `{namespace}Components.ts`
-  
+generate all React Query Components for useQuery() and useMutation()
+
+```ts
+await generateReactQueryComponents(context, {
+  /* config*/
+  schemasFiles,
+});
+```
+
+output: `{namespace}Components.ts`
+
 #### **generateReactQueryFunctions** (frontend)
 
-  generate all React Query Functions used for e.g. React-Router 6.6.0+ loader functions
-  
-  ```ts
-     await generateReactQueryFunctions(context, {
-        filenamePrefix,
-        schemasFiles,
-      });
-  ```
-  
-  output: `{namespace}Functions.ts`
+generate all React Query Functions used for e.g. React-Router 6.6.0+ loader functions
 
-  example usage in react-route-loader:
-  
-  ```ts
-  export const routeLoader = (queryClient: QueryClient) =>
-    async ({ params }: MyParams) => 
-      await queryClient.fetchQuery(...getYourQueryNameQuery({}), {
-        /*options*/
-      })
-  ```
-  
-  _more infos: https://reactrouter.com/en/main/guides/data-libs_
+```ts
+await generateReactQueryFunctions(context, {
+  filenamePrefix,
+  schemasFiles,
+});
+```
 
+output: `{namespace}Functions.ts`
+
+example usage in react-route-loader:
+
+```ts
+export const routeLoader =
+  (queryClient: QueryClient) =>
+  async ({ params }: MyParams) =>
+    await queryClient.fetchQuery(...getYourQueryNameQuery({}), {
+      /*options*/
+    });
+```
+
+_more infos: https://reactrouter.com/en/main/guides/data-libs_
 
 You can import any generator into the `to` section, those can be the ones provided by this project or your own custom ones. You have full control of what you are generating!
 

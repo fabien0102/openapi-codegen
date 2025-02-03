@@ -1,15 +1,22 @@
-import type { QueryKey, UseQueryOptions } from "@tanstack/react-query";
-import { useToken } from "../Auth";
+import type {
+  DefaultError,
+  Enabled,
+  QueryKey,
+  UseQueryOptions,
+} from "@tanstack/react-query";
 import { QueryOperation } from "./githubComponents";
 
-export type GithubContext = {
+export type GithubContext<
+  TQueryFnData = unknown,
+  TError = DefaultError,
+  TData = TQueryFnData,
+  TQueryKey extends QueryKey = QueryKey,
+> = {
   fetcherOptions: {
     /**
      * Headers to inject in the fetcher
      */
-    headers?: {
-      authorization?: string;
-    };
+    headers?: {};
     /**
      * Query params to inject in the fetcher
      */
@@ -20,12 +27,8 @@ export type GithubContext = {
      * Set this to `false` to disable automatic refetching when the query mounts or changes query keys.
      * Defaults to `true`.
      */
-    enabled?: boolean;
+    enabled?: Enabled<TQueryFnData, TError, TQueryFnData, TQueryKey>;
   };
-  /**
-   * Query key manager.
-   */
-  queryKeyFn: (operation: QueryOperation) => QueryKey;
 };
 
 /**
@@ -35,45 +38,39 @@ export type GithubContext = {
  */
 export function useGithubContext<
   TQueryFnData = unknown,
-  TError = unknown,
+  TError = DefaultError,
   TData = TQueryFnData,
-  TQueryKey extends QueryKey = QueryKey
+  TQueryKey extends QueryKey = QueryKey,
 >(
-  queryOptions?: Omit<
+  _queryOptions?: Omit<
     UseQueryOptions<TQueryFnData, TError, TData, TQueryKey>,
     "queryKey" | "queryFn"
   >
-): GithubContext {
-  const token = useToken();
+): GithubContext<TQueryFnData, TError, TData, TQueryKey> {
   return {
-    fetcherOptions: {
-      headers: {
-        authorization: token ? `Bearer ${token}` : undefined,
-      },
-    },
-    queryOptions: {
-      enabled: token !== null && (queryOptions?.enabled ?? true),
-    },
-    queryKeyFn: (operation) => {
-      const queryKey: unknown[] = hasPathParams(operation)
-        ? operation.path
-            .split("/")
-            .filter(Boolean)
-            .map((i) => resolvePathParam(i, operation.variables.pathParams))
-        : operation.path.split("/").filter(Boolean);
-
-      if (hasQueryParams(operation)) {
-        queryKey.push(operation.variables.queryParams);
-      }
-
-      if (hasBody(operation)) {
-        queryKey.push(operation.variables.body);
-      }
-
-      return queryKey;
-    },
+    fetcherOptions: {},
+    queryOptions: {},
   };
 }
+
+export const queryKeyFn = (operation: QueryOperation) => {
+  const queryKey: unknown[] = hasPathParams(operation)
+    ? operation.path
+        .split("/")
+        .filter(Boolean)
+        .map((i) => resolvePathParam(i, operation.variables.pathParams))
+    : operation.path.split("/").filter(Boolean);
+
+  if (hasQueryParams(operation)) {
+    queryKey.push(operation.variables.queryParams);
+  }
+
+  if (hasBody(operation)) {
+    queryKey.push(operation.variables.body);
+  }
+
+  return queryKey;
+};
 
 // Helpers
 const resolvePathParam = (key: string, pathParams: Record<string, string>) => {

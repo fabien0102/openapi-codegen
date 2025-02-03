@@ -1,3 +1,4 @@
+import { describe, expect, it } from "vitest";
 import ts, { factory as f } from "typescript";
 import { print } from "../testUtils";
 import { getUsedImports } from "./getUsedImports";
@@ -12,10 +13,10 @@ describe("getUsedImports", () => {
         f.createTypeReferenceNode(
           f.createQualifiedName(
             f.createIdentifier("RequestBodies"), // this should be detected
-            f.createIdentifier("B"),
+            f.createIdentifier("B")
           ),
-          undefined,
-        ),
+          undefined
+        )
       ),
     ];
 
@@ -28,9 +29,9 @@ describe("getUsedImports", () => {
         utils: "./utils",
       })
         .nodes.map(print)
-        .join("\n"),
+        .join("\n")
     ).toMatchInlineSnapshot(
-      `"import type * as RequestBodies from "././requestBodies";"`,
+      `"import type * as RequestBodies from "././requestBodies";"`
     );
   });
 
@@ -43,10 +44,10 @@ describe("getUsedImports", () => {
         f.createTypeReferenceNode(
           f.createQualifiedName(
             f.createIdentifier("Schemas"), // this should be detected
-            f.createIdentifier("B"),
+            f.createIdentifier("B")
           ),
-          undefined,
-        ),
+          undefined
+        )
       ),
     ];
 
@@ -59,7 +60,7 @@ describe("getUsedImports", () => {
         utils: "./utils",
       })
         .nodes.map(print)
-        .join("\n"),
+        .join("\n")
     ).toMatchInlineSnapshot(`"import type * as Schemas from "././schemas";"`);
   });
 
@@ -72,10 +73,10 @@ describe("getUsedImports", () => {
         f.createTypeReferenceNode(
           f.createQualifiedName(
             f.createIdentifier("Parameters"), // this should be detected
-            f.createIdentifier("B"),
+            f.createIdentifier("B")
           ),
-          undefined,
-        ),
+          undefined
+        )
       ),
     ];
 
@@ -88,9 +89,9 @@ describe("getUsedImports", () => {
         utils: "./utils",
       })
         .nodes.map(print)
-        .join("\n"),
+        .join("\n")
     ).toMatchInlineSnapshot(
-      `"import type * as Parameters from "././parameters";"`,
+      `"import type * as Parameters from "././parameters";"`
     );
   });
 
@@ -103,10 +104,10 @@ describe("getUsedImports", () => {
         f.createTypeReferenceNode(
           f.createQualifiedName(
             f.createIdentifier("Responses"), // this should be detected
-            f.createIdentifier("B"),
+            f.createIdentifier("B")
           ),
-          undefined,
-        ),
+          undefined
+        )
       ),
     ];
 
@@ -119,9 +120,9 @@ describe("getUsedImports", () => {
         utils: "./utils",
       })
         .nodes.map(print)
-        .join("\n"),
+        .join("\n")
     ).toMatchInlineSnapshot(
-      `"import type * as Responses from "././responses";"`,
+      `"import type * as Responses from "././responses";"`
     );
   });
 
@@ -134,10 +135,10 @@ describe("getUsedImports", () => {
         f.createTypeReferenceNode(
           f.createQualifiedName(
             f.createIdentifier("RequestBodies"), // this should be detected
-            f.createIdentifier("B"),
+            f.createIdentifier("B")
           ),
-          undefined,
-        ),
+          undefined
+        )
       ),
       f.createTypeAliasDeclaration(
         undefined,
@@ -146,10 +147,10 @@ describe("getUsedImports", () => {
         f.createTypeReferenceNode(
           f.createQualifiedName(
             f.createIdentifier("Schemas"), // this should be detected
-            f.createIdentifier("B"),
+            f.createIdentifier("B")
           ),
-          undefined,
-        ),
+          undefined
+        )
       ),
       f.createTypeAliasDeclaration(
         undefined,
@@ -158,10 +159,10 @@ describe("getUsedImports", () => {
         f.createTypeReferenceNode(
           f.createQualifiedName(
             f.createIdentifier("Parameters"), // this should be detected
-            f.createIdentifier("B"),
+            f.createIdentifier("B")
           ),
-          undefined,
-        ),
+          undefined
+        )
       ),
       f.createTypeAliasDeclaration(
         undefined,
@@ -170,10 +171,10 @@ describe("getUsedImports", () => {
         f.createTypeReferenceNode(
           f.createQualifiedName(
             f.createIdentifier("Responses"), // this should be detected
-            f.createIdentifier("B"),
+            f.createIdentifier("B")
           ),
-          undefined,
-        ),
+          undefined
+        )
       ),
     ];
 
@@ -186,7 +187,7 @@ describe("getUsedImports", () => {
         utils: "./utils",
       })
         .nodes.map(print)
-        .join("\n"),
+        .join("\n")
     ).toMatchInlineSnapshot(`
      "import type * as Parameters from "././parameters";
      import type * as Schemas from "././schemas";
@@ -204,9 +205,9 @@ describe("getUsedImports", () => {
         f.createTypeReferenceNode(f.createIdentifier("ErrorWrapper"), [
           f.createTypeReferenceNode(
             f.createIdentifier("ClientErrorStatus"), // should be detected
-            undefined,
+            undefined
           ),
-        ]),
+        ])
       ),
     ];
 
@@ -219,9 +220,9 @@ describe("getUsedImports", () => {
         utils: "./utils",
       })
         .nodes.map(print)
-        .join("\n"),
+        .join("\n")
     ).toMatchInlineSnapshot(
-      `"import type { ClientErrorStatus } from "././utils";"`,
+      `"import type { ClientErrorStatus } from "././utils";"`
     );
   });
 
@@ -234,9 +235,9 @@ describe("getUsedImports", () => {
         f.createTypeReferenceNode(f.createIdentifier("ErrorWrapper"), [
           f.createTypeReferenceNode(
             f.createIdentifier("ServerErrorStatus"), // should be detected
-            undefined,
+            undefined
           ),
-        ]),
+        ])
       ),
     ];
 
@@ -249,9 +250,9 @@ describe("getUsedImports", () => {
         utils: "./utils",
       })
         .nodes.map(print)
-        .join("\n"),
+        .join("\n")
     ).toMatchInlineSnapshot(
-      `"import type { ServerErrorStatus } from "././utils";"`,
+      `"import type { ServerErrorStatus } from "././utils";"`
     );
   });
 
@@ -264,9 +265,9 @@ describe("getUsedImports", () => {
         f.createTypeReferenceNode(f.createIdentifier("ErrorWrapper"), [
           f.createTypeReferenceNode(
             f.createIdentifier("ServerErrorStatus"), // should be detected
-            undefined,
+            undefined
           ),
-        ]),
+        ])
       ),
       f.createTypeAliasDeclaration(
         undefined,
@@ -275,9 +276,9 @@ describe("getUsedImports", () => {
         f.createTypeReferenceNode(f.createIdentifier("ErrorWrapper"), [
           f.createTypeReferenceNode(
             f.createIdentifier("ClientErrorStatus"), // should be detected
-            undefined,
+            undefined
           ),
-        ]),
+        ])
       ),
     ];
 
@@ -290,9 +291,9 @@ describe("getUsedImports", () => {
         utils: "./utils",
       })
         .nodes.map(print)
-        .join("\n"),
+        .join("\n")
     ).toMatchInlineSnapshot(
-      `"import type { ServerErrorStatus, ClientErrorStatus } from "././utils";"`,
+      `"import type { ServerErrorStatus, ClientErrorStatus } from "././utils";"`
     );
   });
 });

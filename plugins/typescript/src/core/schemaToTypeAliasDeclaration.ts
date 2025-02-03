@@ -198,7 +198,7 @@ export const getType = (
         f.createKeywordTypeNode(ts.SyntaxKind.NumberKeyword),
         schema.nullable
       );
-    case "string":
+    case "string": {
       if (schema.format === "binary") {
         return f.createTypeReferenceNode("Blob");
       }
@@ -206,12 +206,14 @@ export const getType = (
         f.createKeywordTypeNode(ts.SyntaxKind.StringKeyword),
         schema.nullable
       );
-    case "boolean":
+    }
+    case "boolean": {
       return withNullable(
         f.createKeywordTypeNode(ts.SyntaxKind.BooleanKeyword),
         schema.nullable
       );
-    case "object":
+    }
+    case "object": {
       if (schema.maxProperties === 0) {
         return withNullable(f.createTypeLiteralNode([]), schema.nullable);
       }
@@ -273,7 +275,8 @@ export const getType = (
       }
 
       return withNullable(f.createTypeLiteralNode(members), schema.nullable);
-    case "array":
+    }
+    case "array": {
       return withNullable(
         f.createArrayTypeNode(
           !schema.items || Object.keys(schema.items).length === 0
@@ -282,6 +285,7 @@ export const getType = (
         ),
         schema.nullable
       );
+    }
     default:
       return withNullable(
         f.createKeywordTypeNode(ts.SyntaxKind.VoidKeyword),
@@ -543,7 +547,7 @@ const mergeSchemas = (
   return { mergedSchema: merge({}, a, b), isColliding };
 };
 
-const keysToExpressAsJsDocProperty: Array<keyof RemoveIndex<SchemaObject>> = [
+const keysToExpressAsJsDocProperty: string[] = [
   "minimum",
   "maximum",
   "default",
@@ -563,7 +567,7 @@ const keysToExpressAsJsDocProperty: Array<keyof RemoveIndex<SchemaObject>> = [
   "maxProperties",
   "minProperties",
   "deprecated",
-];
+] satisfies Array<keyof RemoveIndex<SchemaObject>>;
 
 /**
  * Get JSDocComment from an OpenAPI Schema.
@@ -618,7 +622,7 @@ export const getJSDocComment = (
   Object.entries(schemaWithAllOfResolved)
     .filter(
       ([key, value]) =>
-        keysToExpressAsJsDocProperty.includes(key as any) ||
+        keysToExpressAsJsDocProperty.includes(key) ||
         (/^x-/.exec(key) && typeof value !== "object")
     )
     .forEach(([key, value]) => {

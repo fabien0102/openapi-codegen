@@ -1,3 +1,4 @@
+import { describe, expect, it } from "vitest";
 import { OpenAPIObject, SchemaObject } from "openapi3-ts";
 import ts from "typescript";
 import { schemaToEnumDeclaration } from "./schemaToEnumDeclaration";
@@ -87,7 +88,7 @@ const printSchema = (
   schema: SchemaObject,
   schemaName: string = "Test",
   currentComponent: OpenAPIComponentType = "schemas",
-  components?: OpenAPIObject["components"],
+  components?: OpenAPIObject["components"]
 ) => {
   const nodes = schemaToEnumDeclaration(schemaName, schema, {
     currentComponent,
@@ -97,7 +98,7 @@ const printSchema = (
   const sourceFile = ts.createSourceFile(
     "index.ts",
     "",
-    ts.ScriptTarget.Latest,
+    ts.ScriptTarget.Latest
   );
 
   const printer = ts.createPrinter({
@@ -107,7 +108,7 @@ const printSchema = (
 
   return nodes
     .map((node: ts.Node) =>
-      printer.printNode(ts.EmitHint.Unspecified, node, sourceFile),
+      printer.printNode(ts.EmitHint.Unspecified, node, sourceFile)
     )
     .join("\n");
 };

@@ -74,6 +74,6 @@ export const getDataResponseType = ({
   return responseTypes.length === 0
     ? f.createKeywordTypeNode(ts.SyntaxKind.UndefinedKeyword)
     : responseTypes.length === 1
-    ? responseTypes[0]
-    : f.createUnionTypeNode(responseTypes);
+      ? responseTypes[0]
+      : f.createUnionTypeNode(responseTypes);
 };

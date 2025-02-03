@@ -1,3 +1,4 @@
+import { describe, expect, it } from "vitest";
 import { OpenAPIObject, ReferenceObject, SchemaObject } from "openapi3-ts";
 import ts from "typescript";
 import {

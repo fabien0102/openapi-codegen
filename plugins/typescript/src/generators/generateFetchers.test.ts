@@ -1,3 +1,4 @@
+import { describe, expect, it, vi } from "vitest";
 import { set } from "lodash";
 import { OpenAPIObject } from "openapi3-ts";
 import { Config, generateFetchers } from "./generateFetchers";
@@ -58,7 +59,7 @@ describe("generateFetchers", () => {
   };
 
   it("should generate fetchers", async () => {
-    const writeFile = jest.fn();
+    const writeFile = vi.fn();
 
     await generateFetchers(
       {
@@ -67,7 +68,7 @@ describe("generateFetchers", () => {
         readFile: async () => "",
         existsFile: () => true,
       },
-      config,
+      config
     );
 
     expect(writeFile.mock.calls[1][0]).toBe("petstoreComponents.ts");
@@ -102,7 +103,7 @@ describe("generateFetchers", () => {
   });
 
   it("should generate fetchers without prefix", async () => {
-    const writeFile = jest.fn();
+    const writeFile = vi.fn();
 
     await generateFetchers(
       {
@@ -111,7 +112,7 @@ describe("generateFetchers", () => {
         readFile: async () => "",
         existsFile: () => true,
       },
-      { ...config, filenamePrefix: "" },
+      { ...config, filenamePrefix: "" }
     );
 
     expect(writeFile.mock.calls[1][0]).toBe("components.ts");
@@ -146,7 +147,7 @@ describe("generateFetchers", () => {
   });
 
   it("should generate fetcher with injected props", async () => {
-    const writeFile = jest.fn();
+    const writeFile = vi.fn();
 
     await generateFetchers(
       {
@@ -162,7 +163,7 @@ describe("generateFetchers", () => {
         `,
         existsFile: () => true,
       },
-      config,
+      config
     );
 
     expect(writeFile.mock.calls[1][0]).toBe("petstoreComponents.ts");
@@ -199,12 +200,12 @@ describe("generateFetchers", () => {
   });
 
   it("should generate fetcher with operations by tag", async () => {
-    const writeFile = jest.fn();
+    const writeFile = vi.fn();
 
     const openAPIDocumentWithTags = set(
       openAPIDocument,
       "paths./pets.get.tags",
-      ["pets"],
+      ["pets"]
     );
 
     await generateFetchers(
@@ -214,7 +215,7 @@ describe("generateFetchers", () => {
         readFile: async () => "",
         existsFile: () => true,
       },
-      config,
+      config
     );
 
     expect(writeFile.mock.calls[1][0]).toBe("petstoreComponents.ts");

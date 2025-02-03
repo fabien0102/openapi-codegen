@@ -4,5 +4,5 @@
     "outDir": "lib"
   },
 
-  "exclude": ["src/fixtures/**/*", "src/**/*.test.ts"]
+  "exclude": ["src/fixtures/**/*", "src/**/*.test.ts", "src/testUtils.ts"]
 }

@@ -20,11 +20,9 @@ export const serverErrorStatus = "ServerErrorStatus";
 export const getErrorResponseType = ({
   responses,
   components,
-  printNodes,
 }: {
   responses: ResponsesObject;
   components?: ComponentsObject;
-  printNodes: (nodes: ts.Node[]) => string;
 }) => {
   const status = Object.keys(responses);
 
@@ -84,8 +82,8 @@ export const getErrorResponseType = ({
     responseTypes.length === 0
       ? f.createKeywordTypeNode(ts.SyntaxKind.UndefinedKeyword)
       : responseTypes.length === 1
-      ? responseTypes[0]
-      : f.createUnionTypeNode(responseTypes),
+        ? responseTypes[0]
+        : f.createUnionTypeNode(responseTypes),
   ]);
 };
 

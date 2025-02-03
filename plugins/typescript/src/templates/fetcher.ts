@@ -23,8 +23,8 @@ export const getFetcher = ({
        *
        * Note: You need to re-gen after adding the first property to
        * have the \`${pascal(prefix)}FetcherExtraProps\` injected in \`${pascal(
-          prefix
-        )}Components.ts\`
+         prefix
+       )}Components.ts\`
        **/
     }`
   }

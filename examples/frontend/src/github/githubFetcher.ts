@@ -13,15 +13,16 @@ export type GithubFetcherOptions<TBody, THeaders, TQueryParams, TPathParams> = {
   headers?: THeaders;
   queryParams?: TQueryParams;
   pathParams?: TPathParams;
+  signal?: AbortSignal;
 } & GithubContext["fetcherOptions"];
 
 export async function githubFetch<
   TData,
   TError,
-  TBody extends {} | undefined | null,
+  TBody extends {} | FormData | undefined | null,
   THeaders extends {},
   TQueryParams extends {},
-  TPathParams extends {}
+  TPathParams extends {},
 >({
   url,
   method,
@@ -29,6 +30,7 @@ export async function githubFetch<
   headers,
   pathParams,
   queryParams,
+  signal,
 }: GithubFetcherOptions<
   TBody,
   THeaders,
@@ -36,15 +38,36 @@ export async function githubFetch<
   TPathParams
 >): Promise<TData> {
   try {
+    const requestHeaders: HeadersInit = {
+      "Content-Type": "application/json",
+      ...headers,
+    };
+
+    /**
+     * As the fetch API is being used, when multipart/form-data is specified
+     * the Content-Type header must be deleted so that the browser can set
+     * the correct boundary.
+     * https://developer.mozilla.org/en-US/docs/Web/API/FormData/Using_FormData_Objects#sending_files_using_a_formdata_object
+     */
+    if (
+      requestHeaders["Content-Type"]
+        .toLowerCase()
+        .includes("multipart/form-data")
+    ) {
+      delete requestHeaders["Content-Type"];
+    }
+
     const response = await window.fetch(
       `${baseUrl}${resolveUrl(url, queryParams, pathParams)}`,
       {
+        signal,
         method: method.toUpperCase(),
-        body: body ? JSON.stringify(body) : undefined,
-        headers: {
-          "Content-Type": "application/json",
-          ...headers,
-        },
+        body: body
+          ? body instanceof FormData
+            ? body
+            : JSON.stringify(body)
+          : undefined,
+        headers: requestHeaders,
       }
     );
     if (!response.ok) {
@@ -71,11 +94,13 @@ export async function githubFetch<
       return (await response.blob()) as unknown as TData;
     }
   } catch (e) {
-    throw {
-      status: "unknown" as const,
-      payload:
+    const errorObject: Error = {
+      name: "unknown" as const,
+      message:
         e instanceof Error ? `Network error (${e.message})` : "Network error",
+      stack: e as string,
     };
+    throw errorObject;
   }
 }
 
