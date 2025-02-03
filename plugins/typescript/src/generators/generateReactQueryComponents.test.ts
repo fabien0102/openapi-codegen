@@ -126,6 +126,7 @@ describe("generateReactQueryComponents", () => {
        */
       export const listPetsQuery = (
         variables: ListPetsVariables,
+        fetcherOptions?: PetstoreContext["fetcherOptions"],
       ): {
         queryKey: reactQuery.QueryKey;
         queryFn: ({ signal }: { signal?: AbortSignal }) => Promise<ListPetsResponse>;
@@ -136,7 +137,7 @@ describe("generateReactQueryComponents", () => {
           variables,
         }),
         queryFn: ({ signal }: { signal?: AbortSignal }) =>
-          fetchListPets(variables, signal),
+          fetchListPets({ ...fetcherOptions, ...variables }, signal),
       });
 
       /**
@@ -149,9 +150,9 @@ describe("generateReactQueryComponents", () => {
           "queryKey" | "queryFn" | "initialData"
         >,
       ) => {
-        const { queryOptions } = usePetstoreContext(options);
+        const { queryOptions, fetcherOptions } = usePetstoreContext(options);
         return reactQuery.useSuspenseQuery<ListPetsResponse, ListPetsError, TData>({
-          ...listPetsQuery(variables),
+          ...listPetsQuery(variables, fetcherOptions),
           ...options,
           ...queryOptions,
         });
@@ -167,9 +168,9 @@ describe("generateReactQueryComponents", () => {
           "queryKey" | "queryFn" | "initialData"
         >,
       ) => {
-        const { queryOptions } = usePetstoreContext(options);
+        const { queryOptions, fetcherOptions } = usePetstoreContext(options);
         return reactQuery.useQuery<ListPetsResponse, ListPetsError, TData>({
-          ...listPetsQuery(variables),
+          ...listPetsQuery(variables, fetcherOptions),
           ...options,
           ...queryOptions,
         });
@@ -268,6 +269,7 @@ describe("generateReactQueryComponents", () => {
        */
       export const listPetsQuery = (
         variables: ListPetsVariables,
+        fetcherOptions?: PetstoreContext["fetcherOptions"],
       ): {
         queryKey: reactQuery.QueryKey;
         queryFn: ({ signal }: { signal?: AbortSignal }) => Promise<ListPetsResponse>;
@@ -278,7 +280,7 @@ describe("generateReactQueryComponents", () => {
           variables,
         }),
         queryFn: ({ signal }: { signal?: AbortSignal }) =>
-          fetchListPets(variables, signal),
+          fetchListPets({ ...fetcherOptions, ...variables }, signal),
       });
 
       /**
@@ -291,9 +293,9 @@ describe("generateReactQueryComponents", () => {
           "queryKey" | "queryFn" | "initialData"
         >,
       ) => {
-        const { queryOptions } = usePetstoreContext(options);
+        const { queryOptions, fetcherOptions } = usePetstoreContext(options);
         return reactQuery.useSuspenseQuery<ListPetsResponse, ListPetsError, TData>({
-          ...listPetsQuery(variables),
+          ...listPetsQuery(variables, fetcherOptions),
           ...options,
           ...queryOptions,
         });
@@ -309,9 +311,9 @@ describe("generateReactQueryComponents", () => {
           "queryKey" | "queryFn" | "initialData"
         >,
       ) => {
-        const { queryOptions } = usePetstoreContext(options);
+        const { queryOptions, fetcherOptions } = usePetstoreContext(options);
         return reactQuery.useQuery<ListPetsResponse, ListPetsError, TData>({
-          ...listPetsQuery(variables),
+          ...listPetsQuery(variables, fetcherOptions),
           ...options,
           ...queryOptions,
         });
@@ -450,6 +452,7 @@ describe("generateReactQueryComponents", () => {
        */
       export const listPetsQuery = (
         variables: ListPetsVariables,
+        fetcherOptions?: PetstoreContext["fetcherOptions"],
       ): {
         queryKey: reactQuery.QueryKey;
         queryFn: ({ signal }: { signal?: AbortSignal }) => Promise<ListPetsResponse>;
@@ -460,7 +463,7 @@ describe("generateReactQueryComponents", () => {
           variables,
         }),
         queryFn: ({ signal }: { signal?: AbortSignal }) =>
-          fetchListPets(variables, signal),
+          fetchListPets({ ...fetcherOptions, ...variables }, signal),
       });
 
       /**
@@ -473,9 +476,9 @@ describe("generateReactQueryComponents", () => {
           "queryKey" | "queryFn" | "initialData"
         >,
       ) => {
-        const { queryOptions } = usePetstoreContext(options);
+        const { queryOptions, fetcherOptions } = usePetstoreContext(options);
         return reactQuery.useSuspenseQuery<ListPetsResponse, ListPetsError, TData>({
-          ...listPetsQuery(variables),
+          ...listPetsQuery(variables, fetcherOptions),
           ...options,
           ...queryOptions,
         });
@@ -491,9 +494,9 @@ describe("generateReactQueryComponents", () => {
           "queryKey" | "queryFn" | "initialData"
         >,
       ) => {
-        const { queryOptions } = usePetstoreContext(options);
+        const { queryOptions, fetcherOptions } = usePetstoreContext(options);
         return reactQuery.useQuery<ListPetsResponse, ListPetsError, TData>({
-          ...listPetsQuery(variables),
+          ...listPetsQuery(variables, fetcherOptions),
           ...options,
           ...queryOptions,
         });
@@ -632,6 +635,7 @@ describe("generateReactQueryComponents", () => {
        */
       export const listPetsQuery = (
         variables: ListPetsVariables,
+        fetcherOptions?: PetstoreContext["fetcherOptions"],
       ): {
         queryKey: reactQuery.QueryKey;
         queryFn: ({ signal }: { signal?: AbortSignal }) => Promise<ListPetsResponse>;
@@ -642,7 +646,7 @@ describe("generateReactQueryComponents", () => {
           variables,
         }),
         queryFn: ({ signal }: { signal?: AbortSignal }) =>
-          fetchListPets(variables, signal),
+          fetchListPets({ ...fetcherOptions, ...variables }, signal),
       });
 
       /**
@@ -655,9 +659,9 @@ describe("generateReactQueryComponents", () => {
           "queryKey" | "queryFn" | "initialData"
         >,
       ) => {
-        const { queryOptions } = usePetstoreContext(options);
+        const { queryOptions, fetcherOptions } = usePetstoreContext(options);
         return reactQuery.useSuspenseQuery<ListPetsResponse, ListPetsError, TData>({
-          ...listPetsQuery(variables),
+          ...listPetsQuery(variables, fetcherOptions),
           ...options,
           ...queryOptions,
         });
@@ -673,9 +677,9 @@ describe("generateReactQueryComponents", () => {
           "queryKey" | "queryFn" | "initialData"
         >,
       ) => {
-        const { queryOptions } = usePetstoreContext(options);
+        const { queryOptions, fetcherOptions } = usePetstoreContext(options);
         return reactQuery.useQuery<ListPetsResponse, ListPetsError, TData>({
-          ...listPetsQuery(variables),
+          ...listPetsQuery(variables, fetcherOptions),
           ...options,
           ...queryOptions,
         });
@@ -796,6 +800,7 @@ describe("generateReactQueryComponents", () => {
        */
       export const showPetByIdQuery = (
         variables: ShowPetByIdVariables,
+        fetcherOptions?: PetstoreContext["fetcherOptions"],
       ): {
         queryKey: reactQuery.QueryKey;
         queryFn: ({
@@ -810,7 +815,7 @@ describe("generateReactQueryComponents", () => {
           variables,
         }),
         queryFn: ({ signal }: { signal?: AbortSignal }) =>
-          fetchShowPetById(variables, signal),
+          fetchShowPetById({ ...fetcherOptions, ...variables }, signal),
       });
 
       /**
@@ -823,13 +828,13 @@ describe("generateReactQueryComponents", () => {
           "queryKey" | "queryFn" | "initialData"
         >,
       ) => {
-        const { queryOptions } = usePetstoreContext(options);
+        const { queryOptions, fetcherOptions } = usePetstoreContext(options);
         return reactQuery.useSuspenseQuery<
           ShowPetByIdResponse,
           ShowPetByIdError,
           TData
         >({
-          ...showPetByIdQuery(variables),
+          ...showPetByIdQuery(variables, fetcherOptions),
           ...options,
           ...queryOptions,
         });
@@ -845,9 +850,9 @@ describe("generateReactQueryComponents", () => {
           "queryKey" | "queryFn" | "initialData"
         >,
       ) => {
-        const { queryOptions } = usePetstoreContext(options);
+        const { queryOptions, fetcherOptions } = usePetstoreContext(options);
         return reactQuery.useQuery<ShowPetByIdResponse, ShowPetByIdError, TData>({
-          ...showPetByIdQuery(variables),
+          ...showPetByIdQuery(variables, fetcherOptions),
           ...options,
           ...queryOptions,
         });
@@ -969,6 +974,7 @@ describe("generateReactQueryComponents", () => {
        */
       export const showPetByIdQuery = (
         variables: ShowPetByIdVariables,
+        fetcherOptions?: PetstoreContext["fetcherOptions"],
       ): {
         queryKey: reactQuery.QueryKey;
         queryFn: ({
@@ -983,7 +989,7 @@ describe("generateReactQueryComponents", () => {
           variables,
         }),
         queryFn: ({ signal }: { signal?: AbortSignal }) =>
-          fetchShowPetById(variables, signal),
+          fetchShowPetById({ ...fetcherOptions, ...variables }, signal),
       });
 
       /**
@@ -996,13 +1002,13 @@ describe("generateReactQueryComponents", () => {
           "queryKey" | "queryFn" | "initialData"
         >,
       ) => {
-        const { queryOptions } = usePetstoreContext(options);
+        const { queryOptions, fetcherOptions } = usePetstoreContext(options);
         return reactQuery.useSuspenseQuery<
           ShowPetByIdResponse,
           ShowPetByIdError,
           TData
         >({
-          ...showPetByIdQuery(variables),
+          ...showPetByIdQuery(variables, fetcherOptions),
           ...options,
           ...queryOptions,
         });
@@ -1018,9 +1024,9 @@ describe("generateReactQueryComponents", () => {
           "queryKey" | "queryFn" | "initialData"
         >,
       ) => {
-        const { queryOptions } = usePetstoreContext(options);
+        const { queryOptions, fetcherOptions } = usePetstoreContext(options);
         return reactQuery.useQuery<ShowPetByIdResponse, ShowPetByIdError, TData>({
-          ...showPetByIdQuery(variables),
+          ...showPetByIdQuery(variables, fetcherOptions),
           ...options,
           ...queryOptions,
         });
@@ -1164,6 +1170,7 @@ describe("generateReactQueryComponents", () => {
        */
       export const listPetsQuery = (
         variables: ListPetsVariables,
+        fetcherOptions?: PetstoreContext["fetcherOptions"],
       ): {
         queryKey: reactQuery.QueryKey;
         queryFn: ({ signal }: { signal?: AbortSignal }) => Promise<ListPetsResponse>;
@@ -1174,7 +1181,7 @@ describe("generateReactQueryComponents", () => {
           variables,
         }),
         queryFn: ({ signal }: { signal?: AbortSignal }) =>
-          fetchListPets(variables, signal),
+          fetchListPets({ ...fetcherOptions, ...variables }, signal),
       });
 
       /**
@@ -1187,9 +1194,9 @@ describe("generateReactQueryComponents", () => {
           "queryKey" | "queryFn" | "initialData"
         >,
       ) => {
-        const { queryOptions } = usePetstoreContext(options);
+        const { queryOptions, fetcherOptions } = usePetstoreContext(options);
         return reactQuery.useSuspenseQuery<ListPetsResponse, ListPetsError, TData>({
-          ...listPetsQuery(variables),
+          ...listPetsQuery(variables, fetcherOptions),
           ...options,
           ...queryOptions,
         });
@@ -1205,9 +1212,9 @@ describe("generateReactQueryComponents", () => {
           "queryKey" | "queryFn" | "initialData"
         >,
       ) => {
-        const { queryOptions } = usePetstoreContext(options);
+        const { queryOptions, fetcherOptions } = usePetstoreContext(options);
         return reactQuery.useQuery<ListPetsResponse, ListPetsError, TData>({
-          ...listPetsQuery(variables),
+          ...listPetsQuery(variables, fetcherOptions),
           ...options,
           ...queryOptions,
         });
@@ -1320,6 +1327,7 @@ describe("generateReactQueryComponents", () => {
        */
       export const listPetsQuery = (
         variables: ListPetsVariables,
+        fetcherOptions?: PetstoreContext["fetcherOptions"],
       ): {
         queryKey: reactQuery.QueryKey;
         queryFn: ({ signal }: { signal?: AbortSignal }) => Promise<ListPetsResponse>;
@@ -1330,7 +1338,7 @@ describe("generateReactQueryComponents", () => {
           variables,
         }),
         queryFn: ({ signal }: { signal?: AbortSignal }) =>
-          fetchListPets(variables, signal),
+          fetchListPets({ ...fetcherOptions, ...variables }, signal),
       });
 
       /**
@@ -1343,9 +1351,9 @@ describe("generateReactQueryComponents", () => {
           "queryKey" | "queryFn" | "initialData"
         >,
       ) => {
-        const { queryOptions } = usePetstoreContext(options);
+        const { queryOptions, fetcherOptions } = usePetstoreContext(options);
         return reactQuery.useSuspenseQuery<ListPetsResponse, ListPetsError, TData>({
-          ...listPetsQuery(variables),
+          ...listPetsQuery(variables, fetcherOptions),
           ...options,
           ...queryOptions,
         });
@@ -1361,9 +1369,9 @@ describe("generateReactQueryComponents", () => {
           "queryKey" | "queryFn" | "initialData"
         >,
       ) => {
-        const { queryOptions } = usePetstoreContext(options);
+        const { queryOptions, fetcherOptions } = usePetstoreContext(options);
         return reactQuery.useQuery<ListPetsResponse, ListPetsError, TData>({
-          ...listPetsQuery(variables),
+          ...listPetsQuery(variables, fetcherOptions),
           ...options,
           ...queryOptions,
         });
@@ -2454,6 +2462,7 @@ describe("generateReactQueryComponents", () => {
        */
       export const listPetsQuery = (
         variables: ListPetsVariables,
+        fetcherOptions?: PetstoreContext["fetcherOptions"],
       ): {
         queryKey: reactQuery.QueryKey;
         queryFn: ({ signal }: { signal?: AbortSignal }) => Promise<ListPetsResponse>;
@@ -2464,7 +2473,7 @@ describe("generateReactQueryComponents", () => {
           variables,
         }),
         queryFn: ({ signal }: { signal?: AbortSignal }) =>
-          fetchListPets(variables, signal),
+          fetchListPets({ ...fetcherOptions, ...variables }, signal),
       });
 
       /**
@@ -2477,9 +2486,9 @@ describe("generateReactQueryComponents", () => {
           "queryKey" | "queryFn" | "initialData"
         >,
       ) => {
-        const { queryOptions } = usePetstoreContext(options);
+        const { queryOptions, fetcherOptions } = usePetstoreContext(options);
         return reactQuery.useSuspenseQuery<ListPetsResponse, ListPetsError, TData>({
-          ...listPetsQuery(variables),
+          ...listPetsQuery(variables, fetcherOptions),
           ...options,
           ...queryOptions,
         });
@@ -2495,9 +2504,9 @@ describe("generateReactQueryComponents", () => {
           "queryKey" | "queryFn" | "initialData"
         >,
       ) => {
-        const { queryOptions } = usePetstoreContext(options);
+        const { queryOptions, fetcherOptions } = usePetstoreContext(options);
         return reactQuery.useQuery<ListPetsResponse, ListPetsError, TData>({
-          ...listPetsQuery(variables),
+          ...listPetsQuery(variables, fetcherOptions),
           ...options,
           ...queryOptions,
         });

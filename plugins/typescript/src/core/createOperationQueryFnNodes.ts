@@ -11,6 +11,7 @@ import { camelizedPathParams } from "./camelizedPathParams";
 export const createOperationQueryFnNodes = ({
   operationFetcherFnName,
   dataType,
+  fetcherOptionsType,
   variablesType,
   operation,
   operationId,
@@ -21,6 +22,7 @@ export const createOperationQueryFnNodes = ({
   operationFetcherFnName: string;
   dataType: ts.TypeNode;
   variablesType: ts.TypeNode;
+  fetcherOptionsType: ts.TypeNode;
   operation: OperationObject;
   operationId: string;
   url: string;
@@ -51,6 +53,14 @@ export const createOperationQueryFnNodes = ({
                   f.createIdentifier("variables"),
                   undefined,
                   variablesType,
+                  undefined
+                ),
+                f.createParameterDeclaration(
+                  undefined,
+                  undefined,
+                  f.createIdentifier("fetcherOptions"),
+                  f.createToken(ts.SyntaxKind.QuestionToken),
+                  fetcherOptionsType,
                   undefined
                 ),
               ],
@@ -254,7 +264,14 @@ export const createOperationQueryFnNodes = ({
                         f.createIdentifier(operationFetcherFnName),
                         undefined,
                         [
-                          f.createIdentifier("variables"),
+                          f.createObjectLiteralExpression([
+                            f.createSpreadAssignment(
+                              f.createIdentifier("fetcherOptions")
+                            ),
+                            f.createSpreadAssignment(
+                              f.createIdentifier("variables")
+                            ),
+                          ]),
                           f.createIdentifier("signal"),
                         ]
                       )

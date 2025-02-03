@@ -122,6 +122,7 @@ describe("generateReactQueryFunctions", () => {
        */
       export const listPetsQuery = (
         variables: ListPetsVariables,
+        fetcherOptions?,
       ): {
         queryKey: reactQuery.QueryKey;
         queryFn: ({ signal }: { signal?: AbortSignal }) => Promise<ListPetsResponse>;
@@ -132,7 +133,7 @@ describe("generateReactQueryFunctions", () => {
           variables,
         }),
         queryFn: ({ signal }: { signal?: AbortSignal }) =>
-          fetchListPets(variables, signal),
+          fetchListPets({ ...fetcherOptions, ...variables }, signal),
       });
 
       export type QueryOperation = {
@@ -265,6 +266,7 @@ describe("generateReactQueryFunctions", () => {
        */
       export const listPetsQuery = (
         variables: ListPetsVariables,
+        fetcherOptions?,
       ): {
         queryKey: reactQuery.QueryKey;
         queryFn: ({ signal }: { signal?: AbortSignal }) => Promise<ListPetsResponse>;
@@ -275,7 +277,7 @@ describe("generateReactQueryFunctions", () => {
           variables,
         }),
         queryFn: ({ signal }: { signal?: AbortSignal }) =>
-          fetchListPets(variables, signal),
+          fetchListPets({ ...fetcherOptions, ...variables }, signal),
       });
 
       export type QueryOperation = {
@@ -390,6 +392,7 @@ describe("generateReactQueryFunctions", () => {
        */
       export const showPetByIdQuery = (
         variables: ShowPetByIdVariables,
+        fetcherOptions?,
       ): {
         queryKey: reactQuery.QueryKey;
         queryFn: ({
@@ -404,7 +407,7 @@ describe("generateReactQueryFunctions", () => {
           variables,
         }),
         queryFn: ({ signal }: { signal?: AbortSignal }) =>
-          fetchShowPetById(variables, signal),
+          fetchShowPetById({ ...fetcherOptions, ...variables }, signal),
       });
 
       export type QueryOperation = {
@@ -541,6 +544,7 @@ describe("generateReactQueryFunctions", () => {
        */
       export const listPetsQuery = (
         variables: ListPetsVariables,
+        fetcherOptions?,
       ): {
         queryKey: reactQuery.QueryKey;
         queryFn: ({ signal }: { signal?: AbortSignal }) => Promise<ListPetsResponse>;
@@ -551,7 +555,7 @@ describe("generateReactQueryFunctions", () => {
           variables,
         }),
         queryFn: ({ signal }: { signal?: AbortSignal }) =>
-          fetchListPets(variables, signal),
+          fetchListPets({ ...fetcherOptions, ...variables }, signal),
       });
 
       export type QueryOperation = {
@@ -657,6 +661,7 @@ describe("generateReactQueryFunctions", () => {
        */
       export const listPetsQuery = (
         variables: ListPetsVariables,
+        fetcherOptions?,
       ): {
         queryKey: reactQuery.QueryKey;
         queryFn: ({ signal }: { signal?: AbortSignal }) => Promise<ListPetsResponse>;
@@ -667,7 +672,7 @@ describe("generateReactQueryFunctions", () => {
           variables,
         }),
         queryFn: ({ signal }: { signal?: AbortSignal }) =>
-          fetchListPets(variables, signal),
+          fetchListPets({ ...fetcherOptions, ...variables }, signal),
       });
 
       export type QueryOperation = {
@@ -1274,6 +1279,7 @@ describe("generateReactQueryFunctions", () => {
        */
       export const listPetsQuery = (
         variables: ListPetsVariables,
+        fetcherOptions?,
       ): {
         queryKey: reactQuery.QueryKey;
         queryFn: ({ signal }: { signal?: AbortSignal }) => Promise<ListPetsResponse>;
@@ -1284,7 +1290,7 @@ describe("generateReactQueryFunctions", () => {
           variables,
         }),
         queryFn: ({ signal }: { signal?: AbortSignal }) =>
-          fetchListPets(variables, signal),
+          fetchListPets({ ...fetcherOptions, ...variables }, signal),
       });
 
       export type QueryOperation = {
@@ -1377,6 +1383,7 @@ describe("generateReactQueryFunctions", () => {
        */
       export const listPetsQuery = (
         variables: ListPetsVariables,
+        fetcherOptions?,
       ): {
         queryKey: reactQuery.QueryKey;
         queryFn: ({ signal }: { signal?: AbortSignal }) => Promise<ListPetsResponse>;
@@ -1387,7 +1394,7 @@ describe("generateReactQueryFunctions", () => {
           variables,
         }),
         queryFn: ({ signal }: { signal?: AbortSignal }) =>
-          fetchListPets(variables, signal),
+          fetchListPets({ ...fetcherOptions, ...variables }, signal),
       });
 
       export type QueryOperation = {
