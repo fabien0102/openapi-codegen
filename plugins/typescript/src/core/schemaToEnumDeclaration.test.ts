@@ -71,14 +71,20 @@ describe("schemaToTypeAliasDeclaration", () => {
   it("should generate valid enum with values that contains spaces", () => {
     const schema: SchemaObject = {
       type: "string",
-      enum: ["saimois", "bengal", "british shorthair"],
+      enum: [
+        "saimois",
+        "bengal",
+        "british shorthair",
+        "danish\u2013swedish farmdog",
+      ],
     };
 
     expect(printSchema(schema, "test")).toMatchInlineSnapshot(`
       "export enum Test {
           Saimois = "saimois",
           Bengal = "bengal",
-          BritishShorthair = "british shorthair"
+          BritishShorthair = "british shorthair",
+          "danish\\u2013swedish farmdog" = "danish\\u2013swedish farmdog"
       }"
     `);
   });

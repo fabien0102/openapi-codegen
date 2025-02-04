@@ -5,6 +5,30 @@ import { convertNumberToWord } from "../utils/getEnumProperties";
 import { Context, getJSDocComment } from "./schemaToTypeAliasDeclaration";
 
 /**
+ * Function to check if a string is a valid TypeScript identifier
+ *
+ * @param name Name to check
+ */
+function isValidIdentifier(name: string): boolean {
+  if (name.length === 0) {
+    return false;
+  }
+
+  const firstChar = name.charCodeAt(0);
+  if (!ts.isIdentifierStart(firstChar, ts.ScriptTarget.Latest)) {
+    return false;
+  }
+
+  for (let i = 1; i < name.length; i++) {
+    if (!ts.isIdentifierPart(name.charCodeAt(i), ts.ScriptTarget.Latest)) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
+/**
  * Add Enum support when transforming an OpenAPI Schema Object to Typescript Nodes.
  *
  * @param name Name of the schema
@@ -52,8 +76,11 @@ function getEnumMembers(schema: SchemaObject): ts.EnumMember[] {
       throw new Error(`Unsupported enum value type: ${typeof enumValue}`);
     }
 
+    enumName = pascal(enumName);
     return f.createEnumMember(
-      f.createIdentifier(pascal(enumName)),
+      isValidIdentifier(enumName)
+        ? f.createIdentifier(enumName)
+        : f.createStringLiteral(`${enumValue}`),
       enumValueNode
     );
   });
