@@ -122,7 +122,7 @@ describe("generateReactQueryFunctions", () => {
        */
       export const listPetsQuery = (
         variables: ListPetsVariables,
-        fetcherOptions?,
+        fetcherOptions?: PetstoreContext["fetcherOptions"],
       ): {
         queryKey: reactQuery.QueryKey;
         queryFn: ({ signal }: { signal?: AbortSignal }) => Promise<ListPetsResponse>;
@@ -266,7 +266,7 @@ describe("generateReactQueryFunctions", () => {
        */
       export const listPetsQuery = (
         variables: ListPetsVariables,
-        fetcherOptions?,
+        fetcherOptions?: PetstoreContext["fetcherOptions"],
       ): {
         queryKey: reactQuery.QueryKey;
         queryFn: ({ signal }: { signal?: AbortSignal }) => Promise<ListPetsResponse>;
@@ -392,7 +392,7 @@ describe("generateReactQueryFunctions", () => {
        */
       export const showPetByIdQuery = (
         variables: ShowPetByIdVariables,
-        fetcherOptions?,
+        fetcherOptions?: PetstoreContext["fetcherOptions"],
       ): {
         queryKey: reactQuery.QueryKey;
         queryFn: ({
@@ -544,7 +544,7 @@ describe("generateReactQueryFunctions", () => {
        */
       export const listPetsQuery = (
         variables: ListPetsVariables,
-        fetcherOptions?,
+        fetcherOptions?: PetstoreContext["fetcherOptions"],
       ): {
         queryKey: reactQuery.QueryKey;
         queryFn: ({ signal }: { signal?: AbortSignal }) => Promise<ListPetsResponse>;
@@ -661,7 +661,7 @@ describe("generateReactQueryFunctions", () => {
        */
       export const listPetsQuery = (
         variables: ListPetsVariables,
-        fetcherOptions?,
+        fetcherOptions?: PetstoreContext["fetcherOptions"],
       ): {
         queryKey: reactQuery.QueryKey;
         queryFn: ({ signal }: { signal?: AbortSignal }) => Promise<ListPetsResponse>;
@@ -1279,7 +1279,7 @@ describe("generateReactQueryFunctions", () => {
        */
       export const listPetsQuery = (
         variables: ListPetsVariables,
-        fetcherOptions?,
+        fetcherOptions?: PetstoreContext["fetcherOptions"],
       ): {
         queryKey: reactQuery.QueryKey;
         queryFn: ({ signal }: { signal?: AbortSignal }) => Promise<ListPetsResponse>;
@@ -1383,7 +1383,7 @@ describe("generateReactQueryFunctions", () => {
        */
       export const listPetsQuery = (
         variables: ListPetsVariables,
-        fetcherOptions?,
+        fetcherOptions?: PetstoreContext["fetcherOptions"],
       ): {
         queryKey: reactQuery.QueryKey;
         queryFn: ({ signal }: { signal?: AbortSignal }) => Promise<ListPetsResponse>;

@@ -211,6 +211,13 @@ export const generateReactQueryFunctions = async (
               url: route,
               verb,
               name: operationQueryFnName,
+              fetcherOptionsType: f.createIndexedAccessTypeNode(
+                f.createTypeReferenceNode(
+                  f.createIdentifier(contextTypeName),
+                  undefined
+                ),
+                f.createLiteralTypeNode(f.createStringLiteral("fetcherOptions"))
+              ),
             })
           );
         }
