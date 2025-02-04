@@ -284,17 +284,12 @@ export const generateReactQueryComponents = async (
         ])
   );
 
-  const { nodes: usedImportsNodes, keys: usedImportsKeys } = getUsedImports(
-    nodes,
-    {
-      ...config.schemasFiles,
-      utils: utilsFilename,
-    }
-  );
+  const { nodes: usedImportsNodes } = getUsedImports(nodes, {
+    ...config.schemasFiles,
+    utils: utilsFilename,
+  });
 
-  if (usedImportsKeys.includes("utils")) {
-    await context.writeFile(`${utilsFilename}.ts`, getUtils());
-  }
+  await context.writeFile(`${utilsFilename}.ts`, getUtils());
 
   await context.writeFile(
     filename + ".ts",
@@ -305,6 +300,7 @@ export const generateReactQueryComponents = async (
         [contextHookName, contextTypeName, "queryKeyFn"],
         `./${contextFilename}`
       ),
+      createNamedImport("deepMerge", `./${utilsFilename}`),
       createNamespaceImport("Fetcher", `./${fetcherFilename}`),
       createNamedImport(fetcherFn, `./${fetcherFilename}`),
       ...usedImportsNodes,
@@ -431,16 +427,13 @@ const createMutationHook = ({
                                   f.createIdentifier(operationFetcherFnName),
                                   undefined,
                                   [
-                                    f.createObjectLiteralExpression(
+                                    f.createCallExpression(
+                                      f.createIdentifier("deepMerge"),
+                                      undefined,
                                       [
-                                        f.createSpreadAssignment(
-                                          f.createIdentifier("fetcherOptions")
-                                        ),
-                                        f.createSpreadAssignment(
-                                          f.createIdentifier("variables")
-                                        ),
-                                      ],
-                                      false
+                                        f.createIdentifier("fetcherOptions"),
+                                        f.createIdentifier("variables"),
+                                      ]
                                     ),
                                   ]
                                 )
@@ -545,6 +538,12 @@ const createQueryHook = ({
                             f.createIdentifier("queryOptions"),
                             undefined
                           ),
+                          f.createBindingElement(
+                            undefined,
+                            undefined,
+                            f.createIdentifier("fetcherOptions"),
+                            undefined
+                          ),
                         ]),
                         undefined,
                         undefined,
@@ -579,7 +578,16 @@ const createQueryHook = ({
                             f.createCallExpression(
                               f.createIdentifier(operationQueryFnName),
                               undefined,
-                              [f.createIdentifier("variables")]
+                              [
+                                f.createCallExpression(
+                                  f.createIdentifier("deepMerge"),
+                                  undefined,
+                                  [
+                                    f.createIdentifier("fetcherOptions"),
+                                    f.createIdentifier("variables"),
+                                  ]
+                                ),
+                              ]
                             )
                           ),
                           f.createSpreadAssignment(
