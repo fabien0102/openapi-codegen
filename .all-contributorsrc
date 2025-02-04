@@ -112,6 +112,13 @@
       "avatar_url": "https://avatars.githubusercontent.com/u/1638544?v=4",
       "profile": "https://github.com/Kusmeroglu",
       "contributions": ["code"]
+    },
+    {
+      "login": "tverdohleb",
+      "name": "Valeriy",
+      "avatar_url": "https://avatars.githubusercontent.com/u/172711?v=4",
+      "profile": "https://tverdohleb.com/",
+      "contributions": ["bug", "code", "ideas"]
     }
   ],
   "contributorsPerLine": 7

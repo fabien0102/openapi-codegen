@@ -305,6 +305,9 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/dan-cooke"><img src="https://avatars.githubusercontent.com/u/22816887?v=4?s=100" width="100px;" alt="Daniel Cooke"/><br /><sub><b>Daniel Cooke</b></sub></a><br /><a href="https://github.com/fabien0102/openapi-codegen/issues?q=author%3Adan-cooke" title="Bug reports">🐛</a> <a href="https://github.com/fabien0102/openapi-codegen/commits?author=dan-cooke" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/Kusmeroglu"><img src="https://avatars.githubusercontent.com/u/1638544?v=4?s=100" width="100px;" alt="Linden Wright"/><br /><sub><b>Linden Wright</b></sub></a><br /><a href="https://github.com/fabien0102/openapi-codegen/commits?author=Kusmeroglu" title="Code">💻</a></td>
     </tr>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://tverdohleb.com/"><img src="https://avatars.githubusercontent.com/u/172711?v=4?s=100" width="100px;" alt="Valeriy"/><br /><sub><b>Valeriy</b></sub></a><br /><a href="https://github.com/fabien0102/openapi-codegen/issues?q=author%3Atverdohleb" title="Bug reports">🐛</a> <a href="https://github.com/fabien0102/openapi-codegen/commits?author=tverdohleb" title="Code">💻</a> <a href="#ideas-tverdohleb" title="Ideas, Planning, & Feedback">🤔</a></td>
+    </tr>
   </tbody>
 </table>
 
