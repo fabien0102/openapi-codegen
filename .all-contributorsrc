@@ -98,6 +98,13 @@
       "avatar_url": "https://avatars.githubusercontent.com/u/10364836?v=4",
       "profile": "https://github.com/rajzik",
       "contributions": ["bug", "code", "doc"]
+    },
+    {
+      "login": "dan-cooke",
+      "name": "Daniel Cooke",
+      "avatar_url": "https://avatars.githubusercontent.com/u/22816887?v=4",
+      "profile": "https://github.com/dan-cooke",
+      "contributions": ["bug", "code"]
     }
   ],
   "contributorsPerLine": 7
