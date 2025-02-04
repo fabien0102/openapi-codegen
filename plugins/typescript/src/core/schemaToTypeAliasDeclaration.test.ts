@@ -59,6 +59,15 @@ describe("schemaToTypeAliasDeclaration", () => {
     expect(printSchema(schema)).toBe("export type Test = number[];");
   });
 
+  it("should generate a string const", () => {
+    const schema: SchemaObject = {
+      const: "CONSTANT",
+      title: "Test",
+    };
+
+    expect(printSchema(schema)).toBe('export type Test = "CONSTANT";');
+  });
+
   it("should generate enums (strings)", () => {
     const schema: SchemaObject = {
       type: "string",

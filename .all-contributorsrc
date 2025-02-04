@@ -105,6 +105,13 @@
       "avatar_url": "https://avatars.githubusercontent.com/u/22816887?v=4",
       "profile": "https://github.com/dan-cooke",
       "contributions": ["bug", "code"]
+    },
+    {
+      "login": "Kusmeroglu",
+      "name": "Linden Wright",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1638544?v=4",
+      "profile": "https://github.com/Kusmeroglu",
+      "contributions": ["code"]
     }
   ],
   "contributorsPerLine": 7
