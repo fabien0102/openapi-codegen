@@ -1,5 +1,26 @@
 # Changelog
 
+## [10.0.0](https://github.com/fabien0102/openapi-codegen/compare/typescript-v9.2.0...typescript-v10.0.0) (2025-02-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* deep merge variables with fetcherOptions from context. ([#284](https://github.com/fabien0102/openapi-codegen/issues/284))
+* Generated enum should be in pascal case ([#282](https://github.com/fabien0102/openapi-codegen/issues/282))
+
+### Features
+
+* Adding constant handling ([#220](https://github.com/fabien0102/openapi-codegen/issues/220)) ([8944be4](https://github.com/fabien0102/openapi-codegen/commit/8944be44a36a3100cf2ac9f683d245b59a3f954e))
+
+
+### Bug Fixes
+
+* deep merge variables with fetcherOptions from context. ([#284](https://github.com/fabien0102/openapi-codegen/issues/284)) ([2678ea4](https://github.com/fabien0102/openapi-codegen/commit/2678ea407a64cd373adddd868a969b2e3bcc586a))
+* Escape special chars in enum name ([#283](https://github.com/fabien0102/openapi-codegen/issues/283)) ([3392588](https://github.com/fabien0102/openapi-codegen/commit/33925883600418bbdfff65437ce4a1b796766b12))
+* Fixed fetcher template to compile when noUncheckedIndexedAccess ts compile option is set ([#228](https://github.com/fabien0102/openapi-codegen/issues/228)) ([ecf90cd](https://github.com/fabien0102/openapi-codegen/commit/ecf90cd247e4133a13557ab83fed3ced1a9460d5))
+* Generated enum should be in pascal case ([#282](https://github.com/fabien0102/openapi-codegen/issues/282)) ([e16bc82](https://github.com/fabien0102/openapi-codegen/commit/e16bc826a580aaae2f7b29fbb31fe53a7d6a6f57))
+* Invalid variable access inside fetcher ([#277](https://github.com/fabien0102/openapi-codegen/issues/277)) ([ea21f34](https://github.com/fabien0102/openapi-codegen/commit/ea21f34552c47a10151e0536fb2c521d687924c1))
+
 ## [9.2.0](https://github.com/fabien0102/openapi-codegen/compare/typescript-v9.1.0...typescript-v9.2.0) (2025-01-31)
 
 ### Features
