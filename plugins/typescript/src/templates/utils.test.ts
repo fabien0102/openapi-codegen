@@ -2,13 +2,14 @@ import { it, describe, expect } from "vitest";
 
 describe("deepMerge", () => {
   /* Playground to craft `deepMerge` */
-  function deepMerge<T>(target: T, source: T): T {
+  function deepMerge<T, U extends T>(target: T, source: U): U {
+    const returnType = (target || {}) as U;
     for (const key in source) {
       if (source[key] instanceof Object)
-        Object.assign(source[key], deepMerge(target[key], source[key]));
+        Object.assign(source[key], deepMerge(returnType[key], source[key]));
     }
-    Object.assign(target || {}, source);
-    return target;
+    Object.assign(returnType || {}, source);
+    return returnType;
   }
   /* End of playground */
 
