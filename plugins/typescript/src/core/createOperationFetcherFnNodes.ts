@@ -35,7 +35,7 @@ export const createOperationFetcherFnNodes = ({
   name: string;
 }) => {
   const nodes: ts.Node[] = [];
-  if (operation.description) {
+  if (operation.description?.trim()) {
     nodes.push(f.createJSDocComment(operation.description.trim(), []));
   }
 
