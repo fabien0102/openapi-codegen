@@ -85,7 +85,7 @@ const hasPathParams = (
 ): operation is QueryOperation & {
   variables: { pathParams: Record<string, string> };
 } => {
-  return Boolean((operation.variables as any).pathParams);
+  return "variables" in operation && "pathParams" in operation.variables;
 };
 
 const hasBody = (
@@ -93,7 +93,7 @@ const hasBody = (
 ): operation is QueryOperation & {
   variables: { body: Record<string, unknown> };
 } => {
-  return Boolean((operation.variables as any).body);
+  return "variables" in operation && "body" in operation.variables;
 };
 
 const hasQueryParams = (
@@ -101,5 +101,5 @@ const hasQueryParams = (
 ): operation is QueryOperation & {
   variables: { queryParams: Record<string, unknown> };
 } => {
-  return Boolean((operation.variables as any).queryParams);
+  return "variables" in operation && "queryParams" in operation.variables;
 };

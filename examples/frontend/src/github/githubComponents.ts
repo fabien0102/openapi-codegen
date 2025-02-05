@@ -5,6 +5,7 @@
  */
 import * as reactQuery from "@tanstack/react-query";
 import { useGithubContext, GithubContext, queryKeyFn } from "./githubContext";
+import { deepMerge } from "./githubUtils";
 import type * as Fetcher from "./githubFetcher";
 import { githubFetch } from "./githubFetcher";
 import type * as Schemas from "./githubSchemas";
@@ -56,9 +57,9 @@ export const useSuspenseMetaRoot = <TData = Schemas.Root>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<Schemas.Root, MetaRootError, TData>({
-    ...metaRootQuery(variables),
+    ...metaRootQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -74,9 +75,9 @@ export const useMetaRoot = <TData = Schemas.Root>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.Root, MetaRootError, TData>({
-    ...metaRootQuery(variables),
+    ...metaRootQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -144,13 +145,13 @@ export const useSuspenseAppsGetAuthenticated = <TData = Schemas.Integration>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.Integration,
     AppsGetAuthenticatedError,
     TData
   >({
-    ...appsGetAuthenticatedQuery(variables),
+    ...appsGetAuthenticatedQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -172,13 +173,13 @@ export const useAppsGetAuthenticated = <TData = Schemas.Integration>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.Integration,
     AppsGetAuthenticatedError,
     TData
   >({
-    ...appsGetAuthenticatedQuery(variables),
+    ...appsGetAuthenticatedQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -339,7 +340,7 @@ export const useAppsCreateFromManifest = (
     AppsCreateFromManifestVariables
   >({
     mutationFn: (variables: AppsCreateFromManifestVariables) =>
-      fetchAppsCreateFromManifest({ ...fetcherOptions, ...variables }),
+      fetchAppsCreateFromManifest(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -409,13 +410,13 @@ export const useSuspenseAppsGetWebhookConfigForApp = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.WebhookConfig,
     AppsGetWebhookConfigForAppError,
     TData
   >({
-    ...appsGetWebhookConfigForAppQuery(variables),
+    ...appsGetWebhookConfigForAppQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -437,13 +438,13 @@ export const useAppsGetWebhookConfigForApp = <TData = Schemas.WebhookConfig>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.WebhookConfig,
     AppsGetWebhookConfigForAppError,
     TData
   >({
-    ...appsGetWebhookConfigForAppQuery(variables),
+    ...appsGetWebhookConfigForAppQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -503,7 +504,7 @@ export const useAppsUpdateWebhookConfigForApp = (
     AppsUpdateWebhookConfigForAppVariables
   >({
     mutationFn: (variables: AppsUpdateWebhookConfigForAppVariables) =>
-      fetchAppsUpdateWebhookConfigForApp({ ...fetcherOptions, ...variables }),
+      fetchAppsUpdateWebhookConfigForApp(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -599,13 +600,13 @@ export const useSuspenseAppsListWebhookDeliveries = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     AppsListWebhookDeliveriesResponse,
     AppsListWebhookDeliveriesError,
     TData
   >({
-    ...appsListWebhookDeliveriesQuery(variables),
+    ...appsListWebhookDeliveriesQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -629,13 +630,13 @@ export const useAppsListWebhookDeliveries = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     AppsListWebhookDeliveriesResponse,
     AppsListWebhookDeliveriesError,
     TData
   >({
-    ...appsListWebhookDeliveriesQuery(variables),
+    ...appsListWebhookDeliveriesQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -723,13 +724,13 @@ export const useSuspenseAppsGetWebhookDelivery = <TData = Schemas.HookDelivery>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.HookDelivery,
     AppsGetWebhookDeliveryError,
     TData
   >({
-    ...appsGetWebhookDeliveryQuery(variables),
+    ...appsGetWebhookDeliveryQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -751,13 +752,13 @@ export const useAppsGetWebhookDelivery = <TData = Schemas.HookDelivery>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.HookDelivery,
     AppsGetWebhookDeliveryError,
     TData
   >({
-    ...appsGetWebhookDeliveryQuery(variables),
+    ...appsGetWebhookDeliveryQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -827,7 +828,7 @@ export const useAppsRedeliverWebhookDelivery = (
     AppsRedeliverWebhookDeliveryVariables
   >({
     mutationFn: (variables: AppsRedeliverWebhookDeliveryVariables) =>
-      fetchAppsRedeliverWebhookDelivery({ ...fetcherOptions, ...variables }),
+      fetchAppsRedeliverWebhookDelivery(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -922,13 +923,13 @@ export const useSuspenseAppsListInstallations = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     AppsListInstallationsResponse,
     AppsListInstallationsError,
     TData
   >({
-    ...appsListInstallationsQuery(variables),
+    ...appsListInstallationsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -950,13 +951,13 @@ export const useAppsListInstallations = <TData = AppsListInstallationsResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     AppsListInstallationsResponse,
     AppsListInstallationsError,
     TData
   >({
-    ...appsListInstallationsQuery(variables),
+    ...appsListInstallationsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -1023,7 +1024,7 @@ export const useAppsDeleteInstallation = (
     AppsDeleteInstallationVariables
   >({
     mutationFn: (variables: AppsDeleteInstallationVariables) =>
-      fetchAppsDeleteInstallation({ ...fetcherOptions, ...variables }),
+      fetchAppsDeleteInstallation(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -1107,13 +1108,13 @@ export const useSuspenseAppsGetInstallation = <TData = Schemas.Installation>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.Installation,
     AppsGetInstallationError,
     TData
   >({
-    ...appsGetInstallationQuery(variables),
+    ...appsGetInstallationQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -1135,13 +1136,13 @@ export const useAppsGetInstallation = <TData = Schemas.Installation>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.Installation,
     AppsGetInstallationError,
     TData
   >({
-    ...appsGetInstallationQuery(variables),
+    ...appsGetInstallationQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -1237,10 +1238,9 @@ export const useAppsCreateInstallationAccessToken = (
     AppsCreateInstallationAccessTokenVariables
   >({
     mutationFn: (variables: AppsCreateInstallationAccessTokenVariables) =>
-      fetchAppsCreateInstallationAccessToken({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchAppsCreateInstallationAccessToken(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -1306,7 +1306,7 @@ export const useAppsUnsuspendInstallation = (
     AppsUnsuspendInstallationVariables
   >({
     mutationFn: (variables: AppsUnsuspendInstallationVariables) =>
-      fetchAppsUnsuspendInstallation({ ...fetcherOptions, ...variables }),
+      fetchAppsUnsuspendInstallation(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -1372,7 +1372,7 @@ export const useAppsSuspendInstallation = (
     AppsSuspendInstallationVariables
   >({
     mutationFn: (variables: AppsSuspendInstallationVariables) =>
-      fetchAppsSuspendInstallation({ ...fetcherOptions, ...variables }),
+      fetchAppsSuspendInstallation(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -1444,7 +1444,7 @@ export const useAppsDeleteAuthorization = (
     AppsDeleteAuthorizationVariables
   >({
     mutationFn: (variables: AppsDeleteAuthorizationVariables) =>
-      fetchAppsDeleteAuthorization({ ...fetcherOptions, ...variables }),
+      fetchAppsDeleteAuthorization(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -1514,7 +1514,7 @@ export const useAppsDeleteToken = (
     AppsDeleteTokenVariables
   >({
     mutationFn: (variables: AppsDeleteTokenVariables) =>
-      fetchAppsDeleteToken({ ...fetcherOptions, ...variables }),
+      fetchAppsDeleteToken(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -1584,7 +1584,7 @@ export const useAppsResetToken = (
     AppsResetTokenVariables
   >({
     mutationFn: (variables: AppsResetTokenVariables) =>
-      fetchAppsResetToken({ ...fetcherOptions, ...variables }),
+      fetchAppsResetToken(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -1660,7 +1660,7 @@ export const useAppsCheckToken = (
     AppsCheckTokenVariables
   >({
     mutationFn: (variables: AppsCheckTokenVariables) =>
-      fetchAppsCheckToken({ ...fetcherOptions, ...variables }),
+      fetchAppsCheckToken(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -1769,7 +1769,7 @@ export const useAppsScopeToken = (
     AppsScopeTokenVariables
   >({
     mutationFn: (variables: AppsScopeTokenVariables) =>
-      fetchAppsScopeToken({ ...fetcherOptions, ...variables }),
+      fetchAppsScopeToken(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -1847,13 +1847,13 @@ export const useSuspenseAppsGetBySlug = <TData = Schemas.Integration>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.Integration,
     AppsGetBySlugError,
     TData
   >({
-    ...appsGetBySlugQuery(variables),
+    ...appsGetBySlugQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -1871,9 +1871,9 @@ export const useAppsGetBySlug = <TData = Schemas.Integration>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.Integration, AppsGetBySlugError, TData>({
-    ...appsGetBySlugQuery(variables),
+    ...appsGetBySlugQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -1935,13 +1935,15 @@ export const useSuspenseCodesOfConductGetAllCodesOfConduct = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     CodesOfConductGetAllCodesOfConductResponse,
     CodesOfConductGetAllCodesOfConductError,
     TData
   >({
-    ...codesOfConductGetAllCodesOfConductQuery(variables),
+    ...codesOfConductGetAllCodesOfConductQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -1960,13 +1962,15 @@ export const useCodesOfConductGetAllCodesOfConduct = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     CodesOfConductGetAllCodesOfConductResponse,
     CodesOfConductGetAllCodesOfConductError,
     TData
   >({
-    ...codesOfConductGetAllCodesOfConductQuery(variables),
+    ...codesOfConductGetAllCodesOfConductQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -2036,13 +2040,13 @@ export const useSuspenseCodesOfConductGetConductCode = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.CodeOfConduct,
     CodesOfConductGetConductCodeError,
     TData
   >({
-    ...codesOfConductGetConductCodeQuery(variables),
+    ...codesOfConductGetConductCodeQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -2059,13 +2063,13 @@ export const useCodesOfConductGetConductCode = <TData = Schemas.CodeOfConduct>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.CodeOfConduct,
     CodesOfConductGetConductCodeError,
     TData
   >({
-    ...codesOfConductGetConductCodeQuery(variables),
+    ...codesOfConductGetConductCodeQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -2124,9 +2128,9 @@ export const useSuspenseEmojisGet = <TData = EmojisGetResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<EmojisGetResponse, EmojisGetError, TData>({
-    ...emojisGetQuery(variables),
+    ...emojisGetQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -2142,9 +2146,9 @@ export const useEmojisGet = <TData = EmojisGetResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<EmojisGetResponse, EmojisGetError, TData>({
-    ...emojisGetQuery(variables),
+    ...emojisGetQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -2328,13 +2332,15 @@ export const useSuspenseDependabotListAlertsForEnterprise = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     DependabotListAlertsForEnterpriseResponse,
     DependabotListAlertsForEnterpriseError,
     TData
   >({
-    ...dependabotListAlertsForEnterpriseQuery(variables),
+    ...dependabotListAlertsForEnterpriseQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -2359,13 +2365,15 @@ export const useDependabotListAlertsForEnterprise = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     DependabotListAlertsForEnterpriseResponse,
     DependabotListAlertsForEnterpriseError,
     TData
   >({
-    ...dependabotListAlertsForEnterpriseQuery(variables),
+    ...dependabotListAlertsForEnterpriseQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -2502,13 +2510,15 @@ export const useSuspenseSecretScanningListAlertsForEnterprise = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     SecretScanningListAlertsForEnterpriseResponse,
     SecretScanningListAlertsForEnterpriseError,
     TData
   >({
-    ...secretScanningListAlertsForEnterpriseQuery(variables),
+    ...secretScanningListAlertsForEnterpriseQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -2531,13 +2541,15 @@ export const useSecretScanningListAlertsForEnterprise = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     SecretScanningListAlertsForEnterpriseResponse,
     SecretScanningListAlertsForEnterpriseError,
     TData
   >({
-    ...secretScanningListAlertsForEnterpriseQuery(variables),
+    ...secretScanningListAlertsForEnterpriseQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -2633,13 +2645,13 @@ export const useSuspenseActivityListPublicEvents = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     ActivityListPublicEventsResponse,
     ActivityListPublicEventsError,
     TData
   >({
-    ...activityListPublicEventsQuery(variables),
+    ...activityListPublicEventsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -2661,13 +2673,13 @@ export const useActivityListPublicEvents = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     ActivityListPublicEventsResponse,
     ActivityListPublicEventsError,
     TData
   >({
-    ...activityListPublicEventsQuery(variables),
+    ...activityListPublicEventsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -2749,13 +2761,13 @@ export const useSuspenseActivityGetFeeds = <TData = Schemas.Feed>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.Feed,
     ActivityGetFeedsError,
     TData
   >({
-    ...activityGetFeedsQuery(variables),
+    ...activityGetFeedsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -2781,9 +2793,9 @@ export const useActivityGetFeeds = <TData = Schemas.Feed>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.Feed, ActivityGetFeedsError, TData>({
-    ...activityGetFeedsQuery(variables),
+    ...activityGetFeedsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -2871,9 +2883,9 @@ export const useSuspenseGistsList = <TData = GistsListResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<GistsListResponse, GistsListError, TData>({
-    ...gistsListQuery(variables),
+    ...gistsListQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -2889,9 +2901,9 @@ export const useGistsList = <TData = GistsListResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<GistsListResponse, GistsListError, TData>({
-    ...gistsListQuery(variables),
+    ...gistsListQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -2983,7 +2995,7 @@ export const useGistsCreate = (
     GistsCreateVariables
   >({
     mutationFn: (variables: GistsCreateVariables) =>
-      fetchGistsCreate({ ...fetcherOptions, ...variables }),
+      fetchGistsCreate(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -3088,13 +3100,13 @@ export const useSuspenseGistsListPublic = <TData = GistsListPublicResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     GistsListPublicResponse,
     GistsListPublicError,
     TData
   >({
-    ...gistsListPublicQuery(variables),
+    ...gistsListPublicQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -3116,13 +3128,13 @@ export const useGistsListPublic = <TData = GistsListPublicResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     GistsListPublicResponse,
     GistsListPublicError,
     TData
   >({
-    ...gistsListPublicQuery(variables),
+    ...gistsListPublicQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -3222,13 +3234,13 @@ export const useSuspenseGistsListStarred = <TData = GistsListStarredResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     GistsListStarredResponse,
     GistsListStarredError,
     TData
   >({
-    ...gistsListStarredQuery(variables),
+    ...gistsListStarredQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -3248,13 +3260,13 @@ export const useGistsListStarred = <TData = GistsListStarredResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     GistsListStarredResponse,
     GistsListStarredError,
     TData
   >({
-    ...gistsListStarredQuery(variables),
+    ...gistsListStarredQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -3316,7 +3328,7 @@ export const useGistsDelete = (
     GistsDeleteVariables
   >({
     mutationFn: (variables: GistsDeleteVariables) =>
-      fetchGistsDelete({ ...fetcherOptions, ...variables }),
+      fetchGistsDelete(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -3386,9 +3398,9 @@ export const useSuspenseGistsGet = <TData = Schemas.GistSimple>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<Schemas.GistSimple, GistsGetError, TData>({
-    ...gistsGetQuery(variables),
+    ...gistsGetQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -3401,9 +3413,9 @@ export const useGistsGet = <TData = Schemas.GistSimple>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.GistSimple, GistsGetError, TData>({
-    ...gistsGetQuery(variables),
+    ...gistsGetQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -3633,7 +3645,7 @@ export const useGistsUpdate = (
     GistsUpdateVariables
   >({
     mutationFn: (variables: GistsUpdateVariables) =>
-      fetchGistsUpdate({ ...fetcherOptions, ...variables }),
+      fetchGistsUpdate(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -3725,13 +3737,13 @@ export const useSuspenseGistsListComments = <TData = GistsListCommentsResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     GistsListCommentsResponse,
     GistsListCommentsError,
     TData
   >({
-    ...gistsListCommentsQuery(variables),
+    ...gistsListCommentsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -3748,13 +3760,13 @@ export const useGistsListComments = <TData = GistsListCommentsResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     GistsListCommentsResponse,
     GistsListCommentsError,
     TData
   >({
-    ...gistsListCommentsQuery(variables),
+    ...gistsListCommentsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -3827,7 +3839,7 @@ export const useGistsCreateComment = (
     GistsCreateCommentVariables
   >({
     mutationFn: (variables: GistsCreateCommentVariables) =>
-      fetchGistsCreateComment({ ...fetcherOptions, ...variables }),
+      fetchGistsCreateComment(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -3897,7 +3909,7 @@ export const useGistsDeleteComment = (
     GistsDeleteCommentVariables
   >({
     mutationFn: (variables: GistsDeleteCommentVariables) =>
-      fetchGistsDeleteComment({ ...fetcherOptions, ...variables }),
+      fetchGistsDeleteComment(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -3980,13 +3992,13 @@ export const useSuspenseGistsGetComment = <TData = Schemas.GistComment>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.GistComment,
     GistsGetCommentError,
     TData
   >({
-    ...gistsGetCommentQuery(variables),
+    ...gistsGetCommentQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -4003,9 +4015,9 @@ export const useGistsGetComment = <TData = Schemas.GistComment>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.GistComment, GistsGetCommentError, TData>({
-    ...gistsGetCommentQuery(variables),
+    ...gistsGetCommentQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -4077,7 +4089,7 @@ export const useGistsUpdateComment = (
     GistsUpdateCommentVariables
   >({
     mutationFn: (variables: GistsUpdateCommentVariables) =>
-      fetchGistsUpdateComment({ ...fetcherOptions, ...variables }),
+      fetchGistsUpdateComment(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -4169,13 +4181,13 @@ export const useSuspenseGistsListCommits = <TData = GistsListCommitsResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     GistsListCommitsResponse,
     GistsListCommitsError,
     TData
   >({
-    ...gistsListCommitsQuery(variables),
+    ...gistsListCommitsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -4192,13 +4204,13 @@ export const useGistsListCommits = <TData = GistsListCommitsResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     GistsListCommitsResponse,
     GistsListCommitsError,
     TData
   >({
-    ...gistsListCommitsQuery(variables),
+    ...gistsListCommitsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -4291,13 +4303,13 @@ export const useSuspenseGistsListForks = <TData = GistsListForksResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     GistsListForksResponse,
     GistsListForksError,
     TData
   >({
-    ...gistsListForksQuery(variables),
+    ...gistsListForksQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -4314,13 +4326,13 @@ export const useGistsListForks = <TData = GistsListForksResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     GistsListForksResponse,
     GistsListForksError,
     TData
   >({
-    ...gistsListForksQuery(variables),
+    ...gistsListForksQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -4386,7 +4398,7 @@ export const useGistsFork = (
     GistsForkVariables
   >({
     mutationFn: (variables: GistsForkVariables) =>
-      fetchGistsFork({ ...fetcherOptions, ...variables }),
+      fetchGistsFork(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -4447,7 +4459,7 @@ export const useGistsUnstar = (
     GistsUnstarVariables
   >({
     mutationFn: (variables: GistsUnstarVariables) =>
-      fetchGistsUnstar({ ...fetcherOptions, ...variables }),
+      fetchGistsUnstar(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -4513,13 +4525,13 @@ export const useSuspenseGistsCheckIsStarred = <TData = undefined>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     undefined,
     GistsCheckIsStarredError,
     TData
   >({
-    ...gistsCheckIsStarredQuery(variables),
+    ...gistsCheckIsStarredQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -4532,9 +4544,9 @@ export const useGistsCheckIsStarred = <TData = undefined>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<undefined, GistsCheckIsStarredError, TData>({
-    ...gistsCheckIsStarredQuery(variables),
+    ...gistsCheckIsStarredQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -4598,7 +4610,7 @@ export const useGistsStar = (
   const { fetcherOptions } = useGithubContext();
   return reactQuery.useMutation<undefined, GistsStarError, GistsStarVariables>({
     mutationFn: (variables: GistsStarVariables) =>
-      fetchGistsStar({ ...fetcherOptions, ...variables }),
+      fetchGistsStar(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -4673,13 +4685,13 @@ export const useSuspenseGistsGetRevision = <TData = Schemas.GistSimple>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.GistSimple,
     GistsGetRevisionError,
     TData
   >({
-    ...gistsGetRevisionQuery(variables),
+    ...gistsGetRevisionQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -4696,9 +4708,9 @@ export const useGistsGetRevision = <TData = Schemas.GistSimple>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.GistSimple, GistsGetRevisionError, TData>({
-    ...gistsGetRevisionQuery(variables),
+    ...gistsGetRevisionQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -4767,13 +4779,13 @@ export const useSuspenseGitignoreGetAllTemplates = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     GitignoreGetAllTemplatesResponse,
     GitignoreGetAllTemplatesError,
     TData
   >({
-    ...gitignoreGetAllTemplatesQuery(variables),
+    ...gitignoreGetAllTemplatesQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -4795,13 +4807,13 @@ export const useGitignoreGetAllTemplates = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     GitignoreGetAllTemplatesResponse,
     GitignoreGetAllTemplatesError,
     TData
   >({
-    ...gitignoreGetAllTemplatesQuery(variables),
+    ...gitignoreGetAllTemplatesQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -4882,13 +4894,13 @@ export const useSuspenseGitignoreGetTemplate = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.GitignoreTemplate,
     GitignoreGetTemplateError,
     TData
   >({
-    ...gitignoreGetTemplateQuery(variables),
+    ...gitignoreGetTemplateQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -4909,13 +4921,13 @@ export const useGitignoreGetTemplate = <TData = Schemas.GitignoreTemplate>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.GitignoreTemplate,
     GitignoreGetTemplateError,
     TData
   >({
-    ...gitignoreGetTemplateQuery(variables),
+    ...gitignoreGetTemplateQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -5024,13 +5036,15 @@ export const useSuspenseAppsListReposAccessibleToInstallation = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     AppsListReposAccessibleToInstallationResponse,
     AppsListReposAccessibleToInstallationError,
     TData
   >({
-    ...appsListReposAccessibleToInstallationQuery(variables),
+    ...appsListReposAccessibleToInstallationQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -5054,13 +5068,15 @@ export const useAppsListReposAccessibleToInstallation = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     AppsListReposAccessibleToInstallationResponse,
     AppsListReposAccessibleToInstallationError,
     TData
   >({
-    ...appsListReposAccessibleToInstallationQuery(variables),
+    ...appsListReposAccessibleToInstallationQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -5116,10 +5132,9 @@ export const useAppsRevokeInstallationAccessToken = (
     AppsRevokeInstallationAccessTokenVariables
   >({
     mutationFn: (variables: AppsRevokeInstallationAccessTokenVariables) =>
-      fetchAppsRevokeInstallationAccessToken({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchAppsRevokeInstallationAccessToken(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -5276,13 +5291,13 @@ export const useSuspenseIssuesList = <TData = IssuesListResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     IssuesListResponse,
     IssuesListError,
     TData
   >({
-    ...issuesListQuery(variables),
+    ...issuesListQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -5306,9 +5321,9 @@ export const useIssuesList = <TData = IssuesListResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<IssuesListResponse, IssuesListError, TData>({
-    ...issuesListQuery(variables),
+    ...issuesListQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -5386,13 +5401,13 @@ export const useSuspenseLicensesGetAllCommonlyUsed = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     LicensesGetAllCommonlyUsedResponse,
     LicensesGetAllCommonlyUsedError,
     TData
   >({
-    ...licensesGetAllCommonlyUsedQuery(variables),
+    ...licensesGetAllCommonlyUsedQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -5411,13 +5426,13 @@ export const useLicensesGetAllCommonlyUsed = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     LicensesGetAllCommonlyUsedResponse,
     LicensesGetAllCommonlyUsedError,
     TData
   >({
-    ...licensesGetAllCommonlyUsedQuery(variables),
+    ...licensesGetAllCommonlyUsedQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -5481,9 +5496,9 @@ export const useSuspenseLicensesGet = <TData = Schemas.License>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<Schemas.License, LicensesGetError, TData>({
-    ...licensesGetQuery(variables),
+    ...licensesGetQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -5496,9 +5511,9 @@ export const useLicensesGet = <TData = Schemas.License>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.License, LicensesGetError, TData>({
-    ...licensesGetQuery(variables),
+    ...licensesGetQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -5561,7 +5576,7 @@ export const useMarkdownRender = (
     MarkdownRenderVariables
   >({
     mutationFn: (variables: MarkdownRenderVariables) =>
-      fetchMarkdownRender({ ...fetcherOptions, ...variables }),
+      fetchMarkdownRender(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -5607,7 +5622,7 @@ export const useMarkdownRenderRaw = (
     MarkdownRenderRawVariables
   >({
     mutationFn: (variables: MarkdownRenderRawVariables) =>
-      fetchMarkdownRenderRaw({ ...fetcherOptions, ...variables }),
+      fetchMarkdownRenderRaw(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -5699,13 +5714,15 @@ export const useSuspenseAppsGetSubscriptionPlanForAccount = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.MarketplacePurchase,
     AppsGetSubscriptionPlanForAccountError,
     TData
   >({
-    ...appsGetSubscriptionPlanForAccountQuery(variables),
+    ...appsGetSubscriptionPlanForAccountQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -5729,13 +5746,15 @@ export const useAppsGetSubscriptionPlanForAccount = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.MarketplacePurchase,
     AppsGetSubscriptionPlanForAccountError,
     TData
   >({
-    ...appsGetSubscriptionPlanForAccountQuery(variables),
+    ...appsGetSubscriptionPlanForAccountQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -5831,13 +5850,13 @@ export const useSuspenseAppsListPlans = <TData = AppsListPlansResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     AppsListPlansResponse,
     AppsListPlansError,
     TData
   >({
-    ...appsListPlansQuery(variables),
+    ...appsListPlansQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -5859,9 +5878,9 @@ export const useAppsListPlans = <TData = AppsListPlansResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<AppsListPlansResponse, AppsListPlansError, TData>({
-    ...appsListPlansQuery(variables),
+    ...appsListPlansQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -5986,13 +6005,13 @@ export const useSuspenseAppsListAccountsForPlan = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     AppsListAccountsForPlanResponse,
     AppsListAccountsForPlanError,
     TData
   >({
-    ...appsListAccountsForPlanQuery(variables),
+    ...appsListAccountsForPlanQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -6016,13 +6035,13 @@ export const useAppsListAccountsForPlan = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     AppsListAccountsForPlanResponse,
     AppsListAccountsForPlanError,
     TData
   >({
-    ...appsListAccountsForPlanQuery(variables),
+    ...appsListAccountsForPlanQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -6110,13 +6129,15 @@ export const useSuspenseAppsGetSubscriptionPlanForAccountStubbed = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.MarketplacePurchase,
     AppsGetSubscriptionPlanForAccountStubbedError,
     TData
   >({
-    ...appsGetSubscriptionPlanForAccountStubbedQuery(variables),
+    ...appsGetSubscriptionPlanForAccountStubbedQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -6140,13 +6161,15 @@ export const useAppsGetSubscriptionPlanForAccountStubbed = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.MarketplacePurchase,
     AppsGetSubscriptionPlanForAccountStubbedError,
     TData
   >({
-    ...appsGetSubscriptionPlanForAccountStubbedQuery(variables),
+    ...appsGetSubscriptionPlanForAccountStubbedQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -6243,13 +6266,13 @@ export const useSuspenseAppsListPlansStubbed = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     AppsListPlansStubbedResponse,
     AppsListPlansStubbedError,
     TData
   >({
-    ...appsListPlansStubbedQuery(variables),
+    ...appsListPlansStubbedQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -6271,13 +6294,13 @@ export const useAppsListPlansStubbed = <TData = AppsListPlansStubbedResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     AppsListPlansStubbedResponse,
     AppsListPlansStubbedError,
     TData
   >({
-    ...appsListPlansStubbedQuery(variables),
+    ...appsListPlansStubbedQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -6393,13 +6416,15 @@ export const useSuspenseAppsListAccountsForPlanStubbed = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     AppsListAccountsForPlanStubbedResponse,
     AppsListAccountsForPlanStubbedError,
     TData
   >({
-    ...appsListAccountsForPlanStubbedQuery(variables),
+    ...appsListAccountsForPlanStubbedQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -6423,13 +6448,15 @@ export const useAppsListAccountsForPlanStubbed = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     AppsListAccountsForPlanStubbedResponse,
     AppsListAccountsForPlanStubbedError,
     TData
   >({
-    ...appsListAccountsForPlanStubbedQuery(variables),
+    ...appsListAccountsForPlanStubbedQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -6500,9 +6527,9 @@ export const useSuspenseMetaGet = <TData = Schemas.ApiOverview>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<Schemas.ApiOverview, MetaGetError, TData>({
-    ...metaGetQuery(variables),
+    ...metaGetQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -6522,9 +6549,9 @@ export const useMetaGet = <TData = Schemas.ApiOverview>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.ApiOverview, MetaGetError, TData>({
-    ...metaGetQuery(variables),
+    ...metaGetQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -6632,13 +6659,15 @@ export const useSuspenseActivityListPublicEventsForRepoNetwork = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     ActivityListPublicEventsForRepoNetworkResponse,
     ActivityListPublicEventsForRepoNetworkError,
     TData
   >({
-    ...activityListPublicEventsForRepoNetworkQuery(variables),
+    ...activityListPublicEventsForRepoNetworkQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -6657,13 +6686,15 @@ export const useActivityListPublicEventsForRepoNetwork = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     ActivityListPublicEventsForRepoNetworkResponse,
     ActivityListPublicEventsForRepoNetworkError,
     TData
   >({
-    ...activityListPublicEventsForRepoNetworkQuery(variables),
+    ...activityListPublicEventsForRepoNetworkQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -6789,13 +6820,15 @@ export const useSuspenseActivityListNotificationsForAuthenticatedUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     ActivityListNotificationsForAuthenticatedUserResponse,
     ActivityListNotificationsForAuthenticatedUserError,
     TData
   >({
-    ...activityListNotificationsForAuthenticatedUserQuery(variables),
+    ...activityListNotificationsForAuthenticatedUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -6817,13 +6850,15 @@ export const useActivityListNotificationsForAuthenticatedUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     ActivityListNotificationsForAuthenticatedUserResponse,
     ActivityListNotificationsForAuthenticatedUserError,
     TData
   >({
-    ...activityListNotificationsForAuthenticatedUserQuery(variables),
+    ...activityListNotificationsForAuthenticatedUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -6901,7 +6936,9 @@ export const useActivityMarkNotificationsAsRead = (
     ActivityMarkNotificationsAsReadVariables
   >({
     mutationFn: (variables: ActivityMarkNotificationsAsReadVariables) =>
-      fetchActivityMarkNotificationsAsRead({ ...fetcherOptions, ...variables }),
+      fetchActivityMarkNotificationsAsRead(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -6981,13 +7018,13 @@ export const useSuspenseActivityGetThread = <TData = Schemas.Thread>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.Thread,
     ActivityGetThreadError,
     TData
   >({
-    ...activityGetThreadQuery(variables),
+    ...activityGetThreadQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -7003,9 +7040,9 @@ export const useActivityGetThread = <TData = Schemas.Thread>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.Thread, ActivityGetThreadError, TData>({
-    ...activityGetThreadQuery(variables),
+    ...activityGetThreadQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -7074,7 +7111,7 @@ export const useActivityMarkThreadAsRead = (
     ActivityMarkThreadAsReadVariables
   >({
     mutationFn: (variables: ActivityMarkThreadAsReadVariables) =>
-      fetchActivityMarkThreadAsRead({ ...fetcherOptions, ...variables }),
+      fetchActivityMarkThreadAsRead(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -7146,10 +7183,9 @@ export const useActivityDeleteThreadSubscription = (
     ActivityDeleteThreadSubscriptionVariables
   >({
     mutationFn: (variables: ActivityDeleteThreadSubscriptionVariables) =>
-      fetchActivityDeleteThreadSubscription({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchActivityDeleteThreadSubscription(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -7246,13 +7282,15 @@ export const useSuspenseActivityGetThreadSubscriptionForAuthenticatedUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.ThreadSubscription,
     ActivityGetThreadSubscriptionForAuthenticatedUserError,
     TData
   >({
-    ...activityGetThreadSubscriptionForAuthenticatedUserQuery(variables),
+    ...activityGetThreadSubscriptionForAuthenticatedUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -7276,13 +7314,15 @@ export const useActivityGetThreadSubscriptionForAuthenticatedUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.ThreadSubscription,
     ActivityGetThreadSubscriptionForAuthenticatedUserError,
     TData
   >({
-    ...activityGetThreadSubscriptionForAuthenticatedUserQuery(variables),
+    ...activityGetThreadSubscriptionForAuthenticatedUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -7373,7 +7413,7 @@ export const useActivitySetThreadSubscription = (
     ActivitySetThreadSubscriptionVariables
   >({
     mutationFn: (variables: ActivitySetThreadSubscriptionVariables) =>
-      fetchActivitySetThreadSubscription({ ...fetcherOptions, ...variables }),
+      fetchActivitySetThreadSubscription(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -7435,9 +7475,9 @@ export const useSuspenseMetaGetOctocat = <TData = undefined>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<undefined, MetaGetOctocatError, TData>({
-    ...metaGetOctocatQuery(variables),
+    ...metaGetOctocatQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -7453,9 +7493,9 @@ export const useMetaGetOctocat = <TData = undefined>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<undefined, MetaGetOctocatError, TData>({
-    ...metaGetOctocatQuery(variables),
+    ...metaGetOctocatQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -7535,9 +7575,9 @@ export const useSuspenseOrgsList = <TData = OrgsListResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<OrgsListResponse, OrgsListError, TData>({
-    ...orgsListQuery(variables),
+    ...orgsListQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -7555,9 +7595,9 @@ export const useOrgsList = <TData = OrgsListResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<OrgsListResponse, OrgsListError, TData>({
-    ...orgsListQuery(variables),
+    ...orgsListQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -7633,13 +7673,13 @@ export const useSuspenseOrgsGet = <TData = Schemas.OrganizationFull>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.OrganizationFull,
     OrgsGetError,
     TData
   >({
-    ...orgsGetQuery(variables),
+    ...orgsGetQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -7657,9 +7697,9 @@ export const useOrgsGet = <TData = Schemas.OrganizationFull>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.OrganizationFull, OrgsGetError, TData>({
-    ...orgsGetQuery(variables),
+    ...orgsGetQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -7886,7 +7926,7 @@ export const useOrgsUpdate = (
     OrgsUpdateVariables
   >({
     mutationFn: (variables: OrgsUpdateVariables) =>
-      fetchOrgsUpdate({ ...fetcherOptions, ...variables }),
+      fetchOrgsUpdate(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -7970,13 +8010,15 @@ export const useSuspenseActionsGetActionsCacheUsageForOrg = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.ActionsCacheUsageOrgEnterprise,
     ActionsGetActionsCacheUsageForOrgError,
     TData
   >({
-    ...actionsGetActionsCacheUsageForOrgQuery(variables),
+    ...actionsGetActionsCacheUsageForOrgQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -8000,13 +8042,15 @@ export const useActionsGetActionsCacheUsageForOrg = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.ActionsCacheUsageOrgEnterprise,
     ActionsGetActionsCacheUsageForOrgError,
     TData
   >({
-    ...actionsGetActionsCacheUsageForOrgQuery(variables),
+    ...actionsGetActionsCacheUsageForOrgQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -8112,13 +8156,15 @@ export const useSuspenseActionsGetActionsCacheUsageByRepoForOrg = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     ActionsGetActionsCacheUsageByRepoForOrgResponse,
     ActionsGetActionsCacheUsageByRepoForOrgError,
     TData
   >({
-    ...actionsGetActionsCacheUsageByRepoForOrgQuery(variables),
+    ...actionsGetActionsCacheUsageByRepoForOrgQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -8142,13 +8188,15 @@ export const useActionsGetActionsCacheUsageByRepoForOrg = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     ActionsGetActionsCacheUsageByRepoForOrgResponse,
     ActionsGetActionsCacheUsageByRepoForOrgError,
     TData
   >({
-    ...actionsGetActionsCacheUsageByRepoForOrgQuery(variables),
+    ...actionsGetActionsCacheUsageByRepoForOrgQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -8233,13 +8281,15 @@ export const useSuspenseOidcGetOidcCustomSubTemplateForOrg = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.OidcCustomSub,
     OidcGetOidcCustomSubTemplateForOrgError,
     TData
   >({
-    ...oidcGetOidcCustomSubTemplateForOrgQuery(variables),
+    ...oidcGetOidcCustomSubTemplateForOrgQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -8263,13 +8313,15 @@ export const useOidcGetOidcCustomSubTemplateForOrg = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.OidcCustomSub,
     OidcGetOidcCustomSubTemplateForOrgError,
     TData
   >({
-    ...oidcGetOidcCustomSubTemplateForOrgQuery(variables),
+    ...oidcGetOidcCustomSubTemplateForOrgQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -8343,10 +8395,9 @@ export const useOidcUpdateOidcCustomSubTemplateForOrg = (
     OidcUpdateOidcCustomSubTemplateForOrgVariables
   >({
     mutationFn: (variables: OidcUpdateOidcCustomSubTemplateForOrgVariables) =>
-      fetchOidcUpdateOidcCustomSubTemplateForOrg({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchOidcUpdateOidcCustomSubTemplateForOrg(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -8430,13 +8481,15 @@ export const useSuspenseActionsGetGithubActionsPermissionsOrganization = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.ActionsOrganizationPermissions,
     ActionsGetGithubActionsPermissionsOrganizationError,
     TData
   >({
-    ...actionsGetGithubActionsPermissionsOrganizationQuery(variables),
+    ...actionsGetGithubActionsPermissionsOrganizationQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -8460,13 +8513,15 @@ export const useActionsGetGithubActionsPermissionsOrganization = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.ActionsOrganizationPermissions,
     ActionsGetGithubActionsPermissionsOrganizationError,
     TData
   >({
-    ...actionsGetGithubActionsPermissionsOrganizationQuery(variables),
+    ...actionsGetGithubActionsPermissionsOrganizationQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -8539,10 +8594,9 @@ export const useActionsSetGithubActionsPermissionsOrganization = (
     mutationFn: (
       variables: ActionsSetGithubActionsPermissionsOrganizationVariables
     ) =>
-      fetchActionsSetGithubActionsPermissionsOrganization({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchActionsSetGithubActionsPermissionsOrganization(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -8658,14 +8712,14 @@ export const useSuspenseActionsListSelectedRepositoriesEnabledGithubActionsOrgan
       "queryKey" | "queryFn" | "initialData"
     >
   ) => {
-    const { queryOptions } = useGithubContext(options);
+    const { queryOptions, fetcherOptions } = useGithubContext(options);
     return reactQuery.useSuspenseQuery<
       ActionsListSelectedRepositoriesEnabledGithubActionsOrganizationResponse,
       ActionsListSelectedRepositoriesEnabledGithubActionsOrganizationError,
       TData
     >({
       ...actionsListSelectedRepositoriesEnabledGithubActionsOrganizationQuery(
-        variables
+        deepMerge(fetcherOptions, variables)
       ),
       ...options,
       ...queryOptions,
@@ -8691,14 +8745,14 @@ export const useActionsListSelectedRepositoriesEnabledGithubActionsOrganization 
       "queryKey" | "queryFn" | "initialData"
     >
   ) => {
-    const { queryOptions } = useGithubContext(options);
+    const { queryOptions, fetcherOptions } = useGithubContext(options);
     return reactQuery.useQuery<
       ActionsListSelectedRepositoriesEnabledGithubActionsOrganizationResponse,
       ActionsListSelectedRepositoriesEnabledGithubActionsOrganizationError,
       TData
     >({
       ...actionsListSelectedRepositoriesEnabledGithubActionsOrganizationQuery(
-        variables
+        deepMerge(fetcherOptions, variables)
       ),
       ...options,
       ...queryOptions,
@@ -8779,10 +8833,9 @@ export const useActionsSetSelectedRepositoriesEnabledGithubActionsOrganization =
       mutationFn: (
         variables: ActionsSetSelectedRepositoriesEnabledGithubActionsOrganizationVariables
       ) =>
-        fetchActionsSetSelectedRepositoriesEnabledGithubActionsOrganization({
-          ...fetcherOptions,
-          ...variables,
-        }),
+        fetchActionsSetSelectedRepositoriesEnabledGithubActionsOrganization(
+          deepMerge(fetcherOptions, variables)
+        ),
       ...options,
     });
   };
@@ -8854,10 +8907,9 @@ export const useActionsDisableSelectedRepositoryGithubActionsOrganization = (
     mutationFn: (
       variables: ActionsDisableSelectedRepositoryGithubActionsOrganizationVariables
     ) =>
-      fetchActionsDisableSelectedRepositoryGithubActionsOrganization({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchActionsDisableSelectedRepositoryGithubActionsOrganization(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -8929,10 +8981,9 @@ export const useActionsEnableSelectedRepositoryGithubActionsOrganization = (
     mutationFn: (
       variables: ActionsEnableSelectedRepositoryGithubActionsOrganizationVariables
     ) =>
-      fetchActionsEnableSelectedRepositoryGithubActionsOrganization({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchActionsEnableSelectedRepositoryGithubActionsOrganization(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -9016,13 +9067,15 @@ export const useSuspenseActionsGetAllowedActionsOrganization = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.SelectedActions,
     ActionsGetAllowedActionsOrganizationError,
     TData
   >({
-    ...actionsGetAllowedActionsOrganizationQuery(variables),
+    ...actionsGetAllowedActionsOrganizationQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -9046,13 +9099,15 @@ export const useActionsGetAllowedActionsOrganization = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.SelectedActions,
     ActionsGetAllowedActionsOrganizationError,
     TData
   >({
-    ...actionsGetAllowedActionsOrganizationQuery(variables),
+    ...actionsGetAllowedActionsOrganizationQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -9118,10 +9173,9 @@ export const useActionsSetAllowedActionsOrganization = (
     ActionsSetAllowedActionsOrganizationVariables
   >({
     mutationFn: (variables: ActionsSetAllowedActionsOrganizationVariables) =>
-      fetchActionsSetAllowedActionsOrganization({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchActionsSetAllowedActionsOrganization(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -9218,14 +9272,14 @@ export const useSuspenseActionsGetGithubActionsDefaultWorkflowPermissionsOrganiz
       "queryKey" | "queryFn" | "initialData"
     >
   ) => {
-    const { queryOptions } = useGithubContext(options);
+    const { queryOptions, fetcherOptions } = useGithubContext(options);
     return reactQuery.useSuspenseQuery<
       Schemas.ActionsGetDefaultWorkflowPermissions,
       ActionsGetGithubActionsDefaultWorkflowPermissionsOrganizationError,
       TData
     >({
       ...actionsGetGithubActionsDefaultWorkflowPermissionsOrganizationQuery(
-        variables
+        deepMerge(fetcherOptions, variables)
       ),
       ...options,
       ...queryOptions,
@@ -9251,14 +9305,14 @@ export const useActionsGetGithubActionsDefaultWorkflowPermissionsOrganization =
       "queryKey" | "queryFn" | "initialData"
     >
   ) => {
-    const { queryOptions } = useGithubContext(options);
+    const { queryOptions, fetcherOptions } = useGithubContext(options);
     return reactQuery.useQuery<
       Schemas.ActionsGetDefaultWorkflowPermissions,
       ActionsGetGithubActionsDefaultWorkflowPermissionsOrganizationError,
       TData
     >({
       ...actionsGetGithubActionsDefaultWorkflowPermissionsOrganizationQuery(
-        variables
+        deepMerge(fetcherOptions, variables)
       ),
       ...options,
       ...queryOptions,
@@ -9335,10 +9389,9 @@ export const useActionsSetGithubActionsDefaultWorkflowPermissionsOrganization =
       mutationFn: (
         variables: ActionsSetGithubActionsDefaultWorkflowPermissionsOrganizationVariables
       ) =>
-        fetchActionsSetGithubActionsDefaultWorkflowPermissionsOrganization({
-          ...fetcherOptions,
-          ...variables,
-        }),
+        fetchActionsSetGithubActionsDefaultWorkflowPermissionsOrganization(
+          deepMerge(fetcherOptions, variables)
+        ),
       ...options,
     });
   };
@@ -9448,13 +9501,13 @@ export const useSuspenseActionsListRequiredWorkflows = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     ActionsListRequiredWorkflowsResponse,
     ActionsListRequiredWorkflowsError,
     TData
   >({
-    ...actionsListRequiredWorkflowsQuery(variables),
+    ...actionsListRequiredWorkflowsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -9480,13 +9533,13 @@ export const useActionsListRequiredWorkflows = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     ActionsListRequiredWorkflowsResponse,
     ActionsListRequiredWorkflowsError,
     TData
   >({
-    ...actionsListRequiredWorkflowsQuery(variables),
+    ...actionsListRequiredWorkflowsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -9579,7 +9632,7 @@ export const useActionsCreateRequiredWorkflow = (
     ActionsCreateRequiredWorkflowVariables
   >({
     mutationFn: (variables: ActionsCreateRequiredWorkflowVariables) =>
-      fetchActionsCreateRequiredWorkflow({ ...fetcherOptions, ...variables }),
+      fetchActionsCreateRequiredWorkflow(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -9651,7 +9704,7 @@ export const useActionsDeleteRequiredWorkflow = (
     ActionsDeleteRequiredWorkflowVariables
   >({
     mutationFn: (variables: ActionsDeleteRequiredWorkflowVariables) =>
-      fetchActionsDeleteRequiredWorkflow({ ...fetcherOptions, ...variables }),
+      fetchActionsDeleteRequiredWorkflow(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -9744,13 +9797,13 @@ export const useSuspenseActionsGetRequiredWorkflow = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.RequiredWorkflow,
     ActionsGetRequiredWorkflowError,
     TData
   >({
-    ...actionsGetRequiredWorkflowQuery(variables),
+    ...actionsGetRequiredWorkflowQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -9774,13 +9827,13 @@ export const useActionsGetRequiredWorkflow = <TData = Schemas.RequiredWorkflow>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.RequiredWorkflow,
     ActionsGetRequiredWorkflowError,
     TData
   >({
-    ...actionsGetRequiredWorkflowQuery(variables),
+    ...actionsGetRequiredWorkflowQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -9877,7 +9930,7 @@ export const useActionsUpdateRequiredWorkflow = (
     ActionsUpdateRequiredWorkflowVariables
   >({
     mutationFn: (variables: ActionsUpdateRequiredWorkflowVariables) =>
-      fetchActionsUpdateRequiredWorkflow({ ...fetcherOptions, ...variables }),
+      fetchActionsUpdateRequiredWorkflow(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -9976,13 +10029,15 @@ export const useSuspenseActionsListSelectedRepositoriesRequiredWorkflow = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     ActionsListSelectedRepositoriesRequiredWorkflowResponse,
     ActionsListSelectedRepositoriesRequiredWorkflowError,
     TData
   >({
-    ...actionsListSelectedRepositoriesRequiredWorkflowQuery(variables),
+    ...actionsListSelectedRepositoriesRequiredWorkflowQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -10008,13 +10063,15 @@ export const useActionsListSelectedRepositoriesRequiredWorkflow = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     ActionsListSelectedRepositoriesRequiredWorkflowResponse,
     ActionsListSelectedRepositoriesRequiredWorkflowError,
     TData
   >({
-    ...actionsListSelectedRepositoriesRequiredWorkflowQuery(variables),
+    ...actionsListSelectedRepositoriesRequiredWorkflowQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -10097,10 +10154,9 @@ export const useActionsSetSelectedReposToRequiredWorkflow = (
     mutationFn: (
       variables: ActionsSetSelectedReposToRequiredWorkflowVariables
     ) =>
-      fetchActionsSetSelectedReposToRequiredWorkflow({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchActionsSetSelectedReposToRequiredWorkflow(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -10178,10 +10234,9 @@ export const useActionsRemoveSelectedRepoFromRequiredWorkflow = (
     mutationFn: (
       variables: ActionsRemoveSelectedRepoFromRequiredWorkflowVariables
     ) =>
-      fetchActionsRemoveSelectedRepoFromRequiredWorkflow({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchActionsRemoveSelectedRepoFromRequiredWorkflow(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -10259,10 +10314,9 @@ export const useActionsAddSelectedRepoToRequiredWorkflow = (
     mutationFn: (
       variables: ActionsAddSelectedRepoToRequiredWorkflowVariables
     ) =>
-      fetchActionsAddSelectedRepoToRequiredWorkflow({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchActionsAddSelectedRepoToRequiredWorkflow(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -10367,13 +10421,15 @@ export const useSuspenseActionsListSelfHostedRunnersForOrg = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     ActionsListSelfHostedRunnersForOrgResponse,
     ActionsListSelfHostedRunnersForOrgError,
     TData
   >({
-    ...actionsListSelfHostedRunnersForOrgQuery(variables),
+    ...actionsListSelfHostedRunnersForOrgQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -10397,13 +10453,15 @@ export const useActionsListSelfHostedRunnersForOrg = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     ActionsListSelfHostedRunnersForOrgResponse,
     ActionsListSelfHostedRunnersForOrgError,
     TData
   >({
-    ...actionsListSelfHostedRunnersForOrgQuery(variables),
+    ...actionsListSelfHostedRunnersForOrgQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -10491,13 +10549,15 @@ export const useSuspenseActionsListRunnerApplicationsForOrg = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     ActionsListRunnerApplicationsForOrgResponse,
     ActionsListRunnerApplicationsForOrgError,
     TData
   >({
-    ...actionsListRunnerApplicationsForOrgQuery(variables),
+    ...actionsListRunnerApplicationsForOrgQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -10521,13 +10581,15 @@ export const useActionsListRunnerApplicationsForOrg = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     ActionsListRunnerApplicationsForOrgResponse,
     ActionsListRunnerApplicationsForOrgError,
     TData
   >({
-    ...actionsListRunnerApplicationsForOrgQuery(variables),
+    ...actionsListRunnerApplicationsForOrgQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -10608,10 +10670,9 @@ export const useActionsCreateRegistrationTokenForOrg = (
     ActionsCreateRegistrationTokenForOrgVariables
   >({
     mutationFn: (variables: ActionsCreateRegistrationTokenForOrgVariables) =>
-      fetchActionsCreateRegistrationTokenForOrg({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchActionsCreateRegistrationTokenForOrg(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -10693,7 +10754,7 @@ export const useActionsCreateRemoveTokenForOrg = (
     ActionsCreateRemoveTokenForOrgVariables
   >({
     mutationFn: (variables: ActionsCreateRemoveTokenForOrgVariables) =>
-      fetchActionsCreateRemoveTokenForOrg({ ...fetcherOptions, ...variables }),
+      fetchActionsCreateRemoveTokenForOrg(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -10761,10 +10822,9 @@ export const useActionsDeleteSelfHostedRunnerFromOrg = (
     ActionsDeleteSelfHostedRunnerFromOrgVariables
   >({
     mutationFn: (variables: ActionsDeleteSelfHostedRunnerFromOrgVariables) =>
-      fetchActionsDeleteSelfHostedRunnerFromOrg({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchActionsDeleteSelfHostedRunnerFromOrg(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -10848,13 +10908,15 @@ export const useSuspenseActionsGetSelfHostedRunnerForOrg = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.Runner,
     ActionsGetSelfHostedRunnerForOrgError,
     TData
   >({
-    ...actionsGetSelfHostedRunnerForOrgQuery(variables),
+    ...actionsGetSelfHostedRunnerForOrgQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -10876,13 +10938,15 @@ export const useActionsGetSelfHostedRunnerForOrg = <TData = Schemas.Runner>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.Runner,
     ActionsGetSelfHostedRunnerForOrgError,
     TData
   >({
-    ...actionsGetSelfHostedRunnerForOrgQuery(variables),
+    ...actionsGetSelfHostedRunnerForOrgQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -10958,10 +11022,9 @@ export const useActionsRemoveAllCustomLabelsFromSelfHostedRunnerForOrg = (
     mutationFn: (
       variables: ActionsRemoveAllCustomLabelsFromSelfHostedRunnerForOrgVariables
     ) =>
-      fetchActionsRemoveAllCustomLabelsFromSelfHostedRunnerForOrg({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchActionsRemoveAllCustomLabelsFromSelfHostedRunnerForOrg(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -11052,13 +11115,15 @@ export const useSuspenseActionsListLabelsForSelfHostedRunnerForOrg = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Responses.ActionsRunnerLabels,
     ActionsListLabelsForSelfHostedRunnerForOrgError,
     TData
   >({
-    ...actionsListLabelsForSelfHostedRunnerForOrgQuery(variables),
+    ...actionsListLabelsForSelfHostedRunnerForOrgQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -11082,13 +11147,15 @@ export const useActionsListLabelsForSelfHostedRunnerForOrg = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Responses.ActionsRunnerLabels,
     ActionsListLabelsForSelfHostedRunnerForOrgError,
     TData
   >({
-    ...actionsListLabelsForSelfHostedRunnerForOrgQuery(variables),
+    ...actionsListLabelsForSelfHostedRunnerForOrgQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -11179,10 +11246,9 @@ export const useActionsAddCustomLabelsToSelfHostedRunnerForOrg = (
     mutationFn: (
       variables: ActionsAddCustomLabelsToSelfHostedRunnerForOrgVariables
     ) =>
-      fetchActionsAddCustomLabelsToSelfHostedRunnerForOrg({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchActionsAddCustomLabelsToSelfHostedRunnerForOrg(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -11274,10 +11340,9 @@ export const useActionsSetCustomLabelsForSelfHostedRunnerForOrg = (
     mutationFn: (
       variables: ActionsSetCustomLabelsForSelfHostedRunnerForOrgVariables
     ) =>
-      fetchActionsSetCustomLabelsForSelfHostedRunnerForOrg({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchActionsSetCustomLabelsForSelfHostedRunnerForOrg(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -11368,10 +11433,9 @@ export const useActionsRemoveCustomLabelFromSelfHostedRunnerForOrg = (
     mutationFn: (
       variables: ActionsRemoveCustomLabelFromSelfHostedRunnerForOrgVariables
     ) =>
-      fetchActionsRemoveCustomLabelFromSelfHostedRunnerForOrg({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchActionsRemoveCustomLabelFromSelfHostedRunnerForOrg(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -11469,13 +11533,13 @@ export const useSuspenseActionsListOrgSecrets = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     ActionsListOrgSecretsResponse,
     ActionsListOrgSecretsError,
     TData
   >({
-    ...actionsListOrgSecretsQuery(variables),
+    ...actionsListOrgSecretsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -11495,13 +11559,13 @@ export const useActionsListOrgSecrets = <TData = ActionsListOrgSecretsResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     ActionsListOrgSecretsResponse,
     ActionsListOrgSecretsError,
     TData
   >({
-    ...actionsListOrgSecretsQuery(variables),
+    ...actionsListOrgSecretsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -11579,13 +11643,13 @@ export const useSuspenseActionsGetOrgPublicKey = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.ActionsPublicKey,
     ActionsGetOrgPublicKeyError,
     TData
   >({
-    ...actionsGetOrgPublicKeyQuery(variables),
+    ...actionsGetOrgPublicKeyQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -11605,13 +11669,13 @@ export const useActionsGetOrgPublicKey = <TData = Schemas.ActionsPublicKey>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.ActionsPublicKey,
     ActionsGetOrgPublicKeyError,
     TData
   >({
-    ...actionsGetOrgPublicKeyQuery(variables),
+    ...actionsGetOrgPublicKeyQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -11675,7 +11739,7 @@ export const useActionsDeleteOrgSecret = (
     ActionsDeleteOrgSecretVariables
   >({
     mutationFn: (variables: ActionsDeleteOrgSecretVariables) =>
-      fetchActionsDeleteOrgSecret({ ...fetcherOptions, ...variables }),
+      fetchActionsDeleteOrgSecret(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -11756,13 +11820,13 @@ export const useSuspenseActionsGetOrgSecret = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.OrganizationActionsSecret,
     ActionsGetOrgSecretError,
     TData
   >({
-    ...actionsGetOrgSecretQuery(variables),
+    ...actionsGetOrgSecretQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -11784,13 +11848,13 @@ export const useActionsGetOrgSecret = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.OrganizationActionsSecret,
     ActionsGetOrgSecretError,
     TData
   >({
-    ...actionsGetOrgSecretQuery(variables),
+    ...actionsGetOrgSecretQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -12027,7 +12091,7 @@ export const useActionsCreateOrUpdateOrgSecret = (
     ActionsCreateOrUpdateOrgSecretVariables
   >({
     mutationFn: (variables: ActionsCreateOrUpdateOrgSecretVariables) =>
-      fetchActionsCreateOrUpdateOrgSecret({ ...fetcherOptions, ...variables }),
+      fetchActionsCreateOrUpdateOrgSecret(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -12130,13 +12194,15 @@ export const useSuspenseActionsListSelectedReposForOrgSecret = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     ActionsListSelectedReposForOrgSecretResponse,
     ActionsListSelectedReposForOrgSecretError,
     TData
   >({
-    ...actionsListSelectedReposForOrgSecretQuery(variables),
+    ...actionsListSelectedReposForOrgSecretQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -12158,13 +12224,15 @@ export const useActionsListSelectedReposForOrgSecret = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     ActionsListSelectedReposForOrgSecretResponse,
     ActionsListSelectedReposForOrgSecretError,
     TData
   >({
-    ...actionsListSelectedReposForOrgSecretQuery(variables),
+    ...actionsListSelectedReposForOrgSecretQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -12237,10 +12305,9 @@ export const useActionsSetSelectedReposForOrgSecret = (
     ActionsSetSelectedReposForOrgSecretVariables
   >({
     mutationFn: (variables: ActionsSetSelectedReposForOrgSecretVariables) =>
-      fetchActionsSetSelectedReposForOrgSecret({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchActionsSetSelectedReposForOrgSecret(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -12305,10 +12372,9 @@ export const useActionsRemoveSelectedRepoFromOrgSecret = (
     ActionsRemoveSelectedRepoFromOrgSecretVariables
   >({
     mutationFn: (variables: ActionsRemoveSelectedRepoFromOrgSecretVariables) =>
-      fetchActionsRemoveSelectedRepoFromOrgSecret({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchActionsRemoveSelectedRepoFromOrgSecret(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -12373,10 +12439,9 @@ export const useActionsAddSelectedRepoToOrgSecret = (
     ActionsAddSelectedRepoToOrgSecretVariables
   >({
     mutationFn: (variables: ActionsAddSelectedRepoToOrgSecretVariables) =>
-      fetchActionsAddSelectedRepoToOrgSecret({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchActionsAddSelectedRepoToOrgSecret(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -12474,13 +12539,13 @@ export const useSuspenseActionsListOrgVariables = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     ActionsListOrgVariablesResponse,
     ActionsListOrgVariablesError,
     TData
   >({
-    ...actionsListOrgVariablesQuery(variables),
+    ...actionsListOrgVariablesQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -12502,13 +12567,13 @@ export const useActionsListOrgVariables = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     ActionsListOrgVariablesResponse,
     ActionsListOrgVariablesError,
     TData
   >({
-    ...actionsListOrgVariablesQuery(variables),
+    ...actionsListOrgVariablesQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -12592,7 +12657,7 @@ export const useActionsCreateOrgVariable = (
     ActionsCreateOrgVariableVariables
   >({
     mutationFn: (variables: ActionsCreateOrgVariableVariables) =>
-      fetchActionsCreateOrgVariable({ ...fetcherOptions, ...variables }),
+      fetchActionsCreateOrgVariable(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -12659,7 +12724,7 @@ export const useActionsDeleteOrgVariable = (
     ActionsDeleteOrgVariableVariables
   >({
     mutationFn: (variables: ActionsDeleteOrgVariableVariables) =>
-      fetchActionsDeleteOrgVariable({ ...fetcherOptions, ...variables }),
+      fetchActionsDeleteOrgVariable(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -12740,13 +12805,13 @@ export const useSuspenseActionsGetOrgVariable = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.OrganizationActionsVariable,
     ActionsGetOrgVariableError,
     TData
   >({
-    ...actionsGetOrgVariableQuery(variables),
+    ...actionsGetOrgVariableQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -12768,13 +12833,13 @@ export const useActionsGetOrgVariable = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.OrganizationActionsVariable,
     ActionsGetOrgVariableError,
     TData
   >({
-    ...actionsGetOrgVariableQuery(variables),
+    ...actionsGetOrgVariableQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -12862,7 +12927,7 @@ export const useActionsUpdateOrgVariable = (
     ActionsUpdateOrgVariableVariables
   >({
     mutationFn: (variables: ActionsUpdateOrgVariableVariables) =>
-      fetchActionsUpdateOrgVariable({ ...fetcherOptions, ...variables }),
+      fetchActionsUpdateOrgVariable(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -12965,13 +13030,15 @@ export const useSuspenseActionsListSelectedReposForOrgVariable = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     ActionsListSelectedReposForOrgVariableResponse,
     ActionsListSelectedReposForOrgVariableError,
     TData
   >({
-    ...actionsListSelectedReposForOrgVariableQuery(variables),
+    ...actionsListSelectedReposForOrgVariableQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -12993,13 +13060,15 @@ export const useActionsListSelectedReposForOrgVariable = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     ActionsListSelectedReposForOrgVariableResponse,
     ActionsListSelectedReposForOrgVariableError,
     TData
   >({
-    ...actionsListSelectedReposForOrgVariableQuery(variables),
+    ...actionsListSelectedReposForOrgVariableQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -13072,10 +13141,9 @@ export const useActionsSetSelectedReposForOrgVariable = (
     ActionsSetSelectedReposForOrgVariableVariables
   >({
     mutationFn: (variables: ActionsSetSelectedReposForOrgVariableVariables) =>
-      fetchActionsSetSelectedReposForOrgVariable({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchActionsSetSelectedReposForOrgVariable(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -13142,10 +13210,9 @@ export const useActionsRemoveSelectedRepoFromOrgVariable = (
     mutationFn: (
       variables: ActionsRemoveSelectedRepoFromOrgVariableVariables
     ) =>
-      fetchActionsRemoveSelectedRepoFromOrgVariable({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchActionsRemoveSelectedRepoFromOrgVariable(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -13210,10 +13277,9 @@ export const useActionsAddSelectedRepoToOrgVariable = (
     ActionsAddSelectedRepoToOrgVariableVariables
   >({
     mutationFn: (variables: ActionsAddSelectedRepoToOrgVariableVariables) =>
-      fetchActionsAddSelectedRepoToOrgVariable({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchActionsAddSelectedRepoToOrgVariable(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -13303,13 +13369,13 @@ export const useSuspenseOrgsListBlockedUsers = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     OrgsListBlockedUsersResponse,
     OrgsListBlockedUsersError,
     TData
   >({
-    ...orgsListBlockedUsersQuery(variables),
+    ...orgsListBlockedUsersQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -13329,13 +13395,13 @@ export const useOrgsListBlockedUsers = <TData = OrgsListBlockedUsersResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     OrgsListBlockedUsersResponse,
     OrgsListBlockedUsersError,
     TData
   >({
-    ...orgsListBlockedUsersQuery(variables),
+    ...orgsListBlockedUsersQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -13393,7 +13459,7 @@ export const useOrgsUnblockUser = (
     OrgsUnblockUserVariables
   >({
     mutationFn: (variables: OrgsUnblockUserVariables) =>
-      fetchOrgsUnblockUser({ ...fetcherOptions, ...variables }),
+      fetchOrgsUnblockUser(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -13458,13 +13524,13 @@ export const useSuspenseOrgsCheckBlockedUser = <TData = undefined>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     undefined,
     OrgsCheckBlockedUserError,
     TData
   >({
-    ...orgsCheckBlockedUserQuery(variables),
+    ...orgsCheckBlockedUserQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -13477,9 +13543,9 @@ export const useOrgsCheckBlockedUser = <TData = undefined>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<undefined, OrgsCheckBlockedUserError, TData>({
-    ...orgsCheckBlockedUserQuery(variables),
+    ...orgsCheckBlockedUserQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -13540,7 +13606,7 @@ export const useOrgsBlockUser = (
     OrgsBlockUserVariables
   >({
     mutationFn: (variables: OrgsBlockUserVariables) =>
-      fetchOrgsBlockUser({ ...fetcherOptions, ...variables }),
+      fetchOrgsBlockUser(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -13699,13 +13765,13 @@ export const useSuspenseCodeScanningListAlertsForOrg = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     CodeScanningListAlertsForOrgResponse,
     CodeScanningListAlertsForOrgError,
     TData
   >({
-    ...codeScanningListAlertsForOrgQuery(variables),
+    ...codeScanningListAlertsForOrgQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -13733,13 +13799,13 @@ export const useCodeScanningListAlertsForOrg = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     CodeScanningListAlertsForOrgResponse,
     CodeScanningListAlertsForOrgError,
     TData
   >({
-    ...codeScanningListAlertsForOrgQuery(variables),
+    ...codeScanningListAlertsForOrgQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -13860,13 +13926,13 @@ export const useSuspenseCodespacesListInOrganization = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     CodespacesListInOrganizationResponse,
     CodespacesListInOrganizationError,
     TData
   >({
-    ...codespacesListInOrganizationQuery(variables),
+    ...codespacesListInOrganizationQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -13890,13 +13956,13 @@ export const useCodespacesListInOrganization = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     CodespacesListInOrganizationResponse,
     CodespacesListInOrganizationError,
     TData
   >({
-    ...codespacesListInOrganizationQuery(variables),
+    ...codespacesListInOrganizationQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -13993,7 +14059,7 @@ export const useCodespacesSetCodespacesBilling = (
     CodespacesSetCodespacesBillingVariables
   >({
     mutationFn: (variables: CodespacesSetCodespacesBillingVariables) =>
-      fetchCodespacesSetCodespacesBilling({ ...fetcherOptions, ...variables }),
+      fetchCodespacesSetCodespacesBilling(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -14081,10 +14147,9 @@ export const useCodespacesDeleteCodespacesBillingUsers = (
     CodespacesDeleteCodespacesBillingUsersVariables
   >({
     mutationFn: (variables: CodespacesDeleteCodespacesBillingUsersVariables) =>
-      fetchCodespacesDeleteCodespacesBillingUsers({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchCodespacesDeleteCodespacesBillingUsers(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -14172,10 +14237,9 @@ export const useCodespacesSetCodespacesBillingUsers = (
     CodespacesSetCodespacesBillingUsersVariables
   >({
     mutationFn: (variables: CodespacesSetCodespacesBillingUsersVariables) =>
-      fetchCodespacesSetCodespacesBillingUsers({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchCodespacesSetCodespacesBillingUsers(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -14276,13 +14340,13 @@ export const useSuspenseCodespacesListOrgSecrets = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     CodespacesListOrgSecretsResponse,
     CodespacesListOrgSecretsError,
     TData
   >({
-    ...codespacesListOrgSecretsQuery(variables),
+    ...codespacesListOrgSecretsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -14305,13 +14369,13 @@ export const useCodespacesListOrgSecrets = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     CodespacesListOrgSecretsResponse,
     CodespacesListOrgSecretsError,
     TData
   >({
-    ...codespacesListOrgSecretsQuery(variables),
+    ...codespacesListOrgSecretsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -14389,13 +14453,13 @@ export const useSuspenseCodespacesGetOrgPublicKey = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.CodespacesPublicKey,
     CodespacesGetOrgPublicKeyError,
     TData
   >({
-    ...codespacesGetOrgPublicKeyQuery(variables),
+    ...codespacesGetOrgPublicKeyQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -14417,13 +14481,13 @@ export const useCodespacesGetOrgPublicKey = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.CodespacesPublicKey,
     CodespacesGetOrgPublicKeyError,
     TData
   >({
-    ...codespacesGetOrgPublicKeyQuery(variables),
+    ...codespacesGetOrgPublicKeyQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -14490,7 +14554,7 @@ export const useCodespacesDeleteOrgSecret = (
     CodespacesDeleteOrgSecretVariables
   >({
     mutationFn: (variables: CodespacesDeleteOrgSecretVariables) =>
-      fetchCodespacesDeleteOrgSecret({ ...fetcherOptions, ...variables }),
+      fetchCodespacesDeleteOrgSecret(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -14574,13 +14638,13 @@ export const useSuspenseCodespacesGetOrgSecret = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.CodespacesOrgSecret,
     CodespacesGetOrgSecretError,
     TData
   >({
-    ...codespacesGetOrgSecretQuery(variables),
+    ...codespacesGetOrgSecretQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -14601,13 +14665,13 @@ export const useCodespacesGetOrgSecret = <TData = Schemas.CodespacesOrgSecret>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.CodespacesOrgSecret,
     CodespacesGetOrgSecretError,
     TData
   >({
-    ...codespacesGetOrgSecretQuery(variables),
+    ...codespacesGetOrgSecretQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -14850,10 +14914,9 @@ export const useCodespacesCreateOrUpdateOrgSecret = (
     CodespacesCreateOrUpdateOrgSecretVariables
   >({
     mutationFn: (variables: CodespacesCreateOrUpdateOrgSecretVariables) =>
-      fetchCodespacesCreateOrUpdateOrgSecret({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchCodespacesCreateOrUpdateOrgSecret(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -14959,13 +15022,15 @@ export const useSuspenseCodespacesListSelectedReposForOrgSecret = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     CodespacesListSelectedReposForOrgSecretResponse,
     CodespacesListSelectedReposForOrgSecretError,
     TData
   >({
-    ...codespacesListSelectedReposForOrgSecretQuery(variables),
+    ...codespacesListSelectedReposForOrgSecretQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -14987,13 +15052,15 @@ export const useCodespacesListSelectedReposForOrgSecret = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     CodespacesListSelectedReposForOrgSecretResponse,
     CodespacesListSelectedReposForOrgSecretError,
     TData
   >({
-    ...codespacesListSelectedReposForOrgSecretQuery(variables),
+    ...codespacesListSelectedReposForOrgSecretQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -15068,10 +15135,9 @@ export const useCodespacesSetSelectedReposForOrgSecret = (
     CodespacesSetSelectedReposForOrgSecretVariables
   >({
     mutationFn: (variables: CodespacesSetSelectedReposForOrgSecretVariables) =>
-      fetchCodespacesSetSelectedReposForOrgSecret({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchCodespacesSetSelectedReposForOrgSecret(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -15147,10 +15213,9 @@ export const useCodespacesRemoveSelectedRepoFromOrgSecret = (
     mutationFn: (
       variables: CodespacesRemoveSelectedRepoFromOrgSecretVariables
     ) =>
-      fetchCodespacesRemoveSelectedRepoFromOrgSecret({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchCodespacesRemoveSelectedRepoFromOrgSecret(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -15223,10 +15288,9 @@ export const useCodespacesAddSelectedRepoToOrgSecret = (
     CodespacesAddSelectedRepoToOrgSecretVariables
   >({
     mutationFn: (variables: CodespacesAddSelectedRepoToOrgSecretVariables) =>
-      fetchCodespacesAddSelectedRepoToOrgSecret({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchCodespacesAddSelectedRepoToOrgSecret(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -15422,13 +15486,13 @@ export const useSuspenseDependabotListAlertsForOrg = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     DependabotListAlertsForOrgResponse,
     DependabotListAlertsForOrgError,
     TData
   >({
-    ...dependabotListAlertsForOrgQuery(variables),
+    ...dependabotListAlertsForOrgQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -15456,13 +15520,13 @@ export const useDependabotListAlertsForOrg = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     DependabotListAlertsForOrgResponse,
     DependabotListAlertsForOrgError,
     TData
   >({
-    ...dependabotListAlertsForOrgQuery(variables),
+    ...dependabotListAlertsForOrgQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -15561,13 +15625,13 @@ export const useSuspenseDependabotListOrgSecrets = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     DependabotListOrgSecretsResponse,
     DependabotListOrgSecretsError,
     TData
   >({
-    ...dependabotListOrgSecretsQuery(variables),
+    ...dependabotListOrgSecretsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -15589,13 +15653,13 @@ export const useDependabotListOrgSecrets = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     DependabotListOrgSecretsResponse,
     DependabotListOrgSecretsError,
     TData
   >({
-    ...dependabotListOrgSecretsQuery(variables),
+    ...dependabotListOrgSecretsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -15673,13 +15737,13 @@ export const useSuspenseDependabotGetOrgPublicKey = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.DependabotPublicKey,
     DependabotGetOrgPublicKeyError,
     TData
   >({
-    ...dependabotGetOrgPublicKeyQuery(variables),
+    ...dependabotGetOrgPublicKeyQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -15701,13 +15765,13 @@ export const useDependabotGetOrgPublicKey = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.DependabotPublicKey,
     DependabotGetOrgPublicKeyError,
     TData
   >({
-    ...dependabotGetOrgPublicKeyQuery(variables),
+    ...dependabotGetOrgPublicKeyQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -15771,7 +15835,7 @@ export const useDependabotDeleteOrgSecret = (
     DependabotDeleteOrgSecretVariables
   >({
     mutationFn: (variables: DependabotDeleteOrgSecretVariables) =>
-      fetchDependabotDeleteOrgSecret({ ...fetcherOptions, ...variables }),
+      fetchDependabotDeleteOrgSecret(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -15852,13 +15916,13 @@ export const useSuspenseDependabotGetOrgSecret = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.OrganizationDependabotSecret,
     DependabotGetOrgSecretError,
     TData
   >({
-    ...dependabotGetOrgSecretQuery(variables),
+    ...dependabotGetOrgSecretQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -15880,13 +15944,13 @@ export const useDependabotGetOrgSecret = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.OrganizationDependabotSecret,
     DependabotGetOrgSecretError,
     TData
   >({
-    ...dependabotGetOrgSecretQuery(variables),
+    ...dependabotGetOrgSecretQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -16123,10 +16187,9 @@ export const useDependabotCreateOrUpdateOrgSecret = (
     DependabotCreateOrUpdateOrgSecretVariables
   >({
     mutationFn: (variables: DependabotCreateOrUpdateOrgSecretVariables) =>
-      fetchDependabotCreateOrUpdateOrgSecret({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchDependabotCreateOrUpdateOrgSecret(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -16229,13 +16292,15 @@ export const useSuspenseDependabotListSelectedReposForOrgSecret = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     DependabotListSelectedReposForOrgSecretResponse,
     DependabotListSelectedReposForOrgSecretError,
     TData
   >({
-    ...dependabotListSelectedReposForOrgSecretQuery(variables),
+    ...dependabotListSelectedReposForOrgSecretQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -16257,13 +16322,15 @@ export const useDependabotListSelectedReposForOrgSecret = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     DependabotListSelectedReposForOrgSecretResponse,
     DependabotListSelectedReposForOrgSecretError,
     TData
   >({
-    ...dependabotListSelectedReposForOrgSecretQuery(variables),
+    ...dependabotListSelectedReposForOrgSecretQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -16336,10 +16403,9 @@ export const useDependabotSetSelectedReposForOrgSecret = (
     DependabotSetSelectedReposForOrgSecretVariables
   >({
     mutationFn: (variables: DependabotSetSelectedReposForOrgSecretVariables) =>
-      fetchDependabotSetSelectedReposForOrgSecret({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchDependabotSetSelectedReposForOrgSecret(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -16406,10 +16472,9 @@ export const useDependabotRemoveSelectedRepoFromOrgSecret = (
     mutationFn: (
       variables: DependabotRemoveSelectedRepoFromOrgSecretVariables
     ) =>
-      fetchDependabotRemoveSelectedRepoFromOrgSecret({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchDependabotRemoveSelectedRepoFromOrgSecret(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -16474,10 +16539,9 @@ export const useDependabotAddSelectedRepoToOrgSecret = (
     DependabotAddSelectedRepoToOrgSecretVariables
   >({
     mutationFn: (variables: DependabotAddSelectedRepoToOrgSecretVariables) =>
-      fetchDependabotAddSelectedRepoToOrgSecret({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchDependabotAddSelectedRepoToOrgSecret(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -16558,13 +16622,13 @@ export const useSuspenseActivityListPublicOrgEvents = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     ActivityListPublicOrgEventsResponse,
     ActivityListPublicOrgEventsError,
     TData
   >({
-    ...activityListPublicOrgEventsQuery(variables),
+    ...activityListPublicOrgEventsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -16583,13 +16647,13 @@ export const useActivityListPublicOrgEvents = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     ActivityListPublicOrgEventsResponse,
     ActivityListPublicOrgEventsError,
     TData
   >({
-    ...activityListPublicOrgEventsQuery(variables),
+    ...activityListPublicOrgEventsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -16689,13 +16753,13 @@ export const useSuspenseOrgsListFailedInvitations = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     OrgsListFailedInvitationsResponse,
     OrgsListFailedInvitationsError,
     TData
   >({
-    ...orgsListFailedInvitationsQuery(variables),
+    ...orgsListFailedInvitationsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -16717,13 +16781,13 @@ export const useOrgsListFailedInvitations = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     OrgsListFailedInvitationsResponse,
     OrgsListFailedInvitationsError,
     TData
   >({
-    ...orgsListFailedInvitationsQuery(variables),
+    ...orgsListFailedInvitationsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -16806,13 +16870,13 @@ export const useSuspenseOrgsListWebhooks = <TData = OrgsListWebhooksResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     OrgsListWebhooksResponse,
     OrgsListWebhooksError,
     TData
   >({
-    ...orgsListWebhooksQuery(variables),
+    ...orgsListWebhooksQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -16829,13 +16893,13 @@ export const useOrgsListWebhooks = <TData = OrgsListWebhooksResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     OrgsListWebhooksResponse,
     OrgsListWebhooksError,
     TData
   >({
-    ...orgsListWebhooksQuery(variables),
+    ...orgsListWebhooksQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -16936,7 +17000,7 @@ export const useOrgsCreateWebhook = (
     OrgsCreateWebhookVariables
   >({
     mutationFn: (variables: OrgsCreateWebhookVariables) =>
-      fetchOrgsCreateWebhook({ ...fetcherOptions, ...variables }),
+      fetchOrgsCreateWebhook(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -16996,7 +17060,7 @@ export const useOrgsDeleteWebhook = (
     OrgsDeleteWebhookVariables
   >({
     mutationFn: (variables: OrgsDeleteWebhookVariables) =>
-      fetchOrgsDeleteWebhook({ ...fetcherOptions, ...variables }),
+      fetchOrgsDeleteWebhook(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -17065,13 +17129,13 @@ export const useSuspenseOrgsGetWebhook = <TData = Schemas.OrgHook>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.OrgHook,
     OrgsGetWebhookError,
     TData
   >({
-    ...orgsGetWebhookQuery(variables),
+    ...orgsGetWebhookQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -17087,9 +17151,9 @@ export const useOrgsGetWebhook = <TData = Schemas.OrgHook>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.OrgHook, OrgsGetWebhookError, TData>({
-    ...orgsGetWebhookQuery(variables),
+    ...orgsGetWebhookQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -17191,7 +17255,7 @@ export const useOrgsUpdateWebhook = (
     OrgsUpdateWebhookVariables
   >({
     mutationFn: (variables: OrgsUpdateWebhookVariables) =>
-      fetchOrgsUpdateWebhook({ ...fetcherOptions, ...variables }),
+      fetchOrgsUpdateWebhook(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -17278,13 +17342,13 @@ export const useSuspenseOrgsGetWebhookConfigForOrg = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.WebhookConfig,
     OrgsGetWebhookConfigForOrgError,
     TData
   >({
-    ...orgsGetWebhookConfigForOrgQuery(variables),
+    ...orgsGetWebhookConfigForOrgQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -17306,13 +17370,13 @@ export const useOrgsGetWebhookConfigForOrg = <TData = Schemas.WebhookConfig>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.WebhookConfig,
     OrgsGetWebhookConfigForOrgError,
     TData
   >({
-    ...orgsGetWebhookConfigForOrgQuery(variables),
+    ...orgsGetWebhookConfigForOrgQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -17389,7 +17453,7 @@ export const useOrgsUpdateWebhookConfigForOrg = (
     OrgsUpdateWebhookConfigForOrgVariables
   >({
     mutationFn: (variables: OrgsUpdateWebhookConfigForOrgVariables) =>
-      fetchOrgsUpdateWebhookConfigForOrg({ ...fetcherOptions, ...variables }),
+      fetchOrgsUpdateWebhookConfigForOrg(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -17496,13 +17560,13 @@ export const useSuspenseOrgsListWebhookDeliveries = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     OrgsListWebhookDeliveriesResponse,
     OrgsListWebhookDeliveriesError,
     TData
   >({
-    ...orgsListWebhookDeliveriesQuery(variables),
+    ...orgsListWebhookDeliveriesQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -17524,13 +17588,13 @@ export const useOrgsListWebhookDeliveries = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     OrgsListWebhookDeliveriesResponse,
     OrgsListWebhookDeliveriesError,
     TData
   >({
-    ...orgsListWebhookDeliveriesQuery(variables),
+    ...orgsListWebhookDeliveriesQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -17620,13 +17684,13 @@ export const useSuspenseOrgsGetWebhookDelivery = <TData = Schemas.HookDelivery>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.HookDelivery,
     OrgsGetWebhookDeliveryError,
     TData
   >({
-    ...orgsGetWebhookDeliveryQuery(variables),
+    ...orgsGetWebhookDeliveryQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -17646,13 +17710,13 @@ export const useOrgsGetWebhookDelivery = <TData = Schemas.HookDelivery>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.HookDelivery,
     OrgsGetWebhookDeliveryError,
     TData
   >({
-    ...orgsGetWebhookDeliveryQuery(variables),
+    ...orgsGetWebhookDeliveryQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -17726,7 +17790,7 @@ export const useOrgsRedeliverWebhookDelivery = (
     OrgsRedeliverWebhookDeliveryVariables
   >({
     mutationFn: (variables: OrgsRedeliverWebhookDeliveryVariables) =>
-      fetchOrgsRedeliverWebhookDelivery({ ...fetcherOptions, ...variables }),
+      fetchOrgsRedeliverWebhookDelivery(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -17792,7 +17856,7 @@ export const useOrgsPingWebhook = (
     OrgsPingWebhookVariables
   >({
     mutationFn: (variables: OrgsPingWebhookVariables) =>
-      fetchOrgsPingWebhook({ ...fetcherOptions, ...variables }),
+      fetchOrgsPingWebhook(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -17868,13 +17932,13 @@ export const useSuspenseAppsGetOrgInstallation = <TData = Schemas.Installation>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.Installation,
     AppsGetOrgInstallationError,
     TData
   >({
-    ...appsGetOrgInstallationQuery(variables),
+    ...appsGetOrgInstallationQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -17896,13 +17960,13 @@ export const useAppsGetOrgInstallation = <TData = Schemas.Installation>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.Installation,
     AppsGetOrgInstallationError,
     TData
   >({
-    ...appsGetOrgInstallationQuery(variables),
+    ...appsGetOrgInstallationQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -17996,13 +18060,13 @@ export const useSuspenseOrgsListAppInstallations = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     OrgsListAppInstallationsResponse,
     OrgsListAppInstallationsError,
     TData
   >({
-    ...orgsListAppInstallationsQuery(variables),
+    ...orgsListAppInstallationsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -18024,13 +18088,13 @@ export const useOrgsListAppInstallations = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     OrgsListAppInstallationsResponse,
     OrgsListAppInstallationsError,
     TData
   >({
-    ...orgsListAppInstallationsQuery(variables),
+    ...orgsListAppInstallationsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -18091,10 +18155,9 @@ export const useInteractionsRemoveRestrictionsForOrg = (
     InteractionsRemoveRestrictionsForOrgVariables
   >({
     mutationFn: (variables: InteractionsRemoveRestrictionsForOrgVariables) =>
-      fetchInteractionsRemoveRestrictionsForOrg({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchInteractionsRemoveRestrictionsForOrg(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -18172,13 +18235,15 @@ export const useSuspenseInteractionsGetRestrictionsForOrg = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.InteractionLimitResponse | {},
     InteractionsGetRestrictionsForOrgError,
     TData
   >({
-    ...interactionsGetRestrictionsForOrgQuery(variables),
+    ...interactionsGetRestrictionsForOrgQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -18200,13 +18265,15 @@ export const useInteractionsGetRestrictionsForOrg = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.InteractionLimitResponse | {},
     InteractionsGetRestrictionsForOrgError,
     TData
   >({
-    ...interactionsGetRestrictionsForOrgQuery(variables),
+    ...interactionsGetRestrictionsForOrgQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -18270,10 +18337,9 @@ export const useInteractionsSetRestrictionsForOrg = (
     InteractionsSetRestrictionsForOrgVariables
   >({
     mutationFn: (variables: InteractionsSetRestrictionsForOrgVariables) =>
-      fetchInteractionsSetRestrictionsForOrg({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchInteractionsSetRestrictionsForOrg(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -18384,13 +18450,13 @@ export const useSuspenseOrgsListPendingInvitations = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     OrgsListPendingInvitationsResponse,
     OrgsListPendingInvitationsError,
     TData
   >({
-    ...orgsListPendingInvitationsQuery(variables),
+    ...orgsListPendingInvitationsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -18412,13 +18478,13 @@ export const useOrgsListPendingInvitations = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     OrgsListPendingInvitationsResponse,
     OrgsListPendingInvitationsError,
     TData
   >({
-    ...orgsListPendingInvitationsQuery(variables),
+    ...orgsListPendingInvitationsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -18511,7 +18577,7 @@ export const useOrgsCreateInvitation = (
     OrgsCreateInvitationVariables
   >({
     mutationFn: (variables: OrgsCreateInvitationVariables) =>
-      fetchOrgsCreateInvitation({ ...fetcherOptions, ...variables }),
+      fetchOrgsCreateInvitation(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -18587,7 +18653,7 @@ export const useOrgsCancelInvitation = (
     OrgsCancelInvitationVariables
   >({
     mutationFn: (variables: OrgsCancelInvitationVariables) =>
-      fetchOrgsCancelInvitation({ ...fetcherOptions, ...variables }),
+      fetchOrgsCancelInvitation(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -18689,13 +18755,13 @@ export const useSuspenseOrgsListInvitationTeams = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     OrgsListInvitationTeamsResponse,
     OrgsListInvitationTeamsError,
     TData
   >({
-    ...orgsListInvitationTeamsQuery(variables),
+    ...orgsListInvitationTeamsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -18717,13 +18783,13 @@ export const useOrgsListInvitationTeams = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     OrgsListInvitationTeamsResponse,
     OrgsListInvitationTeamsError,
     TData
   >({
-    ...orgsListInvitationTeamsQuery(variables),
+    ...orgsListInvitationTeamsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -18870,13 +18936,13 @@ export const useSuspenseIssuesListForOrg = <TData = IssuesListForOrgResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     IssuesListForOrgResponse,
     IssuesListForOrgError,
     TData
   >({
-    ...issuesListForOrgQuery(variables),
+    ...issuesListForOrgQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -18901,13 +18967,13 @@ export const useIssuesListForOrg = <TData = IssuesListForOrgResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     IssuesListForOrgResponse,
     IssuesListForOrgError,
     TData
   >({
-    ...issuesListForOrgQuery(variables),
+    ...issuesListForOrgQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -19011,13 +19077,13 @@ export const useSuspenseOrgsListMembers = <TData = OrgsListMembersResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     OrgsListMembersResponse,
     OrgsListMembersError,
     TData
   >({
-    ...orgsListMembersQuery(variables),
+    ...orgsListMembersQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -19037,13 +19103,13 @@ export const useOrgsListMembers = <TData = OrgsListMembersResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     OrgsListMembersResponse,
     OrgsListMembersError,
     TData
   >({
-    ...orgsListMembersQuery(variables),
+    ...orgsListMembersQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -19110,7 +19176,7 @@ export const useOrgsRemoveMember = (
     OrgsRemoveMemberVariables
   >({
     mutationFn: (variables: OrgsRemoveMemberVariables) =>
-      fetchOrgsRemoveMember({ ...fetcherOptions, ...variables }),
+      fetchOrgsRemoveMember(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -19185,13 +19251,13 @@ export const useSuspenseOrgsCheckMembershipForUser = <TData = undefined>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     undefined,
     OrgsCheckMembershipForUserError,
     TData
   >({
-    ...orgsCheckMembershipForUserQuery(variables),
+    ...orgsCheckMembershipForUserQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -19211,10 +19277,10 @@ export const useOrgsCheckMembershipForUser = <TData = undefined>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<undefined, OrgsCheckMembershipForUserError, TData>(
     {
-      ...orgsCheckMembershipForUserQuery(variables),
+      ...orgsCheckMembershipForUserQuery(deepMerge(fetcherOptions, variables)),
       ...options,
       ...queryOptions,
     }
@@ -19345,13 +19411,15 @@ export const useSuspenseCodespacesGetCodespacesForUserInOrg = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     CodespacesGetCodespacesForUserInOrgResponse,
     CodespacesGetCodespacesForUserInOrgError,
     TData
   >({
-    ...codespacesGetCodespacesForUserInOrgQuery(variables),
+    ...codespacesGetCodespacesForUserInOrgQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -19375,13 +19443,15 @@ export const useCodespacesGetCodespacesForUserInOrg = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     CodespacesGetCodespacesForUserInOrgResponse,
     CodespacesGetCodespacesForUserInOrgError,
     TData
   >({
-    ...codespacesGetCodespacesForUserInOrgQuery(variables),
+    ...codespacesGetCodespacesForUserInOrgQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -19474,10 +19544,9 @@ export const useCodespacesDeleteFromOrganization = (
     CodespacesDeleteFromOrganizationVariables
   >({
     mutationFn: (variables: CodespacesDeleteFromOrganizationVariables) =>
-      fetchCodespacesDeleteFromOrganization({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchCodespacesDeleteFromOrganization(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -19569,7 +19638,7 @@ export const useCodespacesStopInOrganization = (
     CodespacesStopInOrganizationVariables
   >({
     mutationFn: (variables: CodespacesStopInOrganizationVariables) =>
-      fetchCodespacesStopInOrganization({ ...fetcherOptions, ...variables }),
+      fetchCodespacesStopInOrganization(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -19645,7 +19714,7 @@ export const useOrgsRemoveMembershipForUser = (
     OrgsRemoveMembershipForUserVariables
   >({
     mutationFn: (variables: OrgsRemoveMembershipForUserVariables) =>
-      fetchOrgsRemoveMembershipForUser({ ...fetcherOptions, ...variables }),
+      fetchOrgsRemoveMembershipForUser(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -19735,13 +19804,13 @@ export const useSuspenseOrgsGetMembershipForUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.OrgMembership,
     OrgsGetMembershipForUserError,
     TData
   >({
-    ...orgsGetMembershipForUserQuery(variables),
+    ...orgsGetMembershipForUserQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -19761,13 +19830,13 @@ export const useOrgsGetMembershipForUser = <TData = Schemas.OrgMembership>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.OrgMembership,
     OrgsGetMembershipForUserError,
     TData
   >({
-    ...orgsGetMembershipForUserQuery(variables),
+    ...orgsGetMembershipForUserQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -19868,7 +19937,7 @@ export const useOrgsSetMembershipForUser = (
     OrgsSetMembershipForUserVariables
   >({
     mutationFn: (variables: OrgsSetMembershipForUserVariables) =>
-      fetchOrgsSetMembershipForUser({ ...fetcherOptions, ...variables }),
+      fetchOrgsSetMembershipForUser(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -19968,13 +20037,13 @@ export const useSuspenseMigrationsListForOrg = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     MigrationsListForOrgResponse,
     MigrationsListForOrgError,
     TData
   >({
-    ...migrationsListForOrgQuery(variables),
+    ...migrationsListForOrgQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -19996,13 +20065,13 @@ export const useMigrationsListForOrg = <TData = MigrationsListForOrgResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     MigrationsListForOrgResponse,
     MigrationsListForOrgError,
     TData
   >({
-    ...migrationsListForOrgQuery(variables),
+    ...migrationsListForOrgQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -20125,7 +20194,7 @@ export const useMigrationsStartForOrg = (
     MigrationsStartForOrgVariables
   >({
     mutationFn: (variables: MigrationsStartForOrgVariables) =>
-      fetchMigrationsStartForOrg({ ...fetcherOptions, ...variables }),
+      fetchMigrationsStartForOrg(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -20232,13 +20301,13 @@ export const useSuspenseMigrationsGetStatusForOrg = <TData = Schemas.Migration>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.Migration,
     MigrationsGetStatusForOrgError,
     TData
   >({
-    ...migrationsGetStatusForOrgQuery(variables),
+    ...migrationsGetStatusForOrgQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -20265,13 +20334,13 @@ export const useMigrationsGetStatusForOrg = <TData = Schemas.Migration>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.Migration,
     MigrationsGetStatusForOrgError,
     TData
   >({
-    ...migrationsGetStatusForOrgQuery(variables),
+    ...migrationsGetStatusForOrgQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -20338,7 +20407,7 @@ export const useMigrationsDeleteArchiveForOrg = (
     MigrationsDeleteArchiveForOrgVariables
   >({
     mutationFn: (variables: MigrationsDeleteArchiveForOrgVariables) =>
-      fetchMigrationsDeleteArchiveForOrg({ ...fetcherOptions, ...variables }),
+      fetchMigrationsDeleteArchiveForOrg(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -20416,13 +20485,15 @@ export const useSuspenseMigrationsDownloadArchiveForOrg = <TData = undefined>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     undefined,
     MigrationsDownloadArchiveForOrgError,
     TData
   >({
-    ...migrationsDownloadArchiveForOrgQuery(variables),
+    ...migrationsDownloadArchiveForOrgQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -20442,13 +20513,15 @@ export const useMigrationsDownloadArchiveForOrg = <TData = undefined>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     undefined,
     MigrationsDownloadArchiveForOrgError,
     TData
   >({
-    ...migrationsDownloadArchiveForOrgQuery(variables),
+    ...migrationsDownloadArchiveForOrgQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -20519,7 +20592,7 @@ export const useMigrationsUnlockRepoForOrg = (
     MigrationsUnlockRepoForOrgVariables
   >({
     mutationFn: (variables: MigrationsUnlockRepoForOrgVariables) =>
-      fetchMigrationsUnlockRepoForOrg({ ...fetcherOptions, ...variables }),
+      fetchMigrationsUnlockRepoForOrg(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -20621,13 +20694,13 @@ export const useSuspenseMigrationsListReposForOrg = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     MigrationsListReposForOrgResponse,
     MigrationsListReposForOrgError,
     TData
   >({
-    ...migrationsListReposForOrgQuery(variables),
+    ...migrationsListReposForOrgQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -20649,13 +20722,13 @@ export const useMigrationsListReposForOrg = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     MigrationsListReposForOrgResponse,
     MigrationsListReposForOrgError,
     TData
   >({
-    ...migrationsListReposForOrgQuery(variables),
+    ...migrationsListReposForOrgQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -20757,13 +20830,13 @@ export const useSuspenseOrgsListOutsideCollaborators = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     OrgsListOutsideCollaboratorsResponse,
     OrgsListOutsideCollaboratorsError,
     TData
   >({
-    ...orgsListOutsideCollaboratorsQuery(variables),
+    ...orgsListOutsideCollaboratorsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -20785,13 +20858,13 @@ export const useOrgsListOutsideCollaborators = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     OrgsListOutsideCollaboratorsResponse,
     OrgsListOutsideCollaboratorsError,
     TData
   >({
-    ...orgsListOutsideCollaboratorsQuery(variables),
+    ...orgsListOutsideCollaboratorsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -20861,7 +20934,7 @@ export const useOrgsRemoveOutsideCollaborator = (
     OrgsRemoveOutsideCollaboratorVariables
   >({
     mutationFn: (variables: OrgsRemoveOutsideCollaboratorVariables) =>
-      fetchOrgsRemoveOutsideCollaborator({ ...fetcherOptions, ...variables }),
+      fetchOrgsRemoveOutsideCollaborator(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -20937,10 +21010,9 @@ export const useOrgsConvertMemberToOutsideCollaborator = (
     OrgsConvertMemberToOutsideCollaboratorVariables
   >({
     mutationFn: (variables: OrgsConvertMemberToOutsideCollaboratorVariables) =>
-      fetchOrgsConvertMemberToOutsideCollaborator({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchOrgsConvertMemberToOutsideCollaborator(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -21056,13 +21128,15 @@ export const useSuspensePackagesListPackagesForOrganization = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     PackagesListPackagesForOrganizationResponse,
     PackagesListPackagesForOrganizationError,
     TData
   >({
-    ...packagesListPackagesForOrganizationQuery(variables),
+    ...packagesListPackagesForOrganizationQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -21086,13 +21160,15 @@ export const usePackagesListPackagesForOrganization = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     PackagesListPackagesForOrganizationResponse,
     PackagesListPackagesForOrganizationError,
     TData
   >({
-    ...packagesListPackagesForOrganizationQuery(variables),
+    ...packagesListPackagesForOrganizationQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -21181,7 +21257,7 @@ export const usePackagesDeletePackageForOrg = (
     PackagesDeletePackageForOrgVariables
   >({
     mutationFn: (variables: PackagesDeletePackageForOrgVariables) =>
-      fetchPackagesDeletePackageForOrg({ ...fetcherOptions, ...variables }),
+      fetchPackagesDeletePackageForOrg(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -21269,13 +21345,15 @@ export const useSuspensePackagesGetPackageForOrganization = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.Package,
     PackagesGetPackageForOrganizationError,
     TData
   >({
-    ...packagesGetPackageForOrganizationQuery(variables),
+    ...packagesGetPackageForOrganizationQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -21297,13 +21375,15 @@ export const usePackagesGetPackageForOrganization = <TData = Schemas.Package>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.Package,
     PackagesGetPackageForOrganizationError,
     TData
   >({
-    ...packagesGetPackageForOrganizationQuery(variables),
+    ...packagesGetPackageForOrganizationQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -21408,7 +21488,7 @@ export const usePackagesRestorePackageForOrg = (
     PackagesRestorePackageForOrgVariables
   >({
     mutationFn: (variables: PackagesRestorePackageForOrgVariables) =>
-      fetchPackagesRestorePackageForOrg({ ...fetcherOptions, ...variables }),
+      fetchPackagesRestorePackageForOrg(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -21538,13 +21618,15 @@ export const useSuspensePackagesGetAllPackageVersionsForPackageOwnedByOrg = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     PackagesGetAllPackageVersionsForPackageOwnedByOrgResponse,
     PackagesGetAllPackageVersionsForPackageOwnedByOrgError,
     TData
   >({
-    ...packagesGetAllPackageVersionsForPackageOwnedByOrgQuery(variables),
+    ...packagesGetAllPackageVersionsForPackageOwnedByOrgQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -21568,13 +21650,15 @@ export const usePackagesGetAllPackageVersionsForPackageOwnedByOrg = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     PackagesGetAllPackageVersionsForPackageOwnedByOrgResponse,
     PackagesGetAllPackageVersionsForPackageOwnedByOrgError,
     TData
   >({
-    ...packagesGetAllPackageVersionsForPackageOwnedByOrgQuery(variables),
+    ...packagesGetAllPackageVersionsForPackageOwnedByOrgQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -21667,10 +21751,9 @@ export const usePackagesDeletePackageVersionForOrg = (
     PackagesDeletePackageVersionForOrgVariables
   >({
     mutationFn: (variables: PackagesDeletePackageVersionForOrgVariables) =>
-      fetchPackagesDeletePackageVersionForOrg({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchPackagesDeletePackageVersionForOrg(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -21766,13 +21849,15 @@ export const useSuspensePackagesGetPackageVersionForOrganization = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.PackageVersion,
     PackagesGetPackageVersionForOrganizationError,
     TData
   >({
-    ...packagesGetPackageVersionForOrganizationQuery(variables),
+    ...packagesGetPackageVersionForOrganizationQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -21796,13 +21881,15 @@ export const usePackagesGetPackageVersionForOrganization = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.PackageVersion,
     PackagesGetPackageVersionForOrganizationError,
     TData
   >({
-    ...packagesGetPackageVersionForOrganizationQuery(variables),
+    ...packagesGetPackageVersionForOrganizationQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -21903,10 +21990,9 @@ export const usePackagesRestorePackageVersionForOrg = (
     PackagesRestorePackageVersionForOrgVariables
   >({
     mutationFn: (variables: PackagesRestorePackageVersionForOrgVariables) =>
-      fetchPackagesRestorePackageVersionForOrg({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchPackagesRestorePackageVersionForOrg(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -22005,13 +22091,13 @@ export const useSuspenseProjectsListForOrg = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     ProjectsListForOrgResponse,
     ProjectsListForOrgError,
     TData
   >({
-    ...projectsListForOrgQuery(variables),
+    ...projectsListForOrgQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -22031,13 +22117,13 @@ export const useProjectsListForOrg = <TData = ProjectsListForOrgResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     ProjectsListForOrgResponse,
     ProjectsListForOrgError,
     TData
   >({
-    ...projectsListForOrgQuery(variables),
+    ...projectsListForOrgQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -22125,7 +22211,7 @@ export const useProjectsCreateForOrg = (
     ProjectsCreateForOrgVariables
   >({
     mutationFn: (variables: ProjectsCreateForOrgVariables) =>
-      fetchProjectsCreateForOrg({ ...fetcherOptions, ...variables }),
+      fetchProjectsCreateForOrg(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -22215,13 +22301,13 @@ export const useSuspenseOrgsListPublicMembers = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     OrgsListPublicMembersResponse,
     OrgsListPublicMembersError,
     TData
   >({
-    ...orgsListPublicMembersQuery(variables),
+    ...orgsListPublicMembersQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -22241,13 +22327,13 @@ export const useOrgsListPublicMembers = <TData = OrgsListPublicMembersResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     OrgsListPublicMembersResponse,
     OrgsListPublicMembersError,
     TData
   >({
-    ...orgsListPublicMembersQuery(variables),
+    ...orgsListPublicMembersQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -22308,10 +22394,9 @@ export const useOrgsRemovePublicMembershipForAuthenticatedUser = (
     mutationFn: (
       variables: OrgsRemovePublicMembershipForAuthenticatedUserVariables
     ) =>
-      fetchOrgsRemovePublicMembershipForAuthenticatedUser({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchOrgsRemovePublicMembershipForAuthenticatedUser(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -22378,13 +22463,15 @@ export const useSuspenseOrgsCheckPublicMembershipForUser = <TData = undefined>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     undefined,
     OrgsCheckPublicMembershipForUserError,
     TData
   >({
-    ...orgsCheckPublicMembershipForUserQuery(variables),
+    ...orgsCheckPublicMembershipForUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -22401,13 +22488,15 @@ export const useOrgsCheckPublicMembershipForUser = <TData = undefined>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     undefined,
     OrgsCheckPublicMembershipForUserError,
     TData
   >({
-    ...orgsCheckPublicMembershipForUserQuery(variables),
+    ...orgsCheckPublicMembershipForUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -22481,10 +22570,9 @@ export const useOrgsSetPublicMembershipForAuthenticatedUser = (
     mutationFn: (
       variables: OrgsSetPublicMembershipForAuthenticatedUserVariables
     ) =>
-      fetchOrgsSetPublicMembershipForAuthenticatedUser({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchOrgsSetPublicMembershipForAuthenticatedUser(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -22592,13 +22680,13 @@ export const useSuspenseReposListForOrg = <TData = ReposListForOrgResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     ReposListForOrgResponse,
     ReposListForOrgError,
     TData
   >({
-    ...reposListForOrgQuery(variables),
+    ...reposListForOrgQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -22620,13 +22708,13 @@ export const useReposListForOrg = <TData = ReposListForOrgResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     ReposListForOrgResponse,
     ReposListForOrgError,
     TData
   >({
-    ...reposListForOrgQuery(variables),
+    ...reposListForOrgQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -22846,7 +22934,7 @@ export const useReposCreateInOrg = (
     ReposCreateInOrgVariables
   >({
     mutationFn: (variables: ReposCreateInOrgVariables) =>
-      fetchReposCreateInOrg({ ...fetcherOptions, ...variables }),
+      fetchReposCreateInOrg(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -22997,13 +23085,15 @@ export const useSuspenseSecretScanningListAlertsForOrg = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     SecretScanningListAlertsForOrgResponse,
     SecretScanningListAlertsForOrgError,
     TData
   >({
-    ...secretScanningListAlertsForOrgQuery(variables),
+    ...secretScanningListAlertsForOrgQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -23029,13 +23119,15 @@ export const useSecretScanningListAlertsForOrg = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     SecretScanningListAlertsForOrgResponse,
     SecretScanningListAlertsForOrgError,
     TData
   >({
-    ...secretScanningListAlertsForOrgQuery(variables),
+    ...secretScanningListAlertsForOrgQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -23127,13 +23219,13 @@ export const useSuspenseOrgsListSecurityManagerTeams = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     OrgsListSecurityManagerTeamsResponse,
     OrgsListSecurityManagerTeamsError,
     TData
   >({
-    ...orgsListSecurityManagerTeamsQuery(variables),
+    ...orgsListSecurityManagerTeamsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -23159,13 +23251,13 @@ export const useOrgsListSecurityManagerTeams = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     OrgsListSecurityManagerTeamsResponse,
     OrgsListSecurityManagerTeamsError,
     TData
   >({
-    ...orgsListSecurityManagerTeamsQuery(variables),
+    ...orgsListSecurityManagerTeamsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -23238,7 +23330,7 @@ export const useOrgsRemoveSecurityManagerTeam = (
     OrgsRemoveSecurityManagerTeamVariables
   >({
     mutationFn: (variables: OrgsRemoveSecurityManagerTeamVariables) =>
-      fetchOrgsRemoveSecurityManagerTeam({ ...fetcherOptions, ...variables }),
+      fetchOrgsRemoveSecurityManagerTeam(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -23309,7 +23401,7 @@ export const useOrgsAddSecurityManagerTeam = (
     OrgsAddSecurityManagerTeamVariables
   >({
     mutationFn: (variables: OrgsAddSecurityManagerTeamVariables) =>
-      fetchOrgsAddSecurityManagerTeam({ ...fetcherOptions, ...variables }),
+      fetchOrgsAddSecurityManagerTeam(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -23399,13 +23491,15 @@ export const useSuspenseBillingGetGithubActionsBillingOrg = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.ActionsBillingUsage,
     BillingGetGithubActionsBillingOrgError,
     TData
   >({
-    ...billingGetGithubActionsBillingOrgQuery(variables),
+    ...billingGetGithubActionsBillingOrgQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -23431,13 +23525,15 @@ export const useBillingGetGithubActionsBillingOrg = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.ActionsBillingUsage,
     BillingGetGithubActionsBillingOrgError,
     TData
   >({
-    ...billingGetGithubActionsBillingOrgQuery(variables),
+    ...billingGetGithubActionsBillingOrgQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -23528,13 +23624,15 @@ export const useSuspenseBillingGetGithubPackagesBillingOrg = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.PackagesBillingUsage,
     BillingGetGithubPackagesBillingOrgError,
     TData
   >({
-    ...billingGetGithubPackagesBillingOrgQuery(variables),
+    ...billingGetGithubPackagesBillingOrgQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -23560,13 +23658,15 @@ export const useBillingGetGithubPackagesBillingOrg = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.PackagesBillingUsage,
     BillingGetGithubPackagesBillingOrgError,
     TData
   >({
-    ...billingGetGithubPackagesBillingOrgQuery(variables),
+    ...billingGetGithubPackagesBillingOrgQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -23657,13 +23757,15 @@ export const useSuspenseBillingGetSharedStorageBillingOrg = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.CombinedBillingUsage,
     BillingGetSharedStorageBillingOrgError,
     TData
   >({
-    ...billingGetSharedStorageBillingOrgQuery(variables),
+    ...billingGetSharedStorageBillingOrgQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -23689,13 +23791,15 @@ export const useBillingGetSharedStorageBillingOrg = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.CombinedBillingUsage,
     BillingGetSharedStorageBillingOrgError,
     TData
   >({
-    ...billingGetSharedStorageBillingOrgQuery(variables),
+    ...billingGetSharedStorageBillingOrgQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -23779,9 +23883,9 @@ export const useSuspenseTeamsList = <TData = TeamsListResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<TeamsListResponse, TeamsListError, TData>({
-    ...teamsListQuery(variables),
+    ...teamsListQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -23797,9 +23901,9 @@ export const useTeamsList = <TData = TeamsListResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<TeamsListResponse, TeamsListError, TData>({
-    ...teamsListQuery(variables),
+    ...teamsListQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -23908,7 +24012,7 @@ export const useTeamsCreate = (
     TeamsCreateVariables
   >({
     mutationFn: (variables: TeamsCreateVariables) =>
-      fetchTeamsCreate({ ...fetcherOptions, ...variables }),
+      fetchTeamsCreate(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -23979,7 +24083,7 @@ export const useTeamsDeleteInOrg = (
     TeamsDeleteInOrgVariables
   >({
     mutationFn: (variables: TeamsDeleteInOrgVariables) =>
-      fetchTeamsDeleteInOrg({ ...fetcherOptions, ...variables }),
+      fetchTeamsDeleteInOrg(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -24059,13 +24163,13 @@ export const useSuspenseTeamsGetByName = <TData = Schemas.TeamFull>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.TeamFull,
     TeamsGetByNameError,
     TData
   >({
-    ...teamsGetByNameQuery(variables),
+    ...teamsGetByNameQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -24083,9 +24187,9 @@ export const useTeamsGetByName = <TData = Schemas.TeamFull>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.TeamFull, TeamsGetByNameError, TData>({
-    ...teamsGetByNameQuery(variables),
+    ...teamsGetByNameQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -24197,7 +24301,7 @@ export const useTeamsUpdateInOrg = (
     TeamsUpdateInOrgVariables
   >({
     mutationFn: (variables: TeamsUpdateInOrgVariables) =>
-      fetchTeamsUpdateInOrg({ ...fetcherOptions, ...variables }),
+      fetchTeamsUpdateInOrg(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -24312,13 +24416,13 @@ export const useSuspenseTeamsListDiscussionsInOrg = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     TeamsListDiscussionsInOrgResponse,
     TeamsListDiscussionsInOrgError,
     TData
   >({
-    ...teamsListDiscussionsInOrgQuery(variables),
+    ...teamsListDiscussionsInOrgQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -24342,13 +24446,13 @@ export const useTeamsListDiscussionsInOrg = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     TeamsListDiscussionsInOrgResponse,
     TeamsListDiscussionsInOrgError,
     TData
   >({
-    ...teamsListDiscussionsInOrgQuery(variables),
+    ...teamsListDiscussionsInOrgQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -24438,7 +24542,7 @@ export const useTeamsCreateDiscussionInOrg = (
     TeamsCreateDiscussionInOrgVariables
   >({
     mutationFn: (variables: TeamsCreateDiscussionInOrgVariables) =>
-      fetchTeamsCreateDiscussionInOrg({ ...fetcherOptions, ...variables }),
+      fetchTeamsCreateDiscussionInOrg(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -24509,7 +24613,7 @@ export const useTeamsDeleteDiscussionInOrg = (
     TeamsDeleteDiscussionInOrgVariables
   >({
     mutationFn: (variables: TeamsDeleteDiscussionInOrgVariables) =>
-      fetchTeamsDeleteDiscussionInOrg({ ...fetcherOptions, ...variables }),
+      fetchTeamsDeleteDiscussionInOrg(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -24600,13 +24704,13 @@ export const useSuspenseTeamsGetDiscussionInOrg = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.TeamDiscussion,
     TeamsGetDiscussionInOrgError,
     TData
   >({
-    ...teamsGetDiscussionInOrgQuery(variables),
+    ...teamsGetDiscussionInOrgQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -24628,13 +24732,13 @@ export const useTeamsGetDiscussionInOrg = <TData = Schemas.TeamDiscussion>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.TeamDiscussion,
     TeamsGetDiscussionInOrgError,
     TData
   >({
-    ...teamsGetDiscussionInOrgQuery(variables),
+    ...teamsGetDiscussionInOrgQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -24718,7 +24822,7 @@ export const useTeamsUpdateDiscussionInOrg = (
     TeamsUpdateDiscussionInOrgVariables
   >({
     mutationFn: (variables: TeamsUpdateDiscussionInOrgVariables) =>
-      fetchTeamsUpdateDiscussionInOrg({ ...fetcherOptions, ...variables }),
+      fetchTeamsUpdateDiscussionInOrg(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -24835,13 +24939,15 @@ export const useSuspenseTeamsListDiscussionCommentsInOrg = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     TeamsListDiscussionCommentsInOrgResponse,
     TeamsListDiscussionCommentsInOrgError,
     TData
   >({
-    ...teamsListDiscussionCommentsInOrgQuery(variables),
+    ...teamsListDiscussionCommentsInOrgQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -24865,13 +24971,15 @@ export const useTeamsListDiscussionCommentsInOrg = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     TeamsListDiscussionCommentsInOrgResponse,
     TeamsListDiscussionCommentsInOrgError,
     TData
   >({
-    ...teamsListDiscussionCommentsInOrgQuery(variables),
+    ...teamsListDiscussionCommentsInOrgQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -24956,10 +25064,9 @@ export const useTeamsCreateDiscussionCommentInOrg = (
     TeamsCreateDiscussionCommentInOrgVariables
   >({
     mutationFn: (variables: TeamsCreateDiscussionCommentInOrgVariables) =>
-      fetchTeamsCreateDiscussionCommentInOrg({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchTeamsCreateDiscussionCommentInOrg(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -25035,10 +25142,9 @@ export const useTeamsDeleteDiscussionCommentInOrg = (
     TeamsDeleteDiscussionCommentInOrgVariables
   >({
     mutationFn: (variables: TeamsDeleteDiscussionCommentInOrgVariables) =>
-      fetchTeamsDeleteDiscussionCommentInOrg({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchTeamsDeleteDiscussionCommentInOrg(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -25134,13 +25240,15 @@ export const useSuspenseTeamsGetDiscussionCommentInOrg = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.TeamDiscussionComment,
     TeamsGetDiscussionCommentInOrgError,
     TData
   >({
-    ...teamsGetDiscussionCommentInOrgQuery(variables),
+    ...teamsGetDiscussionCommentInOrgQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -25164,13 +25272,15 @@ export const useTeamsGetDiscussionCommentInOrg = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.TeamDiscussionComment,
     TeamsGetDiscussionCommentInOrgError,
     TData
   >({
-    ...teamsGetDiscussionCommentInOrgQuery(variables),
+    ...teamsGetDiscussionCommentInOrgQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -25255,10 +25365,9 @@ export const useTeamsUpdateDiscussionCommentInOrg = (
     TeamsUpdateDiscussionCommentInOrgVariables
   >({
     mutationFn: (variables: TeamsUpdateDiscussionCommentInOrgVariables) =>
-      fetchTeamsUpdateDiscussionCommentInOrg({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchTeamsUpdateDiscussionCommentInOrg(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -25385,13 +25494,15 @@ export const useSuspenseReactionsListForTeamDiscussionCommentInOrg = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     ReactionsListForTeamDiscussionCommentInOrgResponse,
     ReactionsListForTeamDiscussionCommentInOrgError,
     TData
   >({
-    ...reactionsListForTeamDiscussionCommentInOrgQuery(variables),
+    ...reactionsListForTeamDiscussionCommentInOrgQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -25415,13 +25526,15 @@ export const useReactionsListForTeamDiscussionCommentInOrg = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     ReactionsListForTeamDiscussionCommentInOrgResponse,
     ReactionsListForTeamDiscussionCommentInOrgError,
     TData
   >({
-    ...reactionsListForTeamDiscussionCommentInOrgQuery(variables),
+    ...reactionsListForTeamDiscussionCommentInOrgQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -25516,10 +25629,9 @@ export const useReactionsCreateForTeamDiscussionCommentInOrg = (
     mutationFn: (
       variables: ReactionsCreateForTeamDiscussionCommentInOrgVariables
     ) =>
-      fetchReactionsCreateForTeamDiscussionCommentInOrg({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchReactionsCreateForTeamDiscussionCommentInOrg(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -25599,10 +25711,9 @@ export const useReactionsDeleteForTeamDiscussionComment = (
     ReactionsDeleteForTeamDiscussionCommentVariables
   >({
     mutationFn: (variables: ReactionsDeleteForTeamDiscussionCommentVariables) =>
-      fetchReactionsDeleteForTeamDiscussionComment({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchReactionsDeleteForTeamDiscussionComment(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -25724,13 +25835,15 @@ export const useSuspenseReactionsListForTeamDiscussionInOrg = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     ReactionsListForTeamDiscussionInOrgResponse,
     ReactionsListForTeamDiscussionInOrgError,
     TData
   >({
-    ...reactionsListForTeamDiscussionInOrgQuery(variables),
+    ...reactionsListForTeamDiscussionInOrgQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -25754,13 +25867,15 @@ export const useReactionsListForTeamDiscussionInOrg = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     ReactionsListForTeamDiscussionInOrgResponse,
     ReactionsListForTeamDiscussionInOrgError,
     TData
   >({
-    ...reactionsListForTeamDiscussionInOrgQuery(variables),
+    ...reactionsListForTeamDiscussionInOrgQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -25849,10 +25964,9 @@ export const useReactionsCreateForTeamDiscussionInOrg = (
     ReactionsCreateForTeamDiscussionInOrgVariables
   >({
     mutationFn: (variables: ReactionsCreateForTeamDiscussionInOrgVariables) =>
-      fetchReactionsCreateForTeamDiscussionInOrg({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchReactionsCreateForTeamDiscussionInOrg(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -25928,10 +26042,9 @@ export const useReactionsDeleteForTeamDiscussion = (
     ReactionsDeleteForTeamDiscussionVariables
   >({
     mutationFn: (variables: ReactionsDeleteForTeamDiscussionVariables) =>
-      fetchReactionsDeleteForTeamDiscussion({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchReactionsDeleteForTeamDiscussion(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -26038,13 +26151,15 @@ export const useSuspenseTeamsListPendingInvitationsInOrg = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     TeamsListPendingInvitationsInOrgResponse,
     TeamsListPendingInvitationsInOrgError,
     TData
   >({
-    ...teamsListPendingInvitationsInOrgQuery(variables),
+    ...teamsListPendingInvitationsInOrgQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -26068,13 +26183,15 @@ export const useTeamsListPendingInvitationsInOrg = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     TeamsListPendingInvitationsInOrgResponse,
     TeamsListPendingInvitationsInOrgError,
     TData
   >({
-    ...teamsListPendingInvitationsInOrgQuery(variables),
+    ...teamsListPendingInvitationsInOrgQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -26186,13 +26303,13 @@ export const useSuspenseTeamsListMembersInOrg = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     TeamsListMembersInOrgResponse,
     TeamsListMembersInOrgError,
     TData
   >({
-    ...teamsListMembersInOrgQuery(variables),
+    ...teamsListMembersInOrgQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -26214,13 +26331,13 @@ export const useTeamsListMembersInOrg = <TData = TeamsListMembersInOrgResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     TeamsListMembersInOrgResponse,
     TeamsListMembersInOrgError,
     TData
   >({
-    ...teamsListMembersInOrgQuery(variables),
+    ...teamsListMembersInOrgQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -26301,10 +26418,9 @@ export const useTeamsRemoveMembershipForUserInOrg = (
     TeamsRemoveMembershipForUserInOrgVariables
   >({
     mutationFn: (variables: TeamsRemoveMembershipForUserInOrgVariables) =>
-      fetchTeamsRemoveMembershipForUserInOrg({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchTeamsRemoveMembershipForUserInOrg(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -26417,13 +26533,15 @@ export const useSuspenseTeamsGetMembershipForUserInOrg = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.TeamMembership,
     TeamsGetMembershipForUserInOrgError,
     TData
   >({
-    ...teamsGetMembershipForUserInOrgQuery(variables),
+    ...teamsGetMembershipForUserInOrgQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -26454,13 +26572,15 @@ export const useTeamsGetMembershipForUserInOrg = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.TeamMembership,
     TeamsGetMembershipForUserInOrgError,
     TData
   >({
-    ...teamsGetMembershipForUserInOrgQuery(variables),
+    ...teamsGetMembershipForUserInOrgQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -26559,10 +26679,9 @@ export const useTeamsAddOrUpdateMembershipForUserInOrg = (
     TeamsAddOrUpdateMembershipForUserInOrgVariables
   >({
     mutationFn: (variables: TeamsAddOrUpdateMembershipForUserInOrgVariables) =>
-      fetchTeamsAddOrUpdateMembershipForUserInOrg({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchTeamsAddOrUpdateMembershipForUserInOrg(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -26667,13 +26786,13 @@ export const useSuspenseTeamsListProjectsInOrg = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     TeamsListProjectsInOrgResponse,
     TeamsListProjectsInOrgError,
     TData
   >({
-    ...teamsListProjectsInOrgQuery(variables),
+    ...teamsListProjectsInOrgQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -26697,13 +26816,13 @@ export const useTeamsListProjectsInOrg = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     TeamsListProjectsInOrgResponse,
     TeamsListProjectsInOrgError,
     TData
   >({
-    ...teamsListProjectsInOrgQuery(variables),
+    ...teamsListProjectsInOrgQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -26775,7 +26894,7 @@ export const useTeamsRemoveProjectInOrg = (
     TeamsRemoveProjectInOrgVariables
   >({
     mutationFn: (variables: TeamsRemoveProjectInOrgVariables) =>
-      fetchTeamsRemoveProjectInOrg({ ...fetcherOptions, ...variables }),
+      fetchTeamsRemoveProjectInOrg(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -26867,13 +26986,15 @@ export const useSuspenseTeamsCheckPermissionsForProjectInOrg = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.TeamProject,
     TeamsCheckPermissionsForProjectInOrgError,
     TData
   >({
-    ...teamsCheckPermissionsForProjectInOrgQuery(variables),
+    ...teamsCheckPermissionsForProjectInOrgQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -26897,13 +27018,15 @@ export const useTeamsCheckPermissionsForProjectInOrg = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.TeamProject,
     TeamsCheckPermissionsForProjectInOrgError,
     TData
   >({
-    ...teamsCheckPermissionsForProjectInOrgQuery(variables),
+    ...teamsCheckPermissionsForProjectInOrgQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -26993,10 +27116,9 @@ export const useTeamsAddOrUpdateProjectPermissionsInOrg = (
     TeamsAddOrUpdateProjectPermissionsInOrgVariables
   >({
     mutationFn: (variables: TeamsAddOrUpdateProjectPermissionsInOrgVariables) =>
-      fetchTeamsAddOrUpdateProjectPermissionsInOrg({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchTeamsAddOrUpdateProjectPermissionsInOrg(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -27101,13 +27223,13 @@ export const useSuspenseTeamsListReposInOrg = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     TeamsListReposInOrgResponse,
     TeamsListReposInOrgError,
     TData
   >({
-    ...teamsListReposInOrgQuery(variables),
+    ...teamsListReposInOrgQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -27129,13 +27251,13 @@ export const useTeamsListReposInOrg = <TData = TeamsListReposInOrgResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     TeamsListReposInOrgResponse,
     TeamsListReposInOrgError,
     TData
   >({
-    ...teamsListReposInOrgQuery(variables),
+    ...teamsListReposInOrgQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -27211,7 +27333,7 @@ export const useTeamsRemoveRepoInOrg = (
     TeamsRemoveRepoInOrgVariables
   >({
     mutationFn: (variables: TeamsRemoveRepoInOrgVariables) =>
-      fetchTeamsRemoveRepoInOrg({ ...fetcherOptions, ...variables }),
+      fetchTeamsRemoveRepoInOrg(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -27319,13 +27441,15 @@ export const useSuspenseTeamsCheckPermissionsForRepoInOrg = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.TeamRepository,
     TeamsCheckPermissionsForRepoInOrgError,
     TData
   >({
-    ...teamsCheckPermissionsForRepoInOrgQuery(variables),
+    ...teamsCheckPermissionsForRepoInOrgQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -27353,13 +27477,15 @@ export const useTeamsCheckPermissionsForRepoInOrg = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.TeamRepository,
     TeamsCheckPermissionsForRepoInOrgError,
     TData
   >({
-    ...teamsCheckPermissionsForRepoInOrgQuery(variables),
+    ...teamsCheckPermissionsForRepoInOrgQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -27450,10 +27576,9 @@ export const useTeamsAddOrUpdateRepoPermissionsInOrg = (
     TeamsAddOrUpdateRepoPermissionsInOrgVariables
   >({
     mutationFn: (variables: TeamsAddOrUpdateRepoPermissionsInOrgVariables) =>
-      fetchTeamsAddOrUpdateRepoPermissionsInOrg({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchTeamsAddOrUpdateRepoPermissionsInOrg(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -27558,13 +27683,13 @@ export const useSuspenseTeamsListChildInOrg = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     TeamsListChildInOrgResponse,
     TeamsListChildInOrgError,
     TData
   >({
-    ...teamsListChildInOrgQuery(variables),
+    ...teamsListChildInOrgQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -27586,13 +27711,13 @@ export const useTeamsListChildInOrg = <TData = TeamsListChildInOrgResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     TeamsListChildInOrgResponse,
     TeamsListChildInOrgError,
     TData
   >({
-    ...teamsListChildInOrgQuery(variables),
+    ...teamsListChildInOrgQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -27686,10 +27811,9 @@ export const useOrgsEnableOrDisableSecurityProductOnAllOrgRepos = (
     mutationFn: (
       variables: OrgsEnableOrDisableSecurityProductOnAllOrgReposVariables
     ) =>
-      fetchOrgsEnableOrDisableSecurityProductOnAllOrgRepos({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchOrgsEnableOrDisableSecurityProductOnAllOrgRepos(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -27763,7 +27887,7 @@ export const useProjectsDeleteCard = (
     ProjectsDeleteCardVariables
   >({
     mutationFn: (variables: ProjectsDeleteCardVariables) =>
-      fetchProjectsDeleteCard({ ...fetcherOptions, ...variables }),
+      fetchProjectsDeleteCard(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -27846,13 +27970,13 @@ export const useSuspenseProjectsGetCard = <TData = Schemas.ProjectCard>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.ProjectCard,
     ProjectsGetCardError,
     TData
   >({
-    ...projectsGetCardQuery(variables),
+    ...projectsGetCardQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -27869,9 +27993,9 @@ export const useProjectsGetCard = <TData = Schemas.ProjectCard>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.ProjectCard, ProjectsGetCardError, TData>({
-    ...projectsGetCardQuery(variables),
+    ...projectsGetCardQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -27962,7 +28086,7 @@ export const useProjectsUpdateCard = (
     ProjectsUpdateCardVariables
   >({
     mutationFn: (variables: ProjectsUpdateCardVariables) =>
-      fetchProjectsUpdateCard({ ...fetcherOptions, ...variables }),
+      fetchProjectsUpdateCard(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -28070,7 +28194,7 @@ export const useProjectsMoveCard = (
     ProjectsMoveCardVariables
   >({
     mutationFn: (variables: ProjectsMoveCardVariables) =>
-      fetchProjectsMoveCard({ ...fetcherOptions, ...variables }),
+      fetchProjectsMoveCard(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -28136,7 +28260,7 @@ export const useProjectsDeleteColumn = (
     ProjectsDeleteColumnVariables
   >({
     mutationFn: (variables: ProjectsDeleteColumnVariables) =>
-      fetchProjectsDeleteColumn({ ...fetcherOptions, ...variables }),
+      fetchProjectsDeleteColumn(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -28219,13 +28343,13 @@ export const useSuspenseProjectsGetColumn = <TData = Schemas.ProjectColumn>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.ProjectColumn,
     ProjectsGetColumnError,
     TData
   >({
-    ...projectsGetColumnQuery(variables),
+    ...projectsGetColumnQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -28242,13 +28366,13 @@ export const useProjectsGetColumn = <TData = Schemas.ProjectColumn>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.ProjectColumn,
     ProjectsGetColumnError,
     TData
   >({
-    ...projectsGetColumnQuery(variables),
+    ...projectsGetColumnQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -28325,7 +28449,7 @@ export const useProjectsUpdateColumn = (
     ProjectsUpdateColumnVariables
   >({
     mutationFn: (variables: ProjectsUpdateColumnVariables) =>
-      fetchProjectsUpdateColumn({ ...fetcherOptions, ...variables }),
+      fetchProjectsUpdateColumn(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -28428,13 +28552,13 @@ export const useSuspenseProjectsListCards = <TData = ProjectsListCardsResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     ProjectsListCardsResponse,
     ProjectsListCardsError,
     TData
   >({
-    ...projectsListCardsQuery(variables),
+    ...projectsListCardsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -28451,13 +28575,13 @@ export const useProjectsListCards = <TData = ProjectsListCardsResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     ProjectsListCardsResponse,
     ProjectsListCardsError,
     TData
   >({
-    ...projectsListCardsQuery(variables),
+    ...projectsListCardsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -28584,7 +28708,7 @@ export const useProjectsCreateCard = (
     ProjectsCreateCardVariables
   >({
     mutationFn: (variables: ProjectsCreateCardVariables) =>
-      fetchProjectsCreateCard({ ...fetcherOptions, ...variables }),
+      fetchProjectsCreateCard(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -28665,7 +28789,7 @@ export const useProjectsMoveColumn = (
     ProjectsMoveColumnVariables
   >({
     mutationFn: (variables: ProjectsMoveColumnVariables) =>
-      fetchProjectsMoveColumn({ ...fetcherOptions, ...variables }),
+      fetchProjectsMoveColumn(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -28744,7 +28868,7 @@ export const useProjectsDelete = (
     ProjectsDeleteVariables
   >({
     mutationFn: (variables: ProjectsDeleteVariables) =>
-      fetchProjectsDelete({ ...fetcherOptions, ...variables }),
+      fetchProjectsDelete(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -28819,9 +28943,9 @@ export const useSuspenseProjectsGet = <TData = Schemas.Project>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<Schemas.Project, ProjectsGetError, TData>({
-    ...projectsGetQuery(variables),
+    ...projectsGetQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -28837,9 +28961,9 @@ export const useProjectsGet = <TData = Schemas.Project>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.Project, ProjectsGetError, TData>({
-    ...projectsGetQuery(variables),
+    ...projectsGetQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -28949,7 +29073,7 @@ export const useProjectsUpdate = (
     ProjectsUpdateVariables
   >({
     mutationFn: (variables: ProjectsUpdateVariables) =>
-      fetchProjectsUpdate({ ...fetcherOptions, ...variables }),
+      fetchProjectsUpdate(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -29071,13 +29195,13 @@ export const useSuspenseProjectsListCollaborators = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     ProjectsListCollaboratorsResponse,
     ProjectsListCollaboratorsError,
     TData
   >({
-    ...projectsListCollaboratorsQuery(variables),
+    ...projectsListCollaboratorsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -29099,13 +29223,13 @@ export const useProjectsListCollaborators = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     ProjectsListCollaboratorsResponse,
     ProjectsListCollaboratorsError,
     TData
   >({
-    ...projectsListCollaboratorsQuery(variables),
+    ...projectsListCollaboratorsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -29190,7 +29314,7 @@ export const useProjectsRemoveCollaborator = (
     ProjectsRemoveCollaboratorVariables
   >({
     mutationFn: (variables: ProjectsRemoveCollaboratorVariables) =>
-      fetchProjectsRemoveCollaborator({ ...fetcherOptions, ...variables }),
+      fetchProjectsRemoveCollaborator(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -29291,7 +29415,7 @@ export const useProjectsAddCollaborator = (
     ProjectsAddCollaboratorVariables
   >({
     mutationFn: (variables: ProjectsAddCollaboratorVariables) =>
-      fetchProjectsAddCollaborator({ ...fetcherOptions, ...variables }),
+      fetchProjectsAddCollaborator(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -29393,13 +29517,13 @@ export const useSuspenseProjectsGetPermissionForUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.ProjectCollaboratorPermission,
     ProjectsGetPermissionForUserError,
     TData
   >({
-    ...projectsGetPermissionForUserQuery(variables),
+    ...projectsGetPermissionForUserQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -29421,13 +29545,13 @@ export const useProjectsGetPermissionForUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.ProjectCollaboratorPermission,
     ProjectsGetPermissionForUserError,
     TData
   >({
-    ...projectsGetPermissionForUserQuery(variables),
+    ...projectsGetPermissionForUserQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -29527,13 +29651,13 @@ export const useSuspenseProjectsListColumns = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     ProjectsListColumnsResponse,
     ProjectsListColumnsError,
     TData
   >({
-    ...projectsListColumnsQuery(variables),
+    ...projectsListColumnsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -29550,13 +29674,13 @@ export const useProjectsListColumns = <TData = ProjectsListColumnsResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     ProjectsListColumnsResponse,
     ProjectsListColumnsError,
     TData
   >({
-    ...projectsListColumnsQuery(variables),
+    ...projectsListColumnsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -29637,7 +29761,7 @@ export const useProjectsCreateColumn = (
     ProjectsCreateColumnVariables
   >({
     mutationFn: (variables: ProjectsCreateColumnVariables) =>
-      fetchProjectsCreateColumn({ ...fetcherOptions, ...variables }),
+      fetchProjectsCreateColumn(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -29713,13 +29837,13 @@ export const useSuspenseRateLimitGet = <TData = Schemas.RateLimitOverview>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.RateLimitOverview,
     RateLimitGetError,
     TData
   >({
-    ...rateLimitGetQuery(variables),
+    ...rateLimitGetQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -29741,13 +29865,13 @@ export const useRateLimitGet = <TData = Schemas.RateLimitOverview>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.RateLimitOverview,
     RateLimitGetError,
     TData
   >({
-    ...rateLimitGetQuery(variables),
+    ...rateLimitGetQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -29853,13 +29977,15 @@ export const useSuspenseActionsListRepoRequiredWorkflows = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     ActionsListRepoRequiredWorkflowsResponse,
     ActionsListRepoRequiredWorkflowsError,
     TData
   >({
-    ...actionsListRepoRequiredWorkflowsQuery(variables),
+    ...actionsListRepoRequiredWorkflowsQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -29881,13 +30007,15 @@ export const useActionsListRepoRequiredWorkflows = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     ActionsListRepoRequiredWorkflowsResponse,
     ActionsListRepoRequiredWorkflowsError,
     TData
   >({
-    ...actionsListRepoRequiredWorkflowsQuery(variables),
+    ...actionsListRepoRequiredWorkflowsQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -29976,13 +30104,15 @@ export const useSuspenseActionsGetRepoRequiredWorkflow = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.RepoRequiredWorkflow,
     ActionsGetRepoRequiredWorkflowError,
     TData
   >({
-    ...actionsGetRepoRequiredWorkflowQuery(variables),
+    ...actionsGetRepoRequiredWorkflowQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -30004,13 +30134,15 @@ export const useActionsGetRepoRequiredWorkflow = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.RepoRequiredWorkflow,
     ActionsGetRepoRequiredWorkflowError,
     TData
   >({
-    ...actionsGetRepoRequiredWorkflowQuery(variables),
+    ...actionsGetRepoRequiredWorkflowQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -30111,13 +30243,15 @@ export const useSuspenseActionsGetRepoRequiredWorkflowUsage = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.WorkflowUsage,
     ActionsGetRepoRequiredWorkflowUsageError,
     TData
   >({
-    ...actionsGetRepoRequiredWorkflowUsageQuery(variables),
+    ...actionsGetRepoRequiredWorkflowUsageQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -30143,13 +30277,15 @@ export const useActionsGetRepoRequiredWorkflowUsage = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.WorkflowUsage,
     ActionsGetRepoRequiredWorkflowUsageError,
     TData
   >({
-    ...actionsGetRepoRequiredWorkflowUsageQuery(variables),
+    ...actionsGetRepoRequiredWorkflowUsageQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -30230,7 +30366,7 @@ export const useReposDelete = (
     ReposDeleteVariables
   >({
     mutationFn: (variables: ReposDeleteVariables) =>
-      fetchReposDelete({ ...fetcherOptions, ...variables }),
+      fetchReposDelete(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -30319,13 +30455,13 @@ export const useSuspenseReposGet = <TData = Schemas.FullRepository>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.FullRepository,
     ReposGetError,
     TData
   >({
-    ...reposGetQuery(variables),
+    ...reposGetQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -30343,9 +30479,9 @@ export const useReposGet = <TData = Schemas.FullRepository>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.FullRepository, ReposGetError, TData>({
-    ...reposGetQuery(variables),
+    ...reposGetQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -30606,7 +30742,7 @@ export const useReposUpdate = (
     ReposUpdateVariables
   >({
     mutationFn: (variables: ReposUpdateVariables) =>
-      fetchReposUpdate({ ...fetcherOptions, ...variables }),
+      fetchReposUpdate(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -30712,13 +30848,13 @@ export const useSuspenseActionsListArtifactsForRepo = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     ActionsListArtifactsForRepoResponse,
     ActionsListArtifactsForRepoError,
     TData
   >({
-    ...actionsListArtifactsForRepoQuery(variables),
+    ...actionsListArtifactsForRepoQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -30740,13 +30876,13 @@ export const useActionsListArtifactsForRepo = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     ActionsListArtifactsForRepoResponse,
     ActionsListArtifactsForRepoError,
     TData
   >({
-    ...actionsListArtifactsForRepoQuery(variables),
+    ...actionsListArtifactsForRepoQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -30814,7 +30950,7 @@ export const useActionsDeleteArtifact = (
     ActionsDeleteArtifactVariables
   >({
     mutationFn: (variables: ActionsDeleteArtifactVariables) =>
-      fetchActionsDeleteArtifact({ ...fetcherOptions, ...variables }),
+      fetchActionsDeleteArtifact(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -30893,13 +31029,13 @@ export const useSuspenseActionsGetArtifact = <TData = Schemas.Artifact>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.Artifact,
     ActionsGetArtifactError,
     TData
   >({
-    ...actionsGetArtifactQuery(variables),
+    ...actionsGetArtifactQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -30919,9 +31055,9 @@ export const useActionsGetArtifact = <TData = Schemas.Artifact>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.Artifact, ActionsGetArtifactError, TData>({
-    ...actionsGetArtifactQuery(variables),
+    ...actionsGetArtifactQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -31010,13 +31146,13 @@ export const useSuspenseActionsDownloadArtifact = <TData = undefined>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     undefined,
     ActionsDownloadArtifactError,
     TData
   >({
-    ...actionsDownloadArtifactQuery(variables),
+    ...actionsDownloadArtifactQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -31035,9 +31171,9 @@ export const useActionsDownloadArtifact = <TData = undefined>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<undefined, ActionsDownloadArtifactError, TData>({
-    ...actionsDownloadArtifactQuery(variables),
+    ...actionsDownloadArtifactQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -31125,13 +31261,13 @@ export const useSuspenseActionsGetActionsCacheUsage = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.ActionsCacheUsageByRepository,
     ActionsGetActionsCacheUsageError,
     TData
   >({
-    ...actionsGetActionsCacheUsageQuery(variables),
+    ...actionsGetActionsCacheUsageQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -31155,13 +31291,13 @@ export const useActionsGetActionsCacheUsage = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.ActionsCacheUsageByRepository,
     ActionsGetActionsCacheUsageError,
     TData
   >({
-    ...actionsGetActionsCacheUsageQuery(variables),
+    ...actionsGetActionsCacheUsageQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -31246,7 +31382,7 @@ export const useActionsDeleteActionsCacheByKey = (
     ActionsDeleteActionsCacheByKeyVariables
   >({
     mutationFn: (variables: ActionsDeleteActionsCacheByKeyVariables) =>
-      fetchActionsDeleteActionsCacheByKey({ ...fetcherOptions, ...variables }),
+      fetchActionsDeleteActionsCacheByKey(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -31369,13 +31505,13 @@ export const useSuspenseActionsGetActionsCacheList = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.ActionsCacheList,
     ActionsGetActionsCacheListError,
     TData
   >({
-    ...actionsGetActionsCacheListQuery(variables),
+    ...actionsGetActionsCacheListQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -31397,13 +31533,13 @@ export const useActionsGetActionsCacheList = <TData = Schemas.ActionsCacheList>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.ActionsCacheList,
     ActionsGetActionsCacheListError,
     TData
   >({
-    ...actionsGetActionsCacheListQuery(variables),
+    ...actionsGetActionsCacheListQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -31480,7 +31616,7 @@ export const useActionsDeleteActionsCacheById = (
     ActionsDeleteActionsCacheByIdVariables
   >({
     mutationFn: (variables: ActionsDeleteActionsCacheByIdVariables) =>
-      fetchActionsDeleteActionsCacheById({ ...fetcherOptions, ...variables }),
+      fetchActionsDeleteActionsCacheById(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -31559,13 +31695,13 @@ export const useSuspenseActionsGetJobForWorkflowRun = <TData = Schemas.Job>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.Job,
     ActionsGetJobForWorkflowRunError,
     TData
   >({
-    ...actionsGetJobForWorkflowRunQuery(variables),
+    ...actionsGetJobForWorkflowRunQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -31585,13 +31721,13 @@ export const useActionsGetJobForWorkflowRun = <TData = Schemas.Job>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.Job,
     ActionsGetJobForWorkflowRunError,
     TData
   >({
-    ...actionsGetJobForWorkflowRunQuery(variables),
+    ...actionsGetJobForWorkflowRunQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -31683,13 +31819,15 @@ export const useSuspenseActionsDownloadJobLogsForWorkflowRun = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     undefined,
     ActionsDownloadJobLogsForWorkflowRunError,
     TData
   >({
-    ...actionsDownloadJobLogsForWorkflowRunQuery(variables),
+    ...actionsDownloadJobLogsForWorkflowRunQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -31712,13 +31850,15 @@ export const useActionsDownloadJobLogsForWorkflowRun = <TData = undefined>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     undefined,
     ActionsDownloadJobLogsForWorkflowRunError,
     TData
   >({
-    ...actionsDownloadJobLogsForWorkflowRunQuery(variables),
+    ...actionsDownloadJobLogsForWorkflowRunQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -31804,7 +31944,7 @@ export const useActionsReRunJobForWorkflowRun = (
     ActionsReRunJobForWorkflowRunVariables
   >({
     mutationFn: (variables: ActionsReRunJobForWorkflowRunVariables) =>
-      fetchActionsReRunJobForWorkflowRun({ ...fetcherOptions, ...variables }),
+      fetchActionsReRunJobForWorkflowRun(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -31900,13 +32040,15 @@ export const useSuspenseActionsGetCustomOidcSubClaimForRepo = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.OidcCustomSubRepo,
     ActionsGetCustomOidcSubClaimForRepoError,
     TData
   >({
-    ...actionsGetCustomOidcSubClaimForRepoQuery(variables),
+    ...actionsGetCustomOidcSubClaimForRepoQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -31930,13 +32072,15 @@ export const useActionsGetCustomOidcSubClaimForRepo = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.OidcCustomSubRepo,
     ActionsGetCustomOidcSubClaimForRepoError,
     TData
   >({
-    ...actionsGetCustomOidcSubClaimForRepoQuery(variables),
+    ...actionsGetCustomOidcSubClaimForRepoQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -32029,10 +32173,9 @@ export const useActionsSetCustomOidcSubClaimForRepo = (
     ActionsSetCustomOidcSubClaimForRepoVariables
   >({
     mutationFn: (variables: ActionsSetCustomOidcSubClaimForRepoVariables) =>
-      fetchActionsSetCustomOidcSubClaimForRepo({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchActionsSetCustomOidcSubClaimForRepo(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -32120,13 +32263,15 @@ export const useSuspenseActionsGetGithubActionsPermissionsRepository = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.ActionsRepositoryPermissions,
     ActionsGetGithubActionsPermissionsRepositoryError,
     TData
   >({
-    ...actionsGetGithubActionsPermissionsRepositoryQuery(variables),
+    ...actionsGetGithubActionsPermissionsRepositoryQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -32150,13 +32295,15 @@ export const useActionsGetGithubActionsPermissionsRepository = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.ActionsRepositoryPermissions,
     ActionsGetGithubActionsPermissionsRepositoryError,
     TData
   >({
-    ...actionsGetGithubActionsPermissionsRepositoryQuery(variables),
+    ...actionsGetGithubActionsPermissionsRepositoryQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -32233,10 +32380,9 @@ export const useActionsSetGithubActionsPermissionsRepository = (
     mutationFn: (
       variables: ActionsSetGithubActionsPermissionsRepositoryVariables
     ) =>
-      fetchActionsSetGithubActionsPermissionsRepository({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchActionsSetGithubActionsPermissionsRepository(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -32333,13 +32479,15 @@ export const useSuspenseActionsGetWorkflowAccessToRepository = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.ActionsWorkflowAccessToRepository,
     ActionsGetWorkflowAccessToRepositoryError,
     TData
   >({
-    ...actionsGetWorkflowAccessToRepositoryQuery(variables),
+    ...actionsGetWorkflowAccessToRepositoryQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -32366,13 +32514,15 @@ export const useActionsGetWorkflowAccessToRepository = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.ActionsWorkflowAccessToRepository,
     ActionsGetWorkflowAccessToRepositoryError,
     TData
   >({
-    ...actionsGetWorkflowAccessToRepositoryQuery(variables),
+    ...actionsGetWorkflowAccessToRepositoryQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -32448,10 +32598,9 @@ export const useActionsSetWorkflowAccessToRepository = (
     ActionsSetWorkflowAccessToRepositoryVariables
   >({
     mutationFn: (variables: ActionsSetWorkflowAccessToRepositoryVariables) =>
-      fetchActionsSetWorkflowAccessToRepository({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchActionsSetWorkflowAccessToRepository(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -32539,13 +32688,15 @@ export const useSuspenseActionsGetAllowedActionsRepository = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.SelectedActions,
     ActionsGetAllowedActionsRepositoryError,
     TData
   >({
-    ...actionsGetAllowedActionsRepositoryQuery(variables),
+    ...actionsGetAllowedActionsRepositoryQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -32569,13 +32720,15 @@ export const useActionsGetAllowedActionsRepository = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.SelectedActions,
     ActionsGetAllowedActionsRepositoryError,
     TData
   >({
-    ...actionsGetAllowedActionsRepositoryQuery(variables),
+    ...actionsGetAllowedActionsRepositoryQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -32645,10 +32798,9 @@ export const useActionsSetAllowedActionsRepository = (
     ActionsSetAllowedActionsRepositoryVariables
   >({
     mutationFn: (variables: ActionsSetAllowedActionsRepositoryVariables) =>
-      fetchActionsSetAllowedActionsRepository({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchActionsSetAllowedActionsRepository(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -32749,14 +32901,14 @@ export const useSuspenseActionsGetGithubActionsDefaultWorkflowPermissionsReposit
       "queryKey" | "queryFn" | "initialData"
     >
   ) => {
-    const { queryOptions } = useGithubContext(options);
+    const { queryOptions, fetcherOptions } = useGithubContext(options);
     return reactQuery.useSuspenseQuery<
       Schemas.ActionsGetDefaultWorkflowPermissions,
       ActionsGetGithubActionsDefaultWorkflowPermissionsRepositoryError,
       TData
     >({
       ...actionsGetGithubActionsDefaultWorkflowPermissionsRepositoryQuery(
-        variables
+        deepMerge(fetcherOptions, variables)
       ),
       ...options,
       ...queryOptions,
@@ -32783,14 +32935,14 @@ export const useActionsGetGithubActionsDefaultWorkflowPermissionsRepository = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.ActionsGetDefaultWorkflowPermissions,
     ActionsGetGithubActionsDefaultWorkflowPermissionsRepositoryError,
     TData
   >({
     ...actionsGetGithubActionsDefaultWorkflowPermissionsRepositoryQuery(
-      variables
+      deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -32870,10 +33022,9 @@ export const useActionsSetGithubActionsDefaultWorkflowPermissionsRepository = (
     mutationFn: (
       variables: ActionsSetGithubActionsDefaultWorkflowPermissionsRepositoryVariables
     ) =>
-      fetchActionsSetGithubActionsDefaultWorkflowPermissionsRepository({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchActionsSetGithubActionsDefaultWorkflowPermissionsRepository(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -33036,13 +33187,15 @@ export const useSuspenseActionsListRequiredWorkflowRuns = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     ActionsListRequiredWorkflowRunsResponse,
     ActionsListRequiredWorkflowRunsError,
     TData
   >({
-    ...actionsListRequiredWorkflowRunsQuery(variables),
+    ...actionsListRequiredWorkflowRunsQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -33066,13 +33219,15 @@ export const useActionsListRequiredWorkflowRuns = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     ActionsListRequiredWorkflowRunsResponse,
     ActionsListRequiredWorkflowRunsError,
     TData
   >({
-    ...actionsListRequiredWorkflowRunsQuery(variables),
+    ...actionsListRequiredWorkflowRunsQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -33176,13 +33331,15 @@ export const useSuspenseActionsListSelfHostedRunnersForRepo = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     ActionsListSelfHostedRunnersForRepoResponse,
     ActionsListSelfHostedRunnersForRepoError,
     TData
   >({
-    ...actionsListSelfHostedRunnersForRepoQuery(variables),
+    ...actionsListSelfHostedRunnersForRepoQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -33204,13 +33361,15 @@ export const useActionsListSelfHostedRunnersForRepo = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     ActionsListSelfHostedRunnersForRepoResponse,
     ActionsListSelfHostedRunnersForRepoError,
     TData
   >({
-    ...actionsListSelfHostedRunnersForRepoQuery(variables),
+    ...actionsListSelfHostedRunnersForRepoQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -33302,13 +33461,15 @@ export const useSuspenseActionsListRunnerApplicationsForRepo = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     ActionsListRunnerApplicationsForRepoResponse,
     ActionsListRunnerApplicationsForRepoError,
     TData
   >({
-    ...actionsListRunnerApplicationsForRepoQuery(variables),
+    ...actionsListRunnerApplicationsForRepoQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -33332,13 +33493,15 @@ export const useActionsListRunnerApplicationsForRepo = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     ActionsListRunnerApplicationsForRepoResponse,
     ActionsListRunnerApplicationsForRepoError,
     TData
   >({
-    ...actionsListRunnerApplicationsForRepoQuery(variables),
+    ...actionsListRunnerApplicationsForRepoQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -33421,10 +33584,9 @@ export const useActionsCreateRegistrationTokenForRepo = (
     ActionsCreateRegistrationTokenForRepoVariables
   >({
     mutationFn: (variables: ActionsCreateRegistrationTokenForRepoVariables) =>
-      fetchActionsCreateRegistrationTokenForRepo({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchActionsCreateRegistrationTokenForRepo(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -33506,7 +33668,9 @@ export const useActionsCreateRemoveTokenForRepo = (
     ActionsCreateRemoveTokenForRepoVariables
   >({
     mutationFn: (variables: ActionsCreateRemoveTokenForRepoVariables) =>
-      fetchActionsCreateRemoveTokenForRepo({ ...fetcherOptions, ...variables }),
+      fetchActionsCreateRemoveTokenForRepo(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -33580,10 +33744,9 @@ export const useActionsDeleteSelfHostedRunnerFromRepo = (
     ActionsDeleteSelfHostedRunnerFromRepoVariables
   >({
     mutationFn: (variables: ActionsDeleteSelfHostedRunnerFromRepoVariables) =>
-      fetchActionsDeleteSelfHostedRunnerFromRepo({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchActionsDeleteSelfHostedRunnerFromRepo(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -33674,13 +33837,15 @@ export const useSuspenseActionsGetSelfHostedRunnerForRepo = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.Runner,
     ActionsGetSelfHostedRunnerForRepoError,
     TData
   >({
-    ...actionsGetSelfHostedRunnerForRepoQuery(variables),
+    ...actionsGetSelfHostedRunnerForRepoQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -33703,13 +33868,15 @@ export const useActionsGetSelfHostedRunnerForRepo = <TData = Schemas.Runner>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.Runner,
     ActionsGetSelfHostedRunnerForRepoError,
     TData
   >({
-    ...actionsGetSelfHostedRunnerForRepoQuery(variables),
+    ...actionsGetSelfHostedRunnerForRepoQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -33792,10 +33959,9 @@ export const useActionsRemoveAllCustomLabelsFromSelfHostedRunnerForRepo = (
     mutationFn: (
       variables: ActionsRemoveAllCustomLabelsFromSelfHostedRunnerForRepoVariables
     ) =>
-      fetchActionsRemoveAllCustomLabelsFromSelfHostedRunnerForRepo({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchActionsRemoveAllCustomLabelsFromSelfHostedRunnerForRepo(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -33893,13 +34059,15 @@ export const useSuspenseActionsListLabelsForSelfHostedRunnerForRepo = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Responses.ActionsRunnerLabels,
     ActionsListLabelsForSelfHostedRunnerForRepoError,
     TData
   >({
-    ...actionsListLabelsForSelfHostedRunnerForRepoQuery(variables),
+    ...actionsListLabelsForSelfHostedRunnerForRepoQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -33924,13 +34092,15 @@ export const useActionsListLabelsForSelfHostedRunnerForRepo = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Responses.ActionsRunnerLabels,
     ActionsListLabelsForSelfHostedRunnerForRepoError,
     TData
   >({
-    ...actionsListLabelsForSelfHostedRunnerForRepoQuery(variables),
+    ...actionsListLabelsForSelfHostedRunnerForRepoQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -34027,10 +34197,9 @@ export const useActionsAddCustomLabelsToSelfHostedRunnerForRepo = (
     mutationFn: (
       variables: ActionsAddCustomLabelsToSelfHostedRunnerForRepoVariables
     ) =>
-      fetchActionsAddCustomLabelsToSelfHostedRunnerForRepo({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchActionsAddCustomLabelsToSelfHostedRunnerForRepo(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -34128,10 +34297,9 @@ export const useActionsSetCustomLabelsForSelfHostedRunnerForRepo = (
     mutationFn: (
       variables: ActionsSetCustomLabelsForSelfHostedRunnerForRepoVariables
     ) =>
-      fetchActionsSetCustomLabelsForSelfHostedRunnerForRepo({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchActionsSetCustomLabelsForSelfHostedRunnerForRepo(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -34228,10 +34396,9 @@ export const useActionsRemoveCustomLabelFromSelfHostedRunnerForRepo = (
     mutationFn: (
       variables: ActionsRemoveCustomLabelFromSelfHostedRunnerForRepoVariables
     ) =>
-      fetchActionsRemoveCustomLabelFromSelfHostedRunnerForRepo({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchActionsRemoveCustomLabelFromSelfHostedRunnerForRepo(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -34390,13 +34557,15 @@ export const useSuspenseActionsListWorkflowRunsForRepo = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     ActionsListWorkflowRunsForRepoResponse,
     ActionsListWorkflowRunsForRepoError,
     TData
   >({
-    ...actionsListWorkflowRunsForRepoQuery(variables),
+    ...actionsListWorkflowRunsForRepoQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -34420,13 +34589,15 @@ export const useActionsListWorkflowRunsForRepo = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     ActionsListWorkflowRunsForRepoResponse,
     ActionsListWorkflowRunsForRepoError,
     TData
   >({
-    ...actionsListWorkflowRunsForRepoQuery(variables),
+    ...actionsListWorkflowRunsForRepoQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -34498,7 +34669,7 @@ export const useActionsDeleteWorkflowRun = (
     ActionsDeleteWorkflowRunVariables
   >({
     mutationFn: (variables: ActionsDeleteWorkflowRunVariables) =>
-      fetchActionsDeleteWorkflowRun({ ...fetcherOptions, ...variables }),
+      fetchActionsDeleteWorkflowRun(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -34591,13 +34762,13 @@ export const useSuspenseActionsGetWorkflowRun = <TData = Schemas.WorkflowRun>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.WorkflowRun,
     ActionsGetWorkflowRunError,
     TData
   >({
-    ...actionsGetWorkflowRunQuery(variables),
+    ...actionsGetWorkflowRunQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -34617,13 +34788,13 @@ export const useActionsGetWorkflowRun = <TData = Schemas.WorkflowRun>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.WorkflowRun,
     ActionsGetWorkflowRunError,
     TData
   >({
-    ...actionsGetWorkflowRunQuery(variables),
+    ...actionsGetWorkflowRunQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -34711,13 +34882,13 @@ export const useSuspenseActionsGetReviewsForRun = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     ActionsGetReviewsForRunResponse,
     ActionsGetReviewsForRunError,
     TData
   >({
-    ...actionsGetReviewsForRunQuery(variables),
+    ...actionsGetReviewsForRunQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -34739,13 +34910,13 @@ export const useActionsGetReviewsForRun = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     ActionsGetReviewsForRunResponse,
     ActionsGetReviewsForRunError,
     TData
   >({
-    ...actionsGetReviewsForRunQuery(variables),
+    ...actionsGetReviewsForRunQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -34826,7 +34997,7 @@ export const useActionsApproveWorkflowRun = (
     ActionsApproveWorkflowRunVariables
   >({
     mutationFn: (variables: ActionsApproveWorkflowRunVariables) =>
-      fetchActionsApproveWorkflowRun({ ...fetcherOptions, ...variables }),
+      fetchActionsApproveWorkflowRun(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -34933,13 +35104,15 @@ export const useSuspenseActionsListWorkflowRunArtifacts = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     ActionsListWorkflowRunArtifactsResponse,
     ActionsListWorkflowRunArtifactsError,
     TData
   >({
-    ...actionsListWorkflowRunArtifactsQuery(variables),
+    ...actionsListWorkflowRunArtifactsQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -34961,13 +35134,15 @@ export const useActionsListWorkflowRunArtifacts = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     ActionsListWorkflowRunArtifactsResponse,
     ActionsListWorkflowRunArtifactsError,
     TData
   >({
-    ...actionsListWorkflowRunArtifactsQuery(variables),
+    ...actionsListWorkflowRunArtifactsQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -35076,13 +35251,13 @@ export const useSuspenseActionsGetWorkflowRunAttempt = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.WorkflowRun,
     ActionsGetWorkflowRunAttemptError,
     TData
   >({
-    ...actionsGetWorkflowRunAttemptQuery(variables),
+    ...actionsGetWorkflowRunAttemptQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -35105,13 +35280,13 @@ export const useActionsGetWorkflowRunAttempt = <TData = Schemas.WorkflowRun>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.WorkflowRun,
     ActionsGetWorkflowRunAttemptError,
     TData
   >({
-    ...actionsGetWorkflowRunAttemptQuery(variables),
+    ...actionsGetWorkflowRunAttemptQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -35225,13 +35400,15 @@ export const useSuspenseActionsListJobsForWorkflowRunAttempt = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     ActionsListJobsForWorkflowRunAttemptResponse,
     ActionsListJobsForWorkflowRunAttemptError,
     TData
   >({
-    ...actionsListJobsForWorkflowRunAttemptQuery(variables),
+    ...actionsListJobsForWorkflowRunAttemptQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -35253,13 +35430,15 @@ export const useActionsListJobsForWorkflowRunAttempt = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     ActionsListJobsForWorkflowRunAttemptResponse,
     ActionsListJobsForWorkflowRunAttemptError,
     TData
   >({
-    ...actionsListJobsForWorkflowRunAttemptQuery(variables),
+    ...actionsListJobsForWorkflowRunAttemptQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -35355,13 +35534,15 @@ export const useSuspenseActionsDownloadWorkflowRunAttemptLogs = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     undefined,
     ActionsDownloadWorkflowRunAttemptLogsError,
     TData
   >({
-    ...actionsDownloadWorkflowRunAttemptLogsQuery(variables),
+    ...actionsDownloadWorkflowRunAttemptLogsQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -35384,13 +35565,15 @@ export const useActionsDownloadWorkflowRunAttemptLogs = <TData = undefined>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     undefined,
     ActionsDownloadWorkflowRunAttemptLogsError,
     TData
   >({
-    ...actionsDownloadWorkflowRunAttemptLogsQuery(variables),
+    ...actionsDownloadWorkflowRunAttemptLogsQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -35461,7 +35644,7 @@ export const useActionsCancelWorkflowRun = (
     ActionsCancelWorkflowRunVariables
   >({
     mutationFn: (variables: ActionsCancelWorkflowRunVariables) =>
-      fetchActionsCancelWorkflowRun({ ...fetcherOptions, ...variables }),
+      fetchActionsCancelWorkflowRun(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -35574,13 +35757,13 @@ export const useSuspenseActionsListJobsForWorkflowRun = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     ActionsListJobsForWorkflowRunResponse,
     ActionsListJobsForWorkflowRunError,
     TData
   >({
-    ...actionsListJobsForWorkflowRunQuery(variables),
+    ...actionsListJobsForWorkflowRunQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -35602,13 +35785,13 @@ export const useActionsListJobsForWorkflowRun = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     ActionsListJobsForWorkflowRunResponse,
     ActionsListJobsForWorkflowRunError,
     TData
   >({
-    ...actionsListJobsForWorkflowRunQuery(variables),
+    ...actionsListJobsForWorkflowRunQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -35685,7 +35868,7 @@ export const useActionsDeleteWorkflowRunLogs = (
     ActionsDeleteWorkflowRunLogsVariables
   >({
     mutationFn: (variables: ActionsDeleteWorkflowRunLogsVariables) =>
-      fetchActionsDeleteWorkflowRunLogs({ ...fetcherOptions, ...variables }),
+      fetchActionsDeleteWorkflowRunLogs(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -35774,13 +35957,15 @@ export const useSuspenseActionsDownloadWorkflowRunLogs = <TData = undefined>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     undefined,
     ActionsDownloadWorkflowRunLogsError,
     TData
   >({
-    ...actionsDownloadWorkflowRunLogsQuery(variables),
+    ...actionsDownloadWorkflowRunLogsQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -35803,13 +35988,15 @@ export const useActionsDownloadWorkflowRunLogs = <TData = undefined>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     undefined,
     ActionsDownloadWorkflowRunLogsError,
     TData
   >({
-    ...actionsDownloadWorkflowRunLogsQuery(variables),
+    ...actionsDownloadWorkflowRunLogsQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -35905,13 +36092,15 @@ export const useSuspenseActionsGetPendingDeploymentsForRun = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     ActionsGetPendingDeploymentsForRunResponse,
     ActionsGetPendingDeploymentsForRunError,
     TData
   >({
-    ...actionsGetPendingDeploymentsForRunQuery(variables),
+    ...actionsGetPendingDeploymentsForRunQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -35935,13 +36124,15 @@ export const useActionsGetPendingDeploymentsForRun = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     ActionsGetPendingDeploymentsForRunResponse,
     ActionsGetPendingDeploymentsForRunError,
     TData
   >({
-    ...actionsGetPendingDeploymentsForRunQuery(variables),
+    ...actionsGetPendingDeploymentsForRunQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -36040,10 +36231,9 @@ export const useActionsReviewPendingDeploymentsForRun = (
     ActionsReviewPendingDeploymentsForRunVariables
   >({
     mutationFn: (variables: ActionsReviewPendingDeploymentsForRunVariables) =>
-      fetchActionsReviewPendingDeploymentsForRun({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchActionsReviewPendingDeploymentsForRun(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -36125,7 +36315,7 @@ export const useActionsReRunWorkflow = (
     ActionsReRunWorkflowVariables
   >({
     mutationFn: (variables: ActionsReRunWorkflowVariables) =>
-      fetchActionsReRunWorkflow({ ...fetcherOptions, ...variables }),
+      fetchActionsReRunWorkflow(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -36208,7 +36398,7 @@ export const useActionsReRunWorkflowFailedJobs = (
     ActionsReRunWorkflowFailedJobsVariables
   >({
     mutationFn: (variables: ActionsReRunWorkflowFailedJobsVariables) =>
-      fetchActionsReRunWorkflowFailedJobs({ ...fetcherOptions, ...variables }),
+      fetchActionsReRunWorkflowFailedJobs(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -36299,13 +36489,13 @@ export const useSuspenseActionsGetWorkflowRunUsage = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.WorkflowRunUsage,
     ActionsGetWorkflowRunUsageError,
     TData
   >({
-    ...actionsGetWorkflowRunUsageQuery(variables),
+    ...actionsGetWorkflowRunUsageQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -36327,13 +36517,13 @@ export const useActionsGetWorkflowRunUsage = <TData = Schemas.WorkflowRunUsage>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.WorkflowRunUsage,
     ActionsGetWorkflowRunUsageError,
     TData
   >({
-    ...actionsGetWorkflowRunUsageQuery(variables),
+    ...actionsGetWorkflowRunUsageQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -36436,13 +36626,13 @@ export const useSuspenseActionsListRepoSecrets = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     ActionsListRepoSecretsResponse,
     ActionsListRepoSecretsError,
     TData
   >({
-    ...actionsListRepoSecretsQuery(variables),
+    ...actionsListRepoSecretsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -36464,13 +36654,13 @@ export const useActionsListRepoSecrets = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     ActionsListRepoSecretsResponse,
     ActionsListRepoSecretsError,
     TData
   >({
-    ...actionsListRepoSecretsQuery(variables),
+    ...actionsListRepoSecretsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -36552,13 +36742,13 @@ export const useSuspenseActionsGetRepoPublicKey = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.ActionsPublicKey,
     ActionsGetRepoPublicKeyError,
     TData
   >({
-    ...actionsGetRepoPublicKeyQuery(variables),
+    ...actionsGetRepoPublicKeyQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -36578,13 +36768,13 @@ export const useActionsGetRepoPublicKey = <TData = Schemas.ActionsPublicKey>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.ActionsPublicKey,
     ActionsGetRepoPublicKeyError,
     TData
   >({
-    ...actionsGetRepoPublicKeyQuery(variables),
+    ...actionsGetRepoPublicKeyQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -36652,7 +36842,7 @@ export const useActionsDeleteRepoSecret = (
     ActionsDeleteRepoSecretVariables
   >({
     mutationFn: (variables: ActionsDeleteRepoSecretVariables) =>
-      fetchActionsDeleteRepoSecret({ ...fetcherOptions, ...variables }),
+      fetchActionsDeleteRepoSecret(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -36735,13 +36925,13 @@ export const useSuspenseActionsGetRepoSecret = <TData = Schemas.ActionsSecret>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.ActionsSecret,
     ActionsGetRepoSecretError,
     TData
   >({
-    ...actionsGetRepoSecretQuery(variables),
+    ...actionsGetRepoSecretQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -36761,13 +36951,13 @@ export const useActionsGetRepoSecret = <TData = Schemas.ActionsSecret>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.ActionsSecret,
     ActionsGetRepoSecretError,
     TData
   >({
-    ...actionsGetRepoSecretQuery(variables),
+    ...actionsGetRepoSecretQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -37000,7 +37190,9 @@ export const useActionsCreateOrUpdateRepoSecret = (
     ActionsCreateOrUpdateRepoSecretVariables
   >({
     mutationFn: (variables: ActionsCreateOrUpdateRepoSecretVariables) =>
-      fetchActionsCreateOrUpdateRepoSecret({ ...fetcherOptions, ...variables }),
+      fetchActionsCreateOrUpdateRepoSecret(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -37102,13 +37294,13 @@ export const useSuspenseActionsListRepoVariables = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     ActionsListRepoVariablesResponse,
     ActionsListRepoVariablesError,
     TData
   >({
-    ...actionsListRepoVariablesQuery(variables),
+    ...actionsListRepoVariablesQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -37130,13 +37322,13 @@ export const useActionsListRepoVariables = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     ActionsListRepoVariablesResponse,
     ActionsListRepoVariablesError,
     TData
   >({
-    ...actionsListRepoVariablesQuery(variables),
+    ...actionsListRepoVariablesQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -37216,7 +37408,7 @@ export const useActionsCreateRepoVariable = (
     ActionsCreateRepoVariableVariables
   >({
     mutationFn: (variables: ActionsCreateRepoVariableVariables) =>
-      fetchActionsCreateRepoVariable({ ...fetcherOptions, ...variables }),
+      fetchActionsCreateRepoVariable(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -37287,7 +37479,7 @@ export const useActionsDeleteRepoVariable = (
     ActionsDeleteRepoVariableVariables
   >({
     mutationFn: (variables: ActionsDeleteRepoVariableVariables) =>
-      fetchActionsDeleteRepoVariable({ ...fetcherOptions, ...variables }),
+      fetchActionsDeleteRepoVariable(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -37372,13 +37564,13 @@ export const useSuspenseActionsGetRepoVariable = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.ActionsVariable,
     ActionsGetRepoVariableError,
     TData
   >({
-    ...actionsGetRepoVariableQuery(variables),
+    ...actionsGetRepoVariableQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -37398,13 +37590,13 @@ export const useActionsGetRepoVariable = <TData = Schemas.ActionsVariable>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.ActionsVariable,
     ActionsGetRepoVariableError,
     TData
   >({
-    ...actionsGetRepoVariableQuery(variables),
+    ...actionsGetRepoVariableQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -37488,7 +37680,7 @@ export const useActionsUpdateRepoVariable = (
     ActionsUpdateRepoVariableVariables
   >({
     mutationFn: (variables: ActionsUpdateRepoVariableVariables) =>
-      fetchActionsUpdateRepoVariable({ ...fetcherOptions, ...variables }),
+      fetchActionsUpdateRepoVariable(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -37590,13 +37782,13 @@ export const useSuspenseActionsListRepoWorkflows = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     ActionsListRepoWorkflowsResponse,
     ActionsListRepoWorkflowsError,
     TData
   >({
-    ...actionsListRepoWorkflowsQuery(variables),
+    ...actionsListRepoWorkflowsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -37618,13 +37810,13 @@ export const useActionsListRepoWorkflows = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     ActionsListRepoWorkflowsResponse,
     ActionsListRepoWorkflowsError,
     TData
   >({
-    ...actionsListRepoWorkflowsQuery(variables),
+    ...actionsListRepoWorkflowsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -37704,13 +37896,13 @@ export const useSuspenseActionsGetWorkflow = <TData = Schemas.Workflow>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.Workflow,
     ActionsGetWorkflowError,
     TData
   >({
-    ...actionsGetWorkflowQuery(variables),
+    ...actionsGetWorkflowQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -37730,9 +37922,9 @@ export const useActionsGetWorkflow = <TData = Schemas.Workflow>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.Workflow, ActionsGetWorkflowError, TData>({
-    ...actionsGetWorkflowQuery(variables),
+    ...actionsGetWorkflowQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -37804,7 +37996,7 @@ export const useActionsDisableWorkflow = (
     ActionsDisableWorkflowVariables
   >({
     mutationFn: (variables: ActionsDisableWorkflowVariables) =>
-      fetchActionsDisableWorkflow({ ...fetcherOptions, ...variables }),
+      fetchActionsDisableWorkflow(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -37896,7 +38088,7 @@ export const useActionsCreateWorkflowDispatch = (
     ActionsCreateWorkflowDispatchVariables
   >({
     mutationFn: (variables: ActionsCreateWorkflowDispatchVariables) =>
-      fetchActionsCreateWorkflowDispatch({ ...fetcherOptions, ...variables }),
+      fetchActionsCreateWorkflowDispatch(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -37967,7 +38159,7 @@ export const useActionsEnableWorkflow = (
     ActionsEnableWorkflowVariables
   >({
     mutationFn: (variables: ActionsEnableWorkflowVariables) =>
-      fetchActionsEnableWorkflow({ ...fetcherOptions, ...variables }),
+      fetchActionsEnableWorkflow(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -38129,13 +38321,13 @@ export const useSuspenseActionsListWorkflowRuns = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     ActionsListWorkflowRunsResponse,
     ActionsListWorkflowRunsError,
     TData
   >({
-    ...actionsListWorkflowRunsQuery(variables),
+    ...actionsListWorkflowRunsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -38159,13 +38351,13 @@ export const useActionsListWorkflowRuns = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     ActionsListWorkflowRunsResponse,
     ActionsListWorkflowRunsError,
     TData
   >({
-    ...actionsListWorkflowRunsQuery(variables),
+    ...actionsListWorkflowRunsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -38257,13 +38449,13 @@ export const useSuspenseActionsGetWorkflowUsage = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.WorkflowUsage,
     ActionsGetWorkflowUsageError,
     TData
   >({
-    ...actionsGetWorkflowUsageQuery(variables),
+    ...actionsGetWorkflowUsageQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -38285,13 +38477,13 @@ export const useActionsGetWorkflowUsage = <TData = Schemas.WorkflowUsage>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.WorkflowUsage,
     ActionsGetWorkflowUsageError,
     TData
   >({
-    ...actionsGetWorkflowUsageQuery(variables),
+    ...actionsGetWorkflowUsageQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -38394,13 +38586,13 @@ export const useSuspenseIssuesListAssignees = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     IssuesListAssigneesResponse,
     IssuesListAssigneesError,
     TData
   >({
-    ...issuesListAssigneesQuery(variables),
+    ...issuesListAssigneesQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -38420,13 +38612,13 @@ export const useIssuesListAssignees = <TData = IssuesListAssigneesResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     IssuesListAssigneesResponse,
     IssuesListAssigneesError,
     TData
   >({
-    ...issuesListAssigneesQuery(variables),
+    ...issuesListAssigneesQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -38518,13 +38710,13 @@ export const useSuspenseIssuesCheckUserCanBeAssigned = <TData = undefined>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     undefined,
     IssuesCheckUserCanBeAssignedError,
     TData
   >({
-    ...issuesCheckUserCanBeAssignedQuery(variables),
+    ...issuesCheckUserCanBeAssignedQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -38548,13 +38740,13 @@ export const useIssuesCheckUserCanBeAssigned = <TData = undefined>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     undefined,
     IssuesCheckUserCanBeAssignedError,
     TData
   >({
-    ...issuesCheckUserCanBeAssignedQuery(variables),
+    ...issuesCheckUserCanBeAssignedQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -38654,13 +38846,13 @@ export const useSuspenseReposListAutolinks = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     ReposListAutolinksResponse,
     ReposListAutolinksError,
     TData
   >({
-    ...reposListAutolinksQuery(variables),
+    ...reposListAutolinksQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -38682,13 +38874,13 @@ export const useReposListAutolinks = <TData = ReposListAutolinksResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     ReposListAutolinksResponse,
     ReposListAutolinksError,
     TData
   >({
-    ...reposListAutolinksQuery(variables),
+    ...reposListAutolinksQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -38773,7 +38965,7 @@ export const useReposCreateAutolink = (
     ReposCreateAutolinkVariables
   >({
     mutationFn: (variables: ReposCreateAutolinkVariables) =>
-      fetchReposCreateAutolink({ ...fetcherOptions, ...variables }),
+      fetchReposCreateAutolink(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -38847,7 +39039,7 @@ export const useReposDeleteAutolink = (
     ReposDeleteAutolinkVariables
   >({
     mutationFn: (variables: ReposDeleteAutolinkVariables) =>
-      fetchReposDeleteAutolink({ ...fetcherOptions, ...variables }),
+      fetchReposDeleteAutolink(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -38931,13 +39123,13 @@ export const useSuspenseReposGetAutolink = <TData = Schemas.Autolink>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.Autolink,
     ReposGetAutolinkError,
     TData
   >({
-    ...reposGetAutolinkQuery(variables),
+    ...reposGetAutolinkQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -38955,9 +39147,9 @@ export const useReposGetAutolink = <TData = Schemas.Autolink>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.Autolink, ReposGetAutolinkError, TData>({
-    ...reposGetAutolinkQuery(variables),
+    ...reposGetAutolinkQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -39022,10 +39214,9 @@ export const useReposDisableAutomatedSecurityFixes = (
     ReposDisableAutomatedSecurityFixesVariables
   >({
     mutationFn: (variables: ReposDisableAutomatedSecurityFixesVariables) =>
-      fetchReposDisableAutomatedSecurityFixes({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchReposDisableAutomatedSecurityFixes(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -39089,10 +39280,9 @@ export const useReposEnableAutomatedSecurityFixes = (
     ReposEnableAutomatedSecurityFixesVariables
   >({
     mutationFn: (variables: ReposEnableAutomatedSecurityFixesVariables) =>
-      fetchReposEnableAutomatedSecurityFixes({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchReposEnableAutomatedSecurityFixes(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -39187,13 +39377,13 @@ export const useSuspenseReposListBranches = <TData = ReposListBranchesResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     ReposListBranchesResponse,
     ReposListBranchesError,
     TData
   >({
-    ...reposListBranchesQuery(variables),
+    ...reposListBranchesQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -39210,13 +39400,13 @@ export const useReposListBranches = <TData = ReposListBranchesResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     ReposListBranchesResponse,
     ReposListBranchesError,
     TData
   >({
-    ...reposListBranchesQuery(variables),
+    ...reposListBranchesQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -39300,13 +39490,13 @@ export const useSuspenseReposGetBranch = <TData = Schemas.BranchWithProtection>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.BranchWithProtection,
     ReposGetBranchError,
     TData
   >({
-    ...reposGetBranchQuery(variables),
+    ...reposGetBranchQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -39323,13 +39513,13 @@ export const useReposGetBranch = <TData = Schemas.BranchWithProtection>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.BranchWithProtection,
     ReposGetBranchError,
     TData
   >({
-    ...reposGetBranchQuery(variables),
+    ...reposGetBranchQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -39400,7 +39590,7 @@ export const useReposDeleteBranchProtection = (
     ReposDeleteBranchProtectionVariables
   >({
     mutationFn: (variables: ReposDeleteBranchProtectionVariables) =>
-      fetchReposDeleteBranchProtection({ ...fetcherOptions, ...variables }),
+      fetchReposDeleteBranchProtection(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -39488,13 +39678,13 @@ export const useSuspenseReposGetBranchProtection = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.BranchProtection,
     ReposGetBranchProtectionError,
     TData
   >({
-    ...reposGetBranchProtectionQuery(variables),
+    ...reposGetBranchProtectionQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -39514,13 +39704,13 @@ export const useReposGetBranchProtection = <TData = Schemas.BranchProtection>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.BranchProtection,
     ReposGetBranchProtectionError,
     TData
   >({
-    ...reposGetBranchProtectionQuery(variables),
+    ...reposGetBranchProtectionQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -39755,7 +39945,7 @@ export const useReposUpdateBranchProtection = (
     ReposUpdateBranchProtectionVariables
   >({
     mutationFn: (variables: ReposUpdateBranchProtectionVariables) =>
-      fetchReposUpdateBranchProtection({ ...fetcherOptions, ...variables }),
+      fetchReposUpdateBranchProtection(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -39829,10 +40019,9 @@ export const useReposDeleteAdminBranchProtection = (
     ReposDeleteAdminBranchProtectionVariables
   >({
     mutationFn: (variables: ReposDeleteAdminBranchProtectionVariables) =>
-      fetchReposDeleteAdminBranchProtection({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchReposDeleteAdminBranchProtection(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -39918,13 +40107,13 @@ export const useSuspenseReposGetAdminBranchProtection = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.ProtectedBranchAdminEnforced,
     ReposGetAdminBranchProtectionError,
     TData
   >({
-    ...reposGetAdminBranchProtectionQuery(variables),
+    ...reposGetAdminBranchProtectionQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -39946,13 +40135,13 @@ export const useReposGetAdminBranchProtection = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.ProtectedBranchAdminEnforced,
     ReposGetAdminBranchProtectionError,
     TData
   >({
-    ...reposGetAdminBranchProtectionQuery(variables),
+    ...reposGetAdminBranchProtectionQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -40025,7 +40214,7 @@ export const useReposSetAdminBranchProtection = (
     ReposSetAdminBranchProtectionVariables
   >({
     mutationFn: (variables: ReposSetAdminBranchProtectionVariables) =>
-      fetchReposSetAdminBranchProtection({ ...fetcherOptions, ...variables }),
+      fetchReposSetAdminBranchProtection(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -40095,10 +40284,9 @@ export const useReposDeletePullRequestReviewProtection = (
     ReposDeletePullRequestReviewProtectionVariables
   >({
     mutationFn: (variables: ReposDeletePullRequestReviewProtectionVariables) =>
-      fetchReposDeletePullRequestReviewProtection({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchReposDeletePullRequestReviewProtection(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -40184,13 +40372,15 @@ export const useSuspenseReposGetPullRequestReviewProtection = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.ProtectedBranchPullRequestReview,
     ReposGetPullRequestReviewProtectionError,
     TData
   >({
-    ...reposGetPullRequestReviewProtectionQuery(variables),
+    ...reposGetPullRequestReviewProtectionQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -40212,13 +40402,15 @@ export const useReposGetPullRequestReviewProtection = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.ProtectedBranchPullRequestReview,
     ReposGetPullRequestReviewProtectionError,
     TData
   >({
-    ...reposGetPullRequestReviewProtectionQuery(variables),
+    ...reposGetPullRequestReviewProtectionQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -40353,10 +40545,9 @@ export const useReposUpdatePullRequestReviewProtection = (
     ReposUpdatePullRequestReviewProtectionVariables
   >({
     mutationFn: (variables: ReposUpdatePullRequestReviewProtectionVariables) =>
-      fetchReposUpdatePullRequestReviewProtection({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchReposUpdatePullRequestReviewProtection(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -40430,10 +40621,9 @@ export const useReposDeleteCommitSignatureProtection = (
     ReposDeleteCommitSignatureProtectionVariables
   >({
     mutationFn: (variables: ReposDeleteCommitSignatureProtectionVariables) =>
-      fetchReposDeleteCommitSignatureProtection({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchReposDeleteCommitSignatureProtection(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -40533,13 +40723,15 @@ export const useSuspenseReposGetCommitSignatureProtection = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.ProtectedBranchAdminEnforced,
     ReposGetCommitSignatureProtectionError,
     TData
   >({
-    ...reposGetCommitSignatureProtectionQuery(variables),
+    ...reposGetCommitSignatureProtectionQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -40565,13 +40757,15 @@ export const useReposGetCommitSignatureProtection = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.ProtectedBranchAdminEnforced,
     ReposGetCommitSignatureProtectionError,
     TData
   >({
-    ...reposGetCommitSignatureProtectionQuery(variables),
+    ...reposGetCommitSignatureProtectionQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -40646,10 +40840,9 @@ export const useReposCreateCommitSignatureProtection = (
     ReposCreateCommitSignatureProtectionVariables
   >({
     mutationFn: (variables: ReposCreateCommitSignatureProtectionVariables) =>
-      fetchReposCreateCommitSignatureProtection({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchReposCreateCommitSignatureProtection(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -40717,10 +40910,9 @@ export const useReposRemoveStatusCheckProtection = (
     ReposRemoveStatusCheckProtectionVariables
   >({
     mutationFn: (variables: ReposRemoveStatusCheckProtectionVariables) =>
-      fetchReposRemoveStatusCheckProtection({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchReposRemoveStatusCheckProtection(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -40808,13 +41000,15 @@ export const useSuspenseReposGetStatusChecksProtection = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.StatusCheckPolicy,
     ReposGetStatusChecksProtectionError,
     TData
   >({
-    ...reposGetStatusChecksProtectionQuery(variables),
+    ...reposGetStatusChecksProtectionQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -40836,13 +41030,15 @@ export const useReposGetStatusChecksProtection = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.StatusCheckPolicy,
     ReposGetStatusChecksProtectionError,
     TData
   >({
-    ...reposGetStatusChecksProtectionQuery(variables),
+    ...reposGetStatusChecksProtectionQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -40950,10 +41146,9 @@ export const useReposUpdateStatusCheckProtection = (
     ReposUpdateStatusCheckProtectionVariables
   >({
     mutationFn: (variables: ReposUpdateStatusCheckProtectionVariables) =>
-      fetchReposUpdateStatusCheckProtection({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchReposUpdateStatusCheckProtection(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -41045,7 +41240,7 @@ export const useReposRemoveStatusCheckContexts = (
     ReposRemoveStatusCheckContextsVariables
   >({
     mutationFn: (variables: ReposRemoveStatusCheckContextsVariables) =>
-      fetchReposRemoveStatusCheckContexts({ ...fetcherOptions, ...variables }),
+      fetchReposRemoveStatusCheckContexts(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -41135,13 +41330,15 @@ export const useSuspenseReposGetAllStatusCheckContexts = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     ReposGetAllStatusCheckContextsResponse,
     ReposGetAllStatusCheckContextsError,
     TData
   >({
-    ...reposGetAllStatusCheckContextsQuery(variables),
+    ...reposGetAllStatusCheckContextsQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -41163,13 +41360,15 @@ export const useReposGetAllStatusCheckContexts = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     ReposGetAllStatusCheckContextsResponse,
     ReposGetAllStatusCheckContextsError,
     TData
   >({
-    ...reposGetAllStatusCheckContextsQuery(variables),
+    ...reposGetAllStatusCheckContextsQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -41266,7 +41465,7 @@ export const useReposAddStatusCheckContexts = (
     ReposAddStatusCheckContextsVariables
   >({
     mutationFn: (variables: ReposAddStatusCheckContextsVariables) =>
-      fetchReposAddStatusCheckContexts({ ...fetcherOptions, ...variables }),
+      fetchReposAddStatusCheckContexts(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -41358,7 +41557,7 @@ export const useReposSetStatusCheckContexts = (
     ReposSetStatusCheckContextsVariables
   >({
     mutationFn: (variables: ReposSetStatusCheckContextsVariables) =>
-      fetchReposSetStatusCheckContexts({ ...fetcherOptions, ...variables }),
+      fetchReposSetStatusCheckContexts(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -41430,7 +41629,7 @@ export const useReposDeleteAccessRestrictions = (
     ReposDeleteAccessRestrictionsVariables
   >({
     mutationFn: (variables: ReposDeleteAccessRestrictionsVariables) =>
-      fetchReposDeleteAccessRestrictions({ ...fetcherOptions, ...variables }),
+      fetchReposDeleteAccessRestrictions(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -41530,13 +41729,13 @@ export const useSuspenseReposGetAccessRestrictions = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.BranchRestrictionPolicy,
     ReposGetAccessRestrictionsError,
     TData
   >({
-    ...reposGetAccessRestrictionsQuery(variables),
+    ...reposGetAccessRestrictionsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -41562,13 +41761,13 @@ export const useReposGetAccessRestrictions = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.BranchRestrictionPolicy,
     ReposGetAccessRestrictionsError,
     TData
   >({
-    ...reposGetAccessRestrictionsQuery(variables),
+    ...reposGetAccessRestrictionsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -41659,10 +41858,9 @@ export const useReposRemoveAppAccessRestrictions = (
     ReposRemoveAppAccessRestrictionsVariables
   >({
     mutationFn: (variables: ReposRemoveAppAccessRestrictionsVariables) =>
-      fetchReposRemoveAppAccessRestrictions({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchReposRemoveAppAccessRestrictions(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -41760,13 +41958,15 @@ export const useSuspenseReposGetAppsWithAccessToProtectedBranch = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     ReposGetAppsWithAccessToProtectedBranchResponse,
     ReposGetAppsWithAccessToProtectedBranchError,
     TData
   >({
-    ...reposGetAppsWithAccessToProtectedBranchQuery(variables),
+    ...reposGetAppsWithAccessToProtectedBranchQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -41790,13 +41990,15 @@ export const useReposGetAppsWithAccessToProtectedBranch = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     ReposGetAppsWithAccessToProtectedBranchResponse,
     ReposGetAppsWithAccessToProtectedBranchError,
     TData
   >({
-    ...reposGetAppsWithAccessToProtectedBranchQuery(variables),
+    ...reposGetAppsWithAccessToProtectedBranchQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -41887,7 +42089,7 @@ export const useReposAddAppAccessRestrictions = (
     ReposAddAppAccessRestrictionsVariables
   >({
     mutationFn: (variables: ReposAddAppAccessRestrictionsVariables) =>
-      fetchReposAddAppAccessRestrictions({ ...fetcherOptions, ...variables }),
+      fetchReposAddAppAccessRestrictions(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -41977,7 +42179,7 @@ export const useReposSetAppAccessRestrictions = (
     ReposSetAppAccessRestrictionsVariables
   >({
     mutationFn: (variables: ReposSetAppAccessRestrictionsVariables) =>
-      fetchReposSetAppAccessRestrictions({ ...fetcherOptions, ...variables }),
+      fetchReposSetAppAccessRestrictions(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -42067,10 +42269,9 @@ export const useReposRemoveTeamAccessRestrictions = (
     ReposRemoveTeamAccessRestrictionsVariables
   >({
     mutationFn: (variables: ReposRemoveTeamAccessRestrictionsVariables) =>
-      fetchReposRemoveTeamAccessRestrictions({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchReposRemoveTeamAccessRestrictions(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -42167,13 +42368,15 @@ export const useSuspenseReposGetTeamsWithAccessToProtectedBranch = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     ReposGetTeamsWithAccessToProtectedBranchResponse,
     ReposGetTeamsWithAccessToProtectedBranchError,
     TData
   >({
-    ...reposGetTeamsWithAccessToProtectedBranchQuery(variables),
+    ...reposGetTeamsWithAccessToProtectedBranchQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -42197,13 +42400,15 @@ export const useReposGetTeamsWithAccessToProtectedBranch = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     ReposGetTeamsWithAccessToProtectedBranchResponse,
     ReposGetTeamsWithAccessToProtectedBranchError,
     TData
   >({
-    ...reposGetTeamsWithAccessToProtectedBranchQuery(variables),
+    ...reposGetTeamsWithAccessToProtectedBranchQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -42294,7 +42499,7 @@ export const useReposAddTeamAccessRestrictions = (
     ReposAddTeamAccessRestrictionsVariables
   >({
     mutationFn: (variables: ReposAddTeamAccessRestrictionsVariables) =>
-      fetchReposAddTeamAccessRestrictions({ ...fetcherOptions, ...variables }),
+      fetchReposAddTeamAccessRestrictions(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -42384,7 +42589,7 @@ export const useReposSetTeamAccessRestrictions = (
     ReposSetTeamAccessRestrictionsVariables
   >({
     mutationFn: (variables: ReposSetTeamAccessRestrictionsVariables) =>
-      fetchReposSetTeamAccessRestrictions({ ...fetcherOptions, ...variables }),
+      fetchReposSetTeamAccessRestrictions(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -42482,10 +42687,9 @@ export const useReposRemoveUserAccessRestrictions = (
     ReposRemoveUserAccessRestrictionsVariables
   >({
     mutationFn: (variables: ReposRemoveUserAccessRestrictionsVariables) =>
-      fetchReposRemoveUserAccessRestrictions({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchReposRemoveUserAccessRestrictions(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -42583,13 +42787,15 @@ export const useSuspenseReposGetUsersWithAccessToProtectedBranch = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     ReposGetUsersWithAccessToProtectedBranchResponse,
     ReposGetUsersWithAccessToProtectedBranchError,
     TData
   >({
-    ...reposGetUsersWithAccessToProtectedBranchQuery(variables),
+    ...reposGetUsersWithAccessToProtectedBranchQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -42613,13 +42819,15 @@ export const useReposGetUsersWithAccessToProtectedBranch = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     ReposGetUsersWithAccessToProtectedBranchResponse,
     ReposGetUsersWithAccessToProtectedBranchError,
     TData
   >({
-    ...reposGetUsersWithAccessToProtectedBranchQuery(variables),
+    ...reposGetUsersWithAccessToProtectedBranchQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -42718,7 +42926,7 @@ export const useReposAddUserAccessRestrictions = (
     ReposAddUserAccessRestrictionsVariables
   >({
     mutationFn: (variables: ReposAddUserAccessRestrictionsVariables) =>
-      fetchReposAddUserAccessRestrictions({ ...fetcherOptions, ...variables }),
+      fetchReposAddUserAccessRestrictions(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -42816,7 +43024,7 @@ export const useReposSetUserAccessRestrictions = (
     ReposSetUserAccessRestrictionsVariables
   >({
     mutationFn: (variables: ReposSetUserAccessRestrictionsVariables) =>
-      fetchReposSetUserAccessRestrictions({ ...fetcherOptions, ...variables }),
+      fetchReposSetUserAccessRestrictions(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -42932,7 +43140,7 @@ export const useReposRenameBranch = (
     ReposRenameBranchVariables
   >({
     mutationFn: (variables: ReposRenameBranchVariables) =>
-      fetchReposRenameBranch({ ...fetcherOptions, ...variables }),
+      fetchReposRenameBranch(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -43023,7 +43231,7 @@ export const useChecksCreate = (
     ChecksCreateVariables
   >({
     mutationFn: (variables: ChecksCreateVariables) =>
-      fetchChecksCreate({ ...fetcherOptions, ...variables }),
+      fetchChecksCreate(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -43104,9 +43312,9 @@ export const useSuspenseChecksGet = <TData = Schemas.CheckRun>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<Schemas.CheckRun, ChecksGetError, TData>({
-    ...checksGetQuery(variables),
+    ...checksGetQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -43124,9 +43332,9 @@ export const useChecksGet = <TData = Schemas.CheckRun>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.CheckRun, ChecksGetError, TData>({
-    ...checksGetQuery(variables),
+    ...checksGetQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -43218,7 +43426,7 @@ export const useChecksUpdate = (
     ChecksUpdateVariables
   >({
     mutationFn: (variables: ChecksUpdateVariables) =>
-      fetchChecksUpdate({ ...fetcherOptions, ...variables }),
+      fetchChecksUpdate(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -43321,13 +43529,13 @@ export const useSuspenseChecksListAnnotations = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     ChecksListAnnotationsResponse,
     ChecksListAnnotationsError,
     TData
   >({
-    ...checksListAnnotationsQuery(variables),
+    ...checksListAnnotationsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -43347,13 +43555,13 @@ export const useChecksListAnnotations = <TData = ChecksListAnnotationsResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     ChecksListAnnotationsResponse,
     ChecksListAnnotationsError,
     TData
   >({
-    ...checksListAnnotationsQuery(variables),
+    ...checksListAnnotationsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -43438,7 +43646,7 @@ export const useChecksRerequestRun = (
     ChecksRerequestRunVariables
   >({
     mutationFn: (variables: ChecksRerequestRunVariables) =>
-      fetchChecksRerequestRun({ ...fetcherOptions, ...variables }),
+      fetchChecksRerequestRun(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -43513,7 +43721,7 @@ export const useChecksCreateSuite = (
     ChecksCreateSuiteVariables
   >({
     mutationFn: (variables: ChecksCreateSuiteVariables) =>
-      fetchChecksCreateSuite({ ...fetcherOptions, ...variables }),
+      fetchChecksCreateSuite(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -43595,7 +43803,7 @@ export const useChecksSetSuitesPreferences = (
     ChecksSetSuitesPreferencesVariables
   >({
     mutationFn: (variables: ChecksSetSuitesPreferencesVariables) =>
-      fetchChecksSetSuitesPreferences({ ...fetcherOptions, ...variables }),
+      fetchChecksSetSuitesPreferences(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -43680,13 +43888,13 @@ export const useSuspenseChecksGetSuite = <TData = Schemas.CheckSuite>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.CheckSuite,
     ChecksGetSuiteError,
     TData
   >({
-    ...checksGetSuiteQuery(variables),
+    ...checksGetSuiteQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -43704,9 +43912,9 @@ export const useChecksGetSuite = <TData = Schemas.CheckSuite>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.CheckSuite, ChecksGetSuiteError, TData>({
-    ...checksGetSuiteQuery(variables),
+    ...checksGetSuiteQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -43833,13 +44041,13 @@ export const useSuspenseChecksListForSuite = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     ChecksListForSuiteResponse,
     ChecksListForSuiteError,
     TData
   >({
-    ...checksListForSuiteQuery(variables),
+    ...checksListForSuiteQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -43861,13 +44069,13 @@ export const useChecksListForSuite = <TData = ChecksListForSuiteResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     ChecksListForSuiteResponse,
     ChecksListForSuiteError,
     TData
   >({
-    ...checksListForSuiteQuery(variables),
+    ...checksListForSuiteQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -43939,7 +44147,7 @@ export const useChecksRerequestSuite = (
     ChecksRerequestSuiteVariables
   >({
     mutationFn: (variables: ChecksRerequestSuiteVariables) =>
-      fetchChecksRerequestSuite({ ...fetcherOptions, ...variables }),
+      fetchChecksRerequestSuite(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -44115,13 +44323,13 @@ export const useSuspenseCodeScanningListAlertsForRepo = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     CodeScanningListAlertsForRepoResponse,
     CodeScanningListAlertsForRepoError,
     TData
   >({
-    ...codeScanningListAlertsForRepoQuery(variables),
+    ...codeScanningListAlertsForRepoQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -44152,13 +44360,13 @@ export const useCodeScanningListAlertsForRepo = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     CodeScanningListAlertsForRepoResponse,
     CodeScanningListAlertsForRepoError,
     TData
   >({
-    ...codeScanningListAlertsForRepoQuery(variables),
+    ...codeScanningListAlertsForRepoQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -44261,13 +44469,13 @@ export const useSuspenseCodeScanningGetAlert = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.CodeScanningAlert,
     CodeScanningGetAlertError,
     TData
   >({
-    ...codeScanningGetAlertQuery(variables),
+    ...codeScanningGetAlertQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -44287,13 +44495,13 @@ export const useCodeScanningGetAlert = <TData = Schemas.CodeScanningAlert>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.CodeScanningAlert,
     CodeScanningGetAlertError,
     TData
   >({
-    ...codeScanningGetAlertQuery(variables),
+    ...codeScanningGetAlertQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -44381,7 +44589,7 @@ export const useCodeScanningUpdateAlert = (
     CodeScanningUpdateAlertVariables
   >({
     mutationFn: (variables: CodeScanningUpdateAlertVariables) =>
-      fetchCodeScanningUpdateAlert({ ...fetcherOptions, ...variables }),
+      fetchCodeScanningUpdateAlert(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -44511,13 +44719,15 @@ export const useSuspenseCodeScanningListAlertInstances = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     CodeScanningListAlertInstancesResponse,
     CodeScanningListAlertInstancesError,
     TData
   >({
-    ...codeScanningListAlertInstancesQuery(variables),
+    ...codeScanningListAlertInstancesQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -44542,13 +44752,15 @@ export const useCodeScanningListAlertInstances = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     CodeScanningListAlertInstancesResponse,
     CodeScanningListAlertInstancesError,
     TData
   >({
-    ...codeScanningListAlertInstancesQuery(variables),
+    ...codeScanningListAlertInstancesQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -44738,13 +44950,15 @@ export const useSuspenseCodeScanningListRecentAnalyses = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     CodeScanningListRecentAnalysesResponse,
     CodeScanningListRecentAnalysesError,
     TData
   >({
-    ...codeScanningListRecentAnalysesQuery(variables),
+    ...codeScanningListRecentAnalysesQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -44782,13 +44996,15 @@ export const useCodeScanningListRecentAnalyses = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     CodeScanningListRecentAnalysesResponse,
     CodeScanningListRecentAnalysesError,
     TData
   >({
-    ...codeScanningListRecentAnalysesQuery(variables),
+    ...codeScanningListRecentAnalysesQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -45009,7 +45225,7 @@ export const useCodeScanningDeleteAnalysis = (
     CodeScanningDeleteAnalysisVariables
   >({
     mutationFn: (variables: CodeScanningDeleteAnalysisVariables) =>
-      fetchCodeScanningDeleteAnalysis({ ...fetcherOptions, ...variables }),
+      fetchCodeScanningDeleteAnalysis(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -45161,13 +45377,13 @@ export const useSuspenseCodeScanningGetAnalysis = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.CodeScanningAnalysis,
     CodeScanningGetAnalysisError,
     TData
   >({
-    ...codeScanningGetAnalysisQuery(variables),
+    ...codeScanningGetAnalysisQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -45207,13 +45423,13 @@ export const useCodeScanningGetAnalysis = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.CodeScanningAnalysis,
     CodeScanningGetAnalysisError,
     TData
   >({
-    ...codeScanningGetAnalysisQuery(variables),
+    ...codeScanningGetAnalysisQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -45323,13 +45539,15 @@ export const useSuspenseCodeScanningListCodeqlDatabases = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     CodeScanningListCodeqlDatabasesResponse,
     CodeScanningListCodeqlDatabasesError,
     TData
   >({
-    ...codeScanningListCodeqlDatabasesQuery(variables),
+    ...codeScanningListCodeqlDatabasesQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -45355,13 +45573,15 @@ export const useCodeScanningListCodeqlDatabases = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     CodeScanningListCodeqlDatabasesResponse,
     CodeScanningListCodeqlDatabasesError,
     TData
   >({
-    ...codeScanningListCodeqlDatabasesQuery(variables),
+    ...codeScanningListCodeqlDatabasesQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -45494,13 +45714,13 @@ export const useSuspenseCodeScanningGetCodeqlDatabase = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.CodeScanningCodeqlDatabase,
     CodeScanningGetCodeqlDatabaseError,
     TData
   >({
-    ...codeScanningGetCodeqlDatabaseQuery(variables),
+    ...codeScanningGetCodeqlDatabaseQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -45532,13 +45752,13 @@ export const useCodeScanningGetCodeqlDatabase = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.CodeScanningCodeqlDatabase,
     CodeScanningGetCodeqlDatabaseError,
     TData
   >({
-    ...codeScanningGetCodeqlDatabaseQuery(variables),
+    ...codeScanningGetCodeqlDatabaseQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -45703,7 +45923,7 @@ export const useCodeScanningUploadSarif = (
     CodeScanningUploadSarifVariables
   >({
     mutationFn: (variables: CodeScanningUploadSarifVariables) =>
-      fetchCodeScanningUploadSarif({ ...fetcherOptions, ...variables }),
+      fetchCodeScanningUploadSarif(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -45797,13 +46017,13 @@ export const useSuspenseCodeScanningGetSarif = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.CodeScanningSarifsStatus,
     CodeScanningGetSarifError,
     TData
   >({
-    ...codeScanningGetSarifQuery(variables),
+    ...codeScanningGetSarifQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -45825,13 +46045,13 @@ export const useCodeScanningGetSarif = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.CodeScanningSarifsStatus,
     CodeScanningGetSarifError,
     TData
   >({
-    ...codeScanningGetSarifQuery(variables),
+    ...codeScanningGetSarifQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -45933,13 +46153,13 @@ export const useSuspenseReposCodeownersErrors = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.CodeownersErrors,
     ReposCodeownersErrorsError,
     TData
   >({
-    ...reposCodeownersErrorsQuery(variables),
+    ...reposCodeownersErrorsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -45963,13 +46183,13 @@ export const useReposCodeownersErrors = <TData = Schemas.CodeownersErrors>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.CodeownersErrors,
     ReposCodeownersErrorsError,
     TData
   >({
-    ...reposCodeownersErrorsQuery(variables),
+    ...reposCodeownersErrorsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -46102,13 +46322,15 @@ export const useSuspenseCodespacesListInRepositoryForAuthenticatedUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     CodespacesListInRepositoryForAuthenticatedUserResponse,
     CodespacesListInRepositoryForAuthenticatedUserError,
     TData
   >({
-    ...codespacesListInRepositoryForAuthenticatedUserQuery(variables),
+    ...codespacesListInRepositoryForAuthenticatedUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -46134,13 +46356,15 @@ export const useCodespacesListInRepositoryForAuthenticatedUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     CodespacesListInRepositoryForAuthenticatedUserResponse,
     CodespacesListInRepositoryForAuthenticatedUserError,
     TData
   >({
-    ...codespacesListInRepositoryForAuthenticatedUserQuery(variables),
+    ...codespacesListInRepositoryForAuthenticatedUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -46319,10 +46543,9 @@ export const useCodespacesCreateWithRepoForAuthenticatedUser = (
     mutationFn: (
       variables: CodespacesCreateWithRepoForAuthenticatedUserVariables
     ) =>
-      fetchCodespacesCreateWithRepoForAuthenticatedUser({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchCodespacesCreateWithRepoForAuthenticatedUser(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -46473,14 +46696,14 @@ export const useSuspenseCodespacesListDevcontainersInRepositoryForAuthenticatedU
       "queryKey" | "queryFn" | "initialData"
     >
   ) => {
-    const { queryOptions } = useGithubContext(options);
+    const { queryOptions, fetcherOptions } = useGithubContext(options);
     return reactQuery.useSuspenseQuery<
       CodespacesListDevcontainersInRepositoryForAuthenticatedUserResponse,
       CodespacesListDevcontainersInRepositoryForAuthenticatedUserError,
       TData
     >({
       ...codespacesListDevcontainersInRepositoryForAuthenticatedUserQuery(
-        variables
+        deepMerge(fetcherOptions, variables)
       ),
       ...options,
       ...queryOptions,
@@ -46508,14 +46731,14 @@ export const useCodespacesListDevcontainersInRepositoryForAuthenticatedUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     CodespacesListDevcontainersInRepositoryForAuthenticatedUserResponse,
     CodespacesListDevcontainersInRepositoryForAuthenticatedUserError,
     TData
   >({
     ...codespacesListDevcontainersInRepositoryForAuthenticatedUserQuery(
-      variables
+      deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -46651,13 +46874,15 @@ export const useSuspenseCodespacesRepoMachinesForAuthenticatedUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     CodespacesRepoMachinesForAuthenticatedUserResponse,
     CodespacesRepoMachinesForAuthenticatedUserError,
     TData
   >({
-    ...codespacesRepoMachinesForAuthenticatedUserQuery(variables),
+    ...codespacesRepoMachinesForAuthenticatedUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -46683,13 +46908,15 @@ export const useCodespacesRepoMachinesForAuthenticatedUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     CodespacesRepoMachinesForAuthenticatedUserResponse,
     CodespacesRepoMachinesForAuthenticatedUserError,
     TData
   >({
-    ...codespacesRepoMachinesForAuthenticatedUserQuery(variables),
+    ...codespacesRepoMachinesForAuthenticatedUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -46821,13 +47048,15 @@ export const useSuspenseCodespacesPreFlightWithRepoForAuthenticatedUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     CodespacesPreFlightWithRepoForAuthenticatedUserResponse,
     CodespacesPreFlightWithRepoForAuthenticatedUserError,
     TData
   >({
-    ...codespacesPreFlightWithRepoForAuthenticatedUserQuery(variables),
+    ...codespacesPreFlightWithRepoForAuthenticatedUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -46853,13 +47082,15 @@ export const useCodespacesPreFlightWithRepoForAuthenticatedUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     CodespacesPreFlightWithRepoForAuthenticatedUserResponse,
     CodespacesPreFlightWithRepoForAuthenticatedUserError,
     TData
   >({
-    ...codespacesPreFlightWithRepoForAuthenticatedUserQuery(variables),
+    ...codespacesPreFlightWithRepoForAuthenticatedUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -46962,13 +47193,13 @@ export const useSuspenseCodespacesListRepoSecrets = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     CodespacesListRepoSecretsResponse,
     CodespacesListRepoSecretsError,
     TData
   >({
-    ...codespacesListRepoSecretsQuery(variables),
+    ...codespacesListRepoSecretsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -46990,13 +47221,13 @@ export const useCodespacesListRepoSecrets = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     CodespacesListRepoSecretsResponse,
     CodespacesListRepoSecretsError,
     TData
   >({
-    ...codespacesListRepoSecretsQuery(variables),
+    ...codespacesListRepoSecretsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -47078,13 +47309,13 @@ export const useSuspenseCodespacesGetRepoPublicKey = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.CodespacesPublicKey,
     CodespacesGetRepoPublicKeyError,
     TData
   >({
-    ...codespacesGetRepoPublicKeyQuery(variables),
+    ...codespacesGetRepoPublicKeyQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -47106,13 +47337,13 @@ export const useCodespacesGetRepoPublicKey = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.CodespacesPublicKey,
     CodespacesGetRepoPublicKeyError,
     TData
   >({
-    ...codespacesGetRepoPublicKeyQuery(variables),
+    ...codespacesGetRepoPublicKeyQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -47180,7 +47411,7 @@ export const useCodespacesDeleteRepoSecret = (
     CodespacesDeleteRepoSecretVariables
   >({
     mutationFn: (variables: CodespacesDeleteRepoSecretVariables) =>
-      fetchCodespacesDeleteRepoSecret({ ...fetcherOptions, ...variables }),
+      fetchCodespacesDeleteRepoSecret(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -47265,13 +47496,13 @@ export const useSuspenseCodespacesGetRepoSecret = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.RepoCodespacesSecret,
     CodespacesGetRepoSecretError,
     TData
   >({
-    ...codespacesGetRepoSecretQuery(variables),
+    ...codespacesGetRepoSecretQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -47293,13 +47524,13 @@ export const useCodespacesGetRepoSecret = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.RepoCodespacesSecret,
     CodespacesGetRepoSecretError,
     TData
   >({
-    ...codespacesGetRepoSecretQuery(variables),
+    ...codespacesGetRepoSecretQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -47532,10 +47763,9 @@ export const useCodespacesCreateOrUpdateRepoSecret = (
     CodespacesCreateOrUpdateRepoSecretVariables
   >({
     mutationFn: (variables: CodespacesCreateOrUpdateRepoSecretVariables) =>
-      fetchCodespacesCreateOrUpdateRepoSecret({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchCodespacesCreateOrUpdateRepoSecret(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -47668,13 +47898,13 @@ export const useSuspenseReposListCollaborators = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     ReposListCollaboratorsResponse,
     ReposListCollaboratorsError,
     TData
   >({
-    ...reposListCollaboratorsQuery(variables),
+    ...reposListCollaboratorsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -47703,13 +47933,13 @@ export const useReposListCollaborators = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     ReposListCollaboratorsResponse,
     ReposListCollaboratorsError,
     TData
   >({
-    ...reposListCollaboratorsQuery(variables),
+    ...reposListCollaboratorsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -47771,7 +48001,7 @@ export const useReposRemoveCollaborator = (
     ReposRemoveCollaboratorVariables
   >({
     mutationFn: (variables: ReposRemoveCollaboratorVariables) =>
-      fetchReposRemoveCollaborator({ ...fetcherOptions, ...variables }),
+      fetchReposRemoveCollaborator(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -47864,13 +48094,13 @@ export const useSuspenseReposCheckCollaborator = <TData = undefined>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     undefined,
     ReposCheckCollaboratorError,
     TData
   >({
-    ...reposCheckCollaboratorQuery(variables),
+    ...reposCheckCollaboratorQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -47892,9 +48122,9 @@ export const useReposCheckCollaborator = <TData = undefined>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<undefined, ReposCheckCollaboratorError, TData>({
-    ...reposCheckCollaboratorQuery(variables),
+    ...reposCheckCollaboratorQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -48021,7 +48251,7 @@ export const useReposAddCollaborator = (
     ReposAddCollaboratorVariables
   >({
     mutationFn: (variables: ReposAddCollaboratorVariables) =>
-      fetchReposAddCollaborator({ ...fetcherOptions, ...variables }),
+      fetchReposAddCollaborator(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -48109,13 +48339,15 @@ export const useSuspenseReposGetCollaboratorPermissionLevel = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.RepositoryCollaboratorPermission,
     ReposGetCollaboratorPermissionLevelError,
     TData
   >({
-    ...reposGetCollaboratorPermissionLevelQuery(variables),
+    ...reposGetCollaboratorPermissionLevelQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -48137,13 +48369,15 @@ export const useReposGetCollaboratorPermissionLevel = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.RepositoryCollaboratorPermission,
     ReposGetCollaboratorPermissionLevelError,
     TData
   >({
-    ...reposGetCollaboratorPermissionLevelQuery(variables),
+    ...reposGetCollaboratorPermissionLevelQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -48250,13 +48484,15 @@ export const useSuspenseReposListCommitCommentsForRepo = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     ReposListCommitCommentsForRepoResponse,
     ReposListCommitCommentsForRepoError,
     TData
   >({
-    ...reposListCommitCommentsForRepoQuery(variables),
+    ...reposListCommitCommentsForRepoQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -48280,13 +48516,15 @@ export const useReposListCommitCommentsForRepo = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     ReposListCommitCommentsForRepoResponse,
     ReposListCommitCommentsForRepoError,
     TData
   >({
-    ...reposListCommitCommentsForRepoQuery(variables),
+    ...reposListCommitCommentsForRepoQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -48351,7 +48589,7 @@ export const useReposDeleteCommitComment = (
     ReposDeleteCommitCommentVariables
   >({
     mutationFn: (variables: ReposDeleteCommitCommentVariables) =>
-      fetchReposDeleteCommitComment({ ...fetcherOptions, ...variables }),
+      fetchReposDeleteCommitComment(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -48428,13 +48666,13 @@ export const useSuspenseReposGetCommitComment = <TData = Schemas.CommitComment>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.CommitComment,
     ReposGetCommitCommentError,
     TData
   >({
-    ...reposGetCommitCommentQuery(variables),
+    ...reposGetCommitCommentQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -48451,13 +48689,13 @@ export const useReposGetCommitComment = <TData = Schemas.CommitComment>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.CommitComment,
     ReposGetCommitCommentError,
     TData
   >({
-    ...reposGetCommitCommentQuery(variables),
+    ...reposGetCommitCommentQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -48530,7 +48768,7 @@ export const useReposUpdateCommitComment = (
     ReposUpdateCommitCommentVariables
   >({
     mutationFn: (variables: ReposUpdateCommitCommentVariables) =>
-      fetchReposUpdateCommitComment({ ...fetcherOptions, ...variables }),
+      fetchReposUpdateCommitComment(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -48648,13 +48886,13 @@ export const useSuspenseReactionsListForCommitComment = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     ReactionsListForCommitCommentResponse,
     ReactionsListForCommitCommentError,
     TData
   >({
-    ...reactionsListForCommitCommentQuery(variables),
+    ...reactionsListForCommitCommentQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -48676,13 +48914,13 @@ export const useReactionsListForCommitComment = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     ReactionsListForCommitCommentResponse,
     ReactionsListForCommitCommentError,
     TData
   >({
-    ...reactionsListForCommitCommentQuery(variables),
+    ...reactionsListForCommitCommentQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -48769,7 +49007,9 @@ export const useReactionsCreateForCommitComment = (
     ReactionsCreateForCommitCommentVariables
   >({
     mutationFn: (variables: ReactionsCreateForCommitCommentVariables) =>
-      fetchReactionsCreateForCommitComment({ ...fetcherOptions, ...variables }),
+      fetchReactionsCreateForCommitComment(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -48845,7 +49085,9 @@ export const useReactionsDeleteForCommitComment = (
     ReactionsDeleteForCommitCommentVariables
   >({
     mutationFn: (variables: ReactionsDeleteForCommitCommentVariables) =>
-      fetchReactionsDeleteForCommitComment({ ...fetcherOptions, ...variables }),
+      fetchReactionsDeleteForCommitComment(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -49064,13 +49306,13 @@ export const useSuspenseReposListCommits = <TData = ReposListCommitsResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     ReposListCommitsResponse,
     ReposListCommitsError,
     TData
   >({
-    ...reposListCommitsQuery(variables),
+    ...reposListCommitsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -49117,13 +49359,13 @@ export const useReposListCommits = <TData = ReposListCommitsResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     ReposListCommitsResponse,
     ReposListCommitsError,
     TData
   >({
-    ...reposListCommitsQuery(variables),
+    ...reposListCommitsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -49220,13 +49462,15 @@ export const useSuspenseReposListBranchesForHeadCommit = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     ReposListBranchesForHeadCommitResponse,
     ReposListBranchesForHeadCommitError,
     TData
   >({
-    ...reposListBranchesForHeadCommitQuery(variables),
+    ...reposListBranchesForHeadCommitQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -49250,13 +49494,15 @@ export const useReposListBranchesForHeadCommit = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     ReposListBranchesForHeadCommitResponse,
     ReposListBranchesForHeadCommitError,
     TData
   >({
-    ...reposListBranchesForHeadCommitQuery(variables),
+    ...reposListBranchesForHeadCommitQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -49360,13 +49606,13 @@ export const useSuspenseReposListCommentsForCommit = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     ReposListCommentsForCommitResponse,
     ReposListCommentsForCommitError,
     TData
   >({
-    ...reposListCommentsForCommitQuery(variables),
+    ...reposListCommentsForCommitQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -49388,13 +49634,13 @@ export const useReposListCommentsForCommit = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     ReposListCommentsForCommitResponse,
     ReposListCommentsForCommitError,
     TData
   >({
-    ...reposListCommentsForCommitQuery(variables),
+    ...reposListCommentsForCommitQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -49495,7 +49741,7 @@ export const useReposCreateCommitComment = (
     ReposCreateCommitCommentVariables
   >({
     mutationFn: (variables: ReposCreateCommitCommentVariables) =>
-      fetchReposCreateCommitComment({ ...fetcherOptions, ...variables }),
+      fetchReposCreateCommitComment(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -49600,13 +49846,15 @@ export const useSuspenseReposListPullRequestsAssociatedWithCommit = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     ReposListPullRequestsAssociatedWithCommitResponse,
     ReposListPullRequestsAssociatedWithCommitError,
     TData
   >({
-    ...reposListPullRequestsAssociatedWithCommitQuery(variables),
+    ...reposListPullRequestsAssociatedWithCommitQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -49628,13 +49876,15 @@ export const useReposListPullRequestsAssociatedWithCommit = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     ReposListPullRequestsAssociatedWithCommitResponse,
     ReposListPullRequestsAssociatedWithCommitError,
     TData
   >({
-    ...reposListPullRequestsAssociatedWithCommitQuery(variables),
+    ...reposListPullRequestsAssociatedWithCommitQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -49848,13 +50098,13 @@ export const useSuspenseReposGetCommit = <TData = Schemas.Commit>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.Commit,
     ReposGetCommitError,
     TData
   >({
-    ...reposGetCommitQuery(variables),
+    ...reposGetCommitQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -49905,9 +50155,9 @@ export const useReposGetCommit = <TData = Schemas.Commit>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.Commit, ReposGetCommitError, TData>({
-    ...reposGetCommitQuery(variables),
+    ...reposGetCommitQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -50033,13 +50283,13 @@ export const useSuspenseChecksListForRef = <TData = ChecksListForRefResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     ChecksListForRefResponse,
     ChecksListForRefError,
     TData
   >({
-    ...checksListForRefQuery(variables),
+    ...checksListForRefQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -50061,13 +50311,13 @@ export const useChecksListForRef = <TData = ChecksListForRefResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     ChecksListForRefResponse,
     ChecksListForRefError,
     TData
   >({
-    ...checksListForRefQuery(variables),
+    ...checksListForRefQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -50188,13 +50438,13 @@ export const useSuspenseChecksListSuitesForRef = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     ChecksListSuitesForRefResponse,
     ChecksListSuitesForRefError,
     TData
   >({
-    ...checksListSuitesForRefQuery(variables),
+    ...checksListSuitesForRefQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -50218,13 +50468,13 @@ export const useChecksListSuitesForRef = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     ChecksListSuitesForRefResponse,
     ChecksListSuitesForRefError,
     TData
   >({
-    ...checksListSuitesForRefQuery(variables),
+    ...checksListSuitesForRefQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -50350,13 +50600,13 @@ export const useSuspenseReposGetCombinedStatusForRef = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.CombinedCommitStatus,
     ReposGetCombinedStatusForRefError,
     TData
   >({
-    ...reposGetCombinedStatusForRefQuery(variables),
+    ...reposGetCombinedStatusForRefQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -50385,13 +50635,13 @@ export const useReposGetCombinedStatusForRef = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.CombinedCommitStatus,
     ReposGetCombinedStatusForRefError,
     TData
   >({
-    ...reposGetCombinedStatusForRefQuery(variables),
+    ...reposGetCombinedStatusForRefQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -50504,13 +50754,13 @@ export const useSuspenseReposListCommitStatusesForRef = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     ReposListCommitStatusesForRefResponse,
     ReposListCommitStatusesForRefError,
     TData
   >({
-    ...reposListCommitStatusesForRefQuery(variables),
+    ...reposListCommitStatusesForRefQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -50534,13 +50784,13 @@ export const useReposListCommitStatusesForRef = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     ReposListCommitStatusesForRefResponse,
     ReposListCommitStatusesForRefError,
     TData
   >({
-    ...reposListCommitStatusesForRefQuery(variables),
+    ...reposListCommitStatusesForRefQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -50659,13 +50909,15 @@ export const useSuspenseReposGetCommunityProfileMetrics = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.CommunityProfile,
     ReposGetCommunityProfileMetricsError,
     TData
   >({
-    ...reposGetCommunityProfileMetricsQuery(variables),
+    ...reposGetCommunityProfileMetricsQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -50699,13 +50951,15 @@ export const useReposGetCommunityProfileMetrics = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.CommunityProfile,
     ReposGetCommunityProfileMetricsError,
     TData
   >({
-    ...reposGetCommunityProfileMetricsQuery(variables),
+    ...reposGetCommunityProfileMetricsQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -50952,13 +51206,13 @@ export const useSuspenseReposCompareCommits = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.CommitComparison,
     ReposCompareCommitsError,
     TData
   >({
-    ...reposCompareCommitsQuery(variables),
+    ...reposCompareCommitsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -51022,13 +51276,13 @@ export const useReposCompareCommits = <TData = Schemas.CommitComparison>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.CommitComparison,
     ReposCompareCommitsError,
     TData
   >({
-    ...reposCompareCommitsQuery(variables),
+    ...reposCompareCommitsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -51171,7 +51425,7 @@ export const useReposDeleteFile = (
     ReposDeleteFileVariables
   >({
     mutationFn: (variables: ReposDeleteFileVariables) =>
-      fetchReposDeleteFile({ ...fetcherOptions, ...variables }),
+      fetchReposDeleteFile(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -51400,7 +51654,7 @@ export const useSuspenseReposGetContent = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     | Schemas.ContentDirectory
     | Schemas.ContentFile
@@ -51409,7 +51663,7 @@ export const useSuspenseReposGetContent = <
     ReposGetContentError,
     TData
   >({
-    ...reposGetContentQuery(variables),
+    ...reposGetContentQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -51474,7 +51728,7 @@ export const useReposGetContent = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     | Schemas.ContentDirectory
     | Schemas.ContentFile
@@ -51483,7 +51737,7 @@ export const useReposGetContent = <
     ReposGetContentError,
     TData
   >({
-    ...reposGetContentQuery(variables),
+    ...reposGetContentQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -51622,7 +51876,9 @@ export const useReposCreateOrUpdateFileContents = (
     ReposCreateOrUpdateFileContentsVariables
   >({
     mutationFn: (variables: ReposCreateOrUpdateFileContentsVariables) =>
-      fetchReposCreateOrUpdateFileContents({ ...fetcherOptions, ...variables }),
+      fetchReposCreateOrUpdateFileContents(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -51740,13 +51996,13 @@ export const useSuspenseReposListContributors = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     ReposListContributorsResponse,
     ReposListContributorsError,
     TData
   >({
-    ...reposListContributorsQuery(variables),
+    ...reposListContributorsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -51768,13 +52024,13 @@ export const useReposListContributors = <TData = ReposListContributorsResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     ReposListContributorsResponse,
     ReposListContributorsError,
     TData
   >({
-    ...reposListContributorsQuery(variables),
+    ...reposListContributorsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -51972,13 +52228,13 @@ export const useSuspenseDependabotListAlertsForRepo = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     DependabotListAlertsForRepoResponse,
     DependabotListAlertsForRepoError,
     TData
   >({
-    ...dependabotListAlertsForRepoQuery(variables),
+    ...dependabotListAlertsForRepoQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -52002,13 +52258,13 @@ export const useDependabotListAlertsForRepo = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     DependabotListAlertsForRepoResponse,
     DependabotListAlertsForRepoError,
     TData
   >({
-    ...dependabotListAlertsForRepoQuery(variables),
+    ...dependabotListAlertsForRepoQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -52114,13 +52370,13 @@ export const useSuspenseDependabotGetAlert = <TData = Schemas.DependabotAlert>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.DependabotAlert,
     DependabotGetAlertError,
     TData
   >({
-    ...dependabotGetAlertQuery(variables),
+    ...dependabotGetAlertQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -52142,13 +52398,13 @@ export const useDependabotGetAlert = <TData = Schemas.DependabotAlert>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.DependabotAlert,
     DependabotGetAlertError,
     TData
   >({
-    ...dependabotGetAlertQuery(variables),
+    ...dependabotGetAlertQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -52268,7 +52524,7 @@ export const useDependabotUpdateAlert = (
     DependabotUpdateAlertVariables
   >({
     mutationFn: (variables: DependabotUpdateAlertVariables) =>
-      fetchDependabotUpdateAlert({ ...fetcherOptions, ...variables }),
+      fetchDependabotUpdateAlert(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -52370,13 +52626,13 @@ export const useSuspenseDependabotListRepoSecrets = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     DependabotListRepoSecretsResponse,
     DependabotListRepoSecretsError,
     TData
   >({
-    ...dependabotListRepoSecretsQuery(variables),
+    ...dependabotListRepoSecretsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -52398,13 +52654,13 @@ export const useDependabotListRepoSecrets = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     DependabotListRepoSecretsResponse,
     DependabotListRepoSecretsError,
     TData
   >({
-    ...dependabotListRepoSecretsQuery(variables),
+    ...dependabotListRepoSecretsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -52486,13 +52742,13 @@ export const useSuspenseDependabotGetRepoPublicKey = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.DependabotPublicKey,
     DependabotGetRepoPublicKeyError,
     TData
   >({
-    ...dependabotGetRepoPublicKeyQuery(variables),
+    ...dependabotGetRepoPublicKeyQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -52514,13 +52770,13 @@ export const useDependabotGetRepoPublicKey = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.DependabotPublicKey,
     DependabotGetRepoPublicKeyError,
     TData
   >({
-    ...dependabotGetRepoPublicKeyQuery(variables),
+    ...dependabotGetRepoPublicKeyQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -52588,7 +52844,7 @@ export const useDependabotDeleteRepoSecret = (
     DependabotDeleteRepoSecretVariables
   >({
     mutationFn: (variables: DependabotDeleteRepoSecretVariables) =>
-      fetchDependabotDeleteRepoSecret({ ...fetcherOptions, ...variables }),
+      fetchDependabotDeleteRepoSecret(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -52673,13 +52929,13 @@ export const useSuspenseDependabotGetRepoSecret = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.DependabotSecret,
     DependabotGetRepoSecretError,
     TData
   >({
-    ...dependabotGetRepoSecretQuery(variables),
+    ...dependabotGetRepoSecretQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -52699,13 +52955,13 @@ export const useDependabotGetRepoSecret = <TData = Schemas.DependabotSecret>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.DependabotSecret,
     DependabotGetRepoSecretError,
     TData
   >({
-    ...dependabotGetRepoSecretQuery(variables),
+    ...dependabotGetRepoSecretQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -52938,10 +53194,9 @@ export const useDependabotCreateOrUpdateRepoSecret = (
     DependabotCreateOrUpdateRepoSecretVariables
   >({
     mutationFn: (variables: DependabotCreateOrUpdateRepoSecretVariables) =>
-      fetchDependabotCreateOrUpdateRepoSecret({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchDependabotCreateOrUpdateRepoSecret(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -53043,13 +53298,13 @@ export const useSuspenseDependencyGraphDiffRange = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.DependencyGraphDiff,
     DependencyGraphDiffRangeError,
     TData
   >({
-    ...dependencyGraphDiffRangeQuery(variables),
+    ...dependencyGraphDiffRangeQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -53071,13 +53326,13 @@ export const useDependencyGraphDiffRange = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.DependencyGraphDiff,
     DependencyGraphDiffRangeError,
     TData
   >({
-    ...dependencyGraphDiffRangeQuery(variables),
+    ...dependencyGraphDiffRangeQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -53162,10 +53417,9 @@ export const useDependencyGraphCreateRepositorySnapshot = (
     DependencyGraphCreateRepositorySnapshotVariables
   >({
     mutationFn: (variables: DependencyGraphCreateRepositorySnapshotVariables) =>
-      fetchDependencyGraphCreateRepositorySnapshot({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchDependencyGraphCreateRepositorySnapshot(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -53288,13 +53542,13 @@ export const useSuspenseReposListDeployments = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     ReposListDeploymentsResponse,
     ReposListDeploymentsError,
     TData
   >({
-    ...reposListDeploymentsQuery(variables),
+    ...reposListDeploymentsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -53314,13 +53568,13 @@ export const useReposListDeployments = <TData = ReposListDeploymentsResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     ReposListDeploymentsResponse,
     ReposListDeploymentsError,
     TData
   >({
-    ...reposListDeploymentsQuery(variables),
+    ...reposListDeploymentsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -53535,7 +53789,7 @@ export const useReposCreateDeployment = (
     ReposCreateDeploymentVariables
   >({
     mutationFn: (variables: ReposCreateDeploymentVariables) =>
-      fetchReposCreateDeployment({ ...fetcherOptions, ...variables }),
+      fetchReposCreateDeployment(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -53625,7 +53879,7 @@ export const useReposDeleteDeployment = (
     ReposDeleteDeploymentVariables
   >({
     mutationFn: (variables: ReposDeleteDeploymentVariables) =>
-      fetchReposDeleteDeployment({ ...fetcherOptions, ...variables }),
+      fetchReposDeleteDeployment(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -53702,13 +53956,13 @@ export const useSuspenseReposGetDeployment = <TData = Schemas.Deployment>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.Deployment,
     ReposGetDeploymentError,
     TData
   >({
-    ...reposGetDeploymentQuery(variables),
+    ...reposGetDeploymentQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -53725,13 +53979,13 @@ export const useReposGetDeployment = <TData = Schemas.Deployment>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.Deployment,
     ReposGetDeploymentError,
     TData
   >({
-    ...reposGetDeploymentQuery(variables),
+    ...reposGetDeploymentQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -53838,13 +54092,13 @@ export const useSuspenseReposListDeploymentStatuses = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     ReposListDeploymentStatusesResponse,
     ReposListDeploymentStatusesError,
     TData
   >({
-    ...reposListDeploymentStatusesQuery(variables),
+    ...reposListDeploymentStatusesQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -53866,13 +54120,13 @@ export const useReposListDeploymentStatuses = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     ReposListDeploymentStatusesResponse,
     ReposListDeploymentStatusesError,
     TData
   >({
-    ...reposListDeploymentStatusesQuery(variables),
+    ...reposListDeploymentStatusesQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -53994,7 +54248,7 @@ export const useReposCreateDeploymentStatus = (
     ReposCreateDeploymentStatusVariables
   >({
     mutationFn: (variables: ReposCreateDeploymentStatusVariables) =>
-      fetchReposCreateDeploymentStatus({ ...fetcherOptions, ...variables }),
+      fetchReposCreateDeploymentStatus(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -54083,13 +54337,13 @@ export const useSuspenseReposGetDeploymentStatus = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.DeploymentStatus,
     ReposGetDeploymentStatusError,
     TData
   >({
-    ...reposGetDeploymentStatusQuery(variables),
+    ...reposGetDeploymentStatusQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -54109,13 +54363,13 @@ export const useReposGetDeploymentStatus = <TData = Schemas.DeploymentStatus>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.DeploymentStatus,
     ReposGetDeploymentStatusError,
     TData
   >({
-    ...reposGetDeploymentStatusQuery(variables),
+    ...reposGetDeploymentStatusQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -54219,7 +54473,7 @@ export const useReposCreateDispatchEvent = (
     ReposCreateDispatchEventVariables
   >({
     mutationFn: (variables: ReposCreateDispatchEventVariables) =>
-      fetchReposCreateDispatchEvent({ ...fetcherOptions, ...variables }),
+      fetchReposCreateDispatchEvent(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -54332,13 +54586,13 @@ export const useSuspenseReposGetAllEnvironments = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     ReposGetAllEnvironmentsResponse,
     ReposGetAllEnvironmentsError,
     TData
   >({
-    ...reposGetAllEnvironmentsQuery(variables),
+    ...reposGetAllEnvironmentsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -54362,13 +54616,13 @@ export const useReposGetAllEnvironments = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     ReposGetAllEnvironmentsResponse,
     ReposGetAllEnvironmentsError,
     TData
   >({
-    ...reposGetAllEnvironmentsQuery(variables),
+    ...reposGetAllEnvironmentsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -54436,7 +54690,7 @@ export const useReposDeleteAnEnvironment = (
     ReposDeleteAnEnvironmentVariables
   >({
     mutationFn: (variables: ReposDeleteAnEnvironmentVariables) =>
-      fetchReposDeleteAnEnvironment({ ...fetcherOptions, ...variables }),
+      fetchReposDeleteAnEnvironment(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -54531,13 +54785,13 @@ export const useSuspenseReposGetEnvironment = <TData = Schemas.Environment>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.Environment,
     ReposGetEnvironmentError,
     TData
   >({
-    ...reposGetEnvironmentQuery(variables),
+    ...reposGetEnvironmentQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -54561,13 +54815,13 @@ export const useReposGetEnvironment = <TData = Schemas.Environment>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.Environment,
     ReposGetEnvironmentError,
     TData
   >({
-    ...reposGetEnvironmentQuery(variables),
+    ...reposGetEnvironmentQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -54685,7 +54939,7 @@ export const useReposCreateOrUpdateEnvironment = (
     ReposCreateOrUpdateEnvironmentVariables
   >({
     mutationFn: (variables: ReposCreateOrUpdateEnvironmentVariables) =>
-      fetchReposCreateOrUpdateEnvironment({ ...fetcherOptions, ...variables }),
+      fetchReposCreateOrUpdateEnvironment(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -54803,13 +55057,15 @@ export const useSuspenseReposListDeploymentBranchPolicies = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     ReposListDeploymentBranchPoliciesResponse,
     ReposListDeploymentBranchPoliciesError,
     TData
   >({
-    ...reposListDeploymentBranchPoliciesQuery(variables),
+    ...reposListDeploymentBranchPoliciesQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -54833,13 +55089,15 @@ export const useReposListDeploymentBranchPolicies = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     ReposListDeploymentBranchPoliciesResponse,
     ReposListDeploymentBranchPoliciesError,
     TData
   >({
-    ...reposListDeploymentBranchPoliciesQuery(variables),
+    ...reposListDeploymentBranchPoliciesQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -54913,10 +55171,9 @@ export const useReposCreateDeploymentBranchPolicy = (
     ReposCreateDeploymentBranchPolicyVariables
   >({
     mutationFn: (variables: ReposCreateDeploymentBranchPolicyVariables) =>
-      fetchReposCreateDeploymentBranchPolicy({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchReposCreateDeploymentBranchPolicy(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -54992,10 +55249,9 @@ export const useReposDeleteDeploymentBranchPolicy = (
     ReposDeleteDeploymentBranchPolicyVariables
   >({
     mutationFn: (variables: ReposDeleteDeploymentBranchPolicyVariables) =>
-      fetchReposDeleteDeploymentBranchPolicy({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchReposDeleteDeploymentBranchPolicy(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -55091,13 +55347,15 @@ export const useSuspenseReposGetDeploymentBranchPolicy = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.DeploymentBranchPolicy,
     ReposGetDeploymentBranchPolicyError,
     TData
   >({
-    ...reposGetDeploymentBranchPolicyQuery(variables),
+    ...reposGetDeploymentBranchPolicyQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -55121,13 +55379,15 @@ export const useReposGetDeploymentBranchPolicy = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.DeploymentBranchPolicy,
     ReposGetDeploymentBranchPolicyError,
     TData
   >({
-    ...reposGetDeploymentBranchPolicyQuery(variables),
+    ...reposGetDeploymentBranchPolicyQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -55205,10 +55465,9 @@ export const useReposUpdateDeploymentBranchPolicy = (
     ReposUpdateDeploymentBranchPolicyVariables
   >({
     mutationFn: (variables: ReposUpdateDeploymentBranchPolicyVariables) =>
-      fetchReposUpdateDeploymentBranchPolicy({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchReposUpdateDeploymentBranchPolicy(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -55298,13 +55557,13 @@ export const useSuspenseActivityListRepoEvents = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     ActivityListRepoEventsResponse,
     ActivityListRepoEventsError,
     TData
   >({
-    ...activityListRepoEventsQuery(variables),
+    ...activityListRepoEventsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -55323,13 +55582,13 @@ export const useActivityListRepoEvents = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     ActivityListRepoEventsResponse,
     ActivityListRepoEventsError,
     TData
   >({
-    ...activityListRepoEventsQuery(variables),
+    ...activityListRepoEventsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -55427,13 +55686,13 @@ export const useSuspenseReposListForks = <TData = ReposListForksResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     ReposListForksResponse,
     ReposListForksError,
     TData
   >({
-    ...reposListForksQuery(variables),
+    ...reposListForksQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -55450,13 +55709,13 @@ export const useReposListForks = <TData = ReposListForksResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     ReposListForksResponse,
     ReposListForksError,
     TData
   >({
-    ...reposListForksQuery(variables),
+    ...reposListForksQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -55568,7 +55827,7 @@ export const useReposCreateFork = (
     ReposCreateForkVariables
   >({
     mutationFn: (variables: ReposCreateForkVariables) =>
-      fetchReposCreateFork({ ...fetcherOptions, ...variables }),
+      fetchReposCreateFork(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -55656,7 +55915,7 @@ export const useGitCreateBlob = (
     GitCreateBlobVariables
   >({
     mutationFn: (variables: GitCreateBlobVariables) =>
-      fetchGitCreateBlob({ ...fetcherOptions, ...variables }),
+      fetchGitCreateBlob(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -55747,9 +56006,9 @@ export const useSuspenseGitGetBlob = <TData = Schemas.Blob>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<Schemas.Blob, GitGetBlobError, TData>({
-    ...gitGetBlobQuery(variables),
+    ...gitGetBlobQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -55767,9 +56026,9 @@ export const useGitGetBlob = <TData = Schemas.Blob>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.Blob, GitGetBlobError, TData>({
-    ...gitGetBlobQuery(variables),
+    ...gitGetBlobQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -55958,7 +56217,7 @@ export const useGitCreateCommit = (
     GitCreateCommitVariables
   >({
     mutationFn: (variables: GitCreateCommitVariables) =>
-      fetchGitCreateCommit({ ...fetcherOptions, ...variables }),
+      fetchGitCreateCommit(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -56123,13 +56382,13 @@ export const useSuspenseGitGetCommit = <TData = Schemas.GitCommit>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.GitCommit,
     GitGetCommitError,
     TData
   >({
-    ...gitGetCommitQuery(variables),
+    ...gitGetCommitQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -56174,9 +56433,9 @@ export const useGitGetCommit = <TData = Schemas.GitCommit>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.GitCommit, GitGetCommitError, TData>({
-    ...gitGetCommitQuery(variables),
+    ...gitGetCommitQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -56282,13 +56541,13 @@ export const useSuspenseGitListMatchingRefs = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     GitListMatchingRefsResponse,
     GitListMatchingRefsError,
     TData
   >({
-    ...gitListMatchingRefsQuery(variables),
+    ...gitListMatchingRefsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -56314,13 +56573,13 @@ export const useGitListMatchingRefs = <TData = GitListMatchingRefsResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     GitListMatchingRefsResponse,
     GitListMatchingRefsError,
     TData
   >({
-    ...gitListMatchingRefsQuery(variables),
+    ...gitListMatchingRefsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -56405,9 +56664,9 @@ export const useSuspenseGitGetRef = <TData = Schemas.GitRef>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<Schemas.GitRef, GitGetRefError, TData>({
-    ...gitGetRefQuery(variables),
+    ...gitGetRefQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -56425,9 +56684,9 @@ export const useGitGetRef = <TData = Schemas.GitRef>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.GitRef, GitGetRefError, TData>({
-    ...gitGetRefQuery(variables),
+    ...gitGetRefQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -56510,7 +56769,7 @@ export const useGitCreateRef = (
     GitCreateRefVariables
   >({
     mutationFn: (variables: GitCreateRefVariables) =>
-      fetchGitCreateRef({ ...fetcherOptions, ...variables }),
+      fetchGitCreateRef(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -56574,7 +56833,7 @@ export const useGitDeleteRef = (
     GitDeleteRefVariables
   >({
     mutationFn: (variables: GitDeleteRefVariables) =>
-      fetchGitDeleteRef({ ...fetcherOptions, ...variables }),
+      fetchGitDeleteRef(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -56652,7 +56911,7 @@ export const useGitUpdateRef = (
     GitUpdateRefVariables
   >({
     mutationFn: (variables: GitUpdateRefVariables) =>
-      fetchGitUpdateRef({ ...fetcherOptions, ...variables }),
+      fetchGitUpdateRef(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -56815,7 +57074,7 @@ export const useGitCreateTag = (
     GitCreateTagVariables
   >({
     mutationFn: (variables: GitCreateTagVariables) =>
-      fetchGitCreateTag({ ...fetcherOptions, ...variables }),
+      fetchGitCreateTag(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -56971,9 +57230,9 @@ export const useSuspenseGitGetTag = <TData = Schemas.GitTag>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<Schemas.GitTag, GitGetTagError, TData>({
-    ...gitGetTagQuery(variables),
+    ...gitGetTagQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -57016,9 +57275,9 @@ export const useGitGetTag = <TData = Schemas.GitTag>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.GitTag, GitGetTagError, TData>({
-    ...gitGetTagQuery(variables),
+    ...gitGetTagQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -57141,7 +57400,7 @@ export const useGitCreateTree = (
     GitCreateTreeVariables
   >({
     mutationFn: (variables: GitCreateTreeVariables) =>
-      fetchGitCreateTree({ ...fetcherOptions, ...variables }),
+      fetchGitCreateTree(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -57245,9 +57504,9 @@ export const useSuspenseGitGetTree = <TData = Schemas.GitTree>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<Schemas.GitTree, GitGetTreeError, TData>({
-    ...gitGetTreeQuery(variables),
+    ...gitGetTreeQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -57268,9 +57527,9 @@ export const useGitGetTree = <TData = Schemas.GitTree>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.GitTree, GitGetTreeError, TData>({
-    ...gitGetTreeQuery(variables),
+    ...gitGetTreeQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -57371,13 +57630,13 @@ export const useSuspenseReposListWebhooks = <TData = ReposListWebhooksResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     ReposListWebhooksResponse,
     ReposListWebhooksError,
     TData
   >({
-    ...reposListWebhooksQuery(variables),
+    ...reposListWebhooksQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -57397,13 +57656,13 @@ export const useReposListWebhooks = <TData = ReposListWebhooksResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     ReposListWebhooksResponse,
     ReposListWebhooksError,
     TData
   >({
-    ...reposListWebhooksQuery(variables),
+    ...reposListWebhooksQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -57551,7 +57810,7 @@ export const useReposCreateWebhook = (
     ReposCreateWebhookVariables
   >({
     mutationFn: (variables: ReposCreateWebhookVariables) =>
-      fetchReposCreateWebhook({ ...fetcherOptions, ...variables }),
+      fetchReposCreateWebhook(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -57615,7 +57874,7 @@ export const useReposDeleteWebhook = (
     ReposDeleteWebhookVariables
   >({
     mutationFn: (variables: ReposDeleteWebhookVariables) =>
-      fetchReposDeleteWebhook({ ...fetcherOptions, ...variables }),
+      fetchReposDeleteWebhook(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -57693,10 +57952,10 @@ export const useSuspenseReposGetWebhook = <TData = Schemas.Hook>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<Schemas.Hook, ReposGetWebhookError, TData>(
     {
-      ...reposGetWebhookQuery(variables),
+      ...reposGetWebhookQuery(deepMerge(fetcherOptions, variables)),
       ...options,
       ...queryOptions,
     }
@@ -57713,9 +57972,9 @@ export const useReposGetWebhook = <TData = Schemas.Hook>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.Hook, ReposGetWebhookError, TData>({
-    ...reposGetWebhookQuery(variables),
+    ...reposGetWebhookQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -57833,7 +58092,7 @@ export const useReposUpdateWebhook = (
     ReposUpdateWebhookVariables
   >({
     mutationFn: (variables: ReposUpdateWebhookVariables) =>
-      fetchReposUpdateWebhook({ ...fetcherOptions, ...variables }),
+      fetchReposUpdateWebhook(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -57924,13 +58183,13 @@ export const useSuspenseReposGetWebhookConfigForRepo = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.WebhookConfig,
     ReposGetWebhookConfigForRepoError,
     TData
   >({
-    ...reposGetWebhookConfigForRepoQuery(variables),
+    ...reposGetWebhookConfigForRepoQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -57952,13 +58211,13 @@ export const useReposGetWebhookConfigForRepo = <TData = Schemas.WebhookConfig>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.WebhookConfig,
     ReposGetWebhookConfigForRepoError,
     TData
   >({
-    ...reposGetWebhookConfigForRepoQuery(variables),
+    ...reposGetWebhookConfigForRepoQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -58039,7 +58298,9 @@ export const useReposUpdateWebhookConfigForRepo = (
     ReposUpdateWebhookConfigForRepoVariables
   >({
     mutationFn: (variables: ReposUpdateWebhookConfigForRepoVariables) =>
-      fetchReposUpdateWebhookConfigForRepo({ ...fetcherOptions, ...variables }),
+      fetchReposUpdateWebhookConfigForRepo(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -58150,13 +58411,13 @@ export const useSuspenseReposListWebhookDeliveries = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     ReposListWebhookDeliveriesResponse,
     ReposListWebhookDeliveriesError,
     TData
   >({
-    ...reposListWebhookDeliveriesQuery(variables),
+    ...reposListWebhookDeliveriesQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -58178,13 +58439,13 @@ export const useReposListWebhookDeliveries = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     ReposListWebhookDeliveriesResponse,
     ReposListWebhookDeliveriesError,
     TData
   >({
-    ...reposListWebhookDeliveriesQuery(variables),
+    ...reposListWebhookDeliveriesQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -58280,13 +58541,13 @@ export const useSuspenseReposGetWebhookDelivery = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.HookDelivery,
     ReposGetWebhookDeliveryError,
     TData
   >({
-    ...reposGetWebhookDeliveryQuery(variables),
+    ...reposGetWebhookDeliveryQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -58306,13 +58567,13 @@ export const useReposGetWebhookDelivery = <TData = Schemas.HookDelivery>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.HookDelivery,
     ReposGetWebhookDeliveryError,
     TData
   >({
-    ...reposGetWebhookDeliveryQuery(variables),
+    ...reposGetWebhookDeliveryQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -58390,7 +58651,7 @@ export const useReposRedeliverWebhookDelivery = (
     ReposRedeliverWebhookDeliveryVariables
   >({
     mutationFn: (variables: ReposRedeliverWebhookDeliveryVariables) =>
-      fetchReposRedeliverWebhookDelivery({ ...fetcherOptions, ...variables }),
+      fetchReposRedeliverWebhookDelivery(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -58460,7 +58721,7 @@ export const useReposPingWebhook = (
     ReposPingWebhookVariables
   >({
     mutationFn: (variables: ReposPingWebhookVariables) =>
-      fetchReposPingWebhook({ ...fetcherOptions, ...variables }),
+      fetchReposPingWebhook(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -58534,7 +58795,7 @@ export const useReposTestPushWebhook = (
     ReposTestPushWebhookVariables
   >({
     mutationFn: (variables: ReposTestPushWebhookVariables) =>
-      fetchReposTestPushWebhook({ ...fetcherOptions, ...variables }),
+      fetchReposTestPushWebhook(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -58600,7 +58861,7 @@ export const useMigrationsCancelImport = (
     MigrationsCancelImportVariables
   >({
     mutationFn: (variables: MigrationsCancelImportVariables) =>
-      fetchMigrationsCancelImport({ ...fetcherOptions, ...variables }),
+      fetchMigrationsCancelImport(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -58783,13 +59044,13 @@ export const useSuspenseMigrationsGetImportStatus = <TData = Schemas.Import>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.Import,
     MigrationsGetImportStatusError,
     TData
   >({
-    ...migrationsGetImportStatusQuery(variables),
+    ...migrationsGetImportStatusQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -58842,13 +59103,13 @@ export const useMigrationsGetImportStatus = <TData = Schemas.Import>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.Import,
     MigrationsGetImportStatusError,
     TData
   >({
-    ...migrationsGetImportStatusQuery(variables),
+    ...migrationsGetImportStatusQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -58968,7 +59229,7 @@ export const useMigrationsUpdateImport = (
     MigrationsUpdateImportVariables
   >({
     mutationFn: (variables: MigrationsUpdateImportVariables) =>
-      fetchMigrationsUpdateImport({ ...fetcherOptions, ...variables }),
+      fetchMigrationsUpdateImport(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -59068,7 +59329,7 @@ export const useMigrationsStartImport = (
     MigrationsStartImportVariables
   >({
     mutationFn: (variables: MigrationsStartImportVariables) =>
-      fetchMigrationsStartImport({ ...fetcherOptions, ...variables }),
+      fetchMigrationsStartImport(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -59174,13 +59435,13 @@ export const useSuspenseMigrationsGetCommitAuthors = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     MigrationsGetCommitAuthorsResponse,
     MigrationsGetCommitAuthorsError,
     TData
   >({
-    ...migrationsGetCommitAuthorsQuery(variables),
+    ...migrationsGetCommitAuthorsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -59204,13 +59465,13 @@ export const useMigrationsGetCommitAuthors = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     MigrationsGetCommitAuthorsResponse,
     MigrationsGetCommitAuthorsError,
     TData
   >({
-    ...migrationsGetCommitAuthorsQuery(variables),
+    ...migrationsGetCommitAuthorsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -59300,7 +59561,7 @@ export const useMigrationsMapCommitAuthor = (
     MigrationsMapCommitAuthorVariables
   >({
     mutationFn: (variables: MigrationsMapCommitAuthorVariables) =>
-      fetchMigrationsMapCommitAuthor({ ...fetcherOptions, ...variables }),
+      fetchMigrationsMapCommitAuthor(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -59386,13 +59647,13 @@ export const useSuspenseMigrationsGetLargeFiles = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     MigrationsGetLargeFilesResponse,
     MigrationsGetLargeFilesError,
     TData
   >({
-    ...migrationsGetLargeFilesQuery(variables),
+    ...migrationsGetLargeFilesQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -59414,13 +59675,13 @@ export const useMigrationsGetLargeFiles = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     MigrationsGetLargeFilesResponse,
     MigrationsGetLargeFilesError,
     TData
   >({
-    ...migrationsGetLargeFilesQuery(variables),
+    ...migrationsGetLargeFilesQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -59501,7 +59762,7 @@ export const useMigrationsSetLfsPreference = (
     MigrationsSetLfsPreferenceVariables
   >({
     mutationFn: (variables: MigrationsSetLfsPreferenceVariables) =>
-      fetchMigrationsSetLfsPreference({ ...fetcherOptions, ...variables }),
+      fetchMigrationsSetLfsPreference(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -59597,13 +59858,13 @@ export const useSuspenseAppsGetRepoInstallation = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.Installation,
     AppsGetRepoInstallationError,
     TData
   >({
-    ...appsGetRepoInstallationQuery(variables),
+    ...appsGetRepoInstallationQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -59625,13 +59886,13 @@ export const useAppsGetRepoInstallation = <TData = Schemas.Installation>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.Installation,
     AppsGetRepoInstallationError,
     TData
   >({
-    ...appsGetRepoInstallationQuery(variables),
+    ...appsGetRepoInstallationQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -59696,10 +59957,9 @@ export const useInteractionsRemoveRestrictionsForRepo = (
     InteractionsRemoveRestrictionsForRepoVariables
   >({
     mutationFn: (variables: InteractionsRemoveRestrictionsForRepoVariables) =>
-      fetchInteractionsRemoveRestrictionsForRepo({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchInteractionsRemoveRestrictionsForRepo(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -59781,13 +60041,15 @@ export const useSuspenseInteractionsGetRestrictionsForRepo = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.InteractionLimitResponse | {},
     InteractionsGetRestrictionsForRepoError,
     TData
   >({
-    ...interactionsGetRestrictionsForRepoQuery(variables),
+    ...interactionsGetRestrictionsForRepoQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -59809,13 +60071,15 @@ export const useInteractionsGetRestrictionsForRepo = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.InteractionLimitResponse | {},
     InteractionsGetRestrictionsForRepoError,
     TData
   >({
-    ...interactionsGetRestrictionsForRepoQuery(variables),
+    ...interactionsGetRestrictionsForRepoQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -59881,10 +60145,9 @@ export const useInteractionsSetRestrictionsForRepo = (
     InteractionsSetRestrictionsForRepoVariables
   >({
     mutationFn: (variables: InteractionsSetRestrictionsForRepoVariables) =>
-      fetchInteractionsSetRestrictionsForRepo({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchInteractionsSetRestrictionsForRepo(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -59983,13 +60246,13 @@ export const useSuspenseReposListInvitations = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     ReposListInvitationsResponse,
     ReposListInvitationsError,
     TData
   >({
-    ...reposListInvitationsQuery(variables),
+    ...reposListInvitationsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -60009,13 +60272,13 @@ export const useReposListInvitations = <TData = ReposListInvitationsResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     ReposListInvitationsResponse,
     ReposListInvitationsError,
     TData
   >({
-    ...reposListInvitationsQuery(variables),
+    ...reposListInvitationsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -60077,7 +60340,7 @@ export const useReposDeleteInvitation = (
     ReposDeleteInvitationVariables
   >({
     mutationFn: (variables: ReposDeleteInvitationVariables) =>
-      fetchReposDeleteInvitation({ ...fetcherOptions, ...variables }),
+      fetchReposDeleteInvitation(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -60146,7 +60409,7 @@ export const useReposUpdateInvitation = (
     ReposUpdateInvitationVariables
   >({
     mutationFn: (variables: ReposUpdateInvitationVariables) =>
-      fetchReposUpdateInvitation({ ...fetcherOptions, ...variables }),
+      fetchReposUpdateInvitation(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -60315,13 +60578,13 @@ export const useSuspenseIssuesListForRepo = <TData = IssuesListForRepoResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     IssuesListForRepoResponse,
     IssuesListForRepoError,
     TData
   >({
-    ...issuesListForRepoQuery(variables),
+    ...issuesListForRepoQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -60346,13 +60609,13 @@ export const useIssuesListForRepo = <TData = IssuesListForRepoResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     IssuesListForRepoResponse,
     IssuesListForRepoError,
     TData
   >({
-    ...issuesListForRepoQuery(variables),
+    ...issuesListForRepoQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -60474,7 +60737,7 @@ export const useIssuesCreate = (
     IssuesCreateVariables
   >({
     mutationFn: (variables: IssuesCreateVariables) =>
-      fetchIssuesCreate({ ...fetcherOptions, ...variables }),
+      fetchIssuesCreate(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -60598,13 +60861,13 @@ export const useSuspenseIssuesListCommentsForRepo = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     IssuesListCommentsForRepoResponse,
     IssuesListCommentsForRepoError,
     TData
   >({
-    ...issuesListCommentsForRepoQuery(variables),
+    ...issuesListCommentsForRepoQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -60626,13 +60889,13 @@ export const useIssuesListCommentsForRepo = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     IssuesListCommentsForRepoResponse,
     IssuesListCommentsForRepoError,
     TData
   >({
-    ...issuesListCommentsForRepoQuery(variables),
+    ...issuesListCommentsForRepoQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -60694,7 +60957,7 @@ export const useIssuesDeleteComment = (
     IssuesDeleteCommentVariables
   >({
     mutationFn: (variables: IssuesDeleteCommentVariables) =>
-      fetchIssuesDeleteComment({ ...fetcherOptions, ...variables }),
+      fetchIssuesDeleteComment(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -60771,13 +61034,13 @@ export const useSuspenseIssuesGetComment = <TData = Schemas.IssueComment>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.IssueComment,
     IssuesGetCommentError,
     TData
   >({
-    ...issuesGetCommentQuery(variables),
+    ...issuesGetCommentQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -60794,13 +61057,13 @@ export const useIssuesGetComment = <TData = Schemas.IssueComment>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.IssueComment,
     IssuesGetCommentError,
     TData
   >({
-    ...issuesGetCommentQuery(variables),
+    ...issuesGetCommentQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -60873,7 +61136,7 @@ export const useIssuesUpdateComment = (
     IssuesUpdateCommentVariables
   >({
     mutationFn: (variables: IssuesUpdateCommentVariables) =>
-      fetchIssuesUpdateComment({ ...fetcherOptions, ...variables }),
+      fetchIssuesUpdateComment(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -60991,13 +61254,13 @@ export const useSuspenseReactionsListForIssueComment = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     ReactionsListForIssueCommentResponse,
     ReactionsListForIssueCommentError,
     TData
   >({
-    ...reactionsListForIssueCommentQuery(variables),
+    ...reactionsListForIssueCommentQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -61019,13 +61282,13 @@ export const useReactionsListForIssueComment = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     ReactionsListForIssueCommentResponse,
     ReactionsListForIssueCommentError,
     TData
   >({
-    ...reactionsListForIssueCommentQuery(variables),
+    ...reactionsListForIssueCommentQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -61112,7 +61375,7 @@ export const useReactionsCreateForIssueComment = (
     ReactionsCreateForIssueCommentVariables
   >({
     mutationFn: (variables: ReactionsCreateForIssueCommentVariables) =>
-      fetchReactionsCreateForIssueComment({ ...fetcherOptions, ...variables }),
+      fetchReactionsCreateForIssueComment(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -61188,7 +61451,7 @@ export const useReactionsDeleteForIssueComment = (
     ReactionsDeleteForIssueCommentVariables
   >({
     mutationFn: (variables: ReactionsDeleteForIssueCommentVariables) =>
-      fetchReactionsDeleteForIssueComment({ ...fetcherOptions, ...variables }),
+      fetchReactionsDeleteForIssueComment(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -61281,13 +61544,13 @@ export const useSuspenseIssuesListEventsForRepo = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     IssuesListEventsForRepoResponse,
     IssuesListEventsForRepoError,
     TData
   >({
-    ...issuesListEventsForRepoQuery(variables),
+    ...issuesListEventsForRepoQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -61306,13 +61569,13 @@ export const useIssuesListEventsForRepo = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     IssuesListEventsForRepoResponse,
     IssuesListEventsForRepoError,
     TData
   >({
-    ...issuesListEventsForRepoQuery(variables),
+    ...issuesListEventsForRepoQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -61393,13 +61656,13 @@ export const useSuspenseIssuesGetEvent = <TData = Schemas.IssueEvent>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.IssueEvent,
     IssuesGetEventError,
     TData
   >({
-    ...issuesGetEventQuery(variables),
+    ...issuesGetEventQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -61412,9 +61675,9 @@ export const useIssuesGetEvent = <TData = Schemas.IssueEvent>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.IssueEvent, IssuesGetEventError, TData>({
-    ...issuesGetEventQuery(variables),
+    ...issuesGetEventQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -61537,9 +61800,9 @@ export const useSuspenseIssuesGet = <TData = Schemas.Issue>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<Schemas.Issue, IssuesGetError, TData>({
-    ...issuesGetQuery(variables),
+    ...issuesGetQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -61565,9 +61828,9 @@ export const useIssuesGet = <TData = Schemas.Issue>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.Issue, IssuesGetError, TData>({
-    ...issuesGetQuery(variables),
+    ...issuesGetQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -61703,7 +61966,7 @@ export const useIssuesUpdate = (
     IssuesUpdateVariables
   >({
     mutationFn: (variables: IssuesUpdateVariables) =>
-      fetchIssuesUpdate({ ...fetcherOptions, ...variables }),
+      fetchIssuesUpdate(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -61778,7 +62041,7 @@ export const useIssuesRemoveAssignees = (
     IssuesRemoveAssigneesVariables
   >({
     mutationFn: (variables: IssuesRemoveAssigneesVariables) =>
-      fetchIssuesRemoveAssignees({ ...fetcherOptions, ...variables }),
+      fetchIssuesRemoveAssignees(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -61853,7 +62116,7 @@ export const useIssuesAddAssignees = (
     IssuesAddAssigneesVariables
   >({
     mutationFn: (variables: IssuesAddAssigneesVariables) =>
-      fetchIssuesAddAssignees({ ...fetcherOptions, ...variables }),
+      fetchIssuesAddAssignees(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -61950,13 +62213,15 @@ export const useSuspenseIssuesCheckUserCanBeAssignedToIssue = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     undefined,
     IssuesCheckUserCanBeAssignedToIssueError,
     TData
   >({
-    ...issuesCheckUserCanBeAssignedToIssueQuery(variables),
+    ...issuesCheckUserCanBeAssignedToIssueQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -61980,13 +62245,15 @@ export const useIssuesCheckUserCanBeAssignedToIssue = <TData = undefined>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     undefined,
     IssuesCheckUserCanBeAssignedToIssueError,
     TData
   >({
-    ...issuesCheckUserCanBeAssignedToIssueQuery(variables),
+    ...issuesCheckUserCanBeAssignedToIssueQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -62105,13 +62372,13 @@ export const useSuspenseIssuesListComments = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     IssuesListCommentsResponse,
     IssuesListCommentsError,
     TData
   >({
-    ...issuesListCommentsQuery(variables),
+    ...issuesListCommentsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -62131,13 +62398,13 @@ export const useIssuesListComments = <TData = IssuesListCommentsResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     IssuesListCommentsResponse,
     IssuesListCommentsError,
     TData
   >({
-    ...issuesListCommentsQuery(variables),
+    ...issuesListCommentsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -62230,7 +62497,7 @@ export const useIssuesCreateComment = (
     IssuesCreateCommentVariables
   >({
     mutationFn: (variables: IssuesCreateCommentVariables) =>
-      fetchIssuesCreateComment({ ...fetcherOptions, ...variables }),
+      fetchIssuesCreateComment(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -62325,13 +62592,13 @@ export const useSuspenseIssuesListEvents = <TData = IssuesListEventsResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     IssuesListEventsResponse,
     IssuesListEventsError,
     TData
   >({
-    ...issuesListEventsQuery(variables),
+    ...issuesListEventsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -62348,13 +62615,13 @@ export const useIssuesListEvents = <TData = IssuesListEventsResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     IssuesListEventsResponse,
     IssuesListEventsError,
     TData
   >({
-    ...issuesListEventsQuery(variables),
+    ...issuesListEventsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -62429,7 +62696,7 @@ export const useIssuesRemoveAllLabels = (
     IssuesRemoveAllLabelsVariables
   >({
     mutationFn: (variables: IssuesRemoveAllLabelsVariables) =>
-      fetchIssuesRemoveAllLabels({ ...fetcherOptions, ...variables }),
+      fetchIssuesRemoveAllLabels(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -62536,13 +62803,13 @@ export const useSuspenseIssuesListLabelsOnIssue = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     IssuesListLabelsOnIssueResponse,
     IssuesListLabelsOnIssueError,
     TData
   >({
-    ...issuesListLabelsOnIssueQuery(variables),
+    ...issuesListLabelsOnIssueQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -62561,13 +62828,13 @@ export const useIssuesListLabelsOnIssue = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     IssuesListLabelsOnIssueResponse,
     IssuesListLabelsOnIssueError,
     TData
   >({
-    ...issuesListLabelsOnIssueQuery(variables),
+    ...issuesListLabelsOnIssueQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -62690,7 +62957,7 @@ export const useIssuesAddLabels = (
     IssuesAddLabelsVariables
   >({
     mutationFn: (variables: IssuesAddLabelsVariables) =>
-      fetchIssuesAddLabels({ ...fetcherOptions, ...variables }),
+      fetchIssuesAddLabels(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -62818,7 +63085,7 @@ export const useIssuesSetLabels = (
     IssuesSetLabelsVariables
   >({
     mutationFn: (variables: IssuesSetLabelsVariables) =>
-      fetchIssuesSetLabels({ ...fetcherOptions, ...variables }),
+      fetchIssuesSetLabels(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -62901,7 +63168,7 @@ export const useIssuesRemoveLabel = (
     IssuesRemoveLabelVariables
   >({
     mutationFn: (variables: IssuesRemoveLabelVariables) =>
-      fetchIssuesRemoveLabel({ ...fetcherOptions, ...variables }),
+      fetchIssuesRemoveLabel(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -62977,7 +63244,7 @@ export const useIssuesUnlock = (
     IssuesUnlockVariables
   >({
     mutationFn: (variables: IssuesUnlockVariables) =>
-      fetchIssuesUnlock({ ...fetcherOptions, ...variables }),
+      fetchIssuesUnlock(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -63084,7 +63351,7 @@ export const useIssuesLock = (
     IssuesLockVariables
   >({
     mutationFn: (variables: IssuesLockVariables) =>
-      fetchIssuesLock({ ...fetcherOptions, ...variables }),
+      fetchIssuesLock(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -63208,13 +63475,13 @@ export const useSuspenseReactionsListForIssue = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     ReactionsListForIssueResponse,
     ReactionsListForIssueError,
     TData
   >({
-    ...reactionsListForIssueQuery(variables),
+    ...reactionsListForIssueQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -63234,13 +63501,13 @@ export const useReactionsListForIssue = <TData = ReactionsListForIssueResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     ReactionsListForIssueResponse,
     ReactionsListForIssueError,
     TData
   >({
-    ...reactionsListForIssueQuery(variables),
+    ...reactionsListForIssueQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -63327,7 +63594,7 @@ export const useReactionsCreateForIssue = (
     ReactionsCreateForIssueVariables
   >({
     mutationFn: (variables: ReactionsCreateForIssueVariables) =>
-      fetchReactionsCreateForIssue({ ...fetcherOptions, ...variables }),
+      fetchReactionsCreateForIssue(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -63402,7 +63669,7 @@ export const useReactionsDeleteForIssue = (
     ReactionsDeleteForIssueVariables
   >({
     mutationFn: (variables: ReactionsDeleteForIssueVariables) =>
-      fetchReactionsDeleteForIssue({ ...fetcherOptions, ...variables }),
+      fetchReactionsDeleteForIssue(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -63505,13 +63772,13 @@ export const useSuspenseIssuesListEventsForTimeline = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     IssuesListEventsForTimelineResponse,
     IssuesListEventsForTimelineError,
     TData
   >({
-    ...issuesListEventsForTimelineQuery(variables),
+    ...issuesListEventsForTimelineQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -63530,13 +63797,13 @@ export const useIssuesListEventsForTimeline = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     IssuesListEventsForTimelineResponse,
     IssuesListEventsForTimelineError,
     TData
   >({
-    ...issuesListEventsForTimelineQuery(variables),
+    ...issuesListEventsForTimelineQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -63622,13 +63889,13 @@ export const useSuspenseReposListDeployKeys = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     ReposListDeployKeysResponse,
     ReposListDeployKeysError,
     TData
   >({
-    ...reposListDeployKeysQuery(variables),
+    ...reposListDeployKeysQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -63645,13 +63912,13 @@ export const useReposListDeployKeys = <TData = ReposListDeployKeysResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     ReposListDeployKeysResponse,
     ReposListDeployKeysError,
     TData
   >({
-    ...reposListDeployKeysQuery(variables),
+    ...reposListDeployKeysQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -63736,7 +64003,7 @@ export const useReposCreateDeployKey = (
     ReposCreateDeployKeyVariables
   >({
     mutationFn: (variables: ReposCreateDeployKeyVariables) =>
-      fetchReposCreateDeployKey({ ...fetcherOptions, ...variables }),
+      fetchReposCreateDeployKey(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -63803,7 +64070,7 @@ export const useReposDeleteDeployKey = (
     ReposDeleteDeployKeyVariables
   >({
     mutationFn: (variables: ReposDeleteDeployKeyVariables) =>
-      fetchReposDeleteDeployKey({ ...fetcherOptions, ...variables }),
+      fetchReposDeleteDeployKey(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -63876,13 +64143,13 @@ export const useSuspenseReposGetDeployKey = <TData = Schemas.DeployKey>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.DeployKey,
     ReposGetDeployKeyError,
     TData
   >({
-    ...reposGetDeployKeyQuery(variables),
+    ...reposGetDeployKeyQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -63899,9 +64166,9 @@ export const useReposGetDeployKey = <TData = Schemas.DeployKey>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.DeployKey, ReposGetDeployKeyError, TData>({
-    ...reposGetDeployKeyQuery(variables),
+    ...reposGetDeployKeyQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -63995,13 +64262,13 @@ export const useSuspenseIssuesListLabelsForRepo = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     IssuesListLabelsForRepoResponse,
     IssuesListLabelsForRepoError,
     TData
   >({
-    ...issuesListLabelsForRepoQuery(variables),
+    ...issuesListLabelsForRepoQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -64020,13 +64287,13 @@ export const useIssuesListLabelsForRepo = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     IssuesListLabelsForRepoResponse,
     IssuesListLabelsForRepoError,
     TData
   >({
-    ...issuesListLabelsForRepoQuery(variables),
+    ...issuesListLabelsForRepoQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -64109,7 +64376,7 @@ export const useIssuesCreateLabel = (
     IssuesCreateLabelVariables
   >({
     mutationFn: (variables: IssuesCreateLabelVariables) =>
-      fetchIssuesCreateLabel({ ...fetcherOptions, ...variables }),
+      fetchIssuesCreateLabel(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -64167,7 +64434,7 @@ export const useIssuesDeleteLabel = (
     IssuesDeleteLabelVariables
   >({
     mutationFn: (variables: IssuesDeleteLabelVariables) =>
-      fetchIssuesDeleteLabel({ ...fetcherOptions, ...variables }),
+      fetchIssuesDeleteLabel(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -64233,10 +64500,10 @@ export const useSuspenseIssuesGetLabel = <TData = Schemas.Label>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<Schemas.Label, IssuesGetLabelError, TData>(
     {
-      ...issuesGetLabelQuery(variables),
+      ...issuesGetLabelQuery(deepMerge(fetcherOptions, variables)),
       ...options,
       ...queryOptions,
     }
@@ -64250,9 +64517,9 @@ export const useIssuesGetLabel = <TData = Schemas.Label>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.Label, IssuesGetLabelError, TData>({
-    ...issuesGetLabelQuery(variables),
+    ...issuesGetLabelQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -64327,7 +64594,7 @@ export const useIssuesUpdateLabel = (
     IssuesUpdateLabelVariables
   >({
     mutationFn: (variables: IssuesUpdateLabelVariables) =>
-      fetchIssuesUpdateLabel({ ...fetcherOptions, ...variables }),
+      fetchIssuesUpdateLabel(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -64402,13 +64669,13 @@ export const useSuspenseReposListLanguages = <TData = Schemas.Language>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.Language,
     ReposListLanguagesError,
     TData
   >({
-    ...reposListLanguagesQuery(variables),
+    ...reposListLanguagesQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -64428,9 +64695,9 @@ export const useReposListLanguages = <TData = Schemas.Language>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.Language, ReposListLanguagesError, TData>({
-    ...reposListLanguagesQuery(variables),
+    ...reposListLanguagesQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -64494,7 +64761,7 @@ export const useReposDisableLfsForRepo = (
     ReposDisableLfsForRepoVariables
   >({
     mutationFn: (variables: ReposDisableLfsForRepoVariables) =>
-      fetchReposDisableLfsForRepo({ ...fetcherOptions, ...variables }),
+      fetchReposDisableLfsForRepo(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -64552,7 +64819,7 @@ export const useReposEnableLfsForRepo = (
     ReposEnableLfsForRepoVariables
   >({
     mutationFn: (variables: ReposEnableLfsForRepoVariables) =>
-      fetchReposEnableLfsForRepo({ ...fetcherOptions, ...variables }),
+      fetchReposEnableLfsForRepo(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -64637,13 +64904,13 @@ export const useSuspenseLicensesGetForRepo = <TData = Schemas.LicenseContent>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.LicenseContent,
     LicensesGetForRepoError,
     TData
   >({
-    ...licensesGetForRepoQuery(variables),
+    ...licensesGetForRepoQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -64665,13 +64932,13 @@ export const useLicensesGetForRepo = <TData = Schemas.LicenseContent>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.LicenseContent,
     LicensesGetForRepoError,
     TData
   >({
-    ...licensesGetForRepoQuery(variables),
+    ...licensesGetForRepoQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -64743,7 +65010,7 @@ export const useReposMergeUpstream = (
     ReposMergeUpstreamVariables
   >({
     mutationFn: (variables: ReposMergeUpstreamVariables) =>
-      fetchReposMergeUpstream({ ...fetcherOptions, ...variables }),
+      fetchReposMergeUpstream(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -64825,7 +65092,7 @@ export const useReposMerge = (
     ReposMergeVariables
   >({
     mutationFn: (variables: ReposMergeVariables) =>
-      fetchReposMerge({ ...fetcherOptions, ...variables }),
+      fetchReposMerge(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -64936,13 +65203,13 @@ export const useSuspenseIssuesListMilestones = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     IssuesListMilestonesResponse,
     IssuesListMilestonesError,
     TData
   >({
-    ...issuesListMilestonesQuery(variables),
+    ...issuesListMilestonesQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -64959,13 +65226,13 @@ export const useIssuesListMilestones = <TData = IssuesListMilestonesResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     IssuesListMilestonesResponse,
     IssuesListMilestonesError,
     TData
   >({
-    ...issuesListMilestonesQuery(variables),
+    ...issuesListMilestonesQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -65056,7 +65323,7 @@ export const useIssuesCreateMilestone = (
     IssuesCreateMilestoneVariables
   >({
     mutationFn: (variables: IssuesCreateMilestoneVariables) =>
-      fetchIssuesCreateMilestone({ ...fetcherOptions, ...variables }),
+      fetchIssuesCreateMilestone(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -65120,7 +65387,7 @@ export const useIssuesDeleteMilestone = (
     IssuesDeleteMilestoneVariables
   >({
     mutationFn: (variables: IssuesDeleteMilestoneVariables) =>
-      fetchIssuesDeleteMilestone({ ...fetcherOptions, ...variables }),
+      fetchIssuesDeleteMilestone(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -65193,13 +65460,13 @@ export const useSuspenseIssuesGetMilestone = <TData = Schemas.Milestone>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.Milestone,
     IssuesGetMilestoneError,
     TData
   >({
-    ...issuesGetMilestoneQuery(variables),
+    ...issuesGetMilestoneQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -65216,10 +65483,10 @@ export const useIssuesGetMilestone = <TData = Schemas.Milestone>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.Milestone, IssuesGetMilestoneError, TData>(
     {
-      ...issuesGetMilestoneQuery(variables),
+      ...issuesGetMilestoneQuery(deepMerge(fetcherOptions, variables)),
       ...options,
       ...queryOptions,
     }
@@ -65306,7 +65573,7 @@ export const useIssuesUpdateMilestone = (
     IssuesUpdateMilestoneVariables
   >({
     mutationFn: (variables: IssuesUpdateMilestoneVariables) =>
-      fetchIssuesUpdateMilestone({ ...fetcherOptions, ...variables }),
+      fetchIssuesUpdateMilestone(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -65400,13 +65667,13 @@ export const useSuspenseIssuesListLabelsForMilestone = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     IssuesListLabelsForMilestoneResponse,
     IssuesListLabelsForMilestoneError,
     TData
   >({
-    ...issuesListLabelsForMilestoneQuery(variables),
+    ...issuesListLabelsForMilestoneQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -65425,13 +65692,13 @@ export const useIssuesListLabelsForMilestone = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     IssuesListLabelsForMilestoneResponse,
     IssuesListLabelsForMilestoneError,
     TData
   >({
-    ...issuesListLabelsForMilestoneQuery(variables),
+    ...issuesListLabelsForMilestoneQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -65557,13 +65824,15 @@ export const useSuspenseActivityListRepoNotificationsForAuthenticatedUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     ActivityListRepoNotificationsForAuthenticatedUserResponse,
     ActivityListRepoNotificationsForAuthenticatedUserError,
     TData
   >({
-    ...activityListRepoNotificationsForAuthenticatedUserQuery(variables),
+    ...activityListRepoNotificationsForAuthenticatedUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -65585,13 +65854,15 @@ export const useActivityListRepoNotificationsForAuthenticatedUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     ActivityListRepoNotificationsForAuthenticatedUserResponse,
     ActivityListRepoNotificationsForAuthenticatedUserError,
     TData
   >({
-    ...activityListRepoNotificationsForAuthenticatedUserQuery(variables),
+    ...activityListRepoNotificationsForAuthenticatedUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -65671,10 +65942,9 @@ export const useActivityMarkRepoNotificationsAsRead = (
     ActivityMarkRepoNotificationsAsReadVariables
   >({
     mutationFn: (variables: ActivityMarkRepoNotificationsAsReadVariables) =>
-      fetchActivityMarkRepoNotificationsAsRead({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchActivityMarkRepoNotificationsAsRead(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -65754,7 +66024,7 @@ export const useReposDeletePagesSite = (
     ReposDeletePagesSiteVariables
   >({
     mutationFn: (variables: ReposDeletePagesSiteVariables) =>
-      fetchReposDeletePagesSite({ ...fetcherOptions, ...variables }),
+      fetchReposDeletePagesSite(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -65819,9 +66089,9 @@ export const useSuspenseReposGetPages = <TData = Schemas.Page>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<Schemas.Page, ReposGetPagesError, TData>({
-    ...reposGetPagesQuery(variables),
+    ...reposGetPagesQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -65834,9 +66104,9 @@ export const useReposGetPages = <TData = Schemas.Page>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.Page, ReposGetPagesError, TData>({
-    ...reposGetPagesQuery(variables),
+    ...reposGetPagesQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -65999,7 +66269,7 @@ export const useReposCreatePagesSite = (
     ReposCreatePagesSiteVariables
   >({
     mutationFn: (variables: ReposCreatePagesSiteVariables) =>
-      fetchReposCreatePagesSite({ ...fetcherOptions, ...variables }),
+      fetchReposCreatePagesSite(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -66339,10 +66609,9 @@ export const useReposUpdateInformationAboutPagesSite = (
     ReposUpdateInformationAboutPagesSiteVariables
   >({
     mutationFn: (variables: ReposUpdateInformationAboutPagesSiteVariables) =>
-      fetchReposUpdateInformationAboutPagesSite({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchReposUpdateInformationAboutPagesSite(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -66432,13 +66701,13 @@ export const useSuspenseReposListPagesBuilds = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     ReposListPagesBuildsResponse,
     ReposListPagesBuildsError,
     TData
   >({
-    ...reposListPagesBuildsQuery(variables),
+    ...reposListPagesBuildsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -66455,13 +66724,13 @@ export const useReposListPagesBuilds = <TData = ReposListPagesBuildsResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     ReposListPagesBuildsResponse,
     ReposListPagesBuildsError,
     TData
   >({
-    ...reposListPagesBuildsQuery(variables),
+    ...reposListPagesBuildsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -66529,7 +66798,7 @@ export const useReposRequestPagesBuild = (
     ReposRequestPagesBuildVariables
   >({
     mutationFn: (variables: ReposRequestPagesBuildVariables) =>
-      fetchReposRequestPagesBuild({ ...fetcherOptions, ...variables }),
+      fetchReposRequestPagesBuild(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -66595,13 +66864,13 @@ export const useSuspenseReposGetLatestPagesBuild = <TData = Schemas.PageBuild>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.PageBuild,
     ReposGetLatestPagesBuildError,
     TData
   >({
-    ...reposGetLatestPagesBuildQuery(variables),
+    ...reposGetLatestPagesBuildQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -66618,13 +66887,13 @@ export const useReposGetLatestPagesBuild = <TData = Schemas.PageBuild>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.PageBuild,
     ReposGetLatestPagesBuildError,
     TData
   >({
-    ...reposGetLatestPagesBuildQuery(variables),
+    ...reposGetLatestPagesBuildQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -66692,13 +66961,13 @@ export const useSuspenseReposGetPagesBuild = <TData = Schemas.PageBuild>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.PageBuild,
     ReposGetPagesBuildError,
     TData
   >({
-    ...reposGetPagesBuildQuery(variables),
+    ...reposGetPagesBuildQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -66715,10 +66984,10 @@ export const useReposGetPagesBuild = <TData = Schemas.PageBuild>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.PageBuild, ReposGetPagesBuildError, TData>(
     {
-      ...reposGetPagesBuildQuery(variables),
+      ...reposGetPagesBuildQuery(deepMerge(fetcherOptions, variables)),
       ...options,
       ...queryOptions,
     }
@@ -66824,7 +67093,7 @@ export const useReposCreatePagesDeployment = (
     ReposCreatePagesDeploymentVariables
   >({
     mutationFn: (variables: ReposCreatePagesDeploymentVariables) =>
-      fetchReposCreatePagesDeployment({ ...fetcherOptions, ...variables }),
+      fetchReposCreatePagesDeployment(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -66920,13 +67189,13 @@ export const useSuspenseReposGetPagesHealthCheck = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.PagesHealthCheck | Schemas.EmptyObject,
     ReposGetPagesHealthCheckError,
     TData
   >({
-    ...reposGetPagesHealthCheckQuery(variables),
+    ...reposGetPagesHealthCheckQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -66952,13 +67221,13 @@ export const useReposGetPagesHealthCheck = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.PagesHealthCheck | Schemas.EmptyObject,
     ReposGetPagesHealthCheckError,
     TData
   >({
-    ...reposGetPagesHealthCheckQuery(variables),
+    ...reposGetPagesHealthCheckQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -67085,13 +67354,13 @@ export const useSuspenseProjectsListForRepo = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     ProjectsListForRepoResponse,
     ProjectsListForRepoError,
     TData
   >({
-    ...projectsListForRepoQuery(variables),
+    ...projectsListForRepoQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -67111,13 +67380,13 @@ export const useProjectsListForRepo = <TData = ProjectsListForRepoResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     ProjectsListForRepoResponse,
     ProjectsListForRepoError,
     TData
   >({
-    ...projectsListForRepoQuery(variables),
+    ...projectsListForRepoQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -67214,7 +67483,7 @@ export const useProjectsCreateForRepo = (
     ProjectsCreateForRepoVariables
   >({
     mutationFn: (variables: ProjectsCreateForRepoVariables) =>
-      fetchProjectsCreateForRepo({ ...fetcherOptions, ...variables }),
+      fetchProjectsCreateForRepo(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -67336,9 +67605,9 @@ export const useSuspensePullsList = <TData = PullsListResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<PullsListResponse, PullsListError, TData>({
-    ...pullsListQuery(variables),
+    ...pullsListQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -67354,9 +67623,9 @@ export const usePullsList = <TData = PullsListResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<PullsListResponse, PullsListError, TData>({
-    ...pullsListQuery(variables),
+    ...pullsListQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -67478,7 +67747,7 @@ export const usePullsCreate = (
     PullsCreateVariables
   >({
     mutationFn: (variables: PullsCreateVariables) =>
-      fetchPullsCreate({ ...fetcherOptions, ...variables }),
+      fetchPullsCreate(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -67590,13 +67859,15 @@ export const useSuspensePullsListReviewCommentsForRepo = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     PullsListReviewCommentsForRepoResponse,
     PullsListReviewCommentsForRepoError,
     TData
   >({
-    ...pullsListReviewCommentsForRepoQuery(variables),
+    ...pullsListReviewCommentsForRepoQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -67618,13 +67889,15 @@ export const usePullsListReviewCommentsForRepo = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     PullsListReviewCommentsForRepoResponse,
     PullsListReviewCommentsForRepoError,
     TData
   >({
-    ...pullsListReviewCommentsForRepoQuery(variables),
+    ...pullsListReviewCommentsForRepoQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -67695,7 +67968,7 @@ export const usePullsDeleteReviewComment = (
     PullsDeleteReviewCommentVariables
   >({
     mutationFn: (variables: PullsDeleteReviewCommentVariables) =>
-      fetchPullsDeleteReviewComment({ ...fetcherOptions, ...variables }),
+      fetchPullsDeleteReviewComment(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -67783,13 +68056,13 @@ export const useSuspensePullsGetReviewComment = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.PullRequestReviewComment,
     PullsGetReviewCommentError,
     TData
   >({
-    ...pullsGetReviewCommentQuery(variables),
+    ...pullsGetReviewCommentQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -67811,13 +68084,13 @@ export const usePullsGetReviewComment = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.PullRequestReviewComment,
     PullsGetReviewCommentError,
     TData
   >({
-    ...pullsGetReviewCommentQuery(variables),
+    ...pullsGetReviewCommentQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -67893,7 +68166,7 @@ export const usePullsUpdateReviewComment = (
     PullsUpdateReviewCommentVariables
   >({
     mutationFn: (variables: PullsUpdateReviewCommentVariables) =>
-      fetchPullsUpdateReviewComment({ ...fetcherOptions, ...variables }),
+      fetchPullsUpdateReviewComment(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -68013,13 +68286,15 @@ export const useSuspenseReactionsListForPullRequestReviewComment = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     ReactionsListForPullRequestReviewCommentResponse,
     ReactionsListForPullRequestReviewCommentError,
     TData
   >({
-    ...reactionsListForPullRequestReviewCommentQuery(variables),
+    ...reactionsListForPullRequestReviewCommentQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -68041,13 +68316,15 @@ export const useReactionsListForPullRequestReviewComment = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     ReactionsListForPullRequestReviewCommentResponse,
     ReactionsListForPullRequestReviewCommentError,
     TData
   >({
-    ...reactionsListForPullRequestReviewCommentQuery(variables),
+    ...reactionsListForPullRequestReviewCommentQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -68137,10 +68414,9 @@ export const useReactionsCreateForPullRequestReviewComment = (
     mutationFn: (
       variables: ReactionsCreateForPullRequestReviewCommentVariables
     ) =>
-      fetchReactionsCreateForPullRequestReviewComment({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchReactionsCreateForPullRequestReviewComment(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -68216,10 +68492,9 @@ export const useReactionsDeleteForPullRequestComment = (
     ReactionsDeleteForPullRequestCommentVariables
   >({
     mutationFn: (variables: ReactionsDeleteForPullRequestCommentVariables) =>
-      fetchReactionsDeleteForPullRequestComment({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchReactionsDeleteForPullRequestComment(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -68357,10 +68632,10 @@ export const useSuspensePullsGet = <TData = Schemas.PullRequest>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<Schemas.PullRequest, PullsGetError, TData>(
     {
-      ...pullsGetQuery(variables),
+      ...pullsGetQuery(deepMerge(fetcherOptions, variables)),
       ...options,
       ...queryOptions,
     }
@@ -68391,9 +68666,9 @@ export const usePullsGet = <TData = Schemas.PullRequest>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.PullRequest, PullsGetError, TData>({
-    ...pullsGetQuery(variables),
+    ...pullsGetQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -68498,7 +68773,7 @@ export const usePullsUpdate = (
     PullsUpdateVariables
   >({
     mutationFn: (variables: PullsUpdateVariables) =>
-      fetchPullsUpdate({ ...fetcherOptions, ...variables }),
+      fetchPullsUpdate(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -68668,10 +68943,9 @@ export const useCodespacesCreateWithPrForAuthenticatedUser = (
     mutationFn: (
       variables: CodespacesCreateWithPrForAuthenticatedUserVariables
     ) =>
-      fetchCodespacesCreateWithPrForAuthenticatedUser({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchCodespacesCreateWithPrForAuthenticatedUser(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -68791,13 +69065,13 @@ export const useSuspensePullsListReviewComments = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     PullsListReviewCommentsResponse,
     PullsListReviewCommentsError,
     TData
   >({
-    ...pullsListReviewCommentsQuery(variables),
+    ...pullsListReviewCommentsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -68819,13 +69093,13 @@ export const usePullsListReviewComments = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     PullsListReviewCommentsResponse,
     PullsListReviewCommentsError,
     TData
   >({
-    ...pullsListReviewCommentsQuery(variables),
+    ...pullsListReviewCommentsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -68958,7 +69232,7 @@ export const usePullsCreateReviewComment = (
     PullsCreateReviewCommentVariables
   >({
     mutationFn: (variables: PullsCreateReviewCommentVariables) =>
-      fetchPullsCreateReviewComment({ ...fetcherOptions, ...variables }),
+      fetchPullsCreateReviewComment(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -69044,10 +69318,9 @@ export const usePullsCreateReplyForReviewComment = (
     PullsCreateReplyForReviewCommentVariables
   >({
     mutationFn: (variables: PullsCreateReplyForReviewCommentVariables) =>
-      fetchPullsCreateReplyForReviewComment({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchPullsCreateReplyForReviewComment(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -69148,13 +69421,13 @@ export const useSuspensePullsListCommits = <TData = PullsListCommitsResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     PullsListCommitsResponse,
     PullsListCommitsError,
     TData
   >({
-    ...pullsListCommitsQuery(variables),
+    ...pullsListCommitsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -69174,13 +69447,13 @@ export const usePullsListCommits = <TData = PullsListCommitsResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     PullsListCommitsResponse,
     PullsListCommitsError,
     TData
   >({
-    ...pullsListCommitsQuery(variables),
+    ...pullsListCommitsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -69295,13 +69568,13 @@ export const useSuspensePullsListFiles = <TData = PullsListFilesResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     PullsListFilesResponse,
     PullsListFilesError,
     TData
   >({
-    ...pullsListFilesQuery(variables),
+    ...pullsListFilesQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -69321,13 +69594,13 @@ export const usePullsListFiles = <TData = PullsListFilesResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     PullsListFilesResponse,
     PullsListFilesError,
     TData
   >({
-    ...pullsListFilesQuery(variables),
+    ...pullsListFilesQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -69394,10 +69667,10 @@ export const useSuspensePullsCheckIfMerged = <TData = undefined>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<undefined, PullsCheckIfMergedError, TData>(
     {
-      ...pullsCheckIfMergedQuery(variables),
+      ...pullsCheckIfMergedQuery(deepMerge(fetcherOptions, variables)),
       ...options,
       ...queryOptions,
     }
@@ -69411,9 +69684,9 @@ export const usePullsCheckIfMerged = <TData = undefined>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<undefined, PullsCheckIfMergedError, TData>({
-    ...pullsCheckIfMergedQuery(variables),
+    ...pullsCheckIfMergedQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -69543,7 +69816,7 @@ export const usePullsMerge = (
     PullsMergeVariables
   >({
     mutationFn: (variables: PullsMergeVariables) =>
-      fetchPullsMerge({ ...fetcherOptions, ...variables }),
+      fetchPullsMerge(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -69619,7 +69892,7 @@ export const usePullsRemoveRequestedReviewers = (
     PullsRemoveRequestedReviewersVariables
   >({
     mutationFn: (variables: PullsRemoveRequestedReviewersVariables) =>
-      fetchPullsRemoveRequestedReviewers({ ...fetcherOptions, ...variables }),
+      fetchPullsRemoveRequestedReviewers(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -69704,13 +69977,13 @@ export const useSuspensePullsListRequestedReviewers = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.PullRequestReviewRequest,
     PullsListRequestedReviewersError,
     TData
   >({
-    ...pullsListRequestedReviewersQuery(variables),
+    ...pullsListRequestedReviewersQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -69732,13 +70005,13 @@ export const usePullsListRequestedReviewers = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.PullRequestReviewRequest,
     PullsListRequestedReviewersError,
     TData
   >({
-    ...pullsListRequestedReviewersQuery(variables),
+    ...pullsListRequestedReviewersQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -69849,7 +70122,7 @@ export const usePullsRequestReviewers = (
     PullsRequestReviewersVariables
   >({
     mutationFn: (variables: PullsRequestReviewersVariables) =>
-      fetchPullsRequestReviewers({ ...fetcherOptions, ...variables }),
+      fetchPullsRequestReviewers(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -69950,13 +70223,13 @@ export const useSuspensePullsListReviews = <TData = PullsListReviewsResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     PullsListReviewsResponse,
     PullsListReviewsError,
     TData
   >({
-    ...pullsListReviewsQuery(variables),
+    ...pullsListReviewsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -69976,13 +70249,13 @@ export const usePullsListReviews = <TData = PullsListReviewsResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     PullsListReviewsResponse,
     PullsListReviewsError,
     TData
   >({
-    ...pullsListReviewsQuery(variables),
+    ...pullsListReviewsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -70120,7 +70393,7 @@ export const usePullsCreateReview = (
     PullsCreateReviewVariables
   >({
     mutationFn: (variables: PullsCreateReviewVariables) =>
-      fetchPullsCreateReview({ ...fetcherOptions, ...variables }),
+      fetchPullsCreateReview(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -70194,7 +70467,7 @@ export const usePullsDeletePendingReview = (
     PullsDeletePendingReviewVariables
   >({
     mutationFn: (variables: PullsDeletePendingReviewVariables) =>
-      fetchPullsDeletePendingReview({ ...fetcherOptions, ...variables }),
+      fetchPullsDeletePendingReview(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -70275,13 +70548,13 @@ export const useSuspensePullsGetReview = <TData = Schemas.PullRequestReview>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.PullRequestReview,
     PullsGetReviewError,
     TData
   >({
-    ...pullsGetReviewQuery(variables),
+    ...pullsGetReviewQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -70298,13 +70571,13 @@ export const usePullsGetReview = <TData = Schemas.PullRequestReview>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.PullRequestReview,
     PullsGetReviewError,
     TData
   >({
-    ...pullsGetReviewQuery(variables),
+    ...pullsGetReviewQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -70387,7 +70660,7 @@ export const usePullsUpdateReview = (
     PullsUpdateReviewVariables
   >({
     mutationFn: (variables: PullsUpdateReviewVariables) =>
-      fetchPullsUpdateReview({ ...fetcherOptions, ...variables }),
+      fetchPullsUpdateReview(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -70497,13 +70770,13 @@ export const useSuspensePullsListCommentsForReview = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     PullsListCommentsForReviewResponse,
     PullsListCommentsForReviewError,
     TData
   >({
-    ...pullsListCommentsForReviewQuery(variables),
+    ...pullsListCommentsForReviewQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -70525,13 +70798,13 @@ export const usePullsListCommentsForReview = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     PullsListCommentsForReviewResponse,
     PullsListCommentsForReviewError,
     TData
   >({
-    ...pullsListCommentsForReviewQuery(variables),
+    ...pullsListCommentsForReviewQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -70624,7 +70897,7 @@ export const usePullsDismissReview = (
     PullsDismissReviewVariables
   >({
     mutationFn: (variables: PullsDismissReviewVariables) =>
-      fetchPullsDismissReview({ ...fetcherOptions, ...variables }),
+      fetchPullsDismissReview(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -70720,7 +70993,7 @@ export const usePullsSubmitReview = (
     PullsSubmitReviewVariables
   >({
     mutationFn: (variables: PullsSubmitReviewVariables) =>
-      fetchPullsSubmitReview({ ...fetcherOptions, ...variables }),
+      fetchPullsSubmitReview(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -70812,7 +71085,7 @@ export const usePullsUpdateBranch = (
     PullsUpdateBranchVariables
   >({
     mutationFn: (variables: PullsUpdateBranchVariables) =>
-      fetchPullsUpdateBranch({ ...fetcherOptions, ...variables }),
+      fetchPullsUpdateBranch(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -70910,13 +71183,13 @@ export const useSuspenseReposGetReadme = <TData = Schemas.ContentFile>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.ContentFile,
     ReposGetReadmeError,
     TData
   >({
-    ...reposGetReadmeQuery(variables),
+    ...reposGetReadmeQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -70934,9 +71207,9 @@ export const useReposGetReadme = <TData = Schemas.ContentFile>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.ContentFile, ReposGetReadmeError, TData>({
-    ...reposGetReadmeQuery(variables),
+    ...reposGetReadmeQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -71045,13 +71318,13 @@ export const useSuspenseReposGetReadmeInDirectory = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.ContentFile,
     ReposGetReadmeInDirectoryError,
     TData
   >({
-    ...reposGetReadmeInDirectoryQuery(variables),
+    ...reposGetReadmeInDirectoryQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -71073,13 +71346,13 @@ export const useReposGetReadmeInDirectory = <TData = Schemas.ContentFile>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.ContentFile,
     ReposGetReadmeInDirectoryError,
     TData
   >({
-    ...reposGetReadmeInDirectoryQuery(variables),
+    ...reposGetReadmeInDirectoryQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -71186,13 +71459,13 @@ export const useSuspenseReposListReleases = <TData = ReposListReleasesResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     ReposListReleasesResponse,
     ReposListReleasesError,
     TData
   >({
-    ...reposListReleasesQuery(variables),
+    ...reposListReleasesQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -71214,13 +71487,13 @@ export const useReposListReleases = <TData = ReposListReleasesResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     ReposListReleasesResponse,
     ReposListReleasesError,
     TData
   >({
-    ...reposListReleasesQuery(variables),
+    ...reposListReleasesQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -71345,7 +71618,7 @@ export const useReposCreateRelease = (
     ReposCreateReleaseVariables
   >({
     mutationFn: (variables: ReposCreateReleaseVariables) =>
-      fetchReposCreateRelease({ ...fetcherOptions, ...variables }),
+      fetchReposCreateRelease(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -71406,7 +71679,7 @@ export const useReposDeleteReleaseAsset = (
     ReposDeleteReleaseAssetVariables
   >({
     mutationFn: (variables: ReposDeleteReleaseAssetVariables) =>
-      fetchReposDeleteReleaseAsset({ ...fetcherOptions, ...variables }),
+      fetchReposDeleteReleaseAsset(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -71498,13 +71771,13 @@ export const useSuspenseReposGetReleaseAsset = <TData = Schemas.ReleaseAsset>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.ReleaseAsset,
     ReposGetReleaseAssetError,
     TData
   >({
-    ...reposGetReleaseAssetQuery(variables),
+    ...reposGetReleaseAssetQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -71524,13 +71797,13 @@ export const useReposGetReleaseAsset = <TData = Schemas.ReleaseAsset>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.ReleaseAsset,
     ReposGetReleaseAssetError,
     TData
   >({
-    ...reposGetReleaseAssetQuery(variables),
+    ...reposGetReleaseAssetQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -71614,7 +71887,7 @@ export const useReposUpdateReleaseAsset = (
     ReposUpdateReleaseAssetVariables
   >({
     mutationFn: (variables: ReposUpdateReleaseAssetVariables) =>
-      fetchReposUpdateReleaseAsset({ ...fetcherOptions, ...variables }),
+      fetchReposUpdateReleaseAsset(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -71700,7 +71973,7 @@ export const useReposGenerateReleaseNotes = (
     ReposGenerateReleaseNotesVariables
   >({
     mutationFn: (variables: ReposGenerateReleaseNotesVariables) =>
-      fetchReposGenerateReleaseNotes({ ...fetcherOptions, ...variables }),
+      fetchReposGenerateReleaseNotes(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -71781,13 +72054,13 @@ export const useSuspenseReposGetLatestRelease = <TData = Schemas.Release>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.Release,
     ReposGetLatestReleaseError,
     TData
   >({
-    ...reposGetLatestReleaseQuery(variables),
+    ...reposGetLatestReleaseQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -71809,13 +72082,13 @@ export const useReposGetLatestRelease = <TData = Schemas.Release>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.Release,
     ReposGetLatestReleaseError,
     TData
   >({
-    ...reposGetLatestReleaseQuery(variables),
+    ...reposGetLatestReleaseQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -71898,13 +72171,13 @@ export const useSuspenseReposGetReleaseByTag = <TData = Schemas.Release>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.Release,
     ReposGetReleaseByTagError,
     TData
   >({
-    ...reposGetReleaseByTagQuery(variables),
+    ...reposGetReleaseByTagQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -71924,10 +72197,10 @@ export const useReposGetReleaseByTag = <TData = Schemas.Release>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.Release, ReposGetReleaseByTagError, TData>(
     {
-      ...reposGetReleaseByTagQuery(variables),
+      ...reposGetReleaseByTagQuery(deepMerge(fetcherOptions, variables)),
       ...options,
       ...queryOptions,
     }
@@ -71996,7 +72269,7 @@ export const useReposDeleteRelease = (
     ReposDeleteReleaseVariables
   >({
     mutationFn: (variables: ReposDeleteReleaseVariables) =>
-      fetchReposDeleteRelease({ ...fetcherOptions, ...variables }),
+      fetchReposDeleteRelease(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -72074,13 +72347,13 @@ export const useSuspenseReposGetRelease = <TData = Schemas.Release>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.Release,
     ReposGetReleaseError,
     TData
   >({
-    ...reposGetReleaseQuery(variables),
+    ...reposGetReleaseQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -72096,9 +72369,9 @@ export const useReposGetRelease = <TData = Schemas.Release>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.Release, ReposGetReleaseError, TData>({
-    ...reposGetReleaseQuery(variables),
+    ...reposGetReleaseQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -72207,7 +72480,7 @@ export const useReposUpdateRelease = (
     ReposUpdateReleaseVariables
   >({
     mutationFn: (variables: ReposUpdateReleaseVariables) =>
-      fetchReposUpdateRelease({ ...fetcherOptions, ...variables }),
+      fetchReposUpdateRelease(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -72301,13 +72574,13 @@ export const useSuspenseReposListReleaseAssets = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     ReposListReleaseAssetsResponse,
     ReposListReleaseAssetsError,
     TData
   >({
-    ...reposListReleaseAssetsQuery(variables),
+    ...reposListReleaseAssetsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -72326,13 +72599,13 @@ export const useReposListReleaseAssets = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     ReposListReleaseAssetsResponse,
     ReposListReleaseAssetsError,
     TData
   >({
-    ...reposListReleaseAssetsQuery(variables),
+    ...reposListReleaseAssetsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -72443,7 +72716,7 @@ export const useReposUploadReleaseAsset = (
     ReposUploadReleaseAssetVariables
   >({
     mutationFn: (variables: ReposUploadReleaseAssetVariables) =>
-      fetchReposUploadReleaseAsset({ ...fetcherOptions, ...variables }),
+      fetchReposUploadReleaseAsset(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -72553,13 +72826,13 @@ export const useSuspenseReactionsListForRelease = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     ReactionsListForReleaseResponse,
     ReactionsListForReleaseError,
     TData
   >({
-    ...reactionsListForReleaseQuery(variables),
+    ...reactionsListForReleaseQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -72581,13 +72854,13 @@ export const useReactionsListForRelease = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     ReactionsListForReleaseResponse,
     ReactionsListForReleaseError,
     TData
   >({
-    ...reactionsListForReleaseQuery(variables),
+    ...reactionsListForReleaseQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -72666,7 +72939,7 @@ export const useReactionsCreateForRelease = (
     ReactionsCreateForReleaseVariables
   >({
     mutationFn: (variables: ReactionsCreateForReleaseVariables) =>
-      fetchReactionsCreateForRelease({ ...fetcherOptions, ...variables }),
+      fetchReactionsCreateForRelease(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -72741,7 +73014,7 @@ export const useReactionsDeleteForRelease = (
     ReactionsDeleteForReleaseVariables
   >({
     mutationFn: (variables: ReactionsDeleteForReleaseVariables) =>
-      fetchReactionsDeleteForRelease({ ...fetcherOptions, ...variables }),
+      fetchReactionsDeleteForRelease(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -72890,13 +73163,15 @@ export const useSuspenseSecretScanningListAlertsForRepo = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     SecretScanningListAlertsForRepoResponse,
     SecretScanningListAlertsForRepoError,
     TData
   >({
-    ...secretScanningListAlertsForRepoQuery(variables),
+    ...secretScanningListAlertsForRepoQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -72922,13 +73197,15 @@ export const useSecretScanningListAlertsForRepo = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     SecretScanningListAlertsForRepoResponse,
     SecretScanningListAlertsForRepoError,
     TData
   >({
-    ...secretScanningListAlertsForRepoQuery(variables),
+    ...secretScanningListAlertsForRepoQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -73035,13 +73312,13 @@ export const useSuspenseSecretScanningGetAlert = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.SecretScanningAlert,
     SecretScanningGetAlertError,
     TData
   >({
-    ...secretScanningGetAlertQuery(variables),
+    ...secretScanningGetAlertQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -73065,13 +73342,13 @@ export const useSecretScanningGetAlert = <TData = Schemas.SecretScanningAlert>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.SecretScanningAlert,
     SecretScanningGetAlertError,
     TData
   >({
-    ...secretScanningGetAlertQuery(variables),
+    ...secretScanningGetAlertQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -73157,7 +73434,7 @@ export const useSecretScanningUpdateAlert = (
     SecretScanningUpdateAlertVariables
   >({
     mutationFn: (variables: SecretScanningUpdateAlertVariables) =>
-      fetchSecretScanningUpdateAlert({ ...fetcherOptions, ...variables }),
+      fetchSecretScanningUpdateAlert(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -73276,13 +73553,15 @@ export const useSuspenseSecretScanningListLocationsForAlert = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     SecretScanningListLocationsForAlertResponse,
     SecretScanningListLocationsForAlertError,
     TData
   >({
-    ...secretScanningListLocationsForAlertQuery(variables),
+    ...secretScanningListLocationsForAlertQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -73308,13 +73587,15 @@ export const useSecretScanningListLocationsForAlert = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     SecretScanningListLocationsForAlertResponse,
     SecretScanningListLocationsForAlertError,
     TData
   >({
-    ...secretScanningListLocationsForAlertQuery(variables),
+    ...secretScanningListLocationsForAlertQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -73421,13 +73702,13 @@ export const useSuspenseActivityListStargazersForRepo = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.SimpleUser[] | Schemas.Stargazer[],
     ActivityListStargazersForRepoError,
     TData
   >({
-    ...activityListStargazersForRepoQuery(variables),
+    ...activityListStargazersForRepoQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -73451,13 +73732,13 @@ export const useActivityListStargazersForRepo = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.SimpleUser[] | Schemas.Stargazer[],
     ActivityListStargazersForRepoError,
     TData
   >({
-    ...activityListStargazersForRepoQuery(variables),
+    ...activityListStargazersForRepoQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -73544,13 +73825,13 @@ export const useSuspenseReposGetCodeFrequencyStats = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.CodeFrequencyStat[] | Responses.Accepted | Responses.NoContent,
     ReposGetCodeFrequencyStatsError,
     TData
   >({
-    ...reposGetCodeFrequencyStatsQuery(variables),
+    ...reposGetCodeFrequencyStatsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -73575,13 +73856,13 @@ export const useReposGetCodeFrequencyStats = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.CodeFrequencyStat[] | Responses.Accepted | Responses.NoContent,
     ReposGetCodeFrequencyStatsError,
     TData
   >({
-    ...reposGetCodeFrequencyStatsQuery(variables),
+    ...reposGetCodeFrequencyStatsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -73665,13 +73946,13 @@ export const useSuspenseReposGetCommitActivityStats = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.CommitActivity[] | Responses.Accepted | Responses.NoContent,
     ReposGetCommitActivityStatsError,
     TData
   >({
-    ...reposGetCommitActivityStatsQuery(variables),
+    ...reposGetCommitActivityStatsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -73693,13 +73974,13 @@ export const useReposGetCommitActivityStats = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.CommitActivity[] | Responses.Accepted | Responses.NoContent,
     ReposGetCommitActivityStatsError,
     TData
   >({
-    ...reposGetCommitActivityStatsQuery(variables),
+    ...reposGetCommitActivityStatsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -73801,13 +74082,13 @@ export const useSuspenseReposGetContributorsStats = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.ContributorActivity[] | Responses.Accepted | Responses.NoContent,
     ReposGetContributorsStatsError,
     TData
   >({
-    ...reposGetContributorsStatsQuery(variables),
+    ...reposGetContributorsStatsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -73837,13 +74118,13 @@ export const useReposGetContributorsStats = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.ContributorActivity[] | Responses.Accepted | Responses.NoContent,
     ReposGetContributorsStatsError,
     TData
   >({
-    ...reposGetContributorsStatsQuery(variables),
+    ...reposGetContributorsStatsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -73934,13 +74215,13 @@ export const useSuspenseReposGetParticipationStats = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.ParticipationStats,
     ReposGetParticipationStatsError,
     TData
   >({
-    ...reposGetParticipationStatsQuery(variables),
+    ...reposGetParticipationStatsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -73964,13 +74245,13 @@ export const useReposGetParticipationStats = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.ParticipationStats,
     ReposGetParticipationStatsError,
     TData
   >({
-    ...reposGetParticipationStatsQuery(variables),
+    ...reposGetParticipationStatsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -74070,13 +74351,13 @@ export const useSuspenseReposGetPunchCardStats = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.CodeFrequencyStat[] | Responses.NoContent,
     ReposGetPunchCardStatsError,
     TData
   >({
-    ...reposGetPunchCardStatsQuery(variables),
+    ...reposGetPunchCardStatsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -74104,13 +74385,13 @@ export const useReposGetPunchCardStats = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.CodeFrequencyStat[] | Responses.NoContent,
     ReposGetPunchCardStatsError,
     TData
   >({
-    ...reposGetPunchCardStatsQuery(variables),
+    ...reposGetPunchCardStatsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -74203,7 +74484,7 @@ export const useReposCreateCommitStatus = (
     ReposCreateCommitStatusVariables
   >({
     mutationFn: (variables: ReposCreateCommitStatusVariables) =>
-      fetchReposCreateCommitStatus({ ...fetcherOptions, ...variables }),
+      fetchReposCreateCommitStatus(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -74302,13 +74583,13 @@ export const useSuspenseActivityListWatchersForRepo = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     ActivityListWatchersForRepoResponse,
     ActivityListWatchersForRepoError,
     TData
   >({
-    ...activityListWatchersForRepoQuery(variables),
+    ...activityListWatchersForRepoQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -74330,13 +74611,13 @@ export const useActivityListWatchersForRepo = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     ActivityListWatchersForRepoResponse,
     ActivityListWatchersForRepoError,
     TData
   >({
-    ...activityListWatchersForRepoQuery(variables),
+    ...activityListWatchersForRepoQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -74401,7 +74682,7 @@ export const useActivityDeleteRepoSubscription = (
     ActivityDeleteRepoSubscriptionVariables
   >({
     mutationFn: (variables: ActivityDeleteRepoSubscriptionVariables) =>
-      fetchActivityDeleteRepoSubscription({ ...fetcherOptions, ...variables }),
+      fetchActivityDeleteRepoSubscription(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -74476,13 +74757,13 @@ export const useSuspenseActivityGetRepoSubscription = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.RepositorySubscription,
     ActivityGetRepoSubscriptionError,
     TData
   >({
-    ...activityGetRepoSubscriptionQuery(variables),
+    ...activityGetRepoSubscriptionQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -74501,13 +74782,13 @@ export const useActivityGetRepoSubscription = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.RepositorySubscription,
     ActivityGetRepoSubscriptionError,
     TData
   >({
-    ...activityGetRepoSubscriptionQuery(variables),
+    ...activityGetRepoSubscriptionQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -74583,7 +74864,7 @@ export const useActivitySetRepoSubscription = (
     ActivitySetRepoSubscriptionVariables
   >({
     mutationFn: (variables: ActivitySetRepoSubscriptionVariables) =>
-      fetchActivitySetRepoSubscription({ ...fetcherOptions, ...variables }),
+      fetchActivitySetRepoSubscription(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -74666,13 +74947,13 @@ export const useSuspenseReposListTags = <TData = ReposListTagsResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     ReposListTagsResponse,
     ReposListTagsError,
     TData
   >({
-    ...reposListTagsQuery(variables),
+    ...reposListTagsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -74689,9 +74970,9 @@ export const useReposListTags = <TData = ReposListTagsResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<ReposListTagsResponse, ReposListTagsError, TData>({
-    ...reposListTagsQuery(variables),
+    ...reposListTagsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -74790,13 +75071,13 @@ export const useSuspenseReposListTagProtection = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     ReposListTagProtectionResponse,
     ReposListTagProtectionError,
     TData
   >({
-    ...reposListTagProtectionQuery(variables),
+    ...reposListTagProtectionQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -74820,13 +75101,13 @@ export const useReposListTagProtection = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     ReposListTagProtectionResponse,
     ReposListTagProtectionError,
     TData
   >({
-    ...reposListTagProtectionQuery(variables),
+    ...reposListTagProtectionQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -74909,7 +75190,7 @@ export const useReposCreateTagProtection = (
     ReposCreateTagProtectionVariables
   >({
     mutationFn: (variables: ReposCreateTagProtectionVariables) =>
-      fetchReposCreateTagProtection({ ...fetcherOptions, ...variables }),
+      fetchReposCreateTagProtection(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -74987,7 +75268,7 @@ export const useReposDeleteTagProtection = (
     ReposDeleteTagProtectionVariables
   >({
     mutationFn: (variables: ReposDeleteTagProtectionVariables) =>
-      fetchReposDeleteTagProtection({ ...fetcherOptions, ...variables }),
+      fetchReposDeleteTagProtection(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -75072,13 +75353,13 @@ export const useSuspenseReposDownloadTarballArchive = <TData = undefined>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     undefined,
     ReposDownloadTarballArchiveError,
     TData
   >({
-    ...reposDownloadTarballArchiveQuery(variables),
+    ...reposDownloadTarballArchiveQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -75101,13 +75382,13 @@ export const useReposDownloadTarballArchive = <TData = undefined>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     undefined,
     ReposDownloadTarballArchiveError,
     TData
   >({
-    ...reposDownloadTarballArchiveQuery(variables),
+    ...reposDownloadTarballArchiveQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -75196,13 +75477,13 @@ export const useSuspenseReposListTeams = <TData = ReposListTeamsResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     ReposListTeamsResponse,
     ReposListTeamsError,
     TData
   >({
-    ...reposListTeamsQuery(variables),
+    ...reposListTeamsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -75219,13 +75500,13 @@ export const useReposListTeams = <TData = ReposListTeamsResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     ReposListTeamsResponse,
     ReposListTeamsError,
     TData
   >({
-    ...reposListTeamsQuery(variables),
+    ...reposListTeamsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -75307,13 +75588,13 @@ export const useSuspenseReposGetAllTopics = <TData = Schemas.Topic>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.Topic,
     ReposGetAllTopicsError,
     TData
   >({
-    ...reposGetAllTopicsQuery(variables),
+    ...reposGetAllTopicsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -75326,9 +75607,9 @@ export const useReposGetAllTopics = <TData = Schemas.Topic>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.Topic, ReposGetAllTopicsError, TData>({
-    ...reposGetAllTopicsQuery(variables),
+    ...reposGetAllTopicsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -75403,7 +75684,7 @@ export const useReposReplaceAllTopics = (
     ReposReplaceAllTopicsVariables
   >({
     mutationFn: (variables: ReposReplaceAllTopicsVariables) =>
-      fetchReposReplaceAllTopics({ ...fetcherOptions, ...variables }),
+      fetchReposReplaceAllTopics(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -75495,13 +75776,13 @@ export const useSuspenseReposGetClones = <TData = Schemas.CloneTraffic>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.CloneTraffic,
     ReposGetClonesError,
     TData
   >({
-    ...reposGetClonesQuery(variables),
+    ...reposGetClonesQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -75521,9 +75802,9 @@ export const useReposGetClones = <TData = Schemas.CloneTraffic>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.CloneTraffic, ReposGetClonesError, TData>({
-    ...reposGetClonesQuery(variables),
+    ...reposGetClonesQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -75608,13 +75889,13 @@ export const useSuspenseReposGetTopPaths = <TData = ReposGetTopPathsResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     ReposGetTopPathsResponse,
     ReposGetTopPathsError,
     TData
   >({
-    ...reposGetTopPathsQuery(variables),
+    ...reposGetTopPathsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -75634,13 +75915,13 @@ export const useReposGetTopPaths = <TData = ReposGetTopPathsResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     ReposGetTopPathsResponse,
     ReposGetTopPathsError,
     TData
   >({
-    ...reposGetTopPathsQuery(variables),
+    ...reposGetTopPathsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -75727,13 +76008,13 @@ export const useSuspenseReposGetTopReferrers = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     ReposGetTopReferrersResponse,
     ReposGetTopReferrersError,
     TData
   >({
-    ...reposGetTopReferrersQuery(variables),
+    ...reposGetTopReferrersQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -75753,13 +76034,13 @@ export const useReposGetTopReferrers = <TData = ReposGetTopReferrersResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     ReposGetTopReferrersResponse,
     ReposGetTopReferrersError,
     TData
   >({
-    ...reposGetTopReferrersQuery(variables),
+    ...reposGetTopReferrersQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -75848,13 +76129,13 @@ export const useSuspenseReposGetViews = <TData = Schemas.ViewTraffic>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.ViewTraffic,
     ReposGetViewsError,
     TData
   >({
-    ...reposGetViewsQuery(variables),
+    ...reposGetViewsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -75870,9 +76151,9 @@ export const useReposGetViews = <TData = Schemas.ViewTraffic>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.ViewTraffic, ReposGetViewsError, TData>({
-    ...reposGetViewsQuery(variables),
+    ...reposGetViewsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -75952,7 +76233,7 @@ export const useReposTransfer = (
     ReposTransferVariables
   >({
     mutationFn: (variables: ReposTransferVariables) =>
-      fetchReposTransfer({ ...fetcherOptions, ...variables }),
+      fetchReposTransfer(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -76020,7 +76301,9 @@ export const useReposDisableVulnerabilityAlerts = (
     ReposDisableVulnerabilityAlertsVariables
   >({
     mutationFn: (variables: ReposDisableVulnerabilityAlertsVariables) =>
-      fetchReposDisableVulnerabilityAlerts({ ...fetcherOptions, ...variables }),
+      fetchReposDisableVulnerabilityAlerts(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -76096,13 +76379,13 @@ export const useSuspenseReposCheckVulnerabilityAlerts = <TData = undefined>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     undefined,
     ReposCheckVulnerabilityAlertsError,
     TData
   >({
-    ...reposCheckVulnerabilityAlertsQuery(variables),
+    ...reposCheckVulnerabilityAlertsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -76122,13 +76405,13 @@ export const useReposCheckVulnerabilityAlerts = <TData = undefined>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     undefined,
     ReposCheckVulnerabilityAlertsError,
     TData
   >({
-    ...reposCheckVulnerabilityAlertsQuery(variables),
+    ...reposCheckVulnerabilityAlertsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -76193,7 +76476,7 @@ export const useReposEnableVulnerabilityAlerts = (
     ReposEnableVulnerabilityAlertsVariables
   >({
     mutationFn: (variables: ReposEnableVulnerabilityAlertsVariables) =>
-      fetchReposEnableVulnerabilityAlerts({ ...fetcherOptions, ...variables }),
+      fetchReposEnableVulnerabilityAlerts(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -76281,13 +76564,13 @@ export const useSuspenseReposDownloadZipballArchive = <TData = undefined>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     undefined,
     ReposDownloadZipballArchiveError,
     TData
   >({
-    ...reposDownloadZipballArchiveQuery(variables),
+    ...reposDownloadZipballArchiveQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -76311,13 +76594,13 @@ export const useReposDownloadZipballArchive = <TData = undefined>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     undefined,
     ReposDownloadZipballArchiveError,
     TData
   >({
-    ...reposDownloadZipballArchiveQuery(variables),
+    ...reposDownloadZipballArchiveQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -76417,7 +76700,7 @@ export const useReposCreateUsingTemplate = (
     ReposCreateUsingTemplateVariables
   >({
     mutationFn: (variables: ReposCreateUsingTemplateVariables) =>
-      fetchReposCreateUsingTemplate({ ...fetcherOptions, ...variables }),
+      fetchReposCreateUsingTemplate(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -76510,13 +76793,13 @@ export const useSuspenseReposListPublic = <TData = ReposListPublicResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     ReposListPublicResponse,
     ReposListPublicError,
     TData
   >({
-    ...reposListPublicQuery(variables),
+    ...reposListPublicQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -76540,13 +76823,13 @@ export const useReposListPublic = <TData = ReposListPublicResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     ReposListPublicResponse,
     ReposListPublicError,
     TData
   >({
-    ...reposListPublicQuery(variables),
+    ...reposListPublicQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -76650,13 +76933,13 @@ export const useSuspenseActionsListEnvironmentSecrets = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     ActionsListEnvironmentSecretsResponse,
     ActionsListEnvironmentSecretsError,
     TData
   >({
-    ...actionsListEnvironmentSecretsQuery(variables),
+    ...actionsListEnvironmentSecretsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -76678,13 +76961,13 @@ export const useActionsListEnvironmentSecrets = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     ActionsListEnvironmentSecretsResponse,
     ActionsListEnvironmentSecretsError,
     TData
   >({
-    ...actionsListEnvironmentSecretsQuery(variables),
+    ...actionsListEnvironmentSecretsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -76767,13 +77050,15 @@ export const useSuspenseActionsGetEnvironmentPublicKey = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.ActionsPublicKey,
     ActionsGetEnvironmentPublicKeyError,
     TData
   >({
-    ...actionsGetEnvironmentPublicKeyQuery(variables),
+    ...actionsGetEnvironmentPublicKeyQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -76795,13 +77080,15 @@ export const useActionsGetEnvironmentPublicKey = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.ActionsPublicKey,
     ActionsGetEnvironmentPublicKeyError,
     TData
   >({
-    ...actionsGetEnvironmentPublicKeyQuery(variables),
+    ...actionsGetEnvironmentPublicKeyQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -76870,7 +77157,7 @@ export const useActionsDeleteEnvironmentSecret = (
     ActionsDeleteEnvironmentSecretVariables
   >({
     mutationFn: (variables: ActionsDeleteEnvironmentSecretVariables) =>
-      fetchActionsDeleteEnvironmentSecret({ ...fetcherOptions, ...variables }),
+      fetchActionsDeleteEnvironmentSecret(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -76955,13 +77242,13 @@ export const useSuspenseActionsGetEnvironmentSecret = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.ActionsSecret,
     ActionsGetEnvironmentSecretError,
     TData
   >({
-    ...actionsGetEnvironmentSecretQuery(variables),
+    ...actionsGetEnvironmentSecretQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -76981,13 +77268,13 @@ export const useActionsGetEnvironmentSecret = <TData = Schemas.ActionsSecret>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.ActionsSecret,
     ActionsGetEnvironmentSecretError,
     TData
   >({
-    ...actionsGetEnvironmentSecretQuery(variables),
+    ...actionsGetEnvironmentSecretQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -77220,10 +77507,9 @@ export const useActionsCreateOrUpdateEnvironmentSecret = (
     ActionsCreateOrUpdateEnvironmentSecretVariables
   >({
     mutationFn: (variables: ActionsCreateOrUpdateEnvironmentSecretVariables) =>
-      fetchActionsCreateOrUpdateEnvironmentSecret({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchActionsCreateOrUpdateEnvironmentSecret(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -77326,13 +77612,15 @@ export const useSuspenseActionsListEnvironmentVariables = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     ActionsListEnvironmentVariablesResponse,
     ActionsListEnvironmentVariablesError,
     TData
   >({
-    ...actionsListEnvironmentVariablesQuery(variables),
+    ...actionsListEnvironmentVariablesQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -77354,13 +77642,15 @@ export const useActionsListEnvironmentVariables = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     ActionsListEnvironmentVariablesResponse,
     ActionsListEnvironmentVariablesError,
     TData
   >({
-    ...actionsListEnvironmentVariablesQuery(variables),
+    ...actionsListEnvironmentVariablesQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -77441,10 +77731,9 @@ export const useActionsCreateEnvironmentVariable = (
     ActionsCreateEnvironmentVariableVariables
   >({
     mutationFn: (variables: ActionsCreateEnvironmentVariableVariables) =>
-      fetchActionsCreateEnvironmentVariable({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchActionsCreateEnvironmentVariable(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -77516,10 +77805,9 @@ export const useActionsDeleteEnvironmentVariable = (
     ActionsDeleteEnvironmentVariableVariables
   >({
     mutationFn: (variables: ActionsDeleteEnvironmentVariableVariables) =>
-      fetchActionsDeleteEnvironmentVariable({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchActionsDeleteEnvironmentVariable(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -77605,13 +77893,13 @@ export const useSuspenseActionsGetEnvironmentVariable = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.ActionsVariable,
     ActionsGetEnvironmentVariableError,
     TData
   >({
-    ...actionsGetEnvironmentVariableQuery(variables),
+    ...actionsGetEnvironmentVariableQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -77633,13 +77921,13 @@ export const useActionsGetEnvironmentVariable = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.ActionsVariable,
     ActionsGetEnvironmentVariableError,
     TData
   >({
-    ...actionsGetEnvironmentVariableQuery(variables),
+    ...actionsGetEnvironmentVariableQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -77724,10 +78012,9 @@ export const useActionsUpdateEnvironmentVariable = (
     ActionsUpdateEnvironmentVariableVariables
   >({
     mutationFn: (variables: ActionsUpdateEnvironmentVariableVariables) =>
-      fetchActionsUpdateEnvironmentVariable({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchActionsUpdateEnvironmentVariable(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -77889,13 +78176,13 @@ export const useSuspenseSearchCode = <TData = SearchCodeResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     SearchCodeResponse,
     SearchCodeError,
     TData
   >({
-    ...searchCodeQuery(variables),
+    ...searchCodeQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -77928,9 +78215,9 @@ export const useSearchCode = <TData = SearchCodeResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<SearchCodeResponse, SearchCodeError, TData>({
-    ...searchCodeQuery(variables),
+    ...searchCodeQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -78053,13 +78340,13 @@ export const useSuspenseSearchCommits = <TData = SearchCommitsResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     SearchCommitsResponse,
     SearchCommitsError,
     TData
   >({
-    ...searchCommitsQuery(variables),
+    ...searchCommitsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -78086,9 +78373,9 @@ export const useSearchCommits = <TData = SearchCommitsResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<SearchCommitsResponse, SearchCommitsError, TData>({
-    ...searchCommitsQuery(variables),
+    ...searchCommitsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -78250,13 +78537,13 @@ export const useSuspenseSearchIssuesAndPullRequests = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     SearchIssuesAndPullRequestsResponse,
     SearchIssuesAndPullRequestsError,
     TData
   >({
-    ...searchIssuesAndPullRequestsQuery(variables),
+    ...searchIssuesAndPullRequestsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -78289,13 +78576,13 @@ export const useSearchIssuesAndPullRequests = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     SearchIssuesAndPullRequestsResponse,
     SearchIssuesAndPullRequestsError,
     TData
   >({
-    ...searchIssuesAndPullRequestsQuery(variables),
+    ...searchIssuesAndPullRequestsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -78435,13 +78722,13 @@ export const useSuspenseSearchLabels = <TData = SearchLabelsResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     SearchLabelsResponse,
     SearchLabelsError,
     TData
   >({
-    ...searchLabelsQuery(variables),
+    ...searchLabelsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -78465,9 +78752,9 @@ export const useSearchLabels = <TData = SearchLabelsResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<SearchLabelsResponse, SearchLabelsError, TData>({
-    ...searchLabelsQuery(variables),
+    ...searchLabelsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -78599,13 +78886,13 @@ export const useSuspenseSearchRepos = <TData = SearchReposResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     SearchReposResponse,
     SearchReposError,
     TData
   >({
-    ...searchReposQuery(variables),
+    ...searchReposQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -78629,9 +78916,9 @@ export const useSearchRepos = <TData = SearchReposResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<SearchReposResponse, SearchReposError, TData>({
-    ...searchReposQuery(variables),
+    ...searchReposQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -78743,13 +79030,13 @@ export const useSuspenseSearchTopics = <TData = SearchTopicsResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     SearchTopicsResponse,
     SearchTopicsError,
     TData
   >({
-    ...searchTopicsQuery(variables),
+    ...searchTopicsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -78773,9 +79060,9 @@ export const useSearchTopics = <TData = SearchTopicsResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<SearchTopicsResponse, SearchTopicsError, TData>({
-    ...searchTopicsQuery(variables),
+    ...searchTopicsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -78907,13 +79194,13 @@ export const useSuspenseSearchUsers = <TData = SearchUsersResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     SearchUsersResponse,
     SearchUsersError,
     TData
   >({
-    ...searchUsersQuery(variables),
+    ...searchUsersQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -78937,9 +79224,9 @@ export const useSearchUsers = <TData = SearchUsersResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<SearchUsersResponse, SearchUsersError, TData>({
-    ...searchUsersQuery(variables),
+    ...searchUsersQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -79011,7 +79298,7 @@ export const useTeamsDeleteLegacy = (
     TeamsDeleteLegacyVariables
   >({
     mutationFn: (variables: TeamsDeleteLegacyVariables) =>
-      fetchTeamsDeleteLegacy({ ...fetcherOptions, ...variables }),
+      fetchTeamsDeleteLegacy(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -79076,13 +79363,13 @@ export const useSuspenseTeamsGetLegacy = <TData = Schemas.TeamFull>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.TeamFull,
     TeamsGetLegacyError,
     TData
   >({
-    ...teamsGetLegacyQuery(variables),
+    ...teamsGetLegacyQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -79098,9 +79385,9 @@ export const useTeamsGetLegacy = <TData = Schemas.TeamFull>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.TeamFull, TeamsGetLegacyError, TData>({
-    ...teamsGetLegacyQuery(variables),
+    ...teamsGetLegacyQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -79207,7 +79494,7 @@ export const useTeamsUpdateLegacy = (
     TeamsUpdateLegacyVariables
   >({
     mutationFn: (variables: TeamsUpdateLegacyVariables) =>
-      fetchTeamsUpdateLegacy({ ...fetcherOptions, ...variables }),
+      fetchTeamsUpdateLegacy(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -79314,13 +79601,13 @@ export const useSuspenseTeamsListDiscussionsLegacy = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     TeamsListDiscussionsLegacyResponse,
     TeamsListDiscussionsLegacyError,
     TData
   >({
-    ...teamsListDiscussionsLegacyQuery(variables),
+    ...teamsListDiscussionsLegacyQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -79344,13 +79631,13 @@ export const useTeamsListDiscussionsLegacy = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     TeamsListDiscussionsLegacyResponse,
     TeamsListDiscussionsLegacyError,
     TData
   >({
-    ...teamsListDiscussionsLegacyQuery(variables),
+    ...teamsListDiscussionsLegacyQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -79436,7 +79723,7 @@ export const useTeamsCreateDiscussionLegacy = (
     TeamsCreateDiscussionLegacyVariables
   >({
     mutationFn: (variables: TeamsCreateDiscussionLegacyVariables) =>
-      fetchTeamsCreateDiscussionLegacy({ ...fetcherOptions, ...variables }),
+      fetchTeamsCreateDiscussionLegacy(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -79503,7 +79790,7 @@ export const useTeamsDeleteDiscussionLegacy = (
     TeamsDeleteDiscussionLegacyVariables
   >({
     mutationFn: (variables: TeamsDeleteDiscussionLegacyVariables) =>
-      fetchTeamsDeleteDiscussionLegacy({ ...fetcherOptions, ...variables }),
+      fetchTeamsDeleteDiscussionLegacy(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -79590,13 +79877,13 @@ export const useSuspenseTeamsGetDiscussionLegacy = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.TeamDiscussion,
     TeamsGetDiscussionLegacyError,
     TData
   >({
-    ...teamsGetDiscussionLegacyQuery(variables),
+    ...teamsGetDiscussionLegacyQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -79618,13 +79905,13 @@ export const useTeamsGetDiscussionLegacy = <TData = Schemas.TeamDiscussion>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.TeamDiscussion,
     TeamsGetDiscussionLegacyError,
     TData
   >({
-    ...teamsGetDiscussionLegacyQuery(variables),
+    ...teamsGetDiscussionLegacyQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -79704,7 +79991,7 @@ export const useTeamsUpdateDiscussionLegacy = (
     TeamsUpdateDiscussionLegacyVariables
   >({
     mutationFn: (variables: TeamsUpdateDiscussionLegacyVariables) =>
-      fetchTeamsUpdateDiscussionLegacy({ ...fetcherOptions, ...variables }),
+      fetchTeamsUpdateDiscussionLegacy(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -79817,13 +80104,15 @@ export const useSuspenseTeamsListDiscussionCommentsLegacy = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     TeamsListDiscussionCommentsLegacyResponse,
     TeamsListDiscussionCommentsLegacyError,
     TData
   >({
-    ...teamsListDiscussionCommentsLegacyQuery(variables),
+    ...teamsListDiscussionCommentsLegacyQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -79847,13 +80136,15 @@ export const useTeamsListDiscussionCommentsLegacy = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     TeamsListDiscussionCommentsLegacyResponse,
     TeamsListDiscussionCommentsLegacyError,
     TData
   >({
-    ...teamsListDiscussionCommentsLegacyQuery(variables),
+    ...teamsListDiscussionCommentsLegacyQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -79934,10 +80225,9 @@ export const useTeamsCreateDiscussionCommentLegacy = (
     TeamsCreateDiscussionCommentLegacyVariables
   >({
     mutationFn: (variables: TeamsCreateDiscussionCommentLegacyVariables) =>
-      fetchTeamsCreateDiscussionCommentLegacy({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchTeamsCreateDiscussionCommentLegacy(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -80009,10 +80299,9 @@ export const useTeamsDeleteDiscussionCommentLegacy = (
     TeamsDeleteDiscussionCommentLegacyVariables
   >({
     mutationFn: (variables: TeamsDeleteDiscussionCommentLegacyVariables) =>
-      fetchTeamsDeleteDiscussionCommentLegacy({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchTeamsDeleteDiscussionCommentLegacy(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -80104,13 +80393,15 @@ export const useSuspenseTeamsGetDiscussionCommentLegacy = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.TeamDiscussionComment,
     TeamsGetDiscussionCommentLegacyError,
     TData
   >({
-    ...teamsGetDiscussionCommentLegacyQuery(variables),
+    ...teamsGetDiscussionCommentLegacyQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -80134,13 +80425,15 @@ export const useTeamsGetDiscussionCommentLegacy = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.TeamDiscussionComment,
     TeamsGetDiscussionCommentLegacyError,
     TData
   >({
-    ...teamsGetDiscussionCommentLegacyQuery(variables),
+    ...teamsGetDiscussionCommentLegacyQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -80221,10 +80514,9 @@ export const useTeamsUpdateDiscussionCommentLegacy = (
     TeamsUpdateDiscussionCommentLegacyVariables
   >({
     mutationFn: (variables: TeamsUpdateDiscussionCommentLegacyVariables) =>
-      fetchTeamsUpdateDiscussionCommentLegacy({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchTeamsUpdateDiscussionCommentLegacy(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -80347,13 +80639,15 @@ export const useSuspenseReactionsListForTeamDiscussionCommentLegacy = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     ReactionsListForTeamDiscussionCommentLegacyResponse,
     ReactionsListForTeamDiscussionCommentLegacyError,
     TData
   >({
-    ...reactionsListForTeamDiscussionCommentLegacyQuery(variables),
+    ...reactionsListForTeamDiscussionCommentLegacyQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -80377,13 +80671,15 @@ export const useReactionsListForTeamDiscussionCommentLegacy = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     ReactionsListForTeamDiscussionCommentLegacyResponse,
     ReactionsListForTeamDiscussionCommentLegacyError,
     TData
   >({
-    ...reactionsListForTeamDiscussionCommentLegacyQuery(variables),
+    ...reactionsListForTeamDiscussionCommentLegacyQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -80474,10 +80770,9 @@ export const useReactionsCreateForTeamDiscussionCommentLegacy = (
     mutationFn: (
       variables: ReactionsCreateForTeamDiscussionCommentLegacyVariables
     ) =>
-      fetchReactionsCreateForTeamDiscussionCommentLegacy({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchReactionsCreateForTeamDiscussionCommentLegacy(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -80595,13 +80890,15 @@ export const useSuspenseReactionsListForTeamDiscussionLegacy = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     ReactionsListForTeamDiscussionLegacyResponse,
     ReactionsListForTeamDiscussionLegacyError,
     TData
   >({
-    ...reactionsListForTeamDiscussionLegacyQuery(variables),
+    ...reactionsListForTeamDiscussionLegacyQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -80625,13 +80922,15 @@ export const useReactionsListForTeamDiscussionLegacy = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     ReactionsListForTeamDiscussionLegacyResponse,
     ReactionsListForTeamDiscussionLegacyError,
     TData
   >({
-    ...reactionsListForTeamDiscussionLegacyQuery(variables),
+    ...reactionsListForTeamDiscussionLegacyQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -80716,10 +81015,9 @@ export const useReactionsCreateForTeamDiscussionLegacy = (
     ReactionsCreateForTeamDiscussionLegacyVariables
   >({
     mutationFn: (variables: ReactionsCreateForTeamDiscussionLegacyVariables) =>
-      fetchReactionsCreateForTeamDiscussionLegacy({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchReactionsCreateForTeamDiscussionLegacy(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -80822,13 +81120,15 @@ export const useSuspenseTeamsListPendingInvitationsLegacy = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     TeamsListPendingInvitationsLegacyResponse,
     TeamsListPendingInvitationsLegacyError,
     TData
   >({
-    ...teamsListPendingInvitationsLegacyQuery(variables),
+    ...teamsListPendingInvitationsLegacyQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -80852,13 +81152,15 @@ export const useTeamsListPendingInvitationsLegacy = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     TeamsListPendingInvitationsLegacyResponse,
     TeamsListPendingInvitationsLegacyError,
     TData
   >({
-    ...teamsListPendingInvitationsLegacyQuery(variables),
+    ...teamsListPendingInvitationsLegacyQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -80964,13 +81266,13 @@ export const useSuspenseTeamsListMembersLegacy = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     TeamsListMembersLegacyResponse,
     TeamsListMembersLegacyError,
     TData
   >({
-    ...teamsListMembersLegacyQuery(variables),
+    ...teamsListMembersLegacyQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -80994,13 +81296,13 @@ export const useTeamsListMembersLegacy = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     TeamsListMembersLegacyResponse,
     TeamsListMembersLegacyError,
     TData
   >({
-    ...teamsListMembersLegacyQuery(variables),
+    ...teamsListMembersLegacyQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -81080,7 +81382,7 @@ export const useTeamsRemoveMemberLegacy = (
     TeamsRemoveMemberLegacyVariables
   >({
     mutationFn: (variables: TeamsRemoveMemberLegacyVariables) =>
-      fetchTeamsRemoveMemberLegacy({ ...fetcherOptions, ...variables }),
+      fetchTeamsRemoveMemberLegacy(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -81163,13 +81465,13 @@ export const useSuspenseTeamsGetMemberLegacy = <TData = undefined>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     undefined,
     TeamsGetMemberLegacyError,
     TData
   >({
-    ...teamsGetMemberLegacyQuery(variables),
+    ...teamsGetMemberLegacyQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -81189,9 +81491,9 @@ export const useTeamsGetMemberLegacy = <TData = undefined>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<undefined, TeamsGetMemberLegacyError, TData>({
-    ...teamsGetMemberLegacyQuery(variables),
+    ...teamsGetMemberLegacyQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -81278,7 +81580,7 @@ export const useTeamsAddMemberLegacy = (
     TeamsAddMemberLegacyVariables
   >({
     mutationFn: (variables: TeamsAddMemberLegacyVariables) =>
-      fetchTeamsAddMemberLegacy({ ...fetcherOptions, ...variables }),
+      fetchTeamsAddMemberLegacy(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -81354,10 +81656,9 @@ export const useTeamsRemoveMembershipForUserLegacy = (
     TeamsRemoveMembershipForUserLegacyVariables
   >({
     mutationFn: (variables: TeamsRemoveMembershipForUserLegacyVariables) =>
-      fetchTeamsRemoveMembershipForUserLegacy({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchTeamsRemoveMembershipForUserLegacy(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -81468,13 +81769,15 @@ export const useSuspenseTeamsGetMembershipForUserLegacy = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.TeamMembership,
     TeamsGetMembershipForUserLegacyError,
     TData
   >({
-    ...teamsGetMembershipForUserLegacyQuery(variables),
+    ...teamsGetMembershipForUserLegacyQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -81505,13 +81808,15 @@ export const useTeamsGetMembershipForUserLegacy = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.TeamMembership,
     TeamsGetMembershipForUserLegacyError,
     TData
   >({
-    ...teamsGetMembershipForUserLegacyQuery(variables),
+    ...teamsGetMembershipForUserLegacyQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -81609,10 +81914,9 @@ export const useTeamsAddOrUpdateMembershipForUserLegacy = (
     TeamsAddOrUpdateMembershipForUserLegacyVariables
   >({
     mutationFn: (variables: TeamsAddOrUpdateMembershipForUserLegacyVariables) =>
-      fetchTeamsAddOrUpdateMembershipForUserLegacy({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchTeamsAddOrUpdateMembershipForUserLegacy(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -81711,13 +82015,13 @@ export const useSuspenseTeamsListProjectsLegacy = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     TeamsListProjectsLegacyResponse,
     TeamsListProjectsLegacyError,
     TData
   >({
-    ...teamsListProjectsLegacyQuery(variables),
+    ...teamsListProjectsLegacyQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -81741,13 +82045,13 @@ export const useTeamsListProjectsLegacy = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     TeamsListProjectsLegacyResponse,
     TeamsListProjectsLegacyError,
     TData
   >({
-    ...teamsListProjectsLegacyQuery(variables),
+    ...teamsListProjectsLegacyQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -81824,7 +82128,7 @@ export const useTeamsRemoveProjectLegacy = (
     TeamsRemoveProjectLegacyVariables
   >({
     mutationFn: (variables: TeamsRemoveProjectLegacyVariables) =>
-      fetchTeamsRemoveProjectLegacy({ ...fetcherOptions, ...variables }),
+      fetchTeamsRemoveProjectLegacy(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -81912,13 +82216,15 @@ export const useSuspenseTeamsCheckPermissionsForProjectLegacy = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.TeamProject,
     TeamsCheckPermissionsForProjectLegacyError,
     TData
   >({
-    ...teamsCheckPermissionsForProjectLegacyQuery(variables),
+    ...teamsCheckPermissionsForProjectLegacyQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -81942,13 +82248,15 @@ export const useTeamsCheckPermissionsForProjectLegacy = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.TeamProject,
     TeamsCheckPermissionsForProjectLegacyError,
     TData
   >({
-    ...teamsCheckPermissionsForProjectLegacyQuery(variables),
+    ...teamsCheckPermissionsForProjectLegacyQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -82043,10 +82351,9 @@ export const useTeamsAddOrUpdateProjectPermissionsLegacy = (
     mutationFn: (
       variables: TeamsAddOrUpdateProjectPermissionsLegacyVariables
     ) =>
-      fetchTeamsAddOrUpdateProjectPermissionsLegacy({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchTeamsAddOrUpdateProjectPermissionsLegacy(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -82139,13 +82446,13 @@ export const useSuspenseTeamsListReposLegacy = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     TeamsListReposLegacyResponse,
     TeamsListReposLegacyError,
     TData
   >({
-    ...teamsListReposLegacyQuery(variables),
+    ...teamsListReposLegacyQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -82165,13 +82472,13 @@ export const useTeamsListReposLegacy = <TData = TeamsListReposLegacyResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     TeamsListReposLegacyResponse,
     TeamsListReposLegacyError,
     TData
   >({
-    ...teamsListReposLegacyQuery(variables),
+    ...teamsListReposLegacyQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -82243,7 +82550,7 @@ export const useTeamsRemoveRepoLegacy = (
     TeamsRemoveRepoLegacyVariables
   >({
     mutationFn: (variables: TeamsRemoveRepoLegacyVariables) =>
-      fetchTeamsRemoveRepoLegacy({ ...fetcherOptions, ...variables }),
+      fetchTeamsRemoveRepoLegacy(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -82341,13 +82648,15 @@ export const useSuspenseTeamsCheckPermissionsForRepoLegacy = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.TeamRepository,
     TeamsCheckPermissionsForRepoLegacyError,
     TData
   >({
-    ...teamsCheckPermissionsForRepoLegacyQuery(variables),
+    ...teamsCheckPermissionsForRepoLegacyQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -82373,13 +82682,15 @@ export const useTeamsCheckPermissionsForRepoLegacy = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.TeamRepository,
     TeamsCheckPermissionsForRepoLegacyError,
     TData
   >({
-    ...teamsCheckPermissionsForRepoLegacyQuery(variables),
+    ...teamsCheckPermissionsForRepoLegacyQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -82472,10 +82783,9 @@ export const useTeamsAddOrUpdateRepoPermissionsLegacy = (
     TeamsAddOrUpdateRepoPermissionsLegacyVariables
   >({
     mutationFn: (variables: TeamsAddOrUpdateRepoPermissionsLegacyVariables) =>
-      fetchTeamsAddOrUpdateRepoPermissionsLegacy({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchTeamsAddOrUpdateRepoPermissionsLegacy(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -82578,13 +82888,13 @@ export const useSuspenseTeamsListChildLegacy = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     TeamsListChildLegacyResponse,
     TeamsListChildLegacyError,
     TData
   >({
-    ...teamsListChildLegacyQuery(variables),
+    ...teamsListChildLegacyQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -82604,13 +82914,13 @@ export const useTeamsListChildLegacy = <TData = TeamsListChildLegacyResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     TeamsListChildLegacyResponse,
     TeamsListChildLegacyError,
     TData
   >({
-    ...teamsListChildLegacyQuery(variables),
+    ...teamsListChildLegacyQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -82693,13 +83003,13 @@ export const useSuspenseUsersGetAuthenticated = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.PrivateUser | Schemas.PublicUser,
     UsersGetAuthenticatedError,
     TData
   >({
-    ...usersGetAuthenticatedQuery(variables),
+    ...usersGetAuthenticatedQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -82723,13 +83033,13 @@ export const useUsersGetAuthenticated = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.PrivateUser | Schemas.PublicUser,
     UsersGetAuthenticatedError,
     TData
   >({
-    ...usersGetAuthenticatedQuery(variables),
+    ...usersGetAuthenticatedQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -82845,7 +83155,7 @@ export const useUsersUpdateAuthenticated = (
     UsersUpdateAuthenticatedVariables
   >({
     mutationFn: (variables: UsersUpdateAuthenticatedVariables) =>
-      fetchUsersUpdateAuthenticated({ ...fetcherOptions, ...variables }),
+      fetchUsersUpdateAuthenticated(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -82944,13 +83254,15 @@ export const useSuspenseUsersListBlockedByAuthenticatedUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     UsersListBlockedByAuthenticatedUserResponse,
     UsersListBlockedByAuthenticatedUserError,
     TData
   >({
-    ...usersListBlockedByAuthenticatedUserQuery(variables),
+    ...usersListBlockedByAuthenticatedUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -82972,13 +83284,15 @@ export const useUsersListBlockedByAuthenticatedUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     UsersListBlockedByAuthenticatedUserResponse,
     UsersListBlockedByAuthenticatedUserError,
     TData
   >({
-    ...usersListBlockedByAuthenticatedUserQuery(variables),
+    ...usersListBlockedByAuthenticatedUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -83044,7 +83358,7 @@ export const useUsersUnblock = (
     UsersUnblockVariables
   >({
     mutationFn: (variables: UsersUnblockVariables) =>
-      fetchUsersUnblock({ ...fetcherOptions, ...variables }),
+      fetchUsersUnblock(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -83114,9 +83428,9 @@ export const useSuspenseUsersCheckBlocked = <TData = undefined>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<undefined, UsersCheckBlockedError, TData>({
-    ...usersCheckBlockedQuery(variables),
+    ...usersCheckBlockedQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -83129,9 +83443,9 @@ export const useUsersCheckBlocked = <TData = undefined>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<undefined, UsersCheckBlockedError, TData>({
-    ...usersCheckBlockedQuery(variables),
+    ...usersCheckBlockedQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -83201,7 +83515,7 @@ export const useUsersBlock = (
     UsersBlockVariables
   >({
     mutationFn: (variables: UsersBlockVariables) =>
-      fetchUsersBlock({ ...fetcherOptions, ...variables }),
+      fetchUsersBlock(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -83323,13 +83637,15 @@ export const useSuspenseCodespacesListForAuthenticatedUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     CodespacesListForAuthenticatedUserResponse,
     CodespacesListForAuthenticatedUserError,
     TData
   >({
-    ...codespacesListForAuthenticatedUserQuery(variables),
+    ...codespacesListForAuthenticatedUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -83355,13 +83671,15 @@ export const useCodespacesListForAuthenticatedUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     CodespacesListForAuthenticatedUserResponse,
     CodespacesListForAuthenticatedUserError,
     TData
   >({
-    ...codespacesListForAuthenticatedUserQuery(variables),
+    ...codespacesListForAuthenticatedUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -83599,10 +83917,9 @@ export const useCodespacesCreateForAuthenticatedUser = (
     CodespacesCreateForAuthenticatedUserVariables
   >({
     mutationFn: (variables: CodespacesCreateForAuthenticatedUserVariables) =>
-      fetchCodespacesCreateForAuthenticatedUser({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchCodespacesCreateForAuthenticatedUser(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -83703,13 +84020,15 @@ export const useSuspenseCodespacesListSecretsForAuthenticatedUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     CodespacesListSecretsForAuthenticatedUserResponse,
     CodespacesListSecretsForAuthenticatedUserError,
     TData
   >({
-    ...codespacesListSecretsForAuthenticatedUserQuery(variables),
+    ...codespacesListSecretsForAuthenticatedUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -83736,13 +84055,15 @@ export const useCodespacesListSecretsForAuthenticatedUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     CodespacesListSecretsForAuthenticatedUserResponse,
     CodespacesListSecretsForAuthenticatedUserError,
     TData
   >({
-    ...codespacesListSecretsForAuthenticatedUserQuery(variables),
+    ...codespacesListSecretsForAuthenticatedUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -83825,13 +84146,15 @@ export const useSuspenseCodespacesGetPublicKeyForAuthenticatedUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.CodespacesUserPublicKey,
     CodespacesGetPublicKeyForAuthenticatedUserError,
     TData
   >({
-    ...codespacesGetPublicKeyForAuthenticatedUserQuery(variables),
+    ...codespacesGetPublicKeyForAuthenticatedUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -83857,13 +84180,15 @@ export const useCodespacesGetPublicKeyForAuthenticatedUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.CodespacesUserPublicKey,
     CodespacesGetPublicKeyForAuthenticatedUserError,
     TData
   >({
-    ...codespacesGetPublicKeyForAuthenticatedUserQuery(variables),
+    ...codespacesGetPublicKeyForAuthenticatedUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -83934,10 +84259,9 @@ export const useCodespacesDeleteSecretForAuthenticatedUser = (
     mutationFn: (
       variables: CodespacesDeleteSecretForAuthenticatedUserVariables
     ) =>
-      fetchCodespacesDeleteSecretForAuthenticatedUser({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchCodespacesDeleteSecretForAuthenticatedUser(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -84027,13 +84351,15 @@ export const useSuspenseCodespacesGetSecretForAuthenticatedUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.CodespacesSecret,
     CodespacesGetSecretForAuthenticatedUserError,
     TData
   >({
-    ...codespacesGetSecretForAuthenticatedUserQuery(variables),
+    ...codespacesGetSecretForAuthenticatedUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -84059,13 +84385,15 @@ export const useCodespacesGetSecretForAuthenticatedUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.CodespacesSecret,
     CodespacesGetSecretForAuthenticatedUserError,
     TData
   >({
-    ...codespacesGetSecretForAuthenticatedUserQuery(variables),
+    ...codespacesGetSecretForAuthenticatedUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -84309,10 +84637,9 @@ export const useCodespacesCreateOrUpdateSecretForAuthenticatedUser = (
     mutationFn: (
       variables: CodespacesCreateOrUpdateSecretForAuthenticatedUserVariables
     ) =>
-      fetchCodespacesCreateOrUpdateSecretForAuthenticatedUser({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchCodespacesCreateOrUpdateSecretForAuthenticatedUser(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -84427,14 +84754,14 @@ export const useSuspenseCodespacesListRepositoriesForSecretForAuthenticatedUser 
       "queryKey" | "queryFn" | "initialData"
     >
   ) => {
-    const { queryOptions } = useGithubContext(options);
+    const { queryOptions, fetcherOptions } = useGithubContext(options);
     return reactQuery.useSuspenseQuery<
       CodespacesListRepositoriesForSecretForAuthenticatedUserResponse,
       CodespacesListRepositoriesForSecretForAuthenticatedUserError,
       TData
     >({
       ...codespacesListRepositoriesForSecretForAuthenticatedUserQuery(
-        variables
+        deepMerge(fetcherOptions, variables)
       ),
       ...options,
       ...queryOptions,
@@ -84461,13 +84788,15 @@ export const useCodespacesListRepositoriesForSecretForAuthenticatedUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     CodespacesListRepositoriesForSecretForAuthenticatedUserResponse,
     CodespacesListRepositoriesForSecretForAuthenticatedUserError,
     TData
   >({
-    ...codespacesListRepositoriesForSecretForAuthenticatedUserQuery(variables),
+    ...codespacesListRepositoriesForSecretForAuthenticatedUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -84564,10 +84893,9 @@ export const useCodespacesSetRepositoriesForSecretForAuthenticatedUser = (
     mutationFn: (
       variables: CodespacesSetRepositoriesForSecretForAuthenticatedUserVariables
     ) =>
-      fetchCodespacesSetRepositoriesForSecretForAuthenticatedUser({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchCodespacesSetRepositoriesForSecretForAuthenticatedUser(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -84652,10 +84980,9 @@ export const useCodespacesRemoveRepositoryForSecretForAuthenticatedUser = (
     mutationFn: (
       variables: CodespacesRemoveRepositoryForSecretForAuthenticatedUserVariables
     ) =>
-      fetchCodespacesRemoveRepositoryForSecretForAuthenticatedUser({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchCodespacesRemoveRepositoryForSecretForAuthenticatedUser(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -84739,10 +85066,9 @@ export const useCodespacesAddRepositoryForSecretForAuthenticatedUser = (
     mutationFn: (
       variables: CodespacesAddRepositoryForSecretForAuthenticatedUserVariables
     ) =>
-      fetchCodespacesAddRepositoryForSecretForAuthenticatedUser({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchCodespacesAddRepositoryForSecretForAuthenticatedUser(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -84830,10 +85156,9 @@ export const useCodespacesDeleteForAuthenticatedUser = (
     CodespacesDeleteForAuthenticatedUserVariables
   >({
     mutationFn: (variables: CodespacesDeleteForAuthenticatedUserVariables) =>
-      fetchCodespacesDeleteForAuthenticatedUser({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchCodespacesDeleteForAuthenticatedUser(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -84939,13 +85264,15 @@ export const useSuspenseCodespacesGetForAuthenticatedUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.Codespace,
     CodespacesGetForAuthenticatedUserError,
     TData
   >({
-    ...codespacesGetForAuthenticatedUserQuery(variables),
+    ...codespacesGetForAuthenticatedUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -84969,13 +85296,15 @@ export const useCodespacesGetForAuthenticatedUser = <TData = Schemas.Codespace>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.Codespace,
     CodespacesGetForAuthenticatedUserError,
     TData
   >({
-    ...codespacesGetForAuthenticatedUserQuery(variables),
+    ...codespacesGetForAuthenticatedUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -85076,10 +85405,9 @@ export const useCodespacesUpdateForAuthenticatedUser = (
     CodespacesUpdateForAuthenticatedUserVariables
   >({
     mutationFn: (variables: CodespacesUpdateForAuthenticatedUserVariables) =>
-      fetchCodespacesUpdateForAuthenticatedUser({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchCodespacesUpdateForAuthenticatedUser(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -85171,10 +85499,9 @@ export const useCodespacesExportForAuthenticatedUser = (
     CodespacesExportForAuthenticatedUserVariables
   >({
     mutationFn: (variables: CodespacesExportForAuthenticatedUserVariables) =>
-      fetchCodespacesExportForAuthenticatedUser({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchCodespacesExportForAuthenticatedUser(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -85271,13 +85598,15 @@ export const useSuspenseCodespacesGetExportDetailsForAuthenticatedUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.CodespaceExportDetails,
     CodespacesGetExportDetailsForAuthenticatedUserError,
     TData
   >({
-    ...codespacesGetExportDetailsForAuthenticatedUserQuery(variables),
+    ...codespacesGetExportDetailsForAuthenticatedUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -85303,13 +85632,15 @@ export const useCodespacesGetExportDetailsForAuthenticatedUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.CodespaceExportDetails,
     CodespacesGetExportDetailsForAuthenticatedUserError,
     TData
   >({
-    ...codespacesGetExportDetailsForAuthenticatedUserQuery(variables),
+    ...codespacesGetExportDetailsForAuthenticatedUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -85426,13 +85757,15 @@ export const useSuspenseCodespacesCodespaceMachinesForAuthenticatedUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     CodespacesCodespaceMachinesForAuthenticatedUserResponse,
     CodespacesCodespaceMachinesForAuthenticatedUserError,
     TData
   >({
-    ...codespacesCodespaceMachinesForAuthenticatedUserQuery(variables),
+    ...codespacesCodespaceMachinesForAuthenticatedUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -85458,13 +85791,15 @@ export const useCodespacesCodespaceMachinesForAuthenticatedUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     CodespacesCodespaceMachinesForAuthenticatedUserResponse,
     CodespacesCodespaceMachinesForAuthenticatedUserError,
     TData
   >({
-    ...codespacesCodespaceMachinesForAuthenticatedUserQuery(variables),
+    ...codespacesCodespaceMachinesForAuthenticatedUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -85571,10 +85906,9 @@ export const useCodespacesPublishForAuthenticatedUser = (
     CodespacesPublishForAuthenticatedUserVariables
   >({
     mutationFn: (variables: CodespacesPublishForAuthenticatedUserVariables) =>
-      fetchCodespacesPublishForAuthenticatedUser({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchCodespacesPublishForAuthenticatedUser(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -85674,10 +86008,9 @@ export const useCodespacesStartForAuthenticatedUser = (
     CodespacesStartForAuthenticatedUserVariables
   >({
     mutationFn: (variables: CodespacesStartForAuthenticatedUserVariables) =>
-      fetchCodespacesStartForAuthenticatedUser({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchCodespacesStartForAuthenticatedUser(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -85761,10 +86094,9 @@ export const useCodespacesStopForAuthenticatedUser = (
     CodespacesStopForAuthenticatedUserVariables
   >({
     mutationFn: (variables: CodespacesStopForAuthenticatedUserVariables) =>
-      fetchCodespacesStopForAuthenticatedUser({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchCodespacesStopForAuthenticatedUser(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -85845,10 +86177,9 @@ export const useUsersSetPrimaryEmailVisibilityForAuthenticatedUser = (
     mutationFn: (
       variables: UsersSetPrimaryEmailVisibilityForAuthenticatedUserVariables
     ) =>
-      fetchUsersSetPrimaryEmailVisibilityForAuthenticatedUser({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchUsersSetPrimaryEmailVisibilityForAuthenticatedUser(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -85931,10 +86262,9 @@ export const useUsersDeleteEmailForAuthenticatedUser = (
     UsersDeleteEmailForAuthenticatedUserVariables
   >({
     mutationFn: (variables: UsersDeleteEmailForAuthenticatedUserVariables) =>
-      fetchUsersDeleteEmailForAuthenticatedUser({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchUsersDeleteEmailForAuthenticatedUser(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -86033,13 +86363,15 @@ export const useSuspenseUsersListEmailsForAuthenticatedUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     UsersListEmailsForAuthenticatedUserResponse,
     UsersListEmailsForAuthenticatedUserError,
     TData
   >({
-    ...usersListEmailsForAuthenticatedUserQuery(variables),
+    ...usersListEmailsForAuthenticatedUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -86061,13 +86393,15 @@ export const useUsersListEmailsForAuthenticatedUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     UsersListEmailsForAuthenticatedUserResponse,
     UsersListEmailsForAuthenticatedUserError,
     TData
   >({
-    ...usersListEmailsForAuthenticatedUserQuery(variables),
+    ...usersListEmailsForAuthenticatedUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -86153,10 +86487,9 @@ export const useUsersAddEmailForAuthenticatedUser = (
     UsersAddEmailForAuthenticatedUserVariables
   >({
     mutationFn: (variables: UsersAddEmailForAuthenticatedUserVariables) =>
-      fetchUsersAddEmailForAuthenticatedUser({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchUsersAddEmailForAuthenticatedUser(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -86252,13 +86585,15 @@ export const useSuspenseUsersListFollowersForAuthenticatedUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     UsersListFollowersForAuthenticatedUserResponse,
     UsersListFollowersForAuthenticatedUserError,
     TData
   >({
-    ...usersListFollowersForAuthenticatedUserQuery(variables),
+    ...usersListFollowersForAuthenticatedUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -86280,13 +86615,15 @@ export const useUsersListFollowersForAuthenticatedUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     UsersListFollowersForAuthenticatedUserResponse,
     UsersListFollowersForAuthenticatedUserError,
     TData
   >({
-    ...usersListFollowersForAuthenticatedUserQuery(variables),
+    ...usersListFollowersForAuthenticatedUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -86382,13 +86719,15 @@ export const useSuspenseUsersListFollowedByAuthenticatedUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     UsersListFollowedByAuthenticatedUserResponse,
     UsersListFollowedByAuthenticatedUserError,
     TData
   >({
-    ...usersListFollowedByAuthenticatedUserQuery(variables),
+    ...usersListFollowedByAuthenticatedUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -86410,13 +86749,15 @@ export const useUsersListFollowedByAuthenticatedUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     UsersListFollowedByAuthenticatedUserResponse,
     UsersListFollowedByAuthenticatedUserError,
     TData
   >({
-    ...usersListFollowedByAuthenticatedUserQuery(variables),
+    ...usersListFollowedByAuthenticatedUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -86493,7 +86834,7 @@ export const useUsersUnfollow = (
     UsersUnfollowVariables
   >({
     mutationFn: (variables: UsersUnfollowVariables) =>
-      fetchUsersUnfollow({ ...fetcherOptions, ...variables }),
+      fetchUsersUnfollow(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -86570,13 +86911,15 @@ export const useSuspenseUsersCheckPersonIsFollowedByAuthenticated = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     undefined,
     UsersCheckPersonIsFollowedByAuthenticatedError,
     TData
   >({
-    ...usersCheckPersonIsFollowedByAuthenticatedQuery(variables),
+    ...usersCheckPersonIsFollowedByAuthenticatedQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -86593,13 +86936,15 @@ export const useUsersCheckPersonIsFollowedByAuthenticated = <TData = undefined>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     undefined,
     UsersCheckPersonIsFollowedByAuthenticatedError,
     TData
   >({
-    ...usersCheckPersonIsFollowedByAuthenticatedQuery(variables),
+    ...usersCheckPersonIsFollowedByAuthenticatedQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -86675,7 +87020,7 @@ export const useUsersFollow = (
     UsersFollowVariables
   >({
     mutationFn: (variables: UsersFollowVariables) =>
-      fetchUsersFollow({ ...fetcherOptions, ...variables }),
+      fetchUsersFollow(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -86774,13 +87119,15 @@ export const useSuspenseUsersListGpgKeysForAuthenticatedUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     UsersListGpgKeysForAuthenticatedUserResponse,
     UsersListGpgKeysForAuthenticatedUserError,
     TData
   >({
-    ...usersListGpgKeysForAuthenticatedUserQuery(variables),
+    ...usersListGpgKeysForAuthenticatedUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -86802,13 +87149,15 @@ export const useUsersListGpgKeysForAuthenticatedUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     UsersListGpgKeysForAuthenticatedUserResponse,
     UsersListGpgKeysForAuthenticatedUserError,
     TData
   >({
-    ...usersListGpgKeysForAuthenticatedUserQuery(variables),
+    ...usersListGpgKeysForAuthenticatedUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -86888,10 +87237,9 @@ export const useUsersCreateGpgKeyForAuthenticatedUser = (
     UsersCreateGpgKeyForAuthenticatedUserVariables
   >({
     mutationFn: (variables: UsersCreateGpgKeyForAuthenticatedUserVariables) =>
-      fetchUsersCreateGpgKeyForAuthenticatedUser({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchUsersCreateGpgKeyForAuthenticatedUser(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -86971,10 +87319,9 @@ export const useUsersDeleteGpgKeyForAuthenticatedUser = (
     UsersDeleteGpgKeyForAuthenticatedUserVariables
   >({
     mutationFn: (variables: UsersDeleteGpgKeyForAuthenticatedUserVariables) =>
-      fetchUsersDeleteGpgKeyForAuthenticatedUser({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchUsersDeleteGpgKeyForAuthenticatedUser(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -87059,13 +87406,15 @@ export const useSuspenseUsersGetGpgKeyForAuthenticatedUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.GpgKey,
     UsersGetGpgKeyForAuthenticatedUserError,
     TData
   >({
-    ...usersGetGpgKeyForAuthenticatedUserQuery(variables),
+    ...usersGetGpgKeyForAuthenticatedUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -87085,13 +87434,15 @@ export const useUsersGetGpgKeyForAuthenticatedUser = <TData = Schemas.GpgKey>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.GpgKey,
     UsersGetGpgKeyForAuthenticatedUserError,
     TData
   >({
-    ...usersGetGpgKeyForAuthenticatedUserQuery(variables),
+    ...usersGetGpgKeyForAuthenticatedUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -87209,13 +87560,15 @@ export const useSuspenseAppsListInstallationsForAuthenticatedUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     AppsListInstallationsForAuthenticatedUserResponse,
     AppsListInstallationsForAuthenticatedUserError,
     TData
   >({
-    ...appsListInstallationsForAuthenticatedUserQuery(variables),
+    ...appsListInstallationsForAuthenticatedUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -87243,13 +87596,15 @@ export const useAppsListInstallationsForAuthenticatedUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     AppsListInstallationsForAuthenticatedUserResponse,
     AppsListInstallationsForAuthenticatedUserError,
     TData
   >({
-    ...appsListInstallationsForAuthenticatedUserQuery(variables),
+    ...appsListInstallationsForAuthenticatedUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -87381,13 +87736,15 @@ export const useSuspenseAppsListInstallationReposForAuthenticatedUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     AppsListInstallationReposForAuthenticatedUserResponse,
     AppsListInstallationReposForAuthenticatedUserError,
     TData
   >({
-    ...appsListInstallationReposForAuthenticatedUserQuery(variables),
+    ...appsListInstallationReposForAuthenticatedUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -87415,13 +87772,15 @@ export const useAppsListInstallationReposForAuthenticatedUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     AppsListInstallationReposForAuthenticatedUserResponse,
     AppsListInstallationReposForAuthenticatedUserError,
     TData
   >({
-    ...appsListInstallationReposForAuthenticatedUserQuery(variables),
+    ...appsListInstallationReposForAuthenticatedUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -87505,10 +87864,9 @@ export const useAppsRemoveRepoFromInstallationForAuthenticatedUser = (
     mutationFn: (
       variables: AppsRemoveRepoFromInstallationForAuthenticatedUserVariables
     ) =>
-      fetchAppsRemoveRepoFromInstallationForAuthenticatedUser({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchAppsRemoveRepoFromInstallationForAuthenticatedUser(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -87591,10 +87949,9 @@ export const useAppsAddRepoToInstallationForAuthenticatedUser = (
     mutationFn: (
       variables: AppsAddRepoToInstallationForAuthenticatedUserVariables
     ) =>
-      fetchAppsAddRepoToInstallationForAuthenticatedUser({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchAppsAddRepoToInstallationForAuthenticatedUser(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -87648,10 +88005,9 @@ export const useInteractionsRemoveRestrictionsForAuthenticatedUser = (
     mutationFn: (
       variables: InteractionsRemoveRestrictionsForAuthenticatedUserVariables
     ) =>
-      fetchInteractionsRemoveRestrictionsForAuthenticatedUser({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchInteractionsRemoveRestrictionsForAuthenticatedUser(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -87716,13 +88072,15 @@ export const useSuspenseInteractionsGetRestrictionsForAuthenticatedUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.InteractionLimitResponse | {},
     InteractionsGetRestrictionsForAuthenticatedUserError,
     TData
   >({
-    ...interactionsGetRestrictionsForAuthenticatedUserQuery(variables),
+    ...interactionsGetRestrictionsForAuthenticatedUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -87744,13 +88102,15 @@ export const useInteractionsGetRestrictionsForAuthenticatedUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.InteractionLimitResponse | {},
     InteractionsGetRestrictionsForAuthenticatedUserError,
     TData
   >({
-    ...interactionsGetRestrictionsForAuthenticatedUserQuery(variables),
+    ...interactionsGetRestrictionsForAuthenticatedUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -87804,10 +88164,9 @@ export const useInteractionsSetRestrictionsForAuthenticatedUser = (
     mutationFn: (
       variables: InteractionsSetRestrictionsForAuthenticatedUserVariables
     ) =>
-      fetchInteractionsSetRestrictionsForAuthenticatedUser({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchInteractionsSetRestrictionsForAuthenticatedUser(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -87953,13 +88312,15 @@ export const useSuspenseIssuesListForAuthenticatedUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     IssuesListForAuthenticatedUserResponse,
     IssuesListForAuthenticatedUserError,
     TData
   >({
-    ...issuesListForAuthenticatedUserQuery(variables),
+    ...issuesListForAuthenticatedUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -87986,13 +88347,15 @@ export const useIssuesListForAuthenticatedUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     IssuesListForAuthenticatedUserResponse,
     IssuesListForAuthenticatedUserError,
     TData
   >({
-    ...issuesListForAuthenticatedUserQuery(variables),
+    ...issuesListForAuthenticatedUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -88093,13 +88456,15 @@ export const useSuspenseUsersListPublicSshKeysForAuthenticatedUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     UsersListPublicSshKeysForAuthenticatedUserResponse,
     UsersListPublicSshKeysForAuthenticatedUserError,
     TData
   >({
-    ...usersListPublicSshKeysForAuthenticatedUserQuery(variables),
+    ...usersListPublicSshKeysForAuthenticatedUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -88121,13 +88486,15 @@ export const useUsersListPublicSshKeysForAuthenticatedUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     UsersListPublicSshKeysForAuthenticatedUserResponse,
     UsersListPublicSshKeysForAuthenticatedUserError,
     TData
   >({
-    ...usersListPublicSshKeysForAuthenticatedUserQuery(variables),
+    ...usersListPublicSshKeysForAuthenticatedUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -88214,10 +88581,9 @@ export const useUsersCreatePublicSshKeyForAuthenticatedUser = (
     mutationFn: (
       variables: UsersCreatePublicSshKeyForAuthenticatedUserVariables
     ) =>
-      fetchUsersCreatePublicSshKeyForAuthenticatedUser({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchUsersCreatePublicSshKeyForAuthenticatedUser(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -88291,10 +88657,9 @@ export const useUsersDeletePublicSshKeyForAuthenticatedUser = (
     mutationFn: (
       variables: UsersDeletePublicSshKeyForAuthenticatedUserVariables
     ) =>
-      fetchUsersDeletePublicSshKeyForAuthenticatedUser({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchUsersDeletePublicSshKeyForAuthenticatedUser(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -88380,13 +88745,15 @@ export const useSuspenseUsersGetPublicSshKeyForAuthenticatedUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.Key,
     UsersGetPublicSshKeyForAuthenticatedUserError,
     TData
   >({
-    ...usersGetPublicSshKeyForAuthenticatedUserQuery(variables),
+    ...usersGetPublicSshKeyForAuthenticatedUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -88408,13 +88775,15 @@ export const useUsersGetPublicSshKeyForAuthenticatedUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.Key,
     UsersGetPublicSshKeyForAuthenticatedUserError,
     TData
   >({
-    ...usersGetPublicSshKeyForAuthenticatedUserQuery(variables),
+    ...usersGetPublicSshKeyForAuthenticatedUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -88517,13 +88886,15 @@ export const useSuspenseAppsListSubscriptionsForAuthenticatedUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     AppsListSubscriptionsForAuthenticatedUserResponse,
     AppsListSubscriptionsForAuthenticatedUserError,
     TData
   >({
-    ...appsListSubscriptionsForAuthenticatedUserQuery(variables),
+    ...appsListSubscriptionsForAuthenticatedUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -88545,13 +88916,15 @@ export const useAppsListSubscriptionsForAuthenticatedUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     AppsListSubscriptionsForAuthenticatedUserResponse,
     AppsListSubscriptionsForAuthenticatedUserError,
     TData
   >({
-    ...appsListSubscriptionsForAuthenticatedUserQuery(variables),
+    ...appsListSubscriptionsForAuthenticatedUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -88650,13 +89023,15 @@ export const useSuspenseAppsListSubscriptionsForAuthenticatedUserStubbed = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     AppsListSubscriptionsForAuthenticatedUserStubbedResponse,
     AppsListSubscriptionsForAuthenticatedUserStubbedError,
     TData
   >({
-    ...appsListSubscriptionsForAuthenticatedUserStubbedQuery(variables),
+    ...appsListSubscriptionsForAuthenticatedUserStubbedQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -88678,13 +89053,15 @@ export const useAppsListSubscriptionsForAuthenticatedUserStubbed = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     AppsListSubscriptionsForAuthenticatedUserStubbedResponse,
     AppsListSubscriptionsForAuthenticatedUserStubbedError,
     TData
   >({
-    ...appsListSubscriptionsForAuthenticatedUserStubbedQuery(variables),
+    ...appsListSubscriptionsForAuthenticatedUserStubbedQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -88780,13 +89157,15 @@ export const useSuspenseOrgsListMembershipsForAuthenticatedUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     OrgsListMembershipsForAuthenticatedUserResponse,
     OrgsListMembershipsForAuthenticatedUserError,
     TData
   >({
-    ...orgsListMembershipsForAuthenticatedUserQuery(variables),
+    ...orgsListMembershipsForAuthenticatedUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -88805,13 +89184,15 @@ export const useOrgsListMembershipsForAuthenticatedUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     OrgsListMembershipsForAuthenticatedUserResponse,
     OrgsListMembershipsForAuthenticatedUserError,
     TData
   >({
-    ...orgsListMembershipsForAuthenticatedUserQuery(variables),
+    ...orgsListMembershipsForAuthenticatedUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -88889,13 +89270,15 @@ export const useSuspenseOrgsGetMembershipForAuthenticatedUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.OrgMembership,
     OrgsGetMembershipForAuthenticatedUserError,
     TData
   >({
-    ...orgsGetMembershipForAuthenticatedUserQuery(variables),
+    ...orgsGetMembershipForAuthenticatedUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -88914,13 +89297,15 @@ export const useOrgsGetMembershipForAuthenticatedUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.OrgMembership,
     OrgsGetMembershipForAuthenticatedUserError,
     TData
   >({
-    ...orgsGetMembershipForAuthenticatedUserQuery(variables),
+    ...orgsGetMembershipForAuthenticatedUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -88998,10 +89383,9 @@ export const useOrgsUpdateMembershipForAuthenticatedUser = (
     mutationFn: (
       variables: OrgsUpdateMembershipForAuthenticatedUserVariables
     ) =>
-      fetchOrgsUpdateMembershipForAuthenticatedUser({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchOrgsUpdateMembershipForAuthenticatedUser(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -89096,13 +89480,15 @@ export const useSuspenseMigrationsListForAuthenticatedUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     MigrationsListForAuthenticatedUserResponse,
     MigrationsListForAuthenticatedUserError,
     TData
   >({
-    ...migrationsListForAuthenticatedUserQuery(variables),
+    ...migrationsListForAuthenticatedUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -89124,13 +89510,15 @@ export const useMigrationsListForAuthenticatedUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     MigrationsListForAuthenticatedUserResponse,
     MigrationsListForAuthenticatedUserError,
     TData
   >({
-    ...migrationsListForAuthenticatedUserQuery(variables),
+    ...migrationsListForAuthenticatedUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -89248,10 +89636,9 @@ export const useMigrationsStartForAuthenticatedUser = (
     MigrationsStartForAuthenticatedUserVariables
   >({
     mutationFn: (variables: MigrationsStartForAuthenticatedUserVariables) =>
-      fetchMigrationsStartForAuthenticatedUser({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchMigrationsStartForAuthenticatedUser(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -89367,13 +89754,15 @@ export const useSuspenseMigrationsGetStatusForAuthenticatedUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.Migration,
     MigrationsGetStatusForAuthenticatedUserError,
     TData
   >({
-    ...migrationsGetStatusForAuthenticatedUserQuery(variables),
+    ...migrationsGetStatusForAuthenticatedUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -89402,13 +89791,15 @@ export const useMigrationsGetStatusForAuthenticatedUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.Migration,
     MigrationsGetStatusForAuthenticatedUserError,
     TData
   >({
-    ...migrationsGetStatusForAuthenticatedUserQuery(variables),
+    ...migrationsGetStatusForAuthenticatedUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -89488,10 +89879,9 @@ export const useMigrationsDeleteArchiveForAuthenticatedUser = (
     mutationFn: (
       variables: MigrationsDeleteArchiveForAuthenticatedUserVariables
     ) =>
-      fetchMigrationsDeleteArchiveForAuthenticatedUser({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchMigrationsDeleteArchiveForAuthenticatedUser(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -89638,13 +90028,15 @@ export const useSuspenseMigrationsGetArchiveForAuthenticatedUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     undefined,
     MigrationsGetArchiveForAuthenticatedUserError,
     TData
   >({
-    ...migrationsGetArchiveForAuthenticatedUserQuery(variables),
+    ...migrationsGetArchiveForAuthenticatedUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -89684,13 +90076,15 @@ export const useMigrationsGetArchiveForAuthenticatedUser = <TData = undefined>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     undefined,
     MigrationsGetArchiveForAuthenticatedUserError,
     TData
   >({
-    ...migrationsGetArchiveForAuthenticatedUserQuery(variables),
+    ...migrationsGetArchiveForAuthenticatedUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -89774,10 +90168,9 @@ export const useMigrationsUnlockRepoForAuthenticatedUser = (
     mutationFn: (
       variables: MigrationsUnlockRepoForAuthenticatedUserVariables
     ) =>
-      fetchMigrationsUnlockRepoForAuthenticatedUser({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchMigrationsUnlockRepoForAuthenticatedUser(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -89877,13 +90270,15 @@ export const useSuspenseMigrationsListReposForAuthenticatedUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     MigrationsListReposForAuthenticatedUserResponse,
     MigrationsListReposForAuthenticatedUserError,
     TData
   >({
-    ...migrationsListReposForAuthenticatedUserQuery(variables),
+    ...migrationsListReposForAuthenticatedUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -89905,13 +90300,15 @@ export const useMigrationsListReposForAuthenticatedUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     MigrationsListReposForAuthenticatedUserResponse,
     MigrationsListReposForAuthenticatedUserError,
     TData
   >({
-    ...migrationsListReposForAuthenticatedUserQuery(variables),
+    ...migrationsListReposForAuthenticatedUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -90019,13 +90416,13 @@ export const useSuspenseOrgsListForAuthenticatedUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     OrgsListForAuthenticatedUserResponse,
     OrgsListForAuthenticatedUserError,
     TData
   >({
-    ...orgsListForAuthenticatedUserQuery(variables),
+    ...orgsListForAuthenticatedUserQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -90051,13 +90448,13 @@ export const useOrgsListForAuthenticatedUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     OrgsListForAuthenticatedUserResponse,
     OrgsListForAuthenticatedUserError,
     TData
   >({
-    ...orgsListForAuthenticatedUserQuery(variables),
+    ...orgsListForAuthenticatedUserQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -90147,13 +90544,15 @@ export const useSuspensePackagesListPackagesForAuthenticatedUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     PackagesListPackagesForAuthenticatedUserResponse,
     PackagesListPackagesForAuthenticatedUserError,
     TData
   >({
-    ...packagesListPackagesForAuthenticatedUserQuery(variables),
+    ...packagesListPackagesForAuthenticatedUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -90177,13 +90576,15 @@ export const usePackagesListPackagesForAuthenticatedUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     PackagesListPackagesForAuthenticatedUserResponse,
     PackagesListPackagesForAuthenticatedUserError,
     TData
   >({
-    ...packagesListPackagesForAuthenticatedUserQuery(variables),
+    ...packagesListPackagesForAuthenticatedUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -90269,10 +90670,9 @@ export const usePackagesDeletePackageForAuthenticatedUser = (
     mutationFn: (
       variables: PackagesDeletePackageForAuthenticatedUserVariables
     ) =>
-      fetchPackagesDeletePackageForAuthenticatedUser({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchPackagesDeletePackageForAuthenticatedUser(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -90356,13 +90756,15 @@ export const useSuspensePackagesGetPackageForAuthenticatedUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.Package,
     PackagesGetPackageForAuthenticatedUserError,
     TData
   >({
-    ...packagesGetPackageForAuthenticatedUserQuery(variables),
+    ...packagesGetPackageForAuthenticatedUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -90386,13 +90788,15 @@ export const usePackagesGetPackageForAuthenticatedUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.Package,
     PackagesGetPackageForAuthenticatedUserError,
     TData
   >({
-    ...packagesGetPackageForAuthenticatedUserQuery(variables),
+    ...packagesGetPackageForAuthenticatedUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -90492,10 +90896,9 @@ export const usePackagesRestorePackageForAuthenticatedUser = (
     mutationFn: (
       variables: PackagesRestorePackageForAuthenticatedUserVariables
     ) =>
-      fetchPackagesRestorePackageForAuthenticatedUser({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchPackagesRestorePackageForAuthenticatedUser(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -90637,14 +91040,14 @@ export const useSuspensePackagesGetAllPackageVersionsForPackageOwnedByAuthentica
       "queryKey" | "queryFn" | "initialData"
     >
   ) => {
-    const { queryOptions } = useGithubContext(options);
+    const { queryOptions, fetcherOptions } = useGithubContext(options);
     return reactQuery.useSuspenseQuery<
       PackagesGetAllPackageVersionsForPackageOwnedByAuthenticatedUserResponse,
       PackagesGetAllPackageVersionsForPackageOwnedByAuthenticatedUserError,
       TData
     >({
       ...packagesGetAllPackageVersionsForPackageOwnedByAuthenticatedUserQuery(
-        variables
+        deepMerge(fetcherOptions, variables)
       ),
       ...options,
       ...queryOptions,
@@ -90670,14 +91073,14 @@ export const usePackagesGetAllPackageVersionsForPackageOwnedByAuthenticatedUser 
       "queryKey" | "queryFn" | "initialData"
     >
   ) => {
-    const { queryOptions } = useGithubContext(options);
+    const { queryOptions, fetcherOptions } = useGithubContext(options);
     return reactQuery.useQuery<
       PackagesGetAllPackageVersionsForPackageOwnedByAuthenticatedUserResponse,
       PackagesGetAllPackageVersionsForPackageOwnedByAuthenticatedUserError,
       TData
     >({
       ...packagesGetAllPackageVersionsForPackageOwnedByAuthenticatedUserQuery(
-        variables
+        deepMerge(fetcherOptions, variables)
       ),
       ...options,
       ...queryOptions,
@@ -90768,10 +91171,9 @@ export const usePackagesDeletePackageVersionForAuthenticatedUser = (
     mutationFn: (
       variables: PackagesDeletePackageVersionForAuthenticatedUserVariables
     ) =>
-      fetchPackagesDeletePackageVersionForAuthenticatedUser({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchPackagesDeletePackageVersionForAuthenticatedUser(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -90863,13 +91265,15 @@ export const useSuspensePackagesGetPackageVersionForAuthenticatedUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.PackageVersion,
     PackagesGetPackageVersionForAuthenticatedUserError,
     TData
   >({
-    ...packagesGetPackageVersionForAuthenticatedUserQuery(variables),
+    ...packagesGetPackageVersionForAuthenticatedUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -90893,13 +91297,15 @@ export const usePackagesGetPackageVersionForAuthenticatedUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.PackageVersion,
     PackagesGetPackageVersionForAuthenticatedUserError,
     TData
   >({
-    ...packagesGetPackageVersionForAuthenticatedUserQuery(variables),
+    ...packagesGetPackageVersionForAuthenticatedUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -90995,10 +91401,9 @@ export const usePackagesRestorePackageVersionForAuthenticatedUser = (
     mutationFn: (
       variables: PackagesRestorePackageVersionForAuthenticatedUserVariables
     ) =>
-      fetchPackagesRestorePackageVersionForAuthenticatedUser({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchPackagesRestorePackageVersionForAuthenticatedUser(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -91077,10 +91482,9 @@ export const useProjectsCreateForAuthenticatedUser = (
     ProjectsCreateForAuthenticatedUserVariables
   >({
     mutationFn: (variables: ProjectsCreateForAuthenticatedUserVariables) =>
-      fetchProjectsCreateForAuthenticatedUser({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchProjectsCreateForAuthenticatedUser(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -91180,13 +91584,15 @@ export const useSuspenseUsersListPublicEmailsForAuthenticatedUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     UsersListPublicEmailsForAuthenticatedUserResponse,
     UsersListPublicEmailsForAuthenticatedUserError,
     TData
   >({
-    ...usersListPublicEmailsForAuthenticatedUserQuery(variables),
+    ...usersListPublicEmailsForAuthenticatedUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -91208,13 +91614,15 @@ export const useUsersListPublicEmailsForAuthenticatedUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     UsersListPublicEmailsForAuthenticatedUserResponse,
     UsersListPublicEmailsForAuthenticatedUserError,
     TData
   >({
-    ...usersListPublicEmailsForAuthenticatedUserQuery(variables),
+    ...usersListPublicEmailsForAuthenticatedUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -91363,13 +91771,13 @@ export const useSuspenseReposListForAuthenticatedUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     ReposListForAuthenticatedUserResponse,
     ReposListForAuthenticatedUserError,
     TData
   >({
-    ...reposListForAuthenticatedUserQuery(variables),
+    ...reposListForAuthenticatedUserQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -91393,13 +91801,13 @@ export const useReposListForAuthenticatedUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     ReposListForAuthenticatedUserResponse,
     ReposListForAuthenticatedUserError,
     TData
   >({
-    ...reposListForAuthenticatedUserQuery(variables),
+    ...reposListForAuthenticatedUserQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -91638,7 +92046,9 @@ export const useReposCreateForAuthenticatedUser = (
     ReposCreateForAuthenticatedUserVariables
   >({
     mutationFn: (variables: ReposCreateForAuthenticatedUserVariables) =>
-      fetchReposCreateForAuthenticatedUser({ ...fetcherOptions, ...variables }),
+      fetchReposCreateForAuthenticatedUser(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -91744,13 +92154,15 @@ export const useSuspenseReposListInvitationsForAuthenticatedUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     ReposListInvitationsForAuthenticatedUserResponse,
     ReposListInvitationsForAuthenticatedUserError,
     TData
   >({
-    ...reposListInvitationsForAuthenticatedUserQuery(variables),
+    ...reposListInvitationsForAuthenticatedUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -91772,13 +92184,15 @@ export const useReposListInvitationsForAuthenticatedUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     ReposListInvitationsForAuthenticatedUserResponse,
     ReposListInvitationsForAuthenticatedUserError,
     TData
   >({
-    ...reposListInvitationsForAuthenticatedUserQuery(variables),
+    ...reposListInvitationsForAuthenticatedUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -91852,10 +92266,9 @@ export const useReposDeclineInvitationForAuthenticatedUser = (
     mutationFn: (
       variables: ReposDeclineInvitationForAuthenticatedUserVariables
     ) =>
-      fetchReposDeclineInvitationForAuthenticatedUser({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchReposDeclineInvitationForAuthenticatedUser(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -91928,10 +92341,9 @@ export const useReposAcceptInvitationForAuthenticatedUser = (
     mutationFn: (
       variables: ReposAcceptInvitationForAuthenticatedUserVariables
     ) =>
-      fetchReposAcceptInvitationForAuthenticatedUser({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchReposAcceptInvitationForAuthenticatedUser(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -92032,13 +92444,15 @@ export const useSuspenseUsersListSshSigningKeysForAuthenticatedUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     UsersListSshSigningKeysForAuthenticatedUserResponse,
     UsersListSshSigningKeysForAuthenticatedUserError,
     TData
   >({
-    ...usersListSshSigningKeysForAuthenticatedUserQuery(variables),
+    ...usersListSshSigningKeysForAuthenticatedUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -92060,13 +92474,15 @@ export const useUsersListSshSigningKeysForAuthenticatedUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     UsersListSshSigningKeysForAuthenticatedUserResponse,
     UsersListSshSigningKeysForAuthenticatedUserError,
     TData
   >({
-    ...usersListSshSigningKeysForAuthenticatedUserQuery(variables),
+    ...usersListSshSigningKeysForAuthenticatedUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -92153,10 +92569,9 @@ export const useUsersCreateSshSigningKeyForAuthenticatedUser = (
     mutationFn: (
       variables: UsersCreateSshSigningKeyForAuthenticatedUserVariables
     ) =>
-      fetchUsersCreateSshSigningKeyForAuthenticatedUser({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchUsersCreateSshSigningKeyForAuthenticatedUser(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -92235,10 +92650,9 @@ export const useUsersDeleteSshSigningKeyForAuthenticatedUser = (
     mutationFn: (
       variables: UsersDeleteSshSigningKeyForAuthenticatedUserVariables
     ) =>
-      fetchUsersDeleteSshSigningKeyForAuthenticatedUser({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchUsersDeleteSshSigningKeyForAuthenticatedUser(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -92333,13 +92747,15 @@ export const useSuspenseUsersGetSshSigningKeyForAuthenticatedUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.SshSigningKey,
     UsersGetSshSigningKeyForAuthenticatedUserError,
     TData
   >({
-    ...usersGetSshSigningKeyForAuthenticatedUserQuery(variables),
+    ...usersGetSshSigningKeyForAuthenticatedUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -92361,13 +92777,15 @@ export const useUsersGetSshSigningKeyForAuthenticatedUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.SshSigningKey,
     UsersGetSshSigningKeyForAuthenticatedUserError,
     TData
   >({
-    ...usersGetSshSigningKeyForAuthenticatedUserQuery(variables),
+    ...usersGetSshSigningKeyForAuthenticatedUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -92483,13 +92901,15 @@ export const useSuspenseActivityListReposStarredByAuthenticatedUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     ActivityListReposStarredByAuthenticatedUserResponse,
     ActivityListReposStarredByAuthenticatedUserError,
     TData
   >({
-    ...activityListReposStarredByAuthenticatedUserQuery(variables),
+    ...activityListReposStarredByAuthenticatedUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -92513,13 +92933,15 @@ export const useActivityListReposStarredByAuthenticatedUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     ActivityListReposStarredByAuthenticatedUserResponse,
     ActivityListReposStarredByAuthenticatedUserError,
     TData
   >({
-    ...activityListReposStarredByAuthenticatedUserQuery(variables),
+    ...activityListReposStarredByAuthenticatedUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -92594,10 +93016,9 @@ export const useActivityUnstarRepoForAuthenticatedUser = (
     ActivityUnstarRepoForAuthenticatedUserVariables
   >({
     mutationFn: (variables: ActivityUnstarRepoForAuthenticatedUserVariables) =>
-      fetchActivityUnstarRepoForAuthenticatedUser({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchActivityUnstarRepoForAuthenticatedUser(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -92683,13 +93104,15 @@ export const useSuspenseActivityCheckRepoIsStarredByAuthenticatedUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     undefined,
     ActivityCheckRepoIsStarredByAuthenticatedUserError,
     TData
   >({
-    ...activityCheckRepoIsStarredByAuthenticatedUserQuery(variables),
+    ...activityCheckRepoIsStarredByAuthenticatedUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -92708,13 +93131,15 @@ export const useActivityCheckRepoIsStarredByAuthenticatedUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     undefined,
     ActivityCheckRepoIsStarredByAuthenticatedUserError,
     TData
   >({
-    ...activityCheckRepoIsStarredByAuthenticatedUserQuery(variables),
+    ...activityCheckRepoIsStarredByAuthenticatedUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -92795,10 +93220,9 @@ export const useActivityStarRepoForAuthenticatedUser = (
     ActivityStarRepoForAuthenticatedUserVariables
   >({
     mutationFn: (variables: ActivityStarRepoForAuthenticatedUserVariables) =>
-      fetchActivityStarRepoForAuthenticatedUser({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchActivityStarRepoForAuthenticatedUser(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -92895,13 +93319,15 @@ export const useSuspenseActivityListWatchedReposForAuthenticatedUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     ActivityListWatchedReposForAuthenticatedUserResponse,
     ActivityListWatchedReposForAuthenticatedUserError,
     TData
   >({
-    ...activityListWatchedReposForAuthenticatedUserQuery(variables),
+    ...activityListWatchedReposForAuthenticatedUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -92923,13 +93349,15 @@ export const useActivityListWatchedReposForAuthenticatedUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     ActivityListWatchedReposForAuthenticatedUserResponse,
     ActivityListWatchedReposForAuthenticatedUserError,
     TData
   >({
-    ...activityListWatchedReposForAuthenticatedUserQuery(variables),
+    ...activityListWatchedReposForAuthenticatedUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -93025,13 +93453,13 @@ export const useSuspenseTeamsListForAuthenticatedUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     TeamsListForAuthenticatedUserResponse,
     TeamsListForAuthenticatedUserError,
     TData
   >({
-    ...teamsListForAuthenticatedUserQuery(variables),
+    ...teamsListForAuthenticatedUserQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -93053,13 +93481,13 @@ export const useTeamsListForAuthenticatedUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     TeamsListForAuthenticatedUserResponse,
     TeamsListForAuthenticatedUserError,
     TData
   >({
-    ...teamsListForAuthenticatedUserQuery(variables),
+    ...teamsListForAuthenticatedUserQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -93139,9 +93567,9 @@ export const useSuspenseUsersList = <TData = UsersListResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<UsersListResponse, UsersListError, TData>({
-    ...usersListQuery(variables),
+    ...usersListQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -93159,9 +93587,9 @@ export const useUsersList = <TData = UsersListResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<UsersListResponse, UsersListError, TData>({
-    ...usersListQuery(variables),
+    ...usersListQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -93255,13 +93683,13 @@ export const useSuspenseUsersGetByUsername = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.PrivateUser | Schemas.PublicUser,
     UsersGetByUsernameError,
     TData
   >({
-    ...usersGetByUsernameQuery(variables),
+    ...usersGetByUsernameQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -93289,13 +93717,13 @@ export const useUsersGetByUsername = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.PrivateUser | Schemas.PublicUser,
     UsersGetByUsernameError,
     TData
   >({
-    ...usersGetByUsernameQuery(variables),
+    ...usersGetByUsernameQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -93387,13 +93815,15 @@ export const useSuspenseActivityListEventsForAuthenticatedUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     ActivityListEventsForAuthenticatedUserResponse,
     ActivityListEventsForAuthenticatedUserError,
     TData
   >({
-    ...activityListEventsForAuthenticatedUserQuery(variables),
+    ...activityListEventsForAuthenticatedUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -93415,13 +93845,15 @@ export const useActivityListEventsForAuthenticatedUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     ActivityListEventsForAuthenticatedUserResponse,
     ActivityListEventsForAuthenticatedUserError,
     TData
   >({
-    ...activityListEventsForAuthenticatedUserQuery(variables),
+    ...activityListEventsForAuthenticatedUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -93522,13 +93954,15 @@ export const useSuspenseActivityListOrgEventsForAuthenticatedUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     ActivityListOrgEventsForAuthenticatedUserResponse,
     ActivityListOrgEventsForAuthenticatedUserError,
     TData
   >({
-    ...activityListOrgEventsForAuthenticatedUserQuery(variables),
+    ...activityListOrgEventsForAuthenticatedUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -93550,13 +93984,15 @@ export const useActivityListOrgEventsForAuthenticatedUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     ActivityListOrgEventsForAuthenticatedUserResponse,
     ActivityListOrgEventsForAuthenticatedUserError,
     TData
   >({
-    ...activityListOrgEventsForAuthenticatedUserQuery(variables),
+    ...activityListOrgEventsForAuthenticatedUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -93644,13 +94080,15 @@ export const useSuspenseActivityListPublicEventsForUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     ActivityListPublicEventsForUserResponse,
     ActivityListPublicEventsForUserError,
     TData
   >({
-    ...activityListPublicEventsForUserQuery(variables),
+    ...activityListPublicEventsForUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -93669,13 +94107,15 @@ export const useActivityListPublicEventsForUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     ActivityListPublicEventsForUserResponse,
     ActivityListPublicEventsForUserError,
     TData
   >({
-    ...activityListPublicEventsForUserQuery(variables),
+    ...activityListPublicEventsForUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -93771,13 +94211,13 @@ export const useSuspenseUsersListFollowersForUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     UsersListFollowersForUserResponse,
     UsersListFollowersForUserError,
     TData
   >({
-    ...usersListFollowersForUserQuery(variables),
+    ...usersListFollowersForUserQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -93799,13 +94239,13 @@ export const useUsersListFollowersForUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     UsersListFollowersForUserResponse,
     UsersListFollowersForUserError,
     TData
   >({
-    ...usersListFollowersForUserQuery(variables),
+    ...usersListFollowersForUserQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -93901,13 +94341,13 @@ export const useSuspenseUsersListFollowingForUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     UsersListFollowingForUserResponse,
     UsersListFollowingForUserError,
     TData
   >({
-    ...usersListFollowingForUserQuery(variables),
+    ...usersListFollowingForUserQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -93929,13 +94369,13 @@ export const useUsersListFollowingForUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     UsersListFollowingForUserResponse,
     UsersListFollowingForUserError,
     TData
   >({
-    ...usersListFollowingForUserQuery(variables),
+    ...usersListFollowingForUserQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -93999,13 +94439,13 @@ export const useSuspenseUsersCheckFollowingForUser = <TData = undefined>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     undefined,
     UsersCheckFollowingForUserError,
     TData
   >({
-    ...usersCheckFollowingForUserQuery(variables),
+    ...usersCheckFollowingForUserQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -94022,10 +94462,10 @@ export const useUsersCheckFollowingForUser = <TData = undefined>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<undefined, UsersCheckFollowingForUserError, TData>(
     {
-      ...usersCheckFollowingForUserQuery(variables),
+      ...usersCheckFollowingForUserQuery(deepMerge(fetcherOptions, variables)),
       ...options,
       ...queryOptions,
     }
@@ -94124,13 +94564,13 @@ export const useSuspenseGistsListForUser = <TData = GistsListForUserResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     GistsListForUserResponse,
     GistsListForUserError,
     TData
   >({
-    ...gistsListForUserQuery(variables),
+    ...gistsListForUserQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -94150,13 +94590,13 @@ export const useGistsListForUser = <TData = GistsListForUserResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     GistsListForUserResponse,
     GistsListForUserError,
     TData
   >({
-    ...gistsListForUserQuery(variables),
+    ...gistsListForUserQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -94247,13 +94687,13 @@ export const useSuspenseUsersListGpgKeysForUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     UsersListGpgKeysForUserResponse,
     UsersListGpgKeysForUserError,
     TData
   >({
-    ...usersListGpgKeysForUserQuery(variables),
+    ...usersListGpgKeysForUserQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -94275,13 +94715,13 @@ export const useUsersListGpgKeysForUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     UsersListGpgKeysForUserResponse,
     UsersListGpgKeysForUserError,
     TData
   >({
-    ...usersListGpgKeysForUserQuery(variables),
+    ...usersListGpgKeysForUserQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -94395,13 +94835,13 @@ export const useSuspenseUsersGetContextForUser = <TData = Schemas.Hovercard>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.Hovercard,
     UsersGetContextForUserError,
     TData
   >({
-    ...usersGetContextForUserQuery(variables),
+    ...usersGetContextForUserQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -94428,13 +94868,13 @@ export const useUsersGetContextForUser = <TData = Schemas.Hovercard>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.Hovercard,
     UsersGetContextForUserError,
     TData
   >({
-    ...usersGetContextForUserQuery(variables),
+    ...usersGetContextForUserQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -94518,13 +94958,13 @@ export const useSuspenseAppsGetUserInstallation = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.Installation,
     AppsGetUserInstallationError,
     TData
   >({
-    ...appsGetUserInstallationQuery(variables),
+    ...appsGetUserInstallationQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -94546,13 +94986,13 @@ export const useAppsGetUserInstallation = <TData = Schemas.Installation>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.Installation,
     AppsGetUserInstallationError,
     TData
   >({
-    ...appsGetUserInstallationQuery(variables),
+    ...appsGetUserInstallationQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -94643,13 +95083,13 @@ export const useSuspenseUsersListPublicKeysForUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     UsersListPublicKeysForUserResponse,
     UsersListPublicKeysForUserError,
     TData
   >({
-    ...usersListPublicKeysForUserQuery(variables),
+    ...usersListPublicKeysForUserQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -94671,13 +95111,13 @@ export const useUsersListPublicKeysForUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     UsersListPublicKeysForUserResponse,
     UsersListPublicKeysForUserError,
     TData
   >({
-    ...usersListPublicKeysForUserQuery(variables),
+    ...usersListPublicKeysForUserQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -94772,13 +95212,13 @@ export const useSuspenseOrgsListForUser = <TData = OrgsListForUserResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     OrgsListForUserResponse,
     OrgsListForUserError,
     TData
   >({
-    ...orgsListForUserQuery(variables),
+    ...orgsListForUserQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -94800,13 +95240,13 @@ export const useOrgsListForUser = <TData = OrgsListForUserResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     OrgsListForUserResponse,
     OrgsListForUserError,
     TData
   >({
-    ...orgsListForUserQuery(variables),
+    ...orgsListForUserQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -94911,13 +95351,13 @@ export const useSuspensePackagesListPackagesForUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     PackagesListPackagesForUserResponse,
     PackagesListPackagesForUserError,
     TData
   >({
-    ...packagesListPackagesForUserQuery(variables),
+    ...packagesListPackagesForUserQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -94941,13 +95381,13 @@ export const usePackagesListPackagesForUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     PackagesListPackagesForUserResponse,
     PackagesListPackagesForUserError,
     TData
   >({
-    ...packagesListPackagesForUserQuery(variables),
+    ...packagesListPackagesForUserQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -95036,7 +95476,7 @@ export const usePackagesDeletePackageForUser = (
     PackagesDeletePackageForUserVariables
   >({
     mutationFn: (variables: PackagesDeletePackageForUserVariables) =>
-      fetchPackagesDeletePackageForUser({ ...fetcherOptions, ...variables }),
+      fetchPackagesDeletePackageForUser(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -95121,13 +95561,13 @@ export const useSuspensePackagesGetPackageForUser = <TData = Schemas.Package>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.Package,
     PackagesGetPackageForUserError,
     TData
   >({
-    ...packagesGetPackageForUserQuery(variables),
+    ...packagesGetPackageForUserQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -95149,13 +95589,13 @@ export const usePackagesGetPackageForUser = <TData = Schemas.Package>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.Package,
     PackagesGetPackageForUserError,
     TData
   >({
-    ...packagesGetPackageForUserQuery(variables),
+    ...packagesGetPackageForUserQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -95260,7 +95700,7 @@ export const usePackagesRestorePackageForUser = (
     PackagesRestorePackageForUserVariables
   >({
     mutationFn: (variables: PackagesRestorePackageForUserVariables) =>
-      fetchPackagesRestorePackageForUser({ ...fetcherOptions, ...variables }),
+      fetchPackagesRestorePackageForUser(deepMerge(fetcherOptions, variables)),
     ...options,
   });
 };
@@ -95368,13 +95808,15 @@ export const useSuspensePackagesGetAllPackageVersionsForPackageOwnedByUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     PackagesGetAllPackageVersionsForPackageOwnedByUserResponse,
     PackagesGetAllPackageVersionsForPackageOwnedByUserError,
     TData
   >({
-    ...packagesGetAllPackageVersionsForPackageOwnedByUserQuery(variables),
+    ...packagesGetAllPackageVersionsForPackageOwnedByUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -95398,13 +95840,15 @@ export const usePackagesGetAllPackageVersionsForPackageOwnedByUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     PackagesGetAllPackageVersionsForPackageOwnedByUserResponse,
     PackagesGetAllPackageVersionsForPackageOwnedByUserError,
     TData
   >({
-    ...packagesGetAllPackageVersionsForPackageOwnedByUserQuery(variables),
+    ...packagesGetAllPackageVersionsForPackageOwnedByUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -95497,10 +95941,9 @@ export const usePackagesDeletePackageVersionForUser = (
     PackagesDeletePackageVersionForUserVariables
   >({
     mutationFn: (variables: PackagesDeletePackageVersionForUserVariables) =>
-      fetchPackagesDeletePackageVersionForUser({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchPackagesDeletePackageVersionForUser(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -95596,13 +96039,15 @@ export const useSuspensePackagesGetPackageVersionForUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.PackageVersion,
     PackagesGetPackageVersionForUserError,
     TData
   >({
-    ...packagesGetPackageVersionForUserQuery(variables),
+    ...packagesGetPackageVersionForUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -95626,13 +96071,15 @@ export const usePackagesGetPackageVersionForUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.PackageVersion,
     PackagesGetPackageVersionForUserError,
     TData
   >({
-    ...packagesGetPackageVersionForUserQuery(variables),
+    ...packagesGetPackageVersionForUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -95733,10 +96180,9 @@ export const usePackagesRestorePackageVersionForUser = (
     PackagesRestorePackageVersionForUserVariables
   >({
     mutationFn: (variables: PackagesRestorePackageVersionForUserVariables) =>
-      fetchPackagesRestorePackageVersionForUser({
-        ...fetcherOptions,
-        ...variables,
-      }),
+      fetchPackagesRestorePackageVersionForUser(
+        deepMerge(fetcherOptions, variables)
+      ),
     ...options,
   });
 };
@@ -95826,13 +96272,13 @@ export const useSuspenseProjectsListForUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     ProjectsListForUserResponse,
     ProjectsListForUserError,
     TData
   >({
-    ...projectsListForUserQuery(variables),
+    ...projectsListForUserQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -95849,13 +96295,13 @@ export const useProjectsListForUser = <TData = ProjectsListForUserResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     ProjectsListForUserResponse,
     ProjectsListForUserError,
     TData
   >({
-    ...projectsListForUserQuery(variables),
+    ...projectsListForUserQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -95952,13 +96398,15 @@ export const useSuspenseActivityListReceivedEventsForUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     ActivityListReceivedEventsForUserResponse,
     ActivityListReceivedEventsForUserError,
     TData
   >({
-    ...activityListReceivedEventsForUserQuery(variables),
+    ...activityListReceivedEventsForUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -95980,13 +96428,15 @@ export const useActivityListReceivedEventsForUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     ActivityListReceivedEventsForUserResponse,
     ActivityListReceivedEventsForUserError,
     TData
   >({
-    ...activityListReceivedEventsForUserQuery(variables),
+    ...activityListReceivedEventsForUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -96074,13 +96524,15 @@ export const useSuspenseActivityListReceivedPublicEventsForUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     ActivityListReceivedPublicEventsForUserResponse,
     ActivityListReceivedPublicEventsForUserError,
     TData
   >({
-    ...activityListReceivedPublicEventsForUserQuery(variables),
+    ...activityListReceivedPublicEventsForUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -96099,13 +96551,15 @@ export const useActivityListReceivedPublicEventsForUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     ActivityListReceivedPublicEventsForUserResponse,
     ActivityListReceivedPublicEventsForUserError,
     TData
   >({
-    ...activityListReceivedPublicEventsForUserQuery(variables),
+    ...activityListReceivedPublicEventsForUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -96210,13 +96664,13 @@ export const useSuspenseReposListForUser = <TData = ReposListForUserResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     ReposListForUserResponse,
     ReposListForUserError,
     TData
   >({
-    ...reposListForUserQuery(variables),
+    ...reposListForUserQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -96236,13 +96690,13 @@ export const useReposListForUser = <TData = ReposListForUserResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     ReposListForUserResponse,
     ReposListForUserError,
     TData
   >({
-    ...reposListForUserQuery(variables),
+    ...reposListForUserQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -96333,13 +96787,15 @@ export const useSuspenseBillingGetGithubActionsBillingUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.ActionsBillingUsage,
     BillingGetGithubActionsBillingUserError,
     TData
   >({
-    ...billingGetGithubActionsBillingUserQuery(variables),
+    ...billingGetGithubActionsBillingUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -96365,13 +96821,15 @@ export const useBillingGetGithubActionsBillingUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.ActionsBillingUsage,
     BillingGetGithubActionsBillingUserError,
     TData
   >({
-    ...billingGetGithubActionsBillingUserQuery(variables),
+    ...billingGetGithubActionsBillingUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -96462,13 +96920,15 @@ export const useSuspenseBillingGetGithubPackagesBillingUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.PackagesBillingUsage,
     BillingGetGithubPackagesBillingUserError,
     TData
   >({
-    ...billingGetGithubPackagesBillingUserQuery(variables),
+    ...billingGetGithubPackagesBillingUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -96494,13 +96954,15 @@ export const useBillingGetGithubPackagesBillingUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.PackagesBillingUsage,
     BillingGetGithubPackagesBillingUserError,
     TData
   >({
-    ...billingGetGithubPackagesBillingUserQuery(variables),
+    ...billingGetGithubPackagesBillingUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -96591,13 +97053,15 @@ export const useSuspenseBillingGetSharedStorageBillingUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.CombinedBillingUsage,
     BillingGetSharedStorageBillingUserError,
     TData
   >({
-    ...billingGetSharedStorageBillingUserQuery(variables),
+    ...billingGetSharedStorageBillingUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -96623,13 +97087,15 @@ export const useBillingGetSharedStorageBillingUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.CombinedBillingUsage,
     BillingGetSharedStorageBillingUserError,
     TData
   >({
-    ...billingGetSharedStorageBillingUserQuery(variables),
+    ...billingGetSharedStorageBillingUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -96726,13 +97192,15 @@ export const useSuspenseUsersListSshSigningKeysForUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     UsersListSshSigningKeysForUserResponse,
     UsersListSshSigningKeysForUserError,
     TData
   >({
-    ...usersListSshSigningKeysForUserQuery(variables),
+    ...usersListSshSigningKeysForUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -96754,13 +97222,15 @@ export const useUsersListSshSigningKeysForUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     UsersListSshSigningKeysForUserResponse,
     UsersListSshSigningKeysForUserError,
     TData
   >({
-    ...usersListSshSigningKeysForUserQuery(variables),
+    ...usersListSshSigningKeysForUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -96868,13 +97338,15 @@ export const useSuspenseActivityListReposStarredByUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     Schemas.StarredRepository[] | Schemas.Repository[],
     ActivityListReposStarredByUserError,
     TData
   >({
-    ...activityListReposStarredByUserQuery(variables),
+    ...activityListReposStarredByUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -96898,13 +97370,15 @@ export const useActivityListReposStarredByUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     Schemas.StarredRepository[] | Schemas.Repository[],
     ActivityListReposStarredByUserError,
     TData
   >({
-    ...activityListReposStarredByUserQuery(variables),
+    ...activityListReposStarredByUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -97002,13 +97476,15 @@ export const useSuspenseActivityListReposWatchedByUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     ActivityListReposWatchedByUserResponse,
     ActivityListReposWatchedByUserError,
     TData
   >({
-    ...activityListReposWatchedByUserQuery(variables),
+    ...activityListReposWatchedByUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -97030,13 +97506,15 @@ export const useActivityListReposWatchedByUser = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     ActivityListReposWatchedByUserResponse,
     ActivityListReposWatchedByUserError,
     TData
   >({
-    ...activityListReposWatchedByUserQuery(variables),
+    ...activityListReposWatchedByUserQuery(
+      deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -97105,13 +97583,13 @@ export const useSuspenseMetaGetAllVersions = <
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<
     MetaGetAllVersionsResponse,
     MetaGetAllVersionsError,
     TData
   >({
-    ...metaGetAllVersionsQuery(variables),
+    ...metaGetAllVersionsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -97131,13 +97609,13 @@ export const useMetaGetAllVersions = <TData = MetaGetAllVersionsResponse>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<
     MetaGetAllVersionsResponse,
     MetaGetAllVersionsError,
     TData
   >({
-    ...metaGetAllVersionsQuery(variables),
+    ...metaGetAllVersionsQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -97189,9 +97667,9 @@ export const useSuspenseMetaGetZen = <TData = undefined>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useSuspenseQuery<undefined, MetaGetZenError, TData>({
-    ...metaGetZenQuery(variables),
+    ...metaGetZenQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
@@ -97207,9 +97685,9 @@ export const useMetaGetZen = <TData = undefined>(
     "queryKey" | "queryFn" | "initialData"
   >
 ) => {
-  const { queryOptions } = useGithubContext(options);
+  const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<undefined, MetaGetZenError, TData>({
-    ...metaGetZenQuery(variables),
+    ...metaGetZenQuery(deepMerge(fetcherOptions, variables)),
     ...options,
     ...queryOptions,
   });
