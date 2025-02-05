@@ -102,6 +102,10 @@ describe("generateReactQueryComponents", () => {
       import { petstoreFetch } from "./petstoreFetcher";
       import type * as Schemas from "./petstoreSchemas";
 
+      type QueryFnOptions = {
+        signal?: AbortController["signal"];
+      };
+
       export type ListPetsError = Fetcher.ErrorWrapper<undefined>;
 
       export type ListPetsResponse = Schemas.Pet[];
@@ -125,20 +129,35 @@ describe("generateReactQueryComponents", () => {
       /**
        * Get all the pets
        */
-      export const listPetsQuery = (
-        variables: ListPetsVariables,
+      export function listPetsQuery(variables: ListPetsVariables): {
+        queryKey: reactQuery.QueryKey;
+        queryFn: (options: QueryFnOptions) => Promise<ListPetsResponse>;
+      };
+
+      export function listPetsQuery(
+        variables: ListPetsVariables | reactQuery.SkipToken,
       ): {
         queryKey: reactQuery.QueryKey;
-        queryFn: ({ signal }: { signal?: AbortSignal }) => Promise<ListPetsResponse>;
-      } => ({
-        queryKey: queryKeyFn({
-          path: "/pets",
-          operationId: "listPets",
-          variables,
-        }),
-        queryFn: ({ signal }: { signal?: AbortSignal }) =>
-          fetchListPets(variables, signal),
-      });
+        queryFn:
+          | ((options: QueryFnOptions) => Promise<ListPetsResponse>)
+          | reactQuery.SkipToken;
+      };
+
+      export function listPetsQuery(
+        variables: ListPetsVariables | reactQuery.SkipToken,
+      ) {
+        return {
+          queryKey: queryKeyFn({
+            path: "/pets",
+            operationId: "listPets",
+            variables,
+          }),
+          queryFn:
+            variables === reactQuery.skipToken
+              ? reactQuery.skipToken
+              : ({ signal }: QueryFnOptions) => fetchListPets(variables, signal),
+        };
+      }
 
       /**
        * Get all the pets
@@ -179,7 +198,7 @@ describe("generateReactQueryComponents", () => {
       export type QueryOperation = {
         path: "/pets";
         operationId: "listPets";
-        variables: ListPetsVariables;
+        variables: ListPetsVariables | reactQuery.SkipToken;
       };
       "
     `);
@@ -245,6 +264,10 @@ describe("generateReactQueryComponents", () => {
       import { petstoreFetch } from "./petstoreFetcher";
       import type * as Schemas from "./petstoreSchemas";
 
+      type QueryFnOptions = {
+        signal?: AbortController["signal"];
+      };
+
       export type ListPetsError = Fetcher.ErrorWrapper<undefined>;
 
       export type ListPetsResponse = Schemas.Pet[];
@@ -268,20 +291,35 @@ describe("generateReactQueryComponents", () => {
       /**
        * Get all the pets
        */
-      export const listPetsQuery = (
-        variables: ListPetsVariables,
+      export function listPetsQuery(variables: ListPetsVariables): {
+        queryKey: reactQuery.QueryKey;
+        queryFn: (options: QueryFnOptions) => Promise<ListPetsResponse>;
+      };
+
+      export function listPetsQuery(
+        variables: ListPetsVariables | reactQuery.SkipToken,
       ): {
         queryKey: reactQuery.QueryKey;
-        queryFn: ({ signal }: { signal?: AbortSignal }) => Promise<ListPetsResponse>;
-      } => ({
-        queryKey: queryKeyFn({
-          path: "/pets",
-          operationId: "listPets",
-          variables,
-        }),
-        queryFn: ({ signal }: { signal?: AbortSignal }) =>
-          fetchListPets(variables, signal),
-      });
+        queryFn:
+          | ((options: QueryFnOptions) => Promise<ListPetsResponse>)
+          | reactQuery.SkipToken;
+      };
+
+      export function listPetsQuery(
+        variables: ListPetsVariables | reactQuery.SkipToken,
+      ) {
+        return {
+          queryKey: queryKeyFn({
+            path: "/pets",
+            operationId: "listPets",
+            variables,
+          }),
+          queryFn:
+            variables === reactQuery.skipToken
+              ? reactQuery.skipToken
+              : ({ signal }: QueryFnOptions) => fetchListPets(variables, signal),
+        };
+      }
 
       /**
        * Get all the pets
@@ -322,7 +360,7 @@ describe("generateReactQueryComponents", () => {
       export type QueryOperation = {
         path: "/pets";
         operationId: "listPets";
-        variables: ListPetsVariables;
+        variables: ListPetsVariables | reactQuery.SkipToken;
       };
       "
     `);
@@ -413,6 +451,10 @@ describe("generateReactQueryComponents", () => {
       import { petstoreFetch } from "./petstoreFetcher";
       import type * as Schemas from "./petstoreSchemas";
 
+      type QueryFnOptions = {
+        signal?: AbortController["signal"];
+      };
+
       export type ListPetsQueryParams = {
         /**
          * Filter on the dog breed
@@ -451,20 +493,35 @@ describe("generateReactQueryComponents", () => {
       /**
        * Get all the pets
        */
-      export const listPetsQuery = (
-        variables: ListPetsVariables,
+      export function listPetsQuery(variables: ListPetsVariables): {
+        queryKey: reactQuery.QueryKey;
+        queryFn: (options: QueryFnOptions) => Promise<ListPetsResponse>;
+      };
+
+      export function listPetsQuery(
+        variables: ListPetsVariables | reactQuery.SkipToken,
       ): {
         queryKey: reactQuery.QueryKey;
-        queryFn: ({ signal }: { signal?: AbortSignal }) => Promise<ListPetsResponse>;
-      } => ({
-        queryKey: queryKeyFn({
-          path: "/pets",
-          operationId: "listPets",
-          variables,
-        }),
-        queryFn: ({ signal }: { signal?: AbortSignal }) =>
-          fetchListPets(variables, signal),
-      });
+        queryFn:
+          | ((options: QueryFnOptions) => Promise<ListPetsResponse>)
+          | reactQuery.SkipToken;
+      };
+
+      export function listPetsQuery(
+        variables: ListPetsVariables | reactQuery.SkipToken,
+      ) {
+        return {
+          queryKey: queryKeyFn({
+            path: "/pets",
+            operationId: "listPets",
+            variables,
+          }),
+          queryFn:
+            variables === reactQuery.skipToken
+              ? reactQuery.skipToken
+              : ({ signal }: QueryFnOptions) => fetchListPets(variables, signal),
+        };
+      }
 
       /**
        * Get all the pets
@@ -505,7 +562,7 @@ describe("generateReactQueryComponents", () => {
       export type QueryOperation = {
         path: "/pets";
         operationId: "listPets";
-        variables: ListPetsVariables;
+        variables: ListPetsVariables | reactQuery.SkipToken;
       };
       "
     `);
@@ -596,6 +653,10 @@ describe("generateReactQueryComponents", () => {
       import { petstoreFetch } from "./petstoreFetcher";
       import type * as Schemas from "./petstoreSchemas";
 
+      type QueryFnOptions = {
+        signal?: AbortController["signal"];
+      };
+
       export type ListPetsQueryParams = {
         /**
          * Filter on the dog breed
@@ -634,20 +695,35 @@ describe("generateReactQueryComponents", () => {
       /**
        * Get all the pets
        */
-      export const listPetsQuery = (
-        variables: ListPetsVariables,
+      export function listPetsQuery(variables: ListPetsVariables): {
+        queryKey: reactQuery.QueryKey;
+        queryFn: (options: QueryFnOptions) => Promise<ListPetsResponse>;
+      };
+
+      export function listPetsQuery(
+        variables: ListPetsVariables | reactQuery.SkipToken,
       ): {
         queryKey: reactQuery.QueryKey;
-        queryFn: ({ signal }: { signal?: AbortSignal }) => Promise<ListPetsResponse>;
-      } => ({
-        queryKey: queryKeyFn({
-          path: "/pets",
-          operationId: "listPets",
-          variables,
-        }),
-        queryFn: ({ signal }: { signal?: AbortSignal }) =>
-          fetchListPets(variables, signal),
-      });
+        queryFn:
+          | ((options: QueryFnOptions) => Promise<ListPetsResponse>)
+          | reactQuery.SkipToken;
+      };
+
+      export function listPetsQuery(
+        variables: ListPetsVariables | reactQuery.SkipToken,
+      ) {
+        return {
+          queryKey: queryKeyFn({
+            path: "/pets",
+            operationId: "listPets",
+            variables,
+          }),
+          queryFn:
+            variables === reactQuery.skipToken
+              ? reactQuery.skipToken
+              : ({ signal }: QueryFnOptions) => fetchListPets(variables, signal),
+        };
+      }
 
       /**
        * Get all the pets
@@ -688,7 +764,7 @@ describe("generateReactQueryComponents", () => {
       export type QueryOperation = {
         path: "/pets";
         operationId: "listPets";
-        variables: ListPetsVariables;
+        variables: ListPetsVariables | reactQuery.SkipToken;
       };
       "
     `);
@@ -765,6 +841,10 @@ describe("generateReactQueryComponents", () => {
       import { petstoreFetch } from "./petstoreFetcher";
       import type * as Schemas from "./petstoreSchemas";
 
+      type QueryFnOptions = {
+        signal?: AbortController["signal"];
+      };
+
       export type ShowPetByIdPathParams = {
         /**
          * The id of the pet to retrieve
@@ -799,24 +879,35 @@ describe("generateReactQueryComponents", () => {
       /**
        * Info for a specific pet
        */
-      export const showPetByIdQuery = (
-        variables: ShowPetByIdVariables,
+      export function showPetByIdQuery(variables: ShowPetByIdVariables): {
+        queryKey: reactQuery.QueryKey;
+        queryFn: (options: QueryFnOptions) => Promise<ShowPetByIdResponse>;
+      };
+
+      export function showPetByIdQuery(
+        variables: ShowPetByIdVariables | reactQuery.SkipToken,
       ): {
         queryKey: reactQuery.QueryKey;
-        queryFn: ({
-          signal,
-        }: {
-          signal?: AbortSignal;
-        }) => Promise<ShowPetByIdResponse>;
-      } => ({
-        queryKey: queryKeyFn({
-          path: "/pets/{petId}",
-          operationId: "showPetById",
-          variables,
-        }),
-        queryFn: ({ signal }: { signal?: AbortSignal }) =>
-          fetchShowPetById(variables, signal),
-      });
+        queryFn:
+          | ((options: QueryFnOptions) => Promise<ShowPetByIdResponse>)
+          | reactQuery.SkipToken;
+      };
+
+      export function showPetByIdQuery(
+        variables: ShowPetByIdVariables | reactQuery.SkipToken,
+      ) {
+        return {
+          queryKey: queryKeyFn({
+            path: "/pets/{petId}",
+            operationId: "showPetById",
+            variables,
+          }),
+          queryFn:
+            variables === reactQuery.skipToken
+              ? reactQuery.skipToken
+              : ({ signal }: QueryFnOptions) => fetchShowPetById(variables, signal),
+        };
+      }
 
       /**
        * Info for a specific pet
@@ -861,7 +952,7 @@ describe("generateReactQueryComponents", () => {
       export type QueryOperation = {
         path: "/pets/{petId}";
         operationId: "showPetById";
-        variables: ShowPetByIdVariables;
+        variables: ShowPetByIdVariables | reactQuery.SkipToken;
       };
       "
     `);
@@ -939,6 +1030,10 @@ describe("generateReactQueryComponents", () => {
       import { petstoreFetch } from "./petstoreFetcher";
       import type * as Schemas from "./petstoreSchemas";
 
+      type QueryFnOptions = {
+        signal?: AbortController["signal"];
+      };
+
       export type ShowPetByIdPathParams = {
         /**
          * The id of the pet to retrieve
@@ -973,24 +1068,35 @@ describe("generateReactQueryComponents", () => {
       /**
        * Info for a specific pet
        */
-      export const showPetByIdQuery = (
-        variables: ShowPetByIdVariables,
+      export function showPetByIdQuery(variables: ShowPetByIdVariables): {
+        queryKey: reactQuery.QueryKey;
+        queryFn: (options: QueryFnOptions) => Promise<ShowPetByIdResponse>;
+      };
+
+      export function showPetByIdQuery(
+        variables: ShowPetByIdVariables | reactQuery.SkipToken,
       ): {
         queryKey: reactQuery.QueryKey;
-        queryFn: ({
-          signal,
-        }: {
-          signal?: AbortSignal;
-        }) => Promise<ShowPetByIdResponse>;
-      } => ({
-        queryKey: queryKeyFn({
-          path: "/pets/{petId}",
-          operationId: "showPetById",
-          variables,
-        }),
-        queryFn: ({ signal }: { signal?: AbortSignal }) =>
-          fetchShowPetById(variables, signal),
-      });
+        queryFn:
+          | ((options: QueryFnOptions) => Promise<ShowPetByIdResponse>)
+          | reactQuery.SkipToken;
+      };
+
+      export function showPetByIdQuery(
+        variables: ShowPetByIdVariables | reactQuery.SkipToken,
+      ) {
+        return {
+          queryKey: queryKeyFn({
+            path: "/pets/{petId}",
+            operationId: "showPetById",
+            variables,
+          }),
+          queryFn:
+            variables === reactQuery.skipToken
+              ? reactQuery.skipToken
+              : ({ signal }: QueryFnOptions) => fetchShowPetById(variables, signal),
+        };
+      }
 
       /**
        * Info for a specific pet
@@ -1035,7 +1141,7 @@ describe("generateReactQueryComponents", () => {
       export type QueryOperation = {
         path: "/pets/{petId}";
         operationId: "showPetById";
-        variables: ShowPetByIdVariables;
+        variables: ShowPetByIdVariables | reactQuery.SkipToken;
       };
       "
     `);
@@ -1127,6 +1233,10 @@ describe("generateReactQueryComponents", () => {
       import { petstoreFetch } from "./petstoreFetcher";
       import type * as Schemas from "./petstoreSchemas";
 
+      type QueryFnOptions = {
+        signal?: AbortController["signal"];
+      };
+
       export type ListPetsQueryParams = {
         /**
          * Color of the dog
@@ -1169,20 +1279,35 @@ describe("generateReactQueryComponents", () => {
       /**
        * Get all the pets
        */
-      export const listPetsQuery = (
-        variables: ListPetsVariables,
+      export function listPetsQuery(variables: ListPetsVariables): {
+        queryKey: reactQuery.QueryKey;
+        queryFn: (options: QueryFnOptions) => Promise<ListPetsResponse>;
+      };
+
+      export function listPetsQuery(
+        variables: ListPetsVariables | reactQuery.SkipToken,
       ): {
         queryKey: reactQuery.QueryKey;
-        queryFn: ({ signal }: { signal?: AbortSignal }) => Promise<ListPetsResponse>;
-      } => ({
-        queryKey: queryKeyFn({
-          path: "/pets",
-          operationId: "listPets",
-          variables,
-        }),
-        queryFn: ({ signal }: { signal?: AbortSignal }) =>
-          fetchListPets(variables, signal),
-      });
+        queryFn:
+          | ((options: QueryFnOptions) => Promise<ListPetsResponse>)
+          | reactQuery.SkipToken;
+      };
+
+      export function listPetsQuery(
+        variables: ListPetsVariables | reactQuery.SkipToken,
+      ) {
+        return {
+          queryKey: queryKeyFn({
+            path: "/pets",
+            operationId: "listPets",
+            variables,
+          }),
+          queryFn:
+            variables === reactQuery.skipToken
+              ? reactQuery.skipToken
+              : ({ signal }: QueryFnOptions) => fetchListPets(variables, signal),
+        };
+      }
 
       /**
        * Get all the pets
@@ -1223,7 +1348,7 @@ describe("generateReactQueryComponents", () => {
       export type QueryOperation = {
         path: "/pets";
         operationId: "listPets";
-        variables: ListPetsVariables;
+        variables: ListPetsVariables | reactQuery.SkipToken;
       };
       "
     `);
@@ -1303,6 +1428,10 @@ describe("generateReactQueryComponents", () => {
       import { petstoreFetch } from "./petstoreFetcher";
       import type * as Schemas from "./petstoreSchemas";
 
+      type QueryFnOptions = {
+        signal?: AbortController["signal"];
+      };
+
       export type ListPetsError = Fetcher.ErrorWrapper<undefined>;
 
       export type ListPetsResponse = Schemas.Pet[];
@@ -1326,20 +1455,35 @@ describe("generateReactQueryComponents", () => {
       /**
        * Get all the pets
        */
-      export const listPetsQuery = (
-        variables: ListPetsVariables,
+      export function listPetsQuery(variables: ListPetsVariables): {
+        queryKey: reactQuery.QueryKey;
+        queryFn: (options: QueryFnOptions) => Promise<ListPetsResponse>;
+      };
+
+      export function listPetsQuery(
+        variables: ListPetsVariables | reactQuery.SkipToken,
       ): {
         queryKey: reactQuery.QueryKey;
-        queryFn: ({ signal }: { signal?: AbortSignal }) => Promise<ListPetsResponse>;
-      } => ({
-        queryKey: queryKeyFn({
-          path: "/pets",
-          operationId: "listPets",
-          variables,
-        }),
-        queryFn: ({ signal }: { signal?: AbortSignal }) =>
-          fetchListPets(variables, signal),
-      });
+        queryFn:
+          | ((options: QueryFnOptions) => Promise<ListPetsResponse>)
+          | reactQuery.SkipToken;
+      };
+
+      export function listPetsQuery(
+        variables: ListPetsVariables | reactQuery.SkipToken,
+      ) {
+        return {
+          queryKey: queryKeyFn({
+            path: "/pets",
+            operationId: "listPets",
+            variables,
+          }),
+          queryFn:
+            variables === reactQuery.skipToken
+              ? reactQuery.skipToken
+              : ({ signal }: QueryFnOptions) => fetchListPets(variables, signal),
+        };
+      }
 
       /**
        * Get all the pets
@@ -1380,7 +1524,7 @@ describe("generateReactQueryComponents", () => {
       export type QueryOperation = {
         path: "/pets";
         operationId: "listPets";
-        variables: ListPetsVariables;
+        variables: ListPetsVariables | reactQuery.SkipToken;
       };
       "
     `);
@@ -1486,6 +1630,10 @@ describe("generateReactQueryComponents", () => {
       import type * as Fetcher from "./petstoreFetcher";
       import { petstoreFetch } from "./petstoreFetcher";
 
+      type QueryFnOptions = {
+        signal?: AbortController["signal"];
+      };
+
       export type AddPetError = Fetcher.ErrorWrapper<{
         status: 500;
         payload: {
@@ -1530,7 +1678,7 @@ describe("generateReactQueryComponents", () => {
       export type QueryOperation = {
         path: string;
         operationId: never;
-        variables: unknown;
+        variables: unknown | reactQuery.SkipToken;
       };
       "
     `);
@@ -1637,6 +1785,10 @@ describe("generateReactQueryComponents", () => {
       import type * as Fetcher from "./petstoreFetcher";
       import { petstoreFetch } from "./petstoreFetcher";
 
+      type QueryFnOptions = {
+        signal?: AbortController["signal"];
+      };
+
       export type AddPetError = Fetcher.ErrorWrapper<{
         status: 500;
         payload: {
@@ -1681,7 +1833,7 @@ describe("generateReactQueryComponents", () => {
       export type QueryOperation = {
         path: string;
         operationId: never;
-        variables: unknown;
+        variables: unknown | reactQuery.SkipToken;
       };
       "
     `);
@@ -1795,6 +1947,10 @@ describe("generateReactQueryComponents", () => {
       import { petstoreFetch } from "./petstoreFetcher";
       import type * as RequestBodies from "./petstoreRequestBodies";
 
+      type QueryFnOptions = {
+        signal?: AbortController["signal"];
+      };
+
       export type AddPetError = Fetcher.ErrorWrapper<{
         status: 500;
         payload: {
@@ -1832,7 +1988,7 @@ describe("generateReactQueryComponents", () => {
       export type QueryOperation = {
         path: string;
         operationId: never;
-        variables: unknown;
+        variables: unknown | reactQuery.SkipToken;
       };
       "
     `);
@@ -1925,6 +2081,10 @@ describe("generateReactQueryComponents", () => {
       import { petstoreFetch } from "./petstoreFetcher";
       import type * as RequestBodies from "./petstoreRequestBodies";
 
+      type QueryFnOptions = {
+        signal?: AbortController["signal"];
+      };
+
       export type UpdatePetPathParams = {
         petId: string;
       };
@@ -1966,7 +2126,7 @@ describe("generateReactQueryComponents", () => {
       export type QueryOperation = {
         path: string;
         operationId: never;
-        variables: unknown;
+        variables: unknown | reactQuery.SkipToken;
       };
       "
     `);
@@ -2059,6 +2219,10 @@ describe("generateReactQueryComponents", () => {
       import { petstoreFetch } from "./petstoreFetcher";
       import type * as RequestBodies from "./petstoreRequestBodies";
 
+      type QueryFnOptions = {
+        signal?: AbortController["signal"];
+      };
+
       export type UpdatePetPathParams = {
         petId: string;
       };
@@ -2100,7 +2264,7 @@ describe("generateReactQueryComponents", () => {
       export type QueryOperation = {
         path: string;
         operationId: never;
-        variables: unknown;
+        variables: unknown | reactQuery.SkipToken;
       };
       "
     `);
@@ -2193,6 +2357,10 @@ describe("generateReactQueryComponents", () => {
       import { petstoreFetch } from "./petstoreFetcher";
       import type * as RequestBodies from "./petstoreRequestBodies";
 
+      type QueryFnOptions = {
+        signal?: AbortController["signal"];
+      };
+
       export type UpdatePetPathParams = {
         petId: string;
       };
@@ -2234,7 +2402,7 @@ describe("generateReactQueryComponents", () => {
       export type QueryOperation = {
         path: string;
         operationId: never;
-        variables: unknown;
+        variables: unknown | reactQuery.SkipToken;
       };
       "
     `);
@@ -2323,6 +2491,10 @@ describe("generateReactQueryComponents", () => {
       import { fetch } from "./fetcher";
       import type * as RequestBodies from "./petstoreRequestBodies";
 
+      type QueryFnOptions = {
+        signal?: AbortController["signal"];
+      };
+
       export type UpdatePetPathParams = {
         petId: string;
       };
@@ -2364,7 +2536,7 @@ describe("generateReactQueryComponents", () => {
       export type QueryOperation = {
         path: string;
         operationId: never;
-        variables: unknown;
+        variables: unknown | reactQuery.SkipToken;
       };
       "
     `);
@@ -2442,6 +2614,10 @@ describe("generateReactQueryComponents", () => {
       import type * as Schemas from "./petstoreSchemas";
       import type { ServerErrorStatus } from "./petstoreUtils";
 
+      type QueryFnOptions = {
+        signal?: AbortController["signal"];
+      };
+
       export type ListPetsError = Fetcher.ErrorWrapper<{
         status: ServerErrorStatus;
         payload: string;
@@ -2468,20 +2644,35 @@ describe("generateReactQueryComponents", () => {
       /**
        * Get all the pets
        */
-      export const listPetsQuery = (
-        variables: ListPetsVariables,
+      export function listPetsQuery(variables: ListPetsVariables): {
+        queryKey: reactQuery.QueryKey;
+        queryFn: (options: QueryFnOptions) => Promise<ListPetsResponse>;
+      };
+
+      export function listPetsQuery(
+        variables: ListPetsVariables | reactQuery.SkipToken,
       ): {
         queryKey: reactQuery.QueryKey;
-        queryFn: ({ signal }: { signal?: AbortSignal }) => Promise<ListPetsResponse>;
-      } => ({
-        queryKey: queryKeyFn({
-          path: "/pets",
-          operationId: "listPets",
-          variables,
-        }),
-        queryFn: ({ signal }: { signal?: AbortSignal }) =>
-          fetchListPets(variables, signal),
-      });
+        queryFn:
+          | ((options: QueryFnOptions) => Promise<ListPetsResponse>)
+          | reactQuery.SkipToken;
+      };
+
+      export function listPetsQuery(
+        variables: ListPetsVariables | reactQuery.SkipToken,
+      ) {
+        return {
+          queryKey: queryKeyFn({
+            path: "/pets",
+            operationId: "listPets",
+            variables,
+          }),
+          queryFn:
+            variables === reactQuery.skipToken
+              ? reactQuery.skipToken
+              : ({ signal }: QueryFnOptions) => fetchListPets(variables, signal),
+        };
+      }
 
       /**
        * Get all the pets
@@ -2522,7 +2713,7 @@ describe("generateReactQueryComponents", () => {
       export type QueryOperation = {
         path: "/pets";
         operationId: "listPets";
-        variables: ListPetsVariables;
+        variables: ListPetsVariables | reactQuery.SkipToken;
       };
       "
     `);
