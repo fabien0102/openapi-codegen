@@ -79,85 +79,80 @@
 
    - Wire up the `QueryClient` as described [here](https://tanstack.com/query/v4/docs/adapters/react-query).
 
-## Philosophy
+## Usage
 
-In software development, communication between components and documentation around it is often no fun.
+### React Query components
 
-GraphQL did resolve this by making documentation a part of the tooling (introspection), sadly this is often harder with REST APIs. OpenAPI can be an amazing tool, if, and only if the documentation (spec) and the actual implementation are aligned!
+Using [https://api.apis.guru/v2/specs/giphy.com/1.0/openapi.yaml](giphy specs) as example
 
-### Backend side
+This will generate lot of ready-to-use hooks like:
 
-There are two different approaches:
+- `useRandomGif` -> Wrapper around `useQuery` with injected types
+- `useSuspenseRandomGif` -> Same but with `useSuspense`
 
-1. The OpenAPI spec is generated from the code (**code first**)
-2. The code is generated from the OpenAPI spec (**spec first**)
+And you will have some `useMutation` if the api expose some (not the case with this example)
 
-In either case, there needs to be an integration with the type system of the language, so everything is connected, and as we remove or update something that impacts the final response, this is **automatically** reflected!
-
-This library has chosen the second approach, **spec first**. By doing so, your documentation is not your final (boring) task on the list, but the first and exciting one when adding new functionality! Indeed, you can’t start coding without generating your types (models & controllers) from the specs.
-
-This has multiple benefits:
-
-- You can take your time to think about your API before writing any code!
-- You can discuss the API with your team (and discover API design problems earlier)
-- You can generate all your validation rules
-
-For example, if you add this object to your schema:
-
-```yaml
-SignUpInput:
-  type: object
-  properties:
-    email:
-      type: string
-      format: email
-      maxLength: 255
-    password:
-      type: string
-      maxLength: 255
-    firstName:
-      type: string
-      pattern: ^[0-9a-zA-Z]*$
-      maxLength: 255
-    lastName:
-      type: string
-      pattern: ^[0-9a-zA-Z]*$
-      maxLength: 255
-  required:
-    - email
-    - password
-    - firstName
-    - lastName
-```
-
-OpenAPI Codegen will be able to generate all the relevant validation (or at least give you the choice to do it).
-
-> **Note**
-> You can also attach any custom logic by using the `x-*` tag, the possibilities are endless!
-
-### Frontend side
-
-Having to reverse engineer a backend response is the least productive/fun task ever! However, given a nice OpenAPI specs, we can actually generate nicely typed code for you that lets you interact with your API in a safe manner.
-
-Taking React as example, calling an API can be as simple as this: _(this hooks are using **Tanstack Query** under the hood)_
+Here an example of usage of this generated api:
 
 ```tsx
-import { useListPets } from "./petStore/petStoreComponents"; // <- output from openapi-codegen
+import { useRandomGif } from "./giphy";
 
-const Example = () => {
-  const { data, loading, error } = useListPets();
+export function GifExplorer() {
+  const [tag, setTag] = useState("");
+  const { data, error, isError, isPending } = useRandomGif({
+    queryParams: {
+      tag,
+    },
+  });
 
-  // `data` is fully typed and have all documentation from OpenAPI
-};
+  return (
+    <div>
+      <input value={tag} onChange={(e) => setTag(e.currentTarget.value)} />
+      {isPending ? (
+        <div>Loading…</div>
+      ) : isError ? (
+        <div>
+          <pre>{error.payload ?? "Unknown error"}</pre>
+        </div>
+      ) : (
+        // This is typed!
+        <img src={data.data?.url} />
+      )}
+    </div>
+  );
+}
 ```
 
-> **Note**
-> You can also check this blog post about using generated hooks in React https://xata.io/blog/openapi-typesafe-react-query-hooks
+This also support `reactQuery.skipToken` to stay type-safe when you are waiting for params:
 
-And since this generated from the specs, everything is safe at build time!
+```diff
++ import { skipToken } from "@tanstack/react-query";
 
-> **Note**
-> If you can’t trust your backend, some runtime validation can be useful to avoid surprises in production 😅
+- const { data, error, isError, isPending } = useRandomGif({
+-     queryParams: {
+-       tag,
+-     },
+-   });
++ const { data, error, isError, isPending } = useRandomGif(
++     tag
++       ? skipToken
++       : {
++           queryParams: {
++             tag,
++           },
++         }
++   );
+```
+
+You can also use directly the queryFn for more advanced use cases:
+
+```tsx
+import { randomGifQuery } from "./giphy/giphyComponents";
+
+const queryClient = new QueryClient();
+
+queryClient.fetchQuery(randomGifQuery({}));
+```
 
 ## Configuration
 
@@ -224,7 +219,7 @@ output: `{namespace}Schemas.ts`
 
 #### **generateFetchers** (frontend)
 
-generate all fetchers with types for your specification _needs schemafiles_
+generate all fetchers with types for your specification
 
 ```ts
 await generateFetchers(context, {
@@ -248,31 +243,13 @@ await generateReactQueryComponents(context, {
 
 output: `{namespace}Components.ts`
 
-#### **generateReactQueryFunctions** (frontend)
+This is also generate a query function that can be used in most of React Query functions.
 
-generate all React Query Functions used for e.g. React-Router 6.6.0+ loader functions
-
-```ts
-await generateReactQueryFunctions(context, {
-  filenamePrefix,
-  schemasFiles,
-});
-```
-
-output: `{namespace}Functions.ts`
-
-example usage in react-route-loader:
+Example with `queryClient.fetchQuery` (data loader case):
 
 ```ts
-export const routeLoader =
-  (queryClient: QueryClient) =>
-  async ({ params }: MyParams) =>
-    await queryClient.fetchQuery(...getYourQueryNameQuery({}), {
-      /*options*/
-    });
+await queryClient.fetchQuery(getYourQueryNameQuery({}));
 ```
-
-_more infos: https://reactrouter.com/en/main/guides/data-libs_
 
 You can import any generator into the `to` section, those can be the ones provided by this project or your own custom ones. You have full control of what you are generating!
 
