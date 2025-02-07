@@ -30,7 +30,7 @@ export const getContext = (prefix: string, componentsFile: string) =>
        * Set this to \`false\` to disable automatic refetching when the query mounts or changes query keys.
        * Defaults to \`true\`.
        */
-      enabled?: Enabled<TQueryFnData, TError, TQueryFnData, TQueryKey>;
+      enabled?: Enabled<TQueryFnData, TError, TData, TQueryKey>;
     };
   };
   
