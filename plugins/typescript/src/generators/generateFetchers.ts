@@ -225,7 +225,10 @@ export const generateFetchers = async (context: Context, config: Config) => {
     }
   );
 
-  if (usedImportsKeys.includes("utils")) {
+  if (
+    !context.existsFile(`${utilsFilename}.ts`) &&
+    usedImportsKeys.includes("utils")
+  ) {
     await context.writeFile(`${utilsFilename}.ts`, getUtils());
   }
 
