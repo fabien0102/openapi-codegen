@@ -1,10 +1,12 @@
-import type {
-  DefaultError,
-  Enabled,
-  QueryKey,
-  UseQueryOptions,
+import {
+  skipToken,
+  type DefaultError,
+  type Enabled,
+  type QueryKey,
+  type UseQueryOptions,
 } from "@tanstack/react-query";
 import { QueryOperation } from "./githubComponents";
+import { useToken } from "../Auth";
 
 export type GithubContext<
   TQueryFnData = unknown,
@@ -16,7 +18,9 @@ export type GithubContext<
     /**
      * Headers to inject in the fetcher
      */
-    headers?: {};
+    headers?: {
+      authorization?: string;
+    };
     /**
      * Query params to inject in the fetcher
      */
@@ -42,18 +46,25 @@ export function useGithubContext<
   TData = TQueryFnData,
   TQueryKey extends QueryKey = QueryKey,
 >(
-  _queryOptions?: Omit<
+  queryOptions?: Omit<
     UseQueryOptions<TQueryFnData, TError, TData, TQueryKey>,
     "queryKey" | "queryFn"
   >
 ): GithubContext<TQueryFnData, TError, TData, TQueryKey> {
+  const token = useToken();
   return {
-    fetcherOptions: {},
-    queryOptions: {},
+    fetcherOptions: {
+      headers: {
+        authorization: token ? `Bearer ${token}` : undefined,
+      },
+    },
+    queryOptions: {
+      enabled: token !== null && (queryOptions?.enabled ?? true),
+    },
   };
 }
 
-export const queryKeyFn = (operation: QueryOperation) => {
+export const queryKeyFn = (operation: QueryOperation): QueryKey => {
   const queryKey: unknown[] = hasPathParams(operation)
     ? operation.path
         .split("/")
@@ -85,7 +96,8 @@ const hasPathParams = (
 ): operation is QueryOperation & {
   variables: { pathParams: Record<string, string> };
 } => {
-  return Boolean((operation.variables as any).pathParams);
+  if (operation.variables === skipToken) return false;
+  return "variables" in operation && "pathParams" in operation.variables;
 };
 
 const hasBody = (
@@ -93,7 +105,8 @@ const hasBody = (
 ): operation is QueryOperation & {
   variables: { body: Record<string, unknown> };
 } => {
-  return Boolean((operation.variables as any).body);
+  if (operation.variables === skipToken) return false;
+  return "variables" in operation && "body" in operation.variables;
 };
 
 const hasQueryParams = (
@@ -101,5 +114,6 @@ const hasQueryParams = (
 ): operation is QueryOperation & {
   variables: { queryParams: Record<string, unknown> };
 } => {
-  return Boolean((operation.variables as any).queryParams);
+  if (operation.variables === skipToken) return false;
+  return "variables" in operation && "queryParams" in operation.variables;
 };

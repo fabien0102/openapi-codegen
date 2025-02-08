@@ -15,7 +15,6 @@ export const createOperationQueryFnNodes = ({
   operation,
   operationId,
   url,
-  verb, // TODO: Check if we need a different implementation for GET
   name,
 }: {
   operationFetcherFnName: string;
@@ -24,7 +23,6 @@ export const createOperationQueryFnNodes = ({
   operation: OperationObject;
   operationId: string;
   url: string;
-  verb: string;
   name: string;
 }) => {
   const nodes: ts.Node[] = [];

@@ -37,6 +37,7 @@ export async function githubFetch<
   TQueryParams,
   TPathParams
 >): Promise<TData> {
+  let error: ErrorWrapper<TError>;
   try {
     const requestHeaders: HeadersInit = {
       "Content-Type": "application/json",
@@ -51,7 +52,7 @@ export async function githubFetch<
      */
     if (
       requestHeaders["Content-Type"]
-        .toLowerCase()
+        ?.toLowerCase()
         .includes("multipart/form-data")
     ) {
       delete requestHeaders["Content-Type"];
@@ -71,7 +72,6 @@ export async function githubFetch<
       }
     );
     if (!response.ok) {
-      let error: ErrorWrapper<TError>;
       try {
         error = await response.json();
       } catch (e) {
@@ -83,11 +83,7 @@ export async function githubFetch<
               : "Unexpected error",
         };
       }
-
-      throw error;
-    }
-
-    if (response.headers.get("content-type")?.includes("json")) {
+    } else if (response.headers.get("content-type")?.includes("json")) {
       return await response.json();
     } else {
       // if it is not a json response, assume it is a blob and cast it to TData
@@ -102,6 +98,7 @@ export async function githubFetch<
     };
     throw errorObject;
   }
+  throw error;
 }
 
 const resolveUrl = (
@@ -111,5 +108,7 @@ const resolveUrl = (
 ) => {
   let query = new URLSearchParams(queryParams).toString();
   if (query) query = `?${query}`;
-  return url.replace(/\{\w*\}/g, (key) => pathParams[key.slice(1, -1)]) + query;
+  return (
+    url.replace(/\{\w*\}/g, (key) => pathParams[key.slice(1, -1)] ?? "") + query
+  );
 };

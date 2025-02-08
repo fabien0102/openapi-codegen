@@ -258,7 +258,6 @@ export const generateReactQueryComponents = async (
                   operation,
                   operationId,
                   url: route,
-                  verb,
                   name: operationQueryFnName,
                 }),
                 ...createQueryHook({
@@ -269,6 +268,7 @@ export const generateReactQueryComponents = async (
                 ...createQueryHook({
                   ...useQueryHookOptions,
                   name: `use${c.pascal(operationId)}`,
+                  useQueryIdentifier: "useQuery",
                 }),
               ]
             : createMutationHook({
@@ -524,7 +524,7 @@ const createQueryHook = ({
   errorType: ts.TypeNode;
   variablesType: ts.TypeNode;
   operation: OperationObject;
-  useQueryIdentifier?: "useQuery" | "useSuspenseQuery";
+  useQueryIdentifier: "useQuery" | "useSuspenseQuery";
 }) => {
   const nodes: ts.Node[] = [];
   if (operation.description) {
@@ -555,7 +555,18 @@ const createQueryHook = ({
                   undefined,
                   f.createIdentifier("variables"),
                   undefined,
-                  variablesType
+                  useQueryIdentifier === "useQuery"
+                    ? f.createUnionTypeNode([
+                        variablesType,
+                        f.createTypeReferenceNode(
+                          f.createQualifiedName(
+                            f.createIdentifier("reactQuery"),
+                            f.createIdentifier("SkipToken")
+                          ),
+                          undefined
+                        ),
+                      ])
+                    : variablesType
                 ),
                 f.createParameterDeclaration(
                   undefined,

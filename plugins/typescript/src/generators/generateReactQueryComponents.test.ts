@@ -181,7 +181,7 @@ describe("generateReactQueryComponents", () => {
        * Get all the pets
        */
       export const useListPets = <TData = ListPetsResponse,>(
-        variables: ListPetsVariables,
+        variables: ListPetsVariables | reactQuery.SkipToken,
         options?: Omit<
           reactQuery.UseQueryOptions<ListPetsResponse, ListPetsError, TData>,
           "queryKey" | "queryFn" | "initialData"
@@ -343,7 +343,7 @@ describe("generateReactQueryComponents", () => {
        * Get all the pets
        */
       export const useListPets = <TData = ListPetsResponse,>(
-        variables: ListPetsVariables,
+        variables: ListPetsVariables | reactQuery.SkipToken,
         options?: Omit<
           reactQuery.UseQueryOptions<ListPetsResponse, ListPetsError, TData>,
           "queryKey" | "queryFn" | "initialData"
@@ -545,7 +545,7 @@ describe("generateReactQueryComponents", () => {
        * Get all the pets
        */
       export const useListPets = <TData = ListPetsResponse,>(
-        variables: ListPetsVariables,
+        variables: ListPetsVariables | reactQuery.SkipToken,
         options?: Omit<
           reactQuery.UseQueryOptions<ListPetsResponse, ListPetsError, TData>,
           "queryKey" | "queryFn" | "initialData"
@@ -747,7 +747,7 @@ describe("generateReactQueryComponents", () => {
        * Get all the pets
        */
       export const useListPets = <TData = ListPetsResponse,>(
-        variables: ListPetsVariables,
+        variables: ListPetsVariables | reactQuery.SkipToken,
         options?: Omit<
           reactQuery.UseQueryOptions<ListPetsResponse, ListPetsError, TData>,
           "queryKey" | "queryFn" | "initialData"
@@ -935,7 +935,7 @@ describe("generateReactQueryComponents", () => {
        * Info for a specific pet
        */
       export const useShowPetById = <TData = ShowPetByIdResponse,>(
-        variables: ShowPetByIdVariables,
+        variables: ShowPetByIdVariables | reactQuery.SkipToken,
         options?: Omit<
           reactQuery.UseQueryOptions<ShowPetByIdResponse, ShowPetByIdError, TData>,
           "queryKey" | "queryFn" | "initialData"
@@ -1124,7 +1124,7 @@ describe("generateReactQueryComponents", () => {
        * Info for a specific pet
        */
       export const useShowPetById = <TData = ShowPetByIdResponse,>(
-        variables: ShowPetByIdVariables,
+        variables: ShowPetByIdVariables | reactQuery.SkipToken,
         options?: Omit<
           reactQuery.UseQueryOptions<ShowPetByIdResponse, ShowPetByIdError, TData>,
           "queryKey" | "queryFn" | "initialData"
@@ -1331,7 +1331,7 @@ describe("generateReactQueryComponents", () => {
        * Get all the pets
        */
       export const useListPets = <TData = ListPetsResponse,>(
-        variables: ListPetsVariables,
+        variables: ListPetsVariables | reactQuery.SkipToken,
         options?: Omit<
           reactQuery.UseQueryOptions<ListPetsResponse, ListPetsError, TData>,
           "queryKey" | "queryFn" | "initialData"
@@ -1507,7 +1507,7 @@ describe("generateReactQueryComponents", () => {
        * Get all the pets
        */
       export const useListPets = <TData = ListPetsResponse,>(
-        variables: ListPetsVariables,
+        variables: ListPetsVariables | reactQuery.SkipToken,
         options?: Omit<
           reactQuery.UseQueryOptions<ListPetsResponse, ListPetsError, TData>,
           "queryKey" | "queryFn" | "initialData"
@@ -1679,6 +1679,205 @@ describe("generateReactQueryComponents", () => {
         path: string;
         operationId: never;
         variables: unknown | reactQuery.SkipToken;
+      };
+      "
+    `);
+  });
+
+  it("should generate useQuery if openapi-codegen-component is defined", async () => {
+    const writeFile = createWriteFileMock();
+    const openAPIDocument: OpenAPIObject = {
+      openapi: "3.0.0",
+      info: {
+        title: "petshop",
+        version: "1.0.0",
+      },
+      paths: {
+        "/pet": {
+          post: {
+            operationId: "getPet",
+            "x-openapi-codegen-component": "useQuery",
+            requestBody: {
+              content: {
+                "application/json": {
+                  schema: {
+                    type: "object",
+                    properties: {
+                      name: {
+                        type: "string",
+                      },
+                      color: {
+                        type: "string",
+                      },
+                      breed: {
+                        type: "string",
+                      },
+                      age: {
+                        type: "integer",
+                      },
+                    },
+                    required: ["name", "breed", "age"],
+                  },
+                },
+              },
+            },
+            responses: {
+              200: {
+                content: {
+                  "application/json": {
+                    description: "Successful response",
+                    schema: {
+                      type: "string",
+                    },
+                  },
+                },
+              },
+              500: {
+                content: {
+                  "application/json": {
+                    description: "An Error",
+                    schema: {
+                      type: "object",
+                      properties: {
+                        code: {
+                          type: "integer",
+                          enum: [500],
+                        },
+                        message: {
+                          type: "string",
+                        },
+                      },
+                      required: ["code", "message"],
+                    },
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
+    };
+
+    await generateReactQueryComponents(
+      {
+        openAPIDocument,
+        writeFile,
+        existsFile: () => true,
+        readFile: async () => "",
+      },
+      config
+    );
+
+    expect(writeFile.mock.calls[1][0]).toBe("petstoreComponents.ts");
+    expect(writeFile.mock.calls[1][1]).toMatchInlineSnapshot(`
+      "/**
+       * Generated by @openapi-codegen
+       *
+       * @version 1.0.0
+       */
+      import * as reactQuery from "@tanstack/react-query";
+      import {
+        usePetstoreContext,
+        PetstoreContext,
+        queryKeyFn,
+      } from "./petstoreContext";
+      import { deepMerge } from "./petstoreUtils";
+      import type * as Fetcher from "./petstoreFetcher";
+      import { petstoreFetch } from "./petstoreFetcher";
+
+      type QueryFnOptions = {
+        signal?: AbortController["signal"];
+      };
+
+      export type GetPetError = Fetcher.ErrorWrapper<{
+        status: 500;
+        payload: {
+          code: 500;
+          message: string;
+        };
+      }>;
+
+      export type GetPetRequestBody = {
+        name: string;
+        color?: string;
+        breed: string;
+        age: number;
+      };
+
+      export type GetPetVariables = {
+        body: GetPetRequestBody;
+      } & PetstoreContext["fetcherOptions"];
+
+      export const fetchGetPet = (variables: GetPetVariables, signal?: AbortSignal) =>
+        petstoreFetch<string, GetPetError, GetPetRequestBody, {}, {}, {}>({
+          url: "/pet",
+          method: "post",
+          ...variables,
+          signal,
+        });
+
+      export function getPetQuery(variables: GetPetVariables): {
+        queryKey: reactQuery.QueryKey;
+        queryFn: (options: QueryFnOptions) => Promise<string>;
+      };
+
+      export function getPetQuery(
+        variables: GetPetVariables | reactQuery.SkipToken,
+      ): {
+        queryKey: reactQuery.QueryKey;
+        queryFn:
+          | ((options: QueryFnOptions) => Promise<string>)
+          | reactQuery.SkipToken;
+      };
+
+      export function getPetQuery(variables: GetPetVariables | reactQuery.SkipToken) {
+        return {
+          queryKey: queryKeyFn({
+            path: "/pet",
+            operationId: "getPet",
+            variables,
+          }),
+          queryFn:
+            variables === reactQuery.skipToken
+              ? reactQuery.skipToken
+              : ({ signal }: QueryFnOptions) => fetchGetPet(variables, signal),
+        };
+      }
+
+      export const useSuspenseGetPet = <TData = string,>(
+        variables: GetPetVariables,
+        options?: Omit<
+          reactQuery.UseQueryOptions<string, GetPetError, TData>,
+          "queryKey" | "queryFn" | "initialData"
+        >,
+      ) => {
+        const { queryOptions, fetcherOptions } = usePetstoreContext(options);
+        return reactQuery.useSuspenseQuery<string, GetPetError, TData>({
+          ...getPetQuery(deepMerge(fetcherOptions, variables)),
+          ...options,
+          ...queryOptions,
+        });
+      };
+
+      export const useGetPet = <TData = string,>(
+        variables: GetPetVariables | reactQuery.SkipToken,
+        options?: Omit<
+          reactQuery.UseQueryOptions<string, GetPetError, TData>,
+          "queryKey" | "queryFn" | "initialData"
+        >,
+      ) => {
+        const { queryOptions, fetcherOptions } = usePetstoreContext(options);
+        return reactQuery.useQuery<string, GetPetError, TData>({
+          ...getPetQuery(deepMerge(fetcherOptions, variables)),
+          ...options,
+          ...queryOptions,
+        });
+      };
+
+      export type QueryOperation = {
+        path: "/pet";
+        operationId: "getPet";
+        variables: GetPetVariables | reactQuery.SkipToken;
       };
       "
     `);
@@ -2696,7 +2895,7 @@ describe("generateReactQueryComponents", () => {
        * Get all the pets
        */
       export const useListPets = <TData = ListPetsResponse,>(
-        variables: ListPetsVariables,
+        variables: ListPetsVariables | reactQuery.SkipToken,
         options?: Omit<
           reactQuery.UseQueryOptions<ListPetsResponse, ListPetsError, TData>,
           "queryKey" | "queryFn" | "initialData"

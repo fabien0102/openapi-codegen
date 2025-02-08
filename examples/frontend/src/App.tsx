@@ -1,5 +1,9 @@
 import { useState } from "react";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import {
+  QueryClient,
+  QueryClientProvider,
+  skipToken,
+} from "@tanstack/react-query";
 import { AuthProvider } from "./Auth";
 import { useSearchUsers } from "./github/githubComponents";
 
@@ -18,12 +22,11 @@ function App() {
 function Users() {
   const [query, setQuery] = useState("");
   const { data, error, isPending } = useSearchUsers(
-    {
-      queryParams: { q: query },
-    },
-    {
-      enabled: Boolean(query),
-    }
+    query
+      ? {
+          queryParams: { q: query },
+        }
+      : skipToken
   );
 
   if (error) {
