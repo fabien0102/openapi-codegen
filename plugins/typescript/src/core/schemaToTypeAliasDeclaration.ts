@@ -1,5 +1,5 @@
 import { pascal } from "case";
-import { findKey, get, intersection, merge, omit } from "lodash";
+import { keys, pickBy, get, intersection, merge, omit } from "lodash";
 import {
   ComponentsObject,
   DiscriminatorObject,
@@ -332,17 +332,23 @@ const withDiscriminator = (
     return node;
   }
 
-  const discriminatedValue = findKey(
-    discriminator.mapping,
-    (i) => i === schema.$ref
+  const discriminatedValues = keys(
+    pickBy(discriminator.mapping, (i) => i === schema.$ref)
   );
-  if (discriminatedValue) {
+
+  if (discriminatedValues.length > 0) {
+    const discriminatedValuesType = f.createUnionTypeNode(
+      discriminatedValues.map((val) =>
+        f.createLiteralTypeNode(f.createStringLiteral(val))
+      )
+    );
+
     const propertyNameAsLiteral = f.createTypeLiteralNode([
       f.createPropertySignature(
         undefined,
         f.createIdentifier(discriminator.propertyName),
         undefined,
-        f.createLiteralTypeNode(f.createStringLiteral(discriminatedValue))
+        discriminatedValuesType
       ),
     ]);
 
@@ -355,8 +361,11 @@ const withDiscriminator = (
       if (
         property &&
         isSchemaObject(property) &&
-        property.enum?.length === 1 &&
-        property.enum[0] === discriminatedValue &&
+        property.enum &&
+        property.enum.length === discriminatedValues.length &&
+        property.enum.every((enumVal) =>
+          discriminatedValues.includes(enumVal)
+        ) &&
         spec.required?.includes(discriminator.propertyName)
       ) {
         return node;
