@@ -117,7 +117,7 @@ export async function ${camel(prefix)}Fetch<
       return (await response.blob()) as unknown as TData;
     }
   } catch (e) {
-    let errorObject: Error = {
+    const errorObject: Error = {
       name: "unknown" as const,
       message:
         e instanceof Error ? \`Network error (\${e.message})\` : "Network error",

@@ -108,6 +108,29 @@ export const generateReactQueryComponents = async (
     );
   }
 
+  // Generate type for queryFn options
+  nodes.push(
+    f.createTypeAliasDeclaration(
+      undefined,
+      f.createIdentifier("QueryFnOptions"),
+      undefined,
+      f.createTypeLiteralNode([
+        f.createPropertySignature(
+          undefined,
+          f.createIdentifier("signal"),
+          f.createToken(ts.SyntaxKind.QuestionToken),
+          f.createIndexedAccessTypeNode(
+            f.createTypeReferenceNode(
+              f.createIdentifier("AbortController"),
+              undefined
+            ),
+            f.createLiteralTypeNode(f.createStringLiteral("signal"))
+          )
+        ),
+      ])
+    )
+  );
+
   // Generate `useQuery` & `useMutation`
   const operationIds: string[] = [];
 
@@ -183,7 +206,16 @@ export const generateReactQueryComponents = async (
                 undefined,
                 f.createIdentifier("variables"),
                 undefined,
-                variablesType
+                f.createUnionTypeNode([
+                  variablesType,
+                  f.createTypeReferenceNode(
+                    f.createQualifiedName(
+                      f.createIdentifier("reactQuery"),
+                      f.createIdentifier("SkipToken")
+                    ),
+                    undefined
+                  ),
+                ])
               ),
             ])
           );
@@ -226,7 +258,6 @@ export const generateReactQueryComponents = async (
                   operation,
                   operationId,
                   url: route,
-                  verb,
                   name: operationQueryFnName,
                 }),
                 ...createQueryHook({
@@ -237,6 +268,7 @@ export const generateReactQueryComponents = async (
                 ...createQueryHook({
                   ...useQueryHookOptions,
                   name: `use${c.pascal(operationId)}`,
+                  useQueryIdentifier: "useQuery",
                 }),
               ]
             : createMutationHook({
@@ -256,6 +288,7 @@ export const generateReactQueryComponents = async (
   if (operationIds.length === 0) {
     console.log(`⚠️ You don't have any operation with "operationId" defined!`);
   }
+
   const queryKeyManager = f.createTypeAliasDeclaration(
     [f.createModifier(ts.SyntaxKind.ExportKeyword)],
     "QueryOperation",
@@ -279,7 +312,16 @@ export const generateReactQueryComponents = async (
             undefined,
             f.createIdentifier("variables"),
             undefined,
-            f.createKeywordTypeNode(ts.SyntaxKind.UnknownKeyword)
+            f.createUnionTypeNode([
+              f.createKeywordTypeNode(ts.SyntaxKind.UnknownKeyword),
+              f.createTypeReferenceNode(
+                f.createQualifiedName(
+                  f.createIdentifier("reactQuery"),
+                  f.createIdentifier("SkipToken")
+                ),
+                undefined
+              ),
+            ])
           ),
         ])
   );
@@ -328,7 +370,7 @@ const createMutationHook = ({
   operation: OperationObject;
 }) => {
   const nodes: ts.Node[] = [];
-  if (operation.description) {
+  if (operation.description?.trim()) {
     nodes.push(f.createJSDocComment(operation.description.trim(), []));
   }
 
@@ -482,7 +524,7 @@ const createQueryHook = ({
   errorType: ts.TypeNode;
   variablesType: ts.TypeNode;
   operation: OperationObject;
-  useQueryIdentifier?: "useQuery" | "useSuspenseQuery";
+  useQueryIdentifier: "useQuery" | "useSuspenseQuery";
 }) => {
   const nodes: ts.Node[] = [];
   if (operation.description) {
@@ -513,7 +555,18 @@ const createQueryHook = ({
                   undefined,
                   f.createIdentifier("variables"),
                   undefined,
-                  variablesType
+                  useQueryIdentifier === "useQuery"
+                    ? f.createUnionTypeNode([
+                        variablesType,
+                        f.createTypeReferenceNode(
+                          f.createQualifiedName(
+                            f.createIdentifier("reactQuery"),
+                            f.createIdentifier("SkipToken")
+                          ),
+                          undefined
+                        ),
+                      ])
+                    : variablesType
                 ),
                 f.createParameterDeclaration(
                   undefined,

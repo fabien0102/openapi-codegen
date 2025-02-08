@@ -1,11 +1,12 @@
 import { pascal } from "case";
 
 export const getContext = (prefix: string, componentsFile: string) =>
-  `import type { 
-    DefaultError,
-    Enabled,
-    QueryKey,
-    UseQueryOptions,
+  `import {
+    skipToken,
+    type DefaultError,
+    type Enabled,
+    type QueryKey,
+    type UseQueryOptions,
  } from "@tanstack/react-query";
   import { QueryOperation } from './${componentsFile}';
   
@@ -53,7 +54,7 @@ export const getContext = (prefix: string, componentsFile: string) =>
   }
 };
 
-  export const queryKeyFn = (operation: QueryOperation) => {
+  export const queryKeyFn = (operation: QueryOperation): QueryKey => {
     const queryKey: unknown[] = hasPathParams(operation)
       ? operation.path
           .split("/")
@@ -88,6 +89,7 @@ export const getContext = (prefix: string, componentsFile: string) =>
   ): operation is QueryOperation & {
     variables: { pathParams: Record<string, string> };
   } => {
+    if (operation.variables === skipToken) return false;
     return "variables" in operation && "pathParams" in operation.variables;
   };
 
@@ -96,6 +98,7 @@ export const getContext = (prefix: string, componentsFile: string) =>
   ): operation is QueryOperation & {
     variables: { body: Record<string, unknown> };
   } => {
+    if (operation.variables === skipToken) return false;
     return "variables" in operation && "body" in operation.variables;
   };
 
@@ -104,6 +107,7 @@ export const getContext = (prefix: string, componentsFile: string) =>
   ): operation is QueryOperation & {
     variables: { queryParams: Record<string, unknown> };
   } => {
+    if (operation.variables === skipToken) return false;
     return "variables" in operation && "queryParams" in operation.variables;
   };
   `;
