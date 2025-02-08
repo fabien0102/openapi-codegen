@@ -1,5 +1,22 @@
 # Changelog
 
+## [11.0.0](https://github.com/fabien0102/openapi-codegen/compare/typescript-v10.0.0...typescript-v11.0.0) (2025-02-08)
+
+
+### ⚠ BREAKING CHANGES
+
+* Add support for `skipToken` ([#289](https://github.com/fabien0102/openapi-codegen/issues/289))
+
+### Features
+
+* Add support for `skipToken` ([#289](https://github.com/fabien0102/openapi-codegen/issues/289)) ([d1976e0](https://github.com/fabien0102/openapi-codegen/commit/d1976e0193e459a58ac4a949b845add8fe42c97b))
+* Only generate utils if they don't exist ([#288](https://github.com/fabien0102/openapi-codegen/issues/288)) ([e517a2e](https://github.com/fabien0102/openapi-codegen/commit/e517a2e27e72ebe09ad0c526b5ad6b296f08d59d))
+
+
+### Bug Fixes
+
+* Fix multiple discriminator on same type ([#285](https://github.com/fabien0102/openapi-codegen/issues/285)) ([8937c46](https://github.com/fabien0102/openapi-codegen/commit/8937c460dc9de9cec66fe7588bf5ec7aea5e8eae))
+
 ## [10.0.0](https://github.com/fabien0102/openapi-codegen/compare/typescript-v9.2.0...typescript-v10.0.0) (2025-02-04)
 
 ### ⚠ BREAKING CHANGES
