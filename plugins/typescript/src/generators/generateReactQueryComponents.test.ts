@@ -189,7 +189,11 @@ describe("generateReactQueryComponents", () => {
       ) => {
         const { queryOptions, fetcherOptions } = usePetstoreContext(options);
         return reactQuery.useQuery<ListPetsResponse, ListPetsError, TData>({
-          ...listPetsQuery(deepMerge(fetcherOptions, variables)),
+          ...listPetsQuery(
+            variables === reactQuery.skipToken
+              ? variables
+              : deepMerge(fetcherOptions, variables),
+          ),
           ...options,
           ...queryOptions,
         });
@@ -351,7 +355,11 @@ describe("generateReactQueryComponents", () => {
       ) => {
         const { queryOptions, fetcherOptions } = usePetstoreContext(options);
         return reactQuery.useQuery<ListPetsResponse, ListPetsError, TData>({
-          ...listPetsQuery(deepMerge(fetcherOptions, variables)),
+          ...listPetsQuery(
+            variables === reactQuery.skipToken
+              ? variables
+              : deepMerge(fetcherOptions, variables),
+          ),
           ...options,
           ...queryOptions,
         });
@@ -553,7 +561,11 @@ describe("generateReactQueryComponents", () => {
       ) => {
         const { queryOptions, fetcherOptions } = usePetstoreContext(options);
         return reactQuery.useQuery<ListPetsResponse, ListPetsError, TData>({
-          ...listPetsQuery(deepMerge(fetcherOptions, variables)),
+          ...listPetsQuery(
+            variables === reactQuery.skipToken
+              ? variables
+              : deepMerge(fetcherOptions, variables),
+          ),
           ...options,
           ...queryOptions,
         });
@@ -755,7 +767,11 @@ describe("generateReactQueryComponents", () => {
       ) => {
         const { queryOptions, fetcherOptions } = usePetstoreContext(options);
         return reactQuery.useQuery<ListPetsResponse, ListPetsError, TData>({
-          ...listPetsQuery(deepMerge(fetcherOptions, variables)),
+          ...listPetsQuery(
+            variables === reactQuery.skipToken
+              ? variables
+              : deepMerge(fetcherOptions, variables),
+          ),
           ...options,
           ...queryOptions,
         });
@@ -943,7 +959,11 @@ describe("generateReactQueryComponents", () => {
       ) => {
         const { queryOptions, fetcherOptions } = usePetstoreContext(options);
         return reactQuery.useQuery<ShowPetByIdResponse, ShowPetByIdError, TData>({
-          ...showPetByIdQuery(deepMerge(fetcherOptions, variables)),
+          ...showPetByIdQuery(
+            variables === reactQuery.skipToken
+              ? variables
+              : deepMerge(fetcherOptions, variables),
+          ),
           ...options,
           ...queryOptions,
         });
@@ -1132,7 +1152,11 @@ describe("generateReactQueryComponents", () => {
       ) => {
         const { queryOptions, fetcherOptions } = usePetstoreContext(options);
         return reactQuery.useQuery<ShowPetByIdResponse, ShowPetByIdError, TData>({
-          ...showPetByIdQuery(deepMerge(fetcherOptions, variables)),
+          ...showPetByIdQuery(
+            variables === reactQuery.skipToken
+              ? variables
+              : deepMerge(fetcherOptions, variables),
+          ),
           ...options,
           ...queryOptions,
         });
@@ -1339,7 +1363,11 @@ describe("generateReactQueryComponents", () => {
       ) => {
         const { queryOptions, fetcherOptions } = usePetstoreContext(options);
         return reactQuery.useQuery<ListPetsResponse, ListPetsError, TData>({
-          ...listPetsQuery(deepMerge(fetcherOptions, variables)),
+          ...listPetsQuery(
+            variables === reactQuery.skipToken
+              ? variables
+              : deepMerge(fetcherOptions, variables),
+          ),
           ...options,
           ...queryOptions,
         });
@@ -1515,7 +1543,11 @@ describe("generateReactQueryComponents", () => {
       ) => {
         const { queryOptions, fetcherOptions } = usePetstoreContext(options);
         return reactQuery.useQuery<ListPetsResponse, ListPetsError, TData>({
-          ...listPetsQuery(deepMerge(fetcherOptions, variables)),
+          ...listPetsQuery(
+            variables === reactQuery.skipToken
+              ? variables
+              : deepMerge(fetcherOptions, variables),
+          ),
           ...options,
           ...queryOptions,
         });
@@ -1868,7 +1900,11 @@ describe("generateReactQueryComponents", () => {
       ) => {
         const { queryOptions, fetcherOptions } = usePetstoreContext(options);
         return reactQuery.useQuery<string, GetPetError, TData>({
-          ...getPetQuery(deepMerge(fetcherOptions, variables)),
+          ...getPetQuery(
+            variables === reactQuery.skipToken
+              ? variables
+              : deepMerge(fetcherOptions, variables),
+          ),
           ...options,
           ...queryOptions,
         });
@@ -2903,7 +2939,11 @@ describe("generateReactQueryComponents", () => {
       ) => {
         const { queryOptions, fetcherOptions } = usePetstoreContext(options);
         return reactQuery.useQuery<ListPetsResponse, ListPetsError, TData>({
-          ...listPetsQuery(deepMerge(fetcherOptions, variables)),
+          ...listPetsQuery(
+            variables === reactQuery.skipToken
+              ? variables
+              : deepMerge(fetcherOptions, variables),
+          ),
           ...options,
           ...queryOptions,
         });

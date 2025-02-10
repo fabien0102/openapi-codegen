@@ -14,17 +14,13 @@ export const getUtils = () =>
 export type ${clientErrorStatus} = Exclude<ComputeRange<500>[number], ComputeRange<400>[number]>;
 export type ${serverErrorStatus} = Exclude<ComputeRange<600>[number], ComputeRange<500>[number]>;
 
-export function deepMerge<Target, Source>(
-  target: Target,
-  source: Source
-): Source {
+export function deepMerge<T, U extends T>(target: T, source: U): U {
+  const returnType = (target || {}) as U;
   for (const key in source) {
     if (source[key] instanceof Object)
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      Object.assign(source[key], deepMerge((target as any)[key], source[key]));
+      Object.assign(source[key], deepMerge(returnType[key], source[key]));
   }
-  Object.assign(target || {}, source);
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  return target as any;
+  Object.assign(returnType || {}, source);
+  return returnType;
 }
 `;

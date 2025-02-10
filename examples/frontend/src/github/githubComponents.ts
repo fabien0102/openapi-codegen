@@ -96,7 +96,11 @@ export const useMetaRoot = <TData = Schemas.Root>(
 ) => {
   const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.Root, MetaRootError, TData>({
-    ...metaRootQuery(deepMerge(fetcherOptions, variables)),
+    ...metaRootQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -212,7 +216,11 @@ export const useAppsGetAuthenticated = <TData = Schemas.Integration>(
     AppsGetAuthenticatedError,
     TData
   >({
-    ...appsGetAuthenticatedQuery(deepMerge(fetcherOptions, variables)),
+    ...appsGetAuthenticatedQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -491,7 +499,11 @@ export const useAppsGetWebhookConfigForApp = <TData = Schemas.WebhookConfig>(
     AppsGetWebhookConfigForAppError,
     TData
   >({
-    ...appsGetWebhookConfigForAppQuery(deepMerge(fetcherOptions, variables)),
+    ...appsGetWebhookConfigForAppQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -699,7 +711,11 @@ export const useAppsListWebhookDeliveries = <
     AppsListWebhookDeliveriesError,
     TData
   >({
-    ...appsListWebhookDeliveriesQuery(deepMerge(fetcherOptions, variables)),
+    ...appsListWebhookDeliveriesQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -835,7 +851,11 @@ export const useAppsGetWebhookDelivery = <TData = Schemas.HookDelivery>(
     AppsGetWebhookDeliveryError,
     TData
   >({
-    ...appsGetWebhookDeliveryQuery(deepMerge(fetcherOptions, variables)),
+    ...appsGetWebhookDeliveryQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -1048,7 +1068,11 @@ export const useAppsListInstallations = <TData = AppsListInstallationsResponse>(
     AppsListInstallationsError,
     TData
   >({
-    ...appsListInstallationsQuery(deepMerge(fetcherOptions, variables)),
+    ...appsListInstallationsQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -1247,7 +1271,11 @@ export const useAppsGetInstallation = <TData = Schemas.Installation>(
     AppsGetInstallationError,
     TData
   >({
-    ...appsGetInstallationQuery(deepMerge(fetcherOptions, variables)),
+    ...appsGetInstallationQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -1989,7 +2017,11 @@ export const useAppsGetBySlug = <TData = Schemas.Integration>(
 ) => {
   const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.Integration, AppsGetBySlugError, TData>({
-    ...appsGetBySlugQuery(deepMerge(fetcherOptions, variables)),
+    ...appsGetBySlugQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -2103,7 +2135,9 @@ export const useCodesOfConductGetAllCodesOfConduct = <
     TData
   >({
     ...codesOfConductGetAllCodesOfConductQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -2217,7 +2251,11 @@ export const useCodesOfConductGetConductCode = <TData = Schemas.CodeOfConduct>(
     CodesOfConductGetConductCodeError,
     TData
   >({
-    ...codesOfConductGetConductCodeQuery(deepMerge(fetcherOptions, variables)),
+    ...codesOfConductGetConductCodeQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -2311,7 +2349,11 @@ export const useEmojisGet = <TData = EmojisGetResponse>(
 ) => {
   const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<EmojisGetResponse, EmojisGetError, TData>({
-    ...emojisGetQuery(deepMerge(fetcherOptions, variables)),
+    ...emojisGetQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -2553,7 +2595,9 @@ export const useDependabotListAlertsForEnterprise = <
     TData
   >({
     ...dependabotListAlertsForEnterpriseQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -2753,7 +2797,9 @@ export const useSecretScanningListAlertsForEnterprise = <
     TData
   >({
     ...secretScanningListAlertsForEnterpriseQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -2900,7 +2946,11 @@ export const useActivityListPublicEvents = <
     ActivityListPublicEventsError,
     TData
   >({
-    ...activityListPublicEventsQuery(deepMerge(fetcherOptions, variables)),
+    ...activityListPublicEventsQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -3032,7 +3082,11 @@ export const useActivityGetFeeds = <TData = Schemas.Feed>(
 ) => {
   const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.Feed, ActivityGetFeedsError, TData>({
-    ...activityGetFeedsQuery(deepMerge(fetcherOptions, variables)),
+    ...activityGetFeedsQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -3155,7 +3209,11 @@ export const useGistsList = <TData = GistsListResponse>(
 ) => {
   const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<GistsListResponse, GistsListError, TData>({
-    ...gistsListQuery(deepMerge(fetcherOptions, variables)),
+    ...gistsListQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -3398,7 +3456,11 @@ export const useGistsListPublic = <TData = GistsListPublicResponse>(
     GistsListPublicError,
     TData
   >({
-    ...gistsListPublicQuery(deepMerge(fetcherOptions, variables)),
+    ...gistsListPublicQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -3542,7 +3604,11 @@ export const useGistsListStarred = <TData = GistsListStarredResponse>(
     GistsListStarredError,
     TData
   >({
-    ...gistsListStarredQuery(deepMerge(fetcherOptions, variables)),
+    ...gistsListStarredQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -3702,7 +3768,11 @@ export const useGistsGet = <TData = Schemas.GistSimple>(
 ) => {
   const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.GistSimple, GistsGetError, TData>({
-    ...gistsGetQuery(deepMerge(fetcherOptions, variables)),
+    ...gistsGetQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -4065,7 +4135,11 @@ export const useGistsListComments = <TData = GistsListCommentsResponse>(
     GistsListCommentsError,
     TData
   >({
-    ...gistsListCommentsQuery(deepMerge(fetcherOptions, variables)),
+    ...gistsListCommentsQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -4328,7 +4402,11 @@ export const useGistsGetComment = <TData = Schemas.GistComment>(
 ) => {
   const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.GistComment, GistsGetCommentError, TData>({
-    ...gistsGetCommentQuery(deepMerge(fetcherOptions, variables)),
+    ...gistsGetCommentQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -4533,7 +4611,11 @@ export const useGistsListCommits = <TData = GistsListCommitsResponse>(
     GistsListCommitsError,
     TData
   >({
-    ...gistsListCommitsQuery(deepMerge(fetcherOptions, variables)),
+    ...gistsListCommitsQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -4667,7 +4749,11 @@ export const useGistsListForks = <TData = GistsListForksResponse>(
     GistsListForksError,
     TData
   >({
-    ...gistsListForksQuery(deepMerge(fetcherOptions, variables)),
+    ...gistsListForksQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -4899,7 +4985,11 @@ export const useGistsCheckIsStarred = <TData = undefined>(
 ) => {
   const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<undefined, GistsCheckIsStarredError, TData>({
-    ...gistsCheckIsStarredQuery(deepMerge(fetcherOptions, variables)),
+    ...gistsCheckIsStarredQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -5075,7 +5165,11 @@ export const useGistsGetRevision = <TData = Schemas.GistSimple>(
 ) => {
   const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.GistSimple, GistsGetRevisionError, TData>({
-    ...gistsGetRevisionQuery(deepMerge(fetcherOptions, variables)),
+    ...gistsGetRevisionQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -5194,7 +5288,11 @@ export const useGitignoreGetAllTemplates = <
     GitignoreGetAllTemplatesError,
     TData
   >({
-    ...gitignoreGetAllTemplatesQuery(deepMerge(fetcherOptions, variables)),
+    ...gitignoreGetAllTemplatesQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -5322,7 +5420,11 @@ export const useGitignoreGetTemplate = <TData = Schemas.GitignoreTemplate>(
     GitignoreGetTemplateError,
     TData
   >({
-    ...gitignoreGetTemplateQuery(deepMerge(fetcherOptions, variables)),
+    ...gitignoreGetTemplateQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -5494,7 +5596,9 @@ export const useAppsListReposAccessibleToInstallation = <
     TData
   >({
     ...appsListReposAccessibleToInstallationQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -5753,7 +5857,11 @@ export const useIssuesList = <TData = IssuesListResponse>(
 ) => {
   const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<IssuesListResponse, IssuesListError, TData>({
-    ...issuesListQuery(deepMerge(fetcherOptions, variables)),
+    ...issuesListQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -5878,7 +5986,11 @@ export const useLicensesGetAllCommonlyUsed = <
     LicensesGetAllCommonlyUsedError,
     TData
   >({
-    ...licensesGetAllCommonlyUsedQuery(deepMerge(fetcherOptions, variables)),
+    ...licensesGetAllCommonlyUsedQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -5974,7 +6086,11 @@ export const useLicensesGet = <TData = Schemas.License>(
 ) => {
   const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.License, LicensesGetError, TData>({
-    ...licensesGetQuery(deepMerge(fetcherOptions, variables)),
+    ...licensesGetQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -6228,7 +6344,9 @@ export const useAppsGetSubscriptionPlanForAccount = <
     TData
   >({
     ...appsGetSubscriptionPlanForAccountQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -6366,7 +6484,11 @@ export const useAppsListPlans = <TData = AppsListPlansResponse>(
 ) => {
   const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<AppsListPlansResponse, AppsListPlansError, TData>({
-    ...appsListPlansQuery(deepMerge(fetcherOptions, variables)),
+    ...appsListPlansQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -6543,7 +6665,11 @@ export const useAppsListAccountsForPlan = <
     AppsListAccountsForPlanError,
     TData
   >({
-    ...appsListAccountsForPlanQuery(deepMerge(fetcherOptions, variables)),
+    ...appsListAccountsForPlanQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -6690,7 +6816,9 @@ export const useAppsGetSubscriptionPlanForAccountStubbed = <
     TData
   >({
     ...appsGetSubscriptionPlanForAccountStubbedQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -6836,7 +6964,11 @@ export const useAppsListPlansStubbed = <TData = AppsListPlansStubbedResponse>(
     AppsListPlansStubbedError,
     TData
   >({
-    ...appsListPlansStubbedQuery(deepMerge(fetcherOptions, variables)),
+    ...appsListPlansStubbedQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -7009,7 +7141,9 @@ export const useAppsListAccountsForPlanStubbed = <
     TData
   >({
     ...appsListAccountsForPlanStubbedQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -7116,7 +7250,11 @@ export const useMetaGet = <TData = Schemas.ApiOverview>(
 ) => {
   const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.ApiOverview, MetaGetError, TData>({
-    ...metaGetQuery(deepMerge(fetcherOptions, variables)),
+    ...metaGetQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -7282,7 +7420,9 @@ export const useActivityListPublicEventsForRepoNetwork = <
     TData
   >({
     ...activityListPublicEventsForRepoNetworkQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -7473,7 +7613,9 @@ export const useActivityListNotificationsForAuthenticatedUser = <
     TData
   >({
     ...activityListNotificationsForAuthenticatedUserQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -7674,7 +7816,11 @@ export const useActivityGetThread = <TData = Schemas.Thread>(
 ) => {
   const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.Thread, ActivityGetThreadError, TData>({
-    ...activityGetThreadQuery(deepMerge(fetcherOptions, variables)),
+    ...activityGetThreadQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -7976,7 +8122,9 @@ export const useActivityGetThreadSubscriptionForAuthenticatedUser = <
     TData
   >({
     ...activityGetThreadSubscriptionForAuthenticatedUserQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -8166,7 +8314,11 @@ export const useMetaGetOctocat = <TData = undefined>(
 ) => {
   const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<undefined, MetaGetOctocatError, TData>({
-    ...metaGetOctocatQuery(deepMerge(fetcherOptions, variables)),
+    ...metaGetOctocatQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -8283,7 +8435,11 @@ export const useOrgsList = <TData = OrgsListResponse>(
 ) => {
   const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<OrgsListResponse, OrgsListError, TData>({
-    ...orgsListQuery(deepMerge(fetcherOptions, variables)),
+    ...orgsListQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -8396,7 +8552,11 @@ export const useOrgsGet = <TData = Schemas.OrganizationFull>(
 ) => {
   const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.OrganizationFull, OrgsGetError, TData>({
-    ...orgsGetQuery(deepMerge(fetcherOptions, variables)),
+    ...orgsGetQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -8764,7 +8924,9 @@ export const useActionsGetActionsCacheUsageForOrg = <
     TData
   >({
     ...actionsGetActionsCacheUsageForOrgQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -8934,7 +9096,9 @@ export const useActionsGetActionsCacheUsageByRepoForOrg = <
     TData
   >({
     ...actionsGetActionsCacheUsageByRepoForOrgQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -9073,7 +9237,9 @@ export const useOidcGetOidcCustomSubTemplateForOrg = <
     TData
   >({
     ...oidcGetOidcCustomSubTemplateForOrgQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -9300,7 +9466,9 @@ export const useActionsGetGithubActionsPermissionsOrganization = <
     TData
   >({
     ...actionsGetGithubActionsPermissionsOrganizationQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -9555,7 +9723,9 @@ export const useActionsListSelectedRepositoriesEnabledGithubActionsOrganization 
       TData
     >({
       ...actionsListSelectedRepositoriesEnabledGithubActionsOrganizationQuery(
-        deepMerge(fetcherOptions, variables)
+        variables === reactQuery.skipToken
+          ? variables
+          : deepMerge(fetcherOptions, variables)
       ),
       ...options,
       ...queryOptions,
@@ -9929,7 +10099,9 @@ export const useActionsGetAllowedActionsOrganization = <
     TData
   >({
     ...actionsGetAllowedActionsOrganizationQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -10158,7 +10330,9 @@ export const useActionsGetGithubActionsDefaultWorkflowPermissionsOrganization =
       TData
     >({
       ...actionsGetGithubActionsDefaultWorkflowPermissionsOrganizationQuery(
-        deepMerge(fetcherOptions, variables)
+        variables === reactQuery.skipToken
+          ? variables
+          : deepMerge(fetcherOptions, variables)
       ),
       ...options,
       ...queryOptions,
@@ -10403,7 +10577,11 @@ export const useActionsListRequiredWorkflows = <
     ActionsListRequiredWorkflowsError,
     TData
   >({
-    ...actionsListRequiredWorkflowsQuery(deepMerge(fetcherOptions, variables)),
+    ...actionsListRequiredWorkflowsQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -10711,7 +10889,11 @@ export const useActionsGetRequiredWorkflow = <TData = Schemas.RequiredWorkflow>(
     ActionsGetRequiredWorkflowError,
     TData
   >({
-    ...actionsGetRequiredWorkflowQuery(deepMerge(fetcherOptions, variables)),
+    ...actionsGetRequiredWorkflowQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -10975,7 +11157,9 @@ export const useActionsListSelectedRepositoriesRequiredWorkflow = <
     TData
   >({
     ...actionsListSelectedRepositoriesRequiredWorkflowQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -11383,7 +11567,9 @@ export const useActionsListSelfHostedRunnersForOrg = <
     TData
   >({
     ...actionsListSelfHostedRunnersForOrgQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -11531,7 +11717,9 @@ export const useActionsListRunnerApplicationsForOrg = <
     TData
   >({
     ...actionsListRunnerApplicationsForOrgQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -11906,7 +12094,9 @@ export const useActionsGetSelfHostedRunnerForOrg = <TData = Schemas.Runner>(
     TData
   >({
     ...actionsGetSelfHostedRunnerForOrgQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -12135,7 +12325,9 @@ export const useActionsListLabelsForSelfHostedRunnerForOrg = <
     TData
   >({
     ...actionsListLabelsForSelfHostedRunnerForOrgQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -12560,7 +12752,11 @@ export const useActionsListOrgSecrets = <TData = ActionsListOrgSecretsResponse>(
     ActionsListOrgSecretsError,
     TData
   >({
-    ...actionsListOrgSecretsQuery(deepMerge(fetcherOptions, variables)),
+    ...actionsListOrgSecretsQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -12684,7 +12880,11 @@ export const useActionsGetOrgPublicKey = <TData = Schemas.ActionsPublicKey>(
     ActionsGetOrgPublicKeyError,
     TData
   >({
-    ...actionsGetOrgPublicKeyQuery(deepMerge(fetcherOptions, variables)),
+    ...actionsGetOrgPublicKeyQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -12879,7 +13079,11 @@ export const useActionsGetOrgSecret = <
     ActionsGetOrgSecretError,
     TData
   >({
-    ...actionsGetOrgSecretQuery(deepMerge(fetcherOptions, variables)),
+    ...actionsGetOrgSecretQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -13280,7 +13484,9 @@ export const useActionsListSelectedReposForOrgSecret = <
     TData
   >({
     ...actionsListSelectedReposForOrgSecretQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -13638,7 +13844,11 @@ export const useActionsListOrgVariables = <
     ActionsListOrgVariablesError,
     TData
   >({
-    ...actionsListOrgVariablesQuery(deepMerge(fetcherOptions, variables)),
+    ...actionsListOrgVariablesQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -13922,7 +14132,11 @@ export const useActionsGetOrgVariable = <
     ActionsGetOrgVariableError,
     TData
   >({
-    ...actionsGetOrgVariableQuery(deepMerge(fetcherOptions, variables)),
+    ...actionsGetOrgVariableQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -14174,7 +14388,9 @@ export const useActionsListSelectedReposForOrgVariable = <
     TData
   >({
     ...actionsListSelectedReposForOrgVariableQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -14522,7 +14738,11 @@ export const useOrgsListBlockedUsers = <TData = OrgsListBlockedUsersResponse>(
     OrgsListBlockedUsersError,
     TData
   >({
-    ...orgsListBlockedUsersQuery(deepMerge(fetcherOptions, variables)),
+    ...orgsListBlockedUsersQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -14684,7 +14904,11 @@ export const useOrgsCheckBlockedUser = <TData = undefined>(
 ) => {
   const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<undefined, OrgsCheckBlockedUserError, TData>({
-    ...orgsCheckBlockedUserQuery(deepMerge(fetcherOptions, variables)),
+    ...orgsCheckBlockedUserQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -14962,7 +15186,11 @@ export const useCodeScanningListAlertsForOrg = <
     CodeScanningListAlertsForOrgError,
     TData
   >({
-    ...codeScanningListAlertsForOrgQuery(deepMerge(fetcherOptions, variables)),
+    ...codeScanningListAlertsForOrgQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -15137,7 +15365,11 @@ export const useCodespacesListInOrganization = <
     CodespacesListInOrganizationError,
     TData
   >({
-    ...codespacesListInOrganizationQuery(deepMerge(fetcherOptions, variables)),
+    ...codespacesListInOrganizationQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -15566,7 +15798,11 @@ export const useCodespacesListOrgSecrets = <
     CodespacesListOrgSecretsError,
     TData
   >({
-    ...codespacesListOrgSecretsQuery(deepMerge(fetcherOptions, variables)),
+    ...codespacesListOrgSecretsQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -15692,7 +15928,11 @@ export const useCodespacesGetOrgPublicKey = <
     CodespacesGetOrgPublicKeyError,
     TData
   >({
-    ...codespacesGetOrgPublicKeyQuery(deepMerge(fetcherOptions, variables)),
+    ...codespacesGetOrgPublicKeyQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -15890,7 +16130,11 @@ export const useCodespacesGetOrgSecret = <TData = Schemas.CodespacesOrgSecret>(
     CodespacesGetOrgSecretError,
     TData
   >({
-    ...codespacesGetOrgSecretQuery(deepMerge(fetcherOptions, variables)),
+    ...codespacesGetOrgSecretQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -16302,7 +16546,9 @@ export const useCodespacesListSelectedReposForOrgSecret = <
     TData
   >({
     ...codespacesListSelectedReposForOrgSecretQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -16785,7 +17031,11 @@ export const useDependabotListAlertsForOrg = <
     DependabotListAlertsForOrgError,
     TData
   >({
-    ...dependabotListAlertsForOrgQuery(deepMerge(fetcherOptions, variables)),
+    ...dependabotListAlertsForOrgQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -16934,7 +17184,11 @@ export const useDependabotListOrgSecrets = <
     DependabotListOrgSecretsError,
     TData
   >({
-    ...dependabotListOrgSecretsQuery(deepMerge(fetcherOptions, variables)),
+    ...dependabotListOrgSecretsQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -17060,7 +17314,11 @@ export const useDependabotGetOrgPublicKey = <
     DependabotGetOrgPublicKeyError,
     TData
   >({
-    ...dependabotGetOrgPublicKeyQuery(deepMerge(fetcherOptions, variables)),
+    ...dependabotGetOrgPublicKeyQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -17257,7 +17515,11 @@ export const useDependabotGetOrgSecret = <
     DependabotGetOrgSecretError,
     TData
   >({
-    ...dependabotGetOrgSecretQuery(deepMerge(fetcherOptions, variables)),
+    ...dependabotGetOrgSecretQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -17660,7 +17922,9 @@ export const useDependabotListSelectedReposForOrgSecret = <
     TData
   >({
     ...dependabotListSelectedReposForOrgSecretQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -18002,7 +18266,11 @@ export const useActivityListPublicOrgEvents = <
     ActivityListPublicOrgEventsError,
     TData
   >({
-    ...activityListPublicOrgEventsQuery(deepMerge(fetcherOptions, variables)),
+    ...activityListPublicOrgEventsQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -18152,7 +18420,11 @@ export const useOrgsListFailedInvitations = <
     OrgsListFailedInvitationsError,
     TData
   >({
-    ...orgsListFailedInvitationsQuery(deepMerge(fetcherOptions, variables)),
+    ...orgsListFailedInvitationsQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -18276,7 +18548,11 @@ export const useOrgsListWebhooks = <TData = OrgsListWebhooksResponse>(
     OrgsListWebhooksError,
     TData
   >({
-    ...orgsListWebhooksQuery(deepMerge(fetcherOptions, variables)),
+    ...orgsListWebhooksQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -18546,7 +18822,11 @@ export const useOrgsGetWebhook = <TData = Schemas.OrgHook>(
 ) => {
   const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.OrgHook, OrgsGetWebhookError, TData>({
-    ...orgsGetWebhookQuery(deepMerge(fetcherOptions, variables)),
+    ...orgsGetWebhookQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -18783,7 +19063,11 @@ export const useOrgsGetWebhookConfigForOrg = <TData = Schemas.WebhookConfig>(
     OrgsGetWebhookConfigForOrgError,
     TData
   >({
-    ...orgsGetWebhookConfigForOrgQuery(deepMerge(fetcherOptions, variables)),
+    ...orgsGetWebhookConfigForOrgQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -19017,7 +19301,11 @@ export const useOrgsListWebhookDeliveries = <
     OrgsListWebhookDeliveriesError,
     TData
   >({
-    ...orgsListWebhookDeliveriesQuery(deepMerge(fetcherOptions, variables)),
+    ...orgsListWebhookDeliveriesQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -19153,7 +19441,11 @@ export const useOrgsGetWebhookDelivery = <TData = Schemas.HookDelivery>(
     OrgsGetWebhookDeliveryError,
     TData
   >({
-    ...orgsGetWebhookDeliveryQuery(deepMerge(fetcherOptions, variables)),
+    ...orgsGetWebhookDeliveryQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -19417,7 +19709,11 @@ export const useAppsGetOrgInstallation = <TData = Schemas.Installation>(
     AppsGetOrgInstallationError,
     TData
   >({
-    ...appsGetOrgInstallationQuery(deepMerge(fetcherOptions, variables)),
+    ...appsGetOrgInstallationQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -19561,7 +19857,11 @@ export const useOrgsListAppInstallations = <
     OrgsListAppInstallationsError,
     TData
   >({
-    ...orgsListAppInstallationsQuery(deepMerge(fetcherOptions, variables)),
+    ...orgsListAppInstallationsQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -19757,7 +20057,9 @@ export const useInteractionsGetRestrictionsForOrg = <
     TData
   >({
     ...interactionsGetRestrictionsForOrgQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -19985,7 +20287,11 @@ export const useOrgsListPendingInvitations = <
     OrgsListPendingInvitationsError,
     TData
   >({
-    ...orgsListPendingInvitationsQuery(deepMerge(fetcherOptions, variables)),
+    ...orgsListPendingInvitationsQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -20306,7 +20612,11 @@ export const useOrgsListInvitationTeams = <
     OrgsListInvitationTeamsError,
     TData
   >({
-    ...orgsListInvitationTeamsQuery(deepMerge(fetcherOptions, variables)),
+    ...orgsListInvitationTeamsQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -20502,7 +20812,11 @@ export const useIssuesListForOrg = <TData = IssuesListForOrgResponse>(
     IssuesListForOrgError,
     TData
   >({
-    ...issuesListForOrgQuery(deepMerge(fetcherOptions, variables)),
+    ...issuesListForOrgQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -20650,7 +20964,11 @@ export const useOrgsListMembers = <TData = OrgsListMembersResponse>(
     OrgsListMembersError,
     TData
   >({
-    ...orgsListMembersQuery(deepMerge(fetcherOptions, variables)),
+    ...orgsListMembersQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -20839,7 +21157,11 @@ export const useOrgsCheckMembershipForUser = <TData = undefined>(
   const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<undefined, OrgsCheckMembershipForUserError, TData>(
     {
-      ...orgsCheckMembershipForUserQuery(deepMerge(fetcherOptions, variables)),
+      ...orgsCheckMembershipForUserQuery(
+        variables === reactQuery.skipToken
+          ? variables
+          : deepMerge(fetcherOptions, variables)
+      ),
       ...options,
       ...queryOptions,
     }
@@ -21029,7 +21351,9 @@ export const useCodespacesGetCodespacesForUserInOrg = <
     TData
   >({
     ...codespacesGetCodespacesForUserInOrgQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -21429,7 +21753,11 @@ export const useOrgsGetMembershipForUser = <TData = Schemas.OrgMembership>(
     OrgsGetMembershipForUserError,
     TData
   >({
-    ...orgsGetMembershipForUserQuery(deepMerge(fetcherOptions, variables)),
+    ...orgsGetMembershipForUserQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -21678,7 +22006,11 @@ export const useMigrationsListForOrg = <TData = MigrationsListForOrgResponse>(
     MigrationsListForOrgError,
     TData
   >({
-    ...migrationsListForOrgQuery(deepMerge(fetcherOptions, variables)),
+    ...migrationsListForOrgQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -21965,7 +22297,11 @@ export const useMigrationsGetStatusForOrg = <TData = Schemas.Migration>(
     MigrationsGetStatusForOrgError,
     TData
   >({
-    ...migrationsGetStatusForOrgQuery(deepMerge(fetcherOptions, variables)),
+    ...migrationsGetStatusForOrgQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -22163,7 +22499,9 @@ export const useMigrationsDownloadArchiveForOrg = <TData = undefined>(
     TData
   >({
     ...migrationsDownloadArchiveForOrgQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -22387,7 +22725,11 @@ export const useMigrationsListReposForOrg = <
     MigrationsListReposForOrgError,
     TData
   >({
-    ...migrationsListReposForOrgQuery(deepMerge(fetcherOptions, variables)),
+    ...migrationsListReposForOrgQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -22541,7 +22883,11 @@ export const useOrgsListOutsideCollaborators = <
     OrgsListOutsideCollaboratorsError,
     TData
   >({
-    ...orgsListOutsideCollaboratorsQuery(deepMerge(fetcherOptions, variables)),
+    ...orgsListOutsideCollaboratorsQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -22864,7 +23210,9 @@ export const usePackagesListPackagesForOrganization = <
     TData
   >({
     ...packagesListPackagesForOrganizationQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -23097,7 +23445,9 @@ export const usePackagesGetPackageForOrganization = <TData = Schemas.Package>(
     TData
   >({
     ...packagesGetPackageForOrganizationQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -23399,7 +23749,9 @@ export const usePackagesGetAllPackageVersionsForPackageOwnedByOrg = <
     TData
   >({
     ...packagesGetAllPackageVersionsForPackageOwnedByOrgQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -23650,7 +24002,9 @@ export const usePackagesGetPackageVersionForOrganization = <
     TData
   >({
     ...packagesGetPackageVersionForOrganizationQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -23899,7 +24253,11 @@ export const useProjectsListForOrg = <TData = ProjectsListForOrgResponse>(
     ProjectsListForOrgError,
     TData
   >({
-    ...projectsListForOrgQuery(deepMerge(fetcherOptions, variables)),
+    ...projectsListForOrgQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -24123,7 +24481,11 @@ export const useOrgsListPublicMembers = <TData = OrgsListPublicMembersResponse>(
     OrgsListPublicMembersError,
     TData
   >({
-    ...orgsListPublicMembersQuery(deepMerge(fetcherOptions, variables)),
+    ...orgsListPublicMembersQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -24303,7 +24665,9 @@ export const useOrgsCheckPublicMembershipForUser = <TData = undefined>(
     TData
   >({
     ...orgsCheckPublicMembershipForUserQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -24534,7 +24898,11 @@ export const useReposListForOrg = <TData = ReposListForOrgResponse>(
     ReposListForOrgError,
     TData
   >({
-    ...reposListForOrgQuery(deepMerge(fetcherOptions, variables)),
+    ...reposListForOrgQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -24964,7 +25332,9 @@ export const useSecretScanningListAlertsForOrg = <
     TData
   >({
     ...secretScanningListAlertsForOrgQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -25113,7 +25483,11 @@ export const useOrgsListSecurityManagerTeams = <
     OrgsListSecurityManagerTeamsError,
     TData
   >({
-    ...orgsListSecurityManagerTeamsQuery(deepMerge(fetcherOptions, variables)),
+    ...orgsListSecurityManagerTeamsQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -25402,7 +25776,9 @@ export const useBillingGetGithubActionsBillingOrg = <
     TData
   >({
     ...billingGetGithubActionsBillingOrgQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -25549,7 +25925,9 @@ export const useBillingGetGithubPackagesBillingOrg = <
     TData
   >({
     ...billingGetGithubPackagesBillingOrgQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -25696,7 +26074,9 @@ export const useBillingGetSharedStorageBillingOrg = <
     TData
   >({
     ...billingGetSharedStorageBillingOrgQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -25816,7 +26196,11 @@ export const useTeamsList = <TData = TeamsListResponse>(
 ) => {
   const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<TeamsListResponse, TeamsListError, TData>({
-    ...teamsListQuery(deepMerge(fetcherOptions, variables)),
+    ...teamsListQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -26118,7 +26502,11 @@ export const useTeamsGetByName = <TData = Schemas.TeamFull>(
 ) => {
   const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.TeamFull, TeamsGetByNameError, TData>({
-    ...teamsGetByNameQuery(deepMerge(fetcherOptions, variables)),
+    ...teamsGetByNameQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -26397,7 +26785,11 @@ export const useTeamsListDiscussionsInOrg = <
     TeamsListDiscussionsInOrgError,
     TData
   >({
-    ...teamsListDiscussionsInOrgQuery(deepMerge(fetcherOptions, variables)),
+    ...teamsListDiscussionsInOrgQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -26697,7 +27089,11 @@ export const useTeamsGetDiscussionInOrg = <TData = Schemas.TeamDiscussion>(
     TeamsGetDiscussionInOrgError,
     TData
   >({
-    ...teamsGetDiscussionInOrgQuery(deepMerge(fetcherOptions, variables)),
+    ...teamsGetDiscussionInOrgQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -26955,7 +27351,9 @@ export const useTeamsListDiscussionCommentsInOrg = <
     TData
   >({
     ...teamsListDiscussionCommentsInOrgQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -27270,7 +27668,9 @@ export const useTeamsGetDiscussionCommentInOrg = <
     TData
   >({
     ...teamsGetDiscussionCommentInOrgQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -27548,7 +27948,9 @@ export const useReactionsListForTeamDiscussionCommentInOrg = <
     TData
   >({
     ...reactionsListForTeamDiscussionCommentInOrgQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -27909,7 +28311,9 @@ export const useReactionsListForTeamDiscussionInOrg = <
     TData
   >({
     ...reactionsListForTeamDiscussionInOrgQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -28243,7 +28647,9 @@ export const useTeamsListPendingInvitationsInOrg = <
     TData
   >({
     ...teamsListPendingInvitationsInOrgQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -28404,7 +28810,11 @@ export const useTeamsListMembersInOrg = <TData = TeamsListMembersInOrgResponse>(
     TeamsListMembersInOrgError,
     TData
   >({
-    ...teamsListMembersInOrgQuery(deepMerge(fetcherOptions, variables)),
+    ...teamsListMembersInOrgQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -28660,7 +29070,9 @@ export const useTeamsGetMembershipForUserInOrg = <
     TData
   >({
     ...teamsGetMembershipForUserInOrgQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -28917,7 +29329,11 @@ export const useTeamsListProjectsInOrg = <
     TeamsListProjectsInOrgError,
     TData
   >({
-    ...teamsListProjectsInOrgQuery(deepMerge(fetcherOptions, variables)),
+    ...teamsListProjectsInOrgQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -29140,7 +29556,9 @@ export const useTeamsCheckPermissionsForProjectInOrg = <
     TData
   >({
     ...teamsCheckPermissionsForProjectInOrgQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -29386,7 +29804,11 @@ export const useTeamsListReposInOrg = <TData = TeamsListReposInOrgResponse>(
     TeamsListReposInOrgError,
     TData
   >({
-    ...teamsListReposInOrgQuery(deepMerge(fetcherOptions, variables)),
+    ...teamsListReposInOrgQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -29627,7 +30049,9 @@ export const useTeamsCheckPermissionsForRepoInOrg = <
     TData
   >({
     ...teamsCheckPermissionsForRepoInOrgQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -29874,7 +30298,11 @@ export const useTeamsListChildInOrg = <TData = TeamsListChildInOrgResponse>(
     TeamsListChildInOrgError,
     TData
   >({
-    ...teamsListChildInOrgQuery(deepMerge(fetcherOptions, variables)),
+    ...teamsListChildInOrgQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -30164,7 +30592,11 @@ export const useProjectsGetCard = <TData = Schemas.ProjectCard>(
 ) => {
   const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.ProjectCard, ProjectsGetCardError, TData>({
-    ...projectsGetCardQuery(deepMerge(fetcherOptions, variables)),
+    ...projectsGetCardQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -30553,7 +30985,11 @@ export const useProjectsGetColumn = <TData = Schemas.ProjectColumn>(
     ProjectsGetColumnError,
     TData
   >({
-    ...projectsGetColumnQuery(deepMerge(fetcherOptions, variables)),
+    ...projectsGetColumnQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -30774,7 +31210,11 @@ export const useProjectsListCards = <TData = ProjectsListCardsResponse>(
     ProjectsListCardsError,
     TData
   >({
-    ...projectsListCardsQuery(deepMerge(fetcherOptions, variables)),
+    ...projectsListCardsQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -31171,7 +31611,11 @@ export const useProjectsGet = <TData = Schemas.Project>(
 ) => {
   const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.Project, ProjectsGetError, TData>({
-    ...projectsGetQuery(deepMerge(fetcherOptions, variables)),
+    ...projectsGetQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -31453,7 +31897,11 @@ export const useProjectsListCollaborators = <
     ProjectsListCollaboratorsError,
     TData
   >({
-    ...projectsListCollaboratorsQuery(deepMerge(fetcherOptions, variables)),
+    ...projectsListCollaboratorsQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -31793,7 +32241,11 @@ export const useProjectsGetPermissionForUser = <
     ProjectsGetPermissionForUserError,
     TData
   >({
-    ...projectsGetPermissionForUserQuery(deepMerge(fetcherOptions, variables)),
+    ...projectsGetPermissionForUserQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -31936,7 +32388,11 @@ export const useProjectsListColumns = <TData = ProjectsListColumnsResponse>(
     ProjectsListColumnsError,
     TData
   >({
-    ...projectsListColumnsQuery(deepMerge(fetcherOptions, variables)),
+    ...projectsListColumnsQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -32138,7 +32594,11 @@ export const useRateLimitGet = <TData = Schemas.RateLimitOverview>(
     RateLimitGetError,
     TData
   >({
-    ...rateLimitGetQuery(deepMerge(fetcherOptions, variables)),
+    ...rateLimitGetQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -32299,7 +32759,9 @@ export const useActionsListRepoRequiredWorkflows = <
     TData
   >({
     ...actionsListRepoRequiredWorkflowsQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -32440,7 +32902,9 @@ export const useActionsGetRepoRequiredWorkflow = <
     TData
   >({
     ...actionsGetRepoRequiredWorkflowQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -32599,7 +33063,9 @@ export const useActionsGetRepoRequiredWorkflowUsage = <
     TData
   >({
     ...actionsGetRepoRequiredWorkflowUsageQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -32807,7 +33273,11 @@ export const useReposGet = <TData = Schemas.FullRepository>(
 ) => {
   const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.FullRepository, ReposGetError, TData>({
-    ...reposGetQuery(deepMerge(fetcherOptions, variables)),
+    ...reposGetQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -33226,7 +33696,11 @@ export const useActionsListArtifactsForRepo = <
     ActionsListArtifactsForRepoError,
     TData
   >({
-    ...actionsListArtifactsForRepoQuery(deepMerge(fetcherOptions, variables)),
+    ...actionsListArtifactsForRepoQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -33419,7 +33893,11 @@ export const useActionsGetArtifact = <TData = Schemas.Artifact>(
 ) => {
   const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.Artifact, ActionsGetArtifactError, TData>({
-    ...actionsGetArtifactQuery(deepMerge(fetcherOptions, variables)),
+    ...actionsGetArtifactQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -33553,7 +34031,11 @@ export const useActionsDownloadArtifact = <TData = undefined>(
 ) => {
   const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<undefined, ActionsDownloadArtifactError, TData>({
-    ...actionsDownloadArtifactQuery(deepMerge(fetcherOptions, variables)),
+    ...actionsDownloadArtifactQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -33695,7 +34177,11 @@ export const useActionsGetActionsCacheUsage = <
     ActionsGetActionsCacheUsageError,
     TData
   >({
-    ...actionsGetActionsCacheUsageQuery(deepMerge(fetcherOptions, variables)),
+    ...actionsGetActionsCacheUsageQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -33951,7 +34437,11 @@ export const useActionsGetActionsCacheList = <TData = Schemas.ActionsCacheList>(
     ActionsGetActionsCacheListError,
     TData
   >({
-    ...actionsGetActionsCacheListQuery(deepMerge(fetcherOptions, variables)),
+    ...actionsGetActionsCacheListQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -34157,7 +34647,11 @@ export const useActionsGetJobForWorkflowRun = <TData = Schemas.Job>(
     ActionsGetJobForWorkflowRunError,
     TData
   >({
-    ...actionsGetJobForWorkflowRunQuery(deepMerge(fetcherOptions, variables)),
+    ...actionsGetJobForWorkflowRunQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -34311,7 +34805,9 @@ export const useActionsDownloadJobLogsForWorkflowRun = <TData = undefined>(
     TData
   >({
     ...actionsDownloadJobLogsForWorkflowRunQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -34549,7 +35045,9 @@ export const useActionsGetCustomOidcSubClaimForRepo = <
     TData
   >({
     ...actionsGetCustomOidcSubClaimForRepoQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -34799,7 +35297,9 @@ export const useActionsGetGithubActionsPermissionsRepository = <
     TData
   >({
     ...actionsGetGithubActionsPermissionsRepositoryQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -35042,7 +35542,9 @@ export const useActionsGetWorkflowAccessToRepository = <
     TData
   >({
     ...actionsGetWorkflowAccessToRepositoryQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -35262,7 +35764,9 @@ export const useActionsGetAllowedActionsRepository = <
     TData
   >({
     ...actionsGetAllowedActionsRepositoryQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -35500,7 +36004,9 @@ export const useActionsGetGithubActionsDefaultWorkflowPermissionsRepository = <
     TData
   >({
     ...actionsGetGithubActionsDefaultWorkflowPermissionsRepositoryQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -35802,7 +36308,9 @@ export const useActionsListRequiredWorkflowRuns = <
     TData
   >({
     ...actionsListRequiredWorkflowRunsQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -35964,7 +36472,9 @@ export const useActionsListSelfHostedRunnersForRepo = <
     TData
   >({
     ...actionsListSelfHostedRunnersForRepoQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -36120,7 +36630,9 @@ export const useActionsListRunnerApplicationsForRepo = <
     TData
   >({
     ...actionsListRunnerApplicationsForRepoQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -36513,7 +37025,9 @@ export const useActionsGetSelfHostedRunnerForRepo = <TData = Schemas.Runner>(
     TData
   >({
     ...actionsGetSelfHostedRunnerForRepoQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -36757,7 +37271,9 @@ export const useActionsListLabelsForSelfHostedRunnerForRepo = <
     TData
   >({
     ...actionsListLabelsForSelfHostedRunnerForRepoQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -37272,7 +37788,9 @@ export const useActionsListWorkflowRunsForRepo = <
     TData
   >({
     ...actionsListWorkflowRunsForRepoQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -37484,7 +38002,11 @@ export const useActionsGetWorkflowRun = <TData = Schemas.WorkflowRun>(
     ActionsGetWorkflowRunError,
     TData
   >({
-    ...actionsGetWorkflowRunQuery(deepMerge(fetcherOptions, variables)),
+    ...actionsGetWorkflowRunQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -37622,7 +38144,11 @@ export const useActionsGetReviewsForRun = <
     ActionsGetReviewsForRunError,
     TData
   >({
-    ...actionsGetReviewsForRunQuery(deepMerge(fetcherOptions, variables)),
+    ...actionsGetReviewsForRunQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -37865,7 +38391,9 @@ export const useActionsListWorkflowRunArtifacts = <
     TData
   >({
     ...actionsListWorkflowRunArtifactsQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -38024,7 +38552,11 @@ export const useActionsGetWorkflowRunAttempt = <TData = Schemas.WorkflowRun>(
     ActionsGetWorkflowRunAttemptError,
     TData
   >({
-    ...actionsGetWorkflowRunAttemptQuery(deepMerge(fetcherOptions, variables)),
+    ...actionsGetWorkflowRunAttemptQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -38199,7 +38731,9 @@ export const useActionsListJobsForWorkflowRunAttempt = <
     TData
   >({
     ...actionsListJobsForWorkflowRunAttemptQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -38358,7 +38892,9 @@ export const useActionsDownloadWorkflowRunAttemptLogs = <TData = undefined>(
     TData
   >({
     ...actionsDownloadWorkflowRunAttemptLogsQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -38595,7 +39131,11 @@ export const useActionsListJobsForWorkflowRun = <
     ActionsListJobsForWorkflowRunError,
     TData
   >({
-    ...actionsListJobsForWorkflowRunQuery(deepMerge(fetcherOptions, variables)),
+    ...actionsListJobsForWorkflowRunQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -38817,7 +39357,9 @@ export const useActionsDownloadWorkflowRunLogs = <TData = undefined>(
     TData
   >({
     ...actionsDownloadWorkflowRunLogsQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -38971,7 +39513,9 @@ export const useActionsGetPendingDeploymentsForRun = <
     TData
   >({
     ...actionsGetPendingDeploymentsForRunQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -39377,7 +39921,11 @@ export const useActionsGetWorkflowRunUsage = <TData = Schemas.WorkflowRunUsage>(
     ActionsGetWorkflowRunUsageError,
     TData
   >({
-    ...actionsGetWorkflowRunUsageQuery(deepMerge(fetcherOptions, variables)),
+    ...actionsGetWorkflowRunUsageQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -39528,7 +40076,11 @@ export const useActionsListRepoSecrets = <
     ActionsListRepoSecretsError,
     TData
   >({
-    ...actionsListRepoSecretsQuery(deepMerge(fetcherOptions, variables)),
+    ...actionsListRepoSecretsQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -39656,7 +40208,11 @@ export const useActionsGetRepoPublicKey = <TData = Schemas.ActionsPublicKey>(
     ActionsGetRepoPublicKeyError,
     TData
   >({
-    ...actionsGetRepoPublicKeyQuery(deepMerge(fetcherOptions, variables)),
+    ...actionsGetRepoPublicKeyQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -39853,7 +40409,11 @@ export const useActionsGetRepoSecret = <TData = Schemas.ActionsSecret>(
     ActionsGetRepoSecretError,
     TData
   >({
-    ...actionsGetRepoSecretQuery(deepMerge(fetcherOptions, variables)),
+    ...actionsGetRepoSecretQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -40240,7 +40800,11 @@ export const useActionsListRepoVariables = <
     ActionsListRepoVariablesError,
     TData
   >({
-    ...actionsListRepoVariablesQuery(deepMerge(fetcherOptions, variables)),
+    ...actionsListRepoVariablesQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -40522,7 +41086,11 @@ export const useActionsGetRepoVariable = <TData = Schemas.ActionsVariable>(
     ActionsGetRepoVariableError,
     TData
   >({
-    ...actionsGetRepoVariableQuery(deepMerge(fetcherOptions, variables)),
+    ...actionsGetRepoVariableQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -40758,7 +41326,11 @@ export const useActionsListRepoWorkflows = <
     ActionsListRepoWorkflowsError,
     TData
   >({
-    ...actionsListRepoWorkflowsQuery(deepMerge(fetcherOptions, variables)),
+    ...actionsListRepoWorkflowsQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -40884,7 +41456,11 @@ export const useActionsGetWorkflow = <TData = Schemas.Workflow>(
 ) => {
   const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.Workflow, ActionsGetWorkflowError, TData>({
-    ...actionsGetWorkflowQuery(deepMerge(fetcherOptions, variables)),
+    ...actionsGetWorkflowQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -41333,7 +41909,11 @@ export const useActionsListWorkflowRuns = <
     ActionsListWorkflowRunsError,
     TData
   >({
-    ...actionsListWorkflowRunsQuery(deepMerge(fetcherOptions, variables)),
+    ...actionsListWorkflowRunsQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -41473,7 +42053,11 @@ export const useActionsGetWorkflowUsage = <TData = Schemas.WorkflowUsage>(
     ActionsGetWorkflowUsageError,
     TData
   >({
-    ...actionsGetWorkflowUsageQuery(deepMerge(fetcherOptions, variables)),
+    ...actionsGetWorkflowUsageQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -41622,7 +42206,11 @@ export const useIssuesListAssignees = <TData = IssuesListAssigneesResponse>(
     IssuesListAssigneesError,
     TData
   >({
-    ...issuesListAssigneesQuery(deepMerge(fetcherOptions, variables)),
+    ...issuesListAssigneesQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -41768,7 +42356,11 @@ export const useIssuesCheckUserCanBeAssigned = <TData = undefined>(
     IssuesCheckUserCanBeAssignedError,
     TData
   >({
-    ...issuesCheckUserCanBeAssignedQuery(deepMerge(fetcherOptions, variables)),
+    ...issuesCheckUserCanBeAssignedQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -41916,7 +42508,11 @@ export const useReposListAutolinks = <TData = ReposListAutolinksResponse>(
     ReposListAutolinksError,
     TData
   >({
-    ...reposListAutolinksQuery(deepMerge(fetcherOptions, variables)),
+    ...reposListAutolinksQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -42201,7 +42797,11 @@ export const useReposGetAutolink = <TData = Schemas.Autolink>(
 ) => {
   const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.Autolink, ReposGetAutolinkError, TData>({
-    ...reposGetAutolinkQuery(deepMerge(fetcherOptions, variables)),
+    ...reposGetAutolinkQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -42470,7 +43070,11 @@ export const useReposListBranches = <TData = ReposListBranchesResponse>(
     ReposListBranchesError,
     TData
   >({
-    ...reposListBranchesQuery(deepMerge(fetcherOptions, variables)),
+    ...reposListBranchesQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -42595,7 +43199,11 @@ export const useReposGetBranch = <TData = Schemas.BranchWithProtection>(
     ReposGetBranchError,
     TData
   >({
-    ...reposGetBranchQuery(deepMerge(fetcherOptions, variables)),
+    ...reposGetBranchQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -42800,7 +43408,11 @@ export const useReposGetBranchProtection = <TData = Schemas.BranchProtection>(
     ReposGetBranchProtectionError,
     TData
   >({
-    ...reposGetBranchProtectionQuery(deepMerge(fetcherOptions, variables)),
+    ...reposGetBranchProtectionQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -43249,7 +43861,11 @@ export const useReposGetAdminBranchProtection = <
     ReposGetAdminBranchProtectionError,
     TData
   >({
-    ...reposGetAdminBranchProtectionQuery(deepMerge(fetcherOptions, variables)),
+    ...reposGetAdminBranchProtectionQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -43537,7 +44153,9 @@ export const useReposGetPullRequestReviewProtection = <
     TData
   >({
     ...reposGetPullRequestReviewProtectionQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -43910,7 +44528,9 @@ export const useReposGetCommitSignatureProtection = <
     TData
   >({
     ...reposGetCommitSignatureProtectionQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -44197,7 +44817,9 @@ export const useReposGetStatusChecksProtection = <
     TData
   >({
     ...reposGetStatusChecksProtectionQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -44545,7 +45167,9 @@ export const useReposGetAllStatusCheckContexts = <
     TData
   >({
     ...reposGetAllStatusCheckContextsQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -44961,7 +45585,11 @@ export const useReposGetAccessRestrictions = <
     ReposGetAccessRestrictionsError,
     TData
   >({
-    ...reposGetAccessRestrictionsQuery(deepMerge(fetcherOptions, variables)),
+    ...reposGetAccessRestrictionsQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -45215,7 +45843,9 @@ export const useReposGetAppsWithAccessToProtectedBranch = <
     TData
   >({
     ...reposGetAppsWithAccessToProtectedBranchQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -45649,7 +46279,9 @@ export const useReposGetTeamsWithAccessToProtectedBranch = <
     TData
   >({
     ...reposGetTeamsWithAccessToProtectedBranchQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -46092,7 +46724,9 @@ export const useReposGetUsersWithAccessToProtectedBranch = <
     TData
   >({
     ...reposGetUsersWithAccessToProtectedBranchQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -46615,7 +47249,11 @@ export const useChecksGet = <TData = Schemas.CheckRun>(
 ) => {
   const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.CheckRun, ChecksGetError, TData>({
-    ...checksGetQuery(deepMerge(fetcherOptions, variables)),
+    ...checksGetQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -46856,7 +47494,11 @@ export const useChecksListAnnotations = <TData = ChecksListAnnotationsResponse>(
     ChecksListAnnotationsError,
     TData
   >({
-    ...checksListAnnotationsQuery(deepMerge(fetcherOptions, variables)),
+    ...checksListAnnotationsQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -47221,7 +47863,11 @@ export const useChecksGetSuite = <TData = Schemas.CheckSuite>(
 ) => {
   const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.CheckSuite, ChecksGetSuiteError, TData>({
-    ...checksGetSuiteQuery(deepMerge(fetcherOptions, variables)),
+    ...checksGetSuiteQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -47396,7 +48042,11 @@ export const useChecksListForSuite = <TData = ChecksListForSuiteResponse>(
     ChecksListForSuiteError,
     TData
   >({
-    ...checksListForSuiteQuery(deepMerge(fetcherOptions, variables)),
+    ...checksListForSuiteQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -47705,7 +48355,11 @@ export const useCodeScanningListAlertsForRepo = <
     CodeScanningListAlertsForRepoError,
     TData
   >({
-    ...codeScanningListAlertsForRepoQuery(deepMerge(fetcherOptions, variables)),
+    ...codeScanningListAlertsForRepoQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -47854,7 +48508,11 @@ export const useCodeScanningGetAlert = <TData = Schemas.CodeScanningAlert>(
     CodeScanningGetAlertError,
     TData
   >({
-    ...codeScanningGetAlertQuery(deepMerge(fetcherOptions, variables)),
+    ...codeScanningGetAlertQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -48130,7 +48788,9 @@ export const useCodeScanningListAlertInstances = <
     TData
   >({
     ...codeScanningListAlertInstancesQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -48392,7 +49052,9 @@ export const useCodeScanningListRecentAnalyses = <
     TData
   >({
     ...codeScanningListRecentAnalysesQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -48832,7 +49494,11 @@ export const useCodeScanningGetAnalysis = <
     CodeScanningGetAnalysisError,
     TData
   >({
-    ...codeScanningGetAnalysisQuery(deepMerge(fetcherOptions, variables)),
+    ...codeScanningGetAnalysisQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -49001,7 +49667,9 @@ export const useCodeScanningListCodeqlDatabases = <
     TData
   >({
     ...codeScanningListCodeqlDatabasesQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -49195,7 +49863,11 @@ export const useCodeScanningGetCodeqlDatabase = <
     CodeScanningGetCodeqlDatabaseError,
     TData
   >({
-    ...codeScanningGetCodeqlDatabaseQuery(deepMerge(fetcherOptions, variables)),
+    ...codeScanningGetCodeqlDatabaseQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -49504,7 +50176,11 @@ export const useCodeScanningGetSarif = <
     CodeScanningGetSarifError,
     TData
   >({
-    ...codeScanningGetSarifQuery(deepMerge(fetcherOptions, variables)),
+    ...codeScanningGetSarifQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -49656,7 +50332,11 @@ export const useReposCodeownersErrors = <TData = Schemas.CodeownersErrors>(
     ReposCodeownersErrorsError,
     TData
   >({
-    ...reposCodeownersErrorsQuery(deepMerge(fetcherOptions, variables)),
+    ...reposCodeownersErrorsQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -49857,7 +50537,9 @@ export const useCodespacesListInRepositoryForAuthenticatedUser = <
     TData
   >({
     ...codespacesListInRepositoryForAuthenticatedUserQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -50255,7 +50937,9 @@ export const useCodespacesListDevcontainersInRepositoryForAuthenticatedUser = <
     TData
   >({
     ...codespacesListDevcontainersInRepositoryForAuthenticatedUserQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -50456,7 +51140,9 @@ export const useCodespacesRepoMachinesForAuthenticatedUser = <
     TData
   >({
     ...codespacesRepoMachinesForAuthenticatedUserQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -50657,7 +51343,9 @@ export const useCodespacesPreFlightWithRepoForAuthenticatedUser = <
     TData
   >({
     ...codespacesPreFlightWithRepoForAuthenticatedUserQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -50811,7 +51499,11 @@ export const useCodespacesListRepoSecrets = <
     CodespacesListRepoSecretsError,
     TData
   >({
-    ...codespacesListRepoSecretsQuery(deepMerge(fetcherOptions, variables)),
+    ...codespacesListRepoSecretsQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -50941,7 +51633,11 @@ export const useCodespacesGetRepoPublicKey = <
     CodespacesGetRepoPublicKeyError,
     TData
   >({
-    ...codespacesGetRepoPublicKeyQuery(deepMerge(fetcherOptions, variables)),
+    ...codespacesGetRepoPublicKeyQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -51142,7 +51838,11 @@ export const useCodespacesGetRepoSecret = <
     CodespacesGetRepoSecretError,
     TData
   >({
-    ...codespacesGetRepoSecretQuery(deepMerge(fetcherOptions, variables)),
+    ...codespacesGetRepoSecretQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -51565,7 +52265,11 @@ export const useReposListCollaborators = <
     ReposListCollaboratorsError,
     TData
   >({
-    ...reposListCollaboratorsQuery(deepMerge(fetcherOptions, variables)),
+    ...reposListCollaboratorsQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -51768,7 +52472,11 @@ export const useReposCheckCollaborator = <TData = undefined>(
 ) => {
   const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<undefined, ReposCheckCollaboratorError, TData>({
-    ...reposCheckCollaboratorQuery(deepMerge(fetcherOptions, variables)),
+    ...reposCheckCollaboratorQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -52040,7 +52748,9 @@ export const useReposGetCollaboratorPermissionLevel = <
     TData
   >({
     ...reposGetCollaboratorPermissionLevelQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -52205,7 +52915,9 @@ export const useReposListCommitCommentsForRepo = <
     TData
   >({
     ...reposListCommitCommentsForRepoQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -52391,7 +53103,11 @@ export const useReposGetCommitComment = <TData = Schemas.CommitComment>(
     ReposGetCommitCommentError,
     TData
   >({
-    ...reposGetCommitCommentQuery(deepMerge(fetcherOptions, variables)),
+    ...reposGetCommitCommentQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -52634,7 +53350,11 @@ export const useReactionsListForCommitComment = <
     ReactionsListForCommitCommentError,
     TData
   >({
-    ...reactionsListForCommitCommentQuery(deepMerge(fetcherOptions, variables)),
+    ...reactionsListForCommitCommentQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -53091,7 +53811,11 @@ export const useReposListCommits = <TData = ReposListCommitsResponse>(
     ReposListCommitsError,
     TData
   >({
-    ...reposListCommitsQuery(deepMerge(fetcherOptions, variables)),
+    ...reposListCommitsQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -53245,7 +53969,9 @@ export const useReposListBranchesForHeadCommit = <
     TData
   >({
     ...reposListBranchesForHeadCommitQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -53400,7 +54126,11 @@ export const useReposListCommentsForCommit = <
     ReposListCommentsForCommitError,
     TData
   >({
-    ...reposListCommentsForCommitQuery(deepMerge(fetcherOptions, variables)),
+    ...reposListCommentsForCommitQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -53667,7 +54397,9 @@ export const useReposListPullRequestsAssociatedWithCommit = <
     TData
   >({
     ...reposListPullRequestsAssociatedWithCommitQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -53957,7 +54689,11 @@ export const useReposGetCommit = <TData = Schemas.Commit>(
 ) => {
   const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.Commit, ReposGetCommitError, TData>({
-    ...reposGetCommitQuery(deepMerge(fetcherOptions, variables)),
+    ...reposGetCommitQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -54129,7 +54865,11 @@ export const useChecksListForRef = <TData = ChecksListForRefResponse>(
     ChecksListForRefError,
     TData
   >({
-    ...checksListForRefQuery(deepMerge(fetcherOptions, variables)),
+    ...checksListForRefQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -54300,7 +55040,11 @@ export const useChecksListSuitesForRef = <
     ChecksListSuitesForRefError,
     TData
   >({
-    ...checksListSuitesForRefQuery(deepMerge(fetcherOptions, variables)),
+    ...checksListSuitesForRefQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -54481,7 +55225,11 @@ export const useReposGetCombinedStatusForRef = <
     ReposGetCombinedStatusForRefError,
     TData
   >({
-    ...reposGetCombinedStatusForRefQuery(deepMerge(fetcherOptions, variables)),
+    ...reposGetCombinedStatusForRefQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -54648,7 +55396,11 @@ export const useReposListCommitStatusesForRef = <
     ReposListCommitStatusesForRefError,
     TData
   >({
-    ...reposListCommitStatusesForRefQuery(deepMerge(fetcherOptions, variables)),
+    ...reposListCommitStatusesForRefQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -54830,7 +55582,9 @@ export const useReposGetCommunityProfileMetrics = <
     TData
   >({
     ...reposGetCommunityProfileMetricsQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -55168,7 +55922,11 @@ export const useReposCompareCommits = <TData = Schemas.CommitComparison>(
     ReposCompareCommitsError,
     TData
   >({
-    ...reposCompareCommitsQuery(deepMerge(fetcherOptions, variables)),
+    ...reposCompareCommitsQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -55644,7 +56402,11 @@ export const useReposGetContent = <
     ReposGetContentError,
     TData
   >({
-    ...reposGetContentQuery(deepMerge(fetcherOptions, variables)),
+    ...reposGetContentQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -55951,7 +56713,11 @@ export const useReposListContributors = <TData = ReposListContributorsResponse>(
     ReposListContributorsError,
     TData
   >({
-    ...reposListContributorsQuery(deepMerge(fetcherOptions, variables)),
+    ...reposListContributorsQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -56203,7 +56969,11 @@ export const useDependabotListAlertsForRepo = <
     DependabotListAlertsForRepoError,
     TData
   >({
-    ...dependabotListAlertsForRepoQuery(deepMerge(fetcherOptions, variables)),
+    ...dependabotListAlertsForRepoQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -56357,7 +57127,11 @@ export const useDependabotGetAlert = <TData = Schemas.DependabotAlert>(
     DependabotGetAlertError,
     TData
   >({
-    ...dependabotGetAlertQuery(deepMerge(fetcherOptions, variables)),
+    ...dependabotGetAlertQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -56629,7 +57403,11 @@ export const useDependabotListRepoSecrets = <
     DependabotListRepoSecretsError,
     TData
   >({
-    ...dependabotListRepoSecretsQuery(deepMerge(fetcherOptions, variables)),
+    ...dependabotListRepoSecretsQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -56759,7 +57537,11 @@ export const useDependabotGetRepoPublicKey = <
     DependabotGetRepoPublicKeyError,
     TData
   >({
-    ...dependabotGetRepoPublicKeyQuery(deepMerge(fetcherOptions, variables)),
+    ...dependabotGetRepoPublicKeyQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -56958,7 +57740,11 @@ export const useDependabotGetRepoSecret = <TData = Schemas.DependabotSecret>(
     DependabotGetRepoSecretError,
     TData
   >({
-    ...dependabotGetRepoSecretQuery(deepMerge(fetcherOptions, variables)),
+    ...dependabotGetRepoSecretQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -57343,7 +58129,11 @@ export const useDependencyGraphDiffRange = <
     DependencyGraphDiffRangeError,
     TData
   >({
-    ...dependencyGraphDiffRangeQuery(deepMerge(fetcherOptions, variables)),
+    ...dependencyGraphDiffRangeQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -57599,7 +58389,11 @@ export const useReposListDeployments = <TData = ReposListDeploymentsResponse>(
     ReposListDeploymentsError,
     TData
   >({
-    ...reposListDeploymentsQuery(deepMerge(fetcherOptions, variables)),
+    ...reposListDeploymentsQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -58024,7 +58818,11 @@ export const useReposGetDeployment = <TData = Schemas.Deployment>(
     ReposGetDeploymentError,
     TData
   >({
-    ...reposGetDeploymentQuery(deepMerge(fetcherOptions, variables)),
+    ...reposGetDeploymentQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -58183,7 +58981,11 @@ export const useReposListDeploymentStatuses = <
     ReposListDeploymentStatusesError,
     TData
   >({
-    ...reposListDeploymentStatusesQuery(deepMerge(fetcherOptions, variables)),
+    ...reposListDeploymentStatusesQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -58440,7 +59242,11 @@ export const useReposGetDeploymentStatus = <TData = Schemas.DeploymentStatus>(
     ReposGetDeploymentStatusError,
     TData
   >({
-    ...reposGetDeploymentStatusQuery(deepMerge(fetcherOptions, variables)),
+    ...reposGetDeploymentStatusQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -58709,7 +59515,11 @@ export const useReposGetAllEnvironments = <
     ReposGetAllEnvironmentsError,
     TData
   >({
-    ...reposGetAllEnvironmentsQuery(deepMerge(fetcherOptions, variables)),
+    ...reposGetAllEnvironmentsQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -58922,7 +59732,11 @@ export const useReposGetEnvironment = <TData = Schemas.Environment>(
     ReposGetEnvironmentError,
     TData
   >({
-    ...reposGetEnvironmentQuery(deepMerge(fetcherOptions, variables)),
+    ...reposGetEnvironmentQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -59215,7 +60029,9 @@ export const useReposListDeploymentBranchPolicies = <
     TData
   >({
     ...reposListDeploymentBranchPoliciesQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -59519,7 +60335,9 @@ export const useReposGetDeploymentBranchPolicy = <
     TData
   >({
     ...reposGetDeploymentBranchPolicyQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -59735,7 +60553,11 @@ export const useActivityListRepoEvents = <
     ActivityListRepoEventsError,
     TData
   >({
-    ...activityListRepoEventsQuery(deepMerge(fetcherOptions, variables)),
+    ...activityListRepoEventsQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -59874,7 +60696,11 @@ export const useReposListForks = <TData = ReposListForksResponse>(
     ReposListForksError,
     TData
   >({
-    ...reposListForksQuery(deepMerge(fetcherOptions, variables)),
+    ...reposListForksQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -60202,7 +61028,11 @@ export const useGitGetBlob = <TData = Schemas.Blob>(
 ) => {
   const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.Blob, GitGetBlobError, TData>({
-    ...gitGetBlobQuery(deepMerge(fetcherOptions, variables)),
+    ...gitGetBlobQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -60624,7 +61454,11 @@ export const useGitGetCommit = <TData = Schemas.GitCommit>(
 ) => {
   const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.GitCommit, GitGetCommitError, TData>({
-    ...gitGetCommitQuery(deepMerge(fetcherOptions, variables)),
+    ...gitGetCommitQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -60782,7 +61616,11 @@ export const useGitListMatchingRefs = <TData = GitListMatchingRefsResponse>(
     GitListMatchingRefsError,
     TData
   >({
-    ...gitListMatchingRefsQuery(deepMerge(fetcherOptions, variables)),
+    ...gitListMatchingRefsQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -60904,7 +61742,11 @@ export const useGitGetRef = <TData = Schemas.GitRef>(
 ) => {
   const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.GitRef, GitGetRefError, TData>({
-    ...gitGetRefQuery(deepMerge(fetcherOptions, variables)),
+    ...gitGetRefQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -61510,7 +62352,11 @@ export const useGitGetTag = <TData = Schemas.GitTag>(
 ) => {
   const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.GitTag, GitGetTagError, TData>({
-    ...gitGetTagQuery(deepMerge(fetcherOptions, variables)),
+    ...gitGetTagQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -61777,7 +62623,11 @@ export const useGitGetTree = <TData = Schemas.GitTree>(
 ) => {
   const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.GitTree, GitGetTreeError, TData>({
-    ...gitGetTreeQuery(deepMerge(fetcherOptions, variables)),
+    ...gitGetTreeQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -61922,7 +62772,11 @@ export const useReposListWebhooks = <TData = ReposListWebhooksResponse>(
     ReposListWebhooksError,
     TData
   >({
-    ...reposListWebhooksQuery(deepMerge(fetcherOptions, variables)),
+    ...reposListWebhooksQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -62250,7 +63104,11 @@ export const useReposGetWebhook = <TData = Schemas.Hook>(
 ) => {
   const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.Hook, ReposGetWebhookError, TData>({
-    ...reposGetWebhookQuery(deepMerge(fetcherOptions, variables)),
+    ...reposGetWebhookQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -62507,7 +63365,11 @@ export const useReposGetWebhookConfigForRepo = <TData = Schemas.WebhookConfig>(
     ReposGetWebhookConfigForRepoError,
     TData
   >({
-    ...reposGetWebhookConfigForRepoQuery(deepMerge(fetcherOptions, variables)),
+    ...reposGetWebhookConfigForRepoQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -62751,7 +63613,11 @@ export const useReposListWebhookDeliveries = <
     ReposListWebhookDeliveriesError,
     TData
   >({
-    ...reposListWebhookDeliveriesQuery(deepMerge(fetcherOptions, variables)),
+    ...reposListWebhookDeliveriesQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -62893,7 +63759,11 @@ export const useReposGetWebhookDelivery = <TData = Schemas.HookDelivery>(
     ReposGetWebhookDeliveryError,
     TData
   >({
-    ...reposGetWebhookDeliveryQuery(deepMerge(fetcherOptions, variables)),
+    ...reposGetWebhookDeliveryQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -63447,7 +64317,11 @@ export const useMigrationsGetImportStatus = <TData = Schemas.Import>(
     MigrationsGetImportStatusError,
     TData
   >({
-    ...migrationsGetImportStatusQuery(deepMerge(fetcherOptions, variables)),
+    ...migrationsGetImportStatusQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -63825,7 +64699,11 @@ export const useMigrationsGetCommitAuthors = <
     MigrationsGetCommitAuthorsError,
     TData
   >({
-    ...migrationsGetCommitAuthorsQuery(deepMerge(fetcherOptions, variables)),
+    ...migrationsGetCommitAuthorsQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -64051,7 +64929,11 @@ export const useMigrationsGetLargeFiles = <
     MigrationsGetLargeFilesError,
     TData
   >({
-    ...migrationsGetLargeFilesQuery(deepMerge(fetcherOptions, variables)),
+    ...migrationsGetLargeFilesQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -64276,7 +65158,11 @@ export const useAppsGetRepoInstallation = <TData = Schemas.Installation>(
     AppsGetRepoInstallationError,
     TData
   >({
-    ...appsGetRepoInstallationQuery(deepMerge(fetcherOptions, variables)),
+    ...appsGetRepoInstallationQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -64480,7 +65366,9 @@ export const useInteractionsGetRestrictionsForRepo = <
     TData
   >({
     ...interactionsGetRestrictionsForRepoQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -64694,7 +65582,11 @@ export const useReposListInvitations = <TData = ReposListInvitationsResponse>(
     ReposListInvitationsError,
     TData
   >({
-    ...reposListInvitationsQuery(deepMerge(fetcherOptions, variables)),
+    ...reposListInvitationsQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -65043,7 +65935,11 @@ export const useIssuesListForRepo = <TData = IssuesListForRepoResponse>(
     IssuesListForRepoError,
     TData
   >({
-    ...issuesListForRepoQuery(deepMerge(fetcherOptions, variables)),
+    ...issuesListForRepoQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -65339,7 +66235,11 @@ export const useIssuesListCommentsForRepo = <
     IssuesListCommentsForRepoError,
     TData
   >({
-    ...issuesListCommentsForRepoQuery(deepMerge(fetcherOptions, variables)),
+    ...issuesListCommentsForRepoQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -65519,7 +66419,11 @@ export const useIssuesGetComment = <TData = Schemas.IssueComment>(
     IssuesGetCommentError,
     TData
   >({
-    ...issuesGetCommentQuery(deepMerge(fetcherOptions, variables)),
+    ...issuesGetCommentQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -65762,7 +66666,11 @@ export const useReactionsListForIssueComment = <
     ReactionsListForIssueCommentError,
     TData
   >({
-    ...reactionsListForIssueCommentQuery(deepMerge(fetcherOptions, variables)),
+    ...reactionsListForIssueCommentQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -66065,7 +66973,11 @@ export const useIssuesListEventsForRepo = <
     IssuesListEventsForRepoError,
     TData
   >({
-    ...issuesListEventsForRepoQuery(deepMerge(fetcherOptions, variables)),
+    ...issuesListEventsForRepoQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -66179,7 +67091,11 @@ export const useIssuesGetEvent = <TData = Schemas.IssueEvent>(
 ) => {
   const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.IssueEvent, IssuesGetEventError, TData>({
-    ...issuesGetEventQuery(deepMerge(fetcherOptions, variables)),
+    ...issuesGetEventQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -66347,7 +67263,11 @@ export const useIssuesGet = <TData = Schemas.Issue>(
 ) => {
   const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.Issue, IssuesGetError, TData>({
-    ...issuesGetQuery(deepMerge(fetcherOptions, variables)),
+    ...issuesGetQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -66789,7 +67709,9 @@ export const useIssuesCheckUserCanBeAssignedToIssue = <TData = undefined>(
     TData
   >({
     ...issuesCheckUserCanBeAssignedToIssueQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -66955,7 +67877,11 @@ export const useIssuesListComments = <TData = IssuesListCommentsResponse>(
     IssuesListCommentsError,
     TData
   >({
-    ...issuesListCommentsQuery(deepMerge(fetcherOptions, variables)),
+    ...issuesListCommentsQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -67184,7 +68110,11 @@ export const useIssuesListEvents = <TData = IssuesListEventsResponse>(
     IssuesListEventsError,
     TData
   >({
-    ...issuesListEventsQuery(deepMerge(fetcherOptions, variables)),
+    ...issuesListEventsQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -67413,7 +68343,11 @@ export const useIssuesListLabelsOnIssue = <
     IssuesListLabelsOnIssueError,
     TData
   >({
-    ...issuesListLabelsOnIssueQuery(deepMerge(fetcherOptions, variables)),
+    ...issuesListLabelsOnIssueQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -68100,7 +69034,11 @@ export const useReactionsListForIssue = <TData = ReactionsListForIssueResponse>(
     ReactionsListForIssueError,
     TData
   >({
-    ...reactionsListForIssueQuery(deepMerge(fetcherOptions, variables)),
+    ...reactionsListForIssueQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -68414,7 +69352,11 @@ export const useIssuesListEventsForTimeline = <
     IssuesListEventsForTimelineError,
     TData
   >({
-    ...issuesListEventsForTimelineQuery(deepMerge(fetcherOptions, variables)),
+    ...issuesListEventsForTimelineQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -68543,7 +69485,11 @@ export const useReposListDeployKeys = <TData = ReposListDeployKeysResponse>(
     ReposListDeployKeysError,
     TData
   >({
-    ...reposListDeployKeysQuery(deepMerge(fetcherOptions, variables)),
+    ...reposListDeployKeysQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -68809,7 +69755,11 @@ export const useReposGetDeployKey = <TData = Schemas.DeployKey>(
 ) => {
   const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.DeployKey, ReposGetDeployKeyError, TData>({
-    ...reposGetDeployKeyQuery(deepMerge(fetcherOptions, variables)),
+    ...reposGetDeployKeyQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -68950,7 +69900,11 @@ export const useIssuesListLabelsForRepo = <
     IssuesListLabelsForRepoError,
     TData
   >({
-    ...issuesListLabelsForRepoQuery(deepMerge(fetcherOptions, variables)),
+    ...issuesListLabelsForRepoQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -69192,7 +70146,11 @@ export const useIssuesGetLabel = <TData = Schemas.Label>(
 ) => {
   const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.Label, IssuesGetLabelError, TData>({
-    ...issuesGetLabelQuery(deepMerge(fetcherOptions, variables)),
+    ...issuesGetLabelQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -69388,7 +70346,11 @@ export const useReposListLanguages = <TData = Schemas.Language>(
 ) => {
   const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.Language, ReposListLanguagesError, TData>({
-    ...reposListLanguagesQuery(deepMerge(fetcherOptions, variables)),
+    ...reposListLanguagesQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -69643,7 +70605,11 @@ export const useLicensesGetForRepo = <TData = Schemas.LicenseContent>(
     LicensesGetForRepoError,
     TData
   >({
-    ...licensesGetForRepoQuery(deepMerge(fetcherOptions, variables)),
+    ...licensesGetForRepoQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -69951,7 +70917,11 @@ export const useIssuesListMilestones = <TData = IssuesListMilestonesResponse>(
     IssuesListMilestonesError,
     TData
   >({
-    ...issuesListMilestonesQuery(deepMerge(fetcherOptions, variables)),
+    ...issuesListMilestonesQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -70223,7 +71193,11 @@ export const useIssuesGetMilestone = <TData = Schemas.Milestone>(
   const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.Milestone, IssuesGetMilestoneError, TData>(
     {
-      ...issuesGetMilestoneQuery(deepMerge(fetcherOptions, variables)),
+      ...issuesGetMilestoneQuery(
+        variables === reactQuery.skipToken
+          ? variables
+          : deepMerge(fetcherOptions, variables)
+      ),
       ...options,
       ...queryOptions,
     }
@@ -70453,7 +71427,11 @@ export const useIssuesListLabelsForMilestone = <
     IssuesListLabelsForMilestoneError,
     TData
   >({
-    ...issuesListLabelsForMilestoneQuery(deepMerge(fetcherOptions, variables)),
+    ...issuesListLabelsForMilestoneQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -70643,7 +71621,9 @@ export const useActivityListRepoNotificationsForAuthenticatedUser = <
     TData
   >({
     ...activityListRepoNotificationsForAuthenticatedUserQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -70903,7 +71883,11 @@ export const useReposGetPages = <TData = Schemas.Page>(
 ) => {
   const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.Page, ReposGetPagesError, TData>({
-    ...reposGetPagesQuery(deepMerge(fetcherOptions, variables)),
+    ...reposGetPagesQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -71541,7 +72525,11 @@ export const useReposListPagesBuilds = <TData = ReposListPagesBuildsResponse>(
     ReposListPagesBuildsError,
     TData
   >({
-    ...reposListPagesBuildsQuery(deepMerge(fetcherOptions, variables)),
+    ...reposListPagesBuildsQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -71722,7 +72710,11 @@ export const useReposGetLatestPagesBuild = <TData = Schemas.PageBuild>(
     ReposGetLatestPagesBuildError,
     TData
   >({
-    ...reposGetLatestPagesBuildQuery(deepMerge(fetcherOptions, variables)),
+    ...reposGetLatestPagesBuildQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -71834,7 +72826,11 @@ export const useReposGetPagesBuild = <TData = Schemas.PageBuild>(
   const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.PageBuild, ReposGetPagesBuildError, TData>(
     {
-      ...reposGetPagesBuildQuery(deepMerge(fetcherOptions, variables)),
+      ...reposGetPagesBuildQuery(
+        variables === reactQuery.skipToken
+          ? variables
+          : deepMerge(fetcherOptions, variables)
+      ),
       ...options,
       ...queryOptions,
     }
@@ -72092,7 +73088,11 @@ export const useReposGetPagesHealthCheck = <
     ReposGetPagesHealthCheckError,
     TData
   >({
-    ...reposGetPagesHealthCheckQuery(deepMerge(fetcherOptions, variables)),
+    ...reposGetPagesHealthCheckQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -72265,7 +73265,11 @@ export const useProjectsListForRepo = <TData = ProjectsListForRepoResponse>(
     ProjectsListForRepoError,
     TData
   >({
-    ...projectsListForRepoQuery(deepMerge(fetcherOptions, variables)),
+    ...projectsListForRepoQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -72519,7 +73523,11 @@ export const usePullsList = <TData = PullsListResponse>(
 ) => {
   const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<PullsListResponse, PullsListError, TData>({
-    ...pullsListQuery(deepMerge(fetcherOptions, variables)),
+    ...pullsListQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -72808,7 +73816,9 @@ export const usePullsListReviewCommentsForRepo = <
     TData
   >({
     ...pullsListReviewCommentsForRepoQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -73018,7 +74028,11 @@ export const usePullsGetReviewComment = <
     PullsGetReviewCommentError,
     TData
   >({
-    ...pullsGetReviewCommentQuery(deepMerge(fetcherOptions, variables)),
+    ...pullsGetReviewCommentQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -73275,7 +74289,9 @@ export const useReactionsListForPullRequestReviewComment = <
     TData
   >({
     ...reactionsListForPullRequestReviewCommentQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -73631,7 +74647,11 @@ export const usePullsGet = <TData = Schemas.PullRequest>(
 ) => {
   const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.PullRequest, PullsGetError, TData>({
-    ...pullsGetQuery(deepMerge(fetcherOptions, variables)),
+    ...pullsGetQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -74078,7 +75098,11 @@ export const usePullsListReviewComments = <
     PullsListReviewCommentsError,
     TData
   >({
-    ...pullsListReviewCommentsQuery(deepMerge(fetcherOptions, variables)),
+    ...pullsListReviewCommentsQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -74444,7 +75468,11 @@ export const usePullsListCommits = <TData = PullsListCommitsResponse>(
     PullsListCommitsError,
     TData
   >({
-    ...pullsListCommitsQuery(deepMerge(fetcherOptions, variables)),
+    ...pullsListCommitsQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -74603,7 +75631,11 @@ export const usePullsListFiles = <TData = PullsListFilesResponse>(
     PullsListFilesError,
     TData
   >({
-    ...pullsListFilesQuery(deepMerge(fetcherOptions, variables)),
+    ...pullsListFilesQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -74707,7 +75739,11 @@ export const usePullsCheckIfMerged = <TData = undefined>(
 ) => {
   const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<undefined, PullsCheckIfMergedError, TData>({
-    ...pullsCheckIfMergedQuery(deepMerge(fetcherOptions, variables)),
+    ...pullsCheckIfMergedQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -75048,7 +76084,11 @@ export const usePullsListRequestedReviewers = <
     PullsListRequestedReviewersError,
     TData
   >({
-    ...pullsListRequestedReviewersQuery(deepMerge(fetcherOptions, variables)),
+    ...pullsListRequestedReviewersQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -75304,7 +76344,11 @@ export const usePullsListReviews = <TData = PullsListReviewsResponse>(
     PullsListReviewsError,
     TData
   >({
-    ...pullsListReviewsQuery(deepMerge(fetcherOptions, variables)),
+    ...pullsListReviewsQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -75638,7 +76682,11 @@ export const usePullsGetReview = <TData = Schemas.PullRequestReview>(
     PullsGetReviewError,
     TData
   >({
-    ...pullsGetReviewQuery(deepMerge(fetcherOptions, variables)),
+    ...pullsGetReviewQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -75881,7 +76929,11 @@ export const usePullsListCommentsForReview = <
     PullsListCommentsForReviewError,
     TData
   >({
-    ...pullsListCommentsForReviewQuery(deepMerge(fetcherOptions, variables)),
+    ...pullsListCommentsForReviewQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -76298,7 +77350,11 @@ export const useReposGetReadme = <TData = Schemas.ContentFile>(
 ) => {
   const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.ContentFile, ReposGetReadmeError, TData>({
-    ...reposGetReadmeQuery(deepMerge(fetcherOptions, variables)),
+    ...reposGetReadmeQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -76455,7 +77511,11 @@ export const useReposGetReadmeInDirectory = <TData = Schemas.ContentFile>(
     ReposGetReadmeInDirectoryError,
     TData
   >({
-    ...reposGetReadmeInDirectoryQuery(deepMerge(fetcherOptions, variables)),
+    ...reposGetReadmeInDirectoryQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -76608,7 +77668,11 @@ export const useReposListReleases = <TData = ReposListReleasesResponse>(
     ReposListReleasesError,
     TData
   >({
-    ...reposListReleasesQuery(deepMerge(fetcherOptions, variables)),
+    ...reposListReleasesQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -76932,7 +77996,11 @@ export const useReposGetReleaseAsset = <TData = Schemas.ReleaseAsset>(
     ReposGetReleaseAssetError,
     TData
   >({
-    ...reposGetReleaseAssetQuery(deepMerge(fetcherOptions, variables)),
+    ...reposGetReleaseAssetQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -77235,7 +78303,11 @@ export const useReposGetLatestRelease = <TData = Schemas.Release>(
     ReposGetLatestReleaseError,
     TData
   >({
-    ...reposGetLatestReleaseQuery(deepMerge(fetcherOptions, variables)),
+    ...reposGetLatestReleaseQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -77365,7 +78437,11 @@ export const useReposGetReleaseByTag = <TData = Schemas.Release>(
   const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.Release, ReposGetReleaseByTagError, TData>(
     {
-      ...reposGetReleaseByTagQuery(deepMerge(fetcherOptions, variables)),
+      ...reposGetReleaseByTagQuery(
+        variables === reactQuery.skipToken
+          ? variables
+          : deepMerge(fetcherOptions, variables)
+      ),
       ...options,
       ...queryOptions,
     }
@@ -77552,7 +78628,11 @@ export const useReposGetRelease = <TData = Schemas.Release>(
 ) => {
   const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.Release, ReposGetReleaseError, TData>({
-    ...reposGetReleaseQuery(deepMerge(fetcherOptions, variables)),
+    ...reposGetReleaseQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -77800,7 +78880,11 @@ export const useReposListReleaseAssets = <
     ReposListReleaseAssetsError,
     TData
   >({
-    ...reposListReleaseAssetsQuery(deepMerge(fetcherOptions, variables)),
+    ...reposListReleaseAssetsQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -78071,7 +79155,11 @@ export const useReactionsListForRelease = <
     ReactionsListForReleaseError,
     TData
   >({
-    ...reactionsListForReleaseQuery(deepMerge(fetcherOptions, variables)),
+    ...reactionsListForReleaseQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -78433,7 +79521,9 @@ export const useSecretScanningListAlertsForRepo = <
     TData
   >({
     ...secretScanningListAlertsForRepoQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -78591,7 +79681,11 @@ export const useSecretScanningGetAlert = <TData = Schemas.SecretScanningAlert>(
     SecretScanningGetAlertError,
     TData
   >({
-    ...secretScanningGetAlertQuery(deepMerge(fetcherOptions, variables)),
+    ...secretScanningGetAlertQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -78857,7 +79951,9 @@ export const useSecretScanningListLocationsForAlert = <
     TData
   >({
     ...secretScanningListLocationsForAlertQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -79019,7 +80115,11 @@ export const useActivityListStargazersForRepo = <
     ActivityListStargazersForRepoError,
     TData
   >({
-    ...activityListStargazersForRepoQuery(deepMerge(fetcherOptions, variables)),
+    ...activityListStargazersForRepoQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -79163,7 +80263,11 @@ export const useReposGetCodeFrequencyStats = <
     ReposGetCodeFrequencyStatsError,
     TData
   >({
-    ...reposGetCodeFrequencyStatsQuery(deepMerge(fetcherOptions, variables)),
+    ...reposGetCodeFrequencyStatsQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -79301,7 +80405,11 @@ export const useReposGetCommitActivityStats = <
     ReposGetCommitActivityStatsError,
     TData
   >({
-    ...reposGetCommitActivityStatsQuery(deepMerge(fetcherOptions, variables)),
+    ...reposGetCommitActivityStatsQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -79465,7 +80573,11 @@ export const useReposGetContributorsStats = <
     ReposGetContributorsStatsError,
     TData
   >({
-    ...reposGetContributorsStatsQuery(deepMerge(fetcherOptions, variables)),
+    ...reposGetContributorsStatsQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -79606,7 +80718,11 @@ export const useReposGetParticipationStats = <
     ReposGetParticipationStatsError,
     TData
   >({
-    ...reposGetParticipationStatsQuery(deepMerge(fetcherOptions, variables)),
+    ...reposGetParticipationStatsQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -79764,7 +80880,11 @@ export const useReposGetPunchCardStats = <
     ReposGetPunchCardStatsError,
     TData
   >({
-    ...reposGetPunchCardStatsQuery(deepMerge(fetcherOptions, variables)),
+    ...reposGetPunchCardStatsQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -80008,7 +81128,11 @@ export const useActivityListWatchersForRepo = <
     ActivityListWatchersForRepoError,
     TData
   >({
-    ...activityListWatchersForRepoQuery(deepMerge(fetcherOptions, variables)),
+    ...activityListWatchersForRepoQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -80193,7 +81317,11 @@ export const useActivityGetRepoSubscription = <
     ActivityGetRepoSubscriptionError,
     TData
   >({
-    ...activityGetRepoSubscriptionQuery(deepMerge(fetcherOptions, variables)),
+    ...activityGetRepoSubscriptionQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -80388,7 +81516,11 @@ export const useReposListTags = <TData = ReposListTagsResponse>(
 ) => {
   const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<ReposListTagsResponse, ReposListTagsError, TData>({
-    ...reposListTagsQuery(deepMerge(fetcherOptions, variables)),
+    ...reposListTagsQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -80537,7 +81669,11 @@ export const useReposListTagProtection = <
     ReposListTagProtectionError,
     TData
   >({
-    ...reposListTagProtectionQuery(deepMerge(fetcherOptions, variables)),
+    ...reposListTagProtectionQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -80836,7 +81972,11 @@ export const useReposDownloadTarballArchive = <TData = undefined>(
     ReposDownloadTarballArchiveError,
     TData
   >({
-    ...reposDownloadTarballArchiveQuery(deepMerge(fetcherOptions, variables)),
+    ...reposDownloadTarballArchiveQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -80966,7 +82106,11 @@ export const useReposListTeams = <TData = ReposListTeamsResponse>(
     ReposListTeamsError,
     TData
   >({
-    ...reposListTeamsQuery(deepMerge(fetcherOptions, variables)),
+    ...reposListTeamsQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -81085,7 +82229,11 @@ export const useReposGetAllTopics = <TData = Schemas.Topic>(
 ) => {
   const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.Topic, ReposGetAllTopicsError, TData>({
-    ...reposGetAllTopicsQuery(deepMerge(fetcherOptions, variables)),
+    ...reposGetAllTopicsQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -81292,7 +82440,11 @@ export const useReposGetClones = <TData = Schemas.CloneTraffic>(
 ) => {
   const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.CloneTraffic, ReposGetClonesError, TData>({
-    ...reposGetClonesQuery(deepMerge(fetcherOptions, variables)),
+    ...reposGetClonesQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -81421,7 +82573,11 @@ export const useReposGetTopPaths = <TData = ReposGetTopPathsResponse>(
     ReposGetTopPathsError,
     TData
   >({
-    ...reposGetTopPathsQuery(deepMerge(fetcherOptions, variables)),
+    ...reposGetTopPathsQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -81554,7 +82710,11 @@ export const useReposGetTopReferrers = <TData = ReposGetTopReferrersResponse>(
     ReposGetTopReferrersError,
     TData
   >({
-    ...reposGetTopReferrersQuery(deepMerge(fetcherOptions, variables)),
+    ...reposGetTopReferrersQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -81678,7 +82838,11 @@ export const useReposGetViews = <TData = Schemas.ViewTraffic>(
 ) => {
   const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.ViewTraffic, ReposGetViewsError, TData>({
-    ...reposGetViewsQuery(deepMerge(fetcherOptions, variables)),
+    ...reposGetViewsQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -81954,7 +83118,11 @@ export const useReposCheckVulnerabilityAlerts = <TData = undefined>(
     ReposCheckVulnerabilityAlertsError,
     TData
   >({
-    ...reposCheckVulnerabilityAlertsQuery(deepMerge(fetcherOptions, variables)),
+    ...reposCheckVulnerabilityAlertsQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -82161,7 +83329,11 @@ export const useReposDownloadZipballArchive = <TData = undefined>(
     ReposDownloadZipballArchiveError,
     TData
   >({
-    ...reposDownloadZipballArchiveQuery(deepMerge(fetcherOptions, variables)),
+    ...reposDownloadZipballArchiveQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -82402,7 +83574,11 @@ export const useReposListPublic = <TData = ReposListPublicResponse>(
     ReposListPublicError,
     TData
   >({
-    ...reposListPublicQuery(deepMerge(fetcherOptions, variables)),
+    ...reposListPublicQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -82558,7 +83734,11 @@ export const useActionsListEnvironmentSecrets = <
     ActionsListEnvironmentSecretsError,
     TData
   >({
-    ...actionsListEnvironmentSecretsQuery(deepMerge(fetcherOptions, variables)),
+    ...actionsListEnvironmentSecretsQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -82692,7 +83872,9 @@ export const useActionsGetEnvironmentPublicKey = <
     TData
   >({
     ...actionsGetEnvironmentPublicKeyQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -82893,7 +84075,11 @@ export const useActionsGetEnvironmentSecret = <TData = Schemas.ActionsSecret>(
     ActionsGetEnvironmentSecretError,
     TData
   >({
-    ...actionsGetEnvironmentSecretQuery(deepMerge(fetcherOptions, variables)),
+    ...actionsGetEnvironmentSecretQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -83286,7 +84472,9 @@ export const useActionsListEnvironmentVariables = <
     TData
   >({
     ...actionsListEnvironmentVariablesQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -83578,7 +84766,11 @@ export const useActionsGetEnvironmentVariable = <
     ActionsGetEnvironmentVariableError,
     TData
   >({
-    ...actionsGetEnvironmentVariableQuery(deepMerge(fetcherOptions, variables)),
+    ...actionsGetEnvironmentVariableQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -83879,7 +85071,11 @@ export const useSearchCode = <TData = SearchCodeResponse>(
 ) => {
   const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<SearchCodeResponse, SearchCodeError, TData>({
-    ...searchCodeQuery(deepMerge(fetcherOptions, variables)),
+    ...searchCodeQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -84048,7 +85244,11 @@ export const useSearchCommits = <TData = SearchCommitsResponse>(
 ) => {
   const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<SearchCommitsResponse, SearchCommitsError, TData>({
-    ...searchCommitsQuery(deepMerge(fetcherOptions, variables)),
+    ...searchCommitsQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -84273,7 +85473,11 @@ export const useSearchIssuesAndPullRequests = <
     SearchIssuesAndPullRequestsError,
     TData
   >({
-    ...searchIssuesAndPullRequestsQuery(deepMerge(fetcherOptions, variables)),
+    ...searchIssuesAndPullRequestsQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -84456,7 +85660,11 @@ export const useSearchLabels = <TData = SearchLabelsResponse>(
 ) => {
   const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<SearchLabelsResponse, SearchLabelsError, TData>({
-    ...searchLabelsQuery(deepMerge(fetcherOptions, variables)),
+    ...searchLabelsQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -84631,7 +85839,11 @@ export const useSearchRepos = <TData = SearchReposResponse>(
 ) => {
   const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<SearchReposResponse, SearchReposError, TData>({
-    ...searchReposQuery(deepMerge(fetcherOptions, variables)),
+    ...searchReposQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -84786,7 +85998,11 @@ export const useSearchTopics = <TData = SearchTopicsResponse>(
 ) => {
   const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<SearchTopicsResponse, SearchTopicsError, TData>({
-    ...searchTopicsQuery(deepMerge(fetcherOptions, variables)),
+    ...searchTopicsQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -84961,7 +86177,11 @@ export const useSearchUsers = <TData = SearchUsersResponse>(
 ) => {
   const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<SearchUsersResponse, SearchUsersError, TData>({
-    ...searchUsersQuery(deepMerge(fetcherOptions, variables)),
+    ...searchUsersQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -85138,7 +86358,11 @@ export const useTeamsGetLegacy = <TData = Schemas.TeamFull>(
 ) => {
   const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<Schemas.TeamFull, TeamsGetLegacyError, TData>({
-    ...teamsGetLegacyQuery(deepMerge(fetcherOptions, variables)),
+    ...teamsGetLegacyQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -85404,7 +86628,11 @@ export const useTeamsListDiscussionsLegacy = <
     TeamsListDiscussionsLegacyError,
     TData
   >({
-    ...teamsListDiscussionsLegacyQuery(deepMerge(fetcherOptions, variables)),
+    ...teamsListDiscussionsLegacyQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -85692,7 +86920,11 @@ export const useTeamsGetDiscussionLegacy = <TData = Schemas.TeamDiscussion>(
     TeamsGetDiscussionLegacyError,
     TData
   >({
-    ...teamsGetDiscussionLegacyQuery(deepMerge(fetcherOptions, variables)),
+    ...teamsGetDiscussionLegacyQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -85942,7 +87174,9 @@ export const useTeamsListDiscussionCommentsLegacy = <
     TData
   >({
     ...teamsListDiscussionCommentsLegacyQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -86245,7 +87479,9 @@ export const useTeamsGetDiscussionCommentLegacy = <
     TData
   >({
     ...teamsGetDiscussionCommentLegacyQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -86515,7 +87751,9 @@ export const useReactionsListForTeamDiscussionCommentLegacy = <
     TData
   >({
     ...reactionsListForTeamDiscussionCommentLegacyQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -86790,7 +88028,9 @@ export const useReactionsListForTeamDiscussionLegacy = <
     TData
   >({
     ...reactionsListForTeamDiscussionLegacyQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -87038,7 +88278,9 @@ export const useTeamsListPendingInvitationsLegacy = <
     TData
   >({
     ...teamsListPendingInvitationsLegacyQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -87195,7 +88437,11 @@ export const useTeamsListMembersLegacy = <
     TeamsListMembersLegacyError,
     TData
   >({
-    ...teamsListMembersLegacyQuery(deepMerge(fetcherOptions, variables)),
+    ...teamsListMembersLegacyQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -87404,7 +88650,11 @@ export const useTeamsGetMemberLegacy = <TData = undefined>(
 ) => {
   const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<undefined, TeamsGetMemberLegacyError, TData>({
-    ...teamsGetMemberLegacyQuery(deepMerge(fetcherOptions, variables)),
+    ...teamsGetMemberLegacyQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -87740,7 +88990,9 @@ export const useTeamsGetMembershipForUserLegacy = <
     TData
   >({
     ...teamsGetMembershipForUserLegacyQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -87992,7 +89244,11 @@ export const useTeamsListProjectsLegacy = <
     TeamsListProjectsLegacyError,
     TData
   >({
-    ...teamsListProjectsLegacyQuery(deepMerge(fetcherOptions, variables)),
+    ...teamsListProjectsLegacyQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -88216,7 +89472,9 @@ export const useTeamsCheckPermissionsForProjectLegacy = <
     TData
   >({
     ...teamsCheckPermissionsForProjectLegacyQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -88453,7 +89711,11 @@ export const useTeamsListReposLegacy = <TData = TeamsListReposLegacyResponse>(
     TeamsListReposLegacyError,
     TData
   >({
-    ...teamsListReposLegacyQuery(deepMerge(fetcherOptions, variables)),
+    ...teamsListReposLegacyQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -88678,7 +89940,9 @@ export const useTeamsCheckPermissionsForRepoLegacy = <
     TData
   >({
     ...teamsCheckPermissionsForRepoLegacyQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -88923,7 +90187,11 @@ export const useTeamsListChildLegacy = <TData = TeamsListChildLegacyResponse>(
     TeamsListChildLegacyError,
     TData
   >({
-    ...teamsListChildLegacyQuery(deepMerge(fetcherOptions, variables)),
+    ...teamsListChildLegacyQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -89060,7 +90328,11 @@ export const useUsersGetAuthenticated = <
     UsersGetAuthenticatedError,
     TData
   >({
-    ...usersGetAuthenticatedQuery(deepMerge(fetcherOptions, variables)),
+    ...usersGetAuthenticatedQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -89332,7 +90604,9 @@ export const useUsersListBlockedByAuthenticatedUser = <
     TData
   >({
     ...usersListBlockedByAuthenticatedUserQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -89502,7 +90776,11 @@ export const useUsersCheckBlocked = <TData = undefined>(
 ) => {
   const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<undefined, UsersCheckBlockedError, TData>({
-    ...usersCheckBlockedQuery(deepMerge(fetcherOptions, variables)),
+    ...usersCheckBlockedQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -89753,7 +91031,9 @@ export const useCodespacesListForAuthenticatedUser = <
     TData
   >({
     ...codespacesListForAuthenticatedUserQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -90161,7 +91441,9 @@ export const useCodespacesListSecretsForAuthenticatedUser = <
     TData
   >({
     ...codespacesListSecretsForAuthenticatedUserQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -90308,7 +91590,9 @@ export const useCodespacesGetPublicKeyForAuthenticatedUser = <
     TData
   >({
     ...codespacesGetPublicKeyForAuthenticatedUserQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -90533,7 +91817,9 @@ export const useCodespacesGetSecretForAuthenticatedUser = <
     TData
   >({
     ...codespacesGetSecretForAuthenticatedUserQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -90960,7 +92246,9 @@ export const useCodespacesListRepositoriesForSecretForAuthenticatedUser = <
     TData
   >({
     ...codespacesListRepositoriesForSecretForAuthenticatedUserQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -91486,7 +92774,9 @@ export const useCodespacesGetForAuthenticatedUser = <TData = Schemas.Codespace>(
     TData
   >({
     ...codespacesGetForAuthenticatedUserQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -91845,7 +93135,9 @@ export const useCodespacesGetExportDetailsForAuthenticatedUser = <
     TData
   >({
     ...codespacesGetExportDetailsForAuthenticatedUserQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -92031,7 +93323,9 @@ export const useCodespacesCodespaceMachinesForAuthenticatedUser = <
     TData
   >({
     ...codespacesCodespaceMachinesForAuthenticatedUserQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -92653,7 +93947,9 @@ export const useUsersListEmailsForAuthenticatedUser = <
     TData
   >({
     ...usersListEmailsForAuthenticatedUserQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -92899,7 +94195,9 @@ export const useUsersListFollowersForAuthenticatedUser = <
     TData
   >({
     ...usersListFollowersForAuthenticatedUserQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -93057,7 +94355,9 @@ export const useUsersListFollowedByAuthenticatedUser = <
     TData
   >({
     ...usersListFollowedByAuthenticatedUserQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -93268,7 +94568,9 @@ export const useUsersCheckPersonIsFollowedByAuthenticated = <TData = undefined>(
     TData
   >({
     ...usersCheckPersonIsFollowedByAuthenticatedQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -93505,7 +94807,9 @@ export const useUsersListGpgKeysForAuthenticatedUser = <
     TData
   >({
     ...usersListGpgKeysForAuthenticatedUserQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -93808,7 +95112,9 @@ export const useUsersGetGpgKeyForAuthenticatedUser = <TData = Schemas.GpgKey>(
     TData
   >({
     ...usersGetGpgKeyForAuthenticatedUserQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -93994,7 +95300,9 @@ export const useAppsListInstallationsForAuthenticatedUser = <
     TData
   >({
     ...appsListInstallationsForAuthenticatedUserQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -94197,7 +95505,9 @@ export const useAppsListInstallationReposForAuthenticatedUser = <
     TData
   >({
     ...appsListInstallationReposForAuthenticatedUserQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -94554,7 +95864,9 @@ export const useInteractionsGetRestrictionsForAuthenticatedUser = <
     TData
   >({
     ...interactionsGetRestrictionsForAuthenticatedUserQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -94817,7 +96129,9 @@ export const useIssuesListForAuthenticatedUser = <
     TData
   >({
     ...issuesListForAuthenticatedUserQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -94980,7 +96294,9 @@ export const useUsersListPublicSshKeysForAuthenticatedUser = <
     TData
   >({
     ...usersListPublicSshKeysForAuthenticatedUserQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -95293,7 +96609,9 @@ export const useUsersGetPublicSshKeyForAuthenticatedUser = <
     TData
   >({
     ...usersGetPublicSshKeyForAuthenticatedUserQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -95458,7 +96776,9 @@ export const useAppsListSubscriptionsForAuthenticatedUser = <
     TData
   >({
     ...appsListSubscriptionsForAuthenticatedUserQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -95622,7 +96942,9 @@ export const useAppsListSubscriptionsForAuthenticatedUserStubbed = <
     TData
   >({
     ...appsListSubscriptionsForAuthenticatedUserStubbedQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -95777,7 +97099,9 @@ export const useOrgsListMembershipsForAuthenticatedUser = <
     TData
   >({
     ...orgsListMembershipsForAuthenticatedUserQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -95910,7 +97234,9 @@ export const useOrgsGetMembershipForAuthenticatedUser = <
     TData
   >({
     ...orgsGetMembershipForAuthenticatedUserQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -96141,7 +97467,9 @@ export const useMigrationsListForAuthenticatedUser = <
     TData
   >({
     ...migrationsListForAuthenticatedUserQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -96446,7 +97774,9 @@ export const useMigrationsGetStatusForAuthenticatedUser = <
     TData
   >({
     ...migrationsGetStatusForAuthenticatedUserQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -96755,7 +98085,9 @@ export const useMigrationsGetArchiveForAuthenticatedUser = <TData = undefined>(
     TData
   >({
     ...migrationsGetArchiveForAuthenticatedUserQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -97003,7 +98335,9 @@ export const useMigrationsListReposForAuthenticatedUser = <
     TData
   >({
     ...migrationsListReposForAuthenticatedUserQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -97168,7 +98502,11 @@ export const useOrgsListForAuthenticatedUser = <
     OrgsListForAuthenticatedUserError,
     TData
   >({
-    ...orgsListForAuthenticatedUserQuery(deepMerge(fetcherOptions, variables)),
+    ...orgsListForAuthenticatedUserQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -97321,7 +98659,9 @@ export const usePackagesListPackagesForAuthenticatedUser = <
     TData
   >({
     ...packagesListPackagesForAuthenticatedUserQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -97557,7 +98897,9 @@ export const usePackagesGetPackageForAuthenticatedUser = <
     TData
   >({
     ...packagesGetPackageForAuthenticatedUserQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -97865,7 +99207,9 @@ export const usePackagesGetAllPackageVersionsForPackageOwnedByAuthenticatedUser 
       TData
     >({
       ...packagesGetAllPackageVersionsForPackageOwnedByAuthenticatedUserQuery(
-        deepMerge(fetcherOptions, variables)
+        variables === reactQuery.skipToken
+          ? variables
+          : deepMerge(fetcherOptions, variables)
       ),
       ...options,
       ...queryOptions,
@@ -98112,7 +99456,9 @@ export const usePackagesGetPackageVersionForAuthenticatedUser = <
     TData
   >({
     ...packagesGetPackageVersionForAuthenticatedUserQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -98453,7 +99799,9 @@ export const useUsersListPublicEmailsForAuthenticatedUser = <
     TData
   >({
     ...usersListPublicEmailsForAuthenticatedUserQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -98657,7 +100005,11 @@ export const useReposListForAuthenticatedUser = <
     ReposListForAuthenticatedUserError,
     TData
   >({
-    ...reposListForAuthenticatedUserQuery(deepMerge(fetcherOptions, variables)),
+    ...reposListForAuthenticatedUserQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -99065,7 +100417,9 @@ export const useReposListInvitationsForAuthenticatedUser = <
     TData
   >({
     ...reposListInvitationsForAuthenticatedUserQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -99379,7 +100733,9 @@ export const useUsersListSshSigningKeysForAuthenticatedUser = <
     TData
   >({
     ...usersListSshSigningKeysForAuthenticatedUserQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -99702,7 +101058,9 @@ export const useUsersGetSshSigningKeyForAuthenticatedUser = <
     TData
   >({
     ...usersGetSshSigningKeyForAuthenticatedUserQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -99882,7 +101240,9 @@ export const useActivityListReposStarredByAuthenticatedUser = <
     TData
   >({
     ...activityListReposStarredByAuthenticatedUserQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -100107,7 +101467,9 @@ export const useActivityCheckRepoIsStarredByAuthenticatedUser = <
     TData
   >({
     ...activityCheckRepoIsStarredByAuthenticatedUserQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -100352,7 +101714,9 @@ export const useActivityListWatchedReposForAuthenticatedUser = <
     TData
   >({
     ...activityListWatchedReposForAuthenticatedUserQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -100501,7 +101865,11 @@ export const useTeamsListForAuthenticatedUser = <
     TeamsListForAuthenticatedUserError,
     TData
   >({
-    ...teamsListForAuthenticatedUserQuery(deepMerge(fetcherOptions, variables)),
+    ...teamsListForAuthenticatedUserQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -100618,7 +101986,11 @@ export const useUsersList = <TData = UsersListResponse>(
 ) => {
   const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<UsersListResponse, UsersListError, TData>({
-    ...usersListQuery(deepMerge(fetcherOptions, variables)),
+    ...usersListQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -100770,7 +102142,11 @@ export const useUsersGetByUsername = <
     UsersGetByUsernameError,
     TData
   >({
-    ...usersGetByUsernameQuery(deepMerge(fetcherOptions, variables)),
+    ...usersGetByUsernameQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -100923,7 +102299,9 @@ export const useActivityListEventsForAuthenticatedUser = <
     TData
   >({
     ...activityListEventsForAuthenticatedUserQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -101086,7 +102464,9 @@ export const useActivityListOrgEventsForAuthenticatedUser = <
     TData
   >({
     ...activityListOrgEventsForAuthenticatedUserQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -101227,7 +102607,9 @@ export const useActivityListPublicEventsForUser = <
     TData
   >({
     ...activityListPublicEventsForUserQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -101374,7 +102756,11 @@ export const useUsersListFollowersForUser = <
     UsersListFollowersForUserError,
     TData
   >({
-    ...usersListFollowersForUserQuery(deepMerge(fetcherOptions, variables)),
+    ...usersListFollowersForUserQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -101520,7 +102906,11 @@ export const useUsersListFollowingForUser = <
     UsersListFollowingForUserError,
     TData
   >({
-    ...usersListFollowingForUserQuery(deepMerge(fetcherOptions, variables)),
+    ...usersListFollowingForUserQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -101628,7 +103018,11 @@ export const useUsersCheckFollowingForUser = <TData = undefined>(
   const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<undefined, UsersCheckFollowingForUserError, TData>(
     {
-      ...usersCheckFollowingForUserQuery(deepMerge(fetcherOptions, variables)),
+      ...usersCheckFollowingForUserQuery(
+        variables === reactQuery.skipToken
+          ? variables
+          : deepMerge(fetcherOptions, variables)
+      ),
       ...options,
       ...queryOptions,
     }
@@ -101771,7 +103165,11 @@ export const useGistsListForUser = <TData = GistsListForUserResponse>(
     GistsListForUserError,
     TData
   >({
-    ...gistsListForUserQuery(deepMerge(fetcherOptions, variables)),
+    ...gistsListForUserQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -101912,7 +103310,11 @@ export const useUsersListGpgKeysForUser = <
     UsersListGpgKeysForUserError,
     TData
   >({
-    ...usersListGpgKeysForUserQuery(deepMerge(fetcherOptions, variables)),
+    ...usersListGpgKeysForUserQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -102083,7 +103485,11 @@ export const useUsersGetContextForUser = <TData = Schemas.Hovercard>(
     UsersGetContextForUserError,
     TData
   >({
-    ...usersGetContextForUserQuery(deepMerge(fetcherOptions, variables)),
+    ...usersGetContextForUserQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -102215,7 +103621,11 @@ export const useAppsGetUserInstallation = <TData = Schemas.Installation>(
     AppsGetUserInstallationError,
     TData
   >({
-    ...appsGetUserInstallationQuery(deepMerge(fetcherOptions, variables)),
+    ...appsGetUserInstallationQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -102356,7 +103766,11 @@ export const useUsersListPublicKeysForUser = <
     UsersListPublicKeysForUserError,
     TData
   >({
-    ...usersListPublicKeysForUserQuery(deepMerge(fetcherOptions, variables)),
+    ...usersListPublicKeysForUserQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -102497,7 +103911,11 @@ export const useOrgsListForUser = <TData = OrgsListForUserResponse>(
     OrgsListForUserError,
     TData
   >({
-    ...orgsListForUserQuery(deepMerge(fetcherOptions, variables)),
+    ...orgsListForUserQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -102656,7 +104074,11 @@ export const usePackagesListPackagesForUser = <
     PackagesListPackagesForUserError,
     TData
   >({
-    ...packagesListPackagesForUserQuery(deepMerge(fetcherOptions, variables)),
+    ...packagesListPackagesForUserQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -102882,7 +104304,11 @@ export const usePackagesGetPackageForUser = <TData = Schemas.Package>(
     PackagesGetPackageForUserError,
     TData
   >({
-    ...packagesGetPackageForUserQuery(deepMerge(fetcherOptions, variables)),
+    ...packagesGetPackageForUserQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -103161,7 +104587,9 @@ export const usePackagesGetAllPackageVersionsForPackageOwnedByUser = <
     TData
   >({
     ...packagesGetAllPackageVersionsForPackageOwnedByUserQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -103406,7 +104834,9 @@ export const usePackagesGetPackageVersionForUser = <
     TData
   >({
     ...packagesGetPackageVersionForUserQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -103643,7 +105073,11 @@ export const useProjectsListForUser = <TData = ProjectsListForUserResponse>(
     ProjectsListForUserError,
     TData
   >({
-    ...projectsListForUserQuery(deepMerge(fetcherOptions, variables)),
+    ...projectsListForUserQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -103795,7 +105229,9 @@ export const useActivityListReceivedEventsForUser = <
     TData
   >({
     ...activityListReceivedEventsForUserQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -103942,7 +105378,9 @@ export const useActivityListReceivedPublicEventsForUser = <
     TData
   >({
     ...activityListReceivedPublicEventsForUserQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -104092,7 +105530,11 @@ export const useReposListForUser = <TData = ReposListForUserResponse>(
     ReposListForUserError,
     TData
   >({
-    ...reposListForUserQuery(deepMerge(fetcherOptions, variables)),
+    ...reposListForUserQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -104238,7 +105680,9 @@ export const useBillingGetGithubActionsBillingUser = <
     TData
   >({
     ...billingGetGithubActionsBillingUserQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -104387,7 +105831,9 @@ export const useBillingGetGithubPackagesBillingUser = <
     TData
   >({
     ...billingGetGithubPackagesBillingUserQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -104534,7 +105980,9 @@ export const useBillingGetSharedStorageBillingUser = <
     TData
   >({
     ...billingGetSharedStorageBillingUserQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -104687,7 +106135,9 @@ export const useUsersListSshSigningKeysForUser = <
     TData
   >({
     ...usersListSshSigningKeysForUserQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -104853,7 +106303,9 @@ export const useActivityListReposStarredByUser = <
     TData
   >({
     ...activityListReposStarredByUserQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -105007,7 +106459,9 @@ export const useActivityListReposWatchedByUser = <
     TData
   >({
     ...activityListReposWatchedByUserQuery(
-      deepMerge(fetcherOptions, variables)
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
     ),
     ...options,
     ...queryOptions,
@@ -105123,7 +106577,11 @@ export const useMetaGetAllVersions = <TData = MetaGetAllVersionsResponse>(
     MetaGetAllVersionsError,
     TData
   >({
-    ...metaGetAllVersionsQuery(deepMerge(fetcherOptions, variables)),
+    ...metaGetAllVersionsQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
@@ -105210,7 +106668,11 @@ export const useMetaGetZen = <TData = undefined>(
 ) => {
   const { queryOptions, fetcherOptions } = useGithubContext(options);
   return reactQuery.useQuery<undefined, MetaGetZenError, TData>({
-    ...metaGetZenQuery(deepMerge(fetcherOptions, variables)),
+    ...metaGetZenQuery(
+      variables === reactQuery.skipToken
+        ? variables
+        : deepMerge(fetcherOptions, variables)
+    ),
     ...options,
     ...queryOptions,
   });
