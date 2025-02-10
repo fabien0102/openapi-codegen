@@ -331,7 +331,9 @@ export const generateReactQueryComponents = async (
     utils: utilsFilename,
   });
 
-  await context.writeFile(`${utilsFilename}.ts`, getUtils());
+  if (!context.existsFile(`${utilsFilename}.ts`)) {
+    await context.writeFile(`${utilsFilename}.ts`, getUtils());
+  }
 
   await context.writeFile(
     filename + ".ts",
