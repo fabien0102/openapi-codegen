@@ -1,5 +1,13 @@
 # Changelog
 
+## [11.0.1](https://github.com/fabien0102/openapi-codegen/compare/typescript-v11.0.0...typescript-v11.0.1) (2025-02-17)
+
+
+### Bug Fixes
+
+* Deal with empty object generation ([#299](https://github.com/fabien0102/openapi-codegen/issues/299)) ([e36516a](https://github.com/fabien0102/openapi-codegen/commit/e36516a9ff937a30ac12e08855a3387b4601b890)), closes [#258](https://github.com/fabien0102/openapi-codegen/issues/258)
+* Issue with generated utils. ([#291](https://github.com/fabien0102/openapi-codegen/issues/291)) ([e6cdf21](https://github.com/fabien0102/openapi-codegen/commit/e6cdf217b89d13f3ce52327895340d99943a8bd0))
+
 ## [11.0.0](https://github.com/fabien0102/openapi-codegen/compare/typescript-v10.0.0...typescript-v11.0.0) (2025-02-08)
 
 

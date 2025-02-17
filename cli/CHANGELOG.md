@@ -1,5 +1,13 @@
 # Changelog
 
+## [3.1.0](https://github.com/fabien0102/openapi-codegen/compare/cli-v3.0.1...cli-v3.1.0) (2025-02-17)
+
+
+### Features
+
+* Add a way to generate all configs at once ([#297](https://github.com/fabien0102/openapi-codegen/issues/297)) ([f795e7c](https://github.com/fabien0102/openapi-codegen/commit/f795e7c178ae26778d1040490117b206f43d7f6d)), closes [#195](https://github.com/fabien0102/openapi-codegen/issues/195)
+* handle large specs ([#301](https://github.com/fabien0102/openapi-codegen/issues/301)) ([307c0e3](https://github.com/fabien0102/openapi-codegen/commit/307c0e3daca8351265d86b16c312989a83d2e912))
+
 ## [3.0.1](https://github.com/fabien0102/openapi-codegen/compare/cli-v3.0.0...cli-v3.0.1) (2025-01-18)
 
 ### Bug Fixes
