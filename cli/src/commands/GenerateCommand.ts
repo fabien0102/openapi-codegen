@@ -1,4 +1,5 @@
 import { Command, Option, UsageError } from "clipanion";
+import { tasks } from "@clack/prompts";
 import * as t from "typanion";
 import fsExtra from "fs-extra";
 import { posix as path } from "path";
@@ -24,7 +25,7 @@ export class GenerateCommand extends Command {
     env: "OPENAPI_CODEGEN_CONFIG",
   });
 
-  namespace = Option.String();
+  namespace = Option.String({ required: false });
 
   source = Option.String(`--source`, {
     description: "Source of the spec (file, url or github)",
@@ -78,6 +79,7 @@ export class GenerateCommand extends Command {
     examples: [
       [`From a config key`, `$0 gen myapi`],
       [`With some override`, `$0 gen myapi --ref awesome-feature`],
+      [`All configs`, `$0 gen`],
     ],
   });
 
@@ -205,62 +207,69 @@ export class GenerateCommand extends Command {
 
   async execute() {
     const configs = await this.loadConfigs();
-    if (!(this.namespace in configs)) {
+    if (this.namespace && !(this.namespace in configs)) {
       throw new UsageError(
         `"${this.namespace}" is not defined in your configuration`
       );
     }
 
-    const config = configs[this.namespace];
-    const options = this.getFromOptions(config);
-    if (options.source === "github" && this.pullRequest) {
-      const token = await getGithubToken();
-      const pullRequest = await resolveGithubPullRequest({
-        pullRequestNumber: this.pullRequest,
-        options,
-        token,
-      });
+    await tasks(
+      Object.entries(configs).map(([configName, config]) => ({
+        title: `Generating ${configName} components`,
+        enabled: this.namespace ? this.namespace === configName : true,
+        task: async () => {
+          const options = this.getFromOptions(config);
+          if (options.source === "github" && this.pullRequest) {
+            const token = await getGithubToken();
+            const pullRequest = await resolveGithubPullRequest({
+              pullRequestNumber: this.pullRequest,
+              options,
+              token,
+            });
 
-      options.ref = pullRequest.ref;
-      options.owner = pullRequest.owner;
-      options.repository = pullRequest.repository;
-    }
+            options.ref = pullRequest.ref;
+            options.owner = pullRequest.owner;
+            options.repository = pullRequest.repository;
+          }
 
-    const sourceFile = await getOpenAPISourceFile(options);
-    const openAPIDocument = await parseOpenAPISourceFile(sourceFile);
-    const prettierConfig = await prettier.resolveConfig(process.cwd());
+          const sourceFile = await getOpenAPISourceFile(options);
+          const openAPIDocument = await parseOpenAPISourceFile(sourceFile);
+          const prettierConfig = await prettier.resolveConfig(process.cwd());
 
-    const writeFile = async (file: string, data: string) => {
-      const updatedConfig = await prettier.format(data, {
-        parser: "babel-ts",
-        ...prettierConfig,
-      });
+          const writeFile = async (file: string, data: string) => {
+            const updatedConfig = await prettier.format(data, {
+              parser: "babel-ts",
+              ...prettierConfig,
+            });
 
-      await fsExtra.outputFile(
-        path.join(process.cwd(), config.outputDir, file),
-        updatedConfig
-      );
-    };
+            await fsExtra.outputFile(
+              path.join(process.cwd(), config.outputDir, file),
+              updatedConfig
+            );
+          };
 
-    const readFile = (file: string) => {
-      return fsExtra.readFile(
-        path.join(process.cwd(), config.outputDir, file),
-        "utf-8"
-      );
-    };
+          const readFile = (file: string) => {
+            return fsExtra.readFile(
+              path.join(process.cwd(), config.outputDir, file),
+              "utf-8"
+            );
+          };
 
-    const existsFile = (file: string) => {
-      return fsExtra.existsSync(
-        path.join(process.cwd(), config.outputDir, file)
-      );
-    };
+          const existsFile = (file: string) => {
+            return fsExtra.existsSync(
+              path.join(process.cwd(), config.outputDir, file)
+            );
+          };
 
-    await config.to({
-      openAPIDocument,
-      outputDir: config.outputDir,
-      writeFile,
-      existsFile,
-      readFile,
-    });
+          await config.to({
+            openAPIDocument,
+            outputDir: config.outputDir,
+            writeFile,
+            existsFile,
+            readFile,
+          });
+        },
+      }))
+    );
   }
 }
