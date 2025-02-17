@@ -58,32 +58,23 @@ export const getOpenAPISourceFile = async (
           `https://api.github.com/repos/${options.owner}/${options.repository}/contents/${options.specPath}?ref=${options.ref}`,
           {
             headers: {
-              "content-type": "application/json",
+              accept: "application/vnd.github.raw+json",
               "user-agent": "openapi-codegen",
               authorization: `bearer ${token}`,
             },
           }
-        ).json<{
-          content: string;
-          encoding: string | null;
-        }>();
+        ).text();
 
-        if (!raw.content) {
+        if (!raw) {
           throw new UsageError(`No content found at "${options.specPath}"`);
         }
-
-        const encoding: BufferEncoding =
-          (raw.encoding as BufferEncoding) || "base64";
-        const textContent = Buffer.from(raw.content, encoding).toString(
-          "utf-8"
-        );
 
         let format: OpenAPISourceFile["format"] = "yaml";
         if (options.specPath.toLowerCase().endsWith("json")) {
           format = "json";
         }
 
-        return { text: textContent, format };
+        return { text: raw, format };
       } catch (e) {
         if (
           e instanceof HTTPError &&
