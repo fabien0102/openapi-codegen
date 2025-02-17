@@ -632,14 +632,38 @@ const createQueryHook = ({
                               f.createIdentifier(operationQueryFnName),
                               undefined,
                               [
-                                f.createCallExpression(
-                                  f.createIdentifier("deepMerge"),
-                                  undefined,
-                                  [
-                                    f.createIdentifier("fetcherOptions"),
-                                    f.createIdentifier("variables"),
-                                  ]
-                                ),
+                                useQueryIdentifier === "useQuery"
+                                  ? f.createConditionalExpression(
+                                      f.createBinaryExpression(
+                                        f.createIdentifier("variables"),
+                                        ts.SyntaxKind.EqualsEqualsEqualsToken,
+                                        f.createPropertyAccessExpression(
+                                          f.createIdentifier("reactQuery"),
+                                          f.createIdentifier("skipToken")
+                                        )
+                                      ),
+                                      f.createToken(
+                                        ts.SyntaxKind.QuestionToken
+                                      ),
+                                      f.createIdentifier("variables"),
+                                      f.createToken(ts.SyntaxKind.ColonToken),
+                                      f.createCallExpression(
+                                        f.createIdentifier("deepMerge"),
+                                        undefined,
+                                        [
+                                          f.createIdentifier("fetcherOptions"),
+                                          f.createIdentifier("variables"),
+                                        ]
+                                      )
+                                    )
+                                  : f.createCallExpression(
+                                      f.createIdentifier("deepMerge"),
+                                      undefined,
+                                      [
+                                        f.createIdentifier("fetcherOptions"),
+                                        f.createIdentifier("variables"),
+                                      ]
+                                    ),
                               ]
                             )
                           ),
