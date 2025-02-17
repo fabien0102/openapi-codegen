@@ -223,14 +223,15 @@ export const getType = (
         return withNullable(f.createTypeLiteralNode([]), schema.nullable);
       }
 
-      if (
-        !schema.properties /* free form object */ &&
-        !schema.additionalProperties
-      ) {
+      if (!schema.properties && !schema.additionalProperties) {
         return withNullable(
           f.createTypeReferenceNode(f.createIdentifier("Record"), [
             f.createKeywordTypeNode(ts.SyntaxKind.StringKeyword),
-            f.createKeywordTypeNode(ts.SyntaxKind.AnyKeyword),
+            f.createKeywordTypeNode(
+              schema.additionalProperties === false
+                ? ts.SyntaxKind.NeverKeyword // empty object
+                : ts.SyntaxKind.AnyKeyword // free form object
+            ),
           ]),
           schema.nullable
         );

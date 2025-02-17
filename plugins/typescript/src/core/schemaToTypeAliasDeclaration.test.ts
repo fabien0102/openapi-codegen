@@ -483,6 +483,17 @@ describe("schemaToTypeAliasDeclaration", () => {
     `);
   });
 
+  it("should generate an empty object", () => {
+    const schema: SchemaObject = {
+      type: "object",
+      additionalProperties: false,
+    };
+
+    expect(printSchema(schema)).toMatchInlineSnapshot(
+      `"export type Test = Record<string, never>;"`
+    );
+  });
+
   it("should generate an object with additional properties", () => {
     const schema: SchemaObject = {
       type: "object",
