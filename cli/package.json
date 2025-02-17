@@ -35,7 +35,7 @@
   ],
   "dependencies": {
     "@clack/prompts": "^0.9.1",
-    "@octokit/request": "^9.2.0",
+    "@octokit/request": "^9.2.2",
     "@swc/core": "^1.2.118",
     "case": "^1.6.3",
     "cli-highlight": "^2.1.11",
