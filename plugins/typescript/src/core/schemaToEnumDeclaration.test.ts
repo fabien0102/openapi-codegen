@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { OpenAPIObject, SchemaObject } from "openapi3-ts";
+import { OpenAPIObject, SchemaObject } from "openapi3-ts/oas30";
 import ts from "typescript";
 import { schemaToEnumDeclaration } from "./schemaToEnumDeclaration";
 import { OpenAPIComponentType } from "./schemaToTypeAliasDeclaration";

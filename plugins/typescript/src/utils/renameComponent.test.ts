@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { OpenAPIObject } from "openapi3-ts";
+import { OpenAPIObject } from "openapi3-ts/oas30";
 import { petstore } from "../fixtures/petstore";
 import { renameComponent } from "./renameComponent";
 

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { ResponsesObject } from "openapi3-ts";
+import { ResponsesObject } from "openapi3-ts/oas30";
 import { print } from "../testUtils";
 import { getDataResponseType } from "./getDataResponseType";
 

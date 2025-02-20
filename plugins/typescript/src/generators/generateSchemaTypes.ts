@@ -1,7 +1,7 @@
 import * as c from "case";
 import ts from "typescript";
 
-import { ReferenceObject, SchemaObject } from "openapi3-ts";
+import { ReferenceObject, SchemaObject } from "openapi3-ts/oas30";
 import { createWatermark } from "../core/createWatermark";
 import { getUsedImports } from "../core/getUsedImports";
 import {
@@ -11,7 +11,7 @@ import {
 import { getEnumProperties } from "../utils/getEnumProperties";
 import { ConfigBase, Context } from "./types";
 
-import { isReferenceObject } from "openapi3-ts";
+import { isReferenceObject } from "openapi3-ts/oas30";
 
 import { findCompatibleMediaType } from "../core/findCompatibleMediaType";
 import { schemaToEnumDeclaration } from "../core/schemaToEnumDeclaration";
@@ -143,13 +143,15 @@ export const generateSchemaTypes = async (
     // Convert responses to schemas
     const componentsResponsesEntries = Object.entries(
       components.responses
-    ).reduce<[string, SchemaObject][]>((mem, [name, responseObject]) => {
-      if (isReferenceObject(responseObject)) return mem;
-      const mediaType = findCompatibleMediaType(responseObject);
-
-      mem.push([name, mediaType?.schema || {}]);
-      return mem;
-    }, []);
+    ).reduce<[string, SchemaObject | ReferenceObject][]>(
+      (mem, [name, responseObject]) => {
+        if (isReferenceObject(responseObject)) return mem;
+        const mediaType = findCompatibleMediaType(responseObject);
+        mem.push([name, mediaType?.schema || {}]);
+        return mem;
+      },
+      []
+    );
 
     const schemas = generateTypeAliasDeclarations(
       componentsResponsesEntries,
@@ -173,14 +175,16 @@ export const generateSchemaTypes = async (
     // Convert requestBodies to schemas
     const componentsRequestBodiesEntries = Object.entries(
       components.requestBodies
-    ).reduce<[string, SchemaObject][]>((mem, [name, requestBodyObject]) => {
-      if (isReferenceObject(requestBodyObject)) return mem;
-      const mediaType = findCompatibleMediaType(requestBodyObject);
-      if (!mediaType || !mediaType.schema) return mem;
-
-      mem.push([name, mediaType.schema]);
-      return mem;
-    }, []);
+    ).reduce<[string, SchemaObject | ReferenceObject][]>(
+      (mem, [name, requestBodyObject]) => {
+        if (isReferenceObject(requestBodyObject)) return mem;
+        const mediaType = findCompatibleMediaType(requestBodyObject);
+        if (!mediaType || !mediaType.schema) return mem;
+        mem.push([name, mediaType.schema]);
+        return mem;
+      },
+      []
+    );
 
     const schemas = generateTypeAliasDeclarations(
       componentsRequestBodiesEntries,

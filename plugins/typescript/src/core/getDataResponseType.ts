@@ -5,7 +5,7 @@ import {
   ReferenceObject,
   ResponseObject,
   ResponsesObject,
-} from "openapi3-ts";
+} from "openapi3-ts/oas30";
 import { uniqBy } from "lodash";
 import { pascal } from "case";
 

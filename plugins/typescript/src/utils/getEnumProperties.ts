@@ -1,20 +1,22 @@
 import { pascal } from "case";
-import { SchemaObject } from "openapi3-ts";
+import {
+  isReferenceObject,
+  ReferenceObject,
+  SchemaObject,
+} from "openapi3-ts/oas30";
 
 /**
  * Extracts all the properties with enum values from an array of schema objects.
- * @param schemaArray An array of OpenAPI schema objects
+ * @param componentSchemaEntries An array of OpenAPI schema objects
  * @returns A tuple array containing the property names with enum values and their corresponding schema objects
  */
 export const getEnumProperties = (
-  schemaArray: SchemaObject[]
+  componentSchemaEntries: [string, SchemaObject | ReferenceObject][]
 ): [string, SchemaObject][] => {
   const enumProperties: [string, SchemaObject][] = [];
 
-  schemaArray.forEach((schemaObj) => {
-    const name = schemaObj[0];
-    const schema = schemaObj[1];
-
+  componentSchemaEntries.forEach(([name, schema]) => {
+    if (isReferenceObject(schema)) return; // TODO Resolve the reference
     if (schema.enum) {
       enumProperties.push([name, schema]);
     } else if (schema.type === "object" && schema.properties) {
