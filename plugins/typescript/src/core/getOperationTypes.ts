@@ -1,5 +1,9 @@
 import { pascal } from "case";
-import { OpenAPIObject, OperationObject, PathItemObject } from "openapi3-ts";
+import {
+  OpenAPIObject,
+  OperationObject,
+  PathItemObject,
+} from "openapi3-ts/oas30";
 import ts, { factory as f } from "typescript";
 
 import { getParamsGroupByType } from "./getParamsGroupByType";

@@ -1,5 +1,5 @@
 import { pascal } from "case";
-import { SchemaObject } from "openapi3-ts";
+import { SchemaObject } from "openapi3-ts/oas30";
 import ts, { factory as f } from "typescript";
 import { convertNumberToWord } from "../utils/getEnumProperties";
 import { Context, getJSDocComment } from "./schemaToTypeAliasDeclaration";

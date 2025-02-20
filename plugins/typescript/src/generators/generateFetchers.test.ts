@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { set } from "lodash";
-import { OpenAPIObject } from "openapi3-ts";
+import { OpenAPIObject } from "openapi3-ts/oas30";
 import { Config, generateFetchers } from "./generateFetchers";
 import { createWriteFileMock } from "../testUtils";
 

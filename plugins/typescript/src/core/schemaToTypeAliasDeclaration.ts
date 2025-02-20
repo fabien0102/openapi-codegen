@@ -1,5 +1,5 @@
 import { pascal } from "case";
-import { keys, pickBy, get, intersection, merge, omit } from "lodash";
+import { keys, pickBy, intersection, merge, omit } from "lodash";
 import {
   ComponentsObject,
   DiscriminatorObject,
@@ -8,11 +8,11 @@ import {
   SchemaObject,
   isReferenceObject,
   isSchemaObject,
-} from "openapi3-ts";
+} from "openapi3-ts/oas30";
 import { singular } from "pluralize";
 import { isValidIdentifier } from "tsutils";
 import ts, { factory as f } from "typescript";
-import { getReferenceSchema } from "./getReferenceSchema";
+import { getReferenceSchema } from "./getReference";
 
 type RemoveIndex<T> = {
   [P in keyof T as string extends P
@@ -48,12 +48,14 @@ let useEnumsConfigBase: boolean | undefined;
  */
 export const schemaToTypeAliasDeclaration = (
   name: string,
-  schema: SchemaObject,
+  schema: SchemaObject | ReferenceObject,
   context: Context,
   useEnums?: boolean
 ): ts.Node[] => {
   useEnumsConfigBase = useEnums;
-  const jsDocNode = getJSDocComment(schema, context);
+  const jsDocNode = isSchemaObject(schema)
+    ? getJSDocComment(schema, context)
+    : undefined;
   const declarationNode = f.createTypeAliasDeclaration(
     [f.createModifier(ts.SyntaxKind.ExportKeyword)],
     pascal(name),
@@ -189,11 +191,6 @@ export const getType = (
     schema.type = "array";
   }
 
-  // Handle string constant
-  if (schema.const && !schema.type) {
-    return f.createLiteralTypeNode(f.createStringLiteral(schema.const));
-  }
-
   switch (schema.type) {
     case "null":
       return f.createLiteralTypeNode(f.createNull());
@@ -239,7 +236,13 @@ export const getType = (
 
       const members: ts.TypeElement[] = Object.entries(
         schema.properties || {}
-      ).map(([key, property]) => {
+      ).map(([key, propertyOrRef]) => {
+        const property = isReferenceObject(propertyOrRef)
+          ? getReferenceSchema(
+              propertyOrRef.$ref,
+              context.openAPIDocument.components
+            )
+          : propertyOrRef;
         const isEnum =
           typeof property === "object" &&
           "enum" in property &&
@@ -329,7 +332,12 @@ const withDiscriminator = (
   discriminator: DiscriminatorObject | undefined,
   context: Context
 ): ts.TypeNode => {
-  if (!discriminator || !discriminator.propertyName || !discriminator.mapping) {
+  if (
+    !discriminator ||
+    !discriminator.propertyName ||
+    !discriminator.mapping ||
+    !isReferenceObject(schema)
+  ) {
     return node;
   }
 
@@ -353,9 +361,9 @@ const withDiscriminator = (
       ),
     ]);
 
-    const spec = get<SchemaObject | ReferenceObject>(
-      context.openAPIDocument,
-      schema.$ref.slice(2).replace(/\//g, ".")
+    const spec = getReferenceSchema(
+      schema.$ref,
+      context.openAPIDocument.components
     );
     if (spec && isSchemaObject(spec) && spec.properties) {
       const property = spec.properties[discriminator.propertyName];
@@ -444,7 +452,7 @@ const getAllOf = (
     if (isReferenceObject(member)) {
       const referenceSchema = getReferenceSchema(
         member.$ref,
-        context.openAPIDocument
+        context.openAPIDocument.components
       );
       const { mergedSchema, isColliding } = mergeSchemas(
         acc.mergedSchema,
@@ -601,7 +609,7 @@ export const getJSDocComment = (
         if (isReferenceObject(allOfItem)) {
           const referenceSchema = getReferenceSchema(
             allOfItem.$ref,
-            context.openAPIDocument
+            context.openAPIDocument.components
           );
           return mergeSchemas(mem, referenceSchema).mergedSchema;
         } else {

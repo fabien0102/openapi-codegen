@@ -4,7 +4,7 @@ import {
   isReferenceObject,
   OperationObject,
   ParameterObject,
-} from "openapi3-ts";
+} from "openapi3-ts/oas30";
 
 /**
  * Resolve $ref and group parameters by `type`.

@@ -1,5 +1,5 @@
 import { mapValues } from "lodash";
-import { OpenAPIObject, PathItemObject } from "openapi3-ts";
+import { OpenAPIObject, PathItemObject } from "openapi3-ts/oas30";
 
 /**
  * Util to add a path param to an openAPI operation

@@ -11,7 +11,7 @@ describe("forceReactQueryComponent", () => {
     });
 
     expect(
-      updatedOpenAPIDocument.paths["/pets"].get["x-openapi-codegen-component"]
+      updatedOpenAPIDocument.paths["/pets"].get!["x-openapi-codegen-component"]
     ).toBe("useMutate");
   });
   it("should throw if the operationId is not found", () => {
@@ -35,7 +35,7 @@ describe("forceReactQueryComponent", () => {
     });
 
     expect(
-      originalDocument.paths["/pets"].get["x-openapi-codegen-component"]
+      originalDocument.paths["/pets"].get!["x-openapi-codegen-component"]
     ).toBeUndefined();
   });
 });

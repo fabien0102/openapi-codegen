@@ -1,5 +1,5 @@
 import { get, set, unset } from "lodash";
-import { OpenAPIObject } from "openapi3-ts";
+import { OpenAPIObject } from "openapi3-ts/oas30";
 
 /**
  * Util to rename an openAPI component name

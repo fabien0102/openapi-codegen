@@ -6,9 +6,9 @@ import {
   OperationObject,
   ReferenceObject,
   RequestBodyObject,
-} from "openapi3-ts";
+} from "openapi3-ts/oas30";
 import { findCompatibleMediaType } from "./findCompatibleMediaType";
-import { getReferenceSchema } from "./getReferenceSchema";
+import { getReferenceSchema } from "./getReference";
 
 /**
  * Check if all the properties are optionals
@@ -62,7 +62,7 @@ export const isRequestBodyOptional = ({
   }
 
   if (isReferenceObject(mediaType.schema)) {
-    const schema = getReferenceSchema(mediaType.schema.$ref, { components });
+    const schema = getReferenceSchema(mediaType.schema.$ref, components);
 
     return !schema.required;
   }

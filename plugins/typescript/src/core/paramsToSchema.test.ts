@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { ParameterObject } from "openapi3-ts";
+import { ParameterObject } from "openapi3-ts/oas30";
 import { paramsToSchema } from "./paramsToSchema";
 
 describe("paramsToSchema", () => {

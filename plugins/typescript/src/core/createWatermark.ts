@@ -1,4 +1,4 @@
-import { InfoObject } from "openapi3-ts";
+import { InfoObject } from "openapi3-ts/oas30";
 import { factory as f } from "typescript";
 
 /**
