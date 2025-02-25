@@ -83,7 +83,7 @@
 
 ### React Query components
 
-Using [https://api.apis.guru/v2/specs/giphy.com/1.0/openapi.yaml](giphy specs) as example
+Using [giphy specs](https://api.apis.guru/v2/specs/giphy.com/1.0/openapi.yaml) as example
 
 This will generate lot of ready-to-use hooks like:
 
