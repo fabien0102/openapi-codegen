@@ -1,5 +1,5 @@
 import { cloneDeep, set } from "lodash";
-import { OpenAPIObject, PathItemObject } from "openapi3-ts";
+import { OpenAPIObject, PathItemObject } from "openapi3-ts/oas30";
 
 import { isOperationObject } from "../core/isOperationObject";
 import { isVerb } from "../core/isVerb";

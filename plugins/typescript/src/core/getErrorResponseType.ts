@@ -5,7 +5,7 @@ import {
   ReferenceObject,
   ResponseObject,
   ResponsesObject,
-} from "openapi3-ts";
+} from "openapi3-ts/oas30";
 
 import { findCompatibleMediaType } from "./findCompatibleMediaType";
 import { getType } from "./schemaToTypeAliasDeclaration";

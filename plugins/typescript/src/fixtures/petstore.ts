@@ -1,4 +1,4 @@
-import { OpenAPIObject } from "openapi3-ts";
+import { OpenAPIObject } from "openapi3-ts/oas30";
 
 export const petstore: OpenAPIObject = {
   openapi: "3.0.0",
