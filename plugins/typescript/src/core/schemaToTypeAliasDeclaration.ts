@@ -236,13 +236,7 @@ export const getType = (
 
       const members: ts.TypeElement[] = Object.entries(
         schema.properties || {}
-      ).map(([key, propertyOrRef]) => {
-        const property = isReferenceObject(propertyOrRef)
-          ? getReferenceSchema(
-              propertyOrRef.$ref,
-              context.openAPIDocument.components
-            )
-          : propertyOrRef;
+      ).map(([key, property]) => {
         const isEnum =
           typeof property === "object" &&
           "enum" in property &&
@@ -263,7 +257,9 @@ export const getType = (
             isEnum
           )
         );
-        const jsDocNode = getJSDocComment(property, context);
+        const jsDocNode = isSchemaObject(property)
+          ? getJSDocComment(property, context)
+          : undefined;
         if (jsDocNode) addJSDocToNode(propertyNode, jsDocNode);
 
         return propertyNode;

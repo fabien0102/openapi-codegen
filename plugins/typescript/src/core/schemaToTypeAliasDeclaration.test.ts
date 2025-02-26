@@ -63,6 +63,32 @@ describe("schemaToTypeAliasDeclaration", () => {
     expect(printSchema(schema)).toBe("export type Test = number[];");
   });
 
+  it("should resolve ref in object properties", () => {
+    const schema: SchemaObject = {
+      type: "object",
+      properties: {
+        age: { type: "integer" },
+        breed: { $ref: "#/components/schemas/Breed" },
+      },
+      required: ["age", "breed"],
+    };
+
+    expect(
+      printSchema(schema, "Dog", "schemas", {
+        schemas: {
+          Breed: {
+            type: "string",
+          },
+        },
+      })
+    ).toMatchInlineSnapshot(`
+      "export type Dog = {
+          age: number;
+          breed: Breed;
+      };"
+    `);
+  });
+
   it("should generate enums (strings)", () => {
     const schema: SchemaObject = {
       type: "string",
