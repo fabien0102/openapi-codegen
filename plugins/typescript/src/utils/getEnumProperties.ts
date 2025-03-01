@@ -16,7 +16,7 @@ export const getEnumProperties = (
   const enumProperties: [string, SchemaObject][] = [];
 
   componentSchemaEntries.forEach(([name, schema]) => {
-    if (isReferenceObject(schema)) return; // TODO Resolve the reference
+    if (isReferenceObject(schema)) return;
     if (schema.enum) {
       enumProperties.push([name, schema]);
     } else if (schema.type === "object" && schema.properties) {

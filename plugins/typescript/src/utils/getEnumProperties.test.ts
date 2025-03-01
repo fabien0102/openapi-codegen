@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { SchemaObject } from "openapi3-ts/oas30";
+import { ReferenceObject, SchemaObject } from "openapi3-ts/oas30";
 import { convertNumberToWord, getEnumProperties } from "./getEnumProperties";
 
 describe("getEnumProperties", () => {
@@ -36,7 +36,19 @@ describe("getEnumProperties", () => {
     `);
   });
 
-  it.todo("should correctly extract enum with references");
+  it("should ignore references", () => {
+    const enumSchemaEntries: [string, ReferenceObject][] = [
+      [
+        "Pet",
+        {
+          $ref: "#/components/schemas/Cat",
+        },
+      ],
+    ];
+
+    const result = getEnumProperties(enumSchemaEntries);
+    expect(result).toEqual([]);
+  });
 
   it("should correctly extract nested enum properties", () => {
     const enumSchemaEntries: [string, SchemaObject][] = [
