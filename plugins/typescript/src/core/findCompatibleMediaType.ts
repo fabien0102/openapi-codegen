@@ -2,7 +2,7 @@ import {
   MediaTypeObject,
   RequestBodyObject,
   ResponseObject,
-} from "openapi3-ts";
+} from "openapi3-ts/oas30";
 
 /**
  * Returns the first compatible media type.

@@ -3,7 +3,7 @@ import * as c from "case";
 import { get } from "lodash";
 
 import { ConfigBase, Context } from "./types";
-import { PathItemObject } from "openapi3-ts";
+import { PathItemObject } from "openapi3-ts/oas30";
 
 import { getUsedImports } from "../core/getUsedImports";
 import { createWatermark } from "../core/createWatermark";

@@ -44,7 +44,7 @@
     "got": "^12.0.0",
     "got-fetch": "^5.1.1",
     "js-yaml": "^4.1.0",
-    "openapi3-ts": "^2.0.1",
+    "openapi3-ts": "^4.4.0",
     "prettier": "^3.2.5",
     "slash": "^4.0.0",
     "swagger2openapi": "^7.0.8",

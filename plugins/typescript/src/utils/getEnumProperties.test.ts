@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { SchemaObject } from "openapi3-ts";
+import { ReferenceObject, SchemaObject } from "openapi3-ts/oas30";
 import { convertNumberToWord, getEnumProperties } from "./getEnumProperties";
 
 describe("getEnumProperties", () => {
@@ -9,7 +9,7 @@ describe("getEnumProperties", () => {
   });
 
   it("should correctly extract root enum properties", () => {
-    const mockRootEnumSchema: [string, SchemaObject][] = [
+    const enumSchemaEntries: [string, SchemaObject][] = [
       [
         "MyUserStatus",
         {
@@ -19,7 +19,7 @@ describe("getEnumProperties", () => {
       ],
     ];
 
-    const result = getEnumProperties(mockRootEnumSchema);
+    const result = getEnumProperties(enumSchemaEntries);
     expect(result).toMatchInlineSnapshot(`
      [
        [
@@ -36,8 +36,22 @@ describe("getEnumProperties", () => {
     `);
   });
 
+  it("should ignore references", () => {
+    const enumSchemaEntries: [string, ReferenceObject][] = [
+      [
+        "Pet",
+        {
+          $ref: "#/components/schemas/Cat",
+        },
+      ],
+    ];
+
+    const result = getEnumProperties(enumSchemaEntries);
+    expect(result).toEqual([]);
+  });
+
   it("should correctly extract nested enum properties", () => {
-    const mockSchemaWithNestedEnums: [string, SchemaObject][] = [
+    const enumSchemaEntries: [string, SchemaObject][] = [
       [
         "Pet",
         {
@@ -90,7 +104,7 @@ describe("getEnumProperties", () => {
       ],
     ];
 
-    const result = getEnumProperties(mockSchemaWithNestedEnums);
+    const result = getEnumProperties(enumSchemaEntries);
     expect(result).toMatchInlineSnapshot(`
      [
        [

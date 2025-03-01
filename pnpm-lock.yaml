@@ -81,8 +81,8 @@ importers:
         specifier: ^4.1.0
         version: 4.1.0
       openapi3-ts:
-        specifier: ^2.0.1
-        version: 2.0.2
+        specifier: ^4.4.0
+        version: 4.4.0
       prettier:
         specifier: ^3.2.5
         version: 3.4.2
@@ -173,8 +173,8 @@ importers:
         specifier: ^4.17.21
         version: 4.17.21
       openapi3-ts:
-        specifier: ^2.0.1
-        version: 2.0.2
+        specifier: ^4.4.0
+        version: 4.4.0
       pluralize:
         specifier: ^8.0.0
         version: 8.0.0
@@ -2798,8 +2798,8 @@ packages:
     resolution: {integrity: sha512-7x81NCL719oNbsq/3mh+hVrAWmFuEYUqrq/Iw3kUzH8ReypT9QQ0BLoJS7/G9k6N81XjW4qHWtjWwe/9eLy1EQ==}
     engines: {node: '>=12'}
 
-  openapi3-ts@2.0.2:
-    resolution: {integrity: sha512-TxhYBMoqx9frXyOgnRHufjQfPXomTIHYKhSKJ6jHfj13kS8OEIhvmE8CTuQyKtjjWttAjX5DPxM1vmalEpo8Qw==}
+  openapi3-ts@4.4.0:
+    resolution: {integrity: sha512-9asTNB9IkKEzWMcHmVZE7Ts3kC9G7AFHfs8i7caD8HbI76gEjdkId4z/AkP83xdZsH7PLAnnbl47qZkXuxpArw==}
 
   optionator@0.9.4:
     resolution: {integrity: sha512-6IpQ7mKUxRcZNLIObR0hz7lxsapSSIYNZJwXPGeF0mTVqGKFIXj1DQcMoT22S3ROcLyY/rz0PWaWZ9ayWmad9g==}
@@ -6813,9 +6813,9 @@ snapshots:
       is-docker: 2.2.1
       is-wsl: 2.2.0
 
-  openapi3-ts@2.0.2:
+  openapi3-ts@4.4.0:
     dependencies:
-      yaml: 1.10.2
+      yaml: 2.7.0
 
   optionator@0.9.4:
     dependencies:

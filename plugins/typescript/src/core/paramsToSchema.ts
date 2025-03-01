@@ -1,5 +1,5 @@
 import { camel } from "case";
-import { ParameterObject, SchemaObject } from "openapi3-ts";
+import { ParameterObject, SchemaObject } from "openapi3-ts/oas30";
 
 /**
  * Convert a list of params in an object schema.

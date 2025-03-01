@@ -4,7 +4,7 @@ import {
   isReferenceObject,
   ReferenceObject,
   RequestBodyObject,
-} from "openapi3-ts";
+} from "openapi3-ts/oas30";
 import { pascal } from "case";
 
 import { findCompatibleMediaType } from "./findCompatibleMediaType";

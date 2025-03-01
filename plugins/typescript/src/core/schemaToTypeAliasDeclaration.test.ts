@@ -1,5 +1,9 @@
 import { describe, expect, it } from "vitest";
-import { OpenAPIObject, ReferenceObject, SchemaObject } from "openapi3-ts";
+import {
+  OpenAPIObject,
+  ReferenceObject,
+  SchemaObject,
+} from "openapi3-ts/oas30";
 import ts from "typescript";
 import {
   OpenAPIComponentType,
@@ -59,13 +63,30 @@ describe("schemaToTypeAliasDeclaration", () => {
     expect(printSchema(schema)).toBe("export type Test = number[];");
   });
 
-  it("should generate a string const", () => {
+  it("should resolve ref in object properties", () => {
     const schema: SchemaObject = {
-      const: "CONSTANT",
-      title: "Test",
+      type: "object",
+      properties: {
+        age: { type: "integer" },
+        breed: { $ref: "#/components/schemas/Breed" },
+      },
+      required: ["age", "breed"],
     };
 
-    expect(printSchema(schema)).toBe('export type Test = "CONSTANT";');
+    expect(
+      printSchema(schema, "Dog", "schemas", {
+        schemas: {
+          Breed: {
+            type: "string",
+          },
+        },
+      })
+    ).toMatchInlineSnapshot(`
+      "export type Dog = {
+          age: number;
+          breed: Breed;
+      };"
+    `);
   });
 
   it("should generate enums (strings)", () => {
@@ -1099,7 +1120,7 @@ describe("schemaToTypeAliasDeclaration", () => {
 });
 
 const printSchema = (
-  schema: SchemaObject,
+  schema: SchemaObject | ReferenceObject,
   schemaName: string = "Test",
   currentComponent: OpenAPIComponentType = "schemas",
   components?: OpenAPIObject["components"],
