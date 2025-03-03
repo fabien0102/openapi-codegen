@@ -50,6 +50,11 @@ export const getRequestBodyType = ({
     return f.createKeywordTypeNode(ts.SyntaxKind.UndefinedKeyword);
   }
 
+  // NOTE: Maybe not perfect to have this hardcoded here
+  if (mediaType.contentType === "application/x-www-form-urlencoded") {
+    return f.createTypeReferenceNode("URLSearchParams", undefined);
+  }
+
   if (isReferenceObject(mediaType)) {
     const [hash, topLevel, namespace, name] = mediaType.$ref.split("/");
     if (hash !== "#" || topLevel !== "components") {
