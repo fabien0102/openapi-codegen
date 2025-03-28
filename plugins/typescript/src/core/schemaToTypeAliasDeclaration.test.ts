@@ -89,6 +89,49 @@ describe("schemaToTypeAliasDeclaration", () => {
     `);
   });
 
+  it("should resolve ref in object properties to deep linking", () => {
+    const schema: SchemaObject = {
+      type: "object",
+      properties: {
+        age: { $ref: "#/components/schemas/Age/properties/age" },
+        breed: { $ref: "#/components/schemas/Breeds/items/properties/name" },
+        color: {
+          $ref: "#/components/schemas/Breeds/items/properties/color/items",
+        },
+      },
+      required: ["age", "breed"],
+    };
+
+    expect(
+      printSchema(schema, "Dog", "schemas", {
+        schemas: {
+          Breeds: {
+            type: "array",
+            items: {
+              type: "object",
+              properties: {
+                name: { type: "string" },
+                color: { type: "array", items: { type: "string" } },
+              },
+            },
+          },
+          Age: {
+            type: "object",
+            properties: {
+              age: { type: "integer" },
+            },
+          },
+        },
+      })
+    ).toMatchInlineSnapshot(`
+      "export type Dog = {
+          age: Age["age"];
+          breed: Breeds[number]["name"];
+          color?: Breeds[number]["color"][number];
+      };"
+    `);
+  });
+
   it("should generate enums (strings)", () => {
     const schema: SchemaObject = {
       type: "string",

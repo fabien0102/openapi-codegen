@@ -79,22 +79,38 @@ export const getType = (
   isNodeEnum?: boolean
 ): ts.TypeNode => {
   if (isReferenceObject(schema)) {
-    const [hash, topLevel, namespace, name] = schema.$ref.split("/");
+    const [hash, topLevel, namespace, name, ...propertyPath] =
+      schema.$ref.split("/");
     if (hash !== "#" || topLevel !== "components") {
       throw new Error(
         "This library only resolve $ref that are include into `#/components/*` for now"
       );
     }
-    if (namespace === context.currentComponent) {
-      return f.createTypeReferenceNode(f.createIdentifier(pascal(name)));
+
+    let refNode: ts.TypeNode = f.createTypeReferenceNode(
+      namespace === context.currentComponent
+        ? f.createIdentifier(pascal(name))
+        : f.createQualifiedName(
+            f.createIdentifier(pascal(namespace)),
+            f.createIdentifier(pascal(name))
+          )
+    );
+
+    for (let i = 0; i < propertyPath.length; i++) {
+      if (propertyPath[i] === "properties" && propertyPath[i + 1]) {
+        refNode = f.createIndexedAccessTypeNode(
+          refNode,
+          f.createLiteralTypeNode(f.createStringLiteral(propertyPath[++i]))
+        );
+      } else if (propertyPath[i] === "items") {
+        refNode = f.createIndexedAccessTypeNode(
+          refNode,
+          f.createKeywordTypeNode(ts.SyntaxKind.NumberKeyword)
+        );
+      }
     }
 
-    return f.createTypeReferenceNode(
-      f.createQualifiedName(
-        f.createIdentifier(pascal(namespace)),
-        f.createIdentifier(pascal(name))
-      )
-    );
+    return refNode;
   }
 
   if (schema["x-openapi-codegen"]?.type === "never") {
