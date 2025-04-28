@@ -71,13 +71,8 @@
 
    If during generator setup you picked `> React Query components`, then you will need to install and configure React Query in order for the generated React hooks to work properly:
 
-   - Install the library
-
-     ```bash
-     npm i @tanstack/react-query
-     ```
-
-   - Wire up the `QueryClient` as described [here](https://tanstack.com/query/v4/docs/adapters/react-query).
+   - [Install the React Query library](https://tanstack.com/query/latest/docs/framework/react/installation)
+   - [Wire up the QueryClientProvider component](https://tanstack.com/query/latest/docs/framework/react/reference/QueryClientProvider) to connect and provide a QueryClient to your application
 
 ## Usage
 
