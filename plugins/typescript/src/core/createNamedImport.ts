@@ -33,8 +33,7 @@ export const createNamedImport = (
 };
 
 /**
- * GraphQL Code Generator inspired import generation.
- * This function determines whether an import should be type-only based on actual usage.
+ * Helper to determine whether an import should be type-only based on actual usage.
  * 
  * @param importName the name of the import
  * @param useTypeImports whether to use type-only imports
@@ -50,13 +49,44 @@ export const shouldUseTypeImport = (
     return false;
   }
 
-  // If we have AST nodes, use GraphQL Code Generator style analysis
   if (nodes) {
     const isTypeOnly = analyzeImportUsage(nodes, importName);
     return isTypeOnly;
   }
   
-  // If no AST nodes available, default to false (conservative approach)
-  // This matches GraphQL Code Generator's behavior - no pattern matching fallback
   return false;
+};
+
+/**
+ * Helper to create named imports with types.
+ * 
+ * @param typeImports array of import names that should be type-only
+ * @param valueImports array of import names that should be value imports
+ * @param filename path of the module
+ * @returns ts.Node of the merged import declaration
+ */
+export const createNamedImportWithTypes = (
+  typeImports: string[],
+  valueImports: string[],
+  filename: string
+) => {
+  const allImports = [
+    ...typeImports.map((name) =>
+      f.createImportSpecifier(true, undefined, f.createIdentifier(name))
+    ),
+    ...valueImports.map((name) =>
+      f.createImportSpecifier(false, undefined, f.createIdentifier(name))
+    ),
+  ];
+
+  return f.createImportDeclaration(
+    undefined,
+    f.createImportClause(
+      false,
+      undefined,
+      f.createNamedImports(allImports)
+    ),
+    f.createStringLiteral(filename),
+    undefined
+  );
 };

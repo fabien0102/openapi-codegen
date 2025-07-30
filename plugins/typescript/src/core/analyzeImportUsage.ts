@@ -2,7 +2,6 @@ import ts from "typescript";
 
 /**
  * Analyzes how an imported symbol is used in the AST.
- * Inspired by GraphQL Code Generator's implementation.
  * 
  * @param nodes the AST nodes to analyze
  * @param importName the name of the imported symbol
@@ -20,7 +19,6 @@ export const analyzeImportUsage = (
       const parent = node.parent;
       
       if (parent) {
-        // Value usage patterns
         if (
           ts.isCallExpression(parent) ||
           ts.isObjectBindingPattern(parent) ||
@@ -30,14 +28,12 @@ export const analyzeImportUsage = (
           ts.isExportSpecifier(parent) ||
           ts.isImportSpecifier(parent) ||
           ts.isAsExpression(parent) ||
-          ts.isTypeAssertion(parent) ||
           ts.isNewExpression(parent) ||
           ts.isArrayLiteralExpression(parent) ||
           ts.isObjectLiteralExpression(parent)
         ) {
           isUsedAsValue = true;
         }
-        // Type usage patterns
         else if (
           ts.isTypeReferenceNode(parent) ||
           ts.isTypeAliasDeclaration(parent) ||
@@ -45,9 +41,7 @@ export const analyzeImportUsage = (
         ) {
           isUsedAsType = true;
         }
-        // Indexed access type (e.g., GithubContext["fetcherOptions"])
         else if (ts.isIndexedAccessTypeNode(parent)) {
-          // Check if this node is the objectType of the indexed access
           if (ts.isTypeReferenceNode(parent.objectType) && parent.objectType.typeName === node) {
             isUsedAsType = true;
           }
@@ -60,6 +54,8 @@ export const analyzeImportUsage = (
 
   nodes.forEach(visitor);
 
-  // Return true only if used exclusively as type
+  if (!isUsedAsType && !isUsedAsValue) {
+    return true;
+  }
   return isUsedAsType && !isUsedAsValue;
 }; 

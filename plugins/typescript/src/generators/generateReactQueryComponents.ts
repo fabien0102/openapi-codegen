@@ -11,7 +11,7 @@ import { createOperationFetcherFnNodes } from "../core/createOperationFetcherFnN
 import { isVerb } from "../core/isVerb";
 import { isOperationObject } from "../core/isOperationObject";
 import { getOperationTypes } from "../core/getOperationTypes";
-import { createNamedImport } from "../core/createNamedImport";
+import { createNamedImport, createNamedImportWithTypes } from "../core/createNamedImport";
 
 import { getFetcher } from "../templates/fetcher";
 import { getContext } from "../templates/context";
@@ -341,10 +341,8 @@ export const generateReactQueryComponents = async (
     printNodes([
       createWatermark(context.openAPIDocument.info),
       createReactQueryImport(),
-      // Split imports: types and values
       ...(config.useTypeImports ? [
-        createNamedImport([contextTypeName], `./${contextFilename}`, true), // type import
-        createNamedImport([contextHookName, "queryKeyFn"], `./${contextFilename}`, false) // value import
+        createNamedImportWithTypes([contextTypeName], [contextHookName, "queryKeyFn"], `./${contextFilename}`)
       ] : [
         createNamedImport([contextHookName, contextTypeName, "queryKeyFn"], `./${contextFilename}`, false)
       ]),
