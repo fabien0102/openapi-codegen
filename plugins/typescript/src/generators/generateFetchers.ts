@@ -11,7 +11,10 @@ import { createOperationFetcherFnNodes } from "../core/createOperationFetcherFnN
 import { isVerb } from "../core/isVerb";
 import { isOperationObject } from "../core/isOperationObject";
 import { getOperationTypes } from "../core/getOperationTypes";
-import { createNamedImport, shouldUseTypeImport } from "../core/createNamedImport";
+import {
+  createNamedImport,
+  shouldUseTypeImport,
+} from "../core/createNamedImport";
 
 import { getFetcher } from "../templates/fetcher";
 import { getUtils } from "../templates/utils";
@@ -239,7 +242,14 @@ export const generateFetchers = async (context: Context, config: Config) => {
     printNodes([
       createWatermark(context.openAPIDocument.info),
       createNamespaceImport("Fetcher", `./${fetcherFilename}`),
-      createNamedImport(fetcherImports, `./${fetcherFilename}`, config.useTypeImports && fetcherImports.some(name => shouldUseTypeImport(name, config.useTypeImports || false, nodes))),
+      createNamedImport(
+        fetcherImports,
+        `./${fetcherFilename}`,
+        config.useTypeImports &&
+          fetcherImports.some((name) =>
+            shouldUseTypeImport(name, config.useTypeImports || false, nodes)
+          )
+      ),
       ...usedImportsNodes,
       ...nodes,
     ])

@@ -11,7 +11,10 @@ import { createOperationFetcherFnNodes } from "../core/createOperationFetcherFnN
 import { isVerb } from "../core/isVerb";
 import { isOperationObject } from "../core/isOperationObject";
 import { getOperationTypes } from "../core/getOperationTypes";
-import { createNamedImport, createNamedImportWithTypes } from "../core/createNamedImport";
+import {
+  createNamedImport,
+  createNamedImportWithTypes,
+} from "../core/createNamedImport";
 
 import { getFetcher } from "../templates/fetcher";
 import { getContext } from "../templates/context";
@@ -327,10 +330,14 @@ export const generateReactQueryComponents = async (
         ])
   );
 
-  const { nodes: usedImportsNodes } = getUsedImports(nodes, {
-    ...config.schemasFiles,
-    utils: utilsFilename,
-  }, config.useTypeImports);
+  const { nodes: usedImportsNodes } = getUsedImports(
+    nodes,
+    {
+      ...config.schemasFiles,
+      utils: utilsFilename,
+    },
+    config.useTypeImports
+  );
 
   if (!context.existsFile(`${utilsFilename}.ts`)) {
     await context.writeFile(`${utilsFilename}.ts`, getUtils());
@@ -341,11 +348,21 @@ export const generateReactQueryComponents = async (
     printNodes([
       createWatermark(context.openAPIDocument.info),
       createReactQueryImport(),
-      ...(config.useTypeImports ? [
-        createNamedImportWithTypes([contextTypeName], [contextHookName, "queryKeyFn"], `./${contextFilename}`)
-      ] : [
-        createNamedImport([contextHookName, contextTypeName, "queryKeyFn"], `./${contextFilename}`, false)
-      ]),
+      ...(config.useTypeImports
+        ? [
+            createNamedImportWithTypes(
+              [contextTypeName],
+              [contextHookName, "queryKeyFn"],
+              `./${contextFilename}`
+            ),
+          ]
+        : [
+            createNamedImport(
+              [contextHookName, contextTypeName, "queryKeyFn"],
+              `./${contextFilename}`,
+              false
+            ),
+          ]),
       createNamedImport("deepMerge", `./${utilsFilename}`),
       createNamespaceImport("Fetcher", `./${fetcherFilename}`),
       createNamedImport(fetcherFn, `./${fetcherFilename}`),

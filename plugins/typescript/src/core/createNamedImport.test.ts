@@ -7,11 +7,15 @@ import * as ts from "typescript";
 // Helper function to set parent references in AST nodes
 const setParentReferences = (node: ts.Node): ts.Node => {
   const setParent = (n: ts.Node, parent: ts.Node) => {
-    (n as { parent?: ts.Node }).parent = parent;
-    n.forEachChild(child => setParent(child, n));
+    Object.defineProperty(n, "parent", {
+      value: parent,
+      writable: true,
+      configurable: true,
+    });
+    n.forEachChild((child) => setParent(child, n));
   };
-  
-  node.forEachChild(child => setParent(child, node));
+
+  node.forEachChild((child) => setParent(child, node));
   return node;
 };
 
@@ -33,8 +37,6 @@ describe("createNamedImport", () => {
   });
 });
 
-
-
 describe("shouldUseTypeImport", () => {
   it("should return false when useTypeImports is false", () => {
     expect(shouldUseTypeImport("User", false)).toBe(false);
@@ -50,12 +52,14 @@ describe("shouldUseTypeImport", () => {
 describe("analyzeImportUsage", () => {
   it("should detect type-only usage", () => {
     const nodes = [
-      setParentReferences(f.createTypeAliasDeclaration(
-        undefined,
-        f.createIdentifier("MyType"),
-        undefined,
-        f.createTypeReferenceNode(f.createIdentifier("User"), undefined)
-      )),
+      setParentReferences(
+        f.createTypeAliasDeclaration(
+          undefined,
+          f.createIdentifier("MyType"),
+          undefined,
+          f.createTypeReferenceNode(f.createIdentifier("User"), undefined)
+        )
+      ),
     ];
 
     expect(analyzeImportUsage(nodes, "User")).toBe(true);
@@ -63,11 +67,9 @@ describe("analyzeImportUsage", () => {
 
   it("should detect value usage", () => {
     const nodes = [
-      setParentReferences(f.createCallExpression(
-        f.createIdentifier("fetchData"),
-        undefined,
-        []
-      )),
+      setParentReferences(
+        f.createCallExpression(f.createIdentifier("fetchData"), undefined, [])
+      ),
     ];
 
     expect(analyzeImportUsage(nodes, "fetchData")).toBe(false);
@@ -75,17 +77,17 @@ describe("analyzeImportUsage", () => {
 
   it("should detect mixed usage", () => {
     const nodes = [
-      setParentReferences(f.createTypeAliasDeclaration(
-        undefined,
-        f.createIdentifier("MyType"),
-        undefined,
-        f.createTypeReferenceNode(f.createIdentifier("User"), undefined)
-      )),
-      setParentReferences(f.createCallExpression(
-        f.createIdentifier("User"),
-        undefined,
-        []
-      )),
+      setParentReferences(
+        f.createTypeAliasDeclaration(
+          undefined,
+          f.createIdentifier("MyType"),
+          undefined,
+          f.createTypeReferenceNode(f.createIdentifier("User"), undefined)
+        )
+      ),
+      setParentReferences(
+        f.createCallExpression(f.createIdentifier("User"), undefined, [])
+      ),
     ];
 
     expect(analyzeImportUsage(nodes, "User")).toBe(false);
@@ -93,14 +95,16 @@ describe("analyzeImportUsage", () => {
 
   it("should default to type-only when not used", () => {
     const nodes = [
-      setParentReferences(f.createTypeAliasDeclaration(
-        undefined,
-        f.createIdentifier("MyType"),
-        undefined,
-        f.createKeywordTypeNode(ts.SyntaxKind.StringKeyword)
-      )),
+      setParentReferences(
+        f.createTypeAliasDeclaration(
+          undefined,
+          f.createIdentifier("MyType"),
+          undefined,
+          f.createKeywordTypeNode(ts.SyntaxKind.StringKeyword)
+        )
+      ),
     ];
 
     expect(analyzeImportUsage(nodes, "UnusedImport")).toBe(true);
   });
-}); 
+});

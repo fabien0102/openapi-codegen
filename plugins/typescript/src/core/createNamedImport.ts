@@ -34,7 +34,7 @@ export const createNamedImport = (
 
 /**
  * Helper to determine whether an import should be type-only based on actual usage.
- * 
+ *
  * @param importName the name of the import
  * @param useTypeImports whether to use type-only imports
  * @param nodes AST nodes to analyze for usage
@@ -53,13 +53,13 @@ export const shouldUseTypeImport = (
     const isTypeOnly = analyzeImportUsage(nodes, importName);
     return isTypeOnly;
   }
-  
+
   return false;
 };
 
 /**
  * Helper to create named imports with types.
- * 
+ *
  * @param typeImports array of import names that should be type-only
  * @param valueImports array of import names that should be value imports
  * @param filename path of the module
@@ -81,11 +81,7 @@ export const createNamedImportWithTypes = (
 
   return f.createImportDeclaration(
     undefined,
-    f.createImportClause(
-      false,
-      undefined,
-      f.createNamedImports(allImports)
-    ),
+    f.createImportClause(false, undefined, f.createNamedImports(allImports)),
     f.createStringLiteral(filename),
     undefined
   );
