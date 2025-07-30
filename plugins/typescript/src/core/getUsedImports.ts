@@ -20,7 +20,7 @@ export const getUsedImports = (
     responses: string;
     utils: string;
   },
-  useTypeImports = false
+  useTypeImports = true
 ): { keys: string[]; nodes: ts.Node[] } => {
   const imports: Record<
     keyof typeof files,
@@ -93,7 +93,7 @@ export const getUsedImports = (
         return createNamedImport(
           Array.from(i.imports.values()),
           `./${i.from}`,
-          useTypeImports || true
+          useTypeImports ?? true
         );
       }
     }),
