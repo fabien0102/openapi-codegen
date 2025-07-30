@@ -54,39 +54,30 @@ export const analyzeImportUsage = (
   nodes: ts.Node[],
   importName: string
 ): boolean => {
-  let isUsedAsValue = false;
-  let isUsedAsType = false;
+  const determineUsageType = (): "type-only" | "value" | "mixed" | "unused" => {
+    const usages = { type: false, value: false };
 
-  const visitor = (node: ts.Node): void => {
-    if (isUsedAsValue && isUsedAsType) {
-      return;
-    }
+    const checkNode = (node: ts.Node): boolean => {
+      // returns: should continue
+      if (ts.isIdentifier(node) && node.text === importName && node.parent) {
+        const parent = node.parent;
 
-    if (ts.isIdentifier(node) && node.text === importName && node.parent) {
-      const parent = node.parent;
+        if (isValueUsageContext(parent)) usages.value = true;
+        if (isTypeUsageContext(parent, node)) usages.type = true;
 
-      if (isValueUsageContext(parent)) {
-        isUsedAsValue = true;
-      } else if (isTypeUsageContext(parent, node)) {
-        isUsedAsType = true;
+        return !(usages.type && usages.value);
       }
-    }
 
-    if (!(isUsedAsValue && isUsedAsType)) {
-      node.forEachChild(visitor);
-    }
+      return !node.forEachChild((child) => !checkNode(child));
+    };
+
+    nodes.every(checkNode);
+
+    if (!usages.type && !usages.value) return "unused";
+    if (usages.type && usages.value) return "mixed";
+    return usages.type ? "type-only" : "value";
   };
 
-  for (const node of nodes) {
-    visitor(node);
-    if (isUsedAsValue && isUsedAsType) {
-      break;
-    }
-  }
-
-  if (!isUsedAsType && !isUsedAsValue) {
-    return true;
-  }
-
-  return isUsedAsType && !isUsedAsValue;
+  const usage = determineUsageType();
+  return usage === "type-only" || usage === "unused";
 };

@@ -12,7 +12,7 @@ export const getContext = (
     type QueryKey,
     type UseQueryOptions,
  } from "@tanstack/react-query";
-  import ${useTypeImports ? "type" : ""} { QueryOperation } from './${componentsFile}';
+  import ${useTypeImports ? "{ type QueryOperation }" : "{ QueryOperation }"} from './${componentsFile}';
   
   export type ${pascal(prefix)}Context<
     TQueryFnData = unknown,

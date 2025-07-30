@@ -18,7 +18,7 @@ export const getFetcher = ({
 }) =>
   `${
     contextPath
-      ? `import ${useTypeImports ? "type" : ""} { ${pascal(prefix)}Context } from "./${contextPath}";`
+      ? `import ${useTypeImports ? `{ type ${pascal(prefix)}Context }` : `{ ${pascal(prefix)}Context }`} from "./${contextPath}";`
       : `export type ${pascal(prefix)}FetcherExtraProps = {
       /**
        * You can add some extra props to your generated fetchers.
