@@ -132,7 +132,7 @@ export const generateSchemaTypes = async (
       files.schemas + ".ts",
       printNodes([
         createWatermark(context.openAPIDocument.info),
-        ...getUsedImports(schemas, files).nodes,
+        ...getUsedImports(schemas, files, config.useTypeImports).nodes,
         ...schemas,
       ])
     );
@@ -163,7 +163,7 @@ export const generateSchemaTypes = async (
         files.responses + ".ts",
         printNodes([
           createWatermark(context.openAPIDocument.info),
-          ...getUsedImports(schemas, files).nodes,
+          ...getUsedImports(schemas, files, config.useTypeImports).nodes,
           ...schemas,
         ])
       );
@@ -196,7 +196,7 @@ export const generateSchemaTypes = async (
         files.requestBodies + ".ts",
         printNodes([
           createWatermark(context.openAPIDocument.info),
-          ...getUsedImports(schemas, files).nodes,
+          ...getUsedImports(schemas, files, config.useTypeImports).nodes,
           ...schemas,
         ])
       );
@@ -224,7 +224,7 @@ export const generateSchemaTypes = async (
       files.parameters + ".ts",
       printNodes([
         createWatermark(context.openAPIDocument.info),
-        ...getUsedImports(schemas, files).nodes,
+        ...getUsedImports(schemas, files, config.useTypeImports).nodes,
         ...schemas,
       ])
     );

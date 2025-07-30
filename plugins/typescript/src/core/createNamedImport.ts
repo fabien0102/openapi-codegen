@@ -1,4 +1,6 @@
 import { factory as f } from "typescript";
+import type * as ts from "typescript";
+import { analyzeImportUsage } from "./analyzeImportUsage";
 
 /**
  * Helper to create named imports.
@@ -28,4 +30,33 @@ export const createNamedImport = (
     f.createStringLiteral(filename),
     undefined
   );
+};
+
+/**
+ * GraphQL Code Generator inspired import generation.
+ * This function determines whether an import should be type-only based on actual usage.
+ * 
+ * @param importName the name of the import
+ * @param useTypeImports whether to use type-only imports
+ * @param nodes AST nodes to analyze for usage
+ * @returns true if the import should be type-only
+ */
+export const shouldUseTypeImport = (
+  importName: string,
+  useTypeImports: boolean,
+  nodes?: ts.Node[]
+): boolean => {
+  if (!useTypeImports) {
+    return false;
+  }
+
+  // If we have AST nodes, use GraphQL Code Generator style analysis
+  if (nodes) {
+    const isTypeOnly = analyzeImportUsage(nodes, importName);
+    return isTypeOnly;
+  }
+  
+  // If no AST nodes available, default to false (conservative approach)
+  // This matches GraphQL Code Generator's behavior - no pattern matching fallback
+  return false;
 };

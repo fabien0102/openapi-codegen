@@ -11,7 +11,7 @@ import { createOperationFetcherFnNodes } from "../core/createOperationFetcherFnN
 import { isVerb } from "../core/isVerb";
 import { isOperationObject } from "../core/isOperationObject";
 import { getOperationTypes } from "../core/getOperationTypes";
-import { createNamedImport } from "../core/createNamedImport";
+import { createNamedImport, shouldUseTypeImport } from "../core/createNamedImport";
 
 import { getFetcher } from "../templates/fetcher";
 import { getUtils } from "../templates/utils";
@@ -95,6 +95,7 @@ export const generateFetchers = async (context: Context, config: Config) => {
       getFetcher({
         prefix: filenamePrefix,
         baseUrl: get(context.openAPIDocument, "servers.0.url"),
+        useTypeImports: config.useTypeImports,
       })
     );
   } else {
@@ -222,7 +223,8 @@ export const generateFetchers = async (context: Context, config: Config) => {
     {
       ...config.schemasFiles,
       utils: utilsFilename,
-    }
+    },
+    config.useTypeImports
   );
 
   if (
@@ -237,7 +239,7 @@ export const generateFetchers = async (context: Context, config: Config) => {
     printNodes([
       createWatermark(context.openAPIDocument.info),
       createNamespaceImport("Fetcher", `./${fetcherFilename}`),
-      createNamedImport(fetcherImports, `./${fetcherFilename}`),
+      createNamedImport(fetcherImports, `./${fetcherFilename}`, config.useTypeImports && fetcherImports.some(name => shouldUseTypeImport(name, config.useTypeImports || false, nodes))),
       ...usedImportsNodes,
       ...nodes,
     ])

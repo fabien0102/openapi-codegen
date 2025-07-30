@@ -9,14 +9,16 @@ export const getFetcher = ({
   prefix,
   contextPath,
   baseUrl,
+  useTypeImports = false,
 }: {
   prefix: string;
   contextPath?: string;
   baseUrl?: string;
+  useTypeImports?: boolean;
 }) =>
   `${
     contextPath
-      ? `import { ${pascal(prefix)}Context } from "./${contextPath}";`
+      ? `import ${useTypeImports ? 'type' : ''} { ${pascal(prefix)}Context } from "./${contextPath}";`
       : `export type ${pascal(prefix)}FetcherExtraProps = {
       /**
        * You can add some extra props to your generated fetchers.
