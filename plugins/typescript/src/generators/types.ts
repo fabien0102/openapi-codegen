@@ -36,4 +36,11 @@ export type ConfigBase = {
    * @default false
    */
   useEnums?: boolean;
+  /**
+   * Use type-only imports for types and interfaces.
+   * This is useful when using TypeScript's verbatimModuleSyntax option.
+   *
+   * @default true
+   */
+  useTypeImports?: boolean;
 };
