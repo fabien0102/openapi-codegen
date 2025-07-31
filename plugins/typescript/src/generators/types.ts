@@ -40,7 +40,7 @@ export type ConfigBase = {
    * Use type-only imports for types and interfaces.
    * This is useful when using TypeScript's verbatimModuleSyntax option.
    *
-   * @default false
+   * @default true
    */
   useTypeImports?: boolean;
 };

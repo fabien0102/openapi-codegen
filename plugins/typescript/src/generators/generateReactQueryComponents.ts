@@ -45,6 +45,8 @@ export const generateReactQueryComponents = async (
   context: Context,
   config: Config
 ) => {
+  const { useTypeImports = true, ...restConfig } = config;
+  const finalConfig = { useTypeImports, ...restConfig };
   const sourceFile = ts.createSourceFile(
     "index.ts",
     "",
@@ -72,13 +74,13 @@ export const generateReactQueryComponents = async (
       .join("\n");
 
   const filenamePrefix =
-    c.snake(config.filenamePrefix ?? context.openAPIDocument.info.title) + "-";
+    c.snake(finalConfig.filenamePrefix ?? context.openAPIDocument.info.title) + "-";
 
   const formatFilename =
-    typeof config.formatFilename === "function"
-      ? config.formatFilename
-      : config.filenameCase
-        ? c[config.filenameCase]
+    typeof finalConfig.formatFilename === "function"
+      ? finalConfig.formatFilename
+      : finalConfig.filenameCase
+        ? c[finalConfig.filenameCase]
         : c.camel;
 
   const filename = formatFilename(filenamePrefix + "-components");
@@ -100,7 +102,7 @@ export const generateReactQueryComponents = async (
         prefix: filenamePrefix,
         contextPath: contextFilename,
         baseUrl: get(context.openAPIDocument, "servers.0.url"),
-        useTypeImports: config.useTypeImports,
+        useTypeImports: finalConfig.useTypeImports,
       })
     );
   }
@@ -108,7 +110,7 @@ export const generateReactQueryComponents = async (
   if (!context.existsFile(`${contextFilename}.ts`)) {
     context.writeFile(
       `${contextFilename}.ts`,
-      getContext(filenamePrefix, filename, config.useTypeImports)
+      getContext(filenamePrefix, filename, finalConfig.useTypeImports)
     );
   }
 
@@ -164,7 +166,7 @@ export const generateReactQueryComponents = async (
           operation,
           operationId,
           printNodes,
-          injectedHeaders: config.injectedHeaders,
+          injectedHeaders: finalConfig.injectedHeaders,
           pathParameters: verbs.parameters,
           variablesExtraPropsType: f.createIndexedAccessTypeNode(
             f.createTypeReferenceNode(
@@ -333,10 +335,10 @@ export const generateReactQueryComponents = async (
   const { nodes: usedImportsNodes } = getUsedImports(
     nodes,
     {
-      ...config.schemasFiles,
+      ...finalConfig.schemasFiles,
       utils: utilsFilename,
     },
-    config.useTypeImports
+    finalConfig.useTypeImports
   );
 
   if (!context.existsFile(`${utilsFilename}.ts`)) {
@@ -348,7 +350,7 @@ export const generateReactQueryComponents = async (
     printNodes([
       createWatermark(context.openAPIDocument.info),
       createReactQueryImport(),
-      ...(config.useTypeImports
+      ...(finalConfig.useTypeImports
         ? [
             createNamedImportWithTypes(
               [contextTypeName],

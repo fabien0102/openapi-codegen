@@ -27,6 +27,8 @@ export const generateSchemaTypes = async (
   context: Context,
   config: Config = {}
 ) => {
+  const { useTypeImports = true, ...restConfig } = config;
+  const finalConfig = { useTypeImports, ...restConfig };
   const { components } = context.openAPIDocument;
   if (!components) {
     throw new Error("No components founds!");
@@ -67,7 +69,7 @@ export const generateSchemaTypes = async (
             openAPIDocument: context.openAPIDocument,
             currentComponent: currentComponent,
           },
-          config.useEnums
+          finalConfig.useEnums
         ),
       ],
       []
@@ -77,7 +79,7 @@ export const generateSchemaTypes = async (
     componentSchemaEntries: [string, SchemaObject | ReferenceObject][],
     currentComponent: OpenAPIComponentType
   ) => {
-    if (config.useEnums) {
+    if (finalConfig.useEnums) {
       const enumSchemaEntries = getEnumProperties(componentSchemaEntries);
       const enumSchemas = enumSchemaEntries.reduce<ts.Node[]>(
         (mem, [name, schema]) => [
@@ -104,13 +106,13 @@ export const generateSchemaTypes = async (
   };
 
   const filenamePrefix =
-    c.snake(config.filenamePrefix ?? context.openAPIDocument.info.title) + "-";
+    c.snake(finalConfig.filenamePrefix ?? context.openAPIDocument.info.title) + "-";
 
   const formatFilename =
-    typeof config.formatFilename === "function"
-      ? config.formatFilename
-      : config.filenameCase
-        ? c[config.filenameCase]
+    typeof finalConfig.formatFilename === "function"
+      ? finalConfig.formatFilename
+      : finalConfig.filenameCase
+        ? c[finalConfig.filenameCase]
         : c.camel;
   const files = {
     requestBodies: formatFilename(filenamePrefix + "-request-bodies"),
@@ -132,7 +134,7 @@ export const generateSchemaTypes = async (
       files.schemas + ".ts",
       printNodes([
         createWatermark(context.openAPIDocument.info),
-        ...getUsedImports(schemas, files, config.useTypeImports).nodes,
+        ...getUsedImports(schemas, files, finalConfig.useTypeImports).nodes,
         ...schemas,
       ])
     );
@@ -163,7 +165,7 @@ export const generateSchemaTypes = async (
         files.responses + ".ts",
         printNodes([
           createWatermark(context.openAPIDocument.info),
-          ...getUsedImports(schemas, files, config.useTypeImports).nodes,
+          ...getUsedImports(schemas, files, finalConfig.useTypeImports).nodes,
           ...schemas,
         ])
       );
@@ -196,7 +198,7 @@ export const generateSchemaTypes = async (
         files.requestBodies + ".ts",
         printNodes([
           createWatermark(context.openAPIDocument.info),
-          ...getUsedImports(schemas, files, config.useTypeImports).nodes,
+          ...getUsedImports(schemas, files, finalConfig.useTypeImports).nodes,
           ...schemas,
         ])
       );
@@ -224,7 +226,7 @@ export const generateSchemaTypes = async (
       files.parameters + ".ts",
       printNodes([
         createWatermark(context.openAPIDocument.info),
-        ...getUsedImports(schemas, files, config.useTypeImports).nodes,
+        ...getUsedImports(schemas, files, finalConfig.useTypeImports).nodes,
         ...schemas,
       ])
     );

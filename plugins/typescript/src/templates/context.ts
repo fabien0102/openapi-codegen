@@ -3,7 +3,7 @@ import { pascal } from "case";
 export const getContext = (
   prefix: string,
   componentsFile: string,
-  useTypeImports = false
+  useTypeImports = true
 ) =>
   `import {
     skipToken,

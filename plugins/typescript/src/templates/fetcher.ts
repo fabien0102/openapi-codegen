@@ -9,7 +9,7 @@ export const getFetcher = ({
   prefix,
   contextPath,
   baseUrl,
-  useTypeImports = false,
+  useTypeImports = true,
 }: {
   prefix: string;
   contextPath?: string;

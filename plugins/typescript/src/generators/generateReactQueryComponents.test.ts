@@ -93,8 +93,8 @@ describe("generateReactQueryComponents", () => {
        */
       import * as reactQuery from "@tanstack/react-query";
       import {
+        type PetstoreContext,
         usePetstoreContext,
-        PetstoreContext,
         queryKeyFn,
       } from "./petstoreContext";
       import { deepMerge } from "./petstoreUtils";
@@ -259,8 +259,8 @@ describe("generateReactQueryComponents", () => {
        */
       import * as reactQuery from "@tanstack/react-query";
       import {
+        type PetstoreContext,
         usePetstoreContext,
-        PetstoreContext,
         queryKeyFn,
       } from "./petstoreContext";
       import { deepMerge } from "./petstoreUtils";
@@ -450,8 +450,8 @@ describe("generateReactQueryComponents", () => {
        */
       import * as reactQuery from "@tanstack/react-query";
       import {
+        type PetstoreContext,
         usePetstoreContext,
-        PetstoreContext,
         queryKeyFn,
       } from "./petstoreContext";
       import { deepMerge } from "./petstoreUtils";
@@ -656,8 +656,8 @@ describe("generateReactQueryComponents", () => {
        */
       import * as reactQuery from "@tanstack/react-query";
       import {
+        type PetstoreContext,
         usePetstoreContext,
-        PetstoreContext,
         queryKeyFn,
       } from "./petstoreContext";
       import { deepMerge } from "./petstoreUtils";
@@ -848,8 +848,8 @@ describe("generateReactQueryComponents", () => {
        */
       import * as reactQuery from "@tanstack/react-query";
       import {
+        type PetstoreContext,
         usePetstoreContext,
-        PetstoreContext,
         queryKeyFn,
       } from "./petstoreContext";
       import { deepMerge } from "./petstoreUtils";
@@ -1041,8 +1041,8 @@ describe("generateReactQueryComponents", () => {
        */
       import * as reactQuery from "@tanstack/react-query";
       import {
+        type PetstoreContext,
         usePetstoreContext,
-        PetstoreContext,
         queryKeyFn,
       } from "./petstoreContext";
       import { deepMerge } from "./petstoreUtils";
@@ -1248,8 +1248,8 @@ describe("generateReactQueryComponents", () => {
        */
       import * as reactQuery from "@tanstack/react-query";
       import {
+        type PetstoreContext,
         usePetstoreContext,
-        PetstoreContext,
         queryKeyFn,
       } from "./petstoreContext";
       import { deepMerge } from "./petstoreUtils";
@@ -1447,8 +1447,8 @@ describe("generateReactQueryComponents", () => {
        */
       import * as reactQuery from "@tanstack/react-query";
       import {
+        type PetstoreContext,
         usePetstoreContext,
-        PetstoreContext,
         queryKeyFn,
       } from "./petstoreContext";
       import { deepMerge } from "./petstoreUtils";
@@ -1654,8 +1654,8 @@ describe("generateReactQueryComponents", () => {
        */
       import * as reactQuery from "@tanstack/react-query";
       import {
+        type PetstoreContext,
         usePetstoreContext,
-        PetstoreContext,
         queryKeyFn,
       } from "./petstoreContext";
       import { deepMerge } from "./petstoreUtils";
@@ -1809,8 +1809,8 @@ describe("generateReactQueryComponents", () => {
        */
       import * as reactQuery from "@tanstack/react-query";
       import {
+        type PetstoreContext,
         usePetstoreContext,
-        PetstoreContext,
         queryKeyFn,
       } from "./petstoreContext";
       import { deepMerge } from "./petstoreUtils";
@@ -2012,8 +2012,8 @@ describe("generateReactQueryComponents", () => {
        */
       import * as reactQuery from "@tanstack/react-query";
       import {
+        type PetstoreContext,
         usePetstoreContext,
-        PetstoreContext,
         queryKeyFn,
       } from "./petstoreContext";
       import { deepMerge } from "./petstoreUtils";
@@ -2173,8 +2173,8 @@ describe("generateReactQueryComponents", () => {
        */
       import * as reactQuery from "@tanstack/react-query";
       import {
+        type PetstoreContext,
         usePetstoreContext,
-        PetstoreContext,
         queryKeyFn,
       } from "./petstoreContext";
       import { deepMerge } from "./petstoreUtils";
@@ -2307,8 +2307,8 @@ describe("generateReactQueryComponents", () => {
        */
       import * as reactQuery from "@tanstack/react-query";
       import {
+        type PetstoreContext,
         usePetstoreContext,
-        PetstoreContext,
         queryKeyFn,
       } from "./petstoreContext";
       import { deepMerge } from "./petstoreUtils";
@@ -2445,8 +2445,8 @@ describe("generateReactQueryComponents", () => {
        */
       import * as reactQuery from "@tanstack/react-query";
       import {
+        type PetstoreContext,
         usePetstoreContext,
-        PetstoreContext,
         queryKeyFn,
       } from "./petstoreContext";
       import { deepMerge } from "./petstoreUtils";
@@ -2583,8 +2583,8 @@ describe("generateReactQueryComponents", () => {
        */
       import * as reactQuery from "@tanstack/react-query";
       import {
+        type PetstoreContext,
         usePetstoreContext,
-        PetstoreContext,
         queryKeyFn,
       } from "./petstoreContext";
       import { deepMerge } from "./petstoreUtils";
@@ -2720,7 +2720,7 @@ describe("generateReactQueryComponents", () => {
        * @version 1.0.0
        */
       import * as reactQuery from "@tanstack/react-query";
-      import { useContext, Context, queryKeyFn } from "./context";
+      import { type Context, useContext, queryKeyFn } from "./context";
       import { deepMerge } from "./utils";
       import type * as Fetcher from "./fetcher";
       import { fetch } from "./fetcher";
