@@ -11,7 +11,10 @@ import { createOperationFetcherFnNodes } from "../core/createOperationFetcherFnN
 import { isVerb } from "../core/isVerb";
 import { isOperationObject } from "../core/isOperationObject";
 import { getOperationTypes } from "../core/getOperationTypes";
-import { createNamedImport } from "../core/createNamedImport";
+import {
+  createNamedImport,
+  createNamedImportWithTypes,
+} from "../core/createNamedImport";
 
 import { getFetcher } from "../templates/fetcher";
 import { getContext } from "../templates/context";
@@ -42,6 +45,8 @@ export const generateReactQueryComponents = async (
   context: Context,
   config: Config
 ) => {
+  const { useTypeImports = true, ...restConfig } = config;
+  const finalConfig = { useTypeImports, ...restConfig };
   const sourceFile = ts.createSourceFile(
     "index.ts",
     "",
@@ -69,13 +74,14 @@ export const generateReactQueryComponents = async (
       .join("\n");
 
   const filenamePrefix =
-    c.snake(config.filenamePrefix ?? context.openAPIDocument.info.title) + "-";
+    c.snake(finalConfig.filenamePrefix ?? context.openAPIDocument.info.title) +
+    "-";
 
   const formatFilename =
-    typeof config.formatFilename === "function"
-      ? config.formatFilename
-      : config.filenameCase
-        ? c[config.filenameCase]
+    typeof finalConfig.formatFilename === "function"
+      ? finalConfig.formatFilename
+      : finalConfig.filenameCase
+        ? c[finalConfig.filenameCase]
         : c.camel;
 
   const filename = formatFilename(filenamePrefix + "-components");
@@ -97,6 +103,7 @@ export const generateReactQueryComponents = async (
         prefix: filenamePrefix,
         contextPath: contextFilename,
         baseUrl: get(context.openAPIDocument, "servers.0.url"),
+        useTypeImports: finalConfig.useTypeImports,
       })
     );
   }
@@ -104,7 +111,7 @@ export const generateReactQueryComponents = async (
   if (!context.existsFile(`${contextFilename}.ts`)) {
     context.writeFile(
       `${contextFilename}.ts`,
-      getContext(filenamePrefix, filename)
+      getContext(filenamePrefix, filename, finalConfig.useTypeImports)
     );
   }
 
@@ -160,7 +167,7 @@ export const generateReactQueryComponents = async (
           operation,
           operationId,
           printNodes,
-          injectedHeaders: config.injectedHeaders,
+          injectedHeaders: finalConfig.injectedHeaders,
           pathParameters: verbs.parameters,
           variablesExtraPropsType: f.createIndexedAccessTypeNode(
             f.createTypeReferenceNode(
@@ -326,10 +333,14 @@ export const generateReactQueryComponents = async (
         ])
   );
 
-  const { nodes: usedImportsNodes } = getUsedImports(nodes, {
-    ...config.schemasFiles,
-    utils: utilsFilename,
-  });
+  const { nodes: usedImportsNodes } = getUsedImports(
+    nodes,
+    {
+      ...finalConfig.schemasFiles,
+      utils: utilsFilename,
+    },
+    finalConfig.useTypeImports
+  );
 
   if (!context.existsFile(`${utilsFilename}.ts`)) {
     await context.writeFile(`${utilsFilename}.ts`, getUtils());
@@ -340,10 +351,21 @@ export const generateReactQueryComponents = async (
     printNodes([
       createWatermark(context.openAPIDocument.info),
       createReactQueryImport(),
-      createNamedImport(
-        [contextHookName, contextTypeName, "queryKeyFn"],
-        `./${contextFilename}`
-      ),
+      ...(finalConfig.useTypeImports
+        ? [
+            createNamedImportWithTypes(
+              [contextTypeName],
+              [contextHookName, "queryKeyFn"],
+              `./${contextFilename}`
+            ),
+          ]
+        : [
+            createNamedImport(
+              [contextHookName, contextTypeName, "queryKeyFn"],
+              `./${contextFilename}`,
+              false
+            ),
+          ]),
       createNamedImport("deepMerge", `./${utilsFilename}`),
       createNamespaceImport("Fetcher", `./${fetcherFilename}`),
       createNamedImport(fetcherFn, `./${fetcherFilename}`),

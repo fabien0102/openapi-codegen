@@ -1,6 +1,10 @@
 import { pascal } from "case";
 
-export const getContext = (prefix: string, componentsFile: string) =>
+export const getContext = (
+  prefix: string,
+  componentsFile: string,
+  useTypeImports = true
+) =>
   `import {
     skipToken,
     type DefaultError,
@@ -8,7 +12,7 @@ export const getContext = (prefix: string, componentsFile: string) =>
     type QueryKey,
     type UseQueryOptions,
  } from "@tanstack/react-query";
-  import { QueryOperation } from './${componentsFile}';
+  import ${useTypeImports ? "type { QueryOperation }" : "{ QueryOperation }"} from './${componentsFile}';
   
   export type ${pascal(prefix)}Context<
     TQueryFnData = unknown,

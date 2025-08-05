@@ -119,6 +119,13 @@
       "avatar_url": "https://avatars.githubusercontent.com/u/172711?v=4",
       "profile": "https://tverdohleb.com/",
       "contributions": ["bug", "code", "ideas"]
+    },
+    {
+      "login": "hayawata3626",
+      "name": "Isco",
+      "avatar_url": "https://avatars.githubusercontent.com/u/15213369?v=4",
+      "profile": "https://zenn.dev/watahaya",
+      "contributions": ["code"]
     }
   ],
   "contributorsPerLine": 7

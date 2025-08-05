@@ -279,6 +279,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     </tr>
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://tverdohleb.com/"><img src="https://avatars.githubusercontent.com/u/172711?v=4?s=100" width="100px;" alt="Valeriy"/><br /><sub><b>Valeriy</b></sub></a><br /><a href="https://github.com/fabien0102/openapi-codegen/issues?q=author%3Atverdohleb" title="Bug reports">🐛</a> <a href="https://github.com/fabien0102/openapi-codegen/commits?author=tverdohleb" title="Code">💻</a> <a href="#ideas-tverdohleb" title="Ideas, Planning, & Feedback">🤔</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://zenn.dev/watahaya"><img src="https://avatars.githubusercontent.com/u/15213369?v=4?s=100" width="100px;" alt="Isco"/><br /><sub><b>Isco</b></sub></a><br /><a href="https://github.com/fabien0102/openapi-codegen/commits?author=hayawata3626" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
