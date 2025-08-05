@@ -1,5 +1,12 @@
 # Changelog
 
+## [11.1.0](https://github.com/fabien0102/openapi-codegen/compare/typescript-v11.0.1...typescript-v11.1.0) (2025-08-05)
+
+
+### Features
+
+* **typescript:** add useTypeImports option ([#314](https://github.com/fabien0102/openapi-codegen/issues/314)) ([6c16829](https://github.com/fabien0102/openapi-codegen/commit/6c168296cae316a8ddf11b85eb8636e587656fd6))
+
 ## [11.0.1](https://github.com/fabien0102/openapi-codegen/compare/typescript-v11.0.0...typescript-v11.0.1) (2025-02-17)
 
 
