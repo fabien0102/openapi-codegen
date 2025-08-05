@@ -74,7 +74,8 @@ export const generateReactQueryComponents = async (
       .join("\n");
 
   const filenamePrefix =
-    c.snake(finalConfig.filenamePrefix ?? context.openAPIDocument.info.title) + "-";
+    c.snake(finalConfig.filenamePrefix ?? context.openAPIDocument.info.title) +
+    "-";
 
   const formatFilename =
     typeof finalConfig.formatFilename === "function"
