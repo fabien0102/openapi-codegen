@@ -946,6 +946,30 @@ describe("schemaToTypeAliasDeclaration", () => {
       `);
     });
 
+    it("should generate valid identifier from number name", () => {
+      const schema: SchemaObject = {};
+
+      expect(printSchema(schema, "200")).toMatchInlineSnapshot(`
+        "export type TwoHundred = void;"
+      `);
+    });
+
+    it("should generate valid identifier from symbol name", () => {
+      const schema: SchemaObject = {};
+
+      expect(printSchema(schema, "-")).toMatchInlineSnapshot(`
+        "export type _ = void;"
+      `);
+    });
+
+    it("should generate valid identifier from invalid name", () => {
+      const schema: SchemaObject = {};
+
+      expect(printSchema(schema, "🙂")).toMatchInlineSnapshot(`
+        "export type _ = void;"
+      `);
+    });
+
     it("should generate a `never` if the combined type is broken", () => {
       const schema: SchemaObject = {
         allOf: [{ type: "string" }, { type: "number" }],

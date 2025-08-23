@@ -11,7 +11,12 @@ import {
 } from "openapi3-ts/oas30";
 import { singular } from "pluralize";
 import { isValidIdentifier } from "tsutils";
-import ts, { factory as f } from "typescript";
+import ts, {
+  factory as f,
+  isIdentifierPart,
+  isIdentifierStart,
+} from "typescript";
+import { convertNumberToWord } from "../utils/getEnumProperties";
 import { getReferenceSchema } from "./getReference";
 
 type RemoveIndex<T> = {
@@ -56,11 +61,37 @@ export const schemaToTypeAliasDeclaration = (
   const jsDocNode = isSchemaObject(schema)
     ? getJSDocComment(schema, context)
     : undefined;
+
+  let identifier = pascal(name);
+
+  if (identifier.length > 0 && !isNaN(Number(identifier))) {
+    // If the identifier can be cast to a number, convert it to a word.
+    identifier = pascal(convertNumberToWord(Number(identifier)));
+  } else {
+    // If the identifier does not start with a valid character but valid identifier part, prefix it with an underscore.
+    if (
+      !isIdentifierStart(identifier.charCodeAt(0), ts.ScriptTarget.Latest) &&
+      isIdentifierPart(identifier.charCodeAt(0), ts.ScriptTarget.Latest)
+    ) {
+      identifier = `_${identifier}`;
+    }
+
+    // If the identifier is still not valid, remove invalid characters.
+    if (!isValidIdentifier(identifier)) {
+      identifier = identifier.replace(/[^a-zA-Z0-9_]/g, "");
+    }
+
+    // If the identifier is now empty, set it to "_".
+    if (identifier.length === 0) {
+      identifier = "_";
+    }
+  }
+
   const declarationNode = f.createTypeAliasDeclaration(
     [f.createModifier(ts.SyntaxKind.ExportKeyword)],
-    pascal(name),
+    identifier,
     undefined,
-    getType(schema, context, name)
+    getType(schema, context, identifier)
   );
 
   return jsDocNode ? [jsDocNode, declarationNode] : [declarationNode];
@@ -89,10 +120,10 @@ export const getType = (
 
     let refNode: ts.TypeNode = f.createTypeReferenceNode(
       namespace === context.currentComponent
-        ? f.createIdentifier(pascal(name))
+        ? f.createIdentifier(name)
         : f.createQualifiedName(
             f.createIdentifier(pascal(namespace)),
-            f.createIdentifier(pascal(name))
+            f.createIdentifier(name)
           )
     );
 
@@ -174,7 +205,7 @@ export const getType = (
   if (schema.enum) {
     if (isNodeEnum) {
       return f.createUnionTypeNode([
-        f.createTypeReferenceNode(f.createIdentifier(pascal(name || ""))),
+        f.createTypeReferenceNode(f.createIdentifier(name || "")),
         ...(schema.nullable ? [f.createLiteralTypeNode(f.createNull())] : []),
       ]);
     }
