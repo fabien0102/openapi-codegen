@@ -11,7 +11,7 @@ import {
 } from "openapi3-ts/oas30";
 import { singular } from "pluralize";
 import { isValidIdentifier } from "tsutils";
-import ts, { factory as f } from "typescript";
+import ts, { factory as f, isIdentifierStart } from "typescript";
 import { getReferenceSchema } from "./getReference";
 
 type RemoveIndex<T> = {
@@ -56,11 +56,24 @@ export const schemaToTypeAliasDeclaration = (
   const jsDocNode = isSchemaObject(schema)
     ? getJSDocComment(schema, context)
     : undefined;
+
+  let identifier = pascal(name);
+
+  // If the identifier does not start with a valid character, prefix it with an underscore.
+  if (!isIdentifierStart(identifier.charCodeAt(0), ts.ScriptTarget.Latest)) {
+    identifier = `_${identifier}`;
+  }
+
+  // If the identifier is still not valid, remove invalid characters.
+  if (!isValidIdentifier(identifier)) {
+    identifier = identifier.replace(/[^a-zA-Z0-9_]/g, "");
+  }
+
   const declarationNode = f.createTypeAliasDeclaration(
     [f.createModifier(ts.SyntaxKind.ExportKeyword)],
-    pascal(name),
+    identifier,
     undefined,
-    getType(schema, context, name)
+    getType(schema, context, identifier)
   );
 
   return jsDocNode ? [jsDocNode, declarationNode] : [declarationNode];
@@ -89,10 +102,10 @@ export const getType = (
 
     let refNode: ts.TypeNode = f.createTypeReferenceNode(
       namespace === context.currentComponent
-        ? f.createIdentifier(pascal(name))
+        ? f.createIdentifier(name)
         : f.createQualifiedName(
             f.createIdentifier(pascal(namespace)),
-            f.createIdentifier(pascal(name))
+            f.createIdentifier(name)
           )
     );
 
@@ -173,7 +186,7 @@ export const getType = (
 
   if (schema.enum) {
     if (isNodeEnum) {
-      return f.createTypeReferenceNode(f.createIdentifier(pascal(name || "")));
+      return f.createTypeReferenceNode(f.createIdentifier(name || ""));
     }
 
     const unionTypes = f.createUnionTypeNode([
