@@ -1,5 +1,13 @@
 # Changelog
 
+## [11.1.0](https://github.com/fabien0102/openapi-codegen/compare/typescript-v11.0.1...typescript-v11.1.0) (2025-10-01)
+
+
+### Features
+
+* add support for union type nodes in shouldExtractNode function ([#318](https://github.com/fabien0102/openapi-codegen/issues/318)) ([c555865](https://github.com/fabien0102/openapi-codegen/commit/c555865557025bb69bf9d5e0dc589a965829ae4f))
+* **typescript:** add useTypeImports option ([#314](https://github.com/fabien0102/openapi-codegen/issues/314)) ([6c16829](https://github.com/fabien0102/openapi-codegen/commit/6c168296cae316a8ddf11b85eb8636e587656fd6))
+
 ## [11.0.1](https://github.com/fabien0102/openapi-codegen/compare/typescript-v11.0.0...typescript-v11.0.1) (2025-02-17)
 
 
