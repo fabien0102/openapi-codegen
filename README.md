@@ -61,7 +61,7 @@
 
 3. **Configure the Fetcher** (optional)
 
-   After the first step you should see a file called `{namespace}Fetcher.ts` in your ouput directory. This file
+   After the first step you should see a file called `{namespace}Fetcher.ts` in your ouput directory.
 
    By default it uses the built-in Fetch API, you are free to change this to your fetching library of choice (Axios, Got etc.)
 
