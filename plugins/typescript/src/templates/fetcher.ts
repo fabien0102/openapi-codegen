@@ -95,7 +95,7 @@ export async function ${camel(prefix)}Fetch<
       {
         signal,
         method: method.toUpperCase(),
-        body: body ? (body instanceof FormData ? body : JSON.stringify(body)) : undefined,
+        body: body ? ((body instanceof FormData || body instanceof URLSearchParams) ? body : JSON.stringify(body)) : undefined,
         headers: requestHeaders
       }
     );
