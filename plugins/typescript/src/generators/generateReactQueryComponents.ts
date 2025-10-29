@@ -104,14 +104,16 @@ export const generateReactQueryComponents = async (
         contextPath: contextFilename,
         baseUrl: get(context.openAPIDocument, "servers.0.url"),
         useTypeImports: finalConfig.useTypeImports,
-      })
+      }),
+      finalConfig.format
     );
   }
 
   if (!context.existsFile(`${contextFilename}.ts`)) {
     context.writeFile(
       `${contextFilename}.ts`,
-      getContext(filenamePrefix, filename, finalConfig.useTypeImports)
+      getContext(filenamePrefix, filename, finalConfig.useTypeImports),
+      finalConfig.format
     );
   }
 
@@ -343,7 +345,11 @@ export const generateReactQueryComponents = async (
   );
 
   if (!context.existsFile(`${utilsFilename}.ts`)) {
-    await context.writeFile(`${utilsFilename}.ts`, getUtils());
+    await context.writeFile(
+      `${utilsFilename}.ts`,
+      getUtils(),
+      finalConfig.format
+    );
   }
 
   await context.writeFile(
@@ -372,7 +378,8 @@ export const generateReactQueryComponents = async (
       ...usedImportsNodes,
       ...nodes,
       queryKeyManager,
-    ])
+    ]),
+    finalConfig.format
   );
 };
 
