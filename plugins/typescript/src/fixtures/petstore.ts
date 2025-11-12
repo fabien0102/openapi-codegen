@@ -364,8 +364,13 @@ export const petstore: OpenAPIObject = {
             type: "string",
             enum: ["labrador", "carlin", "beagle"],
           },
+          temperament: {
+            type: "string",
+            enum: ["calm", "playful", "aggressive", "shy"],
+            nullable: true,
+          },
         },
-        required: ["type", "breed"],
+        required: ["type", "breed", "temperament"],
       },
       Dog: {
         description: "A dog, wooof.",
@@ -378,8 +383,13 @@ export const petstore: OpenAPIObject = {
             type: "string",
             enum: ["saimois", "bengal", "british shorthair"],
           },
+          temperament: {
+            type: "string",
+            enum: ["calm", "playful", "aggressive", "shy"],
+            nullable: true,
+          },
         },
-        required: ["type", "breed"],
+        required: ["type", "breed", "temperament"],
       },
       Error: {
         description: "An error :(",
