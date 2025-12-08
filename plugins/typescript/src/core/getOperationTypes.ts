@@ -242,5 +242,6 @@ export const getOperationTypes = ({
  */
 const shouldExtractNode = (node: ts.Node) =>
   ts.isIntersectionTypeNode(node) ||
+  ts.isUnionTypeNode(node) ||
   (ts.isTypeLiteralNode(node) && node.members.length > 0) ||
   ts.isArrayTypeNode(node);

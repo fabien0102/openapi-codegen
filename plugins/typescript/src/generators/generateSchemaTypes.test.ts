@@ -175,6 +175,7 @@ describe("generateSchemaTypes", () => {
         export type Cat = {
           type: string;
           breed: "labrador" | "carlin" | "beagle";
+          temperament: "calm" | "playful" | "aggressive" | "shy" | null;
         };
 
         /**
@@ -183,6 +184,7 @@ describe("generateSchemaTypes", () => {
         export type Dog = {
           type: string;
           breed: "saimois" | "bengal" | "british shorthair";
+          temperament: "calm" | "playful" | "aggressive" | "shy" | null;
         };
 
         /**
@@ -233,13 +235,27 @@ describe("generateSchemaTypes", () => {
           Carlin = "carlin",
           Beagle = "beagle",
         }
-
+        
+        export enum CatTemperament {
+          Calm = "calm",
+          Playful = "playful",
+          Aggressive = "aggressive",
+          Shy = "shy",
+        }
+        
         export enum DogBreed {
           Saimois = "saimois",
           Bengal = "bengal",
           BritishShorthair = "british shorthair",
         }
-
+        
+        export enum DogTemperament {
+          Calm = "calm",
+          Playful = "playful",
+          Aggressive = "aggressive",
+          Shy = "shy",
+        }
+        
         /**
          * A new pet.
          */
@@ -275,6 +291,7 @@ describe("generateSchemaTypes", () => {
         export type Cat = {
           type: string;
           breed: CatBreed;
+          temperament: CatTemperament | null;
         };
 
         /**
@@ -283,6 +300,7 @@ describe("generateSchemaTypes", () => {
         export type Dog = {
           type: string;
           breed: DogBreed;
+          temperament: DogTemperament | null;
         };
 
         /**

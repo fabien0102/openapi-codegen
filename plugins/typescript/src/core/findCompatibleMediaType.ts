@@ -1,4 +1,4 @@
-import {
+import type {
   MediaTypeObject,
   RequestBodyObject,
   ResponseObject,
@@ -19,7 +19,8 @@ export const findCompatibleMediaType = (
       contentType.startsWith("*/*") ||
       contentType.startsWith("application/json") ||
       contentType.startsWith("application/octet-stream") ||
-      contentType.startsWith("multipart/form-data")
+      contentType.startsWith("multipart/form-data") ||
+      contentType.startsWith("text/csv")
     ) {
       return requestBodyOrResponseObject.content[contentType];
     }
