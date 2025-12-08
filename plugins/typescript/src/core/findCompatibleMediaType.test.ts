@@ -1,3 +1,4 @@
+import type { MediaTypeObject } from "openapi3-ts/oas30";
 import { describe, expect, it } from "vitest";
 import { findCompatibleMediaType } from "./findCompatibleMediaType";
 
@@ -7,7 +8,7 @@ describe("findCompatibleMediaType", () => {
   });
 
   it("should return MediaTypeObject for application/json", () => {
-    const mediaTypeObject = { schema: { type: "object" as const } };
+    const mediaTypeObject: MediaTypeObject = { schema: { type: "object" } };
     const result = findCompatibleMediaType({
       content: {
         "application/json": mediaTypeObject,
@@ -17,7 +18,9 @@ describe("findCompatibleMediaType", () => {
   });
 
   it("should return MediaTypeObject for application/json with charset", () => {
-    const mediaTypeObject = { schema: { type: "object" as const } };
+    const mediaTypeObject: MediaTypeObject = {
+      schema: { type: "object" },
+    };
     const result = findCompatibleMediaType({
       content: {
         "application/json; charset=utf-8": mediaTypeObject,
@@ -27,7 +30,9 @@ describe("findCompatibleMediaType", () => {
   });
 
   it("should return MediaTypeObject for */*", () => {
-    const mediaTypeObject = { schema: { type: "string" as const } };
+    const mediaTypeObject: MediaTypeObject = {
+      schema: { type: "string" },
+    };
     const result = findCompatibleMediaType({
       content: {
         "*/*": mediaTypeObject,
@@ -37,8 +42,8 @@ describe("findCompatibleMediaType", () => {
   });
 
   it("should return MediaTypeObject for application/octet-stream", () => {
-    const mediaTypeObject = {
-      schema: { type: "string" as const, format: "binary" },
+    const mediaTypeObject: MediaTypeObject = {
+      schema: { type: "string", format: "binary" },
     };
     const result = findCompatibleMediaType({
       content: {
@@ -49,11 +54,11 @@ describe("findCompatibleMediaType", () => {
   });
 
   it("should return MediaTypeObject for multipart/form-data", () => {
-    const mediaTypeObject = {
+    const mediaTypeObject: MediaTypeObject = {
       schema: {
-        type: "object" as const,
+        type: "object",
         properties: {
-          file: { type: "string" as const, format: "binary" },
+          file: { type: "string", format: "binary" },
         },
       },
     };
@@ -66,7 +71,9 @@ describe("findCompatibleMediaType", () => {
   });
 
   it("should return MediaTypeObject for text/csv", () => {
-    const mediaTypeObject = { schema: { type: "string" as const } };
+    const mediaTypeObject: MediaTypeObject = {
+      schema: { type: "string" },
+    };
     const result = findCompatibleMediaType({
       content: {
         "text/csv": mediaTypeObject,
@@ -76,7 +83,9 @@ describe("findCompatibleMediaType", () => {
   });
 
   it("should return MediaTypeObject for text/csv with charset", () => {
-    const mediaTypeObject = { schema: { type: "string" as const } };
+    const mediaTypeObject: MediaTypeObject = {
+      schema: { type: "string" },
+    };
     const result = findCompatibleMediaType({
       content: {
         "text/csv; charset=utf-8": mediaTypeObject,
@@ -88,18 +97,22 @@ describe("findCompatibleMediaType", () => {
   it("should return undefined for unsupported media type", () => {
     const result = findCompatibleMediaType({
       content: {
-        "text/html": { schema: { type: "string" as const } },
+        "text/html": { schema: { type: "string" } },
       },
     });
     expect(result).toBeUndefined();
   });
 
   it("should return the first compatible media type when multiple are present", () => {
-    const jsonMediaType = { schema: { type: "object" as const } };
-    const csvMediaType = { schema: { type: "string" as const } };
+    const jsonMediaType: MediaTypeObject = {
+      schema: { type: "object" },
+    };
+    const csvMediaType: MediaTypeObject = {
+      schema: { type: "string" },
+    };
     const result = findCompatibleMediaType({
       content: {
-        "text/html": { schema: { type: "string" as const } },
+        "text/html": { schema: { type: "string" } },
         "application/json": jsonMediaType,
         "text/csv": csvMediaType,
       },
