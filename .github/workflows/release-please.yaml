@@ -5,6 +5,7 @@ on:
 
 permissions:
   contents: write
+  issues: write
   pull-requests: write
   id-token: write
 
@@ -13,27 +14,26 @@ jobs:
   release-please:
     runs-on: ubuntu-latest
     steps:
-      - uses: google-github-actions/release-please-action@v4
+      - uses: googleapis/release-please-action@v4
         id: release
         with:
           token: ${{secrets.GITHUB_TOKEN}}
-          default-branch: main
-
+          release-type: node
       # The logic below handles the npm publication:
       - name: Checkout Repository
         uses: actions/checkout@v4
-        if: ${{ steps.release.outputs.releases_created }}
+        if: ${{ steps.release.outputs.release_created }}
       - name: Install pnpm
         uses: pnpm/action-setup@v4
-        if: ${{ steps.release.outputs.releases_created }}
+        if: ${{ steps.release.outputs.release_created }}
       - name: Setup Node
         uses: actions/setup-node@v4
-        if: ${{ steps.release.outputs.releases_created }}
+        if: ${{ steps.release.outputs.release_created }}
         with:
           node-version: 20
           registry-url: "https://registry.npmjs.org"
       - name: Build Packages
-        if: ${{ steps.release.outputs.releases_created }}
+        if: ${{ steps.release.outputs.release_created }}
         run: |
           pnpm install
           pnpm build
