@@ -35,6 +35,26 @@ describe("schemaToTypeAliasDeclaration", () => {
     `);
   });
 
+  it("should generate enums string (numbers)", () => {
+    const schema: SchemaObject = {
+      type: "integer",
+      enum: ["0", "00", "01", "1", "-1", "-01", "2", "3.33"],
+    };
+
+    expect(printSchema(schema)).toMatchInlineSnapshot(`
+      "export enum Test {
+          Zero = "0",
+          "00" = "00",
+          "01" = "01",
+          One = "1",
+          MinusOne = "-1",
+          "-01" = "-01",
+          Two = "2",
+          ThreePointThreeThree = "3.33"
+      }"
+    `);
+  });
+
   it("should generate a int enum (using big numbers)", () => {
     const schema: SchemaObject = {
       type: "string",

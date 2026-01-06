@@ -216,6 +216,15 @@ describe("schemaToTypeAliasDeclaration", () => {
     expect(printSchema(schema)).toBe(`export type Test = 1 | 2 | 3;`);
   });
 
+  it("should generate enums string (numbers)", () => {
+    const schema: SchemaObject = {
+      type: "integer",
+      enum: ["1", "2", "3"],
+    };
+
+    expect(printSchema(schema)).toBe(`export type Test = "1" | "2" | "3";`);
+  });
+
   it("should skip example which contains `*/` to avoid confusion", () => {
     const schema: SchemaObject = {
       title: "CronTimingCreate",

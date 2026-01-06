@@ -63,7 +63,11 @@ function getEnumMembers(schema: SchemaObject): ts.EnumMember[] {
     let enumValueNode: ts.Expression | undefined = undefined;
 
     if (typeof enumValue === "string") {
-      enumName = enumValue;
+      if (String(Number(enumValue)) === enumValue) {
+        enumName = convertNumberToWord(Number(enumValue));
+      } else {
+        enumName = enumValue;
+      }
       enumValueNode = f.createStringLiteral(enumValue);
     } else if (typeof enumValue === "number") {
       enumName = convertNumberToWord(enumValue)

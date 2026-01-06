@@ -93,6 +93,22 @@ const tens: string[] = [
 ];
 
 export const convertNumberToWord = (n: number): string => {
+  if (n < 0) {
+    return "minus " + convertNumberToWord(-n);
+  }
+
+  if (!Number.isInteger(n)) {
+    const [intPart, fracPart] = n.toString().split(".");
+    return (
+      convertNumberToWord(Number(intPart)) +
+      " point " +
+      fracPart
+        .split("")
+        .map((digit) => ones[Number(digit)])
+        .join(" ")
+    );
+  }
+
   if (n < 20) {
     return ones[n];
   }
