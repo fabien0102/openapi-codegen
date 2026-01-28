@@ -1,6 +1,6 @@
 {
   "name": "openapi-codegen",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "OpenAPI code generator framework",
   "repository": "https://github.com/fabien0102/openapi-codegen",
   "author": "Fabien Bernard",
