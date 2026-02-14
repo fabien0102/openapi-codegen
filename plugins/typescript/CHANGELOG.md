@@ -1,5 +1,19 @@
 # Changelog
 
+## [11.2.0](https://github.com/fabien0102/openapi-codegen/compare/typescript-v11.1.0...typescript-v11.2.0) (2026-02-14)
+
+
+### Features
+
+* add text/csv media type support ([#321](https://github.com/fabien0102/openapi-codegen/issues/321)) ([536dc4d](https://github.com/fabien0102/openapi-codegen/commit/536dc4d039aefc9a0253f9b001b91f4a2502aa49))
+
+
+### Bug Fixes
+
+* **enum:** handle nullable enum when useEnums=true ([#324](https://github.com/fabien0102/openapi-codegen/issues/324)) ([d10922f](https://github.com/fabien0102/openapi-codegen/commit/d10922f810be2e4b7ad09f78f9805ed0d1f7df12))
+* **typescript:** Fix handling of string numbers in enums ([#327](https://github.com/fabien0102/openapi-codegen/issues/327)) ([bf87c14](https://github.com/fabien0102/openapi-codegen/commit/bf87c147c039eb117de33565ed23f2d6df790db1))
+* **typescript:** Handle invalid type names ([#317](https://github.com/fabien0102/openapi-codegen/issues/317)) ([95d211c](https://github.com/fabien0102/openapi-codegen/commit/95d211cf201ea6917be4e92d04002e77137f71ee))
+
 ## [11.1.0](https://github.com/fabien0102/openapi-codegen/compare/typescript-v11.0.1...typescript-v11.1.0) (2025-10-01)
 
 
