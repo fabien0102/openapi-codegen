@@ -41,4 +41,4 @@ jobs:
       # need to publish all unpublished versions to NPM here
       - name: Publish to NPM
         if: ${{ steps.release.outputs.release_created }}
-        run: pnpm -r --filter=!private publish --access public --no-git-checks
+        run: pnpm -r publish --access public --no-git-checks
