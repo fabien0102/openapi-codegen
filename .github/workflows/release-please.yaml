@@ -21,18 +21,18 @@ jobs:
       # The logic below handles the npm publication:
       - name: Checkout Repository
         uses: actions/checkout@v4
-        if: ${{ steps.release.outputs.release_created }}
+        if: ${{ steps.release.outputs.releases_created }}
       - name: Install pnpm
         uses: pnpm/action-setup@v4
-        if: ${{ steps.release.outputs.release_created }}
+        if: ${{ steps.release.outputs.releases_created }}
       - name: Setup Node
         uses: actions/setup-node@v4
-        if: ${{ steps.release.outputs.release_created }}
+        if: ${{ steps.release.outputs.releases_created }}
         with:
           node-version: 20
           registry-url: "https://registry.npmjs.org"
       - name: Build Packages
-        if: ${{ steps.release.outputs.release_created }}
+        if: ${{ steps.release.outputs.releases_created }}
         run: |
           pnpm install
           pnpm build
@@ -40,5 +40,5 @@ jobs:
       # Release Please has already incremented versions and published tags, so we just
       # need to publish all unpublished versions to NPM here
       - name: Publish to NPM
-        if: ${{ steps.release.outputs.release_created }}
+        if: ${{ steps.release.outputs.releases_created }}
         run: pnpm -r publish --access public --no-git-checks
