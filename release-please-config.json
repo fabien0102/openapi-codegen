@@ -1,21 +1,22 @@
 {
+  "$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json",
   "packages": {
     "cli": {
-      "releaseType": "node",
+      "release-type": "node",
       "draft": false,
       "prerelease": false,
-      "bumpMinorPreMajor": false,
-      "bumpPatchForMinorPreMajor": false,
+      "bump-minor-pre-major": false,
+      "bump-patch-for-minor-pre-major": false,
       "changelogPath": "CHANGELOG.md",
       "versioning": "default"
     },
     "plugins/typescript": {
-      "releaseType": "node",
+      "release-type": "node",
       "draft": false,
       "prerelease": false,
-      "bumpMinorPreMajor": false,
-      "bumpPatchForMinorPreMajor": false,
-      "changelogPath": "CHANGELOG.md",
+      "bump-minor-pre-major": false,
+      "bump-patch-for-minor-pre-major": false,
+      "changelog-path": "CHANGELOG.md",
       "versioning": "default"
     }
   }
