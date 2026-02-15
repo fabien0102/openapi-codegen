@@ -99,7 +99,8 @@ export const generateFetchers = async (context: Context, config: Config) => {
         prefix: filenamePrefix,
         baseUrl: get(context.openAPIDocument, "servers.0.url"),
         useTypeImports: config.useTypeImports,
-      })
+      }),
+      config.format
     );
   } else {
     const fetcherSourceText = await context.readFile(`${fetcherFilename}.ts`);
@@ -252,6 +253,7 @@ export const generateFetchers = async (context: Context, config: Config) => {
       ),
       ...usedImportsNodes,
       ...nodes,
-    ])
+    ]),
+    config.format
   );
 };

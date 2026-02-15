@@ -6,7 +6,7 @@ import * as c from "case";
  */
 export type Context = {
   openAPIDocument: OpenAPIObject;
-  writeFile: (file: string, data: string) => Promise<void>;
+  writeFile: (file: string, data: string, format?: boolean) => Promise<void>;
   readFile: (file: string) => Promise<string>;
   existsFile: (file: string) => boolean;
 };
@@ -43,4 +43,11 @@ export type ConfigBase = {
    * @default true
    */
   useTypeImports?: boolean;
+
+  /**
+   * Format the generated code using prettier.
+   *
+   * @default true
+   */
+  format?: boolean;
 };
