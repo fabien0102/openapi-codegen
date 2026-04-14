@@ -42,6 +42,11 @@ export type Context = {
   currentComponent: OpenAPIComponentType | null;
 };
 
+type SupportedConstValue = string | number | boolean | null;
+type SchemaObjectWithConst = SchemaObject & {
+  const?: SupportedConstValue;
+};
+
 let useEnumsConfigBase: boolean | undefined;
 
 /**
@@ -146,6 +151,15 @@ export const getType = (
 
   if (schema["x-openapi-codegen"]?.type === "never") {
     return f.createKeywordTypeNode(ts.SyntaxKind.NeverKeyword);
+  }
+
+  const literalConstType = getConstType(schema);
+  const constValue = (schema as SchemaObjectWithConst).const;
+  if (literalConstType) {
+    return withNullable(
+      literalConstType,
+      constValue !== null ? schema.nullable : false
+    );
   }
 
   if (schema.oneOf) {
@@ -346,6 +360,30 @@ export const getType = (
         f.createKeywordTypeNode(ts.SyntaxKind.VoidKeyword),
         schema.nullable
       );
+  }
+};
+
+const getConstType = (
+  schema: SchemaObject
+): ts.LiteralTypeNode | undefined => {
+  const constValue = (schema as SchemaObjectWithConst).const;
+
+  if (typeof constValue === "string") {
+    return f.createLiteralTypeNode(f.createStringLiteral(constValue));
+  }
+
+  if (typeof constValue === "number") {
+    return f.createLiteralTypeNode(f.createNumericLiteral(constValue));
+  }
+
+  if (typeof constValue === "boolean") {
+    return f.createLiteralTypeNode(
+      constValue ? f.createTrue() : f.createFalse()
+    );
+  }
+
+  if (constValue === null) {
+    return f.createLiteralTypeNode(f.createNull());
   }
 };
 
