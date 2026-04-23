@@ -1056,10 +1056,7 @@ describe("schemaToTypeAliasDeclaration", () => {
 
     it("should preserve const when merged with compatible keywords", () => {
       const schema: SchemaObjectWithConst = {
-        allOf: [
-          { type: "string" },
-          { const: "foo" } as SchemaObjectWithConst,
-        ],
+        allOf: [{ type: "string" }, { const: "foo" } as SchemaObjectWithConst],
       };
 
       expect(printSchema(schema)).toMatchInlineSnapshot(

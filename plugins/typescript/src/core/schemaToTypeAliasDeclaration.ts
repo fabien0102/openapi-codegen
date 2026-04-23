@@ -363,9 +363,7 @@ export const getType = (
   }
 };
 
-const getConstType = (
-  schema: SchemaObject
-): ts.LiteralTypeNode | undefined => {
+const getConstType = (schema: SchemaObject): ts.LiteralTypeNode | undefined => {
   const constValue = (schema as SchemaObjectWithConst).const;
 
   if (typeof constValue === "string") {
