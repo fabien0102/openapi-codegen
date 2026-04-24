@@ -11,6 +11,10 @@ import {
 } from "./schemaToTypeAliasDeclaration";
 
 describe("schemaToTypeAliasDeclaration", () => {
+  type SchemaObjectWithConst = SchemaObject & {
+    const?: string | number | boolean | null;
+  };
+
   it("should generate null", () => {
     const schema: SchemaObject = {
       type: "null",
@@ -50,6 +54,52 @@ describe("schemaToTypeAliasDeclaration", () => {
     };
 
     expect(printSchema(schema)).toBe("export type Test = number | null;");
+  });
+
+  it("should generate string const as a literal", () => {
+    const schema: SchemaObjectWithConst = {
+      type: "string",
+      const: "foo",
+    };
+
+    expect(printSchema(schema)).toBe(`export type Test = "foo";`);
+  });
+
+  it("should generate number const as a literal", () => {
+    const schema: SchemaObjectWithConst = {
+      type: "integer",
+      const: 42,
+    };
+
+    expect(printSchema(schema)).toBe(`export type Test = 42;`);
+  });
+
+  it("should generate boolean const as a literal", () => {
+    const schema: SchemaObjectWithConst = {
+      type: "boolean",
+      const: true,
+    };
+
+    expect(printSchema(schema)).toBe(`export type Test = true;`);
+  });
+
+  it("should generate null const as a literal", () => {
+    const schema: SchemaObjectWithConst = {
+      type: "null",
+      const: null,
+    };
+
+    expect(printSchema(schema)).toBe("export type Test = null;");
+  });
+
+  it("should preserve nullable semantics for non-null const", () => {
+    const schema: SchemaObjectWithConst = {
+      type: "string",
+      const: "foo",
+      nullable: true,
+    };
+
+    expect(printSchema(schema)).toBe(`export type Test = "foo" | null;`);
   });
 
   it("should generate an array of numbers", () => {
@@ -682,6 +732,106 @@ describe("schemaToTypeAliasDeclaration", () => {
     );
   });
 
+  it("should generate a oneOf with const branches", () => {
+    const schema: SchemaObjectWithConst = {
+      oneOf: [
+        { type: "string", const: "foo" } as SchemaObjectWithConst,
+        { type: "number", const: 42 } as SchemaObjectWithConst,
+      ],
+    };
+
+    expect(printSchema(schema)).toMatchInlineSnapshot(
+      `"export type Test = "foo" | 42;"`
+    );
+  });
+
+  it("should preserve const discriminators inside object oneOf branches", () => {
+    const schema: SchemaObject = {
+      oneOf: [
+        {
+          type: "object",
+          properties: {
+            status: {
+              type: "string",
+              const: "READY",
+            } as SchemaObjectWithConst,
+            value: {
+              type: "string",
+            },
+          },
+          required: ["status", "value"],
+        },
+        {
+          type: "object",
+          properties: {
+            status: {
+              type: "string",
+              const: "COUNT",
+            } as SchemaObjectWithConst,
+            value: {
+              $ref: "#/components/schemas/CountToken",
+            },
+          },
+          required: ["status", "value"],
+        },
+        {
+          type: "object",
+          properties: {
+            status: {
+              type: "string",
+              const: "RATIO",
+            } as SchemaObjectWithConst,
+            value: {
+              type: "number",
+              format: "double",
+            },
+          },
+          required: ["status", "value"],
+        },
+        {
+          type: "object",
+          properties: {
+            status: {
+              type: "string",
+              const: "ENABLED",
+            } as SchemaObjectWithConst,
+            value: {
+              type: "boolean",
+            },
+          },
+          required: ["status", "value"],
+        },
+      ],
+    };
+
+    expect(
+      printSchema(schema, "Test", "schemas", {
+        schemas: {
+          CountToken: {
+            type: "string",
+          },
+        },
+      })
+    ).toMatchInlineSnapshot(`
+      "export type Test = {
+          status: "READY";
+          value: string;
+      } | {
+          status: "COUNT";
+          value: CountToken;
+      } | {
+          status: "RATIO";
+          /**
+           * @format double
+           */
+          value: number;
+      } | {
+          status: "ENABLED";
+          value: boolean;
+      };"
+    `);
+  });
+
   describe("discrimination", () => {
     const schema: SchemaObject = {
       oneOf: [
@@ -904,6 +1054,16 @@ describe("schemaToTypeAliasDeclaration", () => {
       `);
     });
 
+    it("should preserve const when merged with compatible keywords", () => {
+      const schema: SchemaObjectWithConst = {
+        allOf: [{ type: "string" }, { const: "foo" } as SchemaObjectWithConst],
+      };
+
+      expect(printSchema(schema)).toMatchInlineSnapshot(
+        `"export type Test = "foo";"`
+      );
+    });
+
     it("should combine ref and inline type", () => {
       const schema: SchemaObject = {
         allOf: [
@@ -1060,6 +1220,19 @@ describe("schemaToTypeAliasDeclaration", () => {
 
       expect(printSchema(schema)).toMatchInlineSnapshot(
         `"export type Test = string | number;"`
+      );
+    });
+
+    it("should generate a union with const branches", () => {
+      const schema: SchemaObjectWithConst = {
+        anyOf: [
+          { type: "boolean", const: false } as SchemaObjectWithConst,
+          { type: "string", const: "foo" } as SchemaObjectWithConst,
+        ],
+      };
+
+      expect(printSchema(schema)).toMatchInlineSnapshot(
+        `"export type Test = false | "foo";"`
       );
     });
 
