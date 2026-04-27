@@ -1,5 +1,12 @@
 # Changelog
 
+## [11.3.0](https://github.com/fabien0102/openapi-codegen/compare/typescript-v11.2.0...typescript-v11.3.0) (2026-04-24)
+
+
+### Features
+
+* **openapi-v3:** Preserve JSON Schema const values as TypeScript literal types ([#332](https://github.com/fabien0102/openapi-codegen/issues/332)) ([60972b1](https://github.com/fabien0102/openapi-codegen/commit/60972b1d8bcb4818dd1cdef5149c66746f6619a2))
+
 ## [11.2.0](https://github.com/fabien0102/openapi-codegen/compare/typescript-v11.1.0...typescript-v11.2.0) (2026-02-14)
 
 
