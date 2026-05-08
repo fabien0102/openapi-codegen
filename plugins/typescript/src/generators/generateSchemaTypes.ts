@@ -137,7 +137,8 @@ export const generateSchemaTypes = async (
         createWatermark(context.openAPIDocument.info),
         ...getUsedImports(schemas, files, finalConfig.useTypeImports).nodes,
         ...schemas,
-      ])
+      ]),
+      finalConfig.format
     );
   }
 
@@ -168,7 +169,8 @@ export const generateSchemaTypes = async (
           createWatermark(context.openAPIDocument.info),
           ...getUsedImports(schemas, files, finalConfig.useTypeImports).nodes,
           ...schemas,
-        ])
+        ]),
+        finalConfig.format
       );
     }
   }
@@ -201,7 +203,8 @@ export const generateSchemaTypes = async (
           createWatermark(context.openAPIDocument.info),
           ...getUsedImports(schemas, files, finalConfig.useTypeImports).nodes,
           ...schemas,
-        ])
+        ]),
+        finalConfig.format
       );
     }
   }
@@ -229,7 +232,8 @@ export const generateSchemaTypes = async (
         createWatermark(context.openAPIDocument.info),
         ...getUsedImports(schemas, files, finalConfig.useTypeImports).nodes,
         ...schemas,
-      ])
+      ]),
+      finalConfig.format
     );
   }
 
