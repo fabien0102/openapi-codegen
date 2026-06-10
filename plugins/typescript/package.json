@@ -8,6 +8,10 @@
     "url": "https://github.com/fabien0102/openapi-codegen",
     "directory": "plugins/typescript"
   },
+  "homepage": "https://github.com/fabien0102/openapi-codegen/tree/main/plugins/typescript#readme",
+  "bugs": {
+    "url": "https://github.com/fabien0102/openapi-codegen/issues"
+  },
   "publishConfig": {
     "access": "public"
   },
