@@ -10,7 +10,8 @@
   },
   "repository": {
     "url": "https://github.com/fabien0102/openapi-codegen",
-    "directory": "cli"
+    "directory": "cli",
+    "bugs": "https://github.com/fabien0102/openapi-codegen/issues"
   },
   "publishConfig": {
     "access": "public"
