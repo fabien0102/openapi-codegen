@@ -8,7 +8,6 @@ export const getContext = (
   `import {
     skipToken,
     type DefaultError,
-    type Enabled,
     type QueryKey,
     type UseQueryOptions,
  } from "@tanstack/react-query";
@@ -35,7 +34,7 @@ export const getContext = (
        * Set this to \`false\` to disable automatic refetching when the query mounts or changes query keys.
        * Defaults to \`true\`.
        */
-      enabled?: Enabled<TQueryFnData, TError, TQueryFnData, TQueryKey>;
+      enabled?: UseQueryOptions<TQueryFnData, TError, TQueryFnData, TQueryKey>['enabled'];
     };
   };
   
