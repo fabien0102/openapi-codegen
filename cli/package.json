@@ -34,7 +34,7 @@
     "README.md"
   ],
   "dependencies": {
-    "@clack/prompts": "^0.9.1",
+    "@clack/prompts": "^1.6.0",
     "@octokit/request": "^9.2.2",
     "@swc/core": "^1.2.118",
     "case": "^1.6.3",
