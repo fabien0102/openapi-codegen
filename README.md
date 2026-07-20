@@ -38,12 +38,12 @@
 
    <img style="max-width: 400px" src="https://user-images.githubusercontent.com/271912/194000679-5a4501b8-5fc0-430c-9217-028bf91a5dcd.gif">
 
-   If you wish to change any of the selections made, you can do so in the generated `openapi-codegen.config.ts` file later..
+   If you wish to change any of the selections made, you can do so in the generated `openapi-codegen.config.ts` file later.
 
 2. **Start Generation**
 
    ```bash
-   npx openapi-codegen gen {namespace}
+   npx @openapi-codegen/cli gen {namespace}
    ```
 
    After the code generation is done, you will notice the following files:
@@ -61,7 +61,7 @@
 
 3. **Configure the Fetcher** (optional)
 
-   After the first step you should see a file called `{namespace}Fetcher.ts` in your ouput directory.
+   After the first step you should see a file called `{namespace}Fetcher.ts` in your output directory.
 
    By default it uses the built-in Fetch API, you are free to change this to your fetching library of choice (Axios, Got etc.)
 
