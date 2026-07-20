@@ -111,6 +111,93 @@ describe("generateFetchers", () => {
     `);
   });
 
+  it("should generate variables for the Xquik search query", async () => {
+    const writeFile = createWriteFileMock();
+    const xquikDocument: OpenAPIObject = {
+      openapi: "3.0.0",
+      info: {
+        title: "Xquik API",
+        version: "1.0.0",
+      },
+      components: {
+        securitySchemes: {
+          apiKey: {
+            type: "apiKey",
+            in: "header",
+            name: "x-api-key",
+          },
+        },
+      },
+      paths: {
+        "/api/v1/x/tweets/search": {
+          get: {
+            operationId: "searchTweets",
+            description: "Search tweets",
+            security: [{ apiKey: [] }],
+            parameters: [
+              {
+                name: "q",
+                in: "query",
+                required: true,
+                schema: { type: "string" },
+              },
+              {
+                name: "limit",
+                in: "query",
+                required: false,
+                schema: { type: "integer", minimum: 1, maximum: 100 },
+              },
+            ],
+            responses: {
+              "200": {
+                description: "Search results",
+                content: {
+                  "application/json": {
+                    schema: {
+                      type: "object",
+                      required: ["data"],
+                      properties: {
+                        data: {
+                          type: "array",
+                          items: {
+                            type: "object",
+                            required: ["id", "text"],
+                            properties: {
+                              id: { type: "string" },
+                              text: { type: "string" },
+                            },
+                          },
+                        },
+                      },
+                    },
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
+    };
+
+    await generateFetchers(
+      {
+        openAPIDocument: xquikDocument,
+        writeFile,
+        readFile: async () => "",
+        existsFile: () => true,
+      },
+      config
+    );
+
+    const output = writeFile.mock.calls[0][1];
+    expect(output).toContain("export type SearchTweetsQueryParams = {");
+    expect(output).toContain("export type SearchTweetsVariables = {");
+    expect(output).toContain("queryParams: SearchTweetsQueryParams;");
+    expect(output).toContain("q: string;");
+    expect(output).toContain("limit?: number;");
+    expect(output).toContain('url: "/api/v1/x/tweets/search"');
+  });
+
   it("should generate fetchers without prefix", async () => {
     const writeFile = createWriteFileMock();
 
