@@ -14,13 +14,25 @@ export const getUtils = () =>
 export type ${clientErrorStatus} = Exclude<ComputeRange<500>[number], ComputeRange<400>[number]>;
 export type ${serverErrorStatus} = Exclude<ComputeRange<600>[number], ComputeRange<500>[number]>;
 
+function isMergeableObject(value: unknown): value is Record<string, unknown> {
+  return (
+    typeof value === "object" &&
+    value !== null &&
+    !Array.isArray(value) &&
+    (value.constructor === Object || value.constructor === undefined)
+  );
+}
+
 export function deepMerge<T, U extends T>(target: T, source: U): U {
-  const returnType = (target || {}) as U;
+  const result = { ...(target || {}) } as U;
   for (const key in source) {
-    if (source[key] instanceof Object)
-      Object.assign(source[key], deepMerge(returnType[key], source[key]));
+    const sourceValue = source[key];
+    const targetValue = result[key];
+    result[key] =
+      isMergeableObject(targetValue) && isMergeableObject(sourceValue)
+        ? (deepMerge(targetValue, sourceValue) as U[Extract<keyof U, string>])
+        : sourceValue;
   }
-  Object.assign(returnType || {}, source);
-  return returnType;
+  return result;
 }
 `;
