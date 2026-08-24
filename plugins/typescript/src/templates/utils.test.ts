@@ -46,10 +46,6 @@ describe("deepMerge", () => {
     });
   });
 
-  /**
-   * Mirrors a generated `*Variables` type: every field optional, so any subset
-   * of the fetcher options satisfies the `U extends T` constraint.
-   */
   type variables = {
     headers?: { "x-custom"?: boolean; authorization?: string };
     body?: Record<string, unknown>;
@@ -87,12 +83,6 @@ describe("deepMerge", () => {
     expect(deepMerge({ body: new FormData() }, { body }).body).toBe(body);
   });
 
-  /**
-   * Generated hooks call `deepMerge(fetcherOptions, variables)`, where
-   * `fetcherOptions` comes from a single `useContext()` call per hook instance
-   * and is therefore shared by every call of that hook. A merge that mutated
-   * its target would leak each call's payload into the next.
-   */
   it("should not leak state between calls sharing a target", () => {
     const fetcherOptions: variables = {
       headers: { authorization: "authorized!" },
