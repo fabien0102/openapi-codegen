@@ -12,7 +12,7 @@ describe("deepMerge", () => {
   }
 
   function deepMerge<T, U extends T>(target: T, source: U): U {
-    const result = { ...(target || {}) } as U;
+    const result = { ...target } as U;
     for (const key in source) {
       const sourceValue = source[key];
       const targetValue = result[key];
