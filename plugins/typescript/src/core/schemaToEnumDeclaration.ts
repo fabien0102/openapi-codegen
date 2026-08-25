@@ -1,8 +1,8 @@
 import { pascal } from "case";
 import { SchemaObject } from "openapi3-ts/oas30";
 import ts, { factory as f } from "typescript";
-import { isValidIdentifier } from "tsutils";
 import { convertNumberToWord } from "../utils/getEnumProperties";
+import { isValidIdentifier } from "../utils/isValidIdentifier";
 import { Context, getJSDocComment } from "./schemaToTypeAliasDeclaration";
 
 /**
