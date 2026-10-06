@@ -71,9 +71,6 @@ importers:
       got:
         specifier: ^12.0.0
         version: 12.6.1
-      got-fetch:
-        specifier: ^5.1.1
-        version: 5.1.10(got@12.6.1)
       js-yaml:
         specifier: ^4.1.0
         version: 4.1.0
@@ -1406,12 +1403,6 @@ packages:
   globals@15.14.0:
     resolution: {integrity: sha512-OkToC372DtlQeje9/zHIo5CT8lRP/FUgEOKBEhU4e0abL7J7CD24fD9ohiLN5hagG/kWCYj4K5oaxxtj2Z0Dig==}
     engines: {node: '>=18'}
-
-  got-fetch@5.1.10:
-    resolution: {integrity: sha512-Gwj/A2htjvLEcY07PKDItv0WCPEs3dV2vWeZ+9TVBSKSTuWEZ4oXaMD0ZAOsajwx2orahQWN4HI0MfRyWSZsbg==}
-    engines: {node: '>=14.0.0'}
-    peerDependencies:
-      got: ^12.0.0
 
   got@12.6.1:
     resolution: {integrity: sha512-mThBblvlAF1d4O5oqyvN+ZxLAYwIJK7bpMxgYqPD9okW0C3qm5FFn7k811QrcuEBwaogR3ngOFoCfs6mRv7teQ==}
@@ -3576,10 +3567,6 @@ snapshots:
   globals@14.0.0: {}
 
   globals@15.14.0: {}
-
-  got-fetch@5.1.10(got@12.6.1):
-    dependencies:
-      got: 12.6.1
 
   got@12.6.1:
     dependencies:
