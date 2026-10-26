@@ -1,10 +1,3 @@
-## Unreleased
-
-### ⚠ BREAKING CHANGES
-
-- TanStack React Query v5 removed the public `Enabled` helper. Generated `queryOptions.enabled` should use `UseQueryOptions<...>["enabled"]` (the v5 `QueryBooleanOption` type), not the removed `Enabled<TQueryFnData, TError, ...>` export.
-- The generated context template and example project were updated to match the v5 package API.
-
 # Changelog
 
 ## [11.3.0](https://github.com/fabien0102/openapi-codegen/compare/typescript-v11.2.0...typescript-v11.3.0) (2026-04-24)
