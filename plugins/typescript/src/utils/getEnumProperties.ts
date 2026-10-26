@@ -38,9 +38,9 @@ export const getEnumProperties = (
 const processProperty = (
   enumProperties: [string, SchemaObject][],
   propertyName: string,
-  // oxlint-disable-next-line typescript/no-explicit-any
-  propertySchema: any
+  propertySchema: SchemaObject | ReferenceObject
 ) => {
+  if (isReferenceObject(propertySchema)) return;
   if (propertySchema.enum) {
     enumProperties.push([`${pascal(propertyName)}`, propertySchema]);
   } else if (propertySchema.type === "object" && propertySchema.properties) {

@@ -1,8 +1,6 @@
 {
   "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": [
-    "typescript"
-  ],
+  "plugins": ["typescript"],
   "categories": {
     "correctness": "off"
   },
@@ -11,10 +9,7 @@
     "browser": true,
     "node": true
   },
-  "ignorePatterns": [
-    "**/lib/*",
-    "examples/frontend/src/github/*"
-  ],
+  "ignorePatterns": ["**/lib/*", "examples/frontend/src/github/*"],
   "rules": {
     "constructor-super": "error",
     "for-direction": "error",
@@ -109,12 +104,7 @@
   },
   "overrides": [
     {
-      "files": [
-        "**/*.ts",
-        "**/*.tsx",
-        "**/*.mts",
-        "**/*.cts"
-      ],
+      "files": ["**/*.ts", "**/*.tsx", "**/*.mts", "**/*.cts"],
       "rules": {
         "constructor-super": "off",
         "getter-return": "off",

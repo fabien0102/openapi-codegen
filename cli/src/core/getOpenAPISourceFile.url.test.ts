@@ -2,6 +2,19 @@ import { describe, expect, it } from "vitest";
 import { getOpenAPISourceFile } from "./getOpenAPISourceFile";
 import nock from "nock";
 
+// Polyfill Promise.withResolvers for Node 20 environments (required by @mswjs/interceptors / nock 15)
+if (typeof Promise.withResolvers === "undefined") {
+  Promise.withResolvers = function <T>() {
+    let resolve!: (value: T | PromiseLike<T>) => void;
+    let reject!: (reason?: unknown) => void;
+    const promise = new Promise<T>((res, rej) => {
+      resolve = res;
+      reject = rej;
+    });
+    return { promise, resolve, reject };
+  };
+}
+
 describe("getOpenAPISourceFile (source = url)", () => {
   it("should retrieve a json file specs", async () => {
     nock(
