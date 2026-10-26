@@ -114,7 +114,9 @@ export const generateFetchers = async (context: Context, config: Config) => {
     ts.forEachChild(fetcherSourceFile, (node) => {
       if (
         ts.isTypeAliasDeclaration(node) &&
-        node.name.escapedText === fetcherExtraPropsTypeName &&
+        (node.name.text ||
+          (node.name as unknown as Record<string, unknown>).escapedText) ===
+          fetcherExtraPropsTypeName &&
         ts.isTypeLiteralNode(node.type) &&
         node.type.members.length > 0
       ) {

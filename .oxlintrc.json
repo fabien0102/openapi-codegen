@@ -127,6 +127,13 @@
         "prefer-rest-params": "error",
         "prefer-spread": "error"
       }
+    },
+    {
+      "files": ["plugins/typescript/src/typescript.ts"],
+      "rules": {
+        "typescript/no-explicit-any": "off",
+        "typescript/no-namespace": "off"
+      }
     }
   ]
 }

@@ -10,9 +10,11 @@ const setParentReferences = <T extends ts.Node>(node: T): T => {
       writable: true,
       configurable: true,
     });
-    child.forEachChild((grandChild) => setParent(grandChild, child));
+    ts.forEachChild(child, (grandChild) =>
+      setParent(grandChild as ts.Node, child)
+    );
   }
-  node.forEachChild((child) => setParent(child, node));
+  ts.forEachChild(node, (child) => setParent(child as ts.Node, node));
   return node;
 };
 

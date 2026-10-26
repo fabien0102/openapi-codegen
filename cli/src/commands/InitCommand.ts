@@ -64,7 +64,8 @@ export class InitCommand extends Command {
           ts.isExportAssignment(node) &&
           ts.isCallExpression(node.expression) &&
           ts.isIdentifier(node.expression.expression) &&
-          node.expression.expression.escapedText === "defineConfig"
+          ((node.expression.expression as unknown as Record<string, unknown>)
+            .escapedText || node.expression.expression.text) === "defineConfig"
         ) {
           isValidConfig = true;
         }

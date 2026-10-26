@@ -13,7 +13,15 @@ export function isValidIdentifier(name: string): boolean {
   );
 
   const token = scanner.scan();
-  if (token !== ts.SyntaxKind.Identifier) {
+  if (
+    token !== ts.SyntaxKind.Identifier &&
+    !(
+      typeof (scanner as unknown as Record<string, () => boolean>)
+        .isIdentifier === "function" &&
+      (scanner as unknown as Record<string, () => boolean>).isIdentifier() &&
+      !(scanner as unknown as Record<string, () => boolean>).isReservedWord()
+    )
+  ) {
     return false;
   }
 

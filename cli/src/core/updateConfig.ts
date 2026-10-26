@@ -51,7 +51,13 @@ export function updateConfig({
     context
   ) => {
     const visit = (node: ts.Node): ts.Node => {
-      node = ts.visitEachChild(node, visit, context);
+      node = (
+        ts.visitEachChild as unknown as (
+          n: ts.Node,
+          v: typeof visit,
+          c: unknown
+        ) => ts.Node
+      )(node, visit, context);
 
       if (
         ts.isImportDeclaration(node) &&
@@ -88,7 +94,8 @@ export function updateConfig({
         ts.isExportAssignment(node) &&
         ts.isCallExpression(node.expression) &&
         ts.isIdentifier(node.expression.expression) &&
-        node.expression.expression.escapedText === "defineConfig"
+        ((node.expression.expression as unknown as Record<string, unknown>)
+          .escapedText || node.expression.expression.text) === "defineConfig"
       ) {
         const prevProperties = ts.isObjectLiteralExpression(
           node.expression.arguments[0]
@@ -179,8 +186,9 @@ function createImportStatements(imports: Map<string, string[]>) {
 
 function getText(expression: ts.Expression) {
   try {
-    // @ts-expect-error private field
-    return (expression.text as string) ?? "";
+    return (
+      ((expression as unknown as Record<string, unknown>).text as string) ?? ""
+    );
   } catch {
     return "";
   }
