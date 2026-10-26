@@ -107,15 +107,15 @@ export class InitCommand extends Command {
           message: "Relative path",
           placeholder: "./openapi.json",
           validate(value) {
-            const input = typeof value === "string" ? value : "";
+            if (value === undefined) return "No relative path provided";
 
-            if (!input.startsWith("./") && !input.startsWith("../"))
+            if (!value.startsWith("./") && !value.startsWith("../"))
               return "The path should be relative";
 
             if (
-              !input.endsWith(".json") &&
-              !input.endsWith(".yaml") &&
-              !input.endsWith(".yml")
+              !value.endsWith(".json") &&
+              !value.endsWith(".yaml") &&
+              !value.endsWith(".yml")
             ) {
               return "The file must be a json or yaml";
             }
@@ -134,15 +134,15 @@ export class InitCommand extends Command {
           message: "Url",
           placeholder: "https://.../openapi.json",
           validate(value) {
-            const input = typeof value === "string" ? value : "";
+            if (value === undefined) return "No Url provided";
 
-            if (!input.startsWith("https://") && !input.startsWith("http://")) {
+            if (!value.startsWith("https://") && !value.startsWith("http://")) {
               return "Url must starts with http or https protocol";
             }
             if (
-              !input.endsWith(".json") &&
-              !input.endsWith(".yaml") &&
-              !input.endsWith(".yml")
+              !value.endsWith(".json") &&
+              !value.endsWith(".yaml") &&
+              !value.endsWith(".yml")
             ) {
               return "Url must ends with `.json` or `.yaml` or `.yml`";
             }
@@ -169,7 +169,7 @@ export class InitCommand extends Command {
         ],
         message: "Select the source of your OpenAPI",
       })
-      .then(handlePromptCancel<"file" | "url">);
+      .then(handlePromptCancel);
 
     const from: FromOptions =
       source === "file" ? await this.askForFile() : await this.askForUrl();
@@ -179,7 +179,7 @@ export class InitCommand extends Command {
         .text({
           message: "What namespace do you want for your API?",
         })
-        .then(handlePromptCancel<string>)
+        .then(handlePromptCancel)
     );
 
     const plugin = await prompt
@@ -191,13 +191,13 @@ export class InitCommand extends Command {
           { label: "React Query components", value: "typescript/react-query" },
         ],
       })
-      .then(handlePromptCancel<Plugin>);
+      .then(handlePromptCancel);
 
     const outputDir = await prompt
       .text({
         message: "Which folder do you want to generate?",
       })
-      .then(handlePromptCancel<string>);
+      .then(handlePromptCancel);
 
     const configProperty = generateConfigProperty({
       namespace,
