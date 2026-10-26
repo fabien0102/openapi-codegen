@@ -43,9 +43,6 @@ export default defineConfig({
 });
 ```
 
-> [!IMPORTANT]
-> TanStack React Query v5 removed the `Enabled` export. In generated contexts, use `enabled?: boolean` instead of `Enabled<TQueryFnData, TError, ...>`.
-
 This generator will generate 3 files:
 
 - `{filenamePrefix}Components.ts`
