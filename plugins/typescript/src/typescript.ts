@@ -361,20 +361,26 @@ export const factory = {
     typeOrExpression: any,
     expression?: any
   ) {
+    let updated: any;
     if (expression !== undefined) {
-      return rawFactory.updateExportAssignment(
+      updated = rawFactory.updateExportAssignment(
         node,
         modifiers,
         typeOrExpression,
         expression
       );
+    } else {
+      updated = rawFactory.updateExportAssignment(
+        node,
+        modifiers,
+        undefined as any,
+        typeOrExpression
+      );
     }
-    return rawFactory.updateExportAssignment(
-      node,
-      modifiers,
-      undefined as any,
-      typeOrExpression
-    );
+    if (node.__leadingComments) {
+      updated.__leadingComments = [...node.__leadingComments];
+    }
+    return updated;
   },
   createPropertyAccessExpression(
     expression: any,
@@ -483,7 +489,7 @@ function printJSDoc(node: any): string {
       if (l.trim()) {
         lines.push(" * " + l);
       } else {
-        lines.push(" *");
+        lines.push(" * ");
       }
     }
   }
@@ -492,6 +498,105 @@ function printJSDoc(node: any): string {
     lines.push(` * @${tag._tagName} ${tag._name}`);
   }
   lines.push(" */");
+  return lines.join("\n");
+}
+
+function getTypeName(typeNode: any): string | undefined {
+  if (!typeNode) return undefined;
+  if (typeNode.kind === 150) return "number";
+  if (typeNode.kind === 153) return "string";
+  if (typeNode.kind === 136) return "boolean";
+  if (typeNode.kind === 106) return "null";
+  const tn = typeNode.typeName || typeNode._data?.typeName;
+  if (tn) return tn.text || tn._data?.text;
+  return undefined;
+}
+
+function collectInnerComments(root: any): any[] {
+  const result: any[] = [];
+  function visit(n: any) {
+    if (!n) return;
+    if (n.__leadingComments && n.__leadingComments.length > 0) {
+      result.push(n);
+    }
+    if (n.forEachChild) {
+      n.forEachChild((c: any) => {
+        visit(c);
+      });
+    }
+  }
+  if (root?.forEachChild) {
+    root.forEachChild((c: any) => {
+      visit(c);
+    });
+  }
+  return result;
+}
+
+function injectInnerComments(root: any, text: string): string {
+  const nodes = collectInnerComments(root);
+  if (nodes.length === 0) return text;
+
+  const lines = text.split("\n");
+  let lineIdx = 0;
+
+  for (const node of nodes) {
+    const name = node.name?.text || node.name?._data?.text;
+    if (!name) continue;
+
+    const escapedName = name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    const expectedType = getTypeName(node.type || node._data?.type);
+    const regex = expectedType
+      ? new RegExp(
+          `^(\\s*)(["']?)${escapedName}(["']?[?:;])\\s*${expectedType}`
+        )
+      : new RegExp(`^(\\s*)(["']?)${escapedName}(["']?[?:;])`);
+
+    let matched = false;
+    let fallbackIdx = -1;
+    let fallbackIndent = "";
+
+    for (let i = lineIdx; i < lines.length; i++) {
+      const line = lines[i];
+      const match = line.match(regex);
+      if (match) {
+        matched = true;
+        lineIdx = i;
+        break;
+      }
+      if (
+        fallbackIdx === -1 &&
+        line.match(new RegExp(`^(\\s*)(["']?)${escapedName}(["']?[?:;])`))
+      ) {
+        fallbackIdx = i;
+        fallbackIndent = line.match(/^(\s*)/)?.[1] || "";
+      }
+    }
+
+    const targetIdx = matched ? lineIdx : fallbackIdx;
+    if (targetIdx !== -1) {
+      const indent = matched
+        ? lines[targetIdx].match(/^(\s*)/)?.[1] || ""
+        : fallbackIndent;
+      const commentLines: string[] = [];
+      for (const c of node.__leadingComments) {
+        const raw = ("/*" + c.text + "*/").trimEnd();
+        const parts = raw.split("\n");
+        for (let i = 0; i < parts.length; i++) {
+          const trimmed = parts[i].trim();
+          if (trimmed === "*") {
+            commentLines.push(indent + " *");
+          } else if (i === 0) {
+            commentLines.push(indent + parts[i].trimEnd());
+          } else {
+            commentLines.push(indent + " " + parts[i].trimStart());
+          }
+        }
+      }
+      lines.splice(targetIdx, 0, ...commentLines);
+      lineIdx = targetIdx + commentLines.length + 1;
+    }
+  }
   return lines.join("\n");
 }
 
@@ -509,14 +614,38 @@ export function createPrinter(_options?: {
       if (node.__leadingComments && node.__leadingComments.length > 0) {
         let prefix = "";
         for (const c of node.__leadingComments) {
-          prefix += `/*${c.text}*/` + (c.hasTrailingNewLine ? "\n" : " ");
+          if (c.isLineComment) {
+            prefix += `${c.text}\n`;
+          } else {
+            prefix += `/*${c.text}*/` + (c.hasTrailingNewLine ? "\n" : " ");
+          }
         }
         printed = prefix + printed;
       }
+      printed = injectInnerComments(node, printed);
       return printed;
     },
     printFile(sourceFile: any) {
-      return api.printer.printFile(sourceFile);
+      let printed = api.printer.printFile(sourceFile);
+      if (sourceFile?.statements) {
+        for (const stmt of sourceFile.statements) {
+          if (stmt.__leadingComments && stmt.__leadingComments.length > 0) {
+            for (const c of stmt.__leadingComments) {
+              if (c.isLineComment && !printed.includes(c.text)) {
+                const stmtText = api.printer.printNode(stmt);
+                const firstLine = stmtText.split("\n")[0].trim();
+                const idx = printed.indexOf(firstLine);
+                if (idx !== -1) {
+                  printed =
+                    printed.slice(0, idx) + c.text + "\n" + printed.slice(idx);
+                }
+              }
+            }
+          }
+        }
+      }
+      printed = injectInnerComments(sourceFile, printed);
+      return printed;
     },
   };
 }
@@ -567,6 +696,38 @@ export function createSourceFile(
   const api = getApi();
   const retained = api.createSourceFile(fileName, sourceText);
   const sf = retained.sourceFile;
+  if (sf?.statements) {
+    const srcLines = sourceText.split("\n");
+    const commentBuffer: string[] = [];
+    let stmtIdx = 0;
+    for (const line of srcLines) {
+      const trimmed = line.trim();
+      if (trimmed.startsWith("//")) {
+        commentBuffer.push(trimmed);
+      } else if (
+        trimmed.length > 0 &&
+        !trimmed.startsWith("/*") &&
+        !trimmed.startsWith("*")
+      ) {
+        if (commentBuffer.length > 0 && stmtIdx < sf.statements.length) {
+          const stmt = sf.statements[stmtIdx] as any;
+          if (!stmt.__leadingComments) {
+            stmt.__leadingComments = [];
+          }
+          for (const c of commentBuffer) {
+            stmt.__leadingComments.push({
+              kind: 2,
+              text: c,
+              isLineComment: true,
+              hasTrailingNewLine: true,
+            });
+          }
+          commentBuffer.length = 0;
+        }
+        stmtIdx++;
+      }
+    }
+  }
   if (!remoteNodePatched && sf) {
     remoteNodePatched = true;
     const sample = sf.statements?.[0] || sf;
