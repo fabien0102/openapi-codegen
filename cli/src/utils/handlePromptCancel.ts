@@ -11,11 +11,11 @@ import { isCancel, cancel, CANCEL_SYMBOL } from "@clack/prompts";
  * @param value Any value coming from a cancellable clark prompt
  * @returns
  */
-export async function handlePromptCancel<T>(value: T | typeof CANCEL_SYMBOL): Promise<T> {
+export async function handlePromptCancel<T>(value: T | typeof CANCEL_SYMBOL) {
   if (isCancel(value)) {
     cancel("Operation cancelled! See you later 😁✌️");
     process.exit(0);
   }
 
-  return value as T;
+  return value;
 }

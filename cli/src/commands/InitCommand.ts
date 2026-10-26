@@ -121,7 +121,7 @@ export class InitCommand extends Command {
             }
           },
         })
-        .then(handlePromptCancel<string>),
+        .then(handlePromptCancel),
       source: "file",
     };
   }
@@ -148,7 +148,7 @@ export class InitCommand extends Command {
             }
           },
         })
-        .then(handlePromptCancel<string>),
+        .then(handlePromptCancel),
     };
   }
 

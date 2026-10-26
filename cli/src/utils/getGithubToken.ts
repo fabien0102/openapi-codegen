@@ -8,7 +8,7 @@ import { handlePromptCancel } from "./handlePromptCancel";
 /**
  * Ask for GitHub token if needed and save it for later.
  */
-export async function getGithubToken(): Promise<string> {
+export async function getGithubToken() {
   const envToken = await getEnvGithubToken();
   if (envToken) return envToken;
 
@@ -16,7 +16,7 @@ export async function getGithubToken(): Promise<string> {
     .text({
       message: "Please provide a GitHub token with `repo` rules checked",
     })
-    .then(handlePromptCancel<string>);
+    .then(handlePromptCancel);
 
   await writeFile(githubTokenPath, token);
 
@@ -28,7 +28,7 @@ const githubTokenPath = join(homedir(), ".openapi-codegen");
 /**
  * Retrieve stored github token
  */
-async function getEnvGithubToken(): Promise<string | undefined> {
+async function getEnvGithubToken() {
   let accessToken = process.env.GITHUB_TOKEN;
   if (!accessToken && existsSync(githubTokenPath)) {
     accessToken = await readFile(githubTokenPath, "utf-8");
