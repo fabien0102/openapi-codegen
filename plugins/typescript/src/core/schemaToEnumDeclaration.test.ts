@@ -108,6 +108,33 @@ describe("schemaToTypeAliasDeclaration", () => {
       }"
     `);
   });
+  it("should deal with nullable enums", () => {
+    const schema: SchemaObject = {
+      type: "string",
+      nullable: true,
+      enum: [
+        "success",
+        "failure",
+        null,
+        "skipped",
+        "cancelled",
+        "action_required",
+        "neutral",
+        "timed_out",
+      ],
+    };
+    expect(printSchema(schema, "test")).toMatchInlineSnapshot(`
+          "export enum Test {
+              Success = "success",
+              Failure = "failure",
+              Skipped = "skipped",
+              Cancelled = "cancelled",
+              ActionRequired = "action_required",
+              Neutral = "neutral",
+              TimedOut = "timed_out"
+          }"
+        `);
+  });
 });
 
 const printSchema = (
