@@ -35,34 +35,41 @@ function getEnumMembers(schema: SchemaObject): ts.EnumMember[] {
     );
   }
 
-  return schema.enum.map((enumValue) => {
-    let enumName: string;
-    let enumValueNode: ts.Expression | undefined = undefined;
+  const SKIP = Symbol("SKIP");
 
-    if (typeof enumValue === "string") {
-      if (String(Number(enumValue)) === enumValue) {
-        enumName = convertNumberToWord(Number(enumValue));
+  return schema.enum
+    .map((enumValue) => {
+      let enumName: string;
+      let enumValueNode: ts.Expression | undefined = undefined;
+
+      if (typeof enumValue === "string") {
+        if (String(Number(enumValue)) === enumValue) {
+          enumName = convertNumberToWord(Number(enumValue));
+        } else {
+          enumName = enumValue;
+        }
+        enumValueNode = f.createStringLiteral(enumValue);
+      } else if (typeof enumValue === "number") {
+        enumName = convertNumberToWord(enumValue)
+          .toUpperCase()
+          .replace(/[-\s]/g, "_");
+        enumValueNode = f.createNumericLiteral(enumValue);
+      } else if (typeof enumValue === "boolean") {
+        enumName = enumValue ? "True" : "False";
+      } else if (enumValue === null) {
+        // null values are added at the end of the enum when dealing with `nullable: true`
+        return SKIP;
       } else {
-        enumName = enumValue;
+        throw new Error(`Unsupported enum value type: ${typeof enumValue}`);
       }
-      enumValueNode = f.createStringLiteral(enumValue);
-    } else if (typeof enumValue === "number") {
-      enumName = convertNumberToWord(enumValue)
-        .toUpperCase()
-        .replace(/[-\s]/g, "_");
-      enumValueNode = f.createNumericLiteral(enumValue);
-    } else if (typeof enumValue === "boolean") {
-      enumName = enumValue ? "True" : "False";
-    } else {
-      throw new Error(`Unsupported enum value type: ${typeof enumValue}`);
-    }
 
-    enumName = pascal(enumName);
-    return f.createEnumMember(
-      isValidIdentifier(enumName)
-        ? f.createIdentifier(enumName)
-        : f.createStringLiteral(`${enumValue}`),
-      enumValueNode
-    );
-  });
+      enumName = pascal(enumName);
+      return f.createEnumMember(
+        isValidIdentifier(enumName)
+          ? f.createIdentifier(enumName)
+          : f.createStringLiteral(`${enumValue}`),
+        enumValueNode
+      );
+    })
+    .filter((enumValue) => enumValue !== SKIP);
 }
