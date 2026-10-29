@@ -1,4 +1,4 @@
-import { it, describe, expect } from "vitest";
+import { it, describe, expect } from "vite-plus/test";
 import { omit } from "lodash";
 import ts, { factory } from "typescript";
 import { OperationObject } from "openapi3-ts/oas30";

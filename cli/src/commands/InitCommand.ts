@@ -4,7 +4,6 @@ import { posix as path } from "path";
 import fsExtra from "fs-extra";
 import ts from "typescript";
 import { highlight } from "cli-highlight";
-import prettier from "prettier";
 import format from "case";
 
 import type { FileOptions, FromOptions, UrlOptions, Plugin } from "../types";
@@ -222,16 +221,16 @@ export class InitCommand extends Command {
       removeComments: false,
     });
 
-    const prettierConfig = await prettier.resolveConfig(process.cwd());
+    const oxfmt = await import("oxfmt");
 
-    const updatedConfig = await prettier.format(
-      printer.printFile(updatedConfigSourceFile),
-      { parser: "babel-ts", ...prettierConfig }
+    const updatedConfig = await oxfmt.format(
+      "openapi-codegen.config.ts",
+      printer.printFile(updatedConfigSourceFile)
     );
 
     if (this.dryRun) {
       this.context.stdout.write(
-        highlight(updatedConfig, {
+        highlight(updatedConfig.code, {
           language: "typescript",
         })
       );
@@ -261,7 +260,7 @@ export class InitCommand extends Command {
       }
       nextSteps.push(`npx openapi-codegen gen ${namespace}`);
 
-      await fsExtra.writeFile(userConfigPath, updatedConfig);
+      await fsExtra.writeFile(userConfigPath, updatedConfig.code);
       if (config.isExistingConfig) {
         this.context.stdout.write(
           `The config "${namespace}" has been added to your current config successfully 🥳\n`

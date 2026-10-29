@@ -1,38 +1,37 @@
 {
   "name": "openapi-codegen",
   "version": "0.0.1",
-  "description": "OpenAPI code generator framework",
-  "repository": "https://github.com/fabien0102/openapi-codegen",
-  "author": "Fabien Bernard",
-  "license": "MIT",
   "private": true,
-  "engines": {
-    "node": ">=20"
-  },
+  "description": "OpenAPI code generator framework",
+  "license": "MIT",
+  "author": "Fabien Bernard",
+  "repository": "https://github.com/fabien0102/openapi-codegen",
   "scripts": {
-    "test": "vitest",
+    "test": "vp test",
     "check": "pnpm /^check:.*/",
     "check:types": "tsc --noEmit",
-    "check:lint": "oxlint .",
-    "check:prettier": "prettier --check .",
+    "check:lint": "vp lint .",
+    "check:prettier": "vp fmt --check .",
     "fix": "pnpm /^fix:.*/",
-    "fix:lint": "oxlint --fix .",
-    "fix:prettier": "prettier --write .",
+    "fix:lint": "vp lint --fix .",
+    "fix:prettier": "vp fmt .",
     "build": "pnpm /^build:.*/",
     "build:plugin:ts": "pnpm --filter=@openapi-codegen/typescript build",
     "build:cli": "pnpm --filter=@openapi-codegen/cli build",
-    "all-contrib": "all-contributors"
+    "all-contrib": "all-contributors",
+    "prepare": "vp config"
   },
   "devDependencies": {
     "@types/node": "^26.6.5",
     "all-contributors-cli": "^6.26.1",
-    "got": "^16.1.0",
-    "husky": "^9.1.7",
-    "oxlint": "^1.89.0",
-    "prettier": "^3.9.10",
+    "got": "^16.0.0",
     "pretty-quick": "^4.2.2",
     "typescript": "~6.0.2",
-    "vitest": "^5.0.5"
+    "vite": "catalog:",
+    "vite-plus": "catalog:"
+  },
+  "engines": {
+    "node": ">=22"
   },
   "packageManager": "pnpm@12.15.0"
 }

@@ -1605,7 +1605,11 @@ export type CodeScanningAlert = {
  * A classification of the file. For example to identify it as generated.
  */
 export type CodeScanningAlertClassification =
-  "source" | "generated" | "test" | "library" | null;
+  | "source"
+  | "generated"
+  | "test"
+  | "library"
+  | null;
 
 /**
  * The dismissal comment associated with the dismissal of the alert.
@@ -1618,7 +1622,11 @@ export type CodeScanningAlertDismissedComment = string | null;
  * **Required when the state is dismissed.** The reason for dismissing or closing the alert.
  */
 export type CodeScanningAlertDismissedReason =
-  any | "false positive" | "won't fix" | "used in tests" | null;
+  | any
+  | "false positive"
+  | "won't fix"
+  | "used in tests"
+  | null;
 
 /**
  * Identifies the variable values associated with the environment in which the analysis that generated this alert instance was performed, such as the language that was analyzed.
@@ -1744,7 +1752,13 @@ export type CodeScanningAlertSetState = "open" | "dismissed";
  * Severity of a code scanning alert.
  */
 export type CodeScanningAlertSeverity =
-  "critical" | "high" | "medium" | "low" | "warning" | "note" | "error";
+  | "critical"
+  | "high"
+  | "medium"
+  | "low"
+  | "warning"
+  | "note"
+  | "error";
 
 /**
  * State of a code scanning alert.
@@ -6347,7 +6361,11 @@ export type Integration = {
  * @example one_month
  */
 export type InteractionExpiry =
-  "one_day" | "three_days" | "one_week" | "one_month" | "six_months";
+  | "one_day"
+  | "three_days"
+  | "one_week"
+  | "one_month"
+  | "six_months";
 
 /**
  * The type of GitHub user that can comment, open issues, or create pull requests while the interaction limit is in effect.
@@ -6355,7 +6373,9 @@ export type InteractionExpiry =
  * @example collaborators_only
  */
 export type InteractionGroup =
-  "existing_users" | "contributors_only" | "collaborators_only";
+  | "existing_users"
+  | "contributors_only"
+  | "collaborators_only";
 
 /**
  * Limit interactions to a specific type of user for a specified duration
@@ -10225,7 +10245,12 @@ export type PackageVersion = {
      * @example docker
      */
     package_type:
-      "npm" | "maven" | "rubygems" | "docker" | "nuget" | "container";
+      | "npm"
+      | "maven"
+      | "rubygems"
+      | "docker"
+      | "nuget"
+      | "container";
   };
   /**
    * The name of the package version.
@@ -12511,7 +12536,14 @@ export type Reaction = {
    * @example heart
    */
   content:
-    "+1" | "-1" | "laugh" | "confused" | "heart" | "hooray" | "rocket" | "eyes";
+    | "+1"
+    | "-1"
+    | "laugh"
+    | "confused"
+    | "heart"
+    | "hooray"
+    | "rocket"
+    | "eyes";
   /**
    * @example "2016-05-20T20:09:31.000Z"
    * @format date-time
@@ -14162,7 +14194,12 @@ export type SecretScanningAlert = {
  * **Required when the `state` is `resolved`.** The reason for resolving the alert.
  */
 export type SecretScanningAlertResolution =
-  any | "false_positive" | "wont_fix" | "revoked" | "used_in_tests" | null;
+  | any
+  | "false_positive"
+  | "wont_fix"
+  | "revoked"
+  | "used_in_tests"
+  | null;
 
 /**
  * An optional comment when closing an alert. Cannot be updated or deleted. Must be `null` when changing `state` to `open`.
@@ -16747,7 +16784,9 @@ export type WebhookBranchProtectionRuleCreated = {
     id: number;
     ignore_approvals_from_contributors: boolean;
     linear_history_requirement_enforcement_level:
-      "off" | "non_admins" | "everyone";
+      | "off"
+      | "non_admins"
+      | "everyone";
     merge_queue_enforcement_level: "off" | "non_admins" | "everyone";
     name: string;
     pull_request_reviews_enforcement_level: "off" | "non_admins" | "everyone";
@@ -16793,7 +16832,9 @@ export type WebhookBranchProtectionRuleDeleted = {
     id: number;
     ignore_approvals_from_contributors: boolean;
     linear_history_requirement_enforcement_level:
-      "off" | "non_admins" | "everyone";
+      | "off"
+      | "non_admins"
+      | "everyone";
     merge_queue_enforcement_level: "off" | "non_admins" | "everyone";
     name: string;
     pull_request_reviews_enforcement_level: "off" | "non_admins" | "everyone";
@@ -16865,7 +16906,9 @@ export type WebhookBranchProtectionRuleEdited = {
     id: number;
     ignore_approvals_from_contributors: boolean;
     linear_history_requirement_enforcement_level:
-      "off" | "non_admins" | "everyone";
+      | "off"
+      | "non_admins"
+      | "everyone";
     merge_queue_enforcement_level: "off" | "non_admins" | "everyone";
     name: string;
     pull_request_reviews_enforcement_level: "off" | "non_admins" | "everyone";
@@ -18063,7 +18106,11 @@ export type WebhookCodeScanningAlertAppearedInBranch = {
      * The reason for dismissing or closing the alert. Can be one of: `false positive`, `won't fix`, and `used in tests`.
      */
     dismissed_reason:
-      "false positive" | "won't fix" | "used in tests" | any | null;
+      | "false positive"
+      | "won't fix"
+      | "used in tests"
+      | any
+      | null;
     /**
      * The GitHub URL of the alert resource.
      *
@@ -18233,7 +18280,11 @@ export type WebhookCodeScanningAlertClosedByUser = {
      * The reason for dismissing or closing the alert. Can be one of: `false positive`, `won't fix`, and `used in tests`.
      */
     dismissed_reason:
-      "false positive" | "won't fix" | "used in tests" | any | null;
+      | "false positive"
+      | "won't fix"
+      | "used in tests"
+      | any
+      | null;
     /**
      * The GitHub URL of the alert resource.
      *
@@ -18534,7 +18585,11 @@ export type WebhookCodeScanningAlertFixed = {
      * The reason for dismissing or closing the alert. Can be one of: `false positive`, `won't fix`, and `used in tests`.
      */
     dismissed_reason:
-      "false positive" | "won't fix" | "used in tests" | any | null;
+      | "false positive"
+      | "won't fix"
+      | "used in tests"
+      | any
+      | null;
     /**
      * The GitHub URL of the alert resource.
      *
@@ -23557,7 +23612,12 @@ export type WebhookIssueCommentCreated = {
    */
   issue: {
     active_lock_reason:
-      "resolved" | "off-topic" | "too heated" | "spam" | any | null;
+      | "resolved"
+      | "off-topic"
+      | "too heated"
+      | "spam"
+      | any
+      | null;
     assignee: {
       /**
        * @format uri
@@ -24298,7 +24358,12 @@ export type WebhookIssueCommentDeleted = {
    */
   issue: {
     active_lock_reason:
-      "resolved" | "off-topic" | "too heated" | "spam" | any | null;
+      | "resolved"
+      | "off-topic"
+      | "too heated"
+      | "spam"
+      | any
+      | null;
     assignee: {
       /**
        * @format uri
@@ -25048,7 +25113,12 @@ export type WebhookIssueCommentEdited = {
    */
   issue: {
     active_lock_reason:
-      "resolved" | "off-topic" | "too heated" | "spam" | any | null;
+      | "resolved"
+      | "off-topic"
+      | "too heated"
+      | "spam"
+      | any
+      | null;
     assignee: {
       /**
        * @format uri
@@ -25728,7 +25798,12 @@ export type WebhookIssuesAssigned = {
    */
   issue: {
     active_lock_reason:
-      "resolved" | "off-topic" | "too heated" | "spam" | any | null;
+      | "resolved"
+      | "off-topic"
+      | "too heated"
+      | "spam"
+      | any
+      | null;
     assignee?: {
       /**
        * @format uri
@@ -26349,7 +26424,12 @@ export type WebhookIssuesClosed = {
    */
   issue: {
     active_lock_reason:
-      "resolved" | "off-topic" | "too heated" | "spam" | any | null;
+      | "resolved"
+      | "off-topic"
+      | "too heated"
+      | "spam"
+      | any
+      | null;
     assignee?: {
       /**
        * @format uri
@@ -26968,7 +27048,12 @@ export type WebhookIssuesDeleted = {
    */
   issue: {
     active_lock_reason:
-      "resolved" | "off-topic" | "too heated" | "spam" | any | null;
+      | "resolved"
+      | "off-topic"
+      | "too heated"
+      | "spam"
+      | any
+      | null;
     assignee?: {
       /**
        * @format uri
@@ -27585,7 +27670,12 @@ export type WebhookIssuesDemilestoned = {
    */
   issue: {
     active_lock_reason:
-      "resolved" | "off-topic" | "too heated" | "spam" | any | null;
+      | "resolved"
+      | "off-topic"
+      | "too heated"
+      | "spam"
+      | any
+      | null;
     assignee?: {
       /**
        * @format uri
@@ -28327,7 +28417,12 @@ export type WebhookIssuesEdited = {
    */
   issue: {
     active_lock_reason:
-      "resolved" | "off-topic" | "too heated" | "spam" | any | null;
+      | "resolved"
+      | "off-topic"
+      | "too heated"
+      | "spam"
+      | any
+      | null;
     assignee?: {
       /**
        * @format uri
@@ -28966,7 +29061,12 @@ export type WebhookIssuesLabeled = {
    */
   issue: {
     active_lock_reason:
-      "resolved" | "off-topic" | "too heated" | "spam" | any | null;
+      | "resolved"
+      | "off-topic"
+      | "too heated"
+      | "spam"
+      | any
+      | null;
     assignee?: {
       /**
        * @format uri
@@ -29604,7 +29704,12 @@ export type WebhookIssuesLocked = {
    */
   issue: {
     active_lock_reason:
-      "resolved" | "off-topic" | "too heated" | "spam" | any | null;
+      | "resolved"
+      | "off-topic"
+      | "too heated"
+      | "spam"
+      | any
+      | null;
     assignee?: {
       /**
        * @format uri
@@ -30222,7 +30327,12 @@ export type WebhookIssuesMilestoned = {
    */
   issue: {
     active_lock_reason:
-      "resolved" | "off-topic" | "too heated" | "spam" | any | null;
+      | "resolved"
+      | "off-topic"
+      | "too heated"
+      | "spam"
+      | any
+      | null;
     assignee?: {
       /**
        * @format uri
@@ -30947,7 +31057,12 @@ export type WebhookIssuesOpened = {
      */
     old_issue: {
       active_lock_reason:
-        "resolved" | "off-topic" | "too heated" | "spam" | any | null;
+        | "resolved"
+        | "off-topic"
+        | "too heated"
+        | "spam"
+        | any
+        | null;
       assignee?: {
         /**
          * @format uri
@@ -31921,7 +32036,12 @@ export type WebhookIssuesOpened = {
    */
   issue: {
     active_lock_reason:
-      "resolved" | "off-topic" | "too heated" | "spam" | any | null;
+      | "resolved"
+      | "off-topic"
+      | "too heated"
+      | "spam"
+      | any
+      | null;
     assignee?: {
       /**
        * @format uri
@@ -32540,7 +32660,12 @@ export type WebhookIssuesPinned = {
    */
   issue: {
     active_lock_reason:
-      "resolved" | "off-topic" | "too heated" | "spam" | any | null;
+      | "resolved"
+      | "off-topic"
+      | "too heated"
+      | "spam"
+      | any
+      | null;
     assignee?: {
       /**
        * @format uri
@@ -33156,7 +33281,12 @@ export type WebhookIssuesReopened = {
    */
   issue: {
     active_lock_reason:
-      "resolved" | "off-topic" | "too heated" | "spam" | any | null;
+      | "resolved"
+      | "off-topic"
+      | "too heated"
+      | "spam"
+      | any
+      | null;
     assignee?: {
       /**
        * @format uri
@@ -33773,7 +33903,12 @@ export type WebhookIssuesTransferred = {
      */
     new_issue: {
       active_lock_reason:
-        "resolved" | "off-topic" | "too heated" | "spam" | any | null;
+        | "resolved"
+        | "off-topic"
+        | "too heated"
+        | "spam"
+        | any
+        | null;
       assignee?: {
         /**
          * @format uri
@@ -34757,7 +34892,12 @@ export type WebhookIssuesTransferred = {
    */
   issue: {
     active_lock_reason:
-      "resolved" | "off-topic" | "too heated" | "spam" | any | null;
+      | "resolved"
+      | "off-topic"
+      | "too heated"
+      | "spam"
+      | any
+      | null;
     assignee?: {
       /**
        * @format uri
@@ -35435,7 +35575,12 @@ export type WebhookIssuesUnassigned = {
    */
   issue: {
     active_lock_reason:
-      "resolved" | "off-topic" | "too heated" | "spam" | any | null;
+      | "resolved"
+      | "off-topic"
+      | "too heated"
+      | "spam"
+      | any
+      | null;
     assignee?: {
       /**
        * @format uri
@@ -36053,7 +36198,12 @@ export type WebhookIssuesUnlabeled = {
    */
   issue: {
     active_lock_reason:
-      "resolved" | "off-topic" | "too heated" | "spam" | any | null;
+      | "resolved"
+      | "off-topic"
+      | "too heated"
+      | "spam"
+      | any
+      | null;
     assignee?: {
       /**
        * @format uri
@@ -36691,7 +36841,12 @@ export type WebhookIssuesUnlocked = {
    */
   issue: {
     active_lock_reason:
-      "resolved" | "off-topic" | "too heated" | "spam" | any | null;
+      | "resolved"
+      | "off-topic"
+      | "too heated"
+      | "spam"
+      | any
+      | null;
     assignee?: {
       /**
        * @format uri
@@ -37307,7 +37462,12 @@ export type WebhookIssuesUnpinned = {
    */
   issue: {
     active_lock_reason:
-      "resolved" | "off-topic" | "too heated" | "spam" | any | null;
+      | "resolved"
+      | "off-topic"
+      | "too heated"
+      | "spam"
+      | any
+      | null;
     assignee?: {
       /**
        * @format uri
@@ -42711,7 +42871,12 @@ export type WebhookPullRequestAssigned = {
       };
     };
     active_lock_reason:
-      "resolved" | "off-topic" | "too heated" | "spam" | any | null;
+      | "resolved"
+      | "off-topic"
+      | "too heated"
+      | "spam"
+      | any
+      | null;
     additions?: number;
     assignee: {
       /**
@@ -44486,7 +44651,12 @@ export type WebhookPullRequestAutoMergeDisabled = {
       };
     };
     active_lock_reason:
-      "resolved" | "off-topic" | "too heated" | "spam" | any | null;
+      | "resolved"
+      | "off-topic"
+      | "too heated"
+      | "spam"
+      | any
+      | null;
     additions?: number;
     assignee: {
       /**
@@ -46262,7 +46432,12 @@ export type WebhookPullRequestAutoMergeEnabled = {
       };
     };
     active_lock_reason:
-      "resolved" | "off-topic" | "too heated" | "spam" | any | null;
+      | "resolved"
+      | "off-topic"
+      | "too heated"
+      | "spam"
+      | any
+      | null;
     additions?: number;
     assignee: {
       /**
@@ -48041,7 +48216,12 @@ export type WebhookPullRequestClosed = {
       };
     };
     active_lock_reason:
-      "resolved" | "off-topic" | "too heated" | "spam" | any | null;
+      | "resolved"
+      | "off-topic"
+      | "too heated"
+      | "spam"
+      | any
+      | null;
     additions?: number;
     assignee: {
       /**
@@ -49794,7 +49974,12 @@ export type WebhookPullRequestConvertedToDraft = {
       };
     };
     active_lock_reason:
-      "resolved" | "off-topic" | "too heated" | "spam" | any | null;
+      | "resolved"
+      | "off-topic"
+      | "too heated"
+      | "spam"
+      | any
+      | null;
     additions?: number;
     assignee: {
       /**
@@ -51561,7 +51746,12 @@ export type WebhookPullRequestDemilestoned = {
       };
     };
     active_lock_reason:
-      "resolved" | "off-topic" | "too heated" | "spam" | any | null;
+      | "resolved"
+      | "off-topic"
+      | "too heated"
+      | "spam"
+      | any
+      | null;
     additions?: number;
     assignee: {
       /**
@@ -53336,7 +53526,12 @@ export type WebhookPullRequestDequeued = {
       };
     };
     active_lock_reason:
-      "resolved" | "off-topic" | "too heated" | "spam" | any | null;
+      | "resolved"
+      | "off-topic"
+      | "too heated"
+      | "spam"
+      | any
+      | null;
     additions?: number;
     assignee: {
       /**
@@ -55140,7 +55335,12 @@ export type WebhookPullRequestEdited = {
       };
     };
     active_lock_reason:
-      "resolved" | "off-topic" | "too heated" | "spam" | any | null;
+      | "resolved"
+      | "off-topic"
+      | "too heated"
+      | "spam"
+      | any
+      | null;
     additions?: number;
     assignee: {
       /**
@@ -56915,7 +57115,12 @@ export type WebhookPullRequestEnqueued = {
       };
     };
     active_lock_reason:
-      "resolved" | "off-topic" | "too heated" | "spam" | any | null;
+      | "resolved"
+      | "off-topic"
+      | "too heated"
+      | "spam"
+      | any
+      | null;
     additions?: number;
     assignee: {
       /**
@@ -58713,7 +58918,12 @@ export type WebhookPullRequestLabeled = {
       };
     };
     active_lock_reason:
-      "resolved" | "off-topic" | "too heated" | "spam" | any | null;
+      | "resolved"
+      | "off-topic"
+      | "too heated"
+      | "spam"
+      | any
+      | null;
     additions?: number;
     assignee: {
       /**
@@ -60491,7 +60701,12 @@ export type WebhookPullRequestLocked = {
       };
     };
     active_lock_reason:
-      "resolved" | "off-topic" | "too heated" | "spam" | any | null;
+      | "resolved"
+      | "off-topic"
+      | "too heated"
+      | "spam"
+      | any
+      | null;
     additions?: number;
     assignee: {
       /**
@@ -62269,7 +62484,12 @@ export type WebhookPullRequestMilestoned = {
       };
     };
     active_lock_reason:
-      "resolved" | "off-topic" | "too heated" | "spam" | any | null;
+      | "resolved"
+      | "off-topic"
+      | "too heated"
+      | "spam"
+      | any
+      | null;
     additions?: number;
     assignee: {
       /**
@@ -64047,7 +64267,12 @@ export type WebhookPullRequestOpened = {
       };
     };
     active_lock_reason:
-      "resolved" | "off-topic" | "too heated" | "spam" | any | null;
+      | "resolved"
+      | "off-topic"
+      | "too heated"
+      | "spam"
+      | any
+      | null;
     additions?: number;
     assignee: {
       /**
@@ -65807,7 +66032,12 @@ export type WebhookPullRequestReadyForReview = {
       };
     };
     active_lock_reason:
-      "resolved" | "off-topic" | "too heated" | "spam" | any | null;
+      | "resolved"
+      | "off-topic"
+      | "too heated"
+      | "spam"
+      | any
+      | null;
     additions?: number;
     assignee: {
       /**
@@ -67574,7 +67804,12 @@ export type WebhookPullRequestReopened = {
       };
     };
     active_lock_reason:
-      "resolved" | "off-topic" | "too heated" | "spam" | any | null;
+      | "resolved"
+      | "off-topic"
+      | "too heated"
+      | "spam"
+      | any
+      | null;
     additions?: number;
     assignee: {
       /**
@@ -69537,7 +69772,12 @@ export type WebhookPullRequestReviewCommentCreated = {
       };
     };
     active_lock_reason:
-      "resolved" | "off-topic" | "too heated" | "spam" | any | null;
+      | "resolved"
+      | "off-topic"
+      | "too heated"
+      | "spam"
+      | any
+      | null;
     assignee: {
       /**
        * @format uri
@@ -71421,7 +71661,12 @@ export type WebhookPullRequestReviewCommentDeleted = {
       };
     };
     active_lock_reason:
-      "resolved" | "off-topic" | "too heated" | "spam" | any | null;
+      | "resolved"
+      | "off-topic"
+      | "too heated"
+      | "spam"
+      | any
+      | null;
     assignee: {
       /**
        * @format uri
@@ -73316,7 +73561,12 @@ export type WebhookPullRequestReviewCommentEdited = {
       };
     };
     active_lock_reason:
-      "resolved" | "off-topic" | "too heated" | "spam" | any | null;
+      | "resolved"
+      | "off-topic"
+      | "too heated"
+      | "spam"
+      | any
+      | null;
     assignee: {
       /**
        * @format uri
@@ -74993,7 +75243,12 @@ export type WebhookPullRequestReviewDismissed = {
       };
     };
     active_lock_reason:
-      "resolved" | "off-topic" | "too heated" | "spam" | any | null;
+      | "resolved"
+      | "off-topic"
+      | "too heated"
+      | "spam"
+      | any
+      | null;
     assignee: {
       /**
        * @format uri
@@ -76794,7 +77049,12 @@ export type WebhookPullRequestReviewEdited = {
       };
     };
     active_lock_reason:
-      "resolved" | "off-topic" | "too heated" | "spam" | any | null;
+      | "resolved"
+      | "off-topic"
+      | "too heated"
+      | "spam"
+      | any
+      | null;
     assignee: {
       /**
        * @format uri
@@ -78500,7 +78760,12 @@ export type WebhookPullRequestReviewRequestRemoved =
           };
         };
         active_lock_reason:
-          "resolved" | "off-topic" | "too heated" | "spam" | any | null;
+          | "resolved"
+          | "off-topic"
+          | "too heated"
+          | "spam"
+          | any
+          | null;
         additions?: number;
         assignee: {
           /**
@@ -79052,7 +79317,9 @@ export type WebhookPullRequestReviewRequestRemoved =
              * The default value for a squash merge commit message.
              */
             squash_merge_commit_message?:
-              "PR_BODY" | "COMMIT_MESSAGES" | "BLANK";
+              | "PR_BODY"
+              | "COMMIT_MESSAGES"
+              | "BLANK";
             /**
              * The default value for a squash merge commit title.
              */
@@ -79553,7 +79820,9 @@ export type WebhookPullRequestReviewRequestRemoved =
              * - `BLANK` - default to a blank commit message.
              */
             squash_merge_commit_message?:
-              "PR_BODY" | "COMMIT_MESSAGES" | "BLANK";
+              | "PR_BODY"
+              | "COMMIT_MESSAGES"
+              | "BLANK";
             /**
              * The default value for a squash merge commit title:
              *
@@ -80331,7 +80600,12 @@ export type WebhookPullRequestReviewRequestRemoved =
           };
         };
         active_lock_reason:
-          "resolved" | "off-topic" | "too heated" | "spam" | any | null;
+          | "resolved"
+          | "off-topic"
+          | "too heated"
+          | "spam"
+          | any
+          | null;
         additions?: number;
         assignee: {
           /**
@@ -80887,7 +81161,9 @@ export type WebhookPullRequestReviewRequestRemoved =
              * - `BLANK` - default to a blank commit message.
              */
             squash_merge_commit_message?:
-              "PR_BODY" | "COMMIT_MESSAGES" | "BLANK";
+              | "PR_BODY"
+              | "COMMIT_MESSAGES"
+              | "BLANK";
             /**
              * The default value for a squash merge commit title:
              *
@@ -81391,7 +81667,9 @@ export type WebhookPullRequestReviewRequestRemoved =
              * - `BLANK` - default to a blank commit message.
              */
             squash_merge_commit_message?:
-              "PR_BODY" | "COMMIT_MESSAGES" | "BLANK";
+              | "PR_BODY"
+              | "COMMIT_MESSAGES"
+              | "BLANK";
             /**
              * The default value for a squash merge commit title:
              *
@@ -82194,7 +82472,12 @@ export type WebhookPullRequestReviewRequested =
           };
         };
         active_lock_reason:
-          "resolved" | "off-topic" | "too heated" | "spam" | any | null;
+          | "resolved"
+          | "off-topic"
+          | "too heated"
+          | "spam"
+          | any
+          | null;
         additions?: number;
         assignee: {
           /**
@@ -82750,7 +83033,9 @@ export type WebhookPullRequestReviewRequested =
              * - `BLANK` - default to a blank commit message.
              */
             squash_merge_commit_message?:
-              "PR_BODY" | "COMMIT_MESSAGES" | "BLANK";
+              | "PR_BODY"
+              | "COMMIT_MESSAGES"
+              | "BLANK";
             /**
              * The default value for a squash merge commit title:
              *
@@ -83254,7 +83539,9 @@ export type WebhookPullRequestReviewRequested =
              * - `BLANK` - default to a blank commit message.
              */
             squash_merge_commit_message?:
-              "PR_BODY" | "COMMIT_MESSAGES" | "BLANK";
+              | "PR_BODY"
+              | "COMMIT_MESSAGES"
+              | "BLANK";
             /**
              * The default value for a squash merge commit title:
              *
@@ -84032,7 +84319,12 @@ export type WebhookPullRequestReviewRequested =
           };
         };
         active_lock_reason:
-          "resolved" | "off-topic" | "too heated" | "spam" | any | null;
+          | "resolved"
+          | "off-topic"
+          | "too heated"
+          | "spam"
+          | any
+          | null;
         additions?: number;
         assignee: {
           /**
@@ -84588,7 +84880,9 @@ export type WebhookPullRequestReviewRequested =
              * - `BLANK` - default to a blank commit message.
              */
             squash_merge_commit_message?:
-              "PR_BODY" | "COMMIT_MESSAGES" | "BLANK";
+              | "PR_BODY"
+              | "COMMIT_MESSAGES"
+              | "BLANK";
             /**
              * The default value for a squash merge commit title:
              *
@@ -85092,7 +85386,9 @@ export type WebhookPullRequestReviewRequested =
              * - `BLANK` - default to a blank commit message.
              */
             squash_merge_commit_message?:
-              "PR_BODY" | "COMMIT_MESSAGES" | "BLANK";
+              | "PR_BODY"
+              | "COMMIT_MESSAGES"
+              | "BLANK";
             /**
              * The default value for a squash merge commit title:
              *
@@ -85890,7 +86186,12 @@ export type WebhookPullRequestReviewSubmitted = {
       };
     };
     active_lock_reason:
-      "resolved" | "off-topic" | "too heated" | "spam" | any | null;
+      | "resolved"
+      | "off-topic"
+      | "too heated"
+      | "spam"
+      | any
+      | null;
     assignee: {
       /**
        * @format uri
@@ -87683,7 +87984,12 @@ export type WebhookPullRequestReviewThreadResolved = {
       };
     };
     active_lock_reason:
-      "resolved" | "off-topic" | "too heated" | "spam" | any | null;
+      | "resolved"
+      | "off-topic"
+      | "too heated"
+      | "spam"
+      | any
+      | null;
     assignee: {
       /**
        * @format uri
@@ -89495,7 +89801,12 @@ export type WebhookPullRequestReviewThreadUnresolved = {
       };
     };
     active_lock_reason:
-      "resolved" | "off-topic" | "too heated" | "spam" | any | null;
+      | "resolved"
+      | "off-topic"
+      | "too heated"
+      | "spam"
+      | any
+      | null;
     assignee: {
       /**
        * @format uri
@@ -91313,7 +91624,12 @@ export type WebhookPullRequestSynchronize = {
       };
     };
     active_lock_reason:
-      "resolved" | "off-topic" | "too heated" | "spam" | any | null;
+      | "resolved"
+      | "off-topic"
+      | "too heated"
+      | "spam"
+      | any
+      | null;
     additions?: number;
     assignee: {
       /**
@@ -93143,7 +93459,12 @@ export type WebhookPullRequestUnassigned = {
       };
     };
     active_lock_reason:
-      "resolved" | "off-topic" | "too heated" | "spam" | any | null;
+      | "resolved"
+      | "off-topic"
+      | "too heated"
+      | "spam"
+      | any
+      | null;
     additions?: number;
     assignee: {
       /**
@@ -94941,7 +95262,12 @@ export type WebhookPullRequestUnlabeled = {
       };
     };
     active_lock_reason:
-      "resolved" | "off-topic" | "too heated" | "spam" | any | null;
+      | "resolved"
+      | "off-topic"
+      | "too heated"
+      | "spam"
+      | any
+      | null;
     additions?: number;
     assignee: {
       /**
@@ -96712,7 +97038,12 @@ export type WebhookPullRequestUnlocked = {
       };
     };
     active_lock_reason:
-      "resolved" | "off-topic" | "too heated" | "spam" | any | null;
+      | "resolved"
+      | "off-topic"
+      | "too heated"
+      | "spam"
+      | any
+      | null;
     additions?: number;
     assignee: {
       /**

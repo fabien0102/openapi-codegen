@@ -4,7 +4,6 @@ import * as t from "typanion";
 import fsExtra from "fs-extra";
 import { posix as path } from "path";
 import * as swc from "@swc/core";
-import prettier from "prettier";
 import { fileURLToPath } from "url";
 import slash from "slash";
 
@@ -234,17 +233,14 @@ export class GenerateCommand extends Command {
 
           const sourceFile = await getOpenAPISourceFile(options);
           const openAPIDocument = await parseOpenAPISourceFile(sourceFile);
-          const prettierConfig = await prettier.resolveConfig(process.cwd());
+          const oxfmt = await import("oxfmt");
 
           const writeFile = async (file: string, data: string) => {
-            const updatedConfig = await prettier.format(data, {
-              parser: "babel-ts",
-              ...prettierConfig,
-            });
+            const updatedConfig = await oxfmt.format(file, data);
 
             await fsExtra.outputFile(
               path.join(process.cwd(), config.outputDir, file),
-              updatedConfig
+              updatedConfig.code
             );
           };
 

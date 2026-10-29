@@ -1,4 +1,4 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect } from "vite-plus/test";
 import ts, { factory as f } from "typescript";
 import { analyzeImportUsage } from "./analyzeImportUsage";
 

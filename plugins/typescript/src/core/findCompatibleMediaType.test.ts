@@ -1,5 +1,5 @@
 import type { MediaTypeObject } from "openapi3-ts/oas30";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "vite-plus/test";
 import { findCompatibleMediaType } from "./findCompatibleMediaType";
 
 describe("findCompatibleMediaType", () => {

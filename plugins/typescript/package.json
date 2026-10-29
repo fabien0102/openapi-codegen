@@ -39,6 +39,7 @@
   "devDependencies": {
     "@types/lodash": "^4.17.25",
     "@types/pluralize": "^0.0.33",
-    "@types/qs": "^6.15.1"
+    "@types/qs": "^6.15.1",
+    "oxfmt": "^0.75.0"
   }
 }

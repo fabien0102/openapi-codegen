@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "vite-plus/test";
 import { OpenAPIObject } from "openapi3-ts/oas30";
 import { petstore } from "../fixtures/petstore";
 import { renameComponent } from "./renameComponent";

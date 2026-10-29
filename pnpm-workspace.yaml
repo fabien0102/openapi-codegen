@@ -7,3 +7,13 @@ allowBuilds:
   esbuild: true
 minimumReleaseAgeExclude:
   - nock@15.0.1
+catalog:
+  vite: npm:@voidzero-dev/vite-plus-core@0.2.4
+  vite-plus: 0.2.4
+overrides:
+  vite: "catalog:"
+peerDependencyRules:
+  allowAny:
+    - vite
+  allowedVersions:
+    vite: "*"

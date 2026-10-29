@@ -98,4 +98,6 @@ export type Import = {
 };
 
 export type Plugin =
-  "typescript/types-only" | "typescript/react-query" | "typescript/fetch";
+  | "typescript/types-only"
+  | "typescript/react-query"
+  | "typescript/fetch";

@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "vite-plus/test";
 import { ReferenceObject, SchemaObject } from "openapi3-ts/oas30";
 import { convertNumberToWord, getEnumProperties } from "./getEnumProperties";
 
