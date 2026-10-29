@@ -14,7 +14,10 @@
     "noFallthroughCasesInSwitch": true,
     "sourceMap": true,
     "declaration": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "paths": {
+      "typescript": ["./plugins/typescript/src/typescript.ts"]
+    }
   },
   "include": ["cli/src/**/*", "plugins/*/src/**/*"]
 }

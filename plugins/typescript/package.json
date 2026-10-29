@@ -33,8 +33,7 @@
     "openapi3-ts": "^4.6.1",
     "pluralize": "^8.0.0",
     "tslib": "^2.8.1",
-    "tsutils": "^3.21.0",
-    "typescript": "~6.0.2"
+    "typescript": "7.1.0-beta"
   },
   "devDependencies": {
     "@types/lodash": "^4.17.25",

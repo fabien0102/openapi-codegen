@@ -62,22 +62,26 @@ export const getUsedImports = (
   const visitor: ts.Visitor = (node) => {
     if (ts.isQualifiedName(node)) {
       // We can’t use `node.left.getText()` because the node is not compiled (no internal `text` property)
-      const text = camel(get(node.left, "escapedText", "") as string);
+      const text = camel(
+        (get(node.left, "escapedText") || get(node.left, "text", "")) as string
+      );
       if (text in imports) {
         imports[text as keyof typeof imports].used = true;
       }
     }
     if (imports.utils.type === "named" && ts.isTypeReferenceNode(node)) {
-      if (get(node.typeName, "escapedText", "") === clientErrorStatus) {
+      const typeNameText =
+        get(node.typeName, "escapedText") || get(node.typeName, "text", "");
+      if (typeNameText === clientErrorStatus) {
         imports.utils.used = true;
         imports.utils.imports.add(clientErrorStatus);
       }
-      if (get(node.typeName, "escapedText", "") === serverErrorStatus) {
+      if (typeNameText === serverErrorStatus) {
         imports.utils.used = true;
         imports.utils.imports.add(serverErrorStatus);
       }
     }
-    return node.forEachChild(visitor);
+    return ts.forEachChild(node, visitor);
   };
 
   ts.visitNodes(f.createNodeArray(nodes), visitor);

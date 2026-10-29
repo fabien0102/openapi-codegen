@@ -31,7 +31,7 @@
     "oxlint": "^1.89.0",
     "prettier": "^3.9.10",
     "pretty-quick": "^4.2.2",
-    "typescript": "~6.0.2",
+    "typescript": "7.1.0-beta",
     "vitest": "^5.0.5"
   },
   "packageManager": "pnpm@12.15.0"
