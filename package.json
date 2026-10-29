@@ -11,21 +11,22 @@
     "check": "pnpm /^check:.*/",
     "check:types": "tsc --noEmit",
     "check:lint": "vp lint .",
-    "check:prettier": "vp fmt --check .",
+    "check:fmt": "vp fmt --check .",
+    "check:knip": "knip --workspace cli --workspace plugins/*",
     "fix": "pnpm /^fix:.*/",
     "fix:lint": "vp lint --fix .",
-    "fix:prettier": "vp fmt .",
+    "fix:fmt": "vp fmt .",
     "build": "pnpm /^build:.*/",
     "build:plugin:ts": "pnpm --filter=@openapi-codegen/typescript build",
     "build:cli": "pnpm --filter=@openapi-codegen/cli build",
     "all-contrib": "all-contributors",
-    "prepare": "vp config"
+    "prepare": "vp config",
+    "knip": "knip"
   },
   "devDependencies": {
     "@types/node": "^26.6.5",
     "all-contributors-cli": "^6.26.1",
-    "got": "^16.0.0",
-    "pretty-quick": "^4.2.2",
+    "knip": "^6.43.0",
     "typescript": "~6.0.2",
     "vite": "catalog:",
     "vite-plus": "catalog:"

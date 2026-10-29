@@ -2,44 +2,42 @@
   "name": "@openapi-codegen/typescript",
   "version": "11.3.0",
   "description": "OpenAPI Codegen typescript generators",
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
+  "keywords": [
+    "codegen",
+    "openapi",
+    "plugin",
+    "typescript"
+  ],
+  "license": "MIT",
+  "author": "Fabien Bernard",
   "repository": {
     "url": "https://github.com/fabien0102/openapi-codegen",
     "directory": "plugins/typescript"
-  },
-  "publishConfig": {
-    "access": "public"
-  },
-  "scripts": {
-    "build": "pnpm --workspace-root tsc -p plugins/typescript/tsconfig.package.json",
-    "prepublishOnly": "pnpm build"
   },
   "files": [
     "lib",
     "README.md"
   ],
-  "keywords": [
-    "openapi",
-    "codegen",
-    "plugin",
-    "typescript"
-  ],
-  "author": "Fabien Bernard",
-  "license": "MIT",
+  "main": "dist/index.mjs",
+  "types": "dist/index.d.mts",
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "vp pack src/index.ts",
+    "prepublishOnly": "pnpm build"
+  },
   "dependencies": {
     "case": "^1.6.3",
     "lodash": "^4.18.1",
     "openapi3-ts": "^4.6.1",
     "pluralize": "^8.0.0",
-    "tslib": "^2.8.1",
     "tsutils": "^3.21.0",
     "typescript": "~6.0.2"
   },
   "devDependencies": {
     "@types/lodash": "^4.17.25",
     "@types/pluralize": "^0.0.33",
-    "@types/qs": "^6.15.1",
     "oxfmt": "^0.75.0"
   }
 }

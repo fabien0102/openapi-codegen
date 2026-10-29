@@ -68,7 +68,7 @@ export type GithubOptions = {
 
 export type FromOptions = FileOptions | UrlOptions | GithubOptions;
 
-export type Context = {
+type Context = {
   openAPIDocument: OpenAPIObject;
   outputDir: string;
   writeFile: (file: string, data: string) => Promise<void>;

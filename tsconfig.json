@@ -5,7 +5,6 @@
     "moduleResolution": "Bundler",
     "lib": ["ESNext"],
     "allowSyntheticDefaultImports": true,
-    "importHelpers": true,
     "strict": true,
     "noImplicitAny": true,
     "noImplicitThis": true,

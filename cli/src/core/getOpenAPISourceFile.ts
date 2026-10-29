@@ -109,7 +109,7 @@ export const getOpenAPISourceFile = async (
  *
  * @param extension
  */
-export const getFormat = (extension: string) => {
+const getFormat = (extension: string) => {
   if (extension.startsWith(".")) {
     extension = extension.slice(1);
   }
