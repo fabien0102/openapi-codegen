@@ -13,10 +13,10 @@
     "test": "vitest",
     "check": "pnpm /^check:.*/",
     "check:types": "tsc --noEmit",
-    "check:lint": "eslint .",
+    "check:lint": "oxlint .",
     "check:prettier": "prettier --check .",
     "fix": "pnpm /^fix:.*/",
-    "fix:lint": "eslint --fix .",
+    "fix:lint": "oxlint --fix .",
     "fix:prettier": "prettier --write .",
     "build": "pnpm /^build:.*/",
     "build:plugin:ts": "pnpm --filter=@openapi-codegen/typescript build",
@@ -24,18 +24,15 @@
     "all-contrib": "all-contributors"
   },
   "devDependencies": {
-    "@eslint/js": "^9.19.0",
-    "@types/node": "^20.11.30",
+    "@types/node": "^26.6.5",
     "all-contributors-cli": "^6.26.1",
-    "eslint": "^9.19.0",
-    "globals": "^15.14.0",
-    "got": "^14.2.1",
+    "got": "^16.1.0",
     "husky": "^9.1.7",
-    "prettier": "^3.4.2",
-    "pretty-quick": "^4.0.0",
-    "typescript": "5.7.3",
-    "typescript-eslint": "^8.22.0",
-    "vitest": "^3.0.5"
+    "oxlint": "^1.89.0",
+    "prettier": "^3.9.10",
+    "pretty-quick": "^4.2.2",
+    "typescript": "~6.0.2",
+    "vitest": "^5.0.5"
   },
-  "packageManager": "pnpm@9.15.4+sha512.b2dc20e2fc72b3e18848459b37359a32064663e5627a51e4c74b2c29dd8e8e0491483c3abb40789cfd578bf362fb6ba8261b05f0387d76792ed6e23ea3b1b6a0"
+  "packageManager": "pnpm@12.15.0"
 }

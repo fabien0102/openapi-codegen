@@ -3,8 +3,7 @@ import { GithubContext } from "./githubContext";
 const baseUrl = "https://api.github.com";
 
 export type ErrorWrapper<TError> =
-  | TError
-  | { status: "unknown"; payload: string };
+  TError | { status: "unknown"; payload: string };
 
 export type GithubFetcherOptions<TBody, THeaders, TQueryParams, TPathParams> = {
   url: string;

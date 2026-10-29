@@ -1858,8 +1858,7 @@ describe("generateReactQueryComponents", () => {
       ): {
         queryKey: reactQuery.QueryKey;
         queryFn:
-          | ((options: QueryFnOptions) => Promise<string>)
-          | reactQuery.SkipToken;
+          ((options: QueryFnOptions) => Promise<string>) | reactQuery.SkipToken;
       };
 
       export function getPetQuery(variables: GetPetVariables | reactQuery.SkipToken) {

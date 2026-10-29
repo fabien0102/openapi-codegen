@@ -20,11 +20,9 @@ import { convertNumberToWord } from "../utils/getEnumProperties";
 import { getReferenceSchema } from "./getReference";
 
 type RemoveIndex<T> = {
-  [P in keyof T as string extends P
-    ? never
-    : number extends P
-      ? never
-      : P]: T[P];
+  [
+    P in keyof T as string extends P ? never : number extends P ? never : P
+  ]: T[P];
 };
 
 export type OpenAPIComponentType = Extract<

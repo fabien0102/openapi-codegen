@@ -107,6 +107,8 @@ export class InitCommand extends Command {
           message: "Relative path",
           placeholder: "./openapi.json",
           validate(value) {
+            if (value === undefined) return "No relative path provided";
+
             if (!value.startsWith("./") && !value.startsWith("../"))
               return "The path should be relative";
 
@@ -132,6 +134,8 @@ export class InitCommand extends Command {
           message: "Url",
           placeholder: "https://.../openapi.json",
           validate(value) {
+            if (value === undefined) return "No Url provided";
+
             if (!value.startsWith("https://") && !value.startsWith("http://")) {
               return "Url must starts with http or https protocol";
             }

@@ -17,7 +17,7 @@
 <br>
 <br>
     Tooling to give you full type-safety around OpenAPI specs.
-  
+
   </div>
 
 <br>
@@ -205,9 +205,7 @@ the `@openapi-codegen/cli` supports these generator plugins:
 generate all schema types for your specification:
 
 ```ts
-const { schemasFiles } = await generateSchemaTypes(context, {
-  /* config */
-});
+const { schemasFiles } = await generateSchemaTypes(context, {/* config */});
 ```
 
 output: `{namespace}Schemas.ts`

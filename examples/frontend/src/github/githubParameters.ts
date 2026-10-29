@@ -15,9 +15,7 @@ export type ActionsCacheKeyRequired = string;
  * @default last_accessed_at
  */
 export type ActionsCacheListSort =
-  | "created_at"
-  | "last_accessed_at"
-  | "size_in_bytes";
+  "created_at" | "last_accessed_at" | "size_in_bytes";
 
 export type Actor = string;
 
@@ -159,12 +157,7 @@ export type Owner = string;
 export type PackageName = string;
 
 export type PackageType =
-  | "npm"
-  | "maven"
-  | "rubygems"
-  | "docker"
-  | "nuget"
-  | "container";
+  "npm" | "maven" | "rubygems" | "docker" | "nuget" | "container";
 
 export type PackageVersionId = number;
 

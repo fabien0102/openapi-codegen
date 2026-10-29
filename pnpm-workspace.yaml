@@ -2,3 +2,8 @@ packages:
   - cli
   - plugins/**
   - examples/**
+allowBuilds:
+  "@swc/core": true
+  esbuild: true
+minimumReleaseAgeExclude:
+  - nock@15.0.1
