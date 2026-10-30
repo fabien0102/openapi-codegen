@@ -1,4 +1,4 @@
-import { pascal } from "case";
+import { pascalCase } from "case-anything";
 import {
   isReferenceObject,
   ReferenceObject,
@@ -24,7 +24,7 @@ export const getEnumProperties = (
         ([propertyName, propertySchema]) => {
           processProperty(
             enumProperties,
-            `${name}${pascal(propertyName)}`,
+            `${name}${pascalCase(propertyName)}`,
             propertySchema
           );
         }
@@ -42,13 +42,13 @@ const processProperty = (
 ) => {
   if (isReferenceObject(propertySchema)) return;
   if (propertySchema.enum) {
-    enumProperties.push([`${pascal(propertyName)}`, propertySchema]);
+    enumProperties.push([`${pascalCase(propertyName)}`, propertySchema]);
   } else if (propertySchema.type === "object" && propertySchema.properties) {
     Object.entries(propertySchema.properties).forEach(
       ([nestedPropertyName, nestedPropertySchema]) => {
         processProperty(
           enumProperties,
-          `${propertyName}${pascal(nestedPropertyName)}`,
+          `${propertyName}${pascalCase(nestedPropertyName)}`,
           nestedPropertySchema
         );
       }

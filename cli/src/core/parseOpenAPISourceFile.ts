@@ -1,6 +1,6 @@
 import { OpenAPIObject } from "openapi3-ts/oas30";
 
-import type { OpenAPISourceFile } from "../types";
+import type { OpenAPISourceFile } from "../types/index.js";
 
 import swagger2openapi from "swagger2openapi";
 

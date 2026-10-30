@@ -1,7 +1,7 @@
 import {
   clientErrorStatus,
   serverErrorStatus,
-} from "../core/getErrorResponseType";
+} from "../core/getErrorResponseType.js";
 
 export const getUtils = () =>
   `type ComputeRange<

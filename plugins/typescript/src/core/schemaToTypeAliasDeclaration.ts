@@ -1,5 +1,5 @@
-import { pascal } from "case";
-import { keys, pickBy, intersection, merge, omit } from "lodash";
+import { pascalCase } from "case-anything";
+import { keys, pickBy, intersection, merge, omit } from "lodash-es";
 import {
   ComponentsObject,
   DiscriminatorObject,
@@ -9,15 +9,15 @@ import {
   isReferenceObject,
   isSchemaObject,
 } from "openapi3-ts/oas30";
-import { singular } from "pluralize";
+import pluralize from "pluralize";
 import { isValidIdentifier } from "tsutils";
 import ts, {
   factory as f,
   isIdentifierPart,
   isIdentifierStart,
 } from "typescript";
-import { convertNumberToWord } from "../utils/getEnumProperties";
-import { getReferenceSchema } from "./getReference";
+import { convertNumberToWord } from "../utils/getEnumProperties.js";
+import { getReferenceSchema } from "./getReference.js";
 
 type RemoveIndex<T> = {
   [P in keyof T as string extends P
@@ -67,11 +67,11 @@ export const schemaToTypeAliasDeclaration = (
     ? getJSDocComment(schema, context)
     : undefined;
 
-  let identifier = pascal(name);
+  let identifier = pascalCase(name);
 
   if (identifier.length > 0 && !isNaN(Number(identifier))) {
     // If the identifier can be cast to a number, convert it to a word.
-    identifier = pascal(convertNumberToWord(Number(identifier)));
+    identifier = pascalCase(convertNumberToWord(Number(identifier)));
   } else {
     // If the identifier does not start with a valid character but valid identifier part, prefix it with an underscore.
     if (
@@ -127,7 +127,7 @@ export const getType = (
       namespace === context.currentComponent
         ? f.createIdentifier(name)
         : f.createQualifiedName(
-            f.createIdentifier(pascal(namespace)),
+            f.createIdentifier(pascalCase(namespace)),
             f.createIdentifier(name)
           )
     );
@@ -317,7 +317,7 @@ export const getType = (
           getType(
             property,
             context,
-            `${name}${pascal(key)}`.replace(/[^a-zA-Z0-9 ]/g, ""),
+            `${name}${pascalCase(key)}`.replace(/[^a-zA-Z0-9 ]/g, ""),
             isEnum
           )
         );
@@ -735,7 +735,7 @@ export const getJSDocComment = (
         value.forEach((v) =>
           propertyTags.push(
             f.createJSDocPropertyTag(
-              f.createIdentifier(singular(key)),
+              f.createIdentifier(pluralize.singular(key)),
               getJsDocIdentifier(v),
               false
             )

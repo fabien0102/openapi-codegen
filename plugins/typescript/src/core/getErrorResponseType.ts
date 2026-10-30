@@ -7,9 +7,9 @@ import {
   ResponsesObject,
 } from "openapi3-ts/oas30";
 
-import { findCompatibleMediaType } from "./findCompatibleMediaType";
-import { getType } from "./schemaToTypeAliasDeclaration";
-import { pascal } from "case";
+import { findCompatibleMediaType } from "./findCompatibleMediaType.js";
+import { getType } from "./schemaToTypeAliasDeclaration.js";
+import { pascalCase } from "case-anything";
 
 export const clientErrorStatus = "ClientErrorStatus";
 export const serverErrorStatus = "ServerErrorStatus";
@@ -51,7 +51,7 @@ export const getErrorResponseType = ({
             f.createTypeReferenceNode(
               f.createQualifiedName(
                 f.createIdentifier("Responses"),
-                f.createIdentifier(pascal(name))
+                f.createIdentifier(pascalCase(name))
               ),
               undefined
             ),

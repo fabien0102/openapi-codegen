@@ -7,11 +7,11 @@ import * as swc from "@swc/core";
 import { fileURLToPath } from "url";
 import slash from "slash";
 
-import { Config, FromOptions, Namespace } from "../types";
+import { Config, FromOptions, Namespace } from "../types/index.js";
 import { getOpenAPISourceFile } from "../core/getOpenAPISourceFile.js";
 import { parseOpenAPISourceFile } from "../core/parseOpenAPISourceFile.js";
-import { getGithubToken } from "../utils/getGithubToken";
-import { resolveGithubPullRequest } from "../utils/resolveGithubPullRequest";
+import { getGithubToken } from "../utils/getGithubToken.js";
+import { resolveGithubPullRequest } from "../utils/resolveGithubPullRequest.js";
 
 const __filename = fileURLToPath(import.meta.url);
 

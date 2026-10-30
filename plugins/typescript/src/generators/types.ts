@@ -1,5 +1,4 @@
 import { OpenAPIObject } from "openapi3-ts/oas30";
-import * as c from "case";
 
 /**
  * Generator context (provided by `@openapi-codegen/cli`)
@@ -24,7 +23,7 @@ export type ConfigBase = {
    *
    * @default camel
    */
-  filenameCase?: keyof Pick<typeof c, "snake" | "camel" | "kebab" | "pascal">;
+  filenameCase?: "snake" | "camel" | "kebab" | "pascal";
   /**
    * Allows customizing the filename.
    * If provided, `filenameCase` will be ignored.

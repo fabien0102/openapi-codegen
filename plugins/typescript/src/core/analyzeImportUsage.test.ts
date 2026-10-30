@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vite-plus/test";
 import ts, { factory as f } from "typescript";
-import { analyzeImportUsage } from "./analyzeImportUsage";
+import { analyzeImportUsage } from "./analyzeImportUsage.js";
 
 // Helper to set parent references for TypeScript AST nodes
 const setParentReferences = <T extends ts.Node>(node: T): T => {

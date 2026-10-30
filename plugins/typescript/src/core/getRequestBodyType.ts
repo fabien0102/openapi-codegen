@@ -5,10 +5,10 @@ import {
   ReferenceObject,
   RequestBodyObject,
 } from "openapi3-ts/oas30";
-import { pascal } from "case";
+import { pascalCase } from "case-anything";
 
-import { findCompatibleMediaType } from "./findCompatibleMediaType";
-import { getType } from "./schemaToTypeAliasDeclaration";
+import { findCompatibleMediaType } from "./findCompatibleMediaType.js";
+import { getType } from "./schemaToTypeAliasDeclaration.js";
 
 /**
  * Extract types from request body
@@ -39,7 +39,7 @@ export const getRequestBodyType = ({
     return f.createTypeReferenceNode(
       f.createQualifiedName(
         f.createIdentifier("RequestBodies"),
-        f.createIdentifier(pascal(name))
+        f.createIdentifier(pascalCase(name))
       ),
       undefined
     );
@@ -64,7 +64,7 @@ export const getRequestBodyType = ({
     return f.createTypeReferenceNode(
       f.createQualifiedName(
         f.createIdentifier("Schemas"),
-        f.createIdentifier(pascal(name))
+        f.createIdentifier(pascalCase(name))
       ),
       undefined
     );

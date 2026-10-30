@@ -1,5 +1,5 @@
 import { assert, describe, expect, it } from "vite-plus/test";
-import { getOpenAPISourceFile } from "./getOpenAPISourceFile";
+import { getOpenAPISourceFile } from "./getOpenAPISourceFile.js";
 
 describe("getOpenAPISourceFile (source = file)", () => {
   it("should retrieve a local yaml file specs", async () => {

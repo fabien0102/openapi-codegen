@@ -1,6 +1,6 @@
 import ts from "typescript";
 
-import type { Config, Import, Plugin } from "../types";
+import type { Config, Import, Plugin } from "../types/index.js";
 
 const { factory } = ts;
 

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vite-plus/test";
-import { isRequestBodyOptional } from "./isRequestBodyOptional";
+import { isRequestBodyOptional } from "./isRequestBodyOptional.js";
 
 describe("isRequestBodyOptional", () => {
   it("should return true if no requestBody", () => {

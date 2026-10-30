@@ -8,7 +8,7 @@ import ts from "typescript";
 import {
   OpenAPIComponentType,
   schemaToTypeAliasDeclaration,
-} from "./schemaToTypeAliasDeclaration";
+} from "./schemaToTypeAliasDeclaration.js";
 
 describe("schemaToTypeAliasDeclaration", () => {
   type SchemaObjectWithConst = SchemaObject & {

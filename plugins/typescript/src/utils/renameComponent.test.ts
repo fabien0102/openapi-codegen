@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vite-plus/test";
 import { OpenAPIObject } from "openapi3-ts/oas30";
-import { petstore } from "../fixtures/petstore";
-import { renameComponent } from "./renameComponent";
+import { petstore } from "../fixtures/petstore.js";
+import { renameComponent } from "./renameComponent.js";
 
 describe("renameComponent", () => {
   it("should rename all $ref", () => {

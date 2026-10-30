@@ -1,8 +1,8 @@
 import { describe, expect, it, vi } from "vite-plus/test";
 import { OpenAPIObject } from "openapi3-ts/oas30";
-import { petstore } from "../fixtures/petstore";
-import { generateSchemaTypes } from "./generateSchemaTypes";
-import { createWriteFileMock } from "../testUtils";
+import { petstore } from "../fixtures/petstore.js";
+import { generateSchemaTypes } from "./generateSchemaTypes.js";
+import { createWriteFileMock } from "../testUtils.js";
 
 describe("generateSchemaTypes", () => {
   describe("filenameCase option", () => {
@@ -236,27 +236,27 @@ describe("generateSchemaTypes", () => {
           Carlin = "carlin",
           Beagle = "beagle",
         }
-        
+
         export enum CatTemperament {
           Calm = "calm",
           Playful = "playful",
           Aggressive = "aggressive",
           Shy = "shy",
         }
-        
+
         export enum DogBreed {
           Saimois = "saimois",
           Bengal = "bengal",
           BritishShorthair = "british shorthair",
         }
-        
+
         export enum DogTemperament {
           Calm = "calm",
           Playful = "playful",
           Aggressive = "aggressive",
           Shy = "shy",
         }
-        
+
         /**
          * A new pet.
          */

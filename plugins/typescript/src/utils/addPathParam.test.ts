@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vite-plus/test";
 import { OpenAPIObject } from "openapi3-ts/oas30";
-import { addPathParam } from "./addPathParam";
+import { addPathParam } from "./addPathParam.js";
 
 describe("addPathParam", () => {
   const openAPIDocument: OpenAPIObject = {

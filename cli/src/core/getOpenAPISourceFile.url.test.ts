@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vite-plus/test";
-import { getOpenAPISourceFile } from "./getOpenAPISourceFile";
+import { getOpenAPISourceFile } from "./getOpenAPISourceFile.js";
 import nock from "nock";
 
 describe("getOpenAPISourceFile (source = url)", () => {

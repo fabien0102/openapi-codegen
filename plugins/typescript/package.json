@@ -11,11 +11,11 @@
   "license": "MIT",
   "author": "Fabien Bernard",
   "repository": {
-    "url": "https://github.com/fabien0102/openapi-codegen",
+    "url": "git+https://github.com/fabien0102/openapi-codegen.git",
     "directory": "plugins/typescript"
   },
   "files": [
-    "lib",
+    "dist",
     "README.md"
   ],
   "main": "dist/index.mjs",
@@ -28,15 +28,16 @@
     "prepublishOnly": "pnpm build"
   },
   "dependencies": {
-    "case": "^1.6.3",
-    "lodash": "^4.18.1",
+    "case-anything": "^3.1.7",
+    "lodash-es": "^4.18.1",
     "openapi3-ts": "^4.6.1",
     "pluralize": "^8.0.0",
     "tsutils": "^3.21.0",
     "typescript": "~6.0.2"
   },
+  "type": "module",
   "devDependencies": {
-    "@types/lodash": "^4.17.25",
+    "@types/lodash-es": "^4.17.12",
     "@types/pluralize": "^0.0.33",
     "oxfmt": "^0.75.0"
   }

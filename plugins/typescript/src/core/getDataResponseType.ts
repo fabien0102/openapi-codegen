@@ -6,11 +6,11 @@ import {
   ResponseObject,
   ResponsesObject,
 } from "openapi3-ts/oas30";
-import { uniqBy } from "lodash";
-import { pascal } from "case";
+import { uniqBy } from "lodash-es";
+import { pascalCase } from "case-anything";
 
-import { findCompatibleMediaType } from "./findCompatibleMediaType";
-import { getType } from "./schemaToTypeAliasDeclaration";
+import { findCompatibleMediaType } from "./findCompatibleMediaType.js";
+import { getType } from "./schemaToTypeAliasDeclaration.js";
 
 /**
  * Extract types from success responses (2xx)
@@ -48,7 +48,7 @@ export const getDataResponseType = ({
             f.createTypeReferenceNode(
               f.createQualifiedName(
                 f.createIdentifier("Responses"),
-                f.createIdentifier(pascal(name))
+                f.createIdentifier(pascalCase(name))
               ),
               undefined
             ),

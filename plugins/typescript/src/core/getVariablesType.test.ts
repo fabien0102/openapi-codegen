@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vite-plus/test";
-import { print } from "../testUtils";
+import { print } from "../testUtils.js";
 import ts, { factory as f } from "typescript";
-import { getVariablesType } from "./getVariablesType";
+import { getVariablesType } from "./getVariablesType.js";
 
 describe("getVariableType", () => {
   it("should return void if no types are provided", () => {

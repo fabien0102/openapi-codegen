@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vite-plus/test";
 import ts from "typescript";
-import { updateConfig } from "./updateConfig";
+import { updateConfig } from "./updateConfig.js";
 
 describe("updateConfig", () => {
   const configProperty = ts.factory.createPropertyAssignment(
@@ -10,7 +10,7 @@ describe("updateConfig", () => {
 
   it("should add import statement if not already existing", () => {
     const sourceText = `import { defineConfig } from "@openapi-codegen/cli";
-    
+
     // This comment should stay
     export default defineConfig({})`;
     const sourceFile = ts.createSourceFile(

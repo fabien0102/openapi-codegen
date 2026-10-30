@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vite-plus/test";
 import ts from "typescript";
-import { generateConfigProperty } from "./generateConfigProperty";
+import { generateConfigProperty } from "./generateConfigProperty.js";
 
 describe("generateConfigProperty", () => {
   it("should generate a type only configuration node", () => {

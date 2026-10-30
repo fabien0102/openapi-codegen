@@ -1,11 +1,11 @@
 import { it, describe, expect } from "vite-plus/test";
-import { omit } from "lodash";
+import { omit } from "lodash-es";
 import ts, { factory } from "typescript";
 import { OperationObject } from "openapi3-ts/oas30";
 
-import { petstore } from "../fixtures/petstore";
-import { getOperationTypes } from "./getOperationTypes";
-import { print } from "../testUtils";
+import { petstore } from "../fixtures/petstore.js";
+import { getOperationTypes } from "./getOperationTypes.js";
+import { print } from "../testUtils.js";
 
 describe("getOperationTypes", () => {
   it("should generate a variable type (with extra props)", () => {

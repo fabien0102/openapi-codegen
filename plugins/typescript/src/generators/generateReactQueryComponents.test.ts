@@ -3,8 +3,8 @@ import { OpenAPIObject } from "openapi3-ts/oas30";
 import {
   Config,
   generateReactQueryComponents,
-} from "./generateReactQueryComponents";
-import { createWriteFileMock } from "../testUtils";
+} from "./generateReactQueryComponents.js";
+import { createWriteFileMock } from "../testUtils.js";
 
 const config: Config = {
   filenamePrefix: "petstore",

@@ -1,9 +1,9 @@
-import { pascal } from "case";
+import { pascalCase } from "case-anything";
 import { SchemaObject } from "openapi3-ts/oas30";
 import ts, { factory as f } from "typescript";
 import { isValidIdentifier } from "tsutils";
-import { convertNumberToWord } from "../utils/getEnumProperties";
-import { Context, getJSDocComment } from "./schemaToTypeAliasDeclaration";
+import { convertNumberToWord } from "../utils/getEnumProperties.js";
+import { Context, getJSDocComment } from "./schemaToTypeAliasDeclaration.js";
 
 /**
  * Add Enum support when transforming an OpenAPI Schema Object to Typescript Nodes.
@@ -21,7 +21,7 @@ export const schemaToEnumDeclaration = (
   const members = getEnumMembers(schema);
   const declarationNode = f.createEnumDeclaration(
     [f.createModifier(ts.SyntaxKind.ExportKeyword)],
-    pascal(name),
+    pascalCase(name),
     members
   );
 
@@ -63,7 +63,7 @@ function getEnumMembers(schema: SchemaObject): ts.EnumMember[] {
         throw new Error(`Unsupported enum value type: ${typeof enumValue}`);
       }
 
-      enumName = pascal(enumName);
+      enumName = pascalCase(enumName);
       return f.createEnumMember(
         isValidIdentifier(enumName)
           ? f.createIdentifier(enumName)

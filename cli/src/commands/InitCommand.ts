@@ -4,9 +4,14 @@ import { posix as path } from "path";
 import fsExtra from "fs-extra";
 import ts from "typescript";
 import { highlight } from "cli-highlight";
-import format from "case";
+import { camelCase } from "case-anything";
 
-import type { FileOptions, FromOptions, UrlOptions, Plugin } from "../types";
+import type {
+  FileOptions,
+  FromOptions,
+  UrlOptions,
+  Plugin,
+} from "../types/index.js";
 
 import {
   generateConfigProperty,
@@ -15,7 +20,7 @@ import {
 import { getText } from "../utils/getText.js";
 import emptyConfig from "../templates/emptyConfig.js";
 import { updateConfig } from "../core/updateConfig.js";
-import { handlePromptCancel } from "../utils/handlePromptCancel";
+import { handlePromptCancel } from "../utils/handlePromptCancel.js";
 
 export class InitCommand extends Command {
   static paths = [["init"]];
@@ -173,7 +178,7 @@ export class InitCommand extends Command {
     const from: FromOptions =
       source === "file" ? await this.askForFile() : await this.askForUrl();
 
-    const namespace = format.camel(
+    const namespace = camelCase(
       await prompt
         .text({
           message: "What namespace do you want for your API?",
