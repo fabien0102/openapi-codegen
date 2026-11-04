@@ -224,21 +224,29 @@ export const getType = (
       ]);
     }
 
+    const SKIP = Symbol("SKIP");
+
     const unionTypes = f.createUnionTypeNode([
-      ...schema.enum.map((value) => {
-        if (typeof value === "string") {
-          return f.createLiteralTypeNode(f.createStringLiteral(value));
-        }
-        if (typeof value === "number") {
-          return f.createLiteralTypeNode(f.createNumericLiteral(value));
-        }
-        if (typeof value === "boolean") {
-          return f.createLiteralTypeNode(
-            value ? f.createTrue() : f.createFalse()
-          );
-        }
-        return f.createKeywordTypeNode(ts.SyntaxKind.AnyKeyword);
-      }),
+      ...schema.enum
+        .map((value) => {
+          if (typeof value === "string") {
+            return f.createLiteralTypeNode(f.createStringLiteral(value));
+          }
+          if (typeof value === "number") {
+            return f.createLiteralTypeNode(f.createNumericLiteral(value));
+          }
+          if (typeof value === "boolean") {
+            return f.createLiteralTypeNode(
+              value ? f.createTrue() : f.createFalse()
+            );
+          }
+          if (value === null) {
+            schema.nullable = true;
+            return SKIP;
+          }
+          return f.createKeywordTypeNode(ts.SyntaxKind.AnyKeyword);
+        })
+        .filter((i) => i !== SKIP),
       ...(schema.nullable ? [f.createLiteralTypeNode(f.createNull())] : []),
     ]);
 

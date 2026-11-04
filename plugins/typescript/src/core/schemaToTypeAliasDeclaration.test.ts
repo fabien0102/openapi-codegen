@@ -102,6 +102,16 @@ describe("schemaToTypeAliasDeclaration", () => {
     expect(printSchema(schema)).toBe(`export type Test = "foo" | null;`);
   });
 
+  it("should handle null in enums", () => {
+    const schema: SchemaObjectWithConst = {
+      type: "string",
+      enum: ["foo", null, "bar"],
+    };
+    expect(printSchema(schema)).toBe(
+      `export type Test = "foo" | "bar" | null;`
+    );
+  });
+
   it("should generate an array of numbers", () => {
     const schema: SchemaObject = {
       type: "array",
