@@ -7,7 +7,7 @@ describe("renameComponent", () => {
   it("should rename all $ref", () => {
     const updatedSpecs = renameComponent({
       openAPIDocument: petstore,
-      from: "#/components/schemas/Pet",
+      from: "#/components/schemas/pet",
       to: "#/components/schemas/APet",
     });
     const updatedSpecsAsString = JSON.stringify(updatedSpecs);

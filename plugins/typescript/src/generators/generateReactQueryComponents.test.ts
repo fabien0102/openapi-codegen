@@ -63,7 +63,7 @@ describe("generateReactQueryComponents", () => {
                     schema: {
                       type: "array",
                       items: {
-                        $ref: "#/components/schemas/Pet",
+                        $ref: "#/components/schemas/pet",
                       },
                     },
                   },

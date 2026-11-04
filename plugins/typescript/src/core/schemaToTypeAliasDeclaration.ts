@@ -125,10 +125,10 @@ export const getType = (
 
     let refNode: ts.TypeNode = f.createTypeReferenceNode(
       namespace === context.currentComponent
-        ? f.createIdentifier(name)
+        ? f.createIdentifier(pascalCase(name))
         : f.createQualifiedName(
             f.createIdentifier(pascalCase(namespace)),
-            f.createIdentifier(name)
+            f.createIdentifier(pascalCase(name))
           )
     );
 
