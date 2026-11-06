@@ -156,5 +156,14 @@ export default defineConfig({
       // Slow to process due to a lot of levels of indentations
       "plugins/typescript/src/generators/generateReactQueryComponents.ts",
     ],
+    overrides: [
+      {
+        files: ["**/*.test.ts"],
+        options: {
+          // Avoid inline snapshots to be formatted
+          embeddedLanguageFormatting: "off",
+        },
+      },
+    ],
   },
 });

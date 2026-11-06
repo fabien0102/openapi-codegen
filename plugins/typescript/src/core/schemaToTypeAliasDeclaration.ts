@@ -1,5 +1,5 @@
 import { pascalCase } from "case-anything";
-import { keys, pickBy, intersection, merge, omit } from "lodash-es";
+import { keys, pickBy, intersection, merge, omit, uniq } from "lodash-es";
 import {
   ComponentsObject,
   DiscriminatorObject,
@@ -164,14 +164,21 @@ export const getType = (
 
   if (schema.oneOf) {
     return f.createUnionTypeNode([
-      ...schema.oneOf.map((i) =>
-        withDiscriminator(
-          getType({ ...omit(schema, ["oneOf", "nullable"]), ...i }, context),
+      ...schema.oneOf.map((i) => {
+        // Merge nullable to avoid type duplication
+        if (isSchemaObject(i) && i.nullable) {
+          schema.nullable = true;
+        }
+        return withDiscriminator(
+          getType(
+            { ...omit(schema, ["oneOf", "nullable"]), ...omit(i, "nullable") },
+            context
+          ),
           i,
           schema.discriminator,
           context
-        )
-      ),
+        );
+      }),
       ...(schema.nullable ? [f.createLiteralTypeNode(f.createNull())] : []),
     ]);
   }
@@ -590,7 +597,8 @@ const mergeSchemas = (
   if (Boolean(a.type) && Boolean(b.type) && a.type !== b.type) {
     return {
       mergedSchema: {
-        ...merge(a, b),
+        ...a,
+        ...b,
         ["x-openapi-codegen"]: {
           type: "never",
         },
@@ -601,41 +609,67 @@ const mergeSchemas = (
 
   if (a.properties && b.properties) {
     let isColliding = false;
-    const properties = Object.entries(a.properties).reduce(
-      (mergedProperties, [key, propertyA]) => {
-        const propertyB = b.properties?.[key];
-        if (propertyB) {
-          isColliding = true;
-        }
-        if (
-          propertyB &&
-          isSchemaObject(propertyB) &&
-          isSchemaObject(propertyA) &&
-          Boolean(propertyB.type) &&
-          Boolean(propertyA.type) &&
-          propertyA.type !== propertyB.type
-        ) {
-          return {
-            ...mergedProperties,
-            [key]: {
-              ...propertyA,
-              ...propertyB,
-              ["x-openapi-codegen"]: {
-                type: "never",
-              },
-            },
-          };
-        }
 
-        return { ...mergedProperties, [key]: propertyA };
-      },
-      {} as typeof a.properties
+    const properties = Object.fromEntries(
+      uniq([...Object.keys(a.properties), ...Object.keys(b.properties)]).map(
+        (propertyKey) => {
+          const propertyA = a.properties ? a.properties[propertyKey] : null;
+          const propertyB = b.properties ? b.properties[propertyKey] : null;
+          if (propertyA && propertyB) {
+            isColliding = true;
+          }
+
+          // not compatible types
+          if (
+            propertyA &&
+            propertyB &&
+            isSchemaObject(propertyA) &&
+            isSchemaObject(propertyB) &&
+            propertyA.type &&
+            propertyB.type &&
+            propertyA.type !== propertyB.type
+          ) {
+            return [
+              propertyKey,
+              {
+                ...propertyA,
+                ...propertyB,
+                ["x-openapi-codegen"]: {
+                  type: "never",
+                },
+              },
+            ];
+          }
+
+          // enum merging
+          if (
+            propertyB &&
+            propertyA &&
+            isSchemaObject(propertyB) &&
+            isSchemaObject(propertyA) &&
+            propertyA.enum &&
+            propertyB.enum
+          ) {
+            return [
+              propertyKey,
+              {
+                ...propertyA,
+                ...propertyB,
+                enum: uniq([...propertyA.enum, ...propertyB.enum]),
+              },
+            ];
+          }
+
+          return [propertyKey, { ...propertyA, ...propertyB }];
+        }
+      )
     );
 
     return {
       mergedSchema: {
-        ...merge({}, a, b),
-        properties: merge({}, properties, b.properties),
+        ...a,
+        ...b,
+        properties,
       },
       isColliding,
     };

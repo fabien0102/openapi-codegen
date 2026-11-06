@@ -112,6 +112,17 @@ describe("schemaToTypeAliasDeclaration", () => {
     );
   });
 
+  it("should handle null in enums (nullable)", () => {
+    const schema: SchemaObjectWithConst = {
+      type: "string",
+      nullable: true,
+      enum: ["foo", null, "bar"],
+    };
+    expect(printSchema(schema)).toBe(
+      `export type Test = "foo" | "bar" | null;`
+    );
+  });
+
   it("should generate an array of numbers", () => {
     const schema: SchemaObject = {
       type: "array",
@@ -742,6 +753,31 @@ describe("schemaToTypeAliasDeclaration", () => {
     );
   });
 
+  it("should optimize oneOf with null values", () => {
+    const schema: SchemaObject = {
+      oneOf: [
+        {
+          type: "string",
+          nullable: true,
+        },
+        {
+          type: "integer",
+          nullable: true,
+        },
+        {
+          type: "array",
+          nullable: true,
+          items: {
+            type: "string",
+          },
+        },
+      ],
+    };
+    expect(printSchema(schema)).toMatchInlineSnapshot(
+      `"export type Test = string | number | string[] | null;"`
+    );
+  });
+
   it("should generate a oneOf with const branches", () => {
     const schema: SchemaObjectWithConst = {
       oneOf: [
@@ -1003,6 +1039,46 @@ describe("schemaToTypeAliasDeclaration", () => {
                  [key: string]: string;
              };"
           `);
+    });
+
+    it("should merge enum values", () => {
+      const schema: SchemaObject = {
+        allOf: [
+          {
+            type: "object",
+            properties: {
+              conclusion: {
+                type: "string",
+                nullable: true,
+                enum: [
+                  "success",
+                  "failure",
+                  null,
+                  "skipped",
+                  "cancelled",
+                  "action_required",
+                  "neutral",
+                  "timed_out",
+                ],
+              },
+            },
+          },
+          {
+            type: "object",
+            properties: {
+              conclusion: {
+                type: "string",
+                enum: ["cancelled", "action_required", "neutral", "timed_out"],
+              },
+            },
+          },
+        ],
+      };
+      expect(printSchema(schema)).toMatchInlineSnapshot(`
+        "export type Test = {
+            conclusion?: "success" | "failure" | "skipped" | "cancelled" | "action_required" | "neutral" | "timed_out" | null;
+        };"
+      `);
     });
 
     it("should combine properties & additionalProperties & allOf", () => {
