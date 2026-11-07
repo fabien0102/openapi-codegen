@@ -12,6 +12,9 @@
     "url": "https://github.com/fabien0102/openapi-codegen",
     "directory": "cli"
   },
+  "bugs": {
+    "url": "https://github.com/fabien0102/openapi-codegen/issues"
+  },
   "publishConfig": {
     "access": "public"
   },
