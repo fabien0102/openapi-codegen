@@ -1,4 +1,4 @@
-import { camel, pascal } from "case";
+import { camelCase, pascalCase } from "case-anything";
 
 /**
  * Get fetcher template
@@ -18,13 +18,13 @@ export const getFetcher = ({
 }) =>
   `${
     contextPath
-      ? `import ${useTypeImports ? `type { ${pascal(prefix)}Context }` : `{ ${pascal(prefix)}Context }`} from "./${contextPath}";`
-      : `export type ${pascal(prefix)}FetcherExtraProps = {
+      ? `import ${useTypeImports ? `type { ${pascalCase(prefix)}Context }` : `{ ${pascalCase(prefix)}Context }`} from "./${contextPath}";`
+      : `export type ${pascalCase(prefix)}FetcherExtraProps = {
       /**
        * You can add some extra props to your generated fetchers.
        *
        * Note: You need to re-gen after adding the first property to
-       * have the \`${pascal(prefix)}FetcherExtraProps\` injected in \`${pascal(
+       * have the \`${pascalCase(prefix)}FetcherExtraProps\` injected in \`${pascalCase(
          prefix
        )}Components.ts\`
        **/
@@ -37,7 +37,7 @@ export type ErrorWrapper<TError> =
   | TError
   | { status: "unknown"; payload: string };
 
-export type ${pascal(
+export type ${pascalCase(
     prefix
   )}FetcherOptions<TBody, THeaders, TQueryParams, TPathParams> = {
   url: string;
@@ -49,11 +49,11 @@ export type ${pascal(
   signal?: AbortSignal;
 } & ${
     contextPath
-      ? `${pascal(prefix)}Context["fetcherOptions"];`
-      : `${pascal(prefix)}FetcherExtraProps`
+      ? `${pascalCase(prefix)}Context["fetcherOptions"];`
+      : `${pascalCase(prefix)}FetcherExtraProps`
   }
 
-export async function ${camel(prefix)}Fetch<
+export async function ${camelCase(prefix)}Fetch<
   TData,
   TError,
   TBody extends {} | FormData | undefined | null,
@@ -68,7 +68,7 @@ export async function ${camel(prefix)}Fetch<
   pathParams,
   queryParams,
   signal,
-}: ${pascal(prefix)}FetcherOptions<
+}: ${pascalCase(prefix)}FetcherOptions<
   TBody,
   THeaders,
   TQueryParams,

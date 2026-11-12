@@ -1,5 +1,5 @@
-import { pascal } from "case";
-import { keys, pickBy, intersection, merge, omit } from "lodash";
+import { pascalCase } from "case-anything";
+import { keys, pickBy, intersection, merge, omit, uniq } from "lodash-es";
 import {
   ComponentsObject,
   DiscriminatorObject,
@@ -9,20 +9,22 @@ import {
   isReferenceObject,
   isSchemaObject,
 } from "openapi3-ts/oas30";
-import { singular } from "pluralize";
+import pluralize from "pluralize";
 import { isValidIdentifier } from "tsutils";
 import ts, {
   factory as f,
   isIdentifierPart,
   isIdentifierStart,
 } from "typescript";
-import { convertNumberToWord } from "../utils/getEnumProperties";
-import { getReferenceSchema } from "./getReference";
+import { convertNumberToWord } from "../utils/getEnumProperties.js";
+import { getReferenceSchema } from "./getReference.js";
 
 type RemoveIndex<T> = {
-  [
-    P in keyof T as string extends P ? never : number extends P ? never : P
-  ]: T[P];
+  [P in keyof T as string extends P
+    ? never
+    : number extends P
+      ? never
+      : P]: T[P];
 };
 
 export type OpenAPIComponentType = Extract<
@@ -65,11 +67,11 @@ export const schemaToTypeAliasDeclaration = (
     ? getJSDocComment(schema, context)
     : undefined;
 
-  let identifier = pascal(name);
+  let identifier = pascalCase(name);
 
   if (identifier.length > 0 && !isNaN(Number(identifier))) {
     // If the identifier can be cast to a number, convert it to a word.
-    identifier = pascal(convertNumberToWord(Number(identifier)));
+    identifier = pascalCase(convertNumberToWord(Number(identifier)));
   } else {
     // If the identifier does not start with a valid character but valid identifier part, prefix it with an underscore.
     if (
@@ -123,10 +125,10 @@ export const getType = (
 
     let refNode: ts.TypeNode = f.createTypeReferenceNode(
       namespace === context.currentComponent
-        ? f.createIdentifier(name)
+        ? f.createIdentifier(pascalCase(name))
         : f.createQualifiedName(
-            f.createIdentifier(pascal(namespace)),
-            f.createIdentifier(name)
+            f.createIdentifier(pascalCase(namespace)),
+            f.createIdentifier(pascalCase(name))
           )
     );
 
@@ -162,14 +164,21 @@ export const getType = (
 
   if (schema.oneOf) {
     return f.createUnionTypeNode([
-      ...schema.oneOf.map((i) =>
-        withDiscriminator(
-          getType({ ...omit(schema, ["oneOf", "nullable"]), ...i }, context),
+      ...schema.oneOf.map((i) => {
+        // Merge nullable to avoid type duplication
+        if (isSchemaObject(i) && i.nullable) {
+          schema.nullable = true;
+        }
+        return withDiscriminator(
+          getType(
+            { ...omit(schema, ["oneOf", "nullable"]), ...omit(i, "nullable") },
+            context
+          ),
           i,
           schema.discriminator,
           context
-        )
-      ),
+        );
+      }),
       ...(schema.nullable ? [f.createLiteralTypeNode(f.createNull())] : []),
     ]);
   }
@@ -222,21 +231,29 @@ export const getType = (
       ]);
     }
 
+    const SKIP = Symbol("SKIP");
+
     const unionTypes = f.createUnionTypeNode([
-      ...schema.enum.map((value) => {
-        if (typeof value === "string") {
-          return f.createLiteralTypeNode(f.createStringLiteral(value));
-        }
-        if (typeof value === "number") {
-          return f.createLiteralTypeNode(f.createNumericLiteral(value));
-        }
-        if (typeof value === "boolean") {
-          return f.createLiteralTypeNode(
-            value ? f.createTrue() : f.createFalse()
-          );
-        }
-        return f.createKeywordTypeNode(ts.SyntaxKind.AnyKeyword);
-      }),
+      ...schema.enum
+        .map((value) => {
+          if (typeof value === "string") {
+            return f.createLiteralTypeNode(f.createStringLiteral(value));
+          }
+          if (typeof value === "number") {
+            return f.createLiteralTypeNode(f.createNumericLiteral(value));
+          }
+          if (typeof value === "boolean") {
+            return f.createLiteralTypeNode(
+              value ? f.createTrue() : f.createFalse()
+            );
+          }
+          if (value === null) {
+            schema.nullable = true;
+            return SKIP;
+          }
+          return f.createKeywordTypeNode(ts.SyntaxKind.AnyKeyword);
+        })
+        .filter((i) => i !== SKIP),
       ...(schema.nullable ? [f.createLiteralTypeNode(f.createNull())] : []),
     ]);
 
@@ -315,7 +332,7 @@ export const getType = (
           getType(
             property,
             context,
-            `${name}${pascal(key)}`.replace(/[^a-zA-Z0-9 ]/g, ""),
+            `${name}${pascalCase(key)}`.replace(/[^a-zA-Z0-9 ]/g, ""),
             isEnum
           )
         );
@@ -580,7 +597,8 @@ const mergeSchemas = (
   if (Boolean(a.type) && Boolean(b.type) && a.type !== b.type) {
     return {
       mergedSchema: {
-        ...merge(a, b),
+        ...a,
+        ...b,
         ["x-openapi-codegen"]: {
           type: "never",
         },
@@ -591,41 +609,67 @@ const mergeSchemas = (
 
   if (a.properties && b.properties) {
     let isColliding = false;
-    const properties = Object.entries(a.properties).reduce(
-      (mergedProperties, [key, propertyA]) => {
-        const propertyB = b.properties?.[key];
-        if (propertyB) {
-          isColliding = true;
-        }
-        if (
-          propertyB &&
-          isSchemaObject(propertyB) &&
-          isSchemaObject(propertyA) &&
-          Boolean(propertyB.type) &&
-          Boolean(propertyA.type) &&
-          propertyA.type !== propertyB.type
-        ) {
-          return {
-            ...mergedProperties,
-            [key]: {
-              ...propertyA,
-              ...propertyB,
-              ["x-openapi-codegen"]: {
-                type: "never",
-              },
-            },
-          };
-        }
 
-        return { ...mergedProperties, [key]: propertyA };
-      },
-      {} as typeof a.properties
+    const properties = Object.fromEntries(
+      uniq([...Object.keys(a.properties), ...Object.keys(b.properties)]).map(
+        (propertyKey) => {
+          const propertyA = a.properties ? a.properties[propertyKey] : null;
+          const propertyB = b.properties ? b.properties[propertyKey] : null;
+          if (propertyA && propertyB) {
+            isColliding = true;
+          }
+
+          // not compatible types
+          if (
+            propertyA &&
+            propertyB &&
+            isSchemaObject(propertyA) &&
+            isSchemaObject(propertyB) &&
+            propertyA.type &&
+            propertyB.type &&
+            propertyA.type !== propertyB.type
+          ) {
+            return [
+              propertyKey,
+              {
+                ...propertyA,
+                ...propertyB,
+                ["x-openapi-codegen"]: {
+                  type: "never",
+                },
+              },
+            ];
+          }
+
+          // enum merging
+          if (
+            propertyB &&
+            propertyA &&
+            isSchemaObject(propertyB) &&
+            isSchemaObject(propertyA) &&
+            propertyA.enum &&
+            propertyB.enum
+          ) {
+            return [
+              propertyKey,
+              {
+                ...propertyA,
+                ...propertyB,
+                enum: uniq([...propertyA.enum, ...propertyB.enum]),
+              },
+            ];
+          }
+
+          return [propertyKey, { ...propertyA, ...propertyB }];
+        }
+      )
     );
 
     return {
       mergedSchema: {
-        ...merge({}, a, b),
-        properties: merge({}, properties, b.properties),
+        ...a,
+        ...b,
+        properties,
       },
       isColliding,
     };
@@ -733,7 +777,7 @@ export const getJSDocComment = (
         value.forEach((v) =>
           propertyTags.push(
             f.createJSDocPropertyTag(
-              f.createIdentifier(singular(key)),
+              f.createIdentifier(pluralize.singular(key)),
               getJsDocIdentifier(v),
               false
             )

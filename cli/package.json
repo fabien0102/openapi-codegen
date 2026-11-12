@@ -2,61 +2,54 @@
   "name": "@openapi-codegen/cli",
   "version": "3.1.0",
   "description": "OpenAPI Codegen cli",
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
-  "type": "module",
-  "bin": {
-    "openapi-codegen": "lib/cli.js"
-  },
-  "repository": {
-    "url": "https://github.com/fabien0102/openapi-codegen",
-    "directory": "cli"
-  },
-  "publishConfig": {
-    "access": "public"
-  },
-  "author": "Fabien Bernard",
   "keywords": [
-    "openapi",
     "codegen",
+    "openapi",
     "plugin",
     "typescript"
   ],
   "license": "MIT",
-  "scripts": {
-    "watch": "tsup src/index.ts src/cli.ts --outDir lib --format esm --watch",
-    "prebuild": "pnpm --workspace-root tsc --emitDeclarationOnly --declaration -p cli/tsconfig.package.json",
-    "build": "tsup src/index.ts src/cli.ts --outDir lib --format esm",
-    "prepublishOnly": "pnpm build"
+  "author": "Fabien Bernard",
+  "repository": {
+    "url": "git+https://github.com/fabien0102/openapi-codegen.git",
+    "directory": "cli"
+  },
+  "bin": {
+    "openapi-codegen": "dist/cli.mjs"
   },
   "files": [
-    "lib",
+    "dist",
     "README.md"
   ],
+  "type": "module",
+  "main": "dist/index.mjs",
+  "types": "dist/index.d.mts",
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "vp pack",
+    "prepublishOnly": "pnpm build"
+  },
   "dependencies": {
     "@clack/prompts": "^1.8.1",
     "@octokit/request": "^10.0.16",
     "@swc/core": "^1.16.13",
-    "case": "^1.6.3",
+    "case-anything": "^3.1.7",
     "cli-highlight": "^2.1.11",
     "clipanion": "^4.0.0-rc.4",
     "fs-extra": "^11.4.1",
     "got": "^16.0.0",
     "js-yaml": "^5.4.3",
     "openapi3-ts": "^4.6.1",
-    "prettier": "^3.9.9",
+    "oxfmt": "^0.75.0",
     "slash": "^5.1.0",
     "swagger2openapi": "^7.0.8",
-    "tslib": "^2.8.1",
     "typanion": "^3.14.0",
     "typescript": "~6.0.2"
   },
   "devDependencies": {
-    "@swc-node/register": "^1.12.1",
     "@types/fs-extra": "^11.0.4",
-    "@types/js-yaml": "^4.0.9",
-    "nock": "^15.0.1",
-    "react": "^19.3.0",
-    "tsup": "^8.5.1"
+    "nock": "^15.0.1"
   }
 }

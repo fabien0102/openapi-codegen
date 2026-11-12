@@ -1,7 +1,7 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "vite-plus/test";
 import { ResponsesObject } from "openapi3-ts/oas30";
-import { print } from "../testUtils";
-import { getDataResponseType } from "./getDataResponseType";
+import { print } from "../testUtils.js";
+import { getDataResponseType } from "./getDataResponseType.js";
 
 describe("getDataResponseType", () => {
   it("should extract the response type with 200 status", () => {

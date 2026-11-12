@@ -4,10 +4,14 @@ import { posix as path } from "path";
 import fsExtra from "fs-extra";
 import ts from "typescript";
 import { highlight } from "cli-highlight";
-import prettier from "prettier";
-import format from "case";
+import { camelCase } from "case-anything";
 
-import type { FileOptions, FromOptions, UrlOptions, Plugin } from "../types";
+import type {
+  FileOptions,
+  FromOptions,
+  UrlOptions,
+  Plugin,
+} from "../types/index.js";
 
 import {
   generateConfigProperty,
@@ -16,7 +20,7 @@ import {
 import { getText } from "../utils/getText.js";
 import emptyConfig from "../templates/emptyConfig.js";
 import { updateConfig } from "../core/updateConfig.js";
-import { handlePromptCancel } from "../utils/handlePromptCancel";
+import { handlePromptCancel } from "../utils/handlePromptCancel.js";
 
 export class InitCommand extends Command {
   static paths = [["init"]];
@@ -174,7 +178,7 @@ export class InitCommand extends Command {
     const from: FromOptions =
       source === "file" ? await this.askForFile() : await this.askForUrl();
 
-    const namespace = format.camel(
+    const namespace = camelCase(
       await prompt
         .text({
           message: "What namespace do you want for your API?",
@@ -222,16 +226,16 @@ export class InitCommand extends Command {
       removeComments: false,
     });
 
-    const prettierConfig = await prettier.resolveConfig(process.cwd());
+    const oxfmt = await import("oxfmt");
 
-    const updatedConfig = await prettier.format(
-      printer.printFile(updatedConfigSourceFile),
-      { parser: "babel-ts", ...prettierConfig }
+    const updatedConfig = await oxfmt.format(
+      "openapi-codegen.config.ts",
+      printer.printFile(updatedConfigSourceFile)
     );
 
     if (this.dryRun) {
       this.context.stdout.write(
-        highlight(updatedConfig, {
+        highlight(updatedConfig.code, {
           language: "typescript",
         })
       );
@@ -261,7 +265,7 @@ export class InitCommand extends Command {
       }
       nextSteps.push(`npx openapi-codegen gen ${namespace}`);
 
-      await fsExtra.writeFile(userConfigPath, updatedConfig);
+      await fsExtra.writeFile(userConfigPath, updatedConfig.code);
       if (config.isExistingConfig) {
         this.context.stdout.write(
           `The config "${namespace}" has been added to your current config successfully 🥳\n`

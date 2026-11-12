@@ -1,7 +1,7 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "vite-plus/test";
 import ts, { factory as f } from "typescript";
-import { print } from "../testUtils";
-import { getUsedImports } from "./getUsedImports";
+import { print } from "../testUtils.js";
+import { getUsedImports } from "./getUsedImports.js";
 
 describe("getUsedImports", () => {
   it("should generate requestBodies import", () => {

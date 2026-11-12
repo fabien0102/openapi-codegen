@@ -1,5 +1,5 @@
-import { describe, expect, it } from "vitest";
-import { isVerb } from "./isVerb";
+import { describe, expect, it } from "vite-plus/test";
+import { isVerb } from "./isVerb.js";
 
 describe("isVerb", () => {
   [

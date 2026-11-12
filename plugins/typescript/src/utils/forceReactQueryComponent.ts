@@ -1,8 +1,8 @@
-import { cloneDeep, set } from "lodash";
+import { cloneDeep, set } from "lodash-es";
 import { OpenAPIObject, PathItemObject } from "openapi3-ts/oas30";
 
-import { isOperationObject } from "../core/isOperationObject";
-import { isVerb } from "../core/isVerb";
+import { isOperationObject } from "../core/isOperationObject.js";
+import { isVerb } from "../core/isVerb.js";
 
 export const forceReactQueryComponent = <OperationId extends string>({
   openAPIDocument,

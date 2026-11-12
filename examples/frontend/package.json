@@ -3,9 +3,9 @@
   "private": true,
   "version": "0.0.0",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview",
+    "dev": "vp dev",
+    "build": "tsc && vp build",
+    "preview": "vp preview",
     "gen:github": "openapi-codegen gen github"
   },
   "dependencies": {
@@ -20,6 +20,7 @@
     "@types/react-dom": "19.3.0",
     "@vitejs/plugin-react": "6.1.2",
     "typescript": "~6.0.2",
-    "vite": "8.3.3"
+    "vite": "catalog:",
+    "vite-plus": "catalog:"
   }
 }

@@ -1,6 +1,6 @@
-import { describe, expect, it } from "vitest";
-import { petstore } from "../fixtures/petstore";
-import { forceReactQueryComponent } from "./forceReactQueryComponent";
+import { describe, expect, it } from "vite-plus/test";
+import { petstore } from "../fixtures/petstore.js";
+import { forceReactQueryComponent } from "./forceReactQueryComponent.js";
 
 describe("forceReactQueryComponent", () => {
   it("should add the extension to the targeted operationId", () => {

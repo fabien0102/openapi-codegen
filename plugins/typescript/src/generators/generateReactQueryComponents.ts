@@ -1,27 +1,27 @@
 import ts, { factory as f } from "typescript";
-import * as c from "case";
-import { get, camelCase } from "lodash";
+import * as c from "case-anything";
+import { get } from "lodash-es";
 
-import { ConfigBase, Context } from "./types";
+import { ConfigBase, Context } from "./types.js";
 import { OperationObject, PathItemObject } from "openapi3-ts/oas30";
 
-import { getUsedImports } from "../core/getUsedImports";
-import { createWatermark } from "../core/createWatermark";
-import { createOperationFetcherFnNodes } from "../core/createOperationFetcherFnNodes";
-import { isVerb } from "../core/isVerb";
-import { isOperationObject } from "../core/isOperationObject";
-import { getOperationTypes } from "../core/getOperationTypes";
+import { getUsedImports } from "../core/getUsedImports.js";
+import { createWatermark } from "../core/createWatermark.js";
+import { createOperationFetcherFnNodes } from "../core/createOperationFetcherFnNodes.js";
+import { isVerb } from "../core/isVerb.js";
+import { isOperationObject } from "../core/isOperationObject.js";
+import { getOperationTypes } from "../core/getOperationTypes.js";
 import {
   createNamedImport,
   createNamedImportWithTypes,
-} from "../core/createNamedImport";
+} from "../core/createNamedImport.js";
 
-import { getFetcher } from "../templates/fetcher";
-import { getContext } from "../templates/context";
-import { getUtils } from "../templates/utils";
-import { createNamespaceImport } from "../core/createNamespaceImport";
-import { camelizedPathParams } from "../core/camelizedPathParams";
-import { createOperationQueryFnNodes } from "../core/createOperationQueryFnNodes";
+import { getFetcher } from "../templates/fetcher.js";
+import { getContext } from "../templates/context.js";
+import { getUtils } from "../templates/utils.js";
+import { createNamespaceImport } from "../core/createNamespaceImport.js";
+import { camelizedPathParams } from "../core/camelizedPathParams.js";
+import { createOperationQueryFnNodes } from "../core/createOperationQueryFnNodes.js";
 
 export type Config = ConfigBase & {
   /**
@@ -74,21 +74,21 @@ export const generateReactQueryComponents = async (
       .join("\n");
 
   const filenamePrefix =
-    c.snake(finalConfig.filenamePrefix ?? context.openAPIDocument.info.title) +
+    c.snakeCase(finalConfig.filenamePrefix ?? context.openAPIDocument.info.title) +
     "-";
 
   const formatFilename =
     typeof finalConfig.formatFilename === "function"
       ? finalConfig.formatFilename
       : finalConfig.filenameCase
-        ? c[finalConfig.filenameCase]
-        : c.camel;
+        ? c[`${finalConfig.filenameCase}Case`]
+        : c.camelCase;
 
   const filename = formatFilename(filenamePrefix + "-components");
 
-  const fetcherFn = c.camel(`${filenamePrefix}-fetch`);
-  const contextTypeName = `${c.pascal(filenamePrefix)}Context`;
-  const contextHookName = `use${c.pascal(filenamePrefix)}Context`;
+  const fetcherFn = c.camelCase(`${filenamePrefix}-fetch`);
+  const contextTypeName = `${c.pascalCase(filenamePrefix)}Context`;
+  const contextHookName = `use${c.pascalCase(filenamePrefix)}Context`;
   const nodes: ts.Node[] = [];
   const keyManagerItems: ts.TypeLiteralNode[] = [];
 
@@ -145,7 +145,7 @@ export const generateReactQueryComponents = async (
     ([route, verbs]: [string, PathItemObject]) => {
       Object.entries(verbs).forEach(([verb, operation]) => {
         if (!isVerb(verb) || !isOperationObject(operation)) return;
-        const operationId = c.camel(operation.operationId);
+        const operationId = c.camelCase(operation.operationId);
         if (operationIds.includes(operationId)) {
           throw new Error(
             `The operationId "${operation.operationId}" is duplicated in your schema definition!`
@@ -180,8 +180,8 @@ export const generateReactQueryComponents = async (
 
         nodes.push(...declarationNodes);
 
-        const operationFetcherFnName = `fetch${c.pascal(operationId)}`;
-        const operationQueryFnName = camelCase(`${c.camel(operationId)}Query`);
+        const operationFetcherFnName = `fetch${c.pascalCase(operationId)}`;
+        const operationQueryFnName = c.camelCase(`${c.camelCase(operationId)}Query`);
 
         const component: "useQuery" | "useMutate" =
           operation["x-openapi-codegen-component"] ||
@@ -238,7 +238,7 @@ export const generateReactQueryComponents = async (
           contextHookName,
           operationId,
           url: route,
-          name: `use${c.pascal(operationId)}`,
+          name: `use${c.pascalCase(operationId)}`,
         };
 
         nodes.push(
@@ -269,12 +269,12 @@ export const generateReactQueryComponents = async (
                 }),
                 ...createQueryHook({
                   ...useQueryHookOptions,
-                  name: `useSuspense${c.pascal(operationId)}`,
+                  name: `useSuspense${c.pascalCase(operationId)}`,
                   useQueryIdentifier: "useSuspenseQuery",
                 }),
                 ...createQueryHook({
                   ...useQueryHookOptions,
-                  name: `use${c.pascal(operationId)}`,
+                  name: `use${c.pascalCase(operationId)}`,
                   useQueryIdentifier: "useQuery",
                 }),
               ]
@@ -285,7 +285,7 @@ export const generateReactQueryComponents = async (
                 errorType,
                 variablesType,
                 contextHookName,
-                name: `use${c.pascal(operationId)}`,
+                name: `use${c.pascalCase(operationId)}`,
               }))
         );
       });

@@ -1,5 +1,5 @@
 import { request } from "@octokit/request";
-import { GithubOptions } from "../types";
+import { GithubOptions } from "../types/index.js";
 
 export type PullRequest = {
   ref: string;

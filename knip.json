@@ -1,0 +1,15 @@
+{
+  "$schema": "https://unpkg.com/knip@6/schema.json",
+  "tags": ["-lintignore"],
+  "workspaces": {
+    "cli": {
+      "entry": "src/{index,cli}.ts",
+      "project": ["src/**/*.{js,ts,ts}"],
+      "ignoreFiles": ["src/fixtures/*"]
+    },
+    "plugins/*": {
+      "entry": ["src/index.ts"],
+      "project": ["src/**/*.{js,ts,ts}"]
+    }
+  }
+}

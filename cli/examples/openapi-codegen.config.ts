@@ -1,4 +1,4 @@
-import { defineConfig } from "../lib/index.js";
+import { defineConfig } from "../dist/index.mjs";
 
 export default defineConfig({
   withFile: {

@@ -1,9 +1,12 @@
-import { camel } from "case";
-import { get } from "lodash";
+import { camelCase } from "case-anything";
+import { get } from "lodash-es";
 import ts, { factory as f } from "typescript";
-import { createNamedImport } from "./createNamedImport";
-import { createNamespaceImport } from "./createNamespaceImport";
-import { clientErrorStatus, serverErrorStatus } from "./getErrorResponseType";
+import { createNamedImport } from "./createNamedImport.js";
+import { createNamespaceImport } from "./createNamespaceImport.js";
+import {
+  clientErrorStatus,
+  serverErrorStatus,
+} from "./getErrorResponseType.js";
 
 /**
  * Generate the needed imports regarding the generated nodes usage.
@@ -62,7 +65,7 @@ export const getUsedImports = (
   const visitor: ts.Visitor = (node) => {
     if (ts.isQualifiedName(node)) {
       // We can’t use `node.left.getText()` because the node is not compiled (no internal `text` property)
-      const text = camel(get(node.left, "escapedText", "") as string);
+      const text = camelCase(get(node.left, "escapedText", "") as string);
       if (text in imports) {
         imports[text as keyof typeof imports].used = true;
       }

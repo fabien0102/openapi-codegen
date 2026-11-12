@@ -6,9 +6,9 @@ import { homedir } from "os";
 import { join, parse } from "path";
 import { URL } from "url";
 
-import { FromOptions, OpenAPISourceFile } from "../types";
-import { getGithubToken } from "../utils/getGithubToken";
-import { handlePromptCancel } from "../utils/handlePromptCancel";
+import { FromOptions, OpenAPISourceFile } from "../types/index.js";
+import { getGithubToken } from "../utils/getGithubToken.js";
+import { handlePromptCancel } from "../utils/handlePromptCancel.js";
 
 /**
  * Retrieve the OpenAPI source.
@@ -109,7 +109,7 @@ export const getOpenAPISourceFile = async (
  *
  * @param extension
  */
-export const getFormat = (extension: string) => {
+const getFormat = (extension: string) => {
   if (extension.startsWith(".")) {
     extension = extension.slice(1);
   }

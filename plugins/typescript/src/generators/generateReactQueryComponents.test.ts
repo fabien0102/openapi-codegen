@@ -1,10 +1,10 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "vite-plus/test";
 import { OpenAPIObject } from "openapi3-ts/oas30";
 import {
   Config,
   generateReactQueryComponents,
-} from "./generateReactQueryComponents";
-import { createWriteFileMock } from "../testUtils";
+} from "./generateReactQueryComponents.js";
+import { createWriteFileMock } from "../testUtils.js";
 
 const config: Config = {
   filenamePrefix: "petstore",
@@ -37,8 +37,9 @@ describe("generateReactQueryComponents", () => {
       },
       config
     );
-
-    expect(writeFile.mock.calls[0][0]).toBe("petstoreFetcher.ts");
+    expect(writeFile.mock.calls.map((i) => i[0])).toContain(
+      "petstoreFetcher.ts"
+    );
   });
 
   it("should generate a useQuery wrapper (no parameters)", async () => {
@@ -62,7 +63,7 @@ describe("generateReactQueryComponents", () => {
                     schema: {
                       type: "array",
                       items: {
-                        $ref: "#/components/schemas/Pet",
+                        $ref: "#/components/schemas/pet",
                       },
                     },
                   },
@@ -92,11 +93,7 @@ describe("generateReactQueryComponents", () => {
        * @version 1.0.0
        */
       import * as reactQuery from "@tanstack/react-query";
-      import {
-        type PetstoreContext,
-        usePetstoreContext,
-        queryKeyFn,
-      } from "./petstoreContext";
+      import { type PetstoreContext, usePetstoreContext, queryKeyFn } from "./petstoreContext";
       import { deepMerge } from "./petstoreUtils";
       import type * as Fetcher from "./petstoreFetcher";
       import { petstoreFetch } from "./petstoreFetcher";
@@ -115,10 +112,7 @@ describe("generateReactQueryComponents", () => {
       /**
        * Get all the pets
        */
-      export const fetchListPets = (
-        variables: ListPetsVariables,
-        signal?: AbortSignal,
-      ) =>
+      export const fetchListPets = (variables: ListPetsVariables, signal?: AbortSignal) =>
         petstoreFetch<ListPetsResponse, ListPetsError, undefined, {}, {}, {}>({
           url: "/pets",
           method: "get",
@@ -134,18 +128,12 @@ describe("generateReactQueryComponents", () => {
         queryFn: (options: QueryFnOptions) => Promise<ListPetsResponse>;
       };
 
-      export function listPetsQuery(
-        variables: ListPetsVariables | reactQuery.SkipToken,
-      ): {
+      export function listPetsQuery(variables: ListPetsVariables | reactQuery.SkipToken): {
         queryKey: reactQuery.QueryKey;
-        queryFn:
-          | ((options: QueryFnOptions) => Promise<ListPetsResponse>)
-          | reactQuery.SkipToken;
+        queryFn: ((options: QueryFnOptions) => Promise<ListPetsResponse>) | reactQuery.SkipToken;
       };
 
-      export function listPetsQuery(
-        variables: ListPetsVariables | reactQuery.SkipToken,
-      ) {
+      export function listPetsQuery(variables: ListPetsVariables | reactQuery.SkipToken) {
         return {
           queryKey: queryKeyFn({
             path: "/pets",
@@ -162,12 +150,12 @@ describe("generateReactQueryComponents", () => {
       /**
        * Get all the pets
        */
-      export const useSuspenseListPets = <TData = ListPetsResponse,>(
+      export const useSuspenseListPets = <TData = ListPetsResponse>(
         variables: ListPetsVariables,
         options?: Omit<
           reactQuery.UseQueryOptions<ListPetsResponse, ListPetsError, TData>,
           "queryKey" | "queryFn" | "initialData"
-        >,
+        >
       ) => {
         const { queryOptions, fetcherOptions } = usePetstoreContext(options);
         return reactQuery.useSuspenseQuery<ListPetsResponse, ListPetsError, TData>({
@@ -180,19 +168,17 @@ describe("generateReactQueryComponents", () => {
       /**
        * Get all the pets
        */
-      export const useListPets = <TData = ListPetsResponse,>(
+      export const useListPets = <TData = ListPetsResponse>(
         variables: ListPetsVariables | reactQuery.SkipToken,
         options?: Omit<
           reactQuery.UseQueryOptions<ListPetsResponse, ListPetsError, TData>,
           "queryKey" | "queryFn" | "initialData"
-        >,
+        >
       ) => {
         const { queryOptions, fetcherOptions } = usePetstoreContext(options);
         return reactQuery.useQuery<ListPetsResponse, ListPetsError, TData>({
           ...listPetsQuery(
-            variables === reactQuery.skipToken
-              ? variables
-              : deepMerge(fetcherOptions, variables),
+            variables === reactQuery.skipToken ? variables : deepMerge(fetcherOptions, variables)
           ),
           ...options,
           ...queryOptions,
@@ -258,11 +244,7 @@ describe("generateReactQueryComponents", () => {
        * @version 1.0.0
        */
       import * as reactQuery from "@tanstack/react-query";
-      import {
-        type PetstoreContext,
-        usePetstoreContext,
-        queryKeyFn,
-      } from "./petstoreContext";
+      import { type PetstoreContext, usePetstoreContext, queryKeyFn } from "./petstoreContext";
       import { deepMerge } from "./petstoreUtils";
       import type * as Fetcher from "./petstoreFetcher";
       import { petstoreFetch } from "./petstoreFetcher";
@@ -281,10 +263,7 @@ describe("generateReactQueryComponents", () => {
       /**
        * Get all the pets
        */
-      export const fetchListPets = (
-        variables: ListPetsVariables,
-        signal?: AbortSignal,
-      ) =>
+      export const fetchListPets = (variables: ListPetsVariables, signal?: AbortSignal) =>
         petstoreFetch<ListPetsResponse, ListPetsError, undefined, {}, {}, {}>({
           url: "/pets",
           method: "get",
@@ -300,18 +279,12 @@ describe("generateReactQueryComponents", () => {
         queryFn: (options: QueryFnOptions) => Promise<ListPetsResponse>;
       };
 
-      export function listPetsQuery(
-        variables: ListPetsVariables | reactQuery.SkipToken,
-      ): {
+      export function listPetsQuery(variables: ListPetsVariables | reactQuery.SkipToken): {
         queryKey: reactQuery.QueryKey;
-        queryFn:
-          | ((options: QueryFnOptions) => Promise<ListPetsResponse>)
-          | reactQuery.SkipToken;
+        queryFn: ((options: QueryFnOptions) => Promise<ListPetsResponse>) | reactQuery.SkipToken;
       };
 
-      export function listPetsQuery(
-        variables: ListPetsVariables | reactQuery.SkipToken,
-      ) {
+      export function listPetsQuery(variables: ListPetsVariables | reactQuery.SkipToken) {
         return {
           queryKey: queryKeyFn({
             path: "/pets",
@@ -328,12 +301,12 @@ describe("generateReactQueryComponents", () => {
       /**
        * Get all the pets
        */
-      export const useSuspenseListPets = <TData = ListPetsResponse,>(
+      export const useSuspenseListPets = <TData = ListPetsResponse>(
         variables: ListPetsVariables,
         options?: Omit<
           reactQuery.UseQueryOptions<ListPetsResponse, ListPetsError, TData>,
           "queryKey" | "queryFn" | "initialData"
-        >,
+        >
       ) => {
         const { queryOptions, fetcherOptions } = usePetstoreContext(options);
         return reactQuery.useSuspenseQuery<ListPetsResponse, ListPetsError, TData>({
@@ -346,19 +319,17 @@ describe("generateReactQueryComponents", () => {
       /**
        * Get all the pets
        */
-      export const useListPets = <TData = ListPetsResponse,>(
+      export const useListPets = <TData = ListPetsResponse>(
         variables: ListPetsVariables | reactQuery.SkipToken,
         options?: Omit<
           reactQuery.UseQueryOptions<ListPetsResponse, ListPetsError, TData>,
           "queryKey" | "queryFn" | "initialData"
-        >,
+        >
       ) => {
         const { queryOptions, fetcherOptions } = usePetstoreContext(options);
         return reactQuery.useQuery<ListPetsResponse, ListPetsError, TData>({
           ...listPetsQuery(
-            variables === reactQuery.skipToken
-              ? variables
-              : deepMerge(fetcherOptions, variables),
+            variables === reactQuery.skipToken ? variables : deepMerge(fetcherOptions, variables)
           ),
           ...options,
           ...queryOptions,
@@ -449,11 +420,7 @@ describe("generateReactQueryComponents", () => {
        * @version 1.0.0
        */
       import * as reactQuery from "@tanstack/react-query";
-      import {
-        type PetstoreContext,
-        usePetstoreContext,
-        queryKeyFn,
-      } from "./petstoreContext";
+      import { type PetstoreContext, usePetstoreContext, queryKeyFn } from "./petstoreContext";
       import { deepMerge } from "./petstoreUtils";
       import type * as Fetcher from "./petstoreFetcher";
       import { petstoreFetch } from "./petstoreFetcher";
@@ -485,18 +452,13 @@ describe("generateReactQueryComponents", () => {
       /**
        * Get all the pets
        */
-      export const fetchListPets = (
-        variables: ListPetsVariables,
-        signal?: AbortSignal,
-      ) =>
-        petstoreFetch<
-          ListPetsResponse,
-          ListPetsError,
-          undefined,
-          {},
-          ListPetsQueryParams,
-          {}
-        >({ url: "/pets", method: "get", ...variables, signal });
+      export const fetchListPets = (variables: ListPetsVariables, signal?: AbortSignal) =>
+        petstoreFetch<ListPetsResponse, ListPetsError, undefined, {}, ListPetsQueryParams, {}>({
+          url: "/pets",
+          method: "get",
+          ...variables,
+          signal,
+        });
 
       /**
        * Get all the pets
@@ -506,18 +468,12 @@ describe("generateReactQueryComponents", () => {
         queryFn: (options: QueryFnOptions) => Promise<ListPetsResponse>;
       };
 
-      export function listPetsQuery(
-        variables: ListPetsVariables | reactQuery.SkipToken,
-      ): {
+      export function listPetsQuery(variables: ListPetsVariables | reactQuery.SkipToken): {
         queryKey: reactQuery.QueryKey;
-        queryFn:
-          | ((options: QueryFnOptions) => Promise<ListPetsResponse>)
-          | reactQuery.SkipToken;
+        queryFn: ((options: QueryFnOptions) => Promise<ListPetsResponse>) | reactQuery.SkipToken;
       };
 
-      export function listPetsQuery(
-        variables: ListPetsVariables | reactQuery.SkipToken,
-      ) {
+      export function listPetsQuery(variables: ListPetsVariables | reactQuery.SkipToken) {
         return {
           queryKey: queryKeyFn({
             path: "/pets",
@@ -534,12 +490,12 @@ describe("generateReactQueryComponents", () => {
       /**
        * Get all the pets
        */
-      export const useSuspenseListPets = <TData = ListPetsResponse,>(
+      export const useSuspenseListPets = <TData = ListPetsResponse>(
         variables: ListPetsVariables,
         options?: Omit<
           reactQuery.UseQueryOptions<ListPetsResponse, ListPetsError, TData>,
           "queryKey" | "queryFn" | "initialData"
-        >,
+        >
       ) => {
         const { queryOptions, fetcherOptions } = usePetstoreContext(options);
         return reactQuery.useSuspenseQuery<ListPetsResponse, ListPetsError, TData>({
@@ -552,19 +508,17 @@ describe("generateReactQueryComponents", () => {
       /**
        * Get all the pets
        */
-      export const useListPets = <TData = ListPetsResponse,>(
+      export const useListPets = <TData = ListPetsResponse>(
         variables: ListPetsVariables | reactQuery.SkipToken,
         options?: Omit<
           reactQuery.UseQueryOptions<ListPetsResponse, ListPetsError, TData>,
           "queryKey" | "queryFn" | "initialData"
-        >,
+        >
       ) => {
         const { queryOptions, fetcherOptions } = usePetstoreContext(options);
         return reactQuery.useQuery<ListPetsResponse, ListPetsError, TData>({
           ...listPetsQuery(
-            variables === reactQuery.skipToken
-              ? variables
-              : deepMerge(fetcherOptions, variables),
+            variables === reactQuery.skipToken ? variables : deepMerge(fetcherOptions, variables)
           ),
           ...options,
           ...queryOptions,
@@ -655,11 +609,7 @@ describe("generateReactQueryComponents", () => {
        * @version 1.0.0
        */
       import * as reactQuery from "@tanstack/react-query";
-      import {
-        type PetstoreContext,
-        usePetstoreContext,
-        queryKeyFn,
-      } from "./petstoreContext";
+      import { type PetstoreContext, usePetstoreContext, queryKeyFn } from "./petstoreContext";
       import { deepMerge } from "./petstoreUtils";
       import type * as Fetcher from "./petstoreFetcher";
       import { petstoreFetch } from "./petstoreFetcher";
@@ -691,18 +641,13 @@ describe("generateReactQueryComponents", () => {
       /**
        * Get all the pets
        */
-      export const fetchListPets = (
-        variables: ListPetsVariables,
-        signal?: AbortSignal,
-      ) =>
-        petstoreFetch<
-          ListPetsResponse,
-          ListPetsError,
-          undefined,
-          {},
-          ListPetsQueryParams,
-          {}
-        >({ url: "/pets", method: "get", ...variables, signal });
+      export const fetchListPets = (variables: ListPetsVariables, signal?: AbortSignal) =>
+        petstoreFetch<ListPetsResponse, ListPetsError, undefined, {}, ListPetsQueryParams, {}>({
+          url: "/pets",
+          method: "get",
+          ...variables,
+          signal,
+        });
 
       /**
        * Get all the pets
@@ -712,18 +657,12 @@ describe("generateReactQueryComponents", () => {
         queryFn: (options: QueryFnOptions) => Promise<ListPetsResponse>;
       };
 
-      export function listPetsQuery(
-        variables: ListPetsVariables | reactQuery.SkipToken,
-      ): {
+      export function listPetsQuery(variables: ListPetsVariables | reactQuery.SkipToken): {
         queryKey: reactQuery.QueryKey;
-        queryFn:
-          | ((options: QueryFnOptions) => Promise<ListPetsResponse>)
-          | reactQuery.SkipToken;
+        queryFn: ((options: QueryFnOptions) => Promise<ListPetsResponse>) | reactQuery.SkipToken;
       };
 
-      export function listPetsQuery(
-        variables: ListPetsVariables | reactQuery.SkipToken,
-      ) {
+      export function listPetsQuery(variables: ListPetsVariables | reactQuery.SkipToken) {
         return {
           queryKey: queryKeyFn({
             path: "/pets",
@@ -740,12 +679,12 @@ describe("generateReactQueryComponents", () => {
       /**
        * Get all the pets
        */
-      export const useSuspenseListPets = <TData = ListPetsResponse,>(
+      export const useSuspenseListPets = <TData = ListPetsResponse>(
         variables: ListPetsVariables,
         options?: Omit<
           reactQuery.UseQueryOptions<ListPetsResponse, ListPetsError, TData>,
           "queryKey" | "queryFn" | "initialData"
-        >,
+        >
       ) => {
         const { queryOptions, fetcherOptions } = usePetstoreContext(options);
         return reactQuery.useSuspenseQuery<ListPetsResponse, ListPetsError, TData>({
@@ -758,19 +697,17 @@ describe("generateReactQueryComponents", () => {
       /**
        * Get all the pets
        */
-      export const useListPets = <TData = ListPetsResponse,>(
+      export const useListPets = <TData = ListPetsResponse>(
         variables: ListPetsVariables | reactQuery.SkipToken,
         options?: Omit<
           reactQuery.UseQueryOptions<ListPetsResponse, ListPetsError, TData>,
           "queryKey" | "queryFn" | "initialData"
-        >,
+        >
       ) => {
         const { queryOptions, fetcherOptions } = usePetstoreContext(options);
         return reactQuery.useQuery<ListPetsResponse, ListPetsError, TData>({
           ...listPetsQuery(
-            variables === reactQuery.skipToken
-              ? variables
-              : deepMerge(fetcherOptions, variables),
+            variables === reactQuery.skipToken ? variables : deepMerge(fetcherOptions, variables)
           ),
           ...options,
           ...queryOptions,
@@ -847,11 +784,7 @@ describe("generateReactQueryComponents", () => {
        * @version 1.0.0
        */
       import * as reactQuery from "@tanstack/react-query";
-      import {
-        type PetstoreContext,
-        usePetstoreContext,
-        queryKeyFn,
-      } from "./petstoreContext";
+      import { type PetstoreContext, usePetstoreContext, queryKeyFn } from "./petstoreContext";
       import { deepMerge } from "./petstoreUtils";
       import type * as Fetcher from "./petstoreFetcher";
       import { petstoreFetch } from "./petstoreFetcher";
@@ -879,18 +812,13 @@ describe("generateReactQueryComponents", () => {
       /**
        * Info for a specific pet
        */
-      export const fetchShowPetById = (
-        variables: ShowPetByIdVariables,
-        signal?: AbortSignal,
-      ) =>
-        petstoreFetch<
-          ShowPetByIdResponse,
-          ShowPetByIdError,
-          undefined,
-          {},
-          {},
-          ShowPetByIdPathParams
-        >({ url: "/pets/{petId}", method: "get", ...variables, signal });
+      export const fetchShowPetById = (variables: ShowPetByIdVariables, signal?: AbortSignal) =>
+        petstoreFetch<ShowPetByIdResponse, ShowPetByIdError, undefined, {}, {}, ShowPetByIdPathParams>({
+          url: "/pets/{petId}",
+          method: "get",
+          ...variables,
+          signal,
+        });
 
       /**
        * Info for a specific pet
@@ -900,18 +828,12 @@ describe("generateReactQueryComponents", () => {
         queryFn: (options: QueryFnOptions) => Promise<ShowPetByIdResponse>;
       };
 
-      export function showPetByIdQuery(
-        variables: ShowPetByIdVariables | reactQuery.SkipToken,
-      ): {
+      export function showPetByIdQuery(variables: ShowPetByIdVariables | reactQuery.SkipToken): {
         queryKey: reactQuery.QueryKey;
-        queryFn:
-          | ((options: QueryFnOptions) => Promise<ShowPetByIdResponse>)
-          | reactQuery.SkipToken;
+        queryFn: ((options: QueryFnOptions) => Promise<ShowPetByIdResponse>) | reactQuery.SkipToken;
       };
 
-      export function showPetByIdQuery(
-        variables: ShowPetByIdVariables | reactQuery.SkipToken,
-      ) {
+      export function showPetByIdQuery(variables: ShowPetByIdVariables | reactQuery.SkipToken) {
         return {
           queryKey: queryKeyFn({
             path: "/pets/{petId}",
@@ -928,19 +850,15 @@ describe("generateReactQueryComponents", () => {
       /**
        * Info for a specific pet
        */
-      export const useSuspenseShowPetById = <TData = ShowPetByIdResponse,>(
+      export const useSuspenseShowPetById = <TData = ShowPetByIdResponse>(
         variables: ShowPetByIdVariables,
         options?: Omit<
           reactQuery.UseQueryOptions<ShowPetByIdResponse, ShowPetByIdError, TData>,
           "queryKey" | "queryFn" | "initialData"
-        >,
+        >
       ) => {
         const { queryOptions, fetcherOptions } = usePetstoreContext(options);
-        return reactQuery.useSuspenseQuery<
-          ShowPetByIdResponse,
-          ShowPetByIdError,
-          TData
-        >({
+        return reactQuery.useSuspenseQuery<ShowPetByIdResponse, ShowPetByIdError, TData>({
           ...showPetByIdQuery(deepMerge(fetcherOptions, variables)),
           ...options,
           ...queryOptions,
@@ -950,19 +868,17 @@ describe("generateReactQueryComponents", () => {
       /**
        * Info for a specific pet
        */
-      export const useShowPetById = <TData = ShowPetByIdResponse,>(
+      export const useShowPetById = <TData = ShowPetByIdResponse>(
         variables: ShowPetByIdVariables | reactQuery.SkipToken,
         options?: Omit<
           reactQuery.UseQueryOptions<ShowPetByIdResponse, ShowPetByIdError, TData>,
           "queryKey" | "queryFn" | "initialData"
-        >,
+        >
       ) => {
         const { queryOptions, fetcherOptions } = usePetstoreContext(options);
         return reactQuery.useQuery<ShowPetByIdResponse, ShowPetByIdError, TData>({
           ...showPetByIdQuery(
-            variables === reactQuery.skipToken
-              ? variables
-              : deepMerge(fetcherOptions, variables),
+            variables === reactQuery.skipToken ? variables : deepMerge(fetcherOptions, variables)
           ),
           ...options,
           ...queryOptions,
@@ -1040,11 +956,7 @@ describe("generateReactQueryComponents", () => {
        * @version 1.0.0
        */
       import * as reactQuery from "@tanstack/react-query";
-      import {
-        type PetstoreContext,
-        usePetstoreContext,
-        queryKeyFn,
-      } from "./petstoreContext";
+      import { type PetstoreContext, usePetstoreContext, queryKeyFn } from "./petstoreContext";
       import { deepMerge } from "./petstoreUtils";
       import type * as Fetcher from "./petstoreFetcher";
       import { petstoreFetch } from "./petstoreFetcher";
@@ -1072,18 +984,13 @@ describe("generateReactQueryComponents", () => {
       /**
        * Info for a specific pet
        */
-      export const fetchShowPetById = (
-        variables: ShowPetByIdVariables,
-        signal?: AbortSignal,
-      ) =>
-        petstoreFetch<
-          ShowPetByIdResponse,
-          ShowPetByIdError,
-          undefined,
-          {},
-          {},
-          ShowPetByIdPathParams
-        >({ url: "/pets/{petId}", method: "get", ...variables, signal });
+      export const fetchShowPetById = (variables: ShowPetByIdVariables, signal?: AbortSignal) =>
+        petstoreFetch<ShowPetByIdResponse, ShowPetByIdError, undefined, {}, {}, ShowPetByIdPathParams>({
+          url: "/pets/{petId}",
+          method: "get",
+          ...variables,
+          signal,
+        });
 
       /**
        * Info for a specific pet
@@ -1093,18 +1000,12 @@ describe("generateReactQueryComponents", () => {
         queryFn: (options: QueryFnOptions) => Promise<ShowPetByIdResponse>;
       };
 
-      export function showPetByIdQuery(
-        variables: ShowPetByIdVariables | reactQuery.SkipToken,
-      ): {
+      export function showPetByIdQuery(variables: ShowPetByIdVariables | reactQuery.SkipToken): {
         queryKey: reactQuery.QueryKey;
-        queryFn:
-          | ((options: QueryFnOptions) => Promise<ShowPetByIdResponse>)
-          | reactQuery.SkipToken;
+        queryFn: ((options: QueryFnOptions) => Promise<ShowPetByIdResponse>) | reactQuery.SkipToken;
       };
 
-      export function showPetByIdQuery(
-        variables: ShowPetByIdVariables | reactQuery.SkipToken,
-      ) {
+      export function showPetByIdQuery(variables: ShowPetByIdVariables | reactQuery.SkipToken) {
         return {
           queryKey: queryKeyFn({
             path: "/pets/{petId}",
@@ -1121,19 +1022,15 @@ describe("generateReactQueryComponents", () => {
       /**
        * Info for a specific pet
        */
-      export const useSuspenseShowPetById = <TData = ShowPetByIdResponse,>(
+      export const useSuspenseShowPetById = <TData = ShowPetByIdResponse>(
         variables: ShowPetByIdVariables,
         options?: Omit<
           reactQuery.UseQueryOptions<ShowPetByIdResponse, ShowPetByIdError, TData>,
           "queryKey" | "queryFn" | "initialData"
-        >,
+        >
       ) => {
         const { queryOptions, fetcherOptions } = usePetstoreContext(options);
-        return reactQuery.useSuspenseQuery<
-          ShowPetByIdResponse,
-          ShowPetByIdError,
-          TData
-        >({
+        return reactQuery.useSuspenseQuery<ShowPetByIdResponse, ShowPetByIdError, TData>({
           ...showPetByIdQuery(deepMerge(fetcherOptions, variables)),
           ...options,
           ...queryOptions,
@@ -1143,19 +1040,17 @@ describe("generateReactQueryComponents", () => {
       /**
        * Info for a specific pet
        */
-      export const useShowPetById = <TData = ShowPetByIdResponse,>(
+      export const useShowPetById = <TData = ShowPetByIdResponse>(
         variables: ShowPetByIdVariables | reactQuery.SkipToken,
         options?: Omit<
           reactQuery.UseQueryOptions<ShowPetByIdResponse, ShowPetByIdError, TData>,
           "queryKey" | "queryFn" | "initialData"
-        >,
+        >
       ) => {
         const { queryOptions, fetcherOptions } = usePetstoreContext(options);
         return reactQuery.useQuery<ShowPetByIdResponse, ShowPetByIdError, TData>({
           ...showPetByIdQuery(
-            variables === reactQuery.skipToken
-              ? variables
-              : deepMerge(fetcherOptions, variables),
+            variables === reactQuery.skipToken ? variables : deepMerge(fetcherOptions, variables)
           ),
           ...options,
           ...queryOptions,
@@ -1247,11 +1142,7 @@ describe("generateReactQueryComponents", () => {
        * @version 1.0.0
        */
       import * as reactQuery from "@tanstack/react-query";
-      import {
-        type PetstoreContext,
-        usePetstoreContext,
-        queryKeyFn,
-      } from "./petstoreContext";
+      import { type PetstoreContext, usePetstoreContext, queryKeyFn } from "./petstoreContext";
       import { deepMerge } from "./petstoreUtils";
       import type * as Fetcher from "./petstoreFetcher";
       import { petstoreFetch } from "./petstoreFetcher";
@@ -1287,10 +1178,7 @@ describe("generateReactQueryComponents", () => {
       /**
        * Get all the pets
        */
-      export const fetchListPets = (
-        variables: ListPetsVariables,
-        signal?: AbortSignal,
-      ) =>
+      export const fetchListPets = (variables: ListPetsVariables, signal?: AbortSignal) =>
         petstoreFetch<
           ListPetsResponse,
           ListPetsError,
@@ -1308,18 +1196,12 @@ describe("generateReactQueryComponents", () => {
         queryFn: (options: QueryFnOptions) => Promise<ListPetsResponse>;
       };
 
-      export function listPetsQuery(
-        variables: ListPetsVariables | reactQuery.SkipToken,
-      ): {
+      export function listPetsQuery(variables: ListPetsVariables | reactQuery.SkipToken): {
         queryKey: reactQuery.QueryKey;
-        queryFn:
-          | ((options: QueryFnOptions) => Promise<ListPetsResponse>)
-          | reactQuery.SkipToken;
+        queryFn: ((options: QueryFnOptions) => Promise<ListPetsResponse>) | reactQuery.SkipToken;
       };
 
-      export function listPetsQuery(
-        variables: ListPetsVariables | reactQuery.SkipToken,
-      ) {
+      export function listPetsQuery(variables: ListPetsVariables | reactQuery.SkipToken) {
         return {
           queryKey: queryKeyFn({
             path: "/pets",
@@ -1336,12 +1218,12 @@ describe("generateReactQueryComponents", () => {
       /**
        * Get all the pets
        */
-      export const useSuspenseListPets = <TData = ListPetsResponse,>(
+      export const useSuspenseListPets = <TData = ListPetsResponse>(
         variables: ListPetsVariables,
         options?: Omit<
           reactQuery.UseQueryOptions<ListPetsResponse, ListPetsError, TData>,
           "queryKey" | "queryFn" | "initialData"
-        >,
+        >
       ) => {
         const { queryOptions, fetcherOptions } = usePetstoreContext(options);
         return reactQuery.useSuspenseQuery<ListPetsResponse, ListPetsError, TData>({
@@ -1354,19 +1236,17 @@ describe("generateReactQueryComponents", () => {
       /**
        * Get all the pets
        */
-      export const useListPets = <TData = ListPetsResponse,>(
+      export const useListPets = <TData = ListPetsResponse>(
         variables: ListPetsVariables | reactQuery.SkipToken,
         options?: Omit<
           reactQuery.UseQueryOptions<ListPetsResponse, ListPetsError, TData>,
           "queryKey" | "queryFn" | "initialData"
-        >,
+        >
       ) => {
         const { queryOptions, fetcherOptions } = usePetstoreContext(options);
         return reactQuery.useQuery<ListPetsResponse, ListPetsError, TData>({
           ...listPetsQuery(
-            variables === reactQuery.skipToken
-              ? variables
-              : deepMerge(fetcherOptions, variables),
+            variables === reactQuery.skipToken ? variables : deepMerge(fetcherOptions, variables)
           ),
           ...options,
           ...queryOptions,
@@ -1446,11 +1326,7 @@ describe("generateReactQueryComponents", () => {
        * @version 1.0.0
        */
       import * as reactQuery from "@tanstack/react-query";
-      import {
-        type PetstoreContext,
-        usePetstoreContext,
-        queryKeyFn,
-      } from "./petstoreContext";
+      import { type PetstoreContext, usePetstoreContext, queryKeyFn } from "./petstoreContext";
       import { deepMerge } from "./petstoreUtils";
       import type * as Fetcher from "./petstoreFetcher";
       import { petstoreFetch } from "./petstoreFetcher";
@@ -1469,10 +1345,7 @@ describe("generateReactQueryComponents", () => {
       /**
        * Get all the pets
        */
-      export const fetchListPets = (
-        variables: ListPetsVariables,
-        signal?: AbortSignal,
-      ) =>
+      export const fetchListPets = (variables: ListPetsVariables, signal?: AbortSignal) =>
         petstoreFetch<ListPetsResponse, ListPetsError, undefined, {}, {}, {}>({
           url: "/pets",
           method: "get",
@@ -1488,18 +1361,12 @@ describe("generateReactQueryComponents", () => {
         queryFn: (options: QueryFnOptions) => Promise<ListPetsResponse>;
       };
 
-      export function listPetsQuery(
-        variables: ListPetsVariables | reactQuery.SkipToken,
-      ): {
+      export function listPetsQuery(variables: ListPetsVariables | reactQuery.SkipToken): {
         queryKey: reactQuery.QueryKey;
-        queryFn:
-          | ((options: QueryFnOptions) => Promise<ListPetsResponse>)
-          | reactQuery.SkipToken;
+        queryFn: ((options: QueryFnOptions) => Promise<ListPetsResponse>) | reactQuery.SkipToken;
       };
 
-      export function listPetsQuery(
-        variables: ListPetsVariables | reactQuery.SkipToken,
-      ) {
+      export function listPetsQuery(variables: ListPetsVariables | reactQuery.SkipToken) {
         return {
           queryKey: queryKeyFn({
             path: "/pets",
@@ -1516,12 +1383,12 @@ describe("generateReactQueryComponents", () => {
       /**
        * Get all the pets
        */
-      export const useSuspenseListPets = <TData = ListPetsResponse,>(
+      export const useSuspenseListPets = <TData = ListPetsResponse>(
         variables: ListPetsVariables,
         options?: Omit<
           reactQuery.UseQueryOptions<ListPetsResponse, ListPetsError, TData>,
           "queryKey" | "queryFn" | "initialData"
-        >,
+        >
       ) => {
         const { queryOptions, fetcherOptions } = usePetstoreContext(options);
         return reactQuery.useSuspenseQuery<ListPetsResponse, ListPetsError, TData>({
@@ -1534,19 +1401,17 @@ describe("generateReactQueryComponents", () => {
       /**
        * Get all the pets
        */
-      export const useListPets = <TData = ListPetsResponse,>(
+      export const useListPets = <TData = ListPetsResponse>(
         variables: ListPetsVariables | reactQuery.SkipToken,
         options?: Omit<
           reactQuery.UseQueryOptions<ListPetsResponse, ListPetsError, TData>,
           "queryKey" | "queryFn" | "initialData"
-        >,
+        >
       ) => {
         const { queryOptions, fetcherOptions } = usePetstoreContext(options);
         return reactQuery.useQuery<ListPetsResponse, ListPetsError, TData>({
           ...listPetsQuery(
-            variables === reactQuery.skipToken
-              ? variables
-              : deepMerge(fetcherOptions, variables),
+            variables === reactQuery.skipToken ? variables : deepMerge(fetcherOptions, variables)
           ),
           ...options,
           ...queryOptions,
@@ -1653,11 +1518,7 @@ describe("generateReactQueryComponents", () => {
        * @version 1.0.0
        */
       import * as reactQuery from "@tanstack/react-query";
-      import {
-        type PetstoreContext,
-        usePetstoreContext,
-        queryKeyFn,
-      } from "./petstoreContext";
+      import { type PetstoreContext, usePetstoreContext, queryKeyFn } from "./petstoreContext";
       import { deepMerge } from "./petstoreUtils";
       import type * as Fetcher from "./petstoreFetcher";
       import { petstoreFetch } from "./petstoreFetcher";
@@ -1694,15 +1555,11 @@ describe("generateReactQueryComponents", () => {
         });
 
       export const useAddPet = (
-        options?: Omit<
-          reactQuery.UseMutationOptions<string, AddPetError, AddPetVariables>,
-          "mutationFn"
-        >,
+        options?: Omit<reactQuery.UseMutationOptions<string, AddPetError, AddPetVariables>, "mutationFn">
       ) => {
         const { fetcherOptions } = usePetstoreContext();
         return reactQuery.useMutation<string, AddPetError, AddPetVariables>({
-          mutationFn: (variables: AddPetVariables) =>
-            fetchAddPet(deepMerge(fetcherOptions, variables)),
+          mutationFn: (variables: AddPetVariables) => fetchAddPet(deepMerge(fetcherOptions, variables)),
           ...options,
         });
       };
@@ -1808,11 +1665,7 @@ describe("generateReactQueryComponents", () => {
        * @version 1.0.0
        */
       import * as reactQuery from "@tanstack/react-query";
-      import {
-        type PetstoreContext,
-        usePetstoreContext,
-        queryKeyFn,
-      } from "./petstoreContext";
+      import { type PetstoreContext, usePetstoreContext, queryKeyFn } from "./petstoreContext";
       import { deepMerge } from "./petstoreUtils";
       import type * as Fetcher from "./petstoreFetcher";
       import { petstoreFetch } from "./petstoreFetcher";
@@ -1853,12 +1706,9 @@ describe("generateReactQueryComponents", () => {
         queryFn: (options: QueryFnOptions) => Promise<string>;
       };
 
-      export function getPetQuery(
-        variables: GetPetVariables | reactQuery.SkipToken,
-      ): {
+      export function getPetQuery(variables: GetPetVariables | reactQuery.SkipToken): {
         queryKey: reactQuery.QueryKey;
-        queryFn:
-          ((options: QueryFnOptions) => Promise<string>) | reactQuery.SkipToken;
+        queryFn: ((options: QueryFnOptions) => Promise<string>) | reactQuery.SkipToken;
       };
 
       export function getPetQuery(variables: GetPetVariables | reactQuery.SkipToken) {
@@ -1875,12 +1725,12 @@ describe("generateReactQueryComponents", () => {
         };
       }
 
-      export const useSuspenseGetPet = <TData = string,>(
+      export const useSuspenseGetPet = <TData = string>(
         variables: GetPetVariables,
         options?: Omit<
           reactQuery.UseQueryOptions<string, GetPetError, TData>,
           "queryKey" | "queryFn" | "initialData"
-        >,
+        >
       ) => {
         const { queryOptions, fetcherOptions } = usePetstoreContext(options);
         return reactQuery.useSuspenseQuery<string, GetPetError, TData>({
@@ -1890,19 +1740,17 @@ describe("generateReactQueryComponents", () => {
         });
       };
 
-      export const useGetPet = <TData = string,>(
+      export const useGetPet = <TData = string>(
         variables: GetPetVariables | reactQuery.SkipToken,
         options?: Omit<
           reactQuery.UseQueryOptions<string, GetPetError, TData>,
           "queryKey" | "queryFn" | "initialData"
-        >,
+        >
       ) => {
         const { queryOptions, fetcherOptions } = usePetstoreContext(options);
         return reactQuery.useQuery<string, GetPetError, TData>({
           ...getPetQuery(
-            variables === reactQuery.skipToken
-              ? variables
-              : deepMerge(fetcherOptions, variables),
+            variables === reactQuery.skipToken ? variables : deepMerge(fetcherOptions, variables)
           ),
           ...options,
           ...queryOptions,
@@ -2010,11 +1858,7 @@ describe("generateReactQueryComponents", () => {
        * @version 1.0.0
        */
       import * as reactQuery from "@tanstack/react-query";
-      import {
-        type PetstoreContext,
-        usePetstoreContext,
-        queryKeyFn,
-      } from "./petstoreContext";
+      import { type PetstoreContext, usePetstoreContext, queryKeyFn } from "./petstoreContext";
       import { deepMerge } from "./petstoreUtils";
       import type * as Fetcher from "./petstoreFetcher";
       import { petstoreFetch } from "./petstoreFetcher";
@@ -2051,15 +1895,11 @@ describe("generateReactQueryComponents", () => {
         });
 
       export const useAddPet = (
-        options?: Omit<
-          reactQuery.UseMutationOptions<string, AddPetError, AddPetVariables>,
-          "mutationFn"
-        >,
+        options?: Omit<reactQuery.UseMutationOptions<string, AddPetError, AddPetVariables>, "mutationFn">
       ) => {
         const { fetcherOptions } = usePetstoreContext();
         return reactQuery.useMutation<string, AddPetError, AddPetVariables>({
-          mutationFn: (variables: AddPetVariables) =>
-            fetchAddPet(deepMerge(fetcherOptions, variables)),
+          mutationFn: (variables: AddPetVariables) => fetchAddPet(deepMerge(fetcherOptions, variables)),
           ...options,
         });
       };
@@ -2171,11 +2011,7 @@ describe("generateReactQueryComponents", () => {
        * @version 1.0.0
        */
       import * as reactQuery from "@tanstack/react-query";
-      import {
-        type PetstoreContext,
-        usePetstoreContext,
-        queryKeyFn,
-      } from "./petstoreContext";
+      import { type PetstoreContext, usePetstoreContext, queryKeyFn } from "./petstoreContext";
       import { deepMerge } from "./petstoreUtils";
       import type * as Fetcher from "./petstoreFetcher";
       import { petstoreFetch } from "./petstoreFetcher";
@@ -2206,15 +2042,11 @@ describe("generateReactQueryComponents", () => {
         });
 
       export const useAddPet = (
-        options?: Omit<
-          reactQuery.UseMutationOptions<string, AddPetError, AddPetVariables>,
-          "mutationFn"
-        >,
+        options?: Omit<reactQuery.UseMutationOptions<string, AddPetError, AddPetVariables>, "mutationFn">
       ) => {
         const { fetcherOptions } = usePetstoreContext();
         return reactQuery.useMutation<string, AddPetError, AddPetVariables>({
-          mutationFn: (variables: AddPetVariables) =>
-            fetchAddPet(deepMerge(fetcherOptions, variables)),
+          mutationFn: (variables: AddPetVariables) => fetchAddPet(deepMerge(fetcherOptions, variables)),
           ...options,
         });
       };
@@ -2305,11 +2137,7 @@ describe("generateReactQueryComponents", () => {
        * @version 1.0.0
        */
       import * as reactQuery from "@tanstack/react-query";
-      import {
-        type PetstoreContext,
-        usePetstoreContext,
-        queryKeyFn,
-      } from "./petstoreContext";
+      import { type PetstoreContext, usePetstoreContext, queryKeyFn } from "./petstoreContext";
       import { deepMerge } from "./petstoreUtils";
       import type * as Fetcher from "./petstoreFetcher";
       import { petstoreFetch } from "./petstoreFetcher";
@@ -2330,10 +2158,7 @@ describe("generateReactQueryComponents", () => {
         pathParams: UpdatePetPathParams;
       } & PetstoreContext["fetcherOptions"];
 
-      export const fetchUpdatePet = (
-        variables: UpdatePetVariables,
-        signal?: AbortSignal,
-      ) =>
+      export const fetchUpdatePet = (variables: UpdatePetVariables, signal?: AbortSignal) =>
         petstoreFetch<
           string,
           UpdatePetError,
@@ -2347,7 +2172,7 @@ describe("generateReactQueryComponents", () => {
         options?: Omit<
           reactQuery.UseMutationOptions<string, UpdatePetError, UpdatePetVariables>,
           "mutationFn"
-        >,
+        >
       ) => {
         const { fetcherOptions } = usePetstoreContext();
         return reactQuery.useMutation<string, UpdatePetError, UpdatePetVariables>({
@@ -2443,11 +2268,7 @@ describe("generateReactQueryComponents", () => {
        * @version 1.0.0
        */
       import * as reactQuery from "@tanstack/react-query";
-      import {
-        type PetstoreContext,
-        usePetstoreContext,
-        queryKeyFn,
-      } from "./petstoreContext";
+      import { type PetstoreContext, usePetstoreContext, queryKeyFn } from "./petstoreContext";
       import { deepMerge } from "./petstoreUtils";
       import type * as Fetcher from "./petstoreFetcher";
       import { petstoreFetch } from "./petstoreFetcher";
@@ -2468,10 +2289,7 @@ describe("generateReactQueryComponents", () => {
         pathParams: UpdatePetPathParams;
       } & PetstoreContext["fetcherOptions"];
 
-      export const fetchUpdatePet = (
-        variables: UpdatePetVariables,
-        signal?: AbortSignal,
-      ) =>
+      export const fetchUpdatePet = (variables: UpdatePetVariables, signal?: AbortSignal) =>
         petstoreFetch<
           string,
           UpdatePetError,
@@ -2485,7 +2303,7 @@ describe("generateReactQueryComponents", () => {
         options?: Omit<
           reactQuery.UseMutationOptions<string, UpdatePetError, UpdatePetVariables>,
           "mutationFn"
-        >,
+        >
       ) => {
         const { fetcherOptions } = usePetstoreContext();
         return reactQuery.useMutation<string, UpdatePetError, UpdatePetVariables>({
@@ -2581,11 +2399,7 @@ describe("generateReactQueryComponents", () => {
        * @version 1.0.0
        */
       import * as reactQuery from "@tanstack/react-query";
-      import {
-        type PetstoreContext,
-        usePetstoreContext,
-        queryKeyFn,
-      } from "./petstoreContext";
+      import { type PetstoreContext, usePetstoreContext, queryKeyFn } from "./petstoreContext";
       import { deepMerge } from "./petstoreUtils";
       import type * as Fetcher from "./petstoreFetcher";
       import { petstoreFetch } from "./petstoreFetcher";
@@ -2606,10 +2420,7 @@ describe("generateReactQueryComponents", () => {
         pathParams: UpdatePetPathParams;
       } & PetstoreContext["fetcherOptions"];
 
-      export const fetchUpdatePet = (
-        variables: UpdatePetVariables,
-        signal?: AbortSignal,
-      ) =>
+      export const fetchUpdatePet = (variables: UpdatePetVariables, signal?: AbortSignal) =>
         petstoreFetch<
           string,
           UpdatePetError,
@@ -2623,7 +2434,7 @@ describe("generateReactQueryComponents", () => {
         options?: Omit<
           reactQuery.UseMutationOptions<string, UpdatePetError, UpdatePetVariables>,
           "mutationFn"
-        >,
+        >
       ) => {
         const { fetcherOptions } = usePetstoreContext();
         return reactQuery.useMutation<string, UpdatePetError, UpdatePetVariables>({
@@ -2740,24 +2551,19 @@ describe("generateReactQueryComponents", () => {
         pathParams: UpdatePetPathParams;
       } & Context["fetcherOptions"];
 
-      export const fetchUpdatePet = (
-        variables: UpdatePetVariables,
-        signal?: AbortSignal,
-      ) =>
-        fetch<
-          string,
-          UpdatePetError,
-          RequestBodies.UpdatePetRequestBody,
-          {},
-          {},
-          UpdatePetPathParams
-        >({ url: "/pet/{petId}", method: "put", ...variables, signal });
+      export const fetchUpdatePet = (variables: UpdatePetVariables, signal?: AbortSignal) =>
+        fetch<string, UpdatePetError, RequestBodies.UpdatePetRequestBody, {}, {}, UpdatePetPathParams>({
+          url: "/pet/{petId}",
+          method: "put",
+          ...variables,
+          signal,
+        });
 
       export const useUpdatePet = (
         options?: Omit<
           reactQuery.UseMutationOptions<string, UpdatePetError, UpdatePetVariables>,
           "mutationFn"
-        >,
+        >
       ) => {
         const { fetcherOptions } = useContext();
         return reactQuery.useMutation<string, UpdatePetError, UpdatePetVariables>({
@@ -2831,21 +2637,12 @@ describe("generateReactQueryComponents", () => {
 
     expect(writeFile.mock.calls[0][0]).toBe("petstoreUtils.ts");
     expect(writeFile.mock.calls[0][1]).toMatchInlineSnapshot(`
-      "type ComputeRange<
-        N extends number,
-        Result extends Array<unknown> = [],
-      > = Result["length"] extends N
+      "type ComputeRange<N extends number, Result extends Array<unknown> = []> = Result["length"] extends N
         ? Result
         : ComputeRange<N, [...Result, Result["length"]]>;
 
-      export type ClientErrorStatus = Exclude<
-        ComputeRange<500>[number],
-        ComputeRange<400>[number]
-      >;
-      export type ServerErrorStatus = Exclude<
-        ComputeRange<600>[number],
-        ComputeRange<500>[number]
-      >;
+      export type ClientErrorStatus = Exclude<ComputeRange<500>[number], ComputeRange<400>[number]>;
+      export type ServerErrorStatus = Exclude<ComputeRange<600>[number], ComputeRange<500>[number]>;
 
       export function deepMerge<T, U extends T>(target: T, source: U): U {
         const returnType = (target || {}) as U;

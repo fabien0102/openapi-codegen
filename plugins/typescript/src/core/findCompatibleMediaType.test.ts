@@ -1,6 +1,6 @@
 import type { MediaTypeObject } from "openapi3-ts/oas30";
-import { describe, expect, it } from "vitest";
-import { findCompatibleMediaType } from "./findCompatibleMediaType";
+import { describe, expect, it } from "vite-plus/test";
+import { findCompatibleMediaType } from "./findCompatibleMediaType.js";
 
 describe("findCompatibleMediaType", () => {
   it("should return undefined if content is empty", () => {

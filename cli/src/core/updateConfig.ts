@@ -1,5 +1,5 @@
 import ts from "typescript";
-import type { Import } from "../types";
+import type { Import } from "../types/index.js";
 
 const { factory: f } = ts;
 

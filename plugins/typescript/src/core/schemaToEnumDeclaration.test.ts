@@ -1,8 +1,8 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "vite-plus/test";
 import { OpenAPIObject, SchemaObject } from "openapi3-ts/oas30";
 import ts from "typescript";
-import { schemaToEnumDeclaration } from "./schemaToEnumDeclaration";
-import { OpenAPIComponentType } from "./schemaToTypeAliasDeclaration";
+import { schemaToEnumDeclaration } from "./schemaToEnumDeclaration.js";
+import { OpenAPIComponentType } from "./schemaToTypeAliasDeclaration.js";
 
 describe("schemaToTypeAliasDeclaration", () => {
   it("should generate a string enums", () => {
@@ -104,7 +104,7 @@ describe("schemaToTypeAliasDeclaration", () => {
           Saimois = "saimois",
           Bengal = "bengal",
           BritishShorthair = "british shorthair",
-          "danish\\u2013swedish farmdog" = "danish\\u2013swedish farmdog"
+          DanishswedishFarmdog = "danish\\u2013swedish farmdog"
       }"
     `);
   });

@@ -68,7 +68,7 @@ export type GithubOptions = {
 
 export type FromOptions = FileOptions | UrlOptions | GithubOptions;
 
-export type Context = {
+type Context = {
   openAPIDocument: OpenAPIObject;
   outputDir: string;
   writeFile: (file: string, data: string) => Promise<void>;
@@ -98,4 +98,6 @@ export type Import = {
 };
 
 export type Plugin =
-  "typescript/types-only" | "typescript/react-query" | "typescript/fetch";
+  | "typescript/types-only"
+  | "typescript/react-query"
+  | "typescript/fetch";

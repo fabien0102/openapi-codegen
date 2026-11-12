@@ -1,4 +1,4 @@
-import { pascal } from "case";
+import { pascalCase } from "case-anything";
 
 export const getContext = (
   prefix: string,
@@ -12,8 +12,8 @@ export const getContext = (
     type UseQueryOptions,
  } from "@tanstack/react-query";
   import ${useTypeImports ? "type { QueryOperation }" : "{ QueryOperation }"} from './${componentsFile}';
-  
-  export type ${pascal(prefix)}Context<
+
+  export type ${pascalCase(prefix)}Context<
     TQueryFnData = unknown,
     TError = DefaultError,
     TData = TQueryFnData,
@@ -37,20 +37,20 @@ export const getContext = (
       enabled?: UseQueryOptions<TQueryFnData, TError, TData, TQueryKey>["enabled"];
     };
   };
-  
+
   /**
    * Context injected into every react-query hook wrappers
-   * 
+   *
    * @param queryOptions options from the useQuery wrapper
    */
-   export function use${pascal(prefix)}Context<
+   export function use${pascalCase(prefix)}Context<
    TQueryFnData = unknown,
    TError = DefaultError,
    TData = TQueryFnData,
    TQueryKey extends QueryKey = QueryKey
  >(
    _queryOptions?: Omit<UseQueryOptions<TQueryFnData, TError, TData, TQueryKey>, 'queryKey' | 'queryFn'>
- ): ${pascal(prefix)}Context<TQueryFnData, TError, TData, TQueryKey> {
+ ): ${pascalCase(prefix)}Context<TQueryFnData, TError, TData, TQueryKey> {
     return {
       fetcherOptions: {},
       queryOptions: {}
@@ -64,15 +64,15 @@ export const getContext = (
           .filter(Boolean)
           .map((i) => resolvePathParam(i, operation.variables.pathParams))
       : operation.path.split("/").filter(Boolean);
-  
+
     if (hasQueryParams(operation)) {
       queryKey.push(operation.variables.queryParams);
     }
-  
+
     if (hasBody(operation)) {
       queryKey.push(operation.variables.body);
     }
-  
+
     return queryKey;
   }
 

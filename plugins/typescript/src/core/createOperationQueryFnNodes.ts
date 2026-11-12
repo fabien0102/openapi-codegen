@@ -1,7 +1,7 @@
-import { camelCase } from "lodash";
+import { camelCase } from "case-anything";
 import { OperationObject } from "openapi3-ts/oas30";
 import ts, { factory as f } from "typescript";
-import { camelizedPathParams } from "./camelizedPathParams";
+import { camelizedPathParams } from "./camelizedPathParams.js";
 
 /**
  * Create the declaration of the react-router queries.

@@ -62,7 +62,7 @@ export const petstore: OpenAPIObject = {
                 schema: {
                   type: "array",
                   items: {
-                    $ref: "#/components/schemas/Pet",
+                    $ref: "#/components/schemas/pet",
                   },
                 },
               },
@@ -89,7 +89,7 @@ export const petstore: OpenAPIObject = {
           content: {
             "application/json": {
               schema: {
-                $ref: "#/components/schemas/NewPet",
+                $ref: "#/components/schemas/new-pet",
               },
             },
           },
@@ -100,7 +100,7 @@ export const petstore: OpenAPIObject = {
             content: {
               "application/json": {
                 schema: {
-                  $ref: "#/components/schemas/Pet",
+                  $ref: "#/components/schemas/pet",
                 },
               },
             },
@@ -141,7 +141,7 @@ export const petstore: OpenAPIObject = {
             content: {
               "application/json": {
                 schema: {
-                  $ref: "#/components/schemas/Pet",
+                  $ref: "#/components/schemas/pet",
                 },
               },
             },
@@ -213,7 +213,7 @@ export const petstore: OpenAPIObject = {
             content: {
               "application/json": {
                 schema: {
-                  $ref: "#/components/schemas/Pet",
+                  $ref: "#/components/schemas/pet",
                 },
               },
             },
@@ -259,7 +259,7 @@ export const petstore: OpenAPIObject = {
         content: {
           "application/json": {
             schema: {
-              $ref: "#/components/schemas/NewPet",
+              $ref: "#/components/schemas/new-pet",
             },
           },
         },
@@ -286,7 +286,7 @@ export const petstore: OpenAPIObject = {
         content: {
           "application/json": {
             schema: {
-              $ref: "#/components/schemas/Pet",
+              $ref: "#/components/schemas/pet",
             },
           },
         },
@@ -304,11 +304,11 @@ export const petstore: OpenAPIObject = {
       },
     },
     schemas: {
-      Pet: {
+      pet: {
         description: "A pet.",
         allOf: [
           {
-            $ref: "#/components/schemas/NewPet",
+            $ref: "#/components/schemas/new-pet",
           },
           {
             type: "object",
@@ -322,7 +322,7 @@ export const petstore: OpenAPIObject = {
           },
         ],
       },
-      NewPet: {
+      "new-pet": {
         description: "A new pet.",
         type: "object",
         required: ["name"],

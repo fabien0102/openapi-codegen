@@ -1,4 +1,4 @@
-import { camel } from "case";
+import { camelCase } from "case-anything";
 import { ParameterObject, SchemaObject } from "openapi3-ts/oas30";
 
 /**
@@ -12,7 +12,7 @@ export const paramsToSchema = (
   params: ParameterObject[],
   optionalKeys: string[] = []
 ): SchemaObject => {
-  const formatKey = params[0].in === "path" ? camel : (key: string) => key;
+  const formatKey = params[0].in === "path" ? camelCase : (key: string) => key;
   return {
     type: "object",
     properties: params.reduce((mem, param) => {

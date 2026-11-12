@@ -1,9 +1,8 @@
 import { OpenAPIObject } from "openapi3-ts/oas30";
 
-import type { OpenAPISourceFile } from "../types";
+import type { OpenAPISourceFile } from "../types/index.js";
 
 import swagger2openapi from "swagger2openapi";
-import YAML from "js-yaml";
 
 /**
  * Parse an openAPI source file to an openAPI object.
@@ -13,10 +12,11 @@ import YAML from "js-yaml";
  * @param text raw data of the spec
  * @param format format of the spec
  */
-export const parseOpenAPISourceFile = ({
+export const parseOpenAPISourceFile = async ({
   text,
   format,
 }: OpenAPISourceFile): Promise<OpenAPIObject> => {
+  const YAML = await import("js-yaml");
   const schema = format === "yaml" ? YAML.load(text) : JSON.parse(text);
 
   return new Promise((resolve, reject) => {

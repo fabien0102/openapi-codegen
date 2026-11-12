@@ -1,24 +1,24 @@
 import ts, { factory as f } from "typescript";
-import * as c from "case";
-import { get } from "lodash";
+import * as c from "case-anything";
+import { get } from "lodash-es";
 
-import { ConfigBase, Context } from "./types";
+import { ConfigBase, Context } from "./types.js";
 import { PathItemObject } from "openapi3-ts/oas30";
 
-import { getUsedImports } from "../core/getUsedImports";
-import { createWatermark } from "../core/createWatermark";
-import { createOperationFetcherFnNodes } from "../core/createOperationFetcherFnNodes";
-import { isVerb } from "../core/isVerb";
-import { isOperationObject } from "../core/isOperationObject";
-import { getOperationTypes } from "../core/getOperationTypes";
+import { getUsedImports } from "../core/getUsedImports.js";
+import { createWatermark } from "../core/createWatermark.js";
+import { createOperationFetcherFnNodes } from "../core/createOperationFetcherFnNodes.js";
+import { isVerb } from "../core/isVerb.js";
+import { isOperationObject } from "../core/isOperationObject.js";
+import { getOperationTypes } from "../core/getOperationTypes.js";
 import {
   createNamedImport,
   shouldUseTypeImport,
-} from "../core/createNamedImport";
+} from "../core/createNamedImport.js";
 
-import { getFetcher } from "../templates/fetcher";
-import { getUtils } from "../templates/utils";
-import { createNamespaceImport } from "../core/createNamespaceImport";
+import { getFetcher } from "../templates/fetcher.js";
+import { getUtils } from "../templates/utils.js";
+import { createNamespaceImport } from "../core/createNamespaceImport.js";
 
 export type Config = ConfigBase & {
   /**
@@ -66,25 +66,26 @@ export const generateFetchers = async (context: Context, config: Config) => {
       .join("\n");
 
   const filenamePrefix =
-    c.snake(config.filenamePrefix ?? context.openAPIDocument.info.title) + "-";
+    c.snakeCase(config.filenamePrefix ?? context.openAPIDocument.info.title) +
+    "-";
 
   const formatFilename =
     typeof config.formatFilename === "function"
       ? config.formatFilename
       : config.filenameCase
-        ? c[config.filenameCase]
-        : c.camel;
+        ? c[`${config.filenameCase}Case`]
+        : c.camelCase;
 
   const filename = formatFilename(filenamePrefix + "-components");
 
-  const fetcherFn = c.camel(`${filenamePrefix}-fetch`);
+  const fetcherFn = c.camelCase(`${filenamePrefix}-fetch`);
   const nodes: ts.Node[] = [];
   const fetcherImports = [fetcherFn];
 
   const fetcherFilename = formatFilename(filenamePrefix + "-fetcher");
   const utilsFilename = formatFilename(filenamePrefix + "-utils");
 
-  const fetcherExtraPropsTypeName = `${c.pascal(
+  const fetcherExtraPropsTypeName = `${c.pascalCase(
     filenamePrefix
   )}FetcherExtraProps`;
 
@@ -134,7 +135,7 @@ export const generateFetchers = async (context: Context, config: Config) => {
     ([route, verbs]: [string, PathItemObject]) => {
       Object.entries(verbs).forEach(([verb, operation]) => {
         if (!isVerb(verb) || !isOperationObject(operation)) return;
-        const operationId = c.camel(operation.operationId);
+        const operationId = c.camelCase(operation.operationId);
         if (operationIds.includes(operationId)) {
           throw new Error(
             `The operationId "${operation.operationId}" is duplicated in your schema definition!`
@@ -204,7 +205,7 @@ export const generateFetchers = async (context: Context, config: Config) => {
               f.createObjectLiteralExpression(
                 Object.entries(operationByTags).map(([tag, operationIds]) => {
                   return f.createPropertyAssignment(
-                    f.createStringLiteral(c.camel(tag)),
+                    f.createStringLiteral(c.camelCase(tag)),
                     f.createObjectLiteralExpression(
                       operationIds.map((operationId) =>
                         f.createShorthandPropertyAssignment(operationId)
