@@ -10,13 +10,13 @@ import {
   isSchemaObject,
 } from "openapi3-ts/oas30";
 import pluralize from "pluralize";
-import { isValidIdentifier } from "tsutils";
 import ts, {
   factory as f,
   isIdentifierPart,
   isIdentifierStart,
 } from "typescript";
 import { convertNumberToWord } from "../utils/getEnumProperties.js";
+import { isValidIdentifier } from "../utils/isValidIdentifier.js";
 import { getReferenceSchema } from "./getReference.js";
 
 type RemoveIndex<T> = {
