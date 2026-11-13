@@ -1,5 +1,16 @@
 # Changelog
 
+## [4.0.0](https://github.com/fabien0102/openapi-codegen/compare/cli-v3.1.0...cli-v4.0.0) (2026-11-13)
+
+
+### ⚠ BREAKING CHANGES
+
+* esm only ([#359](https://github.com/fabien0102/openapi-codegen/issues/359))
+
+### Features
+
+* esm only ([#359](https://github.com/fabien0102/openapi-codegen/issues/359)) ([d01198a](https://github.com/fabien0102/openapi-codegen/commit/d01198a11e6a6033974710454a16f887d1ebdeb9))
+
 ## [3.1.0](https://github.com/fabien0102/openapi-codegen/compare/cli-v3.0.1...cli-v3.1.0) (2025-02-17)
 
 
