@@ -48,7 +48,7 @@ jobs:
           PATHS_RELEASED: ${{ steps.release.outputs.paths_released }}
         with:
           script: |
-            import { execFileSync } from "node:child_process";
+            const { execFileSync } = require("node:child_process");
 
             const paths = JSON.parse(process.env.PATHS_RELEASED);
 
