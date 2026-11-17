@@ -24,10 +24,10 @@
     "knip": "knip"
   },
   "devDependencies": {
-    "@types/node": "^26.6.5",
+    "@types/node": "^26.6.6",
     "all-contributors-cli": "^6.26.1",
-    "knip": "^6.43.0",
-    "typescript": "~6.0.2",
+    "knip": "^6.45.1",
+    "typescript": "~6.0.3",
     "vite": "catalog:",
     "vite-plus": "catalog:"
   },

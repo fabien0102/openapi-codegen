@@ -27,9 +27,7 @@ import {
 
 export default defineConfig({
   petstore: {
-    from: {
-      /* file, url or github */
-    },
+    from: {/* file, url or github */},
     outputDir: "./petStore",
     to: async (context) => {
       const filenamePrefix = "petStore";
@@ -181,9 +179,7 @@ import {
 
 export default defineConfig({
   myAPI: {
-    from: {
-      /* file, url or github */
-    },
+    from: {/* file, url or github */},
     outputDir: "./myAPI",
     to: async (context) => {
       // Rename `Foo` to `Bar`

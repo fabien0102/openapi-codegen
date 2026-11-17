@@ -14,6 +14,10 @@
     "url": "git+https://github.com/fabien0102/openapi-codegen.git",
     "directory": "cli"
   },
+  "homepage": "https://github.com/fabien0102/openapi-codegen/tree/main/cli#readme",
+  "bugs": {
+    "url": "https://github.com/fabien0102/openapi-codegen/issues"
+  },
   "bin": {
     "openapi-codegen": "dist/cli.mjs"
   },
