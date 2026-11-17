@@ -14,31 +14,47 @@ jobs:
   release-please:
     runs-on: ubuntu-latest
     steps:
-      - uses: googleapis/release-please-action@v4
+      - uses: googleapis/release-please-action@v17
         id: release
         with:
           token: ${{secrets.GITHUB_TOKEN}}
+
       # The logic below handles the npm publication:
       - name: Checkout Repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         if: ${{ steps.release.outputs.releases_created }}
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4
-        if: ${{ steps.release.outputs.releases_created }}
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        if: ${{ steps.release.outputs.releases_created }}
+
+      - name: Setup pnpm
+        uses: pnpm/setup@v3
         with:
-          node-version: 22
-          registry-url: "https://registry.npmjs.org"
+          runtime: node@22
+          cache: true
+        if: ${{ steps.release.outputs.releases_created }}
+
       - name: Build Packages
         if: ${{ steps.release.outputs.releases_created }}
         run: |
           pnpm install
           pnpm build
 
-      # Release Please has already incremented versions and published tags, so we just
-      # need to publish all unpublished versions to NPM here
-      - name: Publish to NPM
+      # Release Please has already incremented versions and published tags
+      # This is pushing the new packages to npm stage
+      - name: Stage released packages
         if: ${{ steps.release.outputs.releases_created }}
-        run: pnpm -r publish --access public --no-git-checks
+        uses: actions/github-script@v9
+        env:
+          PATHS_RELEASED: ${{ steps.release.outputs.paths_released }}
+        with:
+          script: |
+            import { execFileSync } from "node:child_process";
+
+            const paths = JSON.parse(process.env.PATHS_RELEASED);
+
+            for (const path of paths) {
+              console.log(`Staging package: ${path}`);
+
+              execFileSync("npm", ["stage", "publish"], {
+                cwd: path,
+                stdio: "inherit",
+              });
+            }
