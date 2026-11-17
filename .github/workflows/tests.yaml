@@ -15,14 +15,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout branch
-        uses: actions/checkout@v4
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4
-      - name: Use Node.js 22
-        uses: actions/setup-node@v4
+        uses: actions/checkout@v7
+      - name: Setup pnpm
+        uses: pnpm/setup@v3
         with:
-          node-version: 22
-          cache: "pnpm"
+          runtime: node@22
+          cache: true
       - name: Install dependencies
         run: pnpm install
       - name: Build
