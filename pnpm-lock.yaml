@@ -229,6 +229,9 @@ importers:
       openapi3-ts:
         specifier: ^4.6.1
         version: 4.6.2
+      oxfmt:
+        specifier: ^0.75.0
+        version: 0.75.0(vite-plus@1.7.0(@types/node@26.6.6)(@vitest/ui@5.1.0)(jiti@2.7.0)(typescript@6.0.3)(yaml@2.9.1))
       slash:
         specifier: ^5.1.0
         version: 5.1.0
