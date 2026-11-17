@@ -25,7 +25,7 @@
   },
   "devDependencies": {
     "@types/node": "^26.6.6",
-    "all-contributors-cli": "^6.26.1",
+    "all-contributors-cli": "7.0.3",
     "knip": "^6.45.1",
     "typescript": "~6.0.3",
     "vite": "catalog:",
