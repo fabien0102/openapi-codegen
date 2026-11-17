@@ -1,5 +1,22 @@
 # Changelog
 
+## [12.0.0](https://github.com/fabien0102/openapi-codegen/compare/typescript-v11.3.0...typescript-v12.0.0) (2026-11-17)
+
+
+### ⚠ BREAKING CHANGES
+
+* esm only ([#359](https://github.com/fabien0102/openapi-codegen/issues/359))
+
+### Features
+
+* esm only ([#359](https://github.com/fabien0102/openapi-codegen/issues/359)) ([d01198a](https://github.com/fabien0102/openapi-codegen/commit/d01198a11e6a6033974710454a16f887d1ebdeb9))
+
+
+### Bug Fixes
+
+* deepMerge no longer mutates its arguments ([#350](https://github.com/fabien0102/openapi-codegen/issues/350)) ([bf3fd0f](https://github.com/fabien0102/openapi-codegen/commit/bf3fd0fa760082005c743a053ce597c36872c91d))
+* drop tsutils ([#361](https://github.com/fabien0102/openapi-codegen/issues/361)) ([478cad6](https://github.com/fabien0102/openapi-codegen/commit/478cad6f6fd4a31693ac99a26547b635eba6dc08))
+
 ## [11.3.0](https://github.com/fabien0102/openapi-codegen/compare/typescript-v11.2.0...typescript-v11.3.0) (2026-04-24)
 
 
