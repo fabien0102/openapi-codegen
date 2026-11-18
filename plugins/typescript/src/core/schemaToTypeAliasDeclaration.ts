@@ -278,9 +278,16 @@ export const getType = (
         schema.nullable
       );
     case "string": {
-      if (schema.format === "binary") {
+      if (
+        // OAS30
+        schema.format === "binary" ||
+        // OAS31
+        ("contentMediaType" in schema &&
+          schema.contentMediaType === "application/octet-stream")
+      ) {
         return f.createTypeReferenceNode("Blob");
       }
+
       return withNullable(
         f.createKeywordTypeNode(ts.SyntaxKind.StringKeyword),
         schema.nullable
