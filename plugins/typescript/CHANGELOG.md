@@ -1,5 +1,17 @@
 # Changelog
 
+## [12.1.0](https://github.com/fabien0102/openapi-codegen/compare/typescript-v12.0.0...typescript-v12.1.0) (2026-11-18)
+
+
+### Features
+
+* Support OAS3.1 binary format ([#366](https://github.com/fabien0102/openapi-codegen/issues/366)) ([91fa783](https://github.com/fabien0102/openapi-codegen/commit/91fa78325cfcefc921863c0a069eca60ccbcf328))
+
+
+### Bug Fixes
+
+* Update all security issues, package.json fields and fix release-please ([#363](https://github.com/fabien0102/openapi-codegen/issues/363)) ([5985a62](https://github.com/fabien0102/openapi-codegen/commit/5985a62593820dc801a4630c06dfa48b0556981a))
+
 ## [12.0.0](https://github.com/fabien0102/openapi-codegen/compare/typescript-v11.3.0...typescript-v12.0.0) (2026-11-17)
 
 
