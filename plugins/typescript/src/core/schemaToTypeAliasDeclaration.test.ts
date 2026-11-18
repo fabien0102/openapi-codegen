@@ -4,6 +4,7 @@ import {
   ReferenceObject,
   SchemaObject,
 } from "openapi3-ts/oas30";
+import { SchemaObject as SchemaObject31 } from "openapi3-ts/oas31";
 import ts from "typescript";
 import {
   OpenAPIComponentType,
@@ -490,6 +491,61 @@ describe("schemaToTypeAliasDeclaration", () => {
            */
           bar?: number;
           baz?: boolean;
+      };"
+    `);
+  });
+
+  it("should generate a Blob", () => {
+    const schema: SchemaObject = {
+      type: "object",
+      required: ["document", "opportunity_id"],
+      properties: {
+        document: {
+          type: "string",
+          format: "binary",
+          description: "Proposal document file",
+        },
+        opportunity_id: {
+          type: "string",
+        },
+      },
+    };
+
+    expect(printSchema(schema)).toMatchInlineSnapshot(`
+      "export type Test = {
+          /**
+           * Proposal document file
+           *
+           * @format binary
+           */
+          document: Blob;
+          opportunity_id: string;
+      };"
+    `);
+  });
+
+  it("should generate a Blob (oas3.1)", () => {
+    const schema: SchemaObject31 = {
+      type: "object",
+      required: ["document", "opportunity_id"],
+      properties: {
+        document: {
+          type: "string",
+          contentMediaType: "application/octet-stream",
+          description: "Proposal document file",
+        },
+        opportunity_id: {
+          type: "string",
+        },
+      },
+    };
+    expect(printSchema(schema as SchemaObject)).toMatchInlineSnapshot(`
+      "export type Test = {
+          /**
+           * Proposal document file
+           */
+          document: Blob;
+          opportunity_id: string;
       };"
     `);
   });
