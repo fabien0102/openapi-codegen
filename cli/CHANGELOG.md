@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.0.1](https://github.com/fabien0102/openapi-codegen/compare/cli-v4.0.0...cli-v4.0.1) (2026-11-18)
+
+
+### Bug Fixes
+
+* Update all security issues, package.json fields and fix release-please ([#363](https://github.com/fabien0102/openapi-codegen/issues/363)) ([5985a62](https://github.com/fabien0102/openapi-codegen/commit/5985a62593820dc801a4630c06dfa48b0556981a))
+
 ## [4.0.0](https://github.com/fabien0102/openapi-codegen/compare/cli-v3.1.0...cli-v4.0.0) (2026-11-17)
 
 
