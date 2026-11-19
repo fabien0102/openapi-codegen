@@ -1,6 +1,18 @@
+import path from "node:path";
 import { defineConfig } from "vite-plus";
 
 export default defineConfig({
+  resolve: {
+    alias: [
+      {
+        find: /^typescript$/,
+        replacement: path.resolve(
+          __dirname,
+          "./plugins/typescript/src/typescript.ts"
+        ),
+      },
+    ],
+  },
   staged: {
     "*": "vp check --fix",
   },
@@ -132,6 +144,12 @@ export default defineConfig({
           "prefer-const": "error",
           "prefer-rest-params": "error",
           "prefer-spread": "error",
+        },
+      },
+      {
+        files: ["plugins/typescript/src/typescript.ts"],
+        rules: {
+          "typescript/no-namespace": "off",
         },
       },
     ],

@@ -68,7 +68,7 @@ export const analyzeImportUsage = (
         return !(usages.type && usages.value);
       }
 
-      return !node.forEachChild((child) => !checkNode(child));
+      return !ts.forEachChild(node, (child) => !checkNode(child as ts.Node));
     };
 
     nodes.every(checkNode);

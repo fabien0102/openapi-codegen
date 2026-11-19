@@ -27,7 +27,7 @@
     "@types/node": "^26.6.6",
     "all-contributors-cli": "7.0.3",
     "knip": "^6.45.1",
-    "typescript": "~6.0.3",
+    "typescript": "7.1.0-beta",
     "vite": "catalog:",
     "vite-plus": "catalog:"
   },

@@ -28,7 +28,7 @@
     "access": "public"
   },
   "scripts": {
-    "build": "vp pack src/index.ts",
+    "build": "vp pack src/index.ts --no-dts && tsc -p tsconfig.package.json --emitDeclarationOnly --declaration --outDir dist && cp dist/index.d.ts dist/index.d.mts",
     "prepublishOnly": "pnpm build"
   },
   "dependencies": {
@@ -36,7 +36,7 @@
     "lodash-es": "^4.18.1",
     "openapi3-ts": "^4.6.1",
     "pluralize": "^8.0.0",
-    "typescript": "~6.0.2"
+    "typescript": "7.1.0-beta"
   },
   "type": "module",
   "devDependencies": {

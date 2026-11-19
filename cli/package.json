@@ -32,7 +32,7 @@
     "access": "public"
   },
   "scripts": {
-    "build": "vp pack",
+    "build": "vp pack --no-dts && tsc -p tsconfig.package.json --emitDeclarationOnly --declaration --outDir dist && cp dist/index.d.ts dist/index.d.mts",
     "prepublishOnly": "pnpm build"
   },
   "dependencies": {
@@ -50,7 +50,7 @@
     "slash": "^5.1.0",
     "swagger2openapi": "^7.0.8",
     "typanion": "^3.14.0",
-    "typescript": "~6.0.2"
+    "typescript": "7.1.0-beta"
   },
   "devDependencies": {
     "@types/fs-extra": "^11.0.4",

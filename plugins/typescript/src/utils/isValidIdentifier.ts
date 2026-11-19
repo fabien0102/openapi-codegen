@@ -15,9 +15,13 @@ export const isValidIdentifier = (text: string) => {
     text
   );
   scanner.scan();
-  return (
-    scanner.isIdentifier() &&
-    scanner.getTokenStart() === 0 &&
-    scanner.getTokenEnd() === text.length
-  );
+  const isId =
+    typeof scanner.isIdentifier === "function"
+      ? scanner.isIdentifier()
+      : scanner.getToken() === ts.SyntaxKind.Identifier;
+  const start =
+    typeof scanner.getTokenStart === "function"
+      ? scanner.getTokenStart()
+      : scanner.getTokenPos();
+  return isId && start === 0 && scanner.getTokenEnd() === text.length;
 };

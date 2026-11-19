@@ -12,27 +12,33 @@ const setParentReferences = (node: ts.Node): ts.Node => {
       writable: true,
       configurable: true,
     });
-    n.forEachChild((child) => setParent(child, n));
+    n.forEachChild((child: ts.Node) => setParent(child, n));
   };
 
-  node.forEachChild((child) => setParent(child, node));
+  node.forEachChild((child: ts.Node) => setParent(child, node));
   return node;
 };
 
 describe("createNamedImport", () => {
   it("should create a regular import when isTypeOnly is false", () => {
     const result = createNamedImport("MyType", "./types", false);
-    expect(result.importClause?.isTypeOnly).toBe(false);
+    expect(
+      (result.importClause as unknown as Record<string, unknown>)?.isTypeOnly
+    ).toBe(false);
   });
 
   it("should create a type-only import when isTypeOnly is true", () => {
     const result = createNamedImport("MyType", "./types", true);
-    expect(result.importClause?.isTypeOnly).toBe(true);
+    expect(
+      (result.importClause as unknown as Record<string, unknown>)?.isTypeOnly
+    ).toBe(true);
   });
 
   it("should handle array of imports", () => {
     const result = createNamedImport(["Type1", "Type2"], "./types", true);
-    expect(result.importClause?.isTypeOnly).toBe(true);
+    expect(
+      (result.importClause as unknown as Record<string, unknown>)?.isTypeOnly
+    ).toBe(true);
     expect(result.importClause?.namedBindings).toBeDefined();
   });
 });
