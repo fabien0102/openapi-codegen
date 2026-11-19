@@ -8,6 +8,7 @@ import { API } from "typescript/sync";
 export * from "typescript/ast";
 export * from "typescript/ast/is";
 
+/** @lintignore */
 export enum EmitHint {
   SourceFile = 0,
   Title = 1,
@@ -19,6 +20,7 @@ export enum EmitHint {
   JsxAttributeValue = 7,
 }
 
+/** @lintignore */
 export enum NewLineKind {
   CarriageReturnLineFeed = 0,
   LineFeed = 1,

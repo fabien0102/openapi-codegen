@@ -1,14 +1,15 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "vite-plus/test";
 import {
   OpenAPIObject,
   ReferenceObject,
   SchemaObject,
 } from "openapi3-ts/oas30";
+import { SchemaObject as SchemaObject31 } from "openapi3-ts/oas31";
 import ts from "typescript";
 import {
   OpenAPIComponentType,
   schemaToTypeAliasDeclaration,
-} from "./schemaToTypeAliasDeclaration";
+} from "./schemaToTypeAliasDeclaration.js";
 
 describe("schemaToTypeAliasDeclaration", () => {
   type SchemaObjectWithConst = SchemaObject & {
@@ -100,6 +101,27 @@ describe("schemaToTypeAliasDeclaration", () => {
     };
 
     expect(printSchema(schema)).toBe(`export type Test = "foo" | null;`);
+  });
+
+  it("should handle null in enums", () => {
+    const schema: SchemaObjectWithConst = {
+      type: "string",
+      enum: ["foo", null, "bar"],
+    };
+    expect(printSchema(schema)).toBe(
+      `export type Test = "foo" | "bar" | null;`
+    );
+  });
+
+  it("should handle null in enums (nullable)", () => {
+    const schema: SchemaObjectWithConst = {
+      type: "string",
+      nullable: true,
+      enum: ["foo", null, "bar"],
+    };
+    expect(printSchema(schema)).toBe(
+      `export type Test = "foo" | "bar" | null;`
+    );
   });
 
   it("should generate an array of numbers", () => {
@@ -473,6 +495,61 @@ describe("schemaToTypeAliasDeclaration", () => {
     `);
   });
 
+  it("should generate a Blob", () => {
+    const schema: SchemaObject = {
+      type: "object",
+      required: ["document", "opportunity_id"],
+      properties: {
+        document: {
+          type: "string",
+          format: "binary",
+          description: "Proposal document file",
+        },
+        opportunity_id: {
+          type: "string",
+        },
+      },
+    };
+
+    expect(printSchema(schema)).toMatchInlineSnapshot(`
+      "export type Test = {
+          /**
+           * Proposal document file
+           *
+           * @format binary
+           */
+          document: Blob;
+          opportunity_id: string;
+      };"
+    `);
+  });
+
+  it("should generate a Blob (oas3.1)", () => {
+    const schema: SchemaObject31 = {
+      type: "object",
+      required: ["document", "opportunity_id"],
+      properties: {
+        document: {
+          type: "string",
+          contentMediaType: "application/octet-stream",
+          description: "Proposal document file",
+        },
+        opportunity_id: {
+          type: "string",
+        },
+      },
+    };
+    expect(printSchema(schema as SchemaObject)).toMatchInlineSnapshot(`
+      "export type Test = {
+          /**
+           * Proposal document file
+           */
+          document: Blob;
+          opportunity_id: string;
+      };"
+    `);
+  });
+
   it("should generate an object with escaped keys", () => {
     const schema: SchemaObject = {
       type: "object",
@@ -729,6 +806,31 @@ describe("schemaToTypeAliasDeclaration", () => {
 
     expect(printSchema(schema)).toMatchInlineSnapshot(
       `"export type Test = string | number;"`
+    );
+  });
+
+  it("should optimize oneOf with null values", () => {
+    const schema: SchemaObject = {
+      oneOf: [
+        {
+          type: "string",
+          nullable: true,
+        },
+        {
+          type: "integer",
+          nullable: true,
+        },
+        {
+          type: "array",
+          nullable: true,
+          items: {
+            type: "string",
+          },
+        },
+      ],
+    };
+    expect(printSchema(schema)).toMatchInlineSnapshot(
+      `"export type Test = string | number | string[] | null;"`
     );
   });
 
@@ -993,6 +1095,46 @@ describe("schemaToTypeAliasDeclaration", () => {
                  [key: string]: string;
              };"
           `);
+    });
+
+    it("should merge enum values", () => {
+      const schema: SchemaObject = {
+        allOf: [
+          {
+            type: "object",
+            properties: {
+              conclusion: {
+                type: "string",
+                nullable: true,
+                enum: [
+                  "success",
+                  "failure",
+                  null,
+                  "skipped",
+                  "cancelled",
+                  "action_required",
+                  "neutral",
+                  "timed_out",
+                ],
+              },
+            },
+          },
+          {
+            type: "object",
+            properties: {
+              conclusion: {
+                type: "string",
+                enum: ["cancelled", "action_required", "neutral", "timed_out"],
+              },
+            },
+          },
+        ],
+      };
+      expect(printSchema(schema)).toMatchInlineSnapshot(`
+        "export type Test = {
+            conclusion?: "success" | "failure" | "skipped" | "cancelled" | "action_required" | "neutral" | "timed_out" | null;
+        };"
+      `);
     });
 
     it("should combine properties & additionalProperties & allOf", () => {

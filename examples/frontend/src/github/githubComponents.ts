@@ -46,7 +46,8 @@ export function metaRootQuery(
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn:
-    ((options: QueryFnOptions) => Promise<Schemas.Root>) | reactQuery.SkipToken;
+    | ((options: QueryFnOptions) => Promise<Schemas.Root>)
+    | reactQuery.SkipToken;
 };
 
 export function metaRootQuery(
@@ -2709,7 +2710,8 @@ export function secretScanningListAlertsForEnterpriseQuery(
 
 export function secretScanningListAlertsForEnterpriseQuery(
   variables:
-    SecretScanningListAlertsForEnterpriseVariables | reactQuery.SkipToken
+    | SecretScanningListAlertsForEnterpriseVariables
+    | reactQuery.SkipToken
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn:
@@ -2721,7 +2723,8 @@ export function secretScanningListAlertsForEnterpriseQuery(
 
 export function secretScanningListAlertsForEnterpriseQuery(
   variables:
-    SecretScanningListAlertsForEnterpriseVariables | reactQuery.SkipToken
+    | SecretScanningListAlertsForEnterpriseVariables
+    | reactQuery.SkipToken
 ) {
   return {
     queryKey: queryKeyFn({
@@ -2776,7 +2779,8 @@ export const useSecretScanningListAlertsForEnterprise = <
   TData = SecretScanningListAlertsForEnterpriseResponse,
 >(
   variables:
-    SecretScanningListAlertsForEnterpriseVariables | reactQuery.SkipToken,
+    | SecretScanningListAlertsForEnterpriseVariables
+    | reactQuery.SkipToken,
   options?: Omit<
     reactQuery.UseQueryOptions<
       SecretScanningListAlertsForEnterpriseResponse,
@@ -3003,7 +3007,8 @@ export function activityGetFeedsQuery(
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn:
-    ((options: QueryFnOptions) => Promise<Schemas.Feed>) | reactQuery.SkipToken;
+    | ((options: QueryFnOptions) => Promise<Schemas.Feed>)
+    | reactQuery.SkipToken;
 };
 
 export function activityGetFeedsQuery(
@@ -4931,7 +4936,8 @@ export function gistsCheckIsStarredQuery(
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn:
-    ((options: QueryFnOptions) => Promise<undefined>) | reactQuery.SkipToken;
+    | ((options: QueryFnOptions) => Promise<undefined>)
+    | reactQuery.SkipToken;
 };
 
 export function gistsCheckIsStarredQuery(
@@ -5501,7 +5507,8 @@ export function appsListReposAccessibleToInstallationQuery(
 
 export function appsListReposAccessibleToInstallationQuery(
   variables:
-    AppsListReposAccessibleToInstallationVariables | reactQuery.SkipToken
+    | AppsListReposAccessibleToInstallationVariables
+    | reactQuery.SkipToken
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn:
@@ -5513,7 +5520,8 @@ export function appsListReposAccessibleToInstallationQuery(
 
 export function appsListReposAccessibleToInstallationQuery(
   variables:
-    AppsListReposAccessibleToInstallationVariables | reactQuery.SkipToken
+    | AppsListReposAccessibleToInstallationVariables
+    | reactQuery.SkipToken
 ) {
   return {
     queryKey: queryKeyFn({
@@ -5570,7 +5578,8 @@ export const useAppsListReposAccessibleToInstallation = <
   TData = AppsListReposAccessibleToInstallationResponse,
 >(
   variables:
-    AppsListReposAccessibleToInstallationVariables | reactQuery.SkipToken,
+    | AppsListReposAccessibleToInstallationVariables
+    | reactQuery.SkipToken,
   options?: Omit<
     reactQuery.UseQueryOptions<
       AppsListReposAccessibleToInstallationResponse,
@@ -5660,7 +5669,12 @@ export type IssuesListQueryParams = {
    * @default assigned
    */
   filter?:
-    "assigned" | "created" | "mentioned" | "subscribed" | "repos" | "all";
+    | "assigned"
+    | "created"
+    | "mentioned"
+    | "subscribed"
+    | "repos"
+    | "all";
   /**
    * Indicates the state of the issues to return.
    *
@@ -6715,7 +6729,8 @@ export function appsGetSubscriptionPlanForAccountStubbedQuery(
 
 export function appsGetSubscriptionPlanForAccountStubbedQuery(
   variables:
-    AppsGetSubscriptionPlanForAccountStubbedVariables | reactQuery.SkipToken
+    | AppsGetSubscriptionPlanForAccountStubbedVariables
+    | reactQuery.SkipToken
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn:
@@ -6725,7 +6740,8 @@ export function appsGetSubscriptionPlanForAccountStubbedQuery(
 
 export function appsGetSubscriptionPlanForAccountStubbedQuery(
   variables:
-    AppsGetSubscriptionPlanForAccountStubbedVariables | reactQuery.SkipToken
+    | AppsGetSubscriptionPlanForAccountStubbedVariables
+    | reactQuery.SkipToken
 ) {
   return {
     queryKey: queryKeyFn({
@@ -6782,7 +6798,8 @@ export const useAppsGetSubscriptionPlanForAccountStubbed = <
   TData = Schemas.MarketplacePurchase,
 >(
   variables:
-    AppsGetSubscriptionPlanForAccountStubbedVariables | reactQuery.SkipToken,
+    | AppsGetSubscriptionPlanForAccountStubbedVariables
+    | reactQuery.SkipToken,
   options?: Omit<
     reactQuery.UseQueryOptions<
       Schemas.MarketplacePurchase,
@@ -7324,7 +7341,8 @@ export function activityListPublicEventsForRepoNetworkQuery(
 
 export function activityListPublicEventsForRepoNetworkQuery(
   variables:
-    ActivityListPublicEventsForRepoNetworkVariables | reactQuery.SkipToken
+    | ActivityListPublicEventsForRepoNetworkVariables
+    | reactQuery.SkipToken
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn:
@@ -7336,7 +7354,8 @@ export function activityListPublicEventsForRepoNetworkQuery(
 
 export function activityListPublicEventsForRepoNetworkQuery(
   variables:
-    ActivityListPublicEventsForRepoNetworkVariables | reactQuery.SkipToken
+    | ActivityListPublicEventsForRepoNetworkVariables
+    | reactQuery.SkipToken
 ) {
   return {
     queryKey: queryKeyFn({
@@ -7383,7 +7402,8 @@ export const useActivityListPublicEventsForRepoNetwork = <
   TData = ActivityListPublicEventsForRepoNetworkResponse,
 >(
   variables:
-    ActivityListPublicEventsForRepoNetworkVariables | reactQuery.SkipToken,
+    | ActivityListPublicEventsForRepoNetworkVariables
+    | reactQuery.SkipToken,
   options?: Omit<
     reactQuery.UseQueryOptions<
       ActivityListPublicEventsForRepoNetworkResponse,
@@ -8243,7 +8263,8 @@ export function metaGetOctocatQuery(
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn:
-    ((options: QueryFnOptions) => Promise<undefined>) | reactQuery.SkipToken;
+    | ((options: QueryFnOptions) => Promise<undefined>)
+    | reactQuery.SkipToken;
 };
 
 export function metaGetOctocatQuery(
@@ -8986,7 +9007,8 @@ export function actionsGetActionsCacheUsageByRepoForOrgQuery(
 
 export function actionsGetActionsCacheUsageByRepoForOrgQuery(
   variables:
-    ActionsGetActionsCacheUsageByRepoForOrgVariables | reactQuery.SkipToken
+    | ActionsGetActionsCacheUsageByRepoForOrgVariables
+    | reactQuery.SkipToken
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn:
@@ -8998,7 +9020,8 @@ export function actionsGetActionsCacheUsageByRepoForOrgQuery(
 
 export function actionsGetActionsCacheUsageByRepoForOrgQuery(
   variables:
-    ActionsGetActionsCacheUsageByRepoForOrgVariables | reactQuery.SkipToken
+    | ActionsGetActionsCacheUsageByRepoForOrgVariables
+    | reactQuery.SkipToken
 ) {
   return {
     queryKey: queryKeyFn({
@@ -9055,7 +9078,8 @@ export const useActionsGetActionsCacheUsageByRepoForOrg = <
   TData = ActionsGetActionsCacheUsageByRepoForOrgResponse,
 >(
   variables:
-    ActionsGetActionsCacheUsageByRepoForOrgVariables | reactQuery.SkipToken,
+    | ActionsGetActionsCacheUsageByRepoForOrgVariables
+    | reactQuery.SkipToken,
   options?: Omit<
     reactQuery.UseQueryOptions<
       ActionsGetActionsCacheUsageByRepoForOrgResponse,
@@ -9990,7 +10014,8 @@ export function actionsGetAllowedActionsOrganizationQuery(
 
 export function actionsGetAllowedActionsOrganizationQuery(
   variables:
-    ActionsGetAllowedActionsOrganizationVariables | reactQuery.SkipToken
+    | ActionsGetAllowedActionsOrganizationVariables
+    | reactQuery.SkipToken
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn:
@@ -10000,7 +10025,8 @@ export function actionsGetAllowedActionsOrganizationQuery(
 
 export function actionsGetAllowedActionsOrganizationQuery(
   variables:
-    ActionsGetAllowedActionsOrganizationVariables | reactQuery.SkipToken
+    | ActionsGetAllowedActionsOrganizationVariables
+    | reactQuery.SkipToken
 ) {
   return {
     queryKey: queryKeyFn({
@@ -10057,7 +10083,8 @@ export const useActionsGetAllowedActionsOrganization = <
   TData = Schemas.SelectedActions,
 >(
   variables:
-    ActionsGetAllowedActionsOrganizationVariables | reactQuery.SkipToken,
+    | ActionsGetAllowedActionsOrganizationVariables
+    | reactQuery.SkipToken,
   options?: Omit<
     reactQuery.UseQueryOptions<
       Schemas.SelectedActions,
@@ -11674,7 +11701,8 @@ export const useActionsListRunnerApplicationsForOrg = <
   TData = ActionsListRunnerApplicationsForOrgResponse,
 >(
   variables:
-    ActionsListRunnerApplicationsForOrgVariables | reactQuery.SkipToken,
+    | ActionsListRunnerApplicationsForOrgVariables
+    | reactQuery.SkipToken,
   options?: Omit<
     reactQuery.UseQueryOptions<
       ActionsListRunnerApplicationsForOrgResponse,
@@ -12212,7 +12240,8 @@ export function actionsListLabelsForSelfHostedRunnerForOrgQuery(
 
 export function actionsListLabelsForSelfHostedRunnerForOrgQuery(
   variables:
-    ActionsListLabelsForSelfHostedRunnerForOrgVariables | reactQuery.SkipToken
+    | ActionsListLabelsForSelfHostedRunnerForOrgVariables
+    | reactQuery.SkipToken
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn:
@@ -12222,7 +12251,8 @@ export function actionsListLabelsForSelfHostedRunnerForOrgQuery(
 
 export function actionsListLabelsForSelfHostedRunnerForOrgQuery(
   variables:
-    ActionsListLabelsForSelfHostedRunnerForOrgVariables | reactQuery.SkipToken
+    | ActionsListLabelsForSelfHostedRunnerForOrgVariables
+    | reactQuery.SkipToken
 ) {
   return {
     queryKey: queryKeyFn({
@@ -12279,7 +12309,8 @@ export const useActionsListLabelsForSelfHostedRunnerForOrg = <
   TData = Responses.ActionsRunnerLabels,
 >(
   variables:
-    ActionsListLabelsForSelfHostedRunnerForOrgVariables | reactQuery.SkipToken,
+    | ActionsListLabelsForSelfHostedRunnerForOrgVariables
+    | reactQuery.SkipToken,
   options?: Omit<
     reactQuery.UseQueryOptions<
       Responses.ActionsRunnerLabels,
@@ -13370,7 +13401,8 @@ export function actionsListSelectedReposForOrgSecretQuery(
 
 export function actionsListSelectedReposForOrgSecretQuery(
   variables:
-    ActionsListSelectedReposForOrgSecretVariables | reactQuery.SkipToken
+    | ActionsListSelectedReposForOrgSecretVariables
+    | reactQuery.SkipToken
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn:
@@ -13382,7 +13414,8 @@ export function actionsListSelectedReposForOrgSecretQuery(
 
 export function actionsListSelectedReposForOrgSecretQuery(
   variables:
-    ActionsListSelectedReposForOrgSecretVariables | reactQuery.SkipToken
+    | ActionsListSelectedReposForOrgSecretVariables
+    | reactQuery.SkipToken
 ) {
   return {
     queryKey: queryKeyFn({
@@ -13435,7 +13468,8 @@ export const useActionsListSelectedReposForOrgSecret = <
   TData = ActionsListSelectedReposForOrgSecretResponse,
 >(
   variables:
-    ActionsListSelectedReposForOrgSecretVariables | reactQuery.SkipToken,
+    | ActionsListSelectedReposForOrgSecretVariables
+    | reactQuery.SkipToken,
   options?: Omit<
     reactQuery.UseQueryOptions<
       ActionsListSelectedReposForOrgSecretResponse,
@@ -14271,7 +14305,8 @@ export function actionsListSelectedReposForOrgVariableQuery(
 
 export function actionsListSelectedReposForOrgVariableQuery(
   variables:
-    ActionsListSelectedReposForOrgVariableVariables | reactQuery.SkipToken
+    | ActionsListSelectedReposForOrgVariableVariables
+    | reactQuery.SkipToken
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn:
@@ -14283,7 +14318,8 @@ export function actionsListSelectedReposForOrgVariableQuery(
 
 export function actionsListSelectedReposForOrgVariableQuery(
   variables:
-    ActionsListSelectedReposForOrgVariableVariables | reactQuery.SkipToken
+    | ActionsListSelectedReposForOrgVariableVariables
+    | reactQuery.SkipToken
 ) {
   return {
     queryKey: queryKeyFn({
@@ -14336,7 +14372,8 @@ export const useActionsListSelectedReposForOrgVariable = <
   TData = ActionsListSelectedReposForOrgVariableResponse,
 >(
   variables:
-    ActionsListSelectedReposForOrgVariableVariables | reactQuery.SkipToken,
+    | ActionsListSelectedReposForOrgVariableVariables
+    | reactQuery.SkipToken,
   options?: Omit<
     reactQuery.UseQueryOptions<
       ActionsListSelectedReposForOrgVariableResponse,
@@ -14820,7 +14857,8 @@ export function orgsCheckBlockedUserQuery(
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn:
-    ((options: QueryFnOptions) => Promise<undefined>) | reactQuery.SkipToken;
+    | ((options: QueryFnOptions) => Promise<undefined>)
+    | reactQuery.SkipToken;
 };
 
 export function orgsCheckBlockedUserQuery(
@@ -16425,7 +16463,8 @@ export function codespacesListSelectedReposForOrgSecretQuery(
 
 export function codespacesListSelectedReposForOrgSecretQuery(
   variables:
-    CodespacesListSelectedReposForOrgSecretVariables | reactQuery.SkipToken
+    | CodespacesListSelectedReposForOrgSecretVariables
+    | reactQuery.SkipToken
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn:
@@ -16437,7 +16476,8 @@ export function codespacesListSelectedReposForOrgSecretQuery(
 
 export function codespacesListSelectedReposForOrgSecretQuery(
   variables:
-    CodespacesListSelectedReposForOrgSecretVariables | reactQuery.SkipToken
+    | CodespacesListSelectedReposForOrgSecretVariables
+    | reactQuery.SkipToken
 ) {
   return {
     queryKey: queryKeyFn({
@@ -16490,7 +16530,8 @@ export const useCodespacesListSelectedReposForOrgSecret = <
   TData = CodespacesListSelectedReposForOrgSecretResponse,
 >(
   variables:
-    CodespacesListSelectedReposForOrgSecretVariables | reactQuery.SkipToken,
+    | CodespacesListSelectedReposForOrgSecretVariables
+    | reactQuery.SkipToken,
   options?: Omit<
     reactQuery.UseQueryOptions<
       CodespacesListSelectedReposForOrgSecretResponse,
@@ -17798,7 +17839,8 @@ export function dependabotListSelectedReposForOrgSecretQuery(
 
 export function dependabotListSelectedReposForOrgSecretQuery(
   variables:
-    DependabotListSelectedReposForOrgSecretVariables | reactQuery.SkipToken
+    | DependabotListSelectedReposForOrgSecretVariables
+    | reactQuery.SkipToken
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn:
@@ -17810,7 +17852,8 @@ export function dependabotListSelectedReposForOrgSecretQuery(
 
 export function dependabotListSelectedReposForOrgSecretQuery(
   variables:
-    DependabotListSelectedReposForOrgSecretVariables | reactQuery.SkipToken
+    | DependabotListSelectedReposForOrgSecretVariables
+    | reactQuery.SkipToken
 ) {
   return {
     queryKey: queryKeyFn({
@@ -17863,7 +17906,8 @@ export const useDependabotListSelectedReposForOrgSecret = <
   TData = DependabotListSelectedReposForOrgSecretResponse,
 >(
   variables:
-    DependabotListSelectedReposForOrgSecretVariables | reactQuery.SkipToken,
+    | DependabotListSelectedReposForOrgSecretVariables
+    | reactQuery.SkipToken,
   options?: Omit<
     reactQuery.UseQueryOptions<
       DependabotListSelectedReposForOrgSecretResponse,
@@ -20115,7 +20159,11 @@ export type OrgsListPendingInvitationsQueryParams = {
    * @default all
    */
   role?:
-    "all" | "admin" | "direct_member" | "billing_manager" | "hiring_manager";
+    | "all"
+    | "admin"
+    | "direct_member"
+    | "billing_manager"
+    | "hiring_manager";
   /**
    * Filter invitations by their invitation source.
    *
@@ -20590,7 +20638,12 @@ export type IssuesListForOrgQueryParams = {
    * @default assigned
    */
   filter?:
-    "assigned" | "created" | "mentioned" | "subscribed" | "repos" | "all";
+    | "assigned"
+    | "created"
+    | "mentioned"
+    | "subscribed"
+    | "repos"
+    | "all";
   /**
    * Indicates the state of the issues to return.
    *
@@ -21042,7 +21095,8 @@ export function orgsCheckMembershipForUserQuery(
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn:
-    ((options: QueryFnOptions) => Promise<undefined>) | reactQuery.SkipToken;
+    | ((options: QueryFnOptions) => Promise<undefined>)
+    | reactQuery.SkipToken;
 };
 
 export function orgsCheckMembershipForUserQuery(
@@ -21281,7 +21335,8 @@ export const useCodespacesGetCodespacesForUserInOrg = <
   TData = CodespacesGetCodespacesForUserInOrgResponse,
 >(
   variables:
-    CodespacesGetCodespacesForUserInOrgVariables | reactQuery.SkipToken,
+    | CodespacesGetCodespacesForUserInOrgVariables
+    | reactQuery.SkipToken,
   options?: Omit<
     reactQuery.UseQueryOptions<
       CodespacesGetCodespacesForUserInOrgResponse,
@@ -22376,7 +22431,8 @@ export function migrationsDownloadArchiveForOrgQuery(
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn:
-    ((options: QueryFnOptions) => Promise<undefined>) | reactQuery.SkipToken;
+    | ((options: QueryFnOptions) => Promise<undefined>)
+    | reactQuery.SkipToken;
 };
 
 export function migrationsDownloadArchiveForOrgQuery(
@@ -23138,7 +23194,8 @@ export const usePackagesListPackagesForOrganization = <
   TData = PackagesListPackagesForOrganizationResponse,
 >(
   variables:
-    PackagesListPackagesForOrganizationVariables | reactQuery.SkipToken,
+    | PackagesListPackagesForOrganizationVariables
+    | reactQuery.SkipToken,
   options?: Omit<
     reactQuery.UseQueryOptions<
       PackagesListPackagesForOrganizationResponse,
@@ -23860,7 +23917,8 @@ export function packagesGetPackageVersionForOrganizationQuery(
 
 export function packagesGetPackageVersionForOrganizationQuery(
   variables:
-    PackagesGetPackageVersionForOrganizationVariables | reactQuery.SkipToken
+    | PackagesGetPackageVersionForOrganizationVariables
+    | reactQuery.SkipToken
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn:
@@ -23870,7 +23928,8 @@ export function packagesGetPackageVersionForOrganizationQuery(
 
 export function packagesGetPackageVersionForOrganizationQuery(
   variables:
-    PackagesGetPackageVersionForOrganizationVariables | reactQuery.SkipToken
+    | PackagesGetPackageVersionForOrganizationVariables
+    | reactQuery.SkipToken
 ) {
   return {
     queryKey: queryKeyFn({
@@ -23927,7 +23986,8 @@ export const usePackagesGetPackageVersionForOrganization = <
   TData = Schemas.PackageVersion,
 >(
   variables:
-    PackagesGetPackageVersionForOrganizationVariables | reactQuery.SkipToken,
+    | PackagesGetPackageVersionForOrganizationVariables
+    | reactQuery.SkipToken,
   options?: Omit<
     reactQuery.UseQueryOptions<
       Schemas.PackageVersion,
@@ -24543,7 +24603,8 @@ export function orgsCheckPublicMembershipForUserQuery(
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn:
-    ((options: QueryFnOptions) => Promise<undefined>) | reactQuery.SkipToken;
+    | ((options: QueryFnOptions) => Promise<undefined>)
+    | reactQuery.SkipToken;
 };
 
 export function orgsCheckPublicMembershipForUserQuery(
@@ -27728,7 +27789,14 @@ export type ReactionsListForTeamDiscussionCommentInOrgQueryParams = {
    * Returns a single [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types). Omit this parameter to list all reactions to a team discussion comment.
    */
   content?:
-    "+1" | "-1" | "laugh" | "confused" | "heart" | "hooray" | "rocket" | "eyes";
+    | "+1"
+    | "-1"
+    | "laugh"
+    | "confused"
+    | "heart"
+    | "hooray"
+    | "rocket"
+    | "eyes";
   /**
    * The number of results per page (max 100).
    *
@@ -27793,7 +27861,8 @@ export function reactionsListForTeamDiscussionCommentInOrgQuery(
 
 export function reactionsListForTeamDiscussionCommentInOrgQuery(
   variables:
-    ReactionsListForTeamDiscussionCommentInOrgVariables | reactQuery.SkipToken
+    | ReactionsListForTeamDiscussionCommentInOrgVariables
+    | reactQuery.SkipToken
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn:
@@ -27805,7 +27874,8 @@ export function reactionsListForTeamDiscussionCommentInOrgQuery(
 
 export function reactionsListForTeamDiscussionCommentInOrgQuery(
   variables:
-    ReactionsListForTeamDiscussionCommentInOrgVariables | reactQuery.SkipToken
+    | ReactionsListForTeamDiscussionCommentInOrgVariables
+    | reactQuery.SkipToken
 ) {
   return {
     queryKey: queryKeyFn({
@@ -27862,7 +27932,8 @@ export const useReactionsListForTeamDiscussionCommentInOrg = <
   TData = ReactionsListForTeamDiscussionCommentInOrgResponse,
 >(
   variables:
-    ReactionsListForTeamDiscussionCommentInOrgVariables | reactQuery.SkipToken,
+    | ReactionsListForTeamDiscussionCommentInOrgVariables
+    | reactQuery.SkipToken,
   options?: Omit<
     reactQuery.UseQueryOptions<
       ReactionsListForTeamDiscussionCommentInOrgResponse,
@@ -27915,7 +27986,14 @@ export type ReactionsCreateForTeamDiscussionCommentInOrgRequestBody = {
    * The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the team discussion comment.
    */
   content:
-    "+1" | "-1" | "laugh" | "confused" | "heart" | "hooray" | "rocket" | "eyes";
+    | "+1"
+    | "-1"
+    | "laugh"
+    | "confused"
+    | "heart"
+    | "hooray"
+    | "rocket"
+    | "eyes";
 };
 
 export type ReactionsCreateForTeamDiscussionCommentInOrgVariables = {
@@ -28079,7 +28157,14 @@ export type ReactionsListForTeamDiscussionInOrgQueryParams = {
    * Returns a single [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types). Omit this parameter to list all reactions to a team discussion.
    */
   content?:
-    "+1" | "-1" | "laugh" | "confused" | "heart" | "hooray" | "rocket" | "eyes";
+    | "+1"
+    | "-1"
+    | "laugh"
+    | "confused"
+    | "heart"
+    | "hooray"
+    | "rocket"
+    | "eyes";
   /**
    * The number of results per page (max 100).
    *
@@ -28210,7 +28295,8 @@ export const useReactionsListForTeamDiscussionInOrg = <
   TData = ReactionsListForTeamDiscussionInOrgResponse,
 >(
   variables:
-    ReactionsListForTeamDiscussionInOrgVariables | reactQuery.SkipToken,
+    | ReactionsListForTeamDiscussionInOrgVariables
+    | reactQuery.SkipToken,
   options?: Omit<
     reactQuery.UseQueryOptions<
       ReactionsListForTeamDiscussionInOrgResponse,
@@ -28259,7 +28345,14 @@ export type ReactionsCreateForTeamDiscussionInOrgRequestBody = {
    * The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the team discussion.
    */
   content:
-    "+1" | "-1" | "laugh" | "confused" | "heart" | "hooray" | "rocket" | "eyes";
+    | "+1"
+    | "-1"
+    | "laugh"
+    | "confused"
+    | "heart"
+    | "hooray"
+    | "rocket"
+    | "eyes";
 };
 
 export type ReactionsCreateForTeamDiscussionInOrgVariables = {
@@ -29378,7 +29471,8 @@ export function teamsCheckPermissionsForProjectInOrgQuery(
 
 export function teamsCheckPermissionsForProjectInOrgQuery(
   variables:
-    TeamsCheckPermissionsForProjectInOrgVariables | reactQuery.SkipToken
+    | TeamsCheckPermissionsForProjectInOrgVariables
+    | reactQuery.SkipToken
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn:
@@ -29388,7 +29482,8 @@ export function teamsCheckPermissionsForProjectInOrgQuery(
 
 export function teamsCheckPermissionsForProjectInOrgQuery(
   variables:
-    TeamsCheckPermissionsForProjectInOrgVariables | reactQuery.SkipToken
+    | TeamsCheckPermissionsForProjectInOrgVariables
+    | reactQuery.SkipToken
 ) {
   return {
     queryKey: queryKeyFn({
@@ -29445,7 +29540,8 @@ export const useTeamsCheckPermissionsForProjectInOrg = <
   TData = Schemas.TeamProject,
 >(
   variables:
-    TeamsCheckPermissionsForProjectInOrgVariables | reactQuery.SkipToken,
+    | TeamsCheckPermissionsForProjectInOrgVariables
+    | reactQuery.SkipToken,
   options?: Omit<
     reactQuery.UseQueryOptions<
       Schemas.TeamProject,
@@ -32951,7 +33047,8 @@ export const useActionsGetRepoRequiredWorkflowUsage = <
   TData = Schemas.WorkflowUsage,
 >(
   variables:
-    ActionsGetRepoRequiredWorkflowUsageVariables | reactQuery.SkipToken,
+    | ActionsGetRepoRequiredWorkflowUsageVariables
+    | reactQuery.SkipToken,
   options?: Omit<
     reactQuery.UseQueryOptions<
       Schemas.WorkflowUsage,
@@ -33875,7 +33972,8 @@ export function actionsDownloadArtifactQuery(
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn:
-    ((options: QueryFnOptions) => Promise<undefined>) | reactQuery.SkipToken;
+    | ((options: QueryFnOptions) => Promise<undefined>)
+    | reactQuery.SkipToken;
 };
 
 export function actionsDownloadArtifactQuery(
@@ -34484,7 +34582,8 @@ export function actionsGetJobForWorkflowRunQuery(
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn:
-    ((options: QueryFnOptions) => Promise<Schemas.Job>) | reactQuery.SkipToken;
+    | ((options: QueryFnOptions) => Promise<Schemas.Job>)
+    | reactQuery.SkipToken;
 };
 
 export function actionsGetJobForWorkflowRunQuery(
@@ -34621,16 +34720,19 @@ export function actionsDownloadJobLogsForWorkflowRunQuery(
 
 export function actionsDownloadJobLogsForWorkflowRunQuery(
   variables:
-    ActionsDownloadJobLogsForWorkflowRunVariables | reactQuery.SkipToken
+    | ActionsDownloadJobLogsForWorkflowRunVariables
+    | reactQuery.SkipToken
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn:
-    ((options: QueryFnOptions) => Promise<undefined>) | reactQuery.SkipToken;
+    | ((options: QueryFnOptions) => Promise<undefined>)
+    | reactQuery.SkipToken;
 };
 
 export function actionsDownloadJobLogsForWorkflowRunQuery(
   variables:
-    ActionsDownloadJobLogsForWorkflowRunVariables | reactQuery.SkipToken
+    | ActionsDownloadJobLogsForWorkflowRunVariables
+    | reactQuery.SkipToken
 ) {
   return {
     queryKey: queryKeyFn({
@@ -34687,7 +34789,8 @@ export const useSuspenseActionsDownloadJobLogsForWorkflowRun = <
  */
 export const useActionsDownloadJobLogsForWorkflowRun = <TData = undefined>(
   variables:
-    ActionsDownloadJobLogsForWorkflowRunVariables | reactQuery.SkipToken,
+    | ActionsDownloadJobLogsForWorkflowRunVariables
+    | reactQuery.SkipToken,
   options?: Omit<
     reactQuery.UseQueryOptions<
       undefined,
@@ -34926,7 +35029,8 @@ export const useActionsGetCustomOidcSubClaimForRepo = <
   TData = Schemas.OidcCustomSubRepo,
 >(
   variables:
-    ActionsGetCustomOidcSubClaimForRepoVariables | reactQuery.SkipToken,
+    | ActionsGetCustomOidcSubClaimForRepoVariables
+    | reactQuery.SkipToken,
   options?: Omit<
     reactQuery.UseQueryOptions<
       Schemas.OidcCustomSubRepo,
@@ -35103,7 +35207,8 @@ export function actionsGetGithubActionsPermissionsRepositoryQuery(
 
 export function actionsGetGithubActionsPermissionsRepositoryQuery(
   variables:
-    ActionsGetGithubActionsPermissionsRepositoryVariables | reactQuery.SkipToken
+    | ActionsGetGithubActionsPermissionsRepositoryVariables
+    | reactQuery.SkipToken
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn:
@@ -35115,7 +35220,8 @@ export function actionsGetGithubActionsPermissionsRepositoryQuery(
 
 export function actionsGetGithubActionsPermissionsRepositoryQuery(
   variables:
-    ActionsGetGithubActionsPermissionsRepositoryVariables | reactQuery.SkipToken
+    | ActionsGetGithubActionsPermissionsRepositoryVariables
+    | reactQuery.SkipToken
 ) {
   return {
     queryKey: queryKeyFn({
@@ -35343,7 +35449,8 @@ export function actionsGetWorkflowAccessToRepositoryQuery(
 
 export function actionsGetWorkflowAccessToRepositoryQuery(
   variables:
-    ActionsGetWorkflowAccessToRepositoryVariables | reactQuery.SkipToken
+    | ActionsGetWorkflowAccessToRepositoryVariables
+    | reactQuery.SkipToken
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn:
@@ -35355,7 +35462,8 @@ export function actionsGetWorkflowAccessToRepositoryQuery(
 
 export function actionsGetWorkflowAccessToRepositoryQuery(
   variables:
-    ActionsGetWorkflowAccessToRepositoryVariables | reactQuery.SkipToken
+    | ActionsGetWorkflowAccessToRepositoryVariables
+    | reactQuery.SkipToken
 ) {
   return {
     queryKey: queryKeyFn({
@@ -35418,7 +35526,8 @@ export const useActionsGetWorkflowAccessToRepository = <
   TData = Schemas.ActionsWorkflowAccessToRepository,
 >(
   variables:
-    ActionsGetWorkflowAccessToRepositoryVariables | reactQuery.SkipToken,
+    | ActionsGetWorkflowAccessToRepositoryVariables
+    | reactQuery.SkipToken,
   options?: Omit<
     reactQuery.UseQueryOptions<
       Schemas.ActionsWorkflowAccessToRepository,
@@ -36347,7 +36456,8 @@ export const useActionsListSelfHostedRunnersForRepo = <
   TData = ActionsListSelfHostedRunnersForRepoResponse,
 >(
   variables:
-    ActionsListSelfHostedRunnersForRepoVariables | reactQuery.SkipToken,
+    | ActionsListSelfHostedRunnersForRepoVariables
+    | reactQuery.SkipToken,
   options?: Omit<
     reactQuery.UseQueryOptions<
       ActionsListSelfHostedRunnersForRepoResponse,
@@ -36433,7 +36543,8 @@ export function actionsListRunnerApplicationsForRepoQuery(
 
 export function actionsListRunnerApplicationsForRepoQuery(
   variables:
-    ActionsListRunnerApplicationsForRepoVariables | reactQuery.SkipToken
+    | ActionsListRunnerApplicationsForRepoVariables
+    | reactQuery.SkipToken
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn:
@@ -36445,7 +36556,8 @@ export function actionsListRunnerApplicationsForRepoQuery(
 
 export function actionsListRunnerApplicationsForRepoQuery(
   variables:
-    ActionsListRunnerApplicationsForRepoVariables | reactQuery.SkipToken
+    | ActionsListRunnerApplicationsForRepoVariables
+    | reactQuery.SkipToken
 ) {
   return {
     queryKey: queryKeyFn({
@@ -36502,7 +36614,8 @@ export const useActionsListRunnerApplicationsForRepo = <
   TData = ActionsListRunnerApplicationsForRepoResponse,
 >(
   variables:
-    ActionsListRunnerApplicationsForRepoVariables | reactQuery.SkipToken,
+    | ActionsListRunnerApplicationsForRepoVariables
+    | reactQuery.SkipToken,
   options?: Omit<
     reactQuery.UseQueryOptions<
       ActionsListRunnerApplicationsForRepoResponse,
@@ -37071,7 +37184,8 @@ export function actionsListLabelsForSelfHostedRunnerForRepoQuery(
 
 export function actionsListLabelsForSelfHostedRunnerForRepoQuery(
   variables:
-    ActionsListLabelsForSelfHostedRunnerForRepoVariables | reactQuery.SkipToken
+    | ActionsListLabelsForSelfHostedRunnerForRepoVariables
+    | reactQuery.SkipToken
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn:
@@ -37081,7 +37195,8 @@ export function actionsListLabelsForSelfHostedRunnerForRepoQuery(
 
 export function actionsListLabelsForSelfHostedRunnerForRepoQuery(
   variables:
-    ActionsListLabelsForSelfHostedRunnerForRepoVariables | reactQuery.SkipToken
+    | ActionsListLabelsForSelfHostedRunnerForRepoVariables
+    | reactQuery.SkipToken
 ) {
   return {
     queryKey: queryKeyFn({
@@ -37140,7 +37255,8 @@ export const useActionsListLabelsForSelfHostedRunnerForRepo = <
   TData = Responses.ActionsRunnerLabels,
 >(
   variables:
-    ActionsListLabelsForSelfHostedRunnerForRepoVariables | reactQuery.SkipToken,
+    | ActionsListLabelsForSelfHostedRunnerForRepoVariables
+    | reactQuery.SkipToken,
   options?: Omit<
     reactQuery.UseQueryOptions<
       Responses.ActionsRunnerLabels,
@@ -38532,7 +38648,8 @@ export function actionsListJobsForWorkflowRunAttemptQuery(
 
 export function actionsListJobsForWorkflowRunAttemptQuery(
   variables:
-    ActionsListJobsForWorkflowRunAttemptVariables | reactQuery.SkipToken
+    | ActionsListJobsForWorkflowRunAttemptVariables
+    | reactQuery.SkipToken
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn:
@@ -38544,7 +38661,8 @@ export function actionsListJobsForWorkflowRunAttemptQuery(
 
 export function actionsListJobsForWorkflowRunAttemptQuery(
   variables:
-    ActionsListJobsForWorkflowRunAttemptVariables | reactQuery.SkipToken
+    | ActionsListJobsForWorkflowRunAttemptVariables
+    | reactQuery.SkipToken
 ) {
   return {
     queryKey: queryKeyFn({
@@ -38597,7 +38715,8 @@ export const useActionsListJobsForWorkflowRunAttempt = <
   TData = ActionsListJobsForWorkflowRunAttemptResponse,
 >(
   variables:
-    ActionsListJobsForWorkflowRunAttemptVariables | reactQuery.SkipToken,
+    | ActionsListJobsForWorkflowRunAttemptVariables
+    | reactQuery.SkipToken,
   options?: Omit<
     reactQuery.UseQueryOptions<
       ActionsListJobsForWorkflowRunAttemptResponse,
@@ -38688,16 +38807,19 @@ export function actionsDownloadWorkflowRunAttemptLogsQuery(
 
 export function actionsDownloadWorkflowRunAttemptLogsQuery(
   variables:
-    ActionsDownloadWorkflowRunAttemptLogsVariables | reactQuery.SkipToken
+    | ActionsDownloadWorkflowRunAttemptLogsVariables
+    | reactQuery.SkipToken
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn:
-    ((options: QueryFnOptions) => Promise<undefined>) | reactQuery.SkipToken;
+    | ((options: QueryFnOptions) => Promise<undefined>)
+    | reactQuery.SkipToken;
 };
 
 export function actionsDownloadWorkflowRunAttemptLogsQuery(
   variables:
-    ActionsDownloadWorkflowRunAttemptLogsVariables | reactQuery.SkipToken
+    | ActionsDownloadWorkflowRunAttemptLogsVariables
+    | reactQuery.SkipToken
 ) {
   return {
     queryKey: queryKeyFn({
@@ -38754,7 +38876,8 @@ export const useSuspenseActionsDownloadWorkflowRunAttemptLogs = <
  */
 export const useActionsDownloadWorkflowRunAttemptLogs = <TData = undefined>(
   variables:
-    ActionsDownloadWorkflowRunAttemptLogsVariables | reactQuery.SkipToken,
+    | ActionsDownloadWorkflowRunAttemptLogsVariables
+    | reactQuery.SkipToken,
   options?: Omit<
     reactQuery.UseQueryOptions<
       undefined,
@@ -39160,7 +39283,8 @@ export function actionsDownloadWorkflowRunLogsQuery(
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn:
-    ((options: QueryFnOptions) => Promise<undefined>) | reactQuery.SkipToken;
+    | ((options: QueryFnOptions) => Promise<undefined>)
+    | reactQuery.SkipToken;
 };
 
 export function actionsDownloadWorkflowRunLogsQuery(
@@ -42159,7 +42283,8 @@ export function issuesCheckUserCanBeAssignedQuery(
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn:
-    ((options: QueryFnOptions) => Promise<undefined>) | reactQuery.SkipToken;
+    | ((options: QueryFnOptions) => Promise<undefined>)
+    | reactQuery.SkipToken;
 };
 
 export function issuesCheckUserCanBeAssignedQuery(
@@ -44012,7 +44137,8 @@ export const useReposGetPullRequestReviewProtection = <
   TData = Schemas.ProtectedBranchPullRequestReview,
 >(
   variables:
-    ReposGetPullRequestReviewProtectionVariables | reactQuery.SkipToken,
+    | ReposGetPullRequestReviewProtectionVariables
+    | reactQuery.SkipToken,
   options?: Omit<
     reactQuery.UseQueryOptions<
       Schemas.ProtectedBranchPullRequestReview,
@@ -45630,7 +45756,8 @@ export function reposGetAppsWithAccessToProtectedBranchQuery(
 
 export function reposGetAppsWithAccessToProtectedBranchQuery(
   variables:
-    ReposGetAppsWithAccessToProtectedBranchVariables | reactQuery.SkipToken
+    | ReposGetAppsWithAccessToProtectedBranchVariables
+    | reactQuery.SkipToken
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn:
@@ -45642,7 +45769,8 @@ export function reposGetAppsWithAccessToProtectedBranchQuery(
 
 export function reposGetAppsWithAccessToProtectedBranchQuery(
   variables:
-    ReposGetAppsWithAccessToProtectedBranchVariables | reactQuery.SkipToken
+    | ReposGetAppsWithAccessToProtectedBranchVariables
+    | reactQuery.SkipToken
 ) {
   return {
     queryKey: queryKeyFn({
@@ -45699,7 +45827,8 @@ export const useReposGetAppsWithAccessToProtectedBranch = <
   TData = ReposGetAppsWithAccessToProtectedBranchResponse,
 >(
   variables:
-    ReposGetAppsWithAccessToProtectedBranchVariables | reactQuery.SkipToken,
+    | ReposGetAppsWithAccessToProtectedBranchVariables
+    | reactQuery.SkipToken,
   options?: Omit<
     reactQuery.UseQueryOptions<
       ReposGetAppsWithAccessToProtectedBranchResponse,
@@ -46063,7 +46192,8 @@ export function reposGetTeamsWithAccessToProtectedBranchQuery(
 
 export function reposGetTeamsWithAccessToProtectedBranchQuery(
   variables:
-    ReposGetTeamsWithAccessToProtectedBranchVariables | reactQuery.SkipToken
+    | ReposGetTeamsWithAccessToProtectedBranchVariables
+    | reactQuery.SkipToken
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn:
@@ -46075,7 +46205,8 @@ export function reposGetTeamsWithAccessToProtectedBranchQuery(
 
 export function reposGetTeamsWithAccessToProtectedBranchQuery(
   variables:
-    ReposGetTeamsWithAccessToProtectedBranchVariables | reactQuery.SkipToken
+    | ReposGetTeamsWithAccessToProtectedBranchVariables
+    | reactQuery.SkipToken
 ) {
   return {
     queryKey: queryKeyFn({
@@ -46132,7 +46263,8 @@ export const useReposGetTeamsWithAccessToProtectedBranch = <
   TData = ReposGetTeamsWithAccessToProtectedBranchResponse,
 >(
   variables:
-    ReposGetTeamsWithAccessToProtectedBranchVariables | reactQuery.SkipToken,
+    | ReposGetTeamsWithAccessToProtectedBranchVariables
+    | reactQuery.SkipToken,
   options?: Omit<
     reactQuery.UseQueryOptions<
       ReposGetTeamsWithAccessToProtectedBranchResponse,
@@ -46505,7 +46637,8 @@ export function reposGetUsersWithAccessToProtectedBranchQuery(
 
 export function reposGetUsersWithAccessToProtectedBranchQuery(
   variables:
-    ReposGetUsersWithAccessToProtectedBranchVariables | reactQuery.SkipToken
+    | ReposGetUsersWithAccessToProtectedBranchVariables
+    | reactQuery.SkipToken
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn:
@@ -46517,7 +46650,8 @@ export function reposGetUsersWithAccessToProtectedBranchQuery(
 
 export function reposGetUsersWithAccessToProtectedBranchQuery(
   variables:
-    ReposGetUsersWithAccessToProtectedBranchVariables | reactQuery.SkipToken
+    | ReposGetUsersWithAccessToProtectedBranchVariables
+    | reactQuery.SkipToken
 ) {
   return {
     queryKey: queryKeyFn({
@@ -46574,7 +46708,8 @@ export const useReposGetUsersWithAccessToProtectedBranch = <
   TData = ReposGetUsersWithAccessToProtectedBranchResponse,
 >(
   variables:
-    ReposGetUsersWithAccessToProtectedBranchVariables | reactQuery.SkipToken,
+    | ReposGetUsersWithAccessToProtectedBranchVariables
+    | reactQuery.SkipToken,
   options?: Omit<
     reactQuery.UseQueryOptions<
       ReposGetUsersWithAccessToProtectedBranchResponse,
@@ -50914,7 +51049,8 @@ export function codespacesRepoMachinesForAuthenticatedUserQuery(
 
 export function codespacesRepoMachinesForAuthenticatedUserQuery(
   variables:
-    CodespacesRepoMachinesForAuthenticatedUserVariables | reactQuery.SkipToken
+    | CodespacesRepoMachinesForAuthenticatedUserVariables
+    | reactQuery.SkipToken
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn:
@@ -50926,7 +51062,8 @@ export function codespacesRepoMachinesForAuthenticatedUserQuery(
 
 export function codespacesRepoMachinesForAuthenticatedUserQuery(
   variables:
-    CodespacesRepoMachinesForAuthenticatedUserVariables | reactQuery.SkipToken
+    | CodespacesRepoMachinesForAuthenticatedUserVariables
+    | reactQuery.SkipToken
 ) {
   return {
     queryKey: queryKeyFn({
@@ -50987,7 +51124,8 @@ export const useCodespacesRepoMachinesForAuthenticatedUser = <
   TData = CodespacesRepoMachinesForAuthenticatedUserResponse,
 >(
   variables:
-    CodespacesRepoMachinesForAuthenticatedUserVariables | reactQuery.SkipToken,
+    | CodespacesRepoMachinesForAuthenticatedUserVariables
+    | reactQuery.SkipToken,
   options?: Omit<
     reactQuery.UseQueryOptions<
       CodespacesRepoMachinesForAuthenticatedUserResponse,
@@ -52269,7 +52407,8 @@ export function reposCheckCollaboratorQuery(
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn:
-    ((options: QueryFnOptions) => Promise<undefined>) | reactQuery.SkipToken;
+    | ((options: QueryFnOptions) => Promise<undefined>)
+    | reactQuery.SkipToken;
 };
 
 export function reposCheckCollaboratorQuery(
@@ -52593,7 +52732,8 @@ export const useReposGetCollaboratorPermissionLevel = <
   TData = Schemas.RepositoryCollaboratorPermission,
 >(
   variables:
-    ReposGetCollaboratorPermissionLevelVariables | reactQuery.SkipToken,
+    | ReposGetCollaboratorPermissionLevelVariables
+    | reactQuery.SkipToken,
   options?: Omit<
     reactQuery.UseQueryOptions<
       Schemas.RepositoryCollaboratorPermission,
@@ -53067,7 +53207,14 @@ export type ReactionsListForCommitCommentQueryParams = {
    * Returns a single [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types). Omit this parameter to list all reactions to a commit comment.
    */
   content?:
-    "+1" | "-1" | "laugh" | "confused" | "heart" | "hooray" | "rocket" | "eyes";
+    | "+1"
+    | "-1"
+    | "laugh"
+    | "confused"
+    | "heart"
+    | "hooray"
+    | "rocket"
+    | "eyes";
   /**
    * The number of results per page (max 100).
    *
@@ -53240,7 +53387,14 @@ export type ReactionsCreateForCommitCommentRequestBody = {
    * The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the commit comment.
    */
   content:
-    "+1" | "-1" | "laugh" | "confused" | "heart" | "hooray" | "rocket" | "eyes";
+    | "+1"
+    | "-1"
+    | "laugh"
+    | "confused"
+    | "heart"
+    | "hooray"
+    | "rocket"
+    | "eyes";
 };
 
 export type ReactionsCreateForCommitCommentVariables = {
@@ -54160,7 +54314,8 @@ export function reposListPullRequestsAssociatedWithCommitQuery(
 
 export function reposListPullRequestsAssociatedWithCommitQuery(
   variables:
-    ReposListPullRequestsAssociatedWithCommitVariables | reactQuery.SkipToken
+    | ReposListPullRequestsAssociatedWithCommitVariables
+    | reactQuery.SkipToken
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn:
@@ -54172,7 +54327,8 @@ export function reposListPullRequestsAssociatedWithCommitQuery(
 
 export function reposListPullRequestsAssociatedWithCommitQuery(
   variables:
-    ReposListPullRequestsAssociatedWithCommitVariables | reactQuery.SkipToken
+    | ReposListPullRequestsAssociatedWithCommitVariables
+    | reactQuery.SkipToken
 ) {
   return {
     queryKey: queryKeyFn({
@@ -54225,7 +54381,8 @@ export const useReposListPullRequestsAssociatedWithCommit = <
   TData = ReposListPullRequestsAssociatedWithCommitResponse,
 >(
   variables:
-    ReposListPullRequestsAssociatedWithCommitVariables | reactQuery.SkipToken,
+    | ReposListPullRequestsAssociatedWithCommitVariables
+    | reactQuery.SkipToken,
   options?: Omit<
     reactQuery.UseQueryOptions<
       ReposListPullRequestsAssociatedWithCommitResponse,
@@ -60819,7 +60976,8 @@ export function gitGetBlobQuery(
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn:
-    ((options: QueryFnOptions) => Promise<Schemas.Blob>) | reactQuery.SkipToken;
+    | ((options: QueryFnOptions) => Promise<Schemas.Blob>)
+    | reactQuery.SkipToken;
 };
 
 export function gitGetBlobQuery(
@@ -62895,7 +63053,8 @@ export function reposGetWebhookQuery(
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn:
-    ((options: QueryFnOptions) => Promise<Schemas.Hook>) | reactQuery.SkipToken;
+    | ((options: QueryFnOptions) => Promise<Schemas.Hook>)
+    | reactQuery.SkipToken;
 };
 
 export function reposGetWebhookQuery(
@@ -66364,7 +66523,14 @@ export type ReactionsListForIssueCommentQueryParams = {
    * Returns a single [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types). Omit this parameter to list all reactions to an issue comment.
    */
   content?:
-    "+1" | "-1" | "laugh" | "confused" | "heart" | "hooray" | "rocket" | "eyes";
+    | "+1"
+    | "-1"
+    | "laugh"
+    | "confused"
+    | "heart"
+    | "hooray"
+    | "rocket"
+    | "eyes";
   /**
    * The number of results per page (max 100).
    *
@@ -66537,7 +66703,14 @@ export type ReactionsCreateForIssueCommentRequestBody = {
    * The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the issue comment.
    */
   content:
-    "+1" | "-1" | "laugh" | "confused" | "heart" | "hooray" | "rocket" | "eyes";
+    | "+1"
+    | "-1"
+    | "laugh"
+    | "confused"
+    | "heart"
+    | "hooray"
+    | "rocket"
+    | "eyes";
 };
 
 export type ReactionsCreateForIssueCommentVariables = {
@@ -67456,7 +67629,8 @@ export function issuesCheckUserCanBeAssignedToIssueQuery(
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn:
-    ((options: QueryFnOptions) => Promise<undefined>) | reactQuery.SkipToken;
+    | ((options: QueryFnOptions) => Promise<undefined>)
+    | reactQuery.SkipToken;
 };
 
 export function issuesCheckUserCanBeAssignedToIssueQuery(
@@ -67519,7 +67693,8 @@ export const useSuspenseIssuesCheckUserCanBeAssignedToIssue = <
  */
 export const useIssuesCheckUserCanBeAssignedToIssue = <TData = undefined>(
   variables:
-    IssuesCheckUserCanBeAssignedToIssueVariables | reactQuery.SkipToken,
+    | IssuesCheckUserCanBeAssignedToIssueVariables
+    | reactQuery.SkipToken,
   options?: Omit<
     reactQuery.UseQueryOptions<
       undefined,
@@ -68716,7 +68891,14 @@ export type ReactionsListForIssueQueryParams = {
    * Returns a single [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types). Omit this parameter to list all reactions to an issue.
    */
   content?:
-    "+1" | "-1" | "laugh" | "confused" | "heart" | "hooray" | "rocket" | "eyes";
+    | "+1"
+    | "-1"
+    | "laugh"
+    | "confused"
+    | "heart"
+    | "hooray"
+    | "rocket"
+    | "eyes";
   /**
    * The number of results per page (max 100).
    *
@@ -68889,7 +69071,14 @@ export type ReactionsCreateForIssueRequestBody = {
    * The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the issue.
    */
   content:
-    "+1" | "-1" | "laugh" | "confused" | "heart" | "hooray" | "rocket" | "eyes";
+    | "+1"
+    | "-1"
+    | "laugh"
+    | "confused"
+    | "heart"
+    | "hooray"
+    | "rocket"
+    | "eyes";
 };
 
 export type ReactionsCreateForIssueVariables = {
@@ -71652,7 +71841,8 @@ export function reposGetPagesQuery(
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn:
-    ((options: QueryFnOptions) => Promise<Schemas.Page>) | reactQuery.SkipToken;
+    | ((options: QueryFnOptions) => Promise<Schemas.Page>)
+    | reactQuery.SkipToken;
 };
 
 export function reposGetPagesQuery(
@@ -73945,7 +74135,14 @@ export type ReactionsListForPullRequestReviewCommentQueryParams = {
    * Returns a single [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types). Omit this parameter to list all reactions to a pull request review comment.
    */
   content?:
-    "+1" | "-1" | "laugh" | "confused" | "heart" | "hooray" | "rocket" | "eyes";
+    | "+1"
+    | "-1"
+    | "laugh"
+    | "confused"
+    | "heart"
+    | "hooray"
+    | "rocket"
+    | "eyes";
   /**
    * The number of results per page (max 100).
    *
@@ -74009,7 +74206,8 @@ export function reactionsListForPullRequestReviewCommentQuery(
 
 export function reactionsListForPullRequestReviewCommentQuery(
   variables:
-    ReactionsListForPullRequestReviewCommentVariables | reactQuery.SkipToken
+    | ReactionsListForPullRequestReviewCommentVariables
+    | reactQuery.SkipToken
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn:
@@ -74021,7 +74219,8 @@ export function reactionsListForPullRequestReviewCommentQuery(
 
 export function reactionsListForPullRequestReviewCommentQuery(
   variables:
-    ReactionsListForPullRequestReviewCommentVariables | reactQuery.SkipToken
+    | ReactionsListForPullRequestReviewCommentVariables
+    | reactQuery.SkipToken
 ) {
   return {
     queryKey: queryKeyFn({
@@ -74074,7 +74273,8 @@ export const useReactionsListForPullRequestReviewComment = <
   TData = ReactionsListForPullRequestReviewCommentResponse,
 >(
   variables:
-    ReactionsListForPullRequestReviewCommentVariables | reactQuery.SkipToken,
+    | ReactionsListForPullRequestReviewCommentVariables
+    | reactQuery.SkipToken,
   options?: Omit<
     reactQuery.UseQueryOptions<
       ReactionsListForPullRequestReviewCommentResponse,
@@ -74126,7 +74326,14 @@ export type ReactionsCreateForPullRequestReviewCommentRequestBody = {
    * The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the pull request review comment.
    */
   content:
-    "+1" | "-1" | "laugh" | "confused" | "heart" | "hooray" | "rocket" | "eyes";
+    | "+1"
+    | "-1"
+    | "laugh"
+    | "confused"
+    | "heart"
+    | "hooray"
+    | "rocket"
+    | "eyes";
 };
 
 export type ReactionsCreateForPullRequestReviewCommentVariables = {
@@ -75487,7 +75694,8 @@ export function pullsCheckIfMergedQuery(
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn:
-    ((options: QueryFnOptions) => Promise<undefined>) | reactQuery.SkipToken;
+    | ((options: QueryFnOptions) => Promise<undefined>)
+    | reactQuery.SkipToken;
 };
 
 export function pullsCheckIfMergedQuery(
@@ -79727,7 +79935,8 @@ export const useSecretScanningListLocationsForAlert = <
   TData = SecretScanningListLocationsForAlertResponse,
 >(
   variables:
-    SecretScanningListLocationsForAlertVariables | reactQuery.SkipToken,
+    | SecretScanningListLocationsForAlertVariables
+    | reactQuery.SkipToken,
   options?: Omit<
     reactQuery.UseQueryOptions<
       SecretScanningListLocationsForAlertResponse,
@@ -80005,7 +80214,9 @@ export function reposGetCodeFrequencyStatsQuery(
  */
 export const useSuspenseReposGetCodeFrequencyStats = <
   TData =
-    Schemas.CodeFrequencyStat[] | Responses.Accepted | Responses.NoContent,
+    | Schemas.CodeFrequencyStat[]
+    | Responses.Accepted
+    | Responses.NoContent,
 >(
   variables: ReposGetCodeFrequencyStatsVariables,
   options?: Omit<
@@ -80034,7 +80245,9 @@ export const useSuspenseReposGetCodeFrequencyStats = <
  */
 export const useReposGetCodeFrequencyStats = <
   TData =
-    Schemas.CodeFrequencyStat[] | Responses.Accepted | Responses.NoContent,
+    | Schemas.CodeFrequencyStat[]
+    | Responses.Accepted
+    | Responses.NoContent,
 >(
   variables: ReposGetCodeFrequencyStatsVariables | reactQuery.SkipToken,
   options?: Omit<
@@ -80306,7 +80519,9 @@ export function reposGetContributorsStatsQuery(
  */
 export const useSuspenseReposGetContributorsStats = <
   TData =
-    Schemas.ContributorActivity[] | Responses.Accepted | Responses.NoContent,
+    | Schemas.ContributorActivity[]
+    | Responses.Accepted
+    | Responses.NoContent,
 >(
   variables: ReposGetContributorsStatsVariables,
   options?: Omit<
@@ -80340,7 +80555,9 @@ export const useSuspenseReposGetContributorsStats = <
  */
 export const useReposGetContributorsStats = <
   TData =
-    Schemas.ContributorActivity[] | Responses.Accepted | Responses.NoContent,
+    | Schemas.ContributorActivity[]
+    | Responses.Accepted
+    | Responses.NoContent,
 >(
   variables: ReposGetContributorsStatsVariables | reactQuery.SkipToken,
   options?: Omit<
@@ -81684,7 +81901,8 @@ export function reposDownloadTarballArchiveQuery(
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn:
-    ((options: QueryFnOptions) => Promise<undefined>) | reactQuery.SkipToken;
+    | ((options: QueryFnOptions) => Promise<undefined>)
+    | reactQuery.SkipToken;
 };
 
 export function reposDownloadTarballArchiveQuery(
@@ -82835,7 +83053,8 @@ export function reposCheckVulnerabilityAlertsQuery(
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn:
-    ((options: QueryFnOptions) => Promise<undefined>) | reactQuery.SkipToken;
+    | ((options: QueryFnOptions) => Promise<undefined>)
+    | reactQuery.SkipToken;
 };
 
 export function reposCheckVulnerabilityAlertsQuery(
@@ -83037,7 +83256,8 @@ export function reposDownloadZipballArchiveQuery(
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn:
-    ((options: QueryFnOptions) => Promise<undefined>) | reactQuery.SkipToken;
+    | ((options: QueryFnOptions) => Promise<undefined>)
+    | reactQuery.SkipToken;
 };
 
 export function reposDownloadZipballArchiveQuery(
@@ -87372,7 +87592,14 @@ export type ReactionsListForTeamDiscussionCommentLegacyQueryParams = {
    * Returns a single [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types). Omit this parameter to list all reactions to a team discussion comment.
    */
   content?:
-    "+1" | "-1" | "laugh" | "confused" | "heart" | "hooray" | "rocket" | "eyes";
+    | "+1"
+    | "-1"
+    | "laugh"
+    | "confused"
+    | "heart"
+    | "hooray"
+    | "rocket"
+    | "eyes";
   /**
    * The number of results per page (max 100).
    *
@@ -87437,7 +87664,8 @@ export function reactionsListForTeamDiscussionCommentLegacyQuery(
 
 export function reactionsListForTeamDiscussionCommentLegacyQuery(
   variables:
-    ReactionsListForTeamDiscussionCommentLegacyVariables | reactQuery.SkipToken
+    | ReactionsListForTeamDiscussionCommentLegacyVariables
+    | reactQuery.SkipToken
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn:
@@ -87449,7 +87677,8 @@ export function reactionsListForTeamDiscussionCommentLegacyQuery(
 
 export function reactionsListForTeamDiscussionCommentLegacyQuery(
   variables:
-    ReactionsListForTeamDiscussionCommentLegacyVariables | reactQuery.SkipToken
+    | ReactionsListForTeamDiscussionCommentLegacyVariables
+    | reactQuery.SkipToken
 ) {
   return {
     queryKey: queryKeyFn({
@@ -87506,7 +87735,8 @@ export const useReactionsListForTeamDiscussionCommentLegacy = <
   TData = ReactionsListForTeamDiscussionCommentLegacyResponse,
 >(
   variables:
-    ReactionsListForTeamDiscussionCommentLegacyVariables | reactQuery.SkipToken,
+    | ReactionsListForTeamDiscussionCommentLegacyVariables
+    | reactQuery.SkipToken,
   options?: Omit<
     reactQuery.UseQueryOptions<
       ReactionsListForTeamDiscussionCommentLegacyResponse,
@@ -87555,7 +87785,14 @@ export type ReactionsCreateForTeamDiscussionCommentLegacyRequestBody = {
    * The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the team discussion comment.
    */
   content:
-    "+1" | "-1" | "laugh" | "confused" | "heart" | "hooray" | "rocket" | "eyes";
+    | "+1"
+    | "-1"
+    | "laugh"
+    | "confused"
+    | "heart"
+    | "hooray"
+    | "rocket"
+    | "eyes";
 };
 
 export type ReactionsCreateForTeamDiscussionCommentLegacyVariables = {
@@ -87633,7 +87870,14 @@ export type ReactionsListForTeamDiscussionLegacyQueryParams = {
    * Returns a single [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types). Omit this parameter to list all reactions to a team discussion.
    */
   content?:
-    "+1" | "-1" | "laugh" | "confused" | "heart" | "hooray" | "rocket" | "eyes";
+    | "+1"
+    | "-1"
+    | "laugh"
+    | "confused"
+    | "heart"
+    | "hooray"
+    | "rocket"
+    | "eyes";
   /**
    * The number of results per page (max 100).
    *
@@ -87697,7 +87941,8 @@ export function reactionsListForTeamDiscussionLegacyQuery(
 
 export function reactionsListForTeamDiscussionLegacyQuery(
   variables:
-    ReactionsListForTeamDiscussionLegacyVariables | reactQuery.SkipToken
+    | ReactionsListForTeamDiscussionLegacyVariables
+    | reactQuery.SkipToken
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn:
@@ -87709,7 +87954,8 @@ export function reactionsListForTeamDiscussionLegacyQuery(
 
 export function reactionsListForTeamDiscussionLegacyQuery(
   variables:
-    ReactionsListForTeamDiscussionLegacyVariables | reactQuery.SkipToken
+    | ReactionsListForTeamDiscussionLegacyVariables
+    | reactQuery.SkipToken
 ) {
   return {
     queryKey: queryKeyFn({
@@ -87766,7 +88012,8 @@ export const useReactionsListForTeamDiscussionLegacy = <
   TData = ReactionsListForTeamDiscussionLegacyResponse,
 >(
   variables:
-    ReactionsListForTeamDiscussionLegacyVariables | reactQuery.SkipToken,
+    | ReactionsListForTeamDiscussionLegacyVariables
+    | reactQuery.SkipToken,
   options?: Omit<
     reactQuery.UseQueryOptions<
       ReactionsListForTeamDiscussionLegacyResponse,
@@ -87811,7 +88058,14 @@ export type ReactionsCreateForTeamDiscussionLegacyRequestBody = {
    * The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the team discussion.
    */
   content:
-    "+1" | "-1" | "laugh" | "confused" | "heart" | "hooray" | "rocket" | "eyes";
+    | "+1"
+    | "-1"
+    | "laugh"
+    | "confused"
+    | "heart"
+    | "hooray"
+    | "rocket"
+    | "eyes";
 };
 
 export type ReactionsCreateForTeamDiscussionLegacyVariables = {
@@ -88335,7 +88589,8 @@ export function teamsGetMemberLegacyQuery(
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn:
-    ((options: QueryFnOptions) => Promise<undefined>) | reactQuery.SkipToken;
+    | ((options: QueryFnOptions) => Promise<undefined>)
+    | reactQuery.SkipToken;
 };
 
 export function teamsGetMemberLegacyQuery(
@@ -89132,7 +89387,8 @@ export function teamsCheckPermissionsForProjectLegacyQuery(
 
 export function teamsCheckPermissionsForProjectLegacyQuery(
   variables:
-    TeamsCheckPermissionsForProjectLegacyVariables | reactQuery.SkipToken
+    | TeamsCheckPermissionsForProjectLegacyVariables
+    | reactQuery.SkipToken
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn:
@@ -89142,7 +89398,8 @@ export function teamsCheckPermissionsForProjectLegacyQuery(
 
 export function teamsCheckPermissionsForProjectLegacyQuery(
   variables:
-    TeamsCheckPermissionsForProjectLegacyVariables | reactQuery.SkipToken
+    | TeamsCheckPermissionsForProjectLegacyVariables
+    | reactQuery.SkipToken
 ) {
   return {
     queryKey: queryKeyFn({
@@ -89199,7 +89456,8 @@ export const useTeamsCheckPermissionsForProjectLegacy = <
   TData = Schemas.TeamProject,
 >(
   variables:
-    TeamsCheckPermissionsForProjectLegacyVariables | reactQuery.SkipToken,
+    | TeamsCheckPermissionsForProjectLegacyVariables
+    | reactQuery.SkipToken,
   options?: Omit<
     reactQuery.UseQueryOptions<
       Schemas.TeamProject,
@@ -90330,7 +90588,8 @@ export const useUsersListBlockedByAuthenticatedUser = <
   TData = UsersListBlockedByAuthenticatedUserResponse,
 >(
   variables:
-    UsersListBlockedByAuthenticatedUserVariables | reactQuery.SkipToken,
+    | UsersListBlockedByAuthenticatedUserVariables
+    | reactQuery.SkipToken,
   options?: Omit<
     reactQuery.UseQueryOptions<
       UsersListBlockedByAuthenticatedUserResponse,
@@ -90474,7 +90733,8 @@ export function usersCheckBlockedQuery(
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn:
-    ((options: QueryFnOptions) => Promise<undefined>) | reactQuery.SkipToken;
+    | ((options: QueryFnOptions) => Promise<undefined>)
+    | reactQuery.SkipToken;
 };
 
 export function usersCheckBlockedQuery(
@@ -91088,7 +91348,8 @@ export function codespacesListSecretsForAuthenticatedUserQuery(
 
 export function codespacesListSecretsForAuthenticatedUserQuery(
   variables:
-    CodespacesListSecretsForAuthenticatedUserVariables | reactQuery.SkipToken
+    | CodespacesListSecretsForAuthenticatedUserVariables
+    | reactQuery.SkipToken
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn:
@@ -91100,7 +91361,8 @@ export function codespacesListSecretsForAuthenticatedUserQuery(
 
 export function codespacesListSecretsForAuthenticatedUserQuery(
   variables:
-    CodespacesListSecretsForAuthenticatedUserVariables | reactQuery.SkipToken
+    | CodespacesListSecretsForAuthenticatedUserVariables
+    | reactQuery.SkipToken
 ) {
   return {
     queryKey: queryKeyFn({
@@ -91163,7 +91425,8 @@ export const useCodespacesListSecretsForAuthenticatedUser = <
   TData = CodespacesListSecretsForAuthenticatedUserResponse,
 >(
   variables:
-    CodespacesListSecretsForAuthenticatedUserVariables | reactQuery.SkipToken,
+    | CodespacesListSecretsForAuthenticatedUserVariables
+    | reactQuery.SkipToken,
   options?: Omit<
     reactQuery.UseQueryOptions<
       CodespacesListSecretsForAuthenticatedUserResponse,
@@ -91238,7 +91501,8 @@ export function codespacesGetPublicKeyForAuthenticatedUserQuery(
 
 export function codespacesGetPublicKeyForAuthenticatedUserQuery(
   variables:
-    CodespacesGetPublicKeyForAuthenticatedUserVariables | reactQuery.SkipToken
+    | CodespacesGetPublicKeyForAuthenticatedUserVariables
+    | reactQuery.SkipToken
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn:
@@ -91248,7 +91512,8 @@ export function codespacesGetPublicKeyForAuthenticatedUserQuery(
 
 export function codespacesGetPublicKeyForAuthenticatedUserQuery(
   variables:
-    CodespacesGetPublicKeyForAuthenticatedUserVariables | reactQuery.SkipToken
+    | CodespacesGetPublicKeyForAuthenticatedUserVariables
+    | reactQuery.SkipToken
 ) {
   return {
     queryKey: queryKeyFn({
@@ -91309,7 +91574,8 @@ export const useCodespacesGetPublicKeyForAuthenticatedUser = <
   TData = Schemas.CodespacesUserPublicKey,
 >(
   variables:
-    CodespacesGetPublicKeyForAuthenticatedUserVariables | reactQuery.SkipToken,
+    | CodespacesGetPublicKeyForAuthenticatedUserVariables
+    | reactQuery.SkipToken,
   options?: Omit<
     reactQuery.UseQueryOptions<
       Schemas.CodespacesUserPublicKey,
@@ -91462,7 +91728,8 @@ export function codespacesGetSecretForAuthenticatedUserQuery(
 
 export function codespacesGetSecretForAuthenticatedUserQuery(
   variables:
-    CodespacesGetSecretForAuthenticatedUserVariables | reactQuery.SkipToken
+    | CodespacesGetSecretForAuthenticatedUserVariables
+    | reactQuery.SkipToken
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn:
@@ -91472,7 +91739,8 @@ export function codespacesGetSecretForAuthenticatedUserQuery(
 
 export function codespacesGetSecretForAuthenticatedUserQuery(
   variables:
-    CodespacesGetSecretForAuthenticatedUserVariables | reactQuery.SkipToken
+    | CodespacesGetSecretForAuthenticatedUserVariables
+    | reactQuery.SkipToken
 ) {
   return {
     queryKey: queryKeyFn({
@@ -91533,7 +91801,8 @@ export const useCodespacesGetSecretForAuthenticatedUser = <
   TData = Schemas.CodespacesSecret,
 >(
   variables:
-    CodespacesGetSecretForAuthenticatedUserVariables | reactQuery.SkipToken,
+    | CodespacesGetSecretForAuthenticatedUserVariables
+    | reactQuery.SkipToken,
   options?: Omit<
     reactQuery.UseQueryOptions<
       Schemas.CodespacesSecret,
@@ -93662,7 +93931,8 @@ export const useUsersListEmailsForAuthenticatedUser = <
   TData = UsersListEmailsForAuthenticatedUserResponse,
 >(
   variables:
-    UsersListEmailsForAuthenticatedUserVariables | reactQuery.SkipToken,
+    | UsersListEmailsForAuthenticatedUserVariables
+    | reactQuery.SkipToken,
   options?: Omit<
     reactQuery.UseQueryOptions<
       UsersListEmailsForAuthenticatedUserResponse,
@@ -93842,7 +94112,8 @@ export function usersListFollowersForAuthenticatedUserQuery(
 
 export function usersListFollowersForAuthenticatedUserQuery(
   variables:
-    UsersListFollowersForAuthenticatedUserVariables | reactQuery.SkipToken
+    | UsersListFollowersForAuthenticatedUserVariables
+    | reactQuery.SkipToken
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn:
@@ -93854,7 +94125,8 @@ export function usersListFollowersForAuthenticatedUserQuery(
 
 export function usersListFollowersForAuthenticatedUserQuery(
   variables:
-    UsersListFollowersForAuthenticatedUserVariables | reactQuery.SkipToken
+    | UsersListFollowersForAuthenticatedUserVariables
+    | reactQuery.SkipToken
 ) {
   return {
     queryKey: queryKeyFn({
@@ -93907,7 +94179,8 @@ export const useUsersListFollowersForAuthenticatedUser = <
   TData = UsersListFollowersForAuthenticatedUserResponse,
 >(
   variables:
-    UsersListFollowersForAuthenticatedUserVariables | reactQuery.SkipToken,
+    | UsersListFollowersForAuthenticatedUserVariables
+    | reactQuery.SkipToken,
   options?: Omit<
     reactQuery.UseQueryOptions<
       UsersListFollowersForAuthenticatedUserResponse,
@@ -93999,7 +94272,8 @@ export function usersListFollowedByAuthenticatedUserQuery(
 
 export function usersListFollowedByAuthenticatedUserQuery(
   variables:
-    UsersListFollowedByAuthenticatedUserVariables | reactQuery.SkipToken
+    | UsersListFollowedByAuthenticatedUserVariables
+    | reactQuery.SkipToken
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn:
@@ -94011,7 +94285,8 @@ export function usersListFollowedByAuthenticatedUserQuery(
 
 export function usersListFollowedByAuthenticatedUserQuery(
   variables:
-    UsersListFollowedByAuthenticatedUserVariables | reactQuery.SkipToken
+    | UsersListFollowedByAuthenticatedUserVariables
+    | reactQuery.SkipToken
 ) {
   return {
     queryKey: queryKeyFn({
@@ -94064,7 +94339,8 @@ export const useUsersListFollowedByAuthenticatedUser = <
   TData = UsersListFollowedByAuthenticatedUserResponse,
 >(
   variables:
-    UsersListFollowedByAuthenticatedUserVariables | reactQuery.SkipToken,
+    | UsersListFollowedByAuthenticatedUserVariables
+    | reactQuery.SkipToken,
   options?: Omit<
     reactQuery.UseQueryOptions<
       UsersListFollowedByAuthenticatedUserResponse,
@@ -94219,16 +94495,19 @@ export function usersCheckPersonIsFollowedByAuthenticatedQuery(
 
 export function usersCheckPersonIsFollowedByAuthenticatedQuery(
   variables:
-    UsersCheckPersonIsFollowedByAuthenticatedVariables | reactQuery.SkipToken
+    | UsersCheckPersonIsFollowedByAuthenticatedVariables
+    | reactQuery.SkipToken
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn:
-    ((options: QueryFnOptions) => Promise<undefined>) | reactQuery.SkipToken;
+    | ((options: QueryFnOptions) => Promise<undefined>)
+    | reactQuery.SkipToken;
 };
 
 export function usersCheckPersonIsFollowedByAuthenticatedQuery(
   variables:
-    UsersCheckPersonIsFollowedByAuthenticatedVariables | reactQuery.SkipToken
+    | UsersCheckPersonIsFollowedByAuthenticatedVariables
+    | reactQuery.SkipToken
 ) {
   return {
     queryKey: queryKeyFn({
@@ -94273,7 +94552,8 @@ export const useSuspenseUsersCheckPersonIsFollowedByAuthenticated = <
 
 export const useUsersCheckPersonIsFollowedByAuthenticated = <TData = undefined>(
   variables:
-    UsersCheckPersonIsFollowedByAuthenticatedVariables | reactQuery.SkipToken,
+    | UsersCheckPersonIsFollowedByAuthenticatedVariables
+    | reactQuery.SkipToken,
   options?: Omit<
     reactQuery.UseQueryOptions<
       undefined,
@@ -94444,7 +94724,8 @@ export function usersListGpgKeysForAuthenticatedUserQuery(
 
 export function usersListGpgKeysForAuthenticatedUserQuery(
   variables:
-    UsersListGpgKeysForAuthenticatedUserVariables | reactQuery.SkipToken
+    | UsersListGpgKeysForAuthenticatedUserVariables
+    | reactQuery.SkipToken
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn:
@@ -94456,7 +94737,8 @@ export function usersListGpgKeysForAuthenticatedUserQuery(
 
 export function usersListGpgKeysForAuthenticatedUserQuery(
   variables:
-    UsersListGpgKeysForAuthenticatedUserVariables | reactQuery.SkipToken
+    | UsersListGpgKeysForAuthenticatedUserVariables
+    | reactQuery.SkipToken
 ) {
   return {
     queryKey: queryKeyFn({
@@ -94509,7 +94791,8 @@ export const useUsersListGpgKeysForAuthenticatedUser = <
   TData = UsersListGpgKeysForAuthenticatedUserResponse,
 >(
   variables:
-    UsersListGpgKeysForAuthenticatedUserVariables | reactQuery.SkipToken,
+    | UsersListGpgKeysForAuthenticatedUserVariables
+    | reactQuery.SkipToken,
   options?: Omit<
     reactQuery.UseQueryOptions<
       UsersListGpgKeysForAuthenticatedUserResponse,
@@ -94922,7 +95205,8 @@ export function appsListInstallationsForAuthenticatedUserQuery(
 
 export function appsListInstallationsForAuthenticatedUserQuery(
   variables:
-    AppsListInstallationsForAuthenticatedUserVariables | reactQuery.SkipToken
+    | AppsListInstallationsForAuthenticatedUserVariables
+    | reactQuery.SkipToken
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn:
@@ -94934,7 +95218,8 @@ export function appsListInstallationsForAuthenticatedUserQuery(
 
 export function appsListInstallationsForAuthenticatedUserQuery(
   variables:
-    AppsListInstallationsForAuthenticatedUserVariables | reactQuery.SkipToken
+    | AppsListInstallationsForAuthenticatedUserVariables
+    | reactQuery.SkipToken
 ) {
   return {
     queryKey: queryKeyFn({
@@ -94999,7 +95284,8 @@ export const useAppsListInstallationsForAuthenticatedUser = <
   TData = AppsListInstallationsForAuthenticatedUserResponse,
 >(
   variables:
-    AppsListInstallationsForAuthenticatedUserVariables | reactQuery.SkipToken,
+    | AppsListInstallationsForAuthenticatedUserVariables
+    | reactQuery.SkipToken,
   options?: Omit<
     reactQuery.UseQueryOptions<
       AppsListInstallationsForAuthenticatedUserResponse,
@@ -95651,7 +95937,12 @@ export type IssuesListForAuthenticatedUserQueryParams = {
    * @default assigned
    */
   filter?:
-    "assigned" | "created" | "mentioned" | "subscribed" | "repos" | "all";
+    | "assigned"
+    | "created"
+    | "mentioned"
+    | "subscribed"
+    | "repos"
+    | "all";
   /**
    * Indicates the state of the issues to return.
    *
@@ -95920,7 +96211,8 @@ export function usersListPublicSshKeysForAuthenticatedUserQuery(
 
 export function usersListPublicSshKeysForAuthenticatedUserQuery(
   variables:
-    UsersListPublicSshKeysForAuthenticatedUserVariables | reactQuery.SkipToken
+    | UsersListPublicSshKeysForAuthenticatedUserVariables
+    | reactQuery.SkipToken
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn:
@@ -95932,7 +96224,8 @@ export function usersListPublicSshKeysForAuthenticatedUserQuery(
 
 export function usersListPublicSshKeysForAuthenticatedUserQuery(
   variables:
-    UsersListPublicSshKeysForAuthenticatedUserVariables | reactQuery.SkipToken
+    | UsersListPublicSshKeysForAuthenticatedUserVariables
+    | reactQuery.SkipToken
 ) {
   return {
     queryKey: queryKeyFn({
@@ -95985,7 +96278,8 @@ export const useUsersListPublicSshKeysForAuthenticatedUser = <
   TData = UsersListPublicSshKeysForAuthenticatedUserResponse,
 >(
   variables:
-    UsersListPublicSshKeysForAuthenticatedUserVariables | reactQuery.SkipToken,
+    | UsersListPublicSshKeysForAuthenticatedUserVariables
+    | reactQuery.SkipToken,
   options?: Omit<
     reactQuery.UseQueryOptions<
       UsersListPublicSshKeysForAuthenticatedUserResponse,
@@ -96234,16 +96528,19 @@ export function usersGetPublicSshKeyForAuthenticatedUserQuery(
 
 export function usersGetPublicSshKeyForAuthenticatedUserQuery(
   variables:
-    UsersGetPublicSshKeyForAuthenticatedUserVariables | reactQuery.SkipToken
+    | UsersGetPublicSshKeyForAuthenticatedUserVariables
+    | reactQuery.SkipToken
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn:
-    ((options: QueryFnOptions) => Promise<Schemas.Key>) | reactQuery.SkipToken;
+    | ((options: QueryFnOptions) => Promise<Schemas.Key>)
+    | reactQuery.SkipToken;
 };
 
 export function usersGetPublicSshKeyForAuthenticatedUserQuery(
   variables:
-    UsersGetPublicSshKeyForAuthenticatedUserVariables | reactQuery.SkipToken
+    | UsersGetPublicSshKeyForAuthenticatedUserVariables
+    | reactQuery.SkipToken
 ) {
   return {
     queryKey: queryKeyFn({
@@ -96296,7 +96593,8 @@ export const useUsersGetPublicSshKeyForAuthenticatedUser = <
   TData = Schemas.Key,
 >(
   variables:
-    UsersGetPublicSshKeyForAuthenticatedUserVariables | reactQuery.SkipToken,
+    | UsersGetPublicSshKeyForAuthenticatedUserVariables
+    | reactQuery.SkipToken,
   options?: Omit<
     reactQuery.UseQueryOptions<
       Schemas.Key,
@@ -96395,7 +96693,8 @@ export function appsListSubscriptionsForAuthenticatedUserQuery(
 
 export function appsListSubscriptionsForAuthenticatedUserQuery(
   variables:
-    AppsListSubscriptionsForAuthenticatedUserVariables | reactQuery.SkipToken
+    | AppsListSubscriptionsForAuthenticatedUserVariables
+    | reactQuery.SkipToken
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn:
@@ -96407,7 +96706,8 @@ export function appsListSubscriptionsForAuthenticatedUserQuery(
 
 export function appsListSubscriptionsForAuthenticatedUserQuery(
   variables:
-    AppsListSubscriptionsForAuthenticatedUserVariables | reactQuery.SkipToken
+    | AppsListSubscriptionsForAuthenticatedUserVariables
+    | reactQuery.SkipToken
 ) {
   return {
     queryKey: queryKeyFn({
@@ -96460,7 +96760,8 @@ export const useAppsListSubscriptionsForAuthenticatedUser = <
   TData = AppsListSubscriptionsForAuthenticatedUserResponse,
 >(
   variables:
-    AppsListSubscriptionsForAuthenticatedUserVariables | reactQuery.SkipToken,
+    | AppsListSubscriptionsForAuthenticatedUserVariables
+    | reactQuery.SkipToken,
   options?: Omit<
     reactQuery.UseQueryOptions<
       AppsListSubscriptionsForAuthenticatedUserResponse,
@@ -96721,7 +97022,8 @@ export function orgsListMembershipsForAuthenticatedUserQuery(
 
 export function orgsListMembershipsForAuthenticatedUserQuery(
   variables:
-    OrgsListMembershipsForAuthenticatedUserVariables | reactQuery.SkipToken
+    | OrgsListMembershipsForAuthenticatedUserVariables
+    | reactQuery.SkipToken
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn:
@@ -96733,7 +97035,8 @@ export function orgsListMembershipsForAuthenticatedUserQuery(
 
 export function orgsListMembershipsForAuthenticatedUserQuery(
   variables:
-    OrgsListMembershipsForAuthenticatedUserVariables | reactQuery.SkipToken
+    | OrgsListMembershipsForAuthenticatedUserVariables
+    | reactQuery.SkipToken
 ) {
   return {
     queryKey: queryKeyFn({
@@ -96780,7 +97083,8 @@ export const useOrgsListMembershipsForAuthenticatedUser = <
   TData = OrgsListMembershipsForAuthenticatedUserResponse,
 >(
   variables:
-    OrgsListMembershipsForAuthenticatedUserVariables | reactQuery.SkipToken,
+    | OrgsListMembershipsForAuthenticatedUserVariables
+    | reactQuery.SkipToken,
   options?: Omit<
     reactQuery.UseQueryOptions<
       OrgsListMembershipsForAuthenticatedUserResponse,
@@ -96855,7 +97159,8 @@ export function orgsGetMembershipForAuthenticatedUserQuery(
 
 export function orgsGetMembershipForAuthenticatedUserQuery(
   variables:
-    OrgsGetMembershipForAuthenticatedUserVariables | reactQuery.SkipToken
+    | OrgsGetMembershipForAuthenticatedUserVariables
+    | reactQuery.SkipToken
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn:
@@ -96865,7 +97170,8 @@ export function orgsGetMembershipForAuthenticatedUserQuery(
 
 export function orgsGetMembershipForAuthenticatedUserQuery(
   variables:
-    OrgsGetMembershipForAuthenticatedUserVariables | reactQuery.SkipToken
+    | OrgsGetMembershipForAuthenticatedUserVariables
+    | reactQuery.SkipToken
 ) {
   return {
     queryKey: queryKeyFn({
@@ -96912,7 +97218,8 @@ export const useOrgsGetMembershipForAuthenticatedUser = <
   TData = Schemas.OrgMembership,
 >(
   variables:
-    OrgsGetMembershipForAuthenticatedUserVariables | reactQuery.SkipToken,
+    | OrgsGetMembershipForAuthenticatedUserVariables
+    | reactQuery.SkipToken,
   options?: Omit<
     reactQuery.UseQueryOptions<
       Schemas.OrgMembership,
@@ -97372,7 +97679,8 @@ export function migrationsGetStatusForAuthenticatedUserQuery(
 
 export function migrationsGetStatusForAuthenticatedUserQuery(
   variables:
-    MigrationsGetStatusForAuthenticatedUserVariables | reactQuery.SkipToken
+    | MigrationsGetStatusForAuthenticatedUserVariables
+    | reactQuery.SkipToken
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn:
@@ -97382,7 +97690,8 @@ export function migrationsGetStatusForAuthenticatedUserQuery(
 
 export function migrationsGetStatusForAuthenticatedUserQuery(
   variables:
-    MigrationsGetStatusForAuthenticatedUserVariables | reactQuery.SkipToken
+    | MigrationsGetStatusForAuthenticatedUserVariables
+    | reactQuery.SkipToken
 ) {
   return {
     queryKey: queryKeyFn({
@@ -97449,7 +97758,8 @@ export const useMigrationsGetStatusForAuthenticatedUser = <
   TData = Schemas.Migration,
 >(
   variables:
-    MigrationsGetStatusForAuthenticatedUserVariables | reactQuery.SkipToken,
+    | MigrationsGetStatusForAuthenticatedUserVariables
+    | reactQuery.SkipToken,
   options?: Omit<
     reactQuery.UseQueryOptions<
       Schemas.Migration,
@@ -97656,16 +97966,19 @@ export function migrationsGetArchiveForAuthenticatedUserQuery(
 
 export function migrationsGetArchiveForAuthenticatedUserQuery(
   variables:
-    MigrationsGetArchiveForAuthenticatedUserVariables | reactQuery.SkipToken
+    | MigrationsGetArchiveForAuthenticatedUserVariables
+    | reactQuery.SkipToken
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn:
-    ((options: QueryFnOptions) => Promise<undefined>) | reactQuery.SkipToken;
+    | ((options: QueryFnOptions) => Promise<undefined>)
+    | reactQuery.SkipToken;
 };
 
 export function migrationsGetArchiveForAuthenticatedUserQuery(
   variables:
-    MigrationsGetArchiveForAuthenticatedUserVariables | reactQuery.SkipToken
+    | MigrationsGetArchiveForAuthenticatedUserVariables
+    | reactQuery.SkipToken
 ) {
   return {
     queryKey: queryKeyFn({
@@ -97756,7 +98069,8 @@ export const useSuspenseMigrationsGetArchiveForAuthenticatedUser = <
  */
 export const useMigrationsGetArchiveForAuthenticatedUser = <TData = undefined>(
   variables:
-    MigrationsGetArchiveForAuthenticatedUserVariables | reactQuery.SkipToken,
+    | MigrationsGetArchiveForAuthenticatedUserVariables
+    | reactQuery.SkipToken,
   options?: Omit<
     reactQuery.UseQueryOptions<
       undefined,
@@ -97938,7 +98252,8 @@ export function migrationsListReposForAuthenticatedUserQuery(
 
 export function migrationsListReposForAuthenticatedUserQuery(
   variables:
-    MigrationsListReposForAuthenticatedUserVariables | reactQuery.SkipToken
+    | MigrationsListReposForAuthenticatedUserVariables
+    | reactQuery.SkipToken
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn:
@@ -97950,7 +98265,8 @@ export function migrationsListReposForAuthenticatedUserQuery(
 
 export function migrationsListReposForAuthenticatedUserQuery(
   variables:
-    MigrationsListReposForAuthenticatedUserVariables | reactQuery.SkipToken
+    | MigrationsListReposForAuthenticatedUserVariables
+    | reactQuery.SkipToken
 ) {
   return {
     queryKey: queryKeyFn({
@@ -98003,7 +98319,8 @@ export const useMigrationsListReposForAuthenticatedUser = <
   TData = MigrationsListReposForAuthenticatedUserResponse,
 >(
   variables:
-    MigrationsListReposForAuthenticatedUserVariables | reactQuery.SkipToken,
+    | MigrationsListReposForAuthenticatedUserVariables
+    | reactQuery.SkipToken,
   options?: Omit<
     reactQuery.UseQueryOptions<
       MigrationsListReposForAuthenticatedUserResponse,
@@ -98255,7 +98572,8 @@ export function packagesListPackagesForAuthenticatedUserQuery(
 
 export function packagesListPackagesForAuthenticatedUserQuery(
   variables:
-    PackagesListPackagesForAuthenticatedUserVariables | reactQuery.SkipToken
+    | PackagesListPackagesForAuthenticatedUserVariables
+    | reactQuery.SkipToken
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn:
@@ -98267,7 +98585,8 @@ export function packagesListPackagesForAuthenticatedUserQuery(
 
 export function packagesListPackagesForAuthenticatedUserQuery(
   variables:
-    PackagesListPackagesForAuthenticatedUserVariables | reactQuery.SkipToken
+    | PackagesListPackagesForAuthenticatedUserVariables
+    | reactQuery.SkipToken
 ) {
   return {
     queryKey: queryKeyFn({
@@ -98324,7 +98643,8 @@ export const usePackagesListPackagesForAuthenticatedUser = <
   TData = PackagesListPackagesForAuthenticatedUserResponse,
 >(
   variables:
-    PackagesListPackagesForAuthenticatedUserVariables | reactQuery.SkipToken,
+    | PackagesListPackagesForAuthenticatedUserVariables
+    | reactQuery.SkipToken,
   options?: Omit<
     reactQuery.UseQueryOptions<
       PackagesListPackagesForAuthenticatedUserResponse,
@@ -98492,7 +98812,8 @@ export function packagesGetPackageForAuthenticatedUserQuery(
 
 export function packagesGetPackageForAuthenticatedUserQuery(
   variables:
-    PackagesGetPackageForAuthenticatedUserVariables | reactQuery.SkipToken
+    | PackagesGetPackageForAuthenticatedUserVariables
+    | reactQuery.SkipToken
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn:
@@ -98502,7 +98823,8 @@ export function packagesGetPackageForAuthenticatedUserQuery(
 
 export function packagesGetPackageForAuthenticatedUserQuery(
   variables:
-    PackagesGetPackageForAuthenticatedUserVariables | reactQuery.SkipToken
+    | PackagesGetPackageForAuthenticatedUserVariables
+    | reactQuery.SkipToken
 ) {
   return {
     queryKey: queryKeyFn({
@@ -98559,7 +98881,8 @@ export const usePackagesGetPackageForAuthenticatedUser = <
   TData = Schemas.Package,
 >(
   variables:
-    PackagesGetPackageForAuthenticatedUserVariables | reactQuery.SkipToken,
+    | PackagesGetPackageForAuthenticatedUserVariables
+    | reactQuery.SkipToken,
   options?: Omit<
     reactQuery.UseQueryOptions<
       Schemas.Package,
@@ -98692,7 +99015,12 @@ export type PackagesGetAllPackageVersionsForPackageOwnedByAuthenticatedUserPathP
      * The type of supported package. Packages in GitHub's Gradle registry have the type `maven`. Docker images pushed to GitHub's Container registry (`ghcr.io`) have the type `container`. You can use the type `docker` to find images that were pushed to GitHub's Docker registry (`docker.pkg.github.com`), even if these have now been migrated to the Container registry.
      */
     packageType:
-      "npm" | "maven" | "rubygems" | "docker" | "nuget" | "container";
+      | "npm"
+      | "maven"
+      | "rubygems"
+      | "docker"
+      | "nuget"
+      | "container";
     /**
      * The name of the package.
      */
@@ -99390,7 +99718,8 @@ export function usersListPublicEmailsForAuthenticatedUserQuery(
 
 export function usersListPublicEmailsForAuthenticatedUserQuery(
   variables:
-    UsersListPublicEmailsForAuthenticatedUserVariables | reactQuery.SkipToken
+    | UsersListPublicEmailsForAuthenticatedUserVariables
+    | reactQuery.SkipToken
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn:
@@ -99402,7 +99731,8 @@ export function usersListPublicEmailsForAuthenticatedUserQuery(
 
 export function usersListPublicEmailsForAuthenticatedUserQuery(
   variables:
-    UsersListPublicEmailsForAuthenticatedUserVariables | reactQuery.SkipToken
+    | UsersListPublicEmailsForAuthenticatedUserVariables
+    | reactQuery.SkipToken
 ) {
   return {
     queryKey: queryKeyFn({
@@ -99455,7 +99785,8 @@ export const useUsersListPublicEmailsForAuthenticatedUser = <
   TData = UsersListPublicEmailsForAuthenticatedUserResponse,
 >(
   variables:
-    UsersListPublicEmailsForAuthenticatedUserVariables | reactQuery.SkipToken,
+    | UsersListPublicEmailsForAuthenticatedUserVariables
+    | reactQuery.SkipToken,
   options?: Omit<
     reactQuery.UseQueryOptions<
       UsersListPublicEmailsForAuthenticatedUserResponse,
@@ -100005,7 +100336,8 @@ export function reposListInvitationsForAuthenticatedUserQuery(
 
 export function reposListInvitationsForAuthenticatedUserQuery(
   variables:
-    ReposListInvitationsForAuthenticatedUserVariables | reactQuery.SkipToken
+    | ReposListInvitationsForAuthenticatedUserVariables
+    | reactQuery.SkipToken
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn:
@@ -100017,7 +100349,8 @@ export function reposListInvitationsForAuthenticatedUserQuery(
 
 export function reposListInvitationsForAuthenticatedUserQuery(
   variables:
-    ReposListInvitationsForAuthenticatedUserVariables | reactQuery.SkipToken
+    | ReposListInvitationsForAuthenticatedUserVariables
+    | reactQuery.SkipToken
 ) {
   return {
     queryKey: queryKeyFn({
@@ -100070,7 +100403,8 @@ export const useReposListInvitationsForAuthenticatedUser = <
   TData = ReposListInvitationsForAuthenticatedUserResponse,
 >(
   variables:
-    ReposListInvitationsForAuthenticatedUserVariables | reactQuery.SkipToken,
+    | ReposListInvitationsForAuthenticatedUserVariables
+    | reactQuery.SkipToken,
   options?: Omit<
     reactQuery.UseQueryOptions<
       ReposListInvitationsForAuthenticatedUserResponse,
@@ -100318,7 +100652,8 @@ export function usersListSshSigningKeysForAuthenticatedUserQuery(
 
 export function usersListSshSigningKeysForAuthenticatedUserQuery(
   variables:
-    UsersListSshSigningKeysForAuthenticatedUserVariables | reactQuery.SkipToken
+    | UsersListSshSigningKeysForAuthenticatedUserVariables
+    | reactQuery.SkipToken
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn:
@@ -100330,7 +100665,8 @@ export function usersListSshSigningKeysForAuthenticatedUserQuery(
 
 export function usersListSshSigningKeysForAuthenticatedUserQuery(
   variables:
-    UsersListSshSigningKeysForAuthenticatedUserVariables | reactQuery.SkipToken
+    | UsersListSshSigningKeysForAuthenticatedUserVariables
+    | reactQuery.SkipToken
 ) {
   return {
     queryKey: queryKeyFn({
@@ -100383,7 +100719,8 @@ export const useUsersListSshSigningKeysForAuthenticatedUser = <
   TData = UsersListSshSigningKeysForAuthenticatedUserResponse,
 >(
   variables:
-    UsersListSshSigningKeysForAuthenticatedUserVariables | reactQuery.SkipToken,
+    | UsersListSshSigningKeysForAuthenticatedUserVariables
+    | reactQuery.SkipToken,
   options?: Omit<
     reactQuery.UseQueryOptions<
       UsersListSshSigningKeysForAuthenticatedUserResponse,
@@ -100642,7 +100979,8 @@ export function usersGetSshSigningKeyForAuthenticatedUserQuery(
 
 export function usersGetSshSigningKeyForAuthenticatedUserQuery(
   variables:
-    UsersGetSshSigningKeyForAuthenticatedUserVariables | reactQuery.SkipToken
+    | UsersGetSshSigningKeyForAuthenticatedUserVariables
+    | reactQuery.SkipToken
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn:
@@ -100652,7 +100990,8 @@ export function usersGetSshSigningKeyForAuthenticatedUserQuery(
 
 export function usersGetSshSigningKeyForAuthenticatedUserQuery(
   variables:
-    UsersGetSshSigningKeyForAuthenticatedUserVariables | reactQuery.SkipToken
+    | UsersGetSshSigningKeyForAuthenticatedUserVariables
+    | reactQuery.SkipToken
 ) {
   return {
     queryKey: queryKeyFn({
@@ -100705,7 +101044,8 @@ export const useUsersGetSshSigningKeyForAuthenticatedUser = <
   TData = Schemas.SshSigningKey,
 >(
   variables:
-    UsersGetSshSigningKeyForAuthenticatedUserVariables | reactQuery.SkipToken,
+    | UsersGetSshSigningKeyForAuthenticatedUserVariables
+    | reactQuery.SkipToken,
   options?: Omit<
     reactQuery.UseQueryOptions<
       Schemas.SshSigningKey,
@@ -100815,7 +101155,8 @@ export function activityListReposStarredByAuthenticatedUserQuery(
 
 export function activityListReposStarredByAuthenticatedUserQuery(
   variables:
-    ActivityListReposStarredByAuthenticatedUserVariables | reactQuery.SkipToken
+    | ActivityListReposStarredByAuthenticatedUserVariables
+    | reactQuery.SkipToken
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn:
@@ -100827,7 +101168,8 @@ export function activityListReposStarredByAuthenticatedUserQuery(
 
 export function activityListReposStarredByAuthenticatedUserQuery(
   variables:
-    ActivityListReposStarredByAuthenticatedUserVariables | reactQuery.SkipToken
+    | ActivityListReposStarredByAuthenticatedUserVariables
+    | reactQuery.SkipToken
 ) {
   return {
     queryKey: queryKeyFn({
@@ -100884,7 +101226,8 @@ export const useActivityListReposStarredByAuthenticatedUser = <
   TData = ActivityListReposStarredByAuthenticatedUserResponse,
 >(
   variables:
-    ActivityListReposStarredByAuthenticatedUserVariables | reactQuery.SkipToken,
+    | ActivityListReposStarredByAuthenticatedUserVariables
+    | reactQuery.SkipToken,
   options?: Omit<
     reactQuery.UseQueryOptions<
       ActivityListReposStarredByAuthenticatedUserResponse,
@@ -101053,7 +101396,8 @@ export function activityCheckRepoIsStarredByAuthenticatedUserQuery(
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn:
-    ((options: QueryFnOptions) => Promise<undefined>) | reactQuery.SkipToken;
+    | ((options: QueryFnOptions) => Promise<undefined>)
+    | reactQuery.SkipToken;
 };
 
 export function activityCheckRepoIsStarredByAuthenticatedUserQuery(
@@ -101286,7 +101630,8 @@ export function activityListWatchedReposForAuthenticatedUserQuery(
 
 export function activityListWatchedReposForAuthenticatedUserQuery(
   variables:
-    ActivityListWatchedReposForAuthenticatedUserVariables | reactQuery.SkipToken
+    | ActivityListWatchedReposForAuthenticatedUserVariables
+    | reactQuery.SkipToken
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn:
@@ -101298,7 +101643,8 @@ export function activityListWatchedReposForAuthenticatedUserQuery(
 
 export function activityListWatchedReposForAuthenticatedUserQuery(
   variables:
-    ActivityListWatchedReposForAuthenticatedUserVariables | reactQuery.SkipToken
+    | ActivityListWatchedReposForAuthenticatedUserVariables
+    | reactQuery.SkipToken
 ) {
   return {
     queryKey: queryKeyFn({
@@ -101872,7 +102218,8 @@ export function activityListEventsForAuthenticatedUserQuery(
 
 export function activityListEventsForAuthenticatedUserQuery(
   variables:
-    ActivityListEventsForAuthenticatedUserVariables | reactQuery.SkipToken
+    | ActivityListEventsForAuthenticatedUserVariables
+    | reactQuery.SkipToken
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn:
@@ -101884,7 +102231,8 @@ export function activityListEventsForAuthenticatedUserQuery(
 
 export function activityListEventsForAuthenticatedUserQuery(
   variables:
-    ActivityListEventsForAuthenticatedUserVariables | reactQuery.SkipToken
+    | ActivityListEventsForAuthenticatedUserVariables
+    | reactQuery.SkipToken
 ) {
   return {
     queryKey: queryKeyFn({
@@ -101937,7 +102285,8 @@ export const useActivityListEventsForAuthenticatedUser = <
   TData = ActivityListEventsForAuthenticatedUserResponse,
 >(
   variables:
-    ActivityListEventsForAuthenticatedUserVariables | reactQuery.SkipToken,
+    | ActivityListEventsForAuthenticatedUserVariables
+    | reactQuery.SkipToken,
   options?: Omit<
     reactQuery.UseQueryOptions<
       ActivityListEventsForAuthenticatedUserResponse,
@@ -102034,7 +102383,8 @@ export function activityListOrgEventsForAuthenticatedUserQuery(
 
 export function activityListOrgEventsForAuthenticatedUserQuery(
   variables:
-    ActivityListOrgEventsForAuthenticatedUserVariables | reactQuery.SkipToken
+    | ActivityListOrgEventsForAuthenticatedUserVariables
+    | reactQuery.SkipToken
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn:
@@ -102046,7 +102396,8 @@ export function activityListOrgEventsForAuthenticatedUserQuery(
 
 export function activityListOrgEventsForAuthenticatedUserQuery(
   variables:
-    ActivityListOrgEventsForAuthenticatedUserVariables | reactQuery.SkipToken
+    | ActivityListOrgEventsForAuthenticatedUserVariables
+    | reactQuery.SkipToken
 ) {
   return {
     queryKey: queryKeyFn({
@@ -102099,7 +102450,8 @@ export const useActivityListOrgEventsForAuthenticatedUser = <
   TData = ActivityListOrgEventsForAuthenticatedUserResponse,
 >(
   variables:
-    ActivityListOrgEventsForAuthenticatedUserVariables | reactQuery.SkipToken,
+    | ActivityListOrgEventsForAuthenticatedUserVariables
+    | reactQuery.SkipToken,
   options?: Omit<
     reactQuery.UseQueryOptions<
       ActivityListOrgEventsForAuthenticatedUserResponse,
@@ -102612,7 +102964,8 @@ export function usersCheckFollowingForUserQuery(
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn:
-    ((options: QueryFnOptions) => Promise<undefined>) | reactQuery.SkipToken;
+    | ((options: QueryFnOptions) => Promise<undefined>)
+    | reactQuery.SkipToken;
 };
 
 export function usersCheckFollowingForUserQuery(
@@ -104950,7 +105303,8 @@ export function activityListReceivedPublicEventsForUserQuery(
 
 export function activityListReceivedPublicEventsForUserQuery(
   variables:
-    ActivityListReceivedPublicEventsForUserVariables | reactQuery.SkipToken
+    | ActivityListReceivedPublicEventsForUserVariables
+    | reactQuery.SkipToken
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn:
@@ -104962,7 +105316,8 @@ export function activityListReceivedPublicEventsForUserQuery(
 
 export function activityListReceivedPublicEventsForUserQuery(
   variables:
-    ActivityListReceivedPublicEventsForUserVariables | reactQuery.SkipToken
+    | ActivityListReceivedPublicEventsForUserVariables
+    | reactQuery.SkipToken
 ) {
   return {
     queryKey: queryKeyFn({
@@ -105009,7 +105364,8 @@ export const useActivityListReceivedPublicEventsForUser = <
   TData = ActivityListReceivedPublicEventsForUserResponse,
 >(
   variables:
-    ActivityListReceivedPublicEventsForUserVariables | reactQuery.SkipToken,
+    | ActivityListReceivedPublicEventsForUserVariables
+    | reactQuery.SkipToken,
   options?: Omit<
     reactQuery.UseQueryOptions<
       ActivityListReceivedPublicEventsForUserResponse,
@@ -105461,7 +105817,8 @@ export const useBillingGetGithubPackagesBillingUser = <
   TData = Schemas.PackagesBillingUsage,
 >(
   variables:
-    BillingGetGithubPackagesBillingUserVariables | reactQuery.SkipToken,
+    | BillingGetGithubPackagesBillingUserVariables
+    | reactQuery.SkipToken,
   options?: Omit<
     reactQuery.UseQueryOptions<
       Schemas.PackagesBillingUsage,
@@ -106265,7 +106622,8 @@ export function metaGetZenQuery(
 ): {
   queryKey: reactQuery.QueryKey;
   queryFn:
-    ((options: QueryFnOptions) => Promise<undefined>) | reactQuery.SkipToken;
+    | ((options: QueryFnOptions) => Promise<undefined>)
+    | reactQuery.SkipToken;
 };
 
 export function metaGetZenQuery(
@@ -106369,7 +106727,8 @@ export type QueryOperation =
       path: "/codes_of_conduct";
       operationId: "codesOfConductGetAllCodesOfConduct";
       variables:
-        CodesOfConductGetAllCodesOfConductVariables | reactQuery.SkipToken;
+        | CodesOfConductGetAllCodesOfConductVariables
+        | reactQuery.SkipToken;
     }
   | {
       path: "/codes_of_conduct/{key}";
@@ -106385,13 +106744,15 @@ export type QueryOperation =
       path: "/enterprises/{enterprise}/dependabot/alerts";
       operationId: "dependabotListAlertsForEnterprise";
       variables:
-        DependabotListAlertsForEnterpriseVariables | reactQuery.SkipToken;
+        | DependabotListAlertsForEnterpriseVariables
+        | reactQuery.SkipToken;
     }
   | {
       path: "/enterprises/{enterprise}/secret-scanning/alerts";
       operationId: "secretScanningListAlertsForEnterprise";
       variables:
-        SecretScanningListAlertsForEnterpriseVariables | reactQuery.SkipToken;
+        | SecretScanningListAlertsForEnterpriseVariables
+        | reactQuery.SkipToken;
     }
   | {
       path: "/events";
@@ -106467,7 +106828,8 @@ export type QueryOperation =
       path: "/installation/repositories";
       operationId: "appsListReposAccessibleToInstallation";
       variables:
-        AppsListReposAccessibleToInstallationVariables | reactQuery.SkipToken;
+        | AppsListReposAccessibleToInstallationVariables
+        | reactQuery.SkipToken;
     }
   | {
       path: "/issues";
@@ -106488,7 +106850,8 @@ export type QueryOperation =
       path: "/marketplace_listing/accounts/{accountId}";
       operationId: "appsGetSubscriptionPlanForAccount";
       variables:
-        AppsGetSubscriptionPlanForAccountVariables | reactQuery.SkipToken;
+        | AppsGetSubscriptionPlanForAccountVariables
+        | reactQuery.SkipToken;
     }
   | {
       path: "/marketplace_listing/plans";
@@ -106526,7 +106889,8 @@ export type QueryOperation =
       path: "/networks/{owner}/{repo}/events";
       operationId: "activityListPublicEventsForRepoNetwork";
       variables:
-        ActivityListPublicEventsForRepoNetworkVariables | reactQuery.SkipToken;
+        | ActivityListPublicEventsForRepoNetworkVariables
+        | reactQuery.SkipToken;
     }
   | {
       path: "/notifications";
@@ -106566,19 +106930,22 @@ export type QueryOperation =
       path: "/orgs/{org}/actions/cache/usage";
       operationId: "actionsGetActionsCacheUsageForOrg";
       variables:
-        ActionsGetActionsCacheUsageForOrgVariables | reactQuery.SkipToken;
+        | ActionsGetActionsCacheUsageForOrgVariables
+        | reactQuery.SkipToken;
     }
   | {
       path: "/orgs/{org}/actions/cache/usage-by-repository";
       operationId: "actionsGetActionsCacheUsageByRepoForOrg";
       variables:
-        ActionsGetActionsCacheUsageByRepoForOrgVariables | reactQuery.SkipToken;
+        | ActionsGetActionsCacheUsageByRepoForOrgVariables
+        | reactQuery.SkipToken;
     }
   | {
       path: "/orgs/{org}/actions/oidc/customization/sub";
       operationId: "oidcGetOidcCustomSubTemplateForOrg";
       variables:
-        OidcGetOidcCustomSubTemplateForOrgVariables | reactQuery.SkipToken;
+        | OidcGetOidcCustomSubTemplateForOrgVariables
+        | reactQuery.SkipToken;
     }
   | {
       path: "/orgs/{org}/actions/permissions";
@@ -106598,7 +106965,8 @@ export type QueryOperation =
       path: "/orgs/{org}/actions/permissions/selected-actions";
       operationId: "actionsGetAllowedActionsOrganization";
       variables:
-        ActionsGetAllowedActionsOrganizationVariables | reactQuery.SkipToken;
+        | ActionsGetAllowedActionsOrganizationVariables
+        | reactQuery.SkipToken;
     }
   | {
       path: "/orgs/{org}/actions/permissions/workflow";
@@ -106628,19 +106996,22 @@ export type QueryOperation =
       path: "/orgs/{org}/actions/runners";
       operationId: "actionsListSelfHostedRunnersForOrg";
       variables:
-        ActionsListSelfHostedRunnersForOrgVariables | reactQuery.SkipToken;
+        | ActionsListSelfHostedRunnersForOrgVariables
+        | reactQuery.SkipToken;
     }
   | {
       path: "/orgs/{org}/actions/runners/downloads";
       operationId: "actionsListRunnerApplicationsForOrg";
       variables:
-        ActionsListRunnerApplicationsForOrgVariables | reactQuery.SkipToken;
+        | ActionsListRunnerApplicationsForOrgVariables
+        | reactQuery.SkipToken;
     }
   | {
       path: "/orgs/{org}/actions/runners/{runnerId}";
       operationId: "actionsGetSelfHostedRunnerForOrg";
       variables:
-        ActionsGetSelfHostedRunnerForOrgVariables | reactQuery.SkipToken;
+        | ActionsGetSelfHostedRunnerForOrgVariables
+        | reactQuery.SkipToken;
     }
   | {
       path: "/orgs/{org}/actions/runners/{runnerId}/labels";
@@ -106668,7 +107039,8 @@ export type QueryOperation =
       path: "/orgs/{org}/actions/secrets/{secretName}/repositories";
       operationId: "actionsListSelectedReposForOrgSecret";
       variables:
-        ActionsListSelectedReposForOrgSecretVariables | reactQuery.SkipToken;
+        | ActionsListSelectedReposForOrgSecretVariables
+        | reactQuery.SkipToken;
     }
   | {
       path: "/orgs/{org}/actions/variables";
@@ -106684,7 +107056,8 @@ export type QueryOperation =
       path: "/orgs/{org}/actions/variables/{name}/repositories";
       operationId: "actionsListSelectedReposForOrgVariable";
       variables:
-        ActionsListSelectedReposForOrgVariableVariables | reactQuery.SkipToken;
+        | ActionsListSelectedReposForOrgVariableVariables
+        | reactQuery.SkipToken;
     }
   | {
       path: "/orgs/{org}/blocks";
@@ -106725,7 +107098,8 @@ export type QueryOperation =
       path: "/orgs/{org}/codespaces/secrets/{secretName}/repositories";
       operationId: "codespacesListSelectedReposForOrgSecret";
       variables:
-        CodespacesListSelectedReposForOrgSecretVariables | reactQuery.SkipToken;
+        | CodespacesListSelectedReposForOrgSecretVariables
+        | reactQuery.SkipToken;
     }
   | {
       path: "/orgs/{org}/dependabot/alerts";
@@ -106751,7 +107125,8 @@ export type QueryOperation =
       path: "/orgs/{org}/dependabot/secrets/{secretName}/repositories";
       operationId: "dependabotListSelectedReposForOrgSecret";
       variables:
-        DependabotListSelectedReposForOrgSecretVariables | reactQuery.SkipToken;
+        | DependabotListSelectedReposForOrgSecretVariables
+        | reactQuery.SkipToken;
     }
   | {
       path: "/orgs/{org}/events";
@@ -106802,7 +107177,8 @@ export type QueryOperation =
       path: "/orgs/{org}/interaction-limits";
       operationId: "interactionsGetRestrictionsForOrg";
       variables:
-        InteractionsGetRestrictionsForOrgVariables | reactQuery.SkipToken;
+        | InteractionsGetRestrictionsForOrgVariables
+        | reactQuery.SkipToken;
     }
   | {
       path: "/orgs/{org}/invitations";
@@ -106833,7 +107209,8 @@ export type QueryOperation =
       path: "/orgs/{org}/members/{username}/codespaces";
       operationId: "codespacesGetCodespacesForUserInOrg";
       variables:
-        CodespacesGetCodespacesForUserInOrgVariables | reactQuery.SkipToken;
+        | CodespacesGetCodespacesForUserInOrgVariables
+        | reactQuery.SkipToken;
     }
   | {
       path: "/orgs/{org}/memberships/{username}";
@@ -106854,7 +107231,8 @@ export type QueryOperation =
       path: "/orgs/{org}/migrations/{migrationId}/archive";
       operationId: "migrationsDownloadArchiveForOrg";
       variables:
-        MigrationsDownloadArchiveForOrgVariables | reactQuery.SkipToken;
+        | MigrationsDownloadArchiveForOrgVariables
+        | reactQuery.SkipToken;
     }
   | {
       path: "/orgs/{org}/migrations/{migrationId}/repositories";
@@ -106870,13 +107248,15 @@ export type QueryOperation =
       path: "/orgs/{org}/packages";
       operationId: "packagesListPackagesForOrganization";
       variables:
-        PackagesListPackagesForOrganizationVariables | reactQuery.SkipToken;
+        | PackagesListPackagesForOrganizationVariables
+        | reactQuery.SkipToken;
     }
   | {
       path: "/orgs/{org}/packages/{packageType}/{packageName}";
       operationId: "packagesGetPackageForOrganization";
       variables:
-        PackagesGetPackageForOrganizationVariables | reactQuery.SkipToken;
+        | PackagesGetPackageForOrganizationVariables
+        | reactQuery.SkipToken;
     }
   | {
       path: "/orgs/{org}/packages/{packageType}/{packageName}/versions";
@@ -106906,7 +107286,8 @@ export type QueryOperation =
       path: "/orgs/{org}/public_members/{username}";
       operationId: "orgsCheckPublicMembershipForUser";
       variables:
-        OrgsCheckPublicMembershipForUserVariables | reactQuery.SkipToken;
+        | OrgsCheckPublicMembershipForUserVariables
+        | reactQuery.SkipToken;
     }
   | {
       path: "/orgs/{org}/repos";
@@ -106927,19 +107308,22 @@ export type QueryOperation =
       path: "/orgs/{org}/settings/billing/actions";
       operationId: "billingGetGithubActionsBillingOrg";
       variables:
-        BillingGetGithubActionsBillingOrgVariables | reactQuery.SkipToken;
+        | BillingGetGithubActionsBillingOrgVariables
+        | reactQuery.SkipToken;
     }
   | {
       path: "/orgs/{org}/settings/billing/packages";
       operationId: "billingGetGithubPackagesBillingOrg";
       variables:
-        BillingGetGithubPackagesBillingOrgVariables | reactQuery.SkipToken;
+        | BillingGetGithubPackagesBillingOrgVariables
+        | reactQuery.SkipToken;
     }
   | {
       path: "/orgs/{org}/settings/billing/shared-storage";
       operationId: "billingGetSharedStorageBillingOrg";
       variables:
-        BillingGetSharedStorageBillingOrgVariables | reactQuery.SkipToken;
+        | BillingGetSharedStorageBillingOrgVariables
+        | reactQuery.SkipToken;
     }
   | {
       path: "/orgs/{org}/teams";
@@ -106965,7 +107349,8 @@ export type QueryOperation =
       path: "/orgs/{org}/teams/{teamSlug}/discussions/{discussionNumber}/comments";
       operationId: "teamsListDiscussionCommentsInOrg";
       variables:
-        TeamsListDiscussionCommentsInOrgVariables | reactQuery.SkipToken;
+        | TeamsListDiscussionCommentsInOrgVariables
+        | reactQuery.SkipToken;
     }
   | {
       path: "/orgs/{org}/teams/{teamSlug}/discussions/{discussionNumber}/comments/{commentNumber}";
@@ -106983,13 +107368,15 @@ export type QueryOperation =
       path: "/orgs/{org}/teams/{teamSlug}/discussions/{discussionNumber}/reactions";
       operationId: "reactionsListForTeamDiscussionInOrg";
       variables:
-        ReactionsListForTeamDiscussionInOrgVariables | reactQuery.SkipToken;
+        | ReactionsListForTeamDiscussionInOrgVariables
+        | reactQuery.SkipToken;
     }
   | {
       path: "/orgs/{org}/teams/{teamSlug}/invitations";
       operationId: "teamsListPendingInvitationsInOrg";
       variables:
-        TeamsListPendingInvitationsInOrgVariables | reactQuery.SkipToken;
+        | TeamsListPendingInvitationsInOrgVariables
+        | reactQuery.SkipToken;
     }
   | {
       path: "/orgs/{org}/teams/{teamSlug}/members";
@@ -107010,7 +107397,8 @@ export type QueryOperation =
       path: "/orgs/{org}/teams/{teamSlug}/projects/{projectId}";
       operationId: "teamsCheckPermissionsForProjectInOrg";
       variables:
-        TeamsCheckPermissionsForProjectInOrgVariables | reactQuery.SkipToken;
+        | TeamsCheckPermissionsForProjectInOrgVariables
+        | reactQuery.SkipToken;
     }
   | {
       path: "/orgs/{org}/teams/{teamSlug}/repos";
@@ -107021,7 +107409,8 @@ export type QueryOperation =
       path: "/orgs/{org}/teams/{teamSlug}/repos/{owner}/{repo}";
       operationId: "teamsCheckPermissionsForRepoInOrg";
       variables:
-        TeamsCheckPermissionsForRepoInOrgVariables | reactQuery.SkipToken;
+        | TeamsCheckPermissionsForRepoInOrgVariables
+        | reactQuery.SkipToken;
     }
   | {
       path: "/orgs/{org}/teams/{teamSlug}/teams";
@@ -107072,7 +107461,8 @@ export type QueryOperation =
       path: "/repos/{org}/{repo}/actions/required_workflows";
       operationId: "actionsListRepoRequiredWorkflows";
       variables:
-        ActionsListRepoRequiredWorkflowsVariables | reactQuery.SkipToken;
+        | ActionsListRepoRequiredWorkflowsVariables
+        | reactQuery.SkipToken;
     }
   | {
       path: "/repos/{org}/{repo}/actions/required_workflows/{requiredWorkflowIdForRepo}";
@@ -107083,7 +107473,8 @@ export type QueryOperation =
       path: "/repos/{org}/{repo}/actions/required_workflows/{requiredWorkflowIdForRepo}/timing";
       operationId: "actionsGetRepoRequiredWorkflowUsage";
       variables:
-        ActionsGetRepoRequiredWorkflowUsageVariables | reactQuery.SkipToken;
+        | ActionsGetRepoRequiredWorkflowUsageVariables
+        | reactQuery.SkipToken;
     }
   | {
       path: "/repos/{owner}/{repo}";
@@ -107124,13 +107515,15 @@ export type QueryOperation =
       path: "/repos/{owner}/{repo}/actions/jobs/{jobId}/logs";
       operationId: "actionsDownloadJobLogsForWorkflowRun";
       variables:
-        ActionsDownloadJobLogsForWorkflowRunVariables | reactQuery.SkipToken;
+        | ActionsDownloadJobLogsForWorkflowRunVariables
+        | reactQuery.SkipToken;
     }
   | {
       path: "/repos/{owner}/{repo}/actions/oidc/customization/sub";
       operationId: "actionsGetCustomOidcSubClaimForRepo";
       variables:
-        ActionsGetCustomOidcSubClaimForRepoVariables | reactQuery.SkipToken;
+        | ActionsGetCustomOidcSubClaimForRepoVariables
+        | reactQuery.SkipToken;
     }
   | {
       path: "/repos/{owner}/{repo}/actions/permissions";
@@ -107143,13 +107536,15 @@ export type QueryOperation =
       path: "/repos/{owner}/{repo}/actions/permissions/access";
       operationId: "actionsGetWorkflowAccessToRepository";
       variables:
-        ActionsGetWorkflowAccessToRepositoryVariables | reactQuery.SkipToken;
+        | ActionsGetWorkflowAccessToRepositoryVariables
+        | reactQuery.SkipToken;
     }
   | {
       path: "/repos/{owner}/{repo}/actions/permissions/selected-actions";
       operationId: "actionsGetAllowedActionsRepository";
       variables:
-        ActionsGetAllowedActionsRepositoryVariables | reactQuery.SkipToken;
+        | ActionsGetAllowedActionsRepositoryVariables
+        | reactQuery.SkipToken;
     }
   | {
       path: "/repos/{owner}/{repo}/actions/permissions/workflow";
@@ -107162,25 +107557,29 @@ export type QueryOperation =
       path: "/repos/{owner}/{repo}/actions/required_workflows/{requiredWorkflowIdForRepo}/runs";
       operationId: "actionsListRequiredWorkflowRuns";
       variables:
-        ActionsListRequiredWorkflowRunsVariables | reactQuery.SkipToken;
+        | ActionsListRequiredWorkflowRunsVariables
+        | reactQuery.SkipToken;
     }
   | {
       path: "/repos/{owner}/{repo}/actions/runners";
       operationId: "actionsListSelfHostedRunnersForRepo";
       variables:
-        ActionsListSelfHostedRunnersForRepoVariables | reactQuery.SkipToken;
+        | ActionsListSelfHostedRunnersForRepoVariables
+        | reactQuery.SkipToken;
     }
   | {
       path: "/repos/{owner}/{repo}/actions/runners/downloads";
       operationId: "actionsListRunnerApplicationsForRepo";
       variables:
-        ActionsListRunnerApplicationsForRepoVariables | reactQuery.SkipToken;
+        | ActionsListRunnerApplicationsForRepoVariables
+        | reactQuery.SkipToken;
     }
   | {
       path: "/repos/{owner}/{repo}/actions/runners/{runnerId}";
       operationId: "actionsGetSelfHostedRunnerForRepo";
       variables:
-        ActionsGetSelfHostedRunnerForRepoVariables | reactQuery.SkipToken;
+        | ActionsGetSelfHostedRunnerForRepoVariables
+        | reactQuery.SkipToken;
     }
   | {
       path: "/repos/{owner}/{repo}/actions/runners/{runnerId}/labels";
@@ -107208,7 +107607,8 @@ export type QueryOperation =
       path: "/repos/{owner}/{repo}/actions/runs/{runId}/artifacts";
       operationId: "actionsListWorkflowRunArtifacts";
       variables:
-        ActionsListWorkflowRunArtifactsVariables | reactQuery.SkipToken;
+        | ActionsListWorkflowRunArtifactsVariables
+        | reactQuery.SkipToken;
     }
   | {
       path: "/repos/{owner}/{repo}/actions/runs/{runId}/attempts/{attemptNumber}";
@@ -107219,13 +107619,15 @@ export type QueryOperation =
       path: "/repos/{owner}/{repo}/actions/runs/{runId}/attempts/{attemptNumber}/jobs";
       operationId: "actionsListJobsForWorkflowRunAttempt";
       variables:
-        ActionsListJobsForWorkflowRunAttemptVariables | reactQuery.SkipToken;
+        | ActionsListJobsForWorkflowRunAttemptVariables
+        | reactQuery.SkipToken;
     }
   | {
       path: "/repos/{owner}/{repo}/actions/runs/{runId}/attempts/{attemptNumber}/logs";
       operationId: "actionsDownloadWorkflowRunAttemptLogs";
       variables:
-        ActionsDownloadWorkflowRunAttemptLogsVariables | reactQuery.SkipToken;
+        | ActionsDownloadWorkflowRunAttemptLogsVariables
+        | reactQuery.SkipToken;
     }
   | {
       path: "/repos/{owner}/{repo}/actions/runs/{runId}/jobs";
@@ -107241,7 +107643,8 @@ export type QueryOperation =
       path: "/repos/{owner}/{repo}/actions/runs/{runId}/pending_deployments";
       operationId: "actionsGetPendingDeploymentsForRun";
       variables:
-        ActionsGetPendingDeploymentsForRunVariables | reactQuery.SkipToken;
+        | ActionsGetPendingDeploymentsForRunVariables
+        | reactQuery.SkipToken;
     }
   | {
       path: "/repos/{owner}/{repo}/actions/runs/{runId}/timing";
@@ -107337,13 +107740,15 @@ export type QueryOperation =
       path: "/repos/{owner}/{repo}/branches/{branch}/protection/required_pull_request_reviews";
       operationId: "reposGetPullRequestReviewProtection";
       variables:
-        ReposGetPullRequestReviewProtectionVariables | reactQuery.SkipToken;
+        | ReposGetPullRequestReviewProtectionVariables
+        | reactQuery.SkipToken;
     }
   | {
       path: "/repos/{owner}/{repo}/branches/{branch}/protection/required_signatures";
       operationId: "reposGetCommitSignatureProtection";
       variables:
-        ReposGetCommitSignatureProtectionVariables | reactQuery.SkipToken;
+        | ReposGetCommitSignatureProtectionVariables
+        | reactQuery.SkipToken;
     }
   | {
       path: "/repos/{owner}/{repo}/branches/{branch}/protection/required_status_checks";
@@ -107364,7 +107769,8 @@ export type QueryOperation =
       path: "/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/apps";
       operationId: "reposGetAppsWithAccessToProtectedBranch";
       variables:
-        ReposGetAppsWithAccessToProtectedBranchVariables | reactQuery.SkipToken;
+        | ReposGetAppsWithAccessToProtectedBranchVariables
+        | reactQuery.SkipToken;
     }
   | {
       path: "/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/teams";
@@ -107429,7 +107835,8 @@ export type QueryOperation =
       path: "/repos/{owner}/{repo}/code-scanning/codeql/databases";
       operationId: "codeScanningListCodeqlDatabases";
       variables:
-        CodeScanningListCodeqlDatabasesVariables | reactQuery.SkipToken;
+        | CodeScanningListCodeqlDatabasesVariables
+        | reactQuery.SkipToken;
     }
   | {
       path: "/repos/{owner}/{repo}/code-scanning/codeql/databases/{language}";
@@ -107503,7 +107910,8 @@ export type QueryOperation =
       path: "/repos/{owner}/{repo}/collaborators/{username}/permission";
       operationId: "reposGetCollaboratorPermissionLevel";
       variables:
-        ReposGetCollaboratorPermissionLevelVariables | reactQuery.SkipToken;
+        | ReposGetCollaboratorPermissionLevelVariables
+        | reactQuery.SkipToken;
     }
   | {
       path: "/repos/{owner}/{repo}/comments";
@@ -107571,7 +107979,8 @@ export type QueryOperation =
       path: "/repos/{owner}/{repo}/community/profile";
       operationId: "reposGetCommunityProfileMetrics";
       variables:
-        ReposGetCommunityProfileMetricsVariables | reactQuery.SkipToken;
+        | ReposGetCommunityProfileMetricsVariables
+        | reactQuery.SkipToken;
     }
   | {
       path: "/repos/{owner}/{repo}/compare/{basehead}";
@@ -107652,7 +108061,8 @@ export type QueryOperation =
       path: "/repos/{owner}/{repo}/environments/{environmentName}/deployment-branch-policies";
       operationId: "reposListDeploymentBranchPolicies";
       variables:
-        ReposListDeploymentBranchPoliciesVariables | reactQuery.SkipToken;
+        | ReposListDeploymentBranchPoliciesVariables
+        | reactQuery.SkipToken;
     }
   | {
       path: "/repos/{owner}/{repo}/environments/{environmentName}/deployment-branch-policies/{branchPolicyId}";
@@ -107748,7 +108158,8 @@ export type QueryOperation =
       path: "/repos/{owner}/{repo}/interaction-limits";
       operationId: "interactionsGetRestrictionsForRepo";
       variables:
-        InteractionsGetRestrictionsForRepoVariables | reactQuery.SkipToken;
+        | InteractionsGetRestrictionsForRepoVariables
+        | reactQuery.SkipToken;
     }
   | {
       path: "/repos/{owner}/{repo}/invitations";
@@ -107794,7 +108205,8 @@ export type QueryOperation =
       path: "/repos/{owner}/{repo}/issues/{issueNumber}/assignees/{assignee}";
       operationId: "issuesCheckUserCanBeAssignedToIssue";
       variables:
-        IssuesCheckUserCanBeAssignedToIssueVariables | reactQuery.SkipToken;
+        | IssuesCheckUserCanBeAssignedToIssueVariables
+        | reactQuery.SkipToken;
     }
   | {
       path: "/repos/{owner}/{repo}/issues/{issueNumber}/comments";
@@ -108019,7 +108431,8 @@ export type QueryOperation =
       path: "/repos/{owner}/{repo}/secret-scanning/alerts";
       operationId: "secretScanningListAlertsForRepo";
       variables:
-        SecretScanningListAlertsForRepoVariables | reactQuery.SkipToken;
+        | SecretScanningListAlertsForRepoVariables
+        | reactQuery.SkipToken;
     }
   | {
       path: "/repos/{owner}/{repo}/secret-scanning/alerts/{alertNumber}";
@@ -108030,7 +108443,8 @@ export type QueryOperation =
       path: "/repos/{owner}/{repo}/secret-scanning/alerts/{alertNumber}/locations";
       operationId: "secretScanningListLocationsForAlert";
       variables:
-        SecretScanningListLocationsForAlertVariables | reactQuery.SkipToken;
+        | SecretScanningListLocationsForAlertVariables
+        | reactQuery.SkipToken;
     }
   | {
       path: "/repos/{owner}/{repo}/stargazers";
@@ -108151,7 +108565,8 @@ export type QueryOperation =
       path: "/repositories/{repositoryId}/environments/{environmentName}/variables";
       operationId: "actionsListEnvironmentVariables";
       variables:
-        ActionsListEnvironmentVariablesVariables | reactQuery.SkipToken;
+        | ActionsListEnvironmentVariablesVariables
+        | reactQuery.SkipToken;
     }
   | {
       path: "/repositories/{repositoryId}/environments/{environmentName}/variables/{name}";
@@ -108212,13 +108627,15 @@ export type QueryOperation =
       path: "/teams/{teamId}/discussions/{discussionNumber}/comments";
       operationId: "teamsListDiscussionCommentsLegacy";
       variables:
-        TeamsListDiscussionCommentsLegacyVariables | reactQuery.SkipToken;
+        | TeamsListDiscussionCommentsLegacyVariables
+        | reactQuery.SkipToken;
     }
   | {
       path: "/teams/{teamId}/discussions/{discussionNumber}/comments/{commentNumber}";
       operationId: "teamsGetDiscussionCommentLegacy";
       variables:
-        TeamsGetDiscussionCommentLegacyVariables | reactQuery.SkipToken;
+        | TeamsGetDiscussionCommentLegacyVariables
+        | reactQuery.SkipToken;
     }
   | {
       path: "/teams/{teamId}/discussions/{discussionNumber}/comments/{commentNumber}/reactions";
@@ -108231,13 +108648,15 @@ export type QueryOperation =
       path: "/teams/{teamId}/discussions/{discussionNumber}/reactions";
       operationId: "reactionsListForTeamDiscussionLegacy";
       variables:
-        ReactionsListForTeamDiscussionLegacyVariables | reactQuery.SkipToken;
+        | ReactionsListForTeamDiscussionLegacyVariables
+        | reactQuery.SkipToken;
     }
   | {
       path: "/teams/{teamId}/invitations";
       operationId: "teamsListPendingInvitationsLegacy";
       variables:
-        TeamsListPendingInvitationsLegacyVariables | reactQuery.SkipToken;
+        | TeamsListPendingInvitationsLegacyVariables
+        | reactQuery.SkipToken;
     }
   | {
       path: "/teams/{teamId}/members";
@@ -108253,7 +108672,8 @@ export type QueryOperation =
       path: "/teams/{teamId}/memberships/{username}";
       operationId: "teamsGetMembershipForUserLegacy";
       variables:
-        TeamsGetMembershipForUserLegacyVariables | reactQuery.SkipToken;
+        | TeamsGetMembershipForUserLegacyVariables
+        | reactQuery.SkipToken;
     }
   | {
       path: "/teams/{teamId}/projects";
@@ -108264,7 +108684,8 @@ export type QueryOperation =
       path: "/teams/{teamId}/projects/{projectId}";
       operationId: "teamsCheckPermissionsForProjectLegacy";
       variables:
-        TeamsCheckPermissionsForProjectLegacyVariables | reactQuery.SkipToken;
+        | TeamsCheckPermissionsForProjectLegacyVariables
+        | reactQuery.SkipToken;
     }
   | {
       path: "/teams/{teamId}/repos";
@@ -108275,7 +108696,8 @@ export type QueryOperation =
       path: "/teams/{teamId}/repos/{owner}/{repo}";
       operationId: "teamsCheckPermissionsForRepoLegacy";
       variables:
-        TeamsCheckPermissionsForRepoLegacyVariables | reactQuery.SkipToken;
+        | TeamsCheckPermissionsForRepoLegacyVariables
+        | reactQuery.SkipToken;
     }
   | {
       path: "/teams/{teamId}/teams";
@@ -108291,7 +108713,8 @@ export type QueryOperation =
       path: "/user/blocks";
       operationId: "usersListBlockedByAuthenticatedUser";
       variables:
-        UsersListBlockedByAuthenticatedUserVariables | reactQuery.SkipToken;
+        | UsersListBlockedByAuthenticatedUserVariables
+        | reactQuery.SkipToken;
     }
   | {
       path: "/user/blocks/{username}";
@@ -108302,7 +108725,8 @@ export type QueryOperation =
       path: "/user/codespaces";
       operationId: "codespacesListForAuthenticatedUser";
       variables:
-        CodespacesListForAuthenticatedUserVariables | reactQuery.SkipToken;
+        | CodespacesListForAuthenticatedUserVariables
+        | reactQuery.SkipToken;
     }
   | {
       path: "/user/codespaces/secrets";
@@ -108322,7 +108746,8 @@ export type QueryOperation =
       path: "/user/codespaces/secrets/{secretName}";
       operationId: "codespacesGetSecretForAuthenticatedUser";
       variables:
-        CodespacesGetSecretForAuthenticatedUserVariables | reactQuery.SkipToken;
+        | CodespacesGetSecretForAuthenticatedUserVariables
+        | reactQuery.SkipToken;
     }
   | {
       path: "/user/codespaces/secrets/{secretName}/repositories";
@@ -108335,7 +108760,8 @@ export type QueryOperation =
       path: "/user/codespaces/{codespaceName}";
       operationId: "codespacesGetForAuthenticatedUser";
       variables:
-        CodespacesGetForAuthenticatedUserVariables | reactQuery.SkipToken;
+        | CodespacesGetForAuthenticatedUserVariables
+        | reactQuery.SkipToken;
     }
   | {
       path: "/user/codespaces/{codespaceName}/exports/{exportId}";
@@ -108355,19 +108781,22 @@ export type QueryOperation =
       path: "/user/emails";
       operationId: "usersListEmailsForAuthenticatedUser";
       variables:
-        UsersListEmailsForAuthenticatedUserVariables | reactQuery.SkipToken;
+        | UsersListEmailsForAuthenticatedUserVariables
+        | reactQuery.SkipToken;
     }
   | {
       path: "/user/followers";
       operationId: "usersListFollowersForAuthenticatedUser";
       variables:
-        UsersListFollowersForAuthenticatedUserVariables | reactQuery.SkipToken;
+        | UsersListFollowersForAuthenticatedUserVariables
+        | reactQuery.SkipToken;
     }
   | {
       path: "/user/following";
       operationId: "usersListFollowedByAuthenticatedUser";
       variables:
-        UsersListFollowedByAuthenticatedUserVariables | reactQuery.SkipToken;
+        | UsersListFollowedByAuthenticatedUserVariables
+        | reactQuery.SkipToken;
     }
   | {
       path: "/user/following/{username}";
@@ -108380,13 +108809,15 @@ export type QueryOperation =
       path: "/user/gpg_keys";
       operationId: "usersListGpgKeysForAuthenticatedUser";
       variables:
-        UsersListGpgKeysForAuthenticatedUserVariables | reactQuery.SkipToken;
+        | UsersListGpgKeysForAuthenticatedUserVariables
+        | reactQuery.SkipToken;
     }
   | {
       path: "/user/gpg_keys/{gpgKeyId}";
       operationId: "usersGetGpgKeyForAuthenticatedUser";
       variables:
-        UsersGetGpgKeyForAuthenticatedUserVariables | reactQuery.SkipToken;
+        | UsersGetGpgKeyForAuthenticatedUserVariables
+        | reactQuery.SkipToken;
     }
   | {
       path: "/user/installations";
@@ -108446,25 +108877,29 @@ export type QueryOperation =
       path: "/user/memberships/orgs";
       operationId: "orgsListMembershipsForAuthenticatedUser";
       variables:
-        OrgsListMembershipsForAuthenticatedUserVariables | reactQuery.SkipToken;
+        | OrgsListMembershipsForAuthenticatedUserVariables
+        | reactQuery.SkipToken;
     }
   | {
       path: "/user/memberships/orgs/{org}";
       operationId: "orgsGetMembershipForAuthenticatedUser";
       variables:
-        OrgsGetMembershipForAuthenticatedUserVariables | reactQuery.SkipToken;
+        | OrgsGetMembershipForAuthenticatedUserVariables
+        | reactQuery.SkipToken;
     }
   | {
       path: "/user/migrations";
       operationId: "migrationsListForAuthenticatedUser";
       variables:
-        MigrationsListForAuthenticatedUserVariables | reactQuery.SkipToken;
+        | MigrationsListForAuthenticatedUserVariables
+        | reactQuery.SkipToken;
     }
   | {
       path: "/user/migrations/{migrationId}";
       operationId: "migrationsGetStatusForAuthenticatedUser";
       variables:
-        MigrationsGetStatusForAuthenticatedUserVariables | reactQuery.SkipToken;
+        | MigrationsGetStatusForAuthenticatedUserVariables
+        | reactQuery.SkipToken;
     }
   | {
       path: "/user/migrations/{migrationId}/archive";
@@ -108477,7 +108912,8 @@ export type QueryOperation =
       path: "/user/migrations/{migrationId}/repositories";
       operationId: "migrationsListReposForAuthenticatedUser";
       variables:
-        MigrationsListReposForAuthenticatedUserVariables | reactQuery.SkipToken;
+        | MigrationsListReposForAuthenticatedUserVariables
+        | reactQuery.SkipToken;
     }
   | {
       path: "/user/orgs";
@@ -108495,7 +108931,8 @@ export type QueryOperation =
       path: "/user/packages/{packageType}/{packageName}";
       operationId: "packagesGetPackageForAuthenticatedUser";
       variables:
-        PackagesGetPackageForAuthenticatedUserVariables | reactQuery.SkipToken;
+        | PackagesGetPackageForAuthenticatedUserVariables
+        | reactQuery.SkipToken;
     }
   | {
       path: "/user/packages/{packageType}/{packageName}/versions";
@@ -108584,7 +109021,8 @@ export type QueryOperation =
       path: "/users/{username}/events";
       operationId: "activityListEventsForAuthenticatedUser";
       variables:
-        ActivityListEventsForAuthenticatedUserVariables | reactQuery.SkipToken;
+        | ActivityListEventsForAuthenticatedUserVariables
+        | reactQuery.SkipToken;
     }
   | {
       path: "/users/{username}/events/orgs/{org}";
@@ -108597,7 +109035,8 @@ export type QueryOperation =
       path: "/users/{username}/events/public";
       operationId: "activityListPublicEventsForUser";
       variables:
-        ActivityListPublicEventsForUserVariables | reactQuery.SkipToken;
+        | ActivityListPublicEventsForUserVariables
+        | reactQuery.SkipToken;
     }
   | {
       path: "/users/{username}/followers";
@@ -108665,7 +109104,8 @@ export type QueryOperation =
       path: "/users/{username}/packages/{packageType}/{packageName}/versions/{packageVersionId}";
       operationId: "packagesGetPackageVersionForUser";
       variables:
-        PackagesGetPackageVersionForUserVariables | reactQuery.SkipToken;
+        | PackagesGetPackageVersionForUserVariables
+        | reactQuery.SkipToken;
     }
   | {
       path: "/users/{username}/projects";
@@ -108676,13 +109116,15 @@ export type QueryOperation =
       path: "/users/{username}/received_events";
       operationId: "activityListReceivedEventsForUser";
       variables:
-        ActivityListReceivedEventsForUserVariables | reactQuery.SkipToken;
+        | ActivityListReceivedEventsForUserVariables
+        | reactQuery.SkipToken;
     }
   | {
       path: "/users/{username}/received_events/public";
       operationId: "activityListReceivedPublicEventsForUser";
       variables:
-        ActivityListReceivedPublicEventsForUserVariables | reactQuery.SkipToken;
+        | ActivityListReceivedPublicEventsForUserVariables
+        | reactQuery.SkipToken;
     }
   | {
       path: "/users/{username}/repos";
@@ -108693,19 +109135,22 @@ export type QueryOperation =
       path: "/users/{username}/settings/billing/actions";
       operationId: "billingGetGithubActionsBillingUser";
       variables:
-        BillingGetGithubActionsBillingUserVariables | reactQuery.SkipToken;
+        | BillingGetGithubActionsBillingUserVariables
+        | reactQuery.SkipToken;
     }
   | {
       path: "/users/{username}/settings/billing/packages";
       operationId: "billingGetGithubPackagesBillingUser";
       variables:
-        BillingGetGithubPackagesBillingUserVariables | reactQuery.SkipToken;
+        | BillingGetGithubPackagesBillingUserVariables
+        | reactQuery.SkipToken;
     }
   | {
       path: "/users/{username}/settings/billing/shared-storage";
       operationId: "billingGetSharedStorageBillingUser";
       variables:
-        BillingGetSharedStorageBillingUserVariables | reactQuery.SkipToken;
+        | BillingGetSharedStorageBillingUserVariables
+        | reactQuery.SkipToken;
     }
   | {
       path: "/users/{username}/ssh_signing_keys";

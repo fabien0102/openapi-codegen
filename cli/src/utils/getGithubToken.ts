@@ -3,7 +3,7 @@ import { join } from "path";
 import { homedir } from "os";
 import { existsSync } from "fs";
 import { readFile, writeFile } from "fs/promises";
-import { handlePromptCancel } from "./handlePromptCancel";
+import { handlePromptCancel } from "./handlePromptCancel.js";
 
 /**
  * Ask for GitHub token if needed and save it for later.

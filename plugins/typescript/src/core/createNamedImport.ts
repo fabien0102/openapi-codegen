@@ -1,6 +1,6 @@
 import { factory as f } from "typescript";
 import type * as ts from "typescript";
-import { analyzeImportUsage } from "./analyzeImportUsage";
+import { analyzeImportUsage } from "./analyzeImportUsage.js";
 
 /**
  * Helper to create named imports.

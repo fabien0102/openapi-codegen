@@ -1,8 +1,8 @@
-import { describe, expect, it } from "vitest";
-import { set } from "lodash";
+import { describe, expect, it } from "vite-plus/test";
+import { set } from "lodash-es";
 import { OpenAPIObject } from "openapi3-ts/oas30";
-import { Config, generateFetchers } from "./generateFetchers";
-import { createWriteFileMock } from "../testUtils";
+import { Config, generateFetchers } from "./generateFetchers.js";
+import { createWriteFileMock } from "../testUtils.js";
 
 const config: Config = {
   filenamePrefix: "petstore",

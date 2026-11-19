@@ -1,4 +1,4 @@
-import { camel } from "case";
+import { camelCase } from "case-anything";
 
 /**
  * Transform url params case to camel.
@@ -7,4 +7,4 @@ import { camel } from "case";
  * `pet/{pet_id}` -> `pet/{petId}`
  */
 export const camelizedPathParams = (url: string) =>
-  url.replace(/\{[\w\d\-_.]*\}/g, (match) => `{${camel(match)}}`);
+  url.replace(/\{[\w\d\-_.]*\}/g, (match) => `{${camelCase(match)}}`);

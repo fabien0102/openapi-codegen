@@ -1,7 +1,7 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "vite-plus/test";
 import { ResponseObject } from "openapi3-ts/oas30";
-import { print } from "../testUtils";
-import { getErrorResponseType } from "./getErrorResponseType";
+import { print } from "../testUtils.js";
+import { getErrorResponseType } from "./getErrorResponseType.js";
 
 describe("getErrorResponseType", () => {
   it("should generate a simple error", () => {

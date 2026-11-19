@@ -1,4 +1,4 @@
-import { Config, Namespace } from "./types";
+import { Config, Namespace } from "./types/index.js";
 
 /**
  * Type helper to make it easier to use openapi-codegen.ts.

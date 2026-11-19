@@ -1,8 +1,8 @@
-import { describe, it, expect } from "vitest";
-import { createNamedImport, shouldUseTypeImport } from "./createNamedImport";
-import { analyzeImportUsage } from "./analyzeImportUsage";
+import { describe, it, expect } from "vite-plus/test";
+import { createNamedImport, shouldUseTypeImport } from "./createNamedImport.js";
+import { analyzeImportUsage } from "./analyzeImportUsage.js";
 import { factory as f } from "typescript";
-import * as ts from "typescript";
+import ts from "typescript";
 
 // Helper function to set parent references in AST nodes
 const setParentReferences = (node: ts.Node): ts.Node => {
@@ -12,10 +12,10 @@ const setParentReferences = (node: ts.Node): ts.Node => {
       writable: true,
       configurable: true,
     });
-    n.forEachChild((child) => setParent(child, n));
+    n.forEachChild((child: ts.Node) => setParent(child, n));
   };
 
-  node.forEachChild((child) => setParent(child, node));
+  node.forEachChild((child: ts.Node) => setParent(child, node));
   return node;
 };
 

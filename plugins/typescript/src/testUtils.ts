@@ -1,5 +1,4 @@
 import ts from "typescript";
-import prettier from "prettier";
 
 const sourceFile = ts.createSourceFile("index.ts", "", ts.ScriptTarget.Latest);
 
@@ -20,12 +19,11 @@ export const print = (node: ts.Node) =>
 export const createWriteFileMock = () => {
   const calls: [string, string][] = [];
   async function fn(file: string, data: string) {
-    calls.push([
-      file,
-      await prettier.format(data, {
-        parser: "babel-ts",
-      }),
-    ]);
+    const oxfmt = await import("oxfmt");
+    const formattedFile = await oxfmt.format(file, data, {
+      trailingComma: "es5",
+    });
+    calls.push([file, formattedFile.code]);
   }
 
   fn.mock = { calls };

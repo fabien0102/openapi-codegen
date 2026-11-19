@@ -1,20 +1,20 @@
-import * as c from "case";
+import * as c from "case-anything";
 import ts from "typescript";
 
 import { ReferenceObject, SchemaObject } from "openapi3-ts/oas30";
-import { createWatermark } from "../core/createWatermark";
-import { getUsedImports } from "../core/getUsedImports";
+import { createWatermark } from "../core/createWatermark.js";
+import { getUsedImports } from "../core/getUsedImports.js";
 import {
   OpenAPIComponentType,
   schemaToTypeAliasDeclaration,
-} from "../core/schemaToTypeAliasDeclaration";
-import { getEnumProperties } from "../utils/getEnumProperties";
-import { ConfigBase, Context } from "./types";
+} from "../core/schemaToTypeAliasDeclaration.js";
+import { getEnumProperties } from "../utils/getEnumProperties.js";
+import { ConfigBase, Context } from "./types.js";
 
 import { isReferenceObject } from "openapi3-ts/oas30";
 
-import { findCompatibleMediaType } from "../core/findCompatibleMediaType";
-import { schemaToEnumDeclaration } from "../core/schemaToEnumDeclaration";
+import { findCompatibleMediaType } from "../core/findCompatibleMediaType.js";
+import { schemaToEnumDeclaration } from "../core/schemaToEnumDeclaration.js";
 
 type Config = ConfigBase;
 
@@ -106,15 +106,16 @@ export const generateSchemaTypes = async (
   };
 
   const filenamePrefix =
-    c.snake(finalConfig.filenamePrefix ?? context.openAPIDocument.info.title) +
-    "-";
+    c.snakeCase(
+      finalConfig.filenamePrefix ?? context.openAPIDocument.info.title
+    ) + "-";
 
   const formatFilename =
     typeof finalConfig.formatFilename === "function"
       ? finalConfig.formatFilename
       : finalConfig.filenameCase
-        ? c[finalConfig.filenameCase]
-        : c.camel;
+        ? c[`${finalConfig.filenameCase}Case`]
+        : c.camelCase;
   const files = {
     requestBodies: formatFilename(filenamePrefix + "-request-bodies"),
     schemas: formatFilename(filenamePrefix + "-schemas"),

@@ -1,6 +1,6 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "vite-plus/test";
 import { ParameterObject } from "openapi3-ts/oas30";
-import { paramsToSchema } from "./paramsToSchema";
+import { paramsToSchema } from "./paramsToSchema.js";
 
 describe("paramsToSchema", () => {
   const params: ParameterObject[] = [

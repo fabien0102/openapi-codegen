@@ -1,4 +1,4 @@
-import { get } from "lodash";
+import { get } from "lodash-es";
 import {
   ComponentsObject,
   isReferenceObject,
@@ -7,8 +7,8 @@ import {
   ReferenceObject,
   RequestBodyObject,
 } from "openapi3-ts/oas30";
-import { findCompatibleMediaType } from "./findCompatibleMediaType";
-import { getReferenceSchema } from "./getReference";
+import { findCompatibleMediaType } from "./findCompatibleMediaType.js";
+import { getReferenceSchema } from "./getReference.js";
 
 /**
  * Check if all the properties are optionals
